@@ -96,13 +96,11 @@ class GameModel {
 
 
     updateUserBoard(updatedScore){
-        //this.userBoard = this.boardCalculator.updateUserBoardCalculate(newScore, this.userBoard)
         this.userBoard = updatedScore
         this.userWinPoints = this.boardCalculator.userPointsCalculate(updatedScore)
     }
 
     updateOpponentBoard(updatedScore){
-        //this.opponentBoard = this.boardCalculator.updateOpponentBoardCalculate(newScore, this.opponentBoard)
         this.opponentBoard = updatedScore
         this.opponentWinPoints = this.boardCalculator.opponentPointsCalculate(updatedScore)
     }

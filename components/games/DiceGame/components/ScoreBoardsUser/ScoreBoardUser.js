@@ -7,7 +7,9 @@ import BoardItem from '../BoardItem/BoardItem'
 const ScoreBoardUser = (props) => {
 
     const selectBoardItem = (index) =>{
-        new C_SCORE(props.user.id, props.user.username, props.currentGameId, index, props.diceScore)
+        if(props.diceScore && props.isYouMove){
+            new C_SCORE(props.user.id, props.user.username, props.currentGameId, index, props.diceScore)
+        }
     }
 
     const DrowBoard = () =>{

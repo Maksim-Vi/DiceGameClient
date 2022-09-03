@@ -25,8 +25,6 @@ export default class C_THROW {
 
     exec() {
         sendMessageWS({ name: this.MESSAG_ENAME, clientIdWs: this.clientIdWebsocket, userId: this.userId, username: this.username, gameId: this.gameId })
-
-        store.dispatch(setIsYouMove(false))
     }
 
     setClientId(){

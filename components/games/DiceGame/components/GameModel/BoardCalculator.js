@@ -21,18 +21,19 @@ export default class BoardCalculator {
 
         const calcSameItems = (index,column) =>{
             const countItems = column.reduce((acc, item, index, array) => {
-                acc.obj[item] = acc.obj[item] ? acc.obj[item] + 1 : 1;
-                acc.sum = item * acc.obj[item] + acc.sum
+                acc.obj[item] = acc.obj[item] ? acc.obj[item] + 1 : 1
                 return acc;
-            }, {obj: {}, sum: 0});
+            }, {obj:{}});
 
+            let sum = 0
             const data = {}
-            Object.keys(countItems.obj).forEach((item) => {
+            column.forEach((item) => {
                 if(countItems.obj[item] > 1){
                     data['number'] = item
                     data['count'] = countItems.obj[item] || null
                 }
-                data['sum'] = countItems.sum || null
+                sum = (item * countItems.obj[item]) + sum
+                data['sum'] = sum || null
             });
 
             return countItems ? data : null
