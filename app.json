@@ -4,12 +4,13 @@
     "slug": "DiceGame",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/dice/play_dice.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/dice/play_dice.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#ffffff",
+      "fontSize": "18px"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -18,16 +19,22 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSTemporaryExceptionAllowsInsecureHTTPLoads": true,
+        "NSExceptionAllowsInsecureHTTPLoads": true,
+        "NSAppTransportSecurity" : {
+          "NSExceptionDomains": "localhost",
+          "NSAllowsArbitraryLoads" : true, 
+          "NSExceptionAllowsInsecureHTTPLoads": true,
+          "NSTemporaryExceptionAllowsInsecureHTTPLoads": true
+        }
+      }
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       }
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
     }
   }
 }
