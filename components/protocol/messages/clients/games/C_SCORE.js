@@ -1,4 +1,9 @@
-import {setIsYouMove, setThrowData} from "../../../../redux/reducers/game/GameReducer"
+import {
+    selectOpponentThrowData,
+    setIsYouMove,
+    setOpponentThrowData,
+    setThrowData
+} from "../../../../redux/reducers/game/GameReducer"
 import { selectClientIdWebsocket } from "../../../../redux/reducers/Websocket/WebsocketReducer"
 import { store } from "../../../../redux/redux-store"
 import { sendMessageWS } from "../../../websocet"
@@ -28,6 +33,7 @@ export default class C_SCORE {
     exec() {
         sendMessageWS({ name: this.MESSAG_ENAME, clientIdWs: this.clientIdWebsocket, userId: this.userId, username: this.username, gameId: this.gameId, index: this.index, score: this.score})
         store.dispatch(setThrowData(null))
+        store.dispatch(setOpponentThrowData(null))
         store.dispatch(setIsYouMove(false))
     }
 

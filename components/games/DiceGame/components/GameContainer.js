@@ -12,14 +12,14 @@ class GameContainer extends React.Component {
         super()
 
         this.state = {
+            opponent: {username: ''},
             boardData:{
-                opponent: {username: ''},
                 userBoard: [],
                 opponentBoard: [],
-                winPointsData: {
-                    userWinPoints: null,
-                    opponentWinPoints: null
-                }
+            },
+            winPointsData: {
+                userWinPoints: null,
+                opponentWinPoints: null
             }
         }
 
@@ -34,12 +34,6 @@ class GameContainer extends React.Component {
         if(this.gameModel){
             let boardData = this.gameModel.getBoardData()
             let winPointsData = this.gameModel.getWinPointsData()
-
-            if(this.props.scores){
-                const {userScores, opponentsScores} = this.props.scores
-                boardData = this.gameModel.updateScores(userScores,opponentsScores)
-                winPointsData = this.gameModel.getWinPointsData()
-            }
 
             this.setState({
                 boardData: boardData,
@@ -57,7 +51,6 @@ class GameContainer extends React.Component {
                this.props.throwData !== prevProps.throwData ||
                this.props.opponentThrowData !== prevProps.opponentThrowData ||
                this.props.scores !== prevProps.scores ||
-               this.props.scores.opponentsScores !== prevProps.scores.opponentsScores ||
                this.props.countScores !== prevProps.countScores ||
                this.props.isYouMove !== prevProps.isYouMove ||
                this.state.boardData !== prevState.boardData ||
@@ -72,10 +65,7 @@ class GameContainer extends React.Component {
             this.gameModel.setData(this.props.currentGame, this.props.gameSettings)
         }
 
-        if(
-            this.props.scores !== nextProps.scores ||
-            JSON.stringify(this.props.scores) !== JSON.stringify(nextProps.scores)
-        ){
+        if(this.props.scores !== nextProps.scores){
             const {userId, username, userScores, opponentsScores} = this.props.scores
             let boardData = this.state.boardData
             let winPointsData = this.state.winPointsData
@@ -91,7 +81,10 @@ class GameContainer extends React.Component {
     }
 
     getThrowData = () =>{
-        return this.props.throwData ? this.props.throwData.diceScore : 0
+        if(this.props.isYouMove){
+            return this.props.throwData ? this.props.throwData.diceScore : 0
+        }
+        return this.props.opponentThrowData ? this.props.opponentThrowData.diceScore : 0
     }
 
     hendlerThrowGame = () =>{

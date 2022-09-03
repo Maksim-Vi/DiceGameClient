@@ -1,5 +1,5 @@
 
-import { setOpponentThrowData } from "../../../../redux/reducers/game/GameReducer"
+import {setOpponentThrowData, setThrowData} from "../../../../redux/reducers/game/GameReducer"
 import { store } from "../../../../redux/redux-store"
 
 export default class S_OPPONENT_THROW {
