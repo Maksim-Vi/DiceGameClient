@@ -13,6 +13,7 @@ import {
 import Experience from "./components/Experience";
 import Coins from "./components/Coins";
 import Crystals from "./components/Crystals";
+import {Platform} from "react-native";
 
 const TopMain = (props) => {
 
@@ -57,6 +58,7 @@ const TopPanelContainer = styled.View`
     justify-content: center;
     text-align: center;
     background-color: rgb(1,1,70);
+    padding-top: ${Platform.OS === 'android' ? '0px' : '10px'};
 `
 
 const ElementsContainer = styled.View`

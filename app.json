@@ -21,13 +21,12 @@
     "ios": {
       "supportsTablet": true,
       "infoPlist": {
-        "NSTemporaryExceptionAllowsInsecureHTTPLoads": true,
-        "NSExceptionAllowsInsecureHTTPLoads": true,
         "NSAppTransportSecurity" : {
-          "NSExceptionDomains": "localhost",
-          "NSAllowsArbitraryLoads" : true, 
-          "NSExceptionAllowsInsecureHTTPLoads": true,
-          "NSTemporaryExceptionAllowsInsecureHTTPLoads": true
+          "NSAllowsArbitraryLoads" : true
+        },
+        "NSExceptionDomains": {
+          "NSExceptionAllowsInsecureHTTPLoads" : true,
+          "NSExceptionRequiresForwardSecrecy" : true
         }
       }
     },

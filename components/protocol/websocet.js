@@ -1,10 +1,8 @@
 import { AsyncStorage, Platform } from "react-native";
-import { selectMyUser } from "../redux/reducers/players/PlayersReducer";
 import { setLoaded } from "../redux/reducers/Websocket/WebsocketReducer";
 import { store } from "../redux/redux-store";
 import { hendleMessage } from "./MessageManager";
 import C_PING from "./messages/clients/C_PING";
-
 export let websocket;
 
 let reconnectTimeout = null;
@@ -26,7 +24,7 @@ export const openServerConnection = () => {
     const port = 3030
 
     websocket = new WebSocket(`ws://${url}:${port}`);
-   
+
     websocket.onopen = openWSHandler;
     websocket.onerror = errorWSHandler;
     websocket.onclose = closeWSHandler;
@@ -54,6 +52,7 @@ function setUpPingInterval() {
 
 function openWSHandler() {
     reconnecting = false;
+    console.log('WSS open')
 }
 
 function errorWSHandler(error) {

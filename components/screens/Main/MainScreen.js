@@ -1,5 +1,5 @@
-import { StatusBar } from 'react-native'
-import React, { useEffect } from 'react'
+import { StatusBar } from 'expo-status-bar';
+import React  from 'react'
 import Text from '../../common/Text/Text'
 import BackgroundWrapper from '../../common/BackgroundWrapper/BackgroundWrapper'
 import mainBg from '../../../assets/bg/main_bg.jpg'
@@ -17,7 +17,7 @@ const MainScreen = () => {
 
   return (
     <BackgroundWrapper gackground={mainBg}>
-      <StatusBar />
+      {/*<StatusBar style="light"/>*/}
       <TopMain />
 
       <MainContainer>

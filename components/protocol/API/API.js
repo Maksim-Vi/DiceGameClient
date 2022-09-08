@@ -1,10 +1,30 @@
 import { Platform } from "react-native"
+import Constants from "expo-constants";
 
-const URL = Platform.OS === 'android' ? 'http://10.0.2.2:8080/api' : 'http://172.20.10.2:8080/api'
+const getUrl = () =>{
+    const inProduction = false;
+    const inExpo = Constants.manifest && Constants.manifest.debuggerHost;
+    const inBrowser = typeof document !== 'undefined';
+
+    const apiDomain =
+        inProduction
+            ? 'mywebsite.com'
+            : inExpo
+                ? Constants.manifest.debuggerHost.split(`:`).shift()
+                : inBrowser
+                    ? document.location.hostname
+                    : 'unknown';
+
+    const protocol = inProduction ? 'https' : 'http';
+
+    return `${protocol}://${apiDomain}:8080/api`
+}
+
+const URL = Platform.OS === 'android' ? 'http://10.0.2.2:8080/api' : getUrl()
 
 export const postLoginApi = async (username, password) => {
     let data = { username: username, password: password }
-    
+
     return await fetch(`${URL}/login`, {
         method: 'POST',
         headers: {
