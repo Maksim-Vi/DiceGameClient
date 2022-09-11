@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect, useStore} from 'react-redux'
 import {
+  selectActiveThrowBtn,
   selectCountScores,
   selectCurrentGameId,
   selectGame,
@@ -26,6 +27,7 @@ const GameWithComputer = (props) => {
                         scores={props.scores}
                         countScores={props.countScores}
                         isYouMove={props.isYouMove}
+                        activeThrowBtn={props.activeThrowBtn}
                         store={store}/>
 }
 
@@ -39,6 +41,7 @@ const mapStateToProps = (state) => ({
   scores: selectScores(state),
   countScores: selectCountScores(state),
   isYouMove: selectIsYouMove(state),
+  activeThrowBtn: selectActiveThrowBtn(state),
 });
 
 export default connect(mapStateToProps)(GameWithComputer);

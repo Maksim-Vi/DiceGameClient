@@ -1,5 +1,5 @@
 
-import { setScore, setThrowData } from "../../../../redux/reducers/game/GameReducer"
+import {setActiveThrowBtn, setOpponentThrowData, setThrowData} from "../../../../redux/reducers/game/GameReducer"
 import { store } from "../../../../redux/redux-store"
 
 export default class S_THROW {
@@ -21,7 +21,9 @@ export default class S_THROW {
     }
 
     exec() {
+      store.dispatch(setOpponentThrowData(null))
       store.dispatch(setThrowData({userId: this.userId, username: this.username, diceScore: this.diceScore}))
+      store.dispatch(setActiveThrowBtn(false))
     }
 
 	getLogText() {

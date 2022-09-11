@@ -1,5 +1,5 @@
 
-import {setOpponentThrowData, setScores} from "../../../../redux/reducers/game/GameReducer"
+import {setOpponentThrowData, setScores, setThrowData} from "../../../../redux/reducers/game/GameReducer"
 import { store } from "../../../../redux/redux-store"
 import {selectMyUser} from "../../../../redux/reducers/players/PlayersReducer";
 
@@ -25,10 +25,12 @@ export default class S_SCORE {
     }
 
     exec() {
-        store.dispatch(setScores({userId: this.userId, username: this.username, userScores: this.userScores, opponentsScores: this.opponentsScores}))
         if(this.currentUsername !== this.username){
             store.dispatch(setOpponentThrowData(null))
+        } else {
+            store.dispatch(setThrowData(null))
         }
+        store.dispatch(setScores({userId: this.userId, username: this.username, userScores: this.userScores, opponentsScores: this.opponentsScores}))
     }
 
     selectUserData = () =>{

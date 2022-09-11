@@ -3,8 +3,11 @@ import styled from 'styled-components'
 import Text from '../../../../common/Text/Text'
 import C_SCORE from '../../../../protocol/messages/clients/games/C_SCORE'
 import BoardItem from '../BoardItem/BoardItem'
+import {Dimensions} from "react-native";
 
 const ScoreBoardUser = (props) => {
+
+    const width = Dimensions.get('window').width;
 
     const selectBoardItem = (index) =>{
         if(props.diceScore && props.isYouMove){
@@ -56,13 +59,13 @@ const ScoreBoardUser = (props) => {
 
     return (
         <ScoreBoardUserContainer>
-            <WinPoints>
+            <WinPoints width={width}>
                 <Column center>{getColumnNumber('column1')}</Column>
                 <Column center>{getColumnNumber('column2')}</Column>
                 <Column center>{getColumnNumber('column3')}</Column>
             </WinPoints>
 
-            <ScoresContainer>
+            <ScoresContainer width={width}>
                 {DrowBoard()}
             </ScoresContainer>
 
@@ -74,6 +77,9 @@ const ScoreBoardUser = (props) => {
 
 const ScoreBoardUserContainer = styled.View`
     position: relative;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
 `
 const ScoresContainer = styled.View`
     display: flex;
@@ -81,26 +87,39 @@ const ScoresContainer = styled.View`
     justify-content: center;
     flex-wrap: wrap;
     flex-direction: row;
-    width: 70%;
+    ${props=>{
+        if(props.width < 400){
+            return 'width: 70%'
+        } else {
+          return 'width: 70%'
+        }
+    }}
 `
 const WinPoints = styled.View`
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-around;
   text-align: center;
   flex-direction: row;
-  width: 70%;
+  ${props=>{
+    if(props.width < 400){
+      return 'width: 70%'
+    } else {
+      return 'width: 70%'
+    }
+  }}
 `
+
 const Name = styled(Text)`
-  margin-bottom: -15px;
 `
 
 const CountScores = styled(Text)`
   position: absolute;
-  right: -20px;
+  right: -22px;
+  top: 0;
 `
 const Column = styled(Text)`
-  width: 40px;
+  width: 33%;
   height: 20px;
 `
 export default ScoreBoardUser

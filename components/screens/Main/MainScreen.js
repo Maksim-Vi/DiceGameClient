@@ -1,4 +1,4 @@
-import { StatusBar } from 'expo-status-bar';
+
 import React  from 'react'
 import Text from '../../common/Text/Text'
 import BackgroundWrapper from '../../common/BackgroundWrapper/BackgroundWrapper'
@@ -7,6 +7,7 @@ import styled from 'styled-components'
 import gameIcon from '../../../assets/dice/game_1V1.png'
 import TopMain from '../../common/TopPanel/TopPanel'
 import C_QUICK_PLAY from '../../protocol/messages/clients/games/C_QUICK_PLAY'
+import {StatusBar} from "react-native";
 
 const MainScreen = () => {
 
@@ -17,7 +18,7 @@ const MainScreen = () => {
 
   return (
     <BackgroundWrapper gackground={mainBg}>
-      {/*<StatusBar style="light"/>*/}
+      <StatusBar hidden={true} style="light"/>
       <TopMain />
 
       <MainContainer>

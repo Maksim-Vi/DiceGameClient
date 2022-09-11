@@ -1,5 +1,4 @@
 import React from 'react'
-import { StatusBar } from 'react-native'
 import styled from 'styled-components'
 import mainBg from '../../../assets/bg/main_bg.jpg'
 import BackgroundWrapper from '../../common/BackgroundWrapper/BackgroundWrapper'
@@ -9,7 +8,6 @@ import TopMain from '../../common/TopPanel/TopPanel'
 const ShopScreen = () => {
   return (
     <BackgroundWrapper gackground={mainBg}>
-      <StatusBar />
       <TopMain />
      
       <ShopContainer>

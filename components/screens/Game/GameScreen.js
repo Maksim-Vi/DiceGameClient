@@ -7,6 +7,7 @@ import C_ABORDED_GAME from '../../protocol/messages/clients/games/C_ABORDED_GAME
 import { store } from '../../redux/redux-store'
 import { selectCurrentGameId } from '../../redux/reducers/game/GameReducer'
 import {Ionicons} from '@expo/vector-icons'
+import {Platform} from "react-native";
 
 const GameScreen = () => {
 
@@ -34,7 +35,9 @@ const GameContainer = styled.View`
 `
 const GameBack = styled.TouchableOpacity`
 	position: absolute;
-	top: 20px;
-	left: 10px;
+    padding: 20px;
+	top: -3px;
+    left: -3px;
+    z-index: 1;
 `
 export default GameScreen

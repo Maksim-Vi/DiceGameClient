@@ -21,6 +21,7 @@ export default class S_OPPONENT_THROW {
     }
 
     exec() {
+      store.dispatch(setThrowData(null))
       store.dispatch(setOpponentThrowData({userId: this.userId, username: this.username, diceScore: this.diceScore}))
     }
 

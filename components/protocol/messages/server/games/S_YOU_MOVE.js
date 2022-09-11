@@ -1,5 +1,5 @@
 
-import { setIsYouMove } from "../../../../redux/reducers/game/GameReducer"
+import { setIsYouMove, setActiveThrowBtn } from "../../../../redux/reducers/game/GameReducer"
 import { store } from "../../../../redux/redux-store"
 
 export default class S_YOU_MOVE {
@@ -20,6 +20,7 @@ export default class S_YOU_MOVE {
 
     exec() {
        store.dispatch(setIsYouMove(true))
+       store.dispatch(setActiveThrowBtn(true))
     }
 
 	getLogText() {

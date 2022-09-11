@@ -1,8 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
 import Text from '../../../../common/Text/Text'
+import {Dimensions, Platform} from "react-native";
 
 const BoardItem = (props) => {
+
+  const width = Dimensions.get('window').width;
 
   const hendlerClick = () =>{
     if(props.selectBoardItem){
@@ -11,19 +14,20 @@ const BoardItem = (props) => {
   }
 
   return (
-    <ItemContainer {...props} onPress={hendlerClick} enabled={true} activeOpacity={.8}>
-      <Text large blod>{props.item > 0 ? props.item : ''}</Text>
+    <ItemContainer {...props} width={width} onPress={hendlerClick} enabled={true} activeOpacity={.8}>
+      <Text small blod>{props.item > 0 ? props.item : ''}</Text>
     </ItemContainer>
   )
 }
 
 const ItemContainer = styled.TouchableOpacity`
+  flex-grow: 1;
+  width: 22%;
+  height: 50px;
   align-items: center;
   justify-content: center;
-  width: 60px;
-  height: 60px;
   border-radius: 10px;
-  border: ${props => props.item > 0 ? '2px solid #dbdbdb' : '2px solid #dbdbdb96'} ;
+  border: ${props => props.item > 0 ? '1px solid #dbdbdb' : '1px solid #dbdbdb96'} ;
   
   ${props =>{
     if(props.item > 0){
@@ -43,3 +47,20 @@ const ItemContainer = styled.TouchableOpacity`
   margin: 0px 10px 10px 10px;
 `
 export default BoardItem
+
+/*
+${props=>{
+    if(props.width < 400) {
+      return 'width: 50px'
+    } else {
+      return 'width: 60px'
+    }
+  }}
+  ${props=>{
+    if(props.width < 400) {
+      return 'height: 50px'
+    } else {
+      return 'height: 60px'
+    }
+  }}
+*/

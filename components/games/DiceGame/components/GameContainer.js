@@ -53,6 +53,7 @@ class GameContainer extends React.Component {
                this.props.scores !== prevProps.scores ||
                this.props.countScores !== prevProps.countScores ||
                this.props.isYouMove !== prevProps.isYouMove ||
+               this.props.activeThrowBtn !== prevProps.activeThrowBtn ||
                this.state.boardData !== prevState.boardData ||
                this.state.boardData.userBoard !== prevState.boardData.userBoard ||
                this.state.boardData.opponentBoard !== prevState.boardData.opponentBoard ||
@@ -88,6 +89,8 @@ class GameContainer extends React.Component {
     }
 
     hendlerThrowGame = () =>{
+        if(!this.props.activeThrowBtn) return null
+
         const {id,username} = this.props.user
 
         new C_THROW(id,username,this.props.currentGameId)
@@ -103,7 +106,7 @@ class GameContainer extends React.Component {
                                         countScores={this.props.countScores}
                                         opponent={opponent}/>
                     <SpaceThrow>
-                        <Dice diceNumber={this.getThrowData()}/>
+                        <Dice diceNumber={this.getThrowData()} />
                     </SpaceThrow>
                     <ScoreBoardUser currentGameId={this.props.currentGameId} 
                                     user={this.props.user}
@@ -115,7 +118,7 @@ class GameContainer extends React.Component {
                 </ScoresContainer>
             
                 <ButtonContainer>
-                    <ThrowButton onPress={this.props.isYouMove && this.hendlerThrowGame} 
+                    <ThrowButton onPress={this.hendlerThrowGame}
                                  activeOpacity={this.props.isYouMove ? 1 : 0.6} 
                                  disabled={!this.props.isYouMove}>
                         <Text large heavy color={'#fff'}>Throw Dice</Text>
@@ -135,8 +138,7 @@ const ScoresContainer = styled.View`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 100%;
-    height: 85%;
+    flex: 0.9;
 `
 const SpaceThrow = styled.View`
     display: flex;
@@ -145,6 +147,7 @@ const ButtonContainer = styled.View`
     display: flex;
     align-items: center;
     justify-content: center;
+    flex: 0.1;
 `
 const ThrowButton = styled.TouchableOpacity`
     background-color: green;

@@ -31,10 +31,11 @@ export default class C_SCORE {
     }
 
     exec() {
-        sendMessageWS({ name: this.MESSAG_ENAME, clientIdWs: this.clientIdWebsocket, userId: this.userId, username: this.username, gameId: this.gameId, index: this.index, score: this.score})
         store.dispatch(setThrowData(null))
         store.dispatch(setOpponentThrowData(null))
         store.dispatch(setIsYouMove(false))
+
+        sendMessageWS({ name: this.MESSAG_ENAME, clientIdWs: this.clientIdWebsocket, userId: this.userId, username: this.username, gameId: this.gameId, index: this.index, score: this.score})
     }
 
     setClientId(){

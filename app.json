@@ -21,19 +21,17 @@
     "ios": {
       "supportsTablet": true,
       "infoPlist": {
-        "NSAppTransportSecurity" : {
-          "NSAllowsArbitraryLoads" : true
-        },
-        "NSExceptionDomains": {
-          "NSExceptionAllowsInsecureHTTPLoads" : true,
-          "NSExceptionRequiresForwardSecrecy" : true
+        "NSAppTransportSecurity": {
+          "NSAllowsArbitraryLoads": true
         }
-      }
+      },
+      "bundleIdentifier": "com.anonymous.DiceGame"
     },
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.anonymous.DiceGame"
     }
   }
 }

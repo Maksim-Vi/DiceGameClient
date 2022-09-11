@@ -1,5 +1,10 @@
 
-import { resetScores, setCarrentGameId, setThrowData } from "../../../../redux/reducers/game/GameReducer"
+import {
+    resetScores,
+    setCarrentGameId, setCountScores,
+    setOpponentThrowData,
+    setThrowData
+} from "../../../../redux/reducers/game/GameReducer"
 import { store } from "../../../../redux/redux-store"
 
 export default class S_CREATED_GAME {
@@ -21,7 +26,9 @@ export default class S_CREATED_GAME {
     exec() {
         store.dispatch(setCarrentGameId(this.gameId))
         store.dispatch(setThrowData(null))
+        store.dispatch(setOpponentThrowData(null))
         store.dispatch(resetScores())
+        store.dispatch(setCountScores(null))
     }
 
 	getLogText() {

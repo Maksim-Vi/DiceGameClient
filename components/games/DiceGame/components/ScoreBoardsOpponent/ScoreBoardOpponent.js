@@ -2,8 +2,11 @@ import React from 'react'
 import styled from 'styled-components'
 import Text from '../../../../common/Text/Text'
 import BoardItem from '../BoardItem/BoardItem'
+import {Dimensions} from "react-native";
 
 const ScoreBoardOpponent = (props) => {
+
+  const width = Dimensions.get('window').width;
 
   const DrowBoard = () =>{
 
@@ -46,10 +49,10 @@ const ScoreBoardOpponent = (props) => {
   return (
     <ScoreBoardOpponentContainer>
         <Name large blod color={'#000'} center>{props.opponent ? props.opponent.username : ''}</Name>
-        <ScoresContainer>
+        <ScoresContainer width={width}>
           {DrowBoard()}
         </ScoresContainer>
-        <WinPoints>
+        <WinPoints width={width}>
             <Column center>{getColumnNumber('column1')}</Column>
             <Column center>{getColumnNumber('column2')}</Column>
             <Column center>{getColumnNumber('column3')}</Column>
@@ -60,7 +63,10 @@ const ScoreBoardOpponent = (props) => {
 }
 
 const ScoreBoardOpponentContainer = styled.View`
-    position: relative;
+  position: relative;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
 `
 
 const ScoresContainer = styled.View`
@@ -69,27 +75,39 @@ const ScoresContainer = styled.View`
   justify-content: center;
   flex-wrap: wrap;
   flex-direction: row;
-  width: 70%;
+  ${props=>{
+    if(props.width < 400){
+      return 'width: 70%'
+    } else {
+      return 'width: 70%'
+    }
+  }}
 `
 
 const WinPoints = styled.View`
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-around;
   text-align: center;
   flex-direction: row;
-  width: 70%;
+  ${props=>{
+    if(props.width < 400){
+      return 'width: 70%'
+    } else {
+      return 'width: 70%'
+    }
+  }}
 `
 const Name = styled(Text)`
-    margin-top: -20px;
+    margin-top: 10px;
 `
 const CountScores = styled(Text)`
   position: absolute;
-  right: -20px;
+  right: -22px;
   bottom: 0;
 `
 const Column = styled(Text)`
-  width: 40px;
+  width: 33%;
   height: 20px;
 `
 export default ScoreBoardOpponent
