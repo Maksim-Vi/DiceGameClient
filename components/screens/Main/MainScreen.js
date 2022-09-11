@@ -1,19 +1,20 @@
-
 import React  from 'react'
 import Text from '../../common/Text/Text'
 import BackgroundWrapper from '../../common/BackgroundWrapper/BackgroundWrapper'
 import mainBg from '../../../assets/bg/main_bg.jpg'
 import styled from 'styled-components'
-import gameIcon from '../../../assets/dice/game_1V1.png'
 import TopMain from '../../common/TopPanel/TopPanel'
 import C_QUICK_PLAY from '../../protocol/messages/clients/games/C_QUICK_PLAY'
-import {StatusBar} from "react-native";
+import {StatusBar,StyleSheet} from "react-native";
+import GameWithBot from "./components/GameWithBot";
+import GameWithOpponent from "./components/GameWithOpponent";
+import GameWithOpponentByTime from "./components/GameWithOpponentByTime";
 
 const MainScreen = () => {
 
-  const hendlerPlayGame = () =>{
+  const hendlerPlayGame = (gameType) =>{
     const data = {price: 10}
-    new C_QUICK_PLAY(data.price,1)
+    new C_QUICK_PLAY(data.price,gameType)
   }
 
   return (
@@ -22,11 +23,12 @@ const MainScreen = () => {
       <TopMain />
 
       <MainContainer>
-        <GamesContainer>
-          <GameImage source={gameIcon} />
-          <TextCont title heavy color={'#ff9d4d'}>Dice-fight</TextCont>
+        <GamesContainer horizontal={true} showsHorizontalScrollIndicator={false} contentContainerStyle={styles.scrollView}>
+            <GameWithBot index={0} hendlerPlayGame={hendlerPlayGame}/>
+            <GameWithOpponent index={1} hendlerPlayGame={hendlerPlayGame}/>
+            <GameWithOpponentByTime index={2} hendlerPlayGame={hendlerPlayGame} />
         </GamesContainer>
-        <PlayButton onPress={hendlerPlayGame}><Text large heavy color={'#fff'}>Play</Text></PlayButton>
+        {/*<PlayButton onPress={hendlerPlayGame}><Text large heavy color={'#fff'}>Play</Text></PlayButton>*/}
       </MainContainer>
 
     </BackgroundWrapper>
@@ -37,19 +39,10 @@ const MainContainer = styled.View`
   flex: 1;
   align-items: center;
   justify-content: center;
+  width: 100%;
 `
-const GamesContainer = styled.View`
-  position: relative;
-`
-const GameImage = styled.Image`
-    width: 100px;
-    height: 100px;
-`
-const TextCont = styled(Text)`
-  position: absolute;
-  bottom: 5px;
-  left: -25px;
-  text-shadow: 1px 1px 1px #000;
+const GamesContainer = styled.ScrollView`
+  width: 95%;
 `
 const PlayButton = styled.TouchableOpacity`
   background-color: green;
@@ -58,5 +51,14 @@ const PlayButton = styled.TouchableOpacity`
   padding: 10px 50px;
   margin-top: 20px;
 `;
+
+const styles = StyleSheet.create({
+    scrollView: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between'
+    },
+})
 
 export default MainScreen
