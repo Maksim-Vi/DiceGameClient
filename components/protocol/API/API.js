@@ -1,5 +1,8 @@
 import { Platform } from "react-native"
 import Constants from "expo-constants";
+import {openServerConnection} from "../websocet";
+import {store} from "../../redux/redux-store";
+import {setCurrentUser} from "../../redux/reducers/players/PlayersReducer";
 
 const getUrl = () =>{
     const inProduction = false;
@@ -35,7 +38,8 @@ export const postLoginApi = async (username, password) => {
     })
     .then((response) => response.json())
     .then((json) => {
-      return json
+        openServerConnection()
+        return json
     })
     .catch((err) => {
         console.log(`login ERROR`, err);
@@ -55,7 +59,8 @@ export const postRegisterApi = async (username, email, password) => {
     }) 
     .then((response) => response.json())
     .then((json) => {
-      return json
+        openServerConnection()
+        return json
     })
     .catch((err) => {
         console.log(`register ERROR`, err);

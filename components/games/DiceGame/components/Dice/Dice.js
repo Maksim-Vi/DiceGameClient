@@ -50,8 +50,6 @@ const Dice = (props) => {
       }
     }
 
-    console.log(diceImg)
-
     return diceImg
   }
 

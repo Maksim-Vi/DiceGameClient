@@ -7,11 +7,6 @@ import React from 'react';
 import { openServerConnection } from './components/protocol/websocet';
 
 export default function App() {
-
-  React.useEffect(()=>{
-    openServerConnection()
-  }, [])
-
   return  (
     <Provider store={store}>
       <UserProvider>

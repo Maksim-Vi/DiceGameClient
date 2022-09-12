@@ -3,6 +3,7 @@ import { AsyncStorage } from "react-native";
 import C_LOGIN from "../protocol/messages/clients/C_LOGIN";
 import { setCurrentUser } from "../redux/reducers/players/PlayersReducer";
 import { store } from "../redux/redux-store";
+import {postLoginApi} from "../protocol/API/API";
 
 export const UserContext = createContext({ name: '', auth: false });
 const storageName = 'UserData'
@@ -38,8 +39,15 @@ const UserProvider = ({ children }) => {
     const getDataFromStorage = async () => {
       const data = JSON.parse(await AsyncStorage.getItem(storageName))
       if(data && data.data.token && data.data.user){
-        login(data.data)
-        new C_LOGIN(data.data.user.username,data.data.user.password)
+          const dataLogin = await postLoginApi(data.data.user.username,data.data.user.password)
+
+          if(dataLogin && dataLogin.success){
+              login(dataLogin)
+              new C_LOGIN(dataLogin.user.username,dataLogin.user.password)
+          } else {
+              logout()
+              alert('Login is failed check your name and password')
+          }
       } else {
         logout()
       }

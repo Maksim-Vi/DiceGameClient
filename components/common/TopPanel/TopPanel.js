@@ -53,12 +53,13 @@ const TopMain = (props) => {
 
 const TopPanelContainer = styled.View`
     height: 50px;
-    //flex-direction: row;
     align-items: center;
     justify-content: center;
     text-align: center;
     background-color: rgb(1,1,70);
-    padding-top: ${Platform.OS === 'android' ? '0px' : '10px'};
+    margin-top: ${Platform.OS === 'ios' ? '35px' : '0px'};
+    border-radius: ${Platform.OS === 'ios' ? '20px' : '0px'};
+  
 `
 
 const ElementsContainer = styled.View`
