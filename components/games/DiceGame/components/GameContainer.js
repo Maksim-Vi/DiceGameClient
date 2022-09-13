@@ -6,6 +6,7 @@ import Dice from './Dice/Dice'
 import GameModel from './GameModel/GameModel'
 import ScoreBoardOpponent from './ScoreBoardsOpponent/ScoreBoardOpponent'
 import ScoreBoardUser from './ScoreBoardsUser/ScoreBoardUser'
+import {NativeModules, Platform} from "react-native";
 
 class GameContainer extends React.Component {
     constructor(){
@@ -139,6 +140,13 @@ const ScoresContainer = styled.View`
     align-items: center;
     justify-content: space-between;
     flex: 0.9;
+  ${()=>{
+    if(Platform.OS === 'ios' && NativeModules.DeviceInfo.isIPhoneX_deprecated){
+      return ' flex: 0.8;'
+    } else {
+      return ' flex: 0.9;'
+    }
+  }}
 `
 const SpaceThrow = styled.View`
     display: flex;

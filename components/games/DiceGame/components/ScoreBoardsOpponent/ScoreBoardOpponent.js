@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import Text from '../../../../common/Text/Text'
 import BoardItem from '../BoardItem/BoardItem'
-import {Dimensions} from "react-native";
+import {Dimensions, NativeModules, Platform} from "react-native";
 
 const ScoreBoardOpponent = (props) => {
 
@@ -67,6 +67,11 @@ const ScoreBoardOpponentContainer = styled.View`
   align-items: center;
   text-align: center;
   justify-content: center;
+  ${()=>{
+    if(Platform.OS === 'ios' && NativeModules.DeviceInfo.isIPhoneX_deprecated){
+      return 'margin-top: 50px;'
+    }
+  }}
 `
 
 const ScoresContainer = styled.View`

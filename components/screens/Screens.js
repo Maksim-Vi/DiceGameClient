@@ -1,4 +1,3 @@
-import { View, Text } from 'react-native'
 import React, { useContext } from 'react'
 import { UserContext } from '../utils/UserProvider';
 import AuthNavigation from './navigation/AuthNavigation';

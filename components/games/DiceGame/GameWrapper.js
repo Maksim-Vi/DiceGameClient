@@ -14,7 +14,7 @@ import {
 import { selectMyUser } from '../../redux/reducers/players/PlayersReducer'
 import GameContainer from './components/GameContainer'
 
-const GameWithComputer = (props) => {
+const GameWrapper = (props) => {
   
   const store = useStore()
 
@@ -44,4 +44,4 @@ const mapStateToProps = (state) => ({
   activeThrowBtn: selectActiveThrowBtn(state),
 });
 
-export default connect(mapStateToProps)(GameWithComputer);
+export default connect(mapStateToProps)(GameWrapper);

@@ -13,7 +13,7 @@ import {
 import Experience from "./components/Experience";
 import Coins from "./components/Coins";
 import Crystals from "./components/Crystals";
-import {Platform} from "react-native";
+import {NativeModules, Platform} from "react-native";
 
 const TopMain = (props) => {
 
@@ -57,9 +57,16 @@ const TopPanelContainer = styled.View`
     justify-content: center;
     text-align: center;
     background-color: rgb(1,1,70);
-    margin-top: ${Platform.OS === 'ios' ? '35px' : '0px'};
-    border-radius: ${Platform.OS === 'ios' ? '20px' : '0px'};
-  
+    ${()=>{
+        if(Platform.OS === 'ios' && NativeModules.DeviceInfo.isIPhoneX_deprecated){
+           return 'margin-top: 35px;'
+        }
+    }}
+     ${()=>{
+        if(Platform.OS === 'ios' && NativeModules.DeviceInfo.isIPhoneX_deprecated){
+           return 'border-radius: 20px;'
+        }
+    }}
 `
 const ElementsContainer = styled.View`
     display: flex;

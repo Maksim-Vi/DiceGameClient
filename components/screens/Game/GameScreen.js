@@ -2,7 +2,7 @@ import React from 'react'
 import BackgroundWrapper from '../../common/BackgroundWrapper/BackgroundWrapper'
 import styled from 'styled-components'
 import mainBg from '../../../assets/bg/main_bg.jpg'
-import GameWithComputer from '../../games/DiceGame/GameWithComputer'
+import GameWrapper from '../../games/DiceGame/GameWrapper'
 import C_ABORDED_GAME from '../../protocol/messages/clients/games/C_ABORDED_GAME'
 import { store } from '../../redux/redux-store'
 import { selectCurrentGameId } from '../../redux/reducers/game/GameReducer'
@@ -20,14 +20,14 @@ const GameScreen = () => {
       <GameBack onPress={leaveGame}>
           <Ionicons name='arrow-back' size={38} color={'#000'} />
       </GameBack>  
-      <GameContainer>
-        <GameWithComputer />
-      </GameContainer>
+      <GameWrap>
+        <GameWrapper />
+      </GameWrap>
     </BackgroundWrapper>
   )
 }
 
-const GameContainer = styled.View`
+const GameWrap = styled.View`
   flex: 1;
   align-items: center;
   justify-content: center;
