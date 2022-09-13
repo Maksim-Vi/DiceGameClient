@@ -41,14 +41,13 @@ function heartbeat() {
 
 function setUpPingInterval() {
     clearInterval(pingInterval);
-    pingInterval = null;
 
     pingInterval = setInterval(() => {
         if(!reconnecting) {
             reconnecting = true;
             reconnectWebsocket();
         }
-    }, 30000 + 3000);
+    }, 6000 + 2000);
 }
 
 function openWSHandler() {
@@ -58,19 +57,19 @@ function openWSHandler() {
 function errorWSHandler(error) {
     reconnecting = true;
     store.dispatch(setLoaded(false))
-    // alert('bad connection with data server (error)')
+    clearInterval(reconnectTimeout);
     reconnectWebsocket();
 }
 
 async function closeWSHandler() {
-    //console.log(`ANSWER closeWSHandler`);
     reconnecting = true;
     
     const data = JSON.parse(await AsyncStorage.getItem('UserData'))
     if(data){
         AsyncStorage.removeItem('UserData')
     }
-   
+
+    clearInterval(reconnectTimeout);
     reconnectWebsocket();
 }
 

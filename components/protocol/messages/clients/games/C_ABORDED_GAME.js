@@ -25,8 +25,7 @@ export default class C_ABORDED_GAME {
     }
 
     exec() {
-        sendMessageWS({ name: this.MESSAG_ENAME, clientIdWs: this.clientIdWebsocket, userId: this.id,  username: this.username, gameId: this.gameId }) 
-        window.navigation.navigate('MainScreen')
+        sendMessageWS({ name: this.MESSAG_ENAME, clientIdWs: this.clientIdWebsocket, userId: this.id,  username: this.username, gameId: this.gameId })
     }
 
     selectUserData = () =>{

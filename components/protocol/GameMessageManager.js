@@ -14,6 +14,7 @@ import S_GAME_FINISHED from './messages/server/games/S_GAME_FINISHED';
 import S_LEAVE_GAME from './messages/server/games/S_LEAVE_GAME';
 import S_OPPONENT_THROW from "./messages/server/games/S_OPPONENT_THROW";
 import S_COUNT_SCORES from "./messages/server/games/S_COUNT_SCORES";
+import S_GAME_BROKEN from "./messages/server/games/S_GAME_BROKEN";
 
 export const gameHendleMessage = (data) =>{
     switch (data.name) {
@@ -64,6 +65,9 @@ export const gameHendleMessage = (data) =>{
 
         case 'S_LEAVE_GAME':
             new S_LEAVE_GAME(data.gameId)
+            break;
+        case 'S_GAME_BROKEN':
+            new S_GAME_BROKEN(data.gameId)
             break;
         
         default:
