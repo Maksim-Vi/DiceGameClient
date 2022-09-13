@@ -104,6 +104,7 @@ class GameContainer extends React.Component {
                 <ScoresContainer>
                     <ScoreBoardOpponent board={boardData ? boardData.opponentBoard : null}
                                         winPoints={winPointsData ? winPointsData.opponentWinPoints : null}
+                                        oppMove={!this.props.isYouMove}
                                         countScores={this.props.countScores}
                                         opponent={opponent}/>
                     <SpaceThrow>

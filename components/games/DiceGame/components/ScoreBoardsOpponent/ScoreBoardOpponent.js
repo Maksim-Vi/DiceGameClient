@@ -2,11 +2,12 @@ import React from 'react'
 import styled from 'styled-components'
 import Text from '../../../../common/Text/Text'
 import BoardItem from '../BoardItem/BoardItem'
-import {Dimensions, NativeModules, Platform} from "react-native";
+import {Animated, Dimensions, Easing, NativeModules, Platform} from "react-native";
 
 const ScoreBoardOpponent = (props) => {
 
   const width = Dimensions.get('window').width;
+  const selectedAnim = React.useRef(new Animated.Value(1)).current;
 
   const DrowBoard = () =>{
 
@@ -46,8 +47,30 @@ const ScoreBoardOpponent = (props) => {
       return props.winPoints[column].sum
   }
 
+    React.useEffect(()=>{
+        if(props.oppMove){
+            Animated.loop(
+                Animated.sequence([
+                    Animated.timing(selectedAnim, {
+                        toValue: 1.03,
+                        duration: 1000,
+                        useNativeDriver: true,
+                        easing: Easing.linear,
+                    }),
+                    Animated.timing(selectedAnim, {
+                        toValue: 1,
+                        duration: 1000,
+                        useNativeDriver: true,
+                        easing: Easing.linear,
+                    })
+                ])
+            ).start();
+        }
+    },[props.oppMove])
+
   return (
     <ScoreBoardOpponentContainer>
+        {props.oppMove && <WhoThrow  style={[{transform: [{ scale: selectedAnim }]}]}/>}
         <Name large blod color={'#000'} center>{props.opponent ? props.opponent.username : ''}</Name>
         <ScoresContainer width={width}>
           {DrowBoard()}
@@ -115,4 +138,14 @@ const Column = styled(Text)`
   width: 33%;
   height: 20px;
 `
+const WhoThrow = styled(Animated.View)`
+  position: absolute;
+  left: 0;
+  right: 0;
+  width: 70%;
+  height: 200px;
+  border: 2px solid rgba(255, 157, 77, 0.56);
+  border-radius: 10px;
+`
+
 export default ScoreBoardOpponent
