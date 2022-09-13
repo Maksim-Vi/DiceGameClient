@@ -61,7 +61,6 @@ const TopPanelContainer = styled.View`
     border-radius: ${Platform.OS === 'ios' ? '20px' : '0px'};
   
 `
-
 const ElementsContainer = styled.View`
     display: flex;
     align-items: center;
@@ -69,7 +68,6 @@ const ElementsContainer = styled.View`
     flex-direction: row;
     width: 100%;
 `
-
 const LogoutBtn = styled.TouchableOpacity`
     align-self: flex-end;
     background-color: rgb(255,157,77);
@@ -77,11 +75,11 @@ const LogoutBtn = styled.TouchableOpacity`
     border: 1px solid #000;
     padding: 2px 10px;
 `
-
 const mapStateToProps = (state) => ({
     user: selectMyUser(state),
     coins: selectUserCoins(state),
     crystals: selectUserCrystals(state),
     experience: selectUserExperience(state),
 })
+
 export default connect(mapStateToProps)(TopMain);

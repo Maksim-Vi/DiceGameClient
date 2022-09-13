@@ -1,7 +1,8 @@
 {
   "expo": {
     "name": "DiceGame",
-    "slug": "DiceGame",
+    "slug": "dicegame",
+    "owner": "kastom",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/dice/play_dice.png",
@@ -32,6 +33,11 @@
         "backgroundColor": "#FFFFFF"
       },
       "package": "com.anonymous.DiceGame"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "a5e5cb05-164b-405b-9ee0-6e83cf5f8084"
+      }
     }
   }
 }

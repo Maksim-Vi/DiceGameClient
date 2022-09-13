@@ -5,7 +5,7 @@ import mainBg from '../../../../assets/bg/main_bg.jpg'
 import BackgroundWrapper from '../../../common/BackgroundWrapper/BackgroundWrapper';
 import Text from '../../../common/Text/Text';
 import { useNavigation } from '@react-navigation/native';
-import { Keyboard, TouchableWithoutFeedback } from 'react-native';
+import {Keyboard, Platform, TouchableWithoutFeedback} from 'react-native';
 import { UserContext } from '../../../utils/UserProvider';
 import { postRegisterApi } from '../../../protocol/API/API';
 import C_LOGIN from '../../../protocol/messages/clients/C_LOGIN';
@@ -98,11 +98,14 @@ const InputsContainer = styled.View`
   justify-content: center;
 `
 const BtnContainer = styled.View`
+  width: ${Platform.OS === 'ios' ? '100%' : '80%'};
+  margin-top: 30px;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
 `
 const Name = styled.TextInput`
-  width: 70%;
+  width: 80%;
   height: 50px;
   margin: 10px auto;
   padding: 5px 20px;
@@ -113,7 +116,7 @@ const Name = styled.TextInput`
   border: 2px solid rgb(255,157,77);
 `
 const Email = styled.TextInput`
-  width: 70%;
+  width: 80%;
   height: 50px;
   margin: 10px auto;
   padding: 5px 20px;
@@ -124,7 +127,7 @@ const Email = styled.TextInput`
   border: 2px solid rgb(255,157,77);
 `
 const Password = styled.TextInput`
-  width: 70%;
+  width: 80%;
   height: 50px;
   margin: 10px auto;
   padding: 5px 20px;
@@ -135,11 +138,13 @@ const Password = styled.TextInput`
   border: 2px solid rgb(255,157,77);
 `
 const RegisterBtn = styled.TouchableOpacity`
+  align-items: center;
+  justify-content: center;
   background-color:rgb(255,157,77);
   border-radius: 10px;
   border: 1px solid #000;
-  padding: 10px 50px;
-  margin-top: 30px;
+  width: 80%;
+  height: 40px;
 `
 
 export default RegisterScreen

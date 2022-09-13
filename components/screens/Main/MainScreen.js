@@ -1,11 +1,10 @@
 import React  from 'react'
-import Text from '../../common/Text/Text'
 import BackgroundWrapper from '../../common/BackgroundWrapper/BackgroundWrapper'
 import mainBg from '../../../assets/bg/main_bg.jpg'
 import styled from 'styled-components'
 import TopMain from '../../common/TopPanel/TopPanel'
 import C_QUICK_PLAY from '../../protocol/messages/clients/games/C_QUICK_PLAY'
-import {StatusBar,StyleSheet} from "react-native";
+import {StyleSheet} from "react-native";
 import GameWithBot from "./components/GameWithBot";
 import GameWithOpponent from "./components/GameWithOpponent";
 import GameWithOpponentByTime from "./components/GameWithOpponentByTime";
@@ -19,7 +18,6 @@ const MainScreen = () => {
 
   return (
     <BackgroundWrapper gackground={mainBg}>
-      <StatusBar hidden={true} style="light"/>
       <TopMain />
 
       <MainContainer>

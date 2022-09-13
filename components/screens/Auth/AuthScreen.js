@@ -6,9 +6,10 @@ import Text from '../../common/Text/Text'
 import { useNavigation } from '@react-navigation/native'
 import LoginScreen from './Login/LoginScreen'
 import { postLoginApi } from '../../protocol/API/API'
-import { Keyboard, Platform, TouchableWithoutFeedback } from 'react-native'
+import {Keyboard, Platform, TouchableWithoutFeedback} from 'react-native'
 import { UserContext } from '../../utils/UserProvider'
 import C_LOGIN from '../../protocol/messages/clients/C_LOGIN'
+import Divider from "../../common/Divider/Divider";
 
 const AuthScreen = () => {
 
@@ -44,8 +45,9 @@ const AuthScreen = () => {
           <AuthContainer>
             <LoginScreen hendlerLogin={hendlerLogin} onChangeInputs={onChangeInputs} inputData={inputData}/>
             <ButtonContainer >
-              <LoginBtn onPress={hendlerLogin}><Text small heavy color='#fff'>Login</Text></LoginBtn>
-              <RegisterBtn onPress={hendlerRegister}><Text small heavy color='#fff'>Register</Text></RegisterBtn>
+              <LoginBtn onPress={hendlerLogin}><Text small heavy color='#fff' center>Login</Text></LoginBtn>
+              <Divider text={'or'}/>
+              <RegisterBtn onPress={hendlerRegister}><Text small heavy color='#fff' center>Register</Text></RegisterBtn>
             </ButtonContainer>
           </AuthContainer>
         </TouchableWithoutFeedback>
@@ -61,22 +63,27 @@ const AuthContainer = styled.View`
 const ButtonContainer = styled.View`
   width: ${Platform.OS === 'ios' ? '100%' : '80%'};
   margin-top: 30px;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: space-around;
 `
 const LoginBtn = styled.TouchableOpacity`
+  align-items: center;
+  justify-content: center;
   background-color: rgb(255,157,77);
   border-radius: 10px;
   border: 1px solid #000;
-  padding: 10px 60px;
+  width: 80%;
+  height: 40px;
 `
 const RegisterBtn = styled.TouchableOpacity`
+  align-items: center;
+  justify-content: center;
   background-color:rgb(255,157,77);
   border-radius: 10px;
   border: 1px solid #000;
-  padding: 10px 50px;
-  /* margin-top: 30px; */
+  width: 80%;
+  height: 40px;
 `
 
 export default AuthScreen

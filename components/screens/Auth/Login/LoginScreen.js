@@ -36,7 +36,7 @@ const InputsContainer = styled.View`
   justify-content: center;
 `
 const Name = styled.TextInput`
-  width: 70%;
+  width: 80%;
   height: 50px;
   margin: 10px auto;
   padding: 5px 20px;
@@ -47,7 +47,7 @@ const Name = styled.TextInput`
   border: 2px solid rgb(255,157,77);
 `
 const Password = styled.TextInput`
-  width: 70%;
+  width: 80%;
   height: 50px;
   margin: 10px auto;
   padding: 5px 20px;
