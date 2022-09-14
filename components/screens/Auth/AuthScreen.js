@@ -28,7 +28,8 @@ const AuthScreen = () => {
     const data = await postLoginApi(inputData.name,inputData.password)
 
     if(data && data.success){
-      login(data)
+      //login(data)
+      navigation.navigate('LoadingProject')
       new C_LOGIN(data.user.username,data.user.password)
     } else {
       alert('Login is failed check your name and password')

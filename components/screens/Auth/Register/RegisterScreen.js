@@ -38,7 +38,7 @@ const RegisterScreen = () => {
     const data = await postRegisterApi(inputData.username, inputData.email, inputData.password)
 
     if(data && data.success){
-      login(data.token, data.user.id, data.user.username, data.user.password)
+      //login(data.token, data.user.id, data.user.username, data.user.password)
       new C_LOGIN(data.user.username,data.user.password)
     } else {
       alert('Register is failed check your name email and password')

@@ -36,6 +36,9 @@ const UserProvider = ({ children }) => {
         AsyncStorage.removeItem(storageName)
     })
 
+    store.logout = logout
+    store.login = login
+
     const getDataFromStorage = async () => {
       const data = JSON.parse(await AsyncStorage.getItem(storageName))
       if(data && data.data.token && data.data.user){

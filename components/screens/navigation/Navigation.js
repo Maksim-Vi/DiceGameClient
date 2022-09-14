@@ -9,7 +9,6 @@ import ShopScreen from "../shop/ShopScreen";
 import TabBar from "./TabBar";
 import ResultScreen from "../ResultScreen/ResultScreen";
 import React from "react";
-import {openServerConnection} from "../../protocol/websocet";
 
 const AppStack = createStackNavigator();
 const TabsNav = createBottomTabNavigator();
@@ -25,10 +24,6 @@ const TabNavScreen = () => {
 };
 
 export default function Navigator() {
-
-    // React.useEffect(()=>{
-    //     openServerConnection()
-    // }, [])
 
   return (
     <AppStack.Navigator screenOptions={screenOptions} >
