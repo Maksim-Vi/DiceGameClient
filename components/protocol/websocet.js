@@ -4,6 +4,7 @@ import { store } from "../redux/redux-store";
 import { hendleMessage } from "./MessageManager";
 import C_PING from "./messages/clients/C_PING";
 import Constants from "expo-constants";
+
 export let websocket;
 
 let reconnectTimeout = null;
@@ -101,8 +102,8 @@ function reconnectWebsocket() {
 }
 
 export const sendMessageWS = (message) =>{
-    if((!websocket && !websocket.readyState) || websocket.readyState !== 1) return
-
-    websocket.send(JSON.stringify(message))
+    if(websocket && websocket.readyState === 1){
+        websocket.send(JSON.stringify(message))
+    }
 }
 

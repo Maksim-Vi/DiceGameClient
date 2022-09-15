@@ -6,7 +6,7 @@ import S_UPDATE_USER_FLASH from "./messages/server/users/S_UPDATE_USER_FLASH";
 export const usersHendleMessage = (data) =>{
     switch (data.name) {
         case 'S_UPDATE_USER_EXP':
-            new S_UPDATE_USER_EXP(data.lvl, data.levelExp)
+            new S_UPDATE_USER_EXP(data.lvl, data.levelExp, data.progress)
             break;
         case 'S_UPDATE_USER_FLASH':
             new S_UPDATE_USER_FLASH(data.status, data.flash)
