@@ -2,21 +2,18 @@ import { selectMyUser } from "../../../../redux/reducers/players/PlayersReducer"
 import { selectClientIdWebsocket } from "../../../../redux/reducers/Websocket/WebsocketReducer"
 import { store } from "../../../../redux/redux-store"
 import { sendMessageWS } from "../../../websocet"
-import C_PAY_BY_GAME from "./C_PAY_BY_GAME"
-
 
 // 1: 'play_robot',
 // 2: 'play_opponent',
 // 3: 'play_opponents',
 
 export default class C_QUICK_PLAY {
-    constructor(price,gameType){
+    constructor(gameType){
 
         this.MESSAG_ENAME = 'C_QUICK_PLAY'
         this.clientIdWebsocket = null
         this.showLog = true
 
-        this.price = price
         this.id = ''
         this.username = ''
         this.gameType = gameType
@@ -33,7 +30,6 @@ export default class C_QUICK_PLAY {
 
     exec() {
         sendMessageWS({ name: this.MESSAG_ENAME, clientIdWs: this.clientIdWebsocket, userId: this.id,  username: this.username, gameType: this.gameType})
-        new C_PAY_BY_GAME(this.price)
         this.loadLoadingScreen()
     }
 

@@ -6,6 +6,7 @@ import {
     setThrowData
 } from "../../../../redux/reducers/game/GameReducer"
 import { store } from "../../../../redux/redux-store"
+import C_PAY_BY_GAME from "../../clients/games/C_PAY_BY_GAME";
 
 export default class S_CREATED_GAME {
     constructor(gameId){
@@ -29,6 +30,8 @@ export default class S_CREATED_GAME {
         store.dispatch(setOpponentThrowData(null))
         store.dispatch(resetScores())
         store.dispatch(setCountScores(null))
+
+        new C_PAY_BY_GAME(this.gameId)
     }
 
 	getLogText() {

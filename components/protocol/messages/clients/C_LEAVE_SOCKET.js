@@ -1,7 +1,7 @@
 import { selectMyUser } from "../../../redux/reducers/players/PlayersReducer"
 import { selectClientIdWebsocket } from "../../../redux/reducers/Websocket/WebsocketReducer"
 import { store } from "../../../redux/redux-store"
-import { sendMessageWS } from "../../websocet"
+import {sendMessageWS, websocket} from "../../websocet"
 
 export default class C_LEAVE_SOCKET {
     constructor(){
@@ -25,6 +25,10 @@ export default class C_LEAVE_SOCKET {
 
     exec() {
        sendMessageWS({ name: this.MESSAG_ENAME, clientIdWs: this.clientIdWebsocket, id: this.id, username: this.username })
+
+        if (websocket) {
+            websocket.close();
+        }
     }
 
     getUserData = () =>{

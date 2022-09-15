@@ -21,6 +21,7 @@ export default class S_PONG {
 
     exec() {
         window.wsPing = this.data.ts;
+        new C_PING()
     }
 
 	getLogText() {

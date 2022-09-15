@@ -2,14 +2,12 @@ import { AsyncStorage, Platform } from "react-native";
 import { setLoaded } from "../redux/reducers/Websocket/WebsocketReducer";
 import { store } from "../redux/redux-store";
 import { hendleMessage } from "./MessageManager";
-import C_PING from "./messages/clients/C_PING";
 import Constants from "expo-constants";
 
 export let websocket;
 
 let reconnectTimeout = null;
 let reconnecting = false;
-let pingInterval = null;
 
 export const openServerConnection = () => {
     if (websocket) {
@@ -20,8 +18,6 @@ export const openServerConnection = () => {
         websocket.onmessage = null;
     }
 
-    setUpPingInterval();
-
     const url = Platform.OS === 'android' ? '10.0.2.2' : Constants.manifest.debuggerHost.split(`:`).shift()
     const port = 3030
 
@@ -31,63 +27,52 @@ export const openServerConnection = () => {
     websocket.onerror = errorWSHandler;
     websocket.onclose = closeWSHandler;
     websocket.onmessage = messageWSHandler;
-    websocket.onping = function onping() {
-        heartbeat()
-    };
-}
-
-function heartbeat() {
-    new C_PING()
-}
-
-function setUpPingInterval() {
-    clearInterval(pingInterval);
-
-    pingInterval = setInterval(() => {
-        if(!reconnecting) {
-            reconnecting = true;
-            reconnectWebsocket();
-        }
-    }, 6000 + 2000);
 }
 
 function openWSHandler() {
     reconnecting = false;
+    // clearInterval(reconnectTimeout);
 }
 
 function errorWSHandler(error) {
+
+    const close = async () =>{
+        const data = JSON.parse(await AsyncStorage.getItem('UserData'))
+        if(data){
+            AsyncStorage.removeItem('UserData')
+        }
+        store.logout()
+    }
+
+    console.error(`[error] ${error.message}`);
+
     reconnecting = true;
     store.dispatch(setLoaded(false))
     clearInterval(reconnectTimeout);
     reconnectWebsocket();
+    close()
 }
 
-async function closeWSHandler() {
-    reconnecting = true;
-    
+async function closeWSHandler(event) {
+
+    if (event.wasClean) {
+        console.log(`[close] Connection closed cleanly, code=${event.code} reason=${event.reason}`);
+    } else {
+        console.log('[close] Connection died');
+    }
     const data = JSON.parse(await AsyncStorage.getItem('UserData'))
     if(data){
-        AsyncStorage.removeItem('UserData')
-    }
+        reconnecting = true;
 
-    clearInterval(reconnectTimeout);
-    reconnectWebsocket();
+        clearInterval(reconnectTimeout);
+        reconnectWebsocket();
+    }
 }
 
 function messageWSHandler(event) {
     const parseData = JSON.parse(event.data)
     
     hendleMessage(parseData)
-}
-
-
-export function killWebsocket() {
-    reconnecting = true;
-
-    if (websocket) {
-        store.dispatch(setLoaded(false))
-        websocket.close();
-    }
 }
 
 function reconnectWebsocket() {
@@ -98,7 +83,7 @@ function reconnectWebsocket() {
             websocket = null;
             openServerConnection();
         }
-    }, 3500);
+    }, 1000);
 }
 
 export const sendMessageWS = (message) =>{

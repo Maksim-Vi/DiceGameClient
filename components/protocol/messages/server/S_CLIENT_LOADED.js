@@ -5,7 +5,7 @@ export default class S_CLIENT_LOADED {
     constructor(clientId){
 
         this.MESSAG_ENAME = 'S_CLIENT_LOADED'
-        this.showLog = false
+        this.showLog = true
 
         this.clientId = clientId
 

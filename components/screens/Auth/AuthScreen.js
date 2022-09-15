@@ -16,8 +16,8 @@ const AuthScreen = () => {
   const navigation = useNavigation()
   const { login } = useContext(UserContext);
   const [inputData, setInputChange] = useState({
-    name: '',
-    password: ''
+    name: 'Max',
+    password: 'qwerty'
   })
 
   const onChangeInputs = (name, event) =>{

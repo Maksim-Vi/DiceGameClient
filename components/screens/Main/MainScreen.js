@@ -12,8 +12,7 @@ import GameWithOpponentByTime from "./components/GameWithOpponentByTime";
 const MainScreen = () => {
 
   const hendlerPlayGame = (gameType) =>{
-    const data = {price: 10}
-    new C_QUICK_PLAY(data.price,gameType)
+    new C_QUICK_PLAY(gameType)
   }
 
   return (
