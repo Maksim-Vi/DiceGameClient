@@ -6,16 +6,13 @@ import BackgroundWrapper from '../../../common/BackgroundWrapper/BackgroundWrapp
 import Text from '../../../common/Text/Text';
 import { useNavigation } from '@react-navigation/native';
 import {Keyboard, Platform, TouchableWithoutFeedback} from 'react-native';
-import { UserContext } from '../../../utils/UserProvider';
 import { postRegisterApi } from '../../../protocol/API/API';
-import C_LOGIN from '../../../protocol/messages/clients/C_LOGIN';
 
 const RegisterScreen = () => {
   const refEmail = useRef()
   const refPassword = useRef()
 
   const navigation = useNavigation()
-  const { login } = useContext(UserContext);
   const [inputData, setInputChange] = useState({
     username: '',
     password: '',
@@ -38,8 +35,7 @@ const RegisterScreen = () => {
     const data = await postRegisterApi(inputData.username, inputData.email, inputData.password)
 
     if(data && data.success){
-      //login(data.token, data.user.id, data.user.username, data.user.password)
-      new C_LOGIN(data.user.username,data.user.password)
+      navigation.goBack()
     } else {
       alert('Register is failed check your name email and password')
     }
@@ -70,10 +66,12 @@ const RegisterScreen = () => {
                       secureTextEntry={true} 
                       returnKeyType='go' 
                       onChangeText={(value)=> onChangeInputs('password',value)}
-                      onSubmitEditing={hendlerRegister} />
+                      onSubmitEditing={()=>{hendlerRegister()}} />
           </InputsContainer>
           <BtnContainer>
-            <RegisterBtn onPress={hendlerRegister}><Text small heavy color='#fff'>Register</Text></RegisterBtn>
+            <RegisterBtn onPress={()=>{hendlerRegister()}}>
+              <Text small heavy color='#fff'>Register</Text>
+            </RegisterBtn>
           </BtnContainer>
         </Container>
       </TouchableWithoutFeedback>

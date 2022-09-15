@@ -1,3 +1,4 @@
+import {store} from "../../../redux/redux-store";
 
 export default class S_CREATE_ACCOUNT_FAILED {
     constructor(data){
@@ -16,7 +17,7 @@ export default class S_CREATE_ACCOUNT_FAILED {
     }
 
     exec() {
-        
+        store.logout()
     }
 
 	getLogText() {

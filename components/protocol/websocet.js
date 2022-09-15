@@ -101,8 +101,8 @@ function reconnectWebsocket() {
 }
 
 export const sendMessageWS = (message) =>{
-    if(!websocket && websocket.readyState !== 1) return
-  
+    if((!websocket && !websocket.readyState) || websocket.readyState !== 1) return
+
     websocket.send(JSON.stringify(message))
 }
 

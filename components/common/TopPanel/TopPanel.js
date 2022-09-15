@@ -8,18 +8,20 @@ import {
     selectMyUser,
     selectUserCoins,
     selectUserCrystals,
-    selectUserExperience
+    selectUserExperience, selectUserFlash
 } from "../../redux/reducers/players/PlayersReducer";
 import Experience from "./components/Experience";
 import Coins from "./components/Coins";
 import Crystals from "./components/Crystals";
 import {NativeModules, Platform} from "react-native";
+import Flash from "./components/Flash";
 
 const TopMain = (props) => {
 
     const [userData, setUserData] = React.useState({
         coins: 0,
         crystals: 0,
+        flash: 0,
         experience: null
     })
     const { logout } = useContext(UserContext);
@@ -34,7 +36,8 @@ const TopMain = (props) => {
             setUserData({
                 coins: props.user.coins,
                 crystals: props.user.crystals,
-                experience: props.user.experience
+                experience: props.user.experience,
+                flash: props.user.flash,
             })
         }
     },[props.user])
@@ -44,7 +47,8 @@ const TopMain = (props) => {
             <ElementsContainer>
                 <Experience experience={userData.experience}/>
                 <Coins coins={userData.coins}/>
-                <Crystals crystals={userData.crystals}/>
+                {/*<Crystals crystals={userData.crystals}/>*/}
+                <Flash crystals={userData.flash}/>
                 <LogoutBtn onPress={Logout}><Text>Logout</Text></LogoutBtn>
             </ElementsContainer>
         </TopPanelContainer>
@@ -87,6 +91,7 @@ const mapStateToProps = (state) => ({
     coins: selectUserCoins(state),
     crystals: selectUserCrystals(state),
     experience: selectUserExperience(state),
+    flash: selectUserFlash(state),
 })
 
 export default connect(mapStateToProps)(TopMain);
