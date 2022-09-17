@@ -1,7 +1,7 @@
 import React from "react";
-import Text from "../../Text/Text";
+import Text from "../../../Text/Text";
 import styled from "styled-components";
-import coins from "../../../../assets/topPanel/coins.png";
+import coins from "../../../../../assets/topPanel/coins.png";
 
 const Coins = (props) =>{
     return <CoinsContainer>

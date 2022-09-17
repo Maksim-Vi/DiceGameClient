@@ -1,8 +1,5 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import styled from 'styled-components'
-import { UserContext } from '../../utils/UserProvider';
-import Text from '../Text/Text'
-import C_LEAVE_SOCKET from '../../protocol/messages/clients/C_LEAVE_SOCKET'
 import {connect} from "react-redux";
 import {
     selectMyUser,
@@ -10,53 +7,54 @@ import {
     selectUserCrystals,
     selectUserExperience, selectUserFlash
 } from "../../redux/reducers/players/PlayersReducer";
-import Experience from "./components/Experience";
-import Coins from "./components/Coins";
-import Crystals from "./components/Crystals";
+import Coins from "./components/Top/Coins";
+import Crystals from "./components/Top/Crystals";
 import {NativeModules, Platform} from "react-native";
-import Flash from "./components/Flash";
+import Flash from "./components/Top/Flash";
+import TopPanelBottom from "./TopPanelBottom";
 
 const TopMain = (props) => {
 
     const [userData, setUserData] = React.useState({
+        user: null,
         coins: 0,
         crystals: 0,
         flash: 0,
-        experience: null
+        experience: null,
+        avatarId: null
     })
-    const { logout } = useContext(UserContext);
-
-    const Logout = () =>{
-        new C_LEAVE_SOCKET()
-        logout()
-    }
 
     React.useEffect(()=>{
         if(props.user){
             setUserData({
+                user: props.user,
                 coins: props.user.coins,
                 crystals: props.user.crystals,
                 experience: props.user.experience,
                 flash: props.user.flash,
+                avatarId: null
             })
         }
     },[props.user])
 
     return (
-        <TopPanel>
-            <TopPanelContainer>
-                <ElementsContainer>
-                    <Experience experience={userData.experience}/>
-                    <Coins coins={userData.coins}/>
-                    {/*<Crystals crystals={userData.crystals}/>*/}
-                    <Flash crystals={userData.flash}/>
-                    <LogoutBtn onPress={Logout}><Text>Logout</Text></LogoutBtn>
-                </ElementsContainer>
-            </TopPanelContainer>
-            <ProgressContainer>
-                <Progress progress={userData.experience ? userData.experience.progress : 0}/>
-            </ProgressContainer>
-        </TopPanel>
+        <React.Fragment>
+            <TopPanel>
+                <TopPanelContainer>
+                    <ElementsContainer>
+                        <Coins coins={userData.coins}/>
+                        <Crystals crystals={userData.crystals}/>
+                        <Flash crystals={userData.flash}/>
+                    </ElementsContainer>
+                </TopPanelContainer>
+                <ProgressContainer>
+                    <Progress progress={userData.experience ? userData.experience.progress : 0}/>
+                </ProgressContainer>
+            </TopPanel>
+
+            <TopPanelBottom userData={userData}/>
+        </React.Fragment>
+
     )
 }
 
@@ -83,7 +81,10 @@ const TopPanelContainer = styled.View`
     width: 100%;
      ${()=>{
         if(Platform.OS === 'ios' && NativeModules.DeviceInfo.isIPhoneX_deprecated){
-           return 'border-radius: 20px;'
+           return `
+           width: 99%;
+            border-radius: 15px;
+           `
         }
     }}
 `
@@ -99,7 +100,7 @@ const ProgressContainer = styled.View`
   align-items: flex-start;
   justify-content: center;
   background-color: rgb(1,1,70);
-  height: 5px;
+  height: 0.1px;
   ${()=>{
     if(Platform.OS === 'ios' && NativeModules.DeviceInfo.isIPhoneX_deprecated){
       return `

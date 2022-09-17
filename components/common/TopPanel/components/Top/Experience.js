@@ -1,11 +1,12 @@
 import React from "react";
-import Text from "../../Text/Text";
+import Text from "../../../Text/Text";
 import styled from "styled-components";
-import star from "../../../../assets/topPanel/star_lvl.png";
+import star from "../../../../../assets/topPanel/star_lvl.png";
 
 const Experience = (props) =>{
     return <ExperienceContainer>
-        <StarsImage source={star} />
+        {/*<StarsImage source={star} />*/}
+        <Text blod medium color={'rgb(255,157,77)'}>Lvl:</Text>
         <Text blod medium>{props.experience ? props.experience.lvl : 0}</Text>
     </ExperienceContainer>
 }
@@ -13,9 +14,10 @@ const Experience = (props) =>{
 const ExperienceContainer = styled.View`
   display: flex;
   align-items: center;
-  justify-content: center;
+  flex-direction: row;
+  //justify-content: center;
+  white-space: nowrap;
   position: relative;
-  //padding: 10px 20px 10px 20px;
 `
 
 const StarsImage = styled.Image`

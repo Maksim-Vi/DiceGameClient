@@ -1,11 +1,11 @@
 import React from "react";
-import Text from "../../Text/Text";
+import Text from "../../../Text/Text";
 import styled from "styled-components";
-import flash from "../../../../assets/topPanel/flash.png";
+import star from "../../../../../assets/topPanel/diamond.png";
 
-const Flash = (props) =>{
+const Crystals = (props) =>{
     return <CrystalsContainer>
-        <FlashImage source={flash} />
+        <CrystalsImage source={star} />
         <Text blod medium>{props.crystals}</Text>
     </CrystalsContainer>
 }
@@ -18,7 +18,7 @@ const CrystalsContainer = styled.View`
   padding: 2px 20px 2px 20px;
 `
 
-const FlashImage = styled.Image`
+const CrystalsImage = styled.Image`
   position: absolute;
   top: -5px;
   left: -15px;
@@ -26,4 +26,4 @@ const FlashImage = styled.Image`
   height: 30px;
 `
 
-export default Flash
+export default Crystals
