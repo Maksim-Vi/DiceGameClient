@@ -1,19 +1,14 @@
 import React from "react";
 import styled from "styled-components";
-import {getAvatarById} from "../../utils";
 import Text from "../../../Text/Text";
 import Experience from "../Top/Experience";
+import Avatar from "../../../Avatars/Avatar";
 
 const UserInfo = (props) =>{
     const {avatarId, user, experience} = props.userData
     return (
         <UserInfoContainer>
-            <AvatarContainer>
-                <UserInfoBtn>
-                    <AvatarImg source={getAvatarById(avatarId)} />
-                </UserInfoBtn>
-            </AvatarContainer>
-
+            <Avatar avatarId={avatarId}/>
             <AvatarIfoContainer>
                 <UserName madium heavy>{user ? user.username : ''}</UserName>
                 <Experience experience={experience}/>
@@ -32,18 +27,6 @@ const UserInfoContainer = styled.View`
   height: 60px;
   background-color: rgba(13, 64, 194, 0.88);
 `
-
-const AvatarContainer = styled.View`
-  border: 2px solid rgba(255, 255, 255, 0.7);
-  border-radius: 10px;
-  width: 45%;
-`
-const AvatarImg = styled.Image`
-  width: 100%;
-  height: 100%;
-  resizeMode: 'stretch'
-`
-
 const AvatarIfoContainer = styled.View`
   display: flex;
   flex-direction: column;
@@ -52,10 +35,6 @@ const AvatarIfoContainer = styled.View`
   width: 50%;
   margin-left: 5px;
 `
-const UserInfoBtn = styled.TouchableWithoutFeedback`
- 
-`
-
 const UserName = styled(Text)`
 `
 
