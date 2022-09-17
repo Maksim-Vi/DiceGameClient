@@ -45,7 +45,7 @@ export const postLoginApi = async (username, password) => {
 }
 
 export const postRegisterApi = async (username, email, password) => {
-    let data = { username: username, email: email, password: password }
+    let data = { username: username, email: email.toLowerCase(), password: password }
 
     return await fetch(`${URL}/register`,{
         method: 'POST',

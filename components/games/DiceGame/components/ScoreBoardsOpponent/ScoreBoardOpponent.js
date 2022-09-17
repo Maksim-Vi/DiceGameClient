@@ -4,6 +4,8 @@ import Text from '../../../../common/Text/Text'
 import BoardItem from '../BoardItem/BoardItem'
 import {Animated, Dimensions, Easing, NativeModules, Platform} from "react-native";
 
+const OppIndexView = [6, 7, 8,3, 4, 5,0, 1, 2]
+
 const ScoreBoardOpponent = (props) => {
 
   const width = Dimensions.get('window').width;
@@ -31,9 +33,14 @@ const ScoreBoardOpponent = (props) => {
 
       if(!props.board || props.board.length === 0) return []
 
-      props.board.forEach((item, i)=>{
-        const winPoints = checkWinPiontsByColumn(i)
-        BoardsItem.push(<BoardItem key={i} item={item} winPoints={winPoints}/>)
+      // props.board.forEach((item, i)=>{
+      //   const winPoints = checkWinPiontsByColumn(i)
+      //   BoardsItem.push(<BoardItem key={i} item={item} winPoints={winPoints}/>)
+      // })
+
+      OppIndexView.forEach(index=>{
+          const winPoints = checkWinPiontsByColumn(index)
+          BoardsItem.push(<BoardItem key={index} item={props.board[index]} winPoints={winPoints}/>)
       })
 
       return BoardsItem

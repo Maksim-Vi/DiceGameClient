@@ -14,9 +14,9 @@ const RegisterScreen = () => {
 
   const navigation = useNavigation()
   const [inputData, setInputChange] = useState({
-    username: '',
-    password: '',
-    email: ''
+    username: 'Max',
+    password: 'qwerty',
+    email: 'maxivit@ukr.net'
   })
 
   const onChangeInputs = (name, event) =>{
@@ -34,6 +34,7 @@ const RegisterScreen = () => {
   const hendlerRegister = async () =>{
     const data = await postRegisterApi(inputData.username, inputData.email, inputData.password)
 
+    console.log('ANSWER', data)
     if(data && data.success){
       navigation.goBack()
     } else {
@@ -51,17 +52,20 @@ const RegisterScreen = () => {
           <InputsContainer>
             <Name placeholder='Name' 
                   placeholderTextColor='#838383' 
-                  returnKeyType='next' 
+                  returnKeyType='next'
+                  value={inputData.username}
                   onChangeText={(value)=> onChangeInputs('username',value)}
                   onSubmitEditing={()=> nextFieldFocus('Email')}/>
             <Email ref={refEmail}
                   placeholder='Email'
                   placeholderTextColor='#838383' 
-                  returnKeyType='next' 
+                  returnKeyType='next'
+                  value={inputData.email}
                   onChangeText={(value)=> onChangeInputs('email',value)}
                   onSubmitEditing={()=> nextFieldFocus('Password')} />
             <Password ref={refPassword}
-                      placeholder='Password' 
+                      placeholder='Password'
+                      value={inputData.password}
                       placeholderTextColor='#838383' 
                       secureTextEntry={true} 
                       returnKeyType='go' 

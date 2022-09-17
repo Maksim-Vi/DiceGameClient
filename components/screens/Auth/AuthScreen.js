@@ -14,7 +14,6 @@ import Divider from "../../common/Divider/Divider";
 const AuthScreen = () => {
 
   const navigation = useNavigation()
-  const { login } = useContext(UserContext);
   const [inputData, setInputChange] = useState({
     name: 'Max',
     password: 'qwerty'
@@ -28,9 +27,8 @@ const AuthScreen = () => {
     const data = await postLoginApi(inputData.name,inputData.password)
 
     if(data && data.success){
-      //login(data)
-      navigation.navigate('LoadingProject')
-      new C_LOGIN(data.user.username,data.user.password)
+     navigation.navigate('LoadingProject')
+     new C_LOGIN(data.user.username,data.user.password)
     } else {
       alert('Login is failed check your name and password')
     }
