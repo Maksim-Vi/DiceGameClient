@@ -1,27 +1,14 @@
 import React from 'react'
 import BackgroundWrapper from '../../common/BackgroundWrapper/BackgroundWrapper'
-import mainBg from '../../../assets/bg/main_bg.jpg'
-import styled from 'styled-components'
-import Text from '../../common/Text/Text'
-import TopMain from '../../common/TopPanel/TopPanel'
+import mainBg from '../../../assets/bg/collection_bg.jpeg'
+import CollectionsContainer from "./components/CollectionsContainer";
 
 const CollectionsScreen = () => {
   return (
     <BackgroundWrapper gackground={mainBg}>
-      <TopMain />
-
-      <CollectionsContainer>
-        <Text large heavy color={'#000'}>CollectionsScreen</Text>
-      </CollectionsContainer>
-  
+        <CollectionsContainer />
     </BackgroundWrapper>
   )
 }
-
-const CollectionsContainer = styled.View`
-  flex: 1;
-  align-items: center;
-  justify-content: center;
-`
 
 export default CollectionsScreen

@@ -4,9 +4,9 @@ import styled from "styled-components";
 import coins from "../../../../../assets/topPanel/coins.png";
 
 const Coins = (props) =>{
-    return <CoinsContainer>
+    return <CoinsContainer {...props}>
         <CoinsImage source={coins} />
-        <Text blod medium>{props.coins}</Text>
+        <Text blod medium center>{props.coins}</Text>
     </CoinsContainer>
 }
 
@@ -16,6 +16,13 @@ const CoinsContainer = styled.View`
   border-radius: 5px;
   background-color: aqua;
   padding: 2px 20px 2px 20px;
+  
+  ${(props)=>{
+      if(props.width){
+          return `width: ${props.width}px;`
+      }
+  }}
+  
 `
 
 const CoinsImage = styled.Image`

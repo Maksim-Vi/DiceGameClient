@@ -1,9 +1,32 @@
-export const isObjectEmpty = (obj) => {
-    for(var prop in obj) {
-      if(Object.prototype.hasOwnProperty.call(obj, prop)) {
-        return false;
-      }
-    }
-  
-    return JSON.stringify(obj) === JSON.stringify({});
-  }
+import images from "../../assets/dynamicLoadImage";
+
+export const getCollectionDiceImg = (name) => {
+    let diceUrl = null
+
+   try {
+        if(name){
+            diceUrl = images.dices[name]
+       }
+   } catch (e){
+       console.error('cannot loaded dice by name, set default')
+       diceUrl = images.dices.default
+   }
+
+   return diceUrl
+}
+
+export const getCollectionSquareImg = (name) => {
+    let diceUrl = null
+
+   try {
+        if(name){
+            diceUrl = images.squares[name]
+       }
+   } catch (e){
+       console.error('cannot loaded dice by name, set default')
+       diceUrl = images.squares.blackLines
+   }
+
+   return diceUrl
+}
+

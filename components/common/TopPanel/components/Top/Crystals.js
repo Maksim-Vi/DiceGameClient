@@ -4,9 +4,9 @@ import styled from "styled-components";
 import star from "../../../../../assets/topPanel/diamond.png";
 
 const Crystals = (props) =>{
-    return <CrystalsContainer>
+    return <CrystalsContainer {...props}>
         <CrystalsImage source={star} />
-        <Text blod medium>{props.crystals}</Text>
+        <Text blod medium center>{props.crystals}</Text>
     </CrystalsContainer>
 }
 
@@ -16,6 +16,14 @@ const CrystalsContainer = styled.View`
   border-radius: 5px;
   background-color: aqua;
   padding: 2px 20px 2px 20px;
+
+  ${(props)=>{
+    if(props.width){
+      return `
+        width: ${props.width}px;
+      `
+    }
+  }}
 `
 
 const CrystalsImage = styled.Image`

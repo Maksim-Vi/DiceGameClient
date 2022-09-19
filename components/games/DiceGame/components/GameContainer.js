@@ -159,10 +159,21 @@ const ButtonContainer = styled.View`
     flex: 0.1;
 `
 const ThrowButton = styled.TouchableOpacity`
-    background-color: green;
     border-radius: 10px;
     border: 1px solid #000;
     padding: 10px 50px;
+  
+    ${(props)=>{
+        if(props.disabled){
+            return `
+                background-color: gray;
+            `
+        } else {
+          return `
+                background-color: green;
+          `
+        }
+    }}
 `
 
 export default GameContainer

@@ -126,13 +126,6 @@ const Progress = styled.View`
       }
     }}
 `
-const LogoutBtn = styled.TouchableOpacity`
-    align-self: flex-end;
-    background-color: rgb(255,157,77);
-    border-radius: 10px;
-    border: 1px solid #000;
-    padding: 2px 10px;
-`
 const mapStateToProps = (state) => ({
     user: selectMyUser(state),
     coins: selectUserCoins(state),

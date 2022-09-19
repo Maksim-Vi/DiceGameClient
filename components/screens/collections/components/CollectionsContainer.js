@@ -1,0 +1,52 @@
+import React, {useState} from 'react';
+import styled from "styled-components";
+import TopPanelCollection from "./topPanel/TopPanelCollection";
+import TabsCollection from "./tabs/TabsCollection";
+import Divider from "../../../common/Divider/Divider";
+import {selectMyUser} from "../../../redux/reducers/players/PlayersReducer";
+import {connect} from "react-redux";
+import DicesTab from "./dicesTab/DicesTab";
+import SquaresTab from "./squaresTab/SquaresTab";
+import {selectGameItems} from "../../../redux/reducers/collections/CollectionsReducer";
+
+const CollectionsContainer = (props) => {
+
+    const [activeTab,setActiveTab] = useState('dices')
+
+    const handelActiveTab = (tab) =>{
+        setActiveTab(tab)
+    }
+
+    const getTabContext = (tab) =>{
+        switch (tab) {
+            case 'dices': {
+                return <DicesTab dices={props.gameItems.Dices}/>
+            }
+            case 'squares': {
+                return <SquaresTab squares={props.gameItems.SquaresGame}/>
+            }
+            default: return null
+        }
+    }
+
+    return (
+        <CollectionContainer>
+            <TopPanelCollection coins={props.user.coins} crystals={props.user.crystals} />
+            <Divider color={'white'}/>
+            <TabsCollection activeTab={activeTab} handelActiveTab={handelActiveTab}/>
+
+            {getTabContext(activeTab)}
+        </CollectionContainer>
+    );
+}
+
+const CollectionContainer = styled.View`
+  flex: 1;
+`
+
+const mapStateToProps = (state) => ({
+    user: selectMyUser(state),
+    gameItems: selectGameItems(state),
+})
+
+export default connect(mapStateToProps)(CollectionsContainer);

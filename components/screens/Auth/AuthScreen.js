@@ -45,7 +45,7 @@ const AuthScreen = () => {
             <LoginScreen hendlerLogin={hendlerLogin} onChangeInputs={onChangeInputs} inputData={inputData}/>
             <ButtonContainer >
               <LoginBtn onPress={hendlerLogin}><Text small heavy color='#fff' center>Login</Text></LoginBtn>
-              <Divider text={'or'}/>
+              <Divider text={'or'} padding={10} color={'black'}/>
               <RegisterBtn onPress={hendlerRegister}><Text small heavy color='#fff' center>Register</Text></RegisterBtn>
             </ButtonContainer>
           </AuthContainer>
