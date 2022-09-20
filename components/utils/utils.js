@@ -1,11 +1,11 @@
 import images from "../../assets/dynamicLoadImage";
 
-export const getCollectionDiceImg = (name) => {
+export const getCollectionDiceImg = (id) => {
     let diceUrl = null
 
    try {
-        if(name){
-            diceUrl = images.dices[name]
+        if(id){
+            diceUrl = images.dices[id]
        }
    } catch (e){
        console.error('cannot loaded dice by name, set default')
@@ -15,16 +15,16 @@ export const getCollectionDiceImg = (name) => {
    return diceUrl
 }
 
-export const getCollectionSquareImg = (name) => {
+export const getCollectionSquareImg = (id) => {
     let diceUrl = null
 
    try {
-        if(name){
-            diceUrl = images.squares[name]
+        if(id){
+            diceUrl = images.squares[id]
        }
    } catch (e){
        console.error('cannot loaded dice by name, set default')
-       diceUrl = images.squares.blackLines
+       diceUrl = images.squares['1']
    }
 
    return diceUrl

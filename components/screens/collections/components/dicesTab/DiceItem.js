@@ -8,7 +8,7 @@ const DiceItem = ({diceItem}) => {
 
     return (
         <DiceCard>
-            <DiceImage source={getCollectionDiceImg(diceItem.name)}/>
+            <DiceImage source={getCollectionDiceImg(diceItem.id)}/>
             <Text center>{diceItem.name}</Text>
             <CollectButton item={diceItem}/>
         </DiceCard>
