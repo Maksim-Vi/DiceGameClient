@@ -2,211 +2,14 @@ import { createSlice } from '@reduxjs/toolkit';
 
 let initialState = {
     Shop:{},
-    GameItems:{
-        Dices:[
-            {
-                id: 1,
-                name: 'dark',
-                type: 'coins',
-                sortIndex: 1,
-                available: true,
-                lvlUnlock: 1,
-                price: {
-                    coins: '200',
-                    diamonds: '10',
-                    money: '3.99'
-                },
-                saleType: '',
-                isSale: false,
-                salePrice:{}
-            },
-            {
-                id: 2,
-                name: 'blue',
-                type: 'coins-diamonds',
-                sortIndex: 2,
-                available: true,
-                lvlUnlock: 1,
-                price: {
-                    coins: '150',
-                    diamonds: '5',
-                    money: '1.99'
-                },
-                saleType: '',
-                isSale: false,
-                salePrice:{}
-            },
-            {
-                id: 3,
-                name: 'yellow',
-                type: 'diamonds-realmoney',
-                sortIndex: 3,
-                available: true,
-                lvlUnlock: 5,
-                price: {
-                    coins: '180',
-                    diamonds: '7',
-                    money: '2.99'
-                },
-                saleType: '',
-                isSale: false,
-                salePrice:{}
-            },
-            {
-                id: 4,
-                name: 'orange',
-                type: 'diamonds',
-                sortIndex: 4,
-                available: true,
-                lvlUnlock: 10,
-                price: {
-                    coins: '350',
-                    diamonds: '10',
-                    money: '4.99'
-                },
-                saleType: '',
-                isSale: false,
-                salePrice:{}
-            },
-        ],
-        SquaresGame:[
-           {
-                id: 1,
-                name: 'blackLines',
-                type: 'coins-diamonds-realmoney',
-                sortIndex: 1,
-                available: true,
-                lvlUnlock: 1,
-                price: {
-                    coins: '500',
-                    diamonds: '15',
-                    money: '4.99'
-                },
-               saleType: '',
-               isSale: false,
-               salePrice:{}
-            },
-            {
-                id: 2,
-                name: 'blackLinesAround',
-                type: 'coins-diamonds-realmoney',
-                sortIndex: 2,
-                available: true,
-                lvlUnlock: 1,
-                price: {
-                    coins: '500',
-                    diamonds: '15',
-                    money: '4.99'
-                },
-                saleType: '',
-                isSale: false,
-                salePrice:{}
-            },
-            {
-                id: 3,
-                name: 'greyLinesAround',
-                type: 'coins-diamonds-realmoney',
-                sortIndex: 3,
-                available: true,
-                lvlUnlock: 1,
-                price: {
-                    coins: '500',
-                    diamonds: '15',
-                    money: '4.99'
-                },
-                saleType: '',
-                isSale: false,
-                salePrice:{}
-            },
-            {
-                id: 4,
-                name: 'redLinesAround',
-                type: 'coins-diamonds-realmoney',
-                sortIndex: 4,
-                available: true,
-                lvlUnlock: 1,
-                price: {
-                    coins: '500',
-                    diamonds: '15',
-                    money: '4.99'
-                },
-                saleType: '',
-                isSale: false,
-                salePrice:{}
-            },
-            {
-                id: 5,
-                name: 'smile',
-                type: 'coins',
-                sortIndex: 5,
-                available: true,
-                lvlUnlock: 1,
-                price: {
-                    coins: '500',
-                    diamonds: '15',
-                    money: '4.99'
-                },
-            },
-            {
-                id: 6,
-                name: 'greenBlue',
-                type: 'diamonds',
-                sortIndex: 6,
-                available: true,
-                lvlUnlock: 1,
-                price: {
-                    coins: '500',
-                    diamonds: '15',
-                    money: '4.99'
-                },
-            },
-            {
-                id: 7,
-                name: 'greenBlueLinesAround',
-                type: 'coins',
-                sortIndex: 7,
-                available: true,
-                lvlUnlock: 1,
-                price: {
-                    coins: '500',
-                    diamonds: '15',
-                    money: '4.99'
-                },
-            },
-            {
-                id: 8,
-                name: 'bluePurpure',
-                type: 'coins',
-                sortIndex: 8,
-                available: true,
-                lvlUnlock: 1,
-                price: {
-                    coins: '500',
-                    diamonds: '15',
-                    money: '4.99'
-                },
-            },
-            {
-                id: 9,
-                name: 'default',
-                type: 'coins',
-                sortIndex: 9,
-                available: true,
-                lvlUnlock: 1,
-                price: {
-                    coins: '0',
-                    diamonds: '0',
-                    money: '0'
-                },
-            },
-        ]
-    },
+    GameItems:{},
     MoneyItems:{
         Coins:[
             {
                 id: 1,
                 name: 'low bank coins',
                 type: 'diamonds',
+                collectionType: 'coins',
                 sortIndex: 1,
                 available: true,
                 countAdd: 10,
@@ -222,6 +25,7 @@ let initialState = {
                 id: 2,
                 name: 'medium bank coins',
                 type: 'diamonds-realmoney',
+                collectionType: 'coins',
                 sortIndex: 2,
                 available: true,
                 countAdd: 50,
@@ -237,6 +41,7 @@ let initialState = {
                 id: 3,
                 name: 'big bank coins',
                 type: 'diamonds-realmoney',
+                collectionType: 'coins',
                 sortIndex: 3,
                 available: true,
                 countAdd: 100,
@@ -252,6 +57,7 @@ let initialState = {
                 id: 4,
                 name: '300 bank coins',
                 type: 'realmoney',
+                collectionType: 'coins',
                 sortIndex: 4,
                 available: true,
                 countAdd: 300,
@@ -267,6 +73,7 @@ let initialState = {
                 id: 5,
                 name: '500 bank coins',
                 type: 'realmoney',
+                collectionType: 'coins',
                 sortIndex: 5,
                 available: true,
                 countAdd: 500,
@@ -284,6 +91,7 @@ let initialState = {
                 id: 1,
                 name: 'low bank diamonds',
                 type: 'coins',
+                collectionType: 'diamonds',
                 sortIndex: 1,
                 available: true,
                 countAdd: 10,
@@ -299,6 +107,7 @@ let initialState = {
                 id: 2,
                 name: 'medium bank diamonds',
                 type: 'coins-realmoney',
+                collectionType: 'diamonds',
                 sortIndex: 2,
                 available: true,
                 countAdd: 50,
@@ -314,6 +123,7 @@ let initialState = {
                 id: 3,
                 name: 'big bank diamonds',
                 type: 'coins-realmoney',
+                collectionType: 'diamonds',
                 sortIndex: 3,
                 available: true,
                 countAdd: 100,
@@ -329,6 +139,7 @@ let initialState = {
                 id: 4,
                 name: '300 bank diamonds',
                 type: 'realmoney',
+                collectionType: 'diamonds',
                 sortIndex: 4,
                 available: true,
                 countAdd: 300,
@@ -344,6 +155,7 @@ let initialState = {
                 id: 5,
                 name: '500 bank diamonds',
                 type: 'realmoney',
+                collectionType: 'diamonds',
                 sortIndex: 5,
                 available: true,
                 countAdd: 500,
@@ -361,6 +173,7 @@ let initialState = {
                 id: 1,
                 name: 'low bank flash',
                 type: 'coins-diamonds-realmoney',
+                collectionType: 'flash',
                 sortIndex: 1,
                 available: true,
                 countAdd: 3,
@@ -376,6 +189,7 @@ let initialState = {
                 id: 2,
                 name: 'medium bank flash',
                 type: 'diamonds-realmoney',
+                collectionType: 'flash',
                 sortIndex: 2,
                 available: true,
                 countAdd: 8,
@@ -391,6 +205,7 @@ let initialState = {
                 id: 3,
                 name: 'big bank flash',
                 type: 'diamonds-realmoney',
+                collectionType: 'flash',
                 sortIndex: 3,
                 available: true,
                 countAdd: 15,
@@ -406,6 +221,7 @@ let initialState = {
                 id: 4,
                 name: '20 bank flash',
                 type: 'realmoney',
+                collectionType: 'flash',
                 sortIndex: 4,
                 available: true,
                 countAdd: 20,
@@ -421,6 +237,7 @@ let initialState = {
                 id: 5,
                 name: '30 bank diamonds',
                 type: 'realmoney',
+                collectionType: 'flash',
                 sortIndex: 5,
                 available: true,
                 countAdd: 30,
@@ -440,11 +257,19 @@ export const collectionsReducerSlice = createSlice({
     name: 'collections',
     initialState,
     reducers: {
-
+        addShop: (state, action)=>{
+            state.Shop = action.payload
+        },
+        addGameItems: (state, action)=>{
+            state.GameItems = action.payload
+        },
+        MoneyItems: (state, action)=>{
+            state.MoneyItems = action.payload
+        }
     },
 });
 
-export const {} = collectionsReducerSlice.actions;
+export const {addShop, addGameItems,MoneyItems} = collectionsReducerSlice.actions;
 
 export const selectGameItems = state => state.collections.GameItems;
 export const selectMoneyItems = state => state.collections.MoneyItems;

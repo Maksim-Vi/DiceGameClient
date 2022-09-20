@@ -7,7 +7,7 @@ import CollectButton from "../common/CollectButton";
 const SquareItem = ({squareItem}) => {
     return (
         <SquareCard>
-            <SquareImage source={getCollectionSquareImg(squareItem.id)}/>
+            <SquareImage source={getCollectionSquareImg(squareItem.sortIndex)}/>
             <Text center>{squareItem.name}</Text>
             <CollectButton item={squareItem}/>
         </SquareCard>

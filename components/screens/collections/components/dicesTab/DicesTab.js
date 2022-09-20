@@ -10,7 +10,7 @@ const DicesTab = (props) => {
             <DicesScroll showsVerticalScrollIndicator={false} contentContainerStyle={styles.scroll}>
                 <DiceScrollContainer>
                     {props.dices &&
-                        props.dices.map(diceItem=>{
+                        [...props.dices].sort((a,b)=> a.sortIndex > b.sortIndex ? 1 : -1).map(diceItem=>{
                             return <DiceItem key={diceItem.id} diceItem={diceItem}/>
                         })
                     }

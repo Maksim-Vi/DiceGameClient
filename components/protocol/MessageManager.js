@@ -6,6 +6,7 @@ import S_CREATE_ACCOUNT_FAILED from './messages/server/S_CREATE_ACCOUNT_FAILED';
 import S_CLIENT_LOADED from './messages/server/S_CLIENT_LOADED';
 import { gameHendleMessage } from './GameMessageManager';
 import {usersHendleMessage} from "./UsersMessageManager";
+import {collectionHendleMessage} from "./collectionMessageManager";
 
 export const hendleMessage = (data) =>{
     switch (data.name) {
@@ -47,4 +48,5 @@ export const hendleMessage = (data) =>{
 
     gameHendleMessage(data)
     usersHendleMessage(data)
+    collectionHendleMessage(data)
 }

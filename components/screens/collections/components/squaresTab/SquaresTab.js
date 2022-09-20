@@ -9,7 +9,7 @@ const SquaresTab = (props) => {
             <SquaresScroll showsVerticalScrollIndicator={false} contentContainerStyle={styles.scroll}>
                 <SquaresScrollContainer>
                     {props.squares &&
-                        props.squares.map(squareItem=>{
+                        [...props.squares].sort((a,b)=> a.sortIndex > b.sortIndex ? 1 : -1).map(squareItem=>{
                             return <SquareItem key={squareItem.id} squareItem={squareItem}/>
                         })
                     }
