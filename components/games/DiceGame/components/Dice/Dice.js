@@ -1,12 +1,7 @@
-import {Dimensions, Platform} from 'react-native'
+import {Dimensions} from 'react-native'
 import React from 'react'
 import styled from 'styled-components'
-import dice1 from '../../../../../assets/game/dice_1.png'
-import dice2 from '../../../../../assets/game/dice_2.png'
-import dice3 from '../../../../../assets/game/dice_3.png'
-import dice4 from '../../../../../assets/game/dice_4.png'
-import dice5 from '../../../../../assets/game/dice_5.png'
-import dice6 from '../../../../../assets/game/dice_6.png'
+import imagesGameDices from "../../../../../assets/dynamicLoadGameDices";
 
 const Dice = (props) => {
 
@@ -21,27 +16,27 @@ const Dice = (props) => {
         break
       }
       case 1: {
-        diceImg = dice1
+        diceImg = imagesGameDices[props.activeItems.dice || 1][`${props.diceNumber}`]
         break
       }
       case 2:  {
-        diceImg = dice2
+        diceImg = imagesGameDices[props.activeItems.dice || 1][`${props.diceNumber}`]
         break
       }
       case 3:  {
-        diceImg = dice3
+        diceImg = imagesGameDices[props.activeItems.dice || 1][`${props.diceNumber}`]
         break
       }
       case 4:  {
-        diceImg = dice4
+        diceImg = imagesGameDices[props.activeItems.dice || 1][`${props.diceNumber}`]
         break
       }
       case 5:  {
-        diceImg = dice5
+        diceImg = imagesGameDices[props.activeItems.dice || 1][`${props.diceNumber}`]
         break
       }
       case 6:  {
-        diceImg = dice6
+        diceImg = imagesGameDices[props.activeItems.dice || 1][`${props.diceNumber}`]
         break
       }
       default:  {
@@ -60,11 +55,15 @@ const DiceImage = styled.Image`
   ${props=>{
     if(props.width < 350){
       return 'width: 50px;'
+    } else {
+      return 'width: 70px; '
     }
   }}
   ${props=>{
     if(props.width < 350){
       return 'height: 50px;'
+    } else {
+      return 'height: 70px;'
     }
   }}
 `

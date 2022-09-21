@@ -11,7 +11,7 @@ import {
   selectScores,
   selectThrowData
 } from '../../redux/reducers/game/GameReducer'
-import { selectMyUser } from '../../redux/reducers/players/PlayersReducer'
+import {selectActiveItems, selectMyUser} from '../../redux/reducers/players/PlayersReducer'
 import GameContainer from './components/GameContainer'
 
 const GameWrapper = (props) => {
@@ -25,6 +25,7 @@ const GameWrapper = (props) => {
                         throwData={props.throwData}
                         opponentThrowData={props.opponentThrowData}
                         scores={props.scores}
+                        activeItems={props.activeItems}
                         countScores={props.countScores}
                         isYouMove={props.isYouMove}
                         activeThrowBtn={props.activeThrowBtn}
@@ -33,6 +34,7 @@ const GameWrapper = (props) => {
 
 const mapStateToProps = (state) => ({
   user: selectMyUser(state),
+  activeItems: selectActiveItems(state),
   currentGameId: selectCurrentGameId(state),
   gameSettings: selectGameSettings(state),
   currentGame: selectGame(state),

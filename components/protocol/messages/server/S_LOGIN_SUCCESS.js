@@ -1,7 +1,5 @@
-import { setCurrentUser } from "../../../redux/reducers/players/PlayersReducer"
+import {setActiveItems, setCurrentUser} from "../../../redux/reducers/players/PlayersReducer"
 import { store } from "../../../redux/redux-store"
-import {useContext} from "react";
-import {UserContext} from "../../../utils/UserProvider";
 
 export default class S_LOGIN_SUCCESS {
     constructor(data){
@@ -22,6 +20,8 @@ export default class S_LOGIN_SUCCESS {
     exec() {
         store.login(this.data)
         store.dispatch(setCurrentUser(this.data.user))
+        store.dispatch(setActiveItems(this.data.user.activeItems || {dice: 1, square: 1}))
+
         setTimeout(()=>{
             window.navigation.navigate('MainScreen')
         },1500)

@@ -6,7 +6,7 @@ export default class S_COLLECTIONS {
     constructor(data){
 
         this.MESSAG_ENAME = 'S_COLLECTIONS'
-        this.showLog = true
+        this.showLog = false
 
         this.data = data
 

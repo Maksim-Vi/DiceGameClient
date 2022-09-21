@@ -108,7 +108,7 @@ class GameContainer extends React.Component {
                                         countScores={this.props.countScores}
                                         opponent={opponent}/>
                     <SpaceThrow>
-                        <Dice diceNumber={this.getThrowData()} />
+                        <Dice activeItems={this.props.activeItems} diceNumber={this.getThrowData()} />
                     </SpaceThrow>
                     <ScoreBoardUser currentGameId={this.props.currentGameId} 
                                     user={this.props.user}
