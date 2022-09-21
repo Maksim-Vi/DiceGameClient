@@ -19,10 +19,11 @@ export default class S_LOGIN_SUCCESS {
     }
 
     exec() {
+        console.log('USER', this.data.user)
         store.login(this.data)
         store.dispatch(setCurrentUser(this.data.user))
-        store.dispatch(setActiveItems(this.data.user.activeItems || {dice: 1, square: 1}))
-        store.dispatch(addAvailableCollectionItems(this.data.user.availableCollectionItems || {dice: [1], square: [1],gameBackgrounds:[1]}))
+        store.dispatch(setActiveItems(this.data.user.activeItems || {dice: 13, square: 14}))
+        store.dispatch(addAvailableCollectionItems(this.data.user.availableCollectionItems || {dice: [13], square: [14],gameBackgrounds:[1]}))
 
         setTimeout(()=>{
             window.navigation.navigate('MainScreen')

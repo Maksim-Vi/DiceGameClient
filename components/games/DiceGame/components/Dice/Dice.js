@@ -10,39 +10,8 @@ const Dice = (props) => {
   const getDiceNumber = () =>{
     let diceImg = ''
 
-    switch (props.diceNumber) {
-      case 0: {
-        diceImg = ''
-        break
-      }
-      case 1: {
-        diceImg = imagesGameDices[props.activeItems.dice || 1][`${props.diceNumber}`]
-        break
-      }
-      case 2:  {
-        diceImg = imagesGameDices[props.activeItems.dice || 1][`${props.diceNumber}`]
-        break
-      }
-      case 3:  {
-        diceImg = imagesGameDices[props.activeItems.dice || 1][`${props.diceNumber}`]
-        break
-      }
-      case 4:  {
-        diceImg = imagesGameDices[props.activeItems.dice || 1][`${props.diceNumber}`]
-        break
-      }
-      case 5:  {
-        diceImg = imagesGameDices[props.activeItems.dice || 1][`${props.diceNumber}`]
-        break
-      }
-      case 6:  {
-        diceImg = imagesGameDices[props.activeItems.dice || 1][`${props.diceNumber}`]
-        break
-      }
-      default:  {
-        diceImg = ''
-        break
-      }
+    if(props.diceNumber > 0) {
+      diceImg = imagesGameDices[props.activeItems ? props.activeItems.dice : 1][+props.diceNumber]
     }
 
     return diceImg

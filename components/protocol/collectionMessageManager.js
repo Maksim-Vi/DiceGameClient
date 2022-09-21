@@ -8,7 +8,7 @@ export const collectionHendleMessage = (data) =>{
             new S_COLLECTIONS(data)
             break;
         case 'S_BUY_GAME_ITEM':
-            new S_BUY_GAME_ITEM(data.availableCollectionItems)
+            new S_BUY_GAME_ITEM(data.availableCollectionItems,data.collectionType,data.itemId)
             break;
         case 'S_SET_ACTIVE_GAME_ITEMS':
             new S_SET_ACTIVE_GAME_ITEMS(data.activeItems)

@@ -18,7 +18,7 @@ export default class S_SET_ACTIVE_GAME_ITEMS {
     }
 
     exec() {
-        store.dispatch(setActiveItems(this.activeItems || {dice: 1, square: 1}))
+        store.dispatch(setActiveItems(this.activeItems || {dice: 14, square: 13}))
     }
 
     getLogText() {

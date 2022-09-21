@@ -34,7 +34,6 @@ const RegisterScreen = () => {
   const hendlerRegister = async () =>{
     const data = await postRegisterApi(inputData.username, inputData.email, inputData.password)
 
-    console.log('ANSWER', data)
     if(data && data.success){
       navigation.goBack()
     } else {

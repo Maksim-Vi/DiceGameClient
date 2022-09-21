@@ -251,7 +251,7 @@ let initialState = {
             },
         ]
     },
-    availableCollectionItems: {dice: [1], square: [1],gameBackgrounds:[1]}
+    availableCollectionItems: {dice: [13], square: [14],gameBackgrounds:[1]}
 }
 
 export const collectionsReducerSlice = createSlice({
