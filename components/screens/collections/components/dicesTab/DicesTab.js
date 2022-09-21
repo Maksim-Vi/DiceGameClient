@@ -1,22 +1,53 @@
 import React from 'react';
 import styled from "styled-components";
-import Text from "../../../../common/Text/Text";
 import {StyleSheet} from "react-native";
 import DiceItem from "./DiceItem";
+import ModalWrapper from "../../../../common/ModalWondows/ModalWrapper";
+import ModalChildrenBuy from "../../../../common/ModalWondows/ModalChildren/ModalChildrenBuy";
 
 const DicesTab = (props) => {
+    const [modal, setModal] = React.useState({
+        visible: false,
+        modalName: 'Dices',
+        openItem: {}
+    });
+
+    const setModalVisible = (isVisible, item) =>{
+        setModal({
+            ...modal,
+            visible: isVisible,
+            openItem: item
+        })
+    }
+
+    const Model = () =>{
+        return (
+            <ModalWrapper modalVisible={modal.visible} setModalVisible={setModalVisible}>
+                <ModalChildrenBuy titleItemName={modal.modalName} openItem={modal.openItem} setModalVisible={setModalVisible}/>
+            </ModalWrapper>
+        )
+    }
+
     return (
         <DicesContainer>
             <DicesScroll showsVerticalScrollIndicator={false} contentContainerStyle={styles.scroll}>
                 <DiceScrollContainer>
                     {props.dices &&
                         [...props.dices].sort((a,b)=> a.sortIndex > b.sortIndex ? 1 : -1).map(diceItem=>{
-                            return <DiceItem key={diceItem.id} diceItem={diceItem}/>
+                            const isCollected = props.availableItems.dices.includes(+diceItem.id)
+                            const isActive = +props.activeItems.dice === +diceItem.id
+
+                            return <DiceItem key={diceItem.id}
+                                             isActive={isActive}
+                                             isCollected={isCollected}
+                                             diceItem={diceItem}
+                                             setModalVisible={setModalVisible}/>
                         })
                     }
                 </DiceScrollContainer>
                 <DiceCardLast />
             </DicesScroll>
+            {Model()}
         </DicesContainer>
     );
 }

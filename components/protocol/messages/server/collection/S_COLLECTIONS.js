@@ -25,7 +25,7 @@ export default class S_COLLECTIONS {
 
         store.dispatch(addShop(shop))
         store.dispatch(addGameItems(gameItems))
-        //store.dispatch(MoneyItems(moneyItems))
+        //store.dispatch(addMoneyItems(moneyItems))
     }
 
 	getLogText() {

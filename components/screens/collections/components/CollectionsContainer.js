@@ -3,11 +3,14 @@ import styled from "styled-components";
 import TopPanelCollection from "./topPanel/TopPanelCollection";
 import TabsCollection from "./tabs/TabsCollection";
 import Divider from "../../../common/Divider/Divider";
-import {selectMyUser} from "../../../redux/reducers/players/PlayersReducer";
+import {
+    selectActiveItems,
+    selectMyUser
+} from "../../../redux/reducers/players/PlayersReducer";
 import {connect} from "react-redux";
 import DicesTab from "./dicesTab/DicesTab";
 import SquaresTab from "./squaresTab/SquaresTab";
-import {selectGameItems} from "../../../redux/reducers/collections/CollectionsReducer";
+import {selectAvailableCollectionItems, selectGameItems} from "../../../redux/reducers/collections/CollectionsReducer";
 
 const CollectionsContainer = (props) => {
 
@@ -20,10 +23,14 @@ const CollectionsContainer = (props) => {
     const getTabContext = (tab) =>{
         switch (tab) {
             case 'dices': {
-                return <DicesTab dices={props.gameItems.Dices}/>
+                return <DicesTab dices={props.gameItems.Dices}
+                                 activeItems={props.activeItems}
+                                 availableItems={props.availableItems}/>
             }
             case 'squares': {
-                return <SquaresTab squares={props.gameItems.SquaresGame}/>
+                return <SquaresTab squares={props.gameItems.SquaresGame}
+                                   activeItems={props.activeItems}
+                                   availableItems={props.availableItems}/>
             }
             default: return null
         }
@@ -46,6 +53,8 @@ const CollectionContainer = styled.View`
 
 const mapStateToProps = (state) => ({
     user: selectMyUser(state),
+    activeItems: selectActiveItems(state),
+    availableItems: selectAvailableCollectionItems(state),
     gameItems: selectGameItems(state),
 })
 

@@ -4,13 +4,15 @@ import styled from "styled-components";
 import {getCollectionDiceImg} from "../../../../utils/utils";
 import CollectButton from "../common/CollectButton";
 
-const DiceItem = ({diceItem}) => {
-
+const DiceItem = ({diceItem, isActive, isCollected, setModalVisible}) => {
     return (
         <DiceCard>
             <DiceImage source={getCollectionDiceImg(diceItem.sortIndex)}/>
             <Text center>{diceItem.name}</Text>
-            <CollectButton item={diceItem}/>
+            <CollectButton item={diceItem}
+                           setModalVisible={setModalVisible}
+                           isActive={isActive}
+                           isCollected={isCollected}/>
         </DiceCard>
     );
 }

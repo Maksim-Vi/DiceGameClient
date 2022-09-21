@@ -1,5 +1,6 @@
 import {setActiveItems, setCurrentUser} from "../../../redux/reducers/players/PlayersReducer"
 import { store } from "../../../redux/redux-store"
+import {addAvailableCollectionItems} from "../../../redux/reducers/collections/CollectionsReducer";
 
 export default class S_LOGIN_SUCCESS {
     constructor(data){
@@ -21,6 +22,7 @@ export default class S_LOGIN_SUCCESS {
         store.login(this.data)
         store.dispatch(setCurrentUser(this.data.user))
         store.dispatch(setActiveItems(this.data.user.activeItems || {dice: 1, square: 1}))
+        store.dispatch(addAvailableCollectionItems(this.data.user.availableCollectionItems || {dice: [1], square: [1],gameBackgrounds:[1]}))
 
         setTimeout(()=>{
             window.navigation.navigate('MainScreen')

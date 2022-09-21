@@ -250,7 +250,8 @@ let initialState = {
                 salePrice:{}
             },
         ]
-    }
+    },
+    availableCollectionItems: {dice: [1], square: [1],gameBackgrounds:[1]}
 }
 
 export const collectionsReducerSlice = createSlice({
@@ -263,16 +264,20 @@ export const collectionsReducerSlice = createSlice({
         addGameItems: (state, action)=>{
             state.GameItems = action.payload
         },
-        MoneyItems: (state, action)=>{
+        addMoneyItems: (state, action)=>{
             state.MoneyItems = action.payload
+        },
+        addAvailableCollectionItems: (state, action)=>{
+            state.availableCollectionItems = action.payload
         }
     },
 });
 
-export const {addShop, addGameItems,MoneyItems} = collectionsReducerSlice.actions;
+export const {addShop, addGameItems,addMoneyItems,addAvailableCollectionItems} = collectionsReducerSlice.actions;
 
 export const selectGameItems = state => state.collections.GameItems;
 export const selectMoneyItems = state => state.collections.MoneyItems;
+export const selectAvailableCollectionItems = state => state.collections.availableCollectionItems;
 
 export default collectionsReducerSlice.reducer;
 
