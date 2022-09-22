@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from "styled-components";
-import Coins from "../../../../common/TopPanel/components/Top/Coins";
-import Crystals from "../../../../common/TopPanel/components/Top/Crystals";
 import {NativeModules, Platform} from "react-native";
+import Coins from "../TopPanel/components/Top/Coins";
+import Crystals from "../TopPanel/components/Top/Crystals";
 
-const TopPanelCollection = (props) => {
+const TopPanelStores = (props) => {
     return (
         <TopPanel>
             <ElementsContainer>
@@ -21,18 +21,18 @@ const TopPanel = styled.View`
     width: 100%;
     ${()=>{
     if(Platform.OS === 'ios' && NativeModules.DeviceInfo.isIPhoneX_deprecated){
-      return `
+        return `
          height: 80px;
          justify-content: flex-end;
          padding-bottom: 10px;
       `
     } else {
-      return `
+        return `
          height: 50px;
          justify-content: space-around;
       `
     }
-    }}
+}}
     background-color: rgb(1,1,70);
 `
 const ElementsContainer = styled.View`
@@ -43,4 +43,4 @@ const ElementsContainer = styled.View`
     width: 100%;
 `
 
-export default TopPanelCollection;
+export default TopPanelStores;

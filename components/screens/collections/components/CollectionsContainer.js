@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import styled from "styled-components";
-import TopPanelCollection from "./topPanel/TopPanelCollection";
 import TabsCollection from "./tabs/TabsCollection";
 import Divider from "../../../common/Divider/Divider";
 import {
@@ -11,6 +10,7 @@ import {connect} from "react-redux";
 import DicesTab from "./dicesTab/DicesTab";
 import SquaresTab from "./squaresTab/SquaresTab";
 import {selectAvailableCollectionItems, selectGameItems} from "../../../redux/reducers/collections/CollectionsReducer";
+import TopPanelStores from "../../../common/TopPanelStores/TopPanelStores";
 
 const CollectionsContainer = (props) => {
 
@@ -38,7 +38,7 @@ const CollectionsContainer = (props) => {
 
     return (
         <CollectionContainer>
-            <TopPanelCollection coins={props.user.coins} crystals={props.user.crystals} />
+            <TopPanelStores coins={props.user.coins} crystals={props.user.crystals} />
             <Divider color={'white'}/>
             <TabsCollection activeTab={activeTab} handelActiveTab={handelActiveTab}/>
 
