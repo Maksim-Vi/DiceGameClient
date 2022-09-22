@@ -104,6 +104,12 @@ class GameContainer extends React.Component {
             return this.props.activeItems
         }
 
+        return this.getOpponentActiveItems()
+    }
+
+    getOpponentActiveItems = () =>{
+        if(this.props.gameSettings.bot) return this.props.activeItems
+
         const {username} = this.props.user
 
         const opponent = this.props.gameSettings.players.find(opp => opp.username !== username)
@@ -123,6 +129,7 @@ class GameContainer extends React.Component {
                     <ScoreBoardOpponent board={boardData ? boardData.opponentBoard : null}
                                         winPoints={winPointsData ? winPointsData.opponentWinPoints : null}
                                         oppMove={!this.props.isYouMove}
+                                        activeItems={this.getOpponentActiveItems()}
                                         countScores={this.props.countScores}
                                         opponent={opponent}/>
                     <SpaceThrow>
@@ -132,6 +139,7 @@ class GameContainer extends React.Component {
                                     user={this.props.user}
                                     countScores={this.props.countScores}
                                     isYouMove={this.props.isYouMove}
+                                    activeItems={this.props.activeItems}
                                     winPoints={winPointsData ? winPointsData.userWinPoints : null}
                                     diceScore={this.props.throwData ? this.props.throwData.diceScore : 0}
                                     board={boardData ? boardData.userBoard : null}/>

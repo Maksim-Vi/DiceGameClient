@@ -11,7 +11,7 @@ const Dice = (props) => {
     let diceImg = ''
 
     if(props.diceNumber > 0) {
-      diceImg = imagesGameDices[props.activeItems ? props.activeItems.dice : 1][+props.diceNumber]
+      diceImg = imagesGameDices[props.activeItems ? props.activeItems.dice : 14][+props.diceNumber]
     }
 
     return diceImg

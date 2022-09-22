@@ -43,6 +43,7 @@ const ScoreBoardUser = (props) => {
           BoardsItem.push(<BoardItem key={i}
                                      item={item}
                                      winPoints={winPoints}
+                                     activeItems={props.activeItems}
                                      index={i}
                                      selectBoardItem={selectBoardItem}/>)
         })

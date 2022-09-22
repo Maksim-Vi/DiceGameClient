@@ -40,7 +40,10 @@ const ScoreBoardOpponent = (props) => {
 
       OppIndexView.forEach(index=>{
           const winPoints = checkWinPiontsByColumn(index)
-          BoardsItem.push(<BoardItem key={index} item={props.board[index]} winPoints={winPoints}/>)
+          BoardsItem.push(<BoardItem key={index}
+                                     item={props.board[index]}
+                                     activeItems={props.activeItems}
+                                     winPoints={winPoints}/>)
       })
 
       return BoardsItem
