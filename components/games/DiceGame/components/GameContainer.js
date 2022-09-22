@@ -97,6 +97,24 @@ class GameContainer extends React.Component {
         new C_THROW(id,username,this.props.currentGameId)
     }
 
+    getActiveItemsByUser = () =>{
+        if(this.props.gameSettings.bot) return this.props.activeItems
+
+        if(this.props.isYouMove) {
+            return this.props.activeItems
+        }
+
+        const {username} = this.props.user
+
+        const opponent = this.props.gameSettings.players.find(opp => opp.username !== username)
+
+        if(opponent){
+            return opponent.activeItems
+        } else {
+            return this.props.activeItems
+        }
+    }
+
     render(){
         const {boardData, winPointsData, opponent} = this.state
         return (
@@ -108,7 +126,7 @@ class GameContainer extends React.Component {
                                         countScores={this.props.countScores}
                                         opponent={opponent}/>
                     <SpaceThrow>
-                        <Dice activeItems={this.props.activeItems} diceNumber={this.getThrowData()} />
+                        <Dice activeItems={this.getActiveItemsByUser()} diceNumber={this.getThrowData()} />
                     </SpaceThrow>
                     <ScoreBoardUser currentGameId={this.props.currentGameId} 
                                     user={this.props.user}
