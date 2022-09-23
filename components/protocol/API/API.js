@@ -3,7 +3,8 @@ import Constants from "expo-constants";
 import {openServerConnection} from "../websocet";
 
 const getUrl = () =>{
-    const inProduction = true;
+    const inProduction = false;
+    const port = 3000
     const inExpo = Constants.manifest && Constants.manifest.debuggerHost;
     const inBrowser = typeof document !== 'undefined';
 
@@ -19,9 +20,9 @@ const getUrl = () =>{
     const protocol = inProduction ? 'https' : 'http';
 
     if(Platform.OS === 'android'){
-        return inProduction ? `${protocol}://${apiDomain}/api` : `${protocol}://10.0.2.2:8080/api`
+        return inProduction ? `${protocol}://${apiDomain}/api` : `${protocol}://10.0.2.2:${port}/api`
     } else {
-        return inProduction ? `${protocol}://${apiDomain}/api` : `${protocol}://${apiDomain}:8080/api`
+        return inProduction ? `${protocol}://${apiDomain}/api` : `${protocol}://${Constants.manifest.debuggerHost.split(`:`).shift()}:${port}/api`
     }
 }
 
