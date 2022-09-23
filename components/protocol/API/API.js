@@ -3,13 +3,13 @@ import Constants from "expo-constants";
 import {openServerConnection} from "../websocet";
 
 const getUrl = () =>{
-    const inProduction = false;
+    const inProduction = true;
     const inExpo = Constants.manifest && Constants.manifest.debuggerHost;
     const inBrowser = typeof document !== 'undefined';
 
     const apiDomain =
         inProduction
-            ? 'mywebsite.com'
+            ? 'dicegame-server.herokuapp.com'
             : inExpo
                 ? Constants.manifest.debuggerHost.split(`:`).shift()
                 : inBrowser
@@ -18,10 +18,14 @@ const getUrl = () =>{
 
     const protocol = inProduction ? 'https' : 'http';
 
-    return `${protocol}://${apiDomain}:8080/api`
+    if(Platform.OS === 'android'){
+        return inProduction ? `${protocol}://${apiDomain}/api` : `${protocol}://10.0.2.2:8080/api`
+    } else {
+        return inProduction ? `${protocol}://${apiDomain}/api` : `${protocol}://${apiDomain}:8080/api`
+    }
 }
 
-const URL = Platform.OS === 'android' ? 'http://10.0.2.2:8080/api' : getUrl()
+const URL = getUrl()
 
 export const postLoginApi = async (username, password) => {
     let data = { username: username, password: password }

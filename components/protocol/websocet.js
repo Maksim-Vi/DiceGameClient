@@ -9,6 +9,21 @@ export let websocket;
 let reconnectTimeout = null;
 let reconnecting = false;
 
+const getWSUrl = () =>{
+    const inProduction = true
+    const port = 3000
+
+    const protocol = inProduction ? 'wss' : 'ws';
+
+    `${protocol}://10.0.2.2`
+
+    if(Platform.OS === 'android'){
+        return inProduction ? `${protocol}://dicegame-server.herokuapp.com` : `${protocol}://10.0.2.2:${port}`
+    } else {
+        return inProduction ? `${protocol}://dicegame-server.herokuapp.com` : `${protocol}://${Constants.manifest.debuggerHost.split(`:`).shift()}:${port}`
+    }
+}
+
 export const openServerConnection = () => {
     if (websocket) {
         websocket.close();
@@ -18,10 +33,7 @@ export const openServerConnection = () => {
         websocket.onmessage = null;
     }
 
-    const url = Platform.OS === 'android' ? '10.0.2.2' : Constants.manifest.debuggerHost.split(`:`).shift()
-    const port = 3030
-
-    websocket = new WebSocket(`ws://${url}:${port}`);
+    websocket = new WebSocket(getWSUrl());
 
     websocket.onopen = openWSHandler;
     websocket.onerror = errorWSHandler;
