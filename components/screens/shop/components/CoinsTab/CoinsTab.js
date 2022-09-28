@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styled from "styled-components";
 import {Platform, StyleSheet} from "react-native";
 import CoinItem from "./CoinItem";
 import CoinItemAdmod from "./CoinItemAdmod";
-//import {AdMobInterstitial} from "expo-ads-admob";
+import {RewardedAd, RewardedAdEventType} from "react-native-google-mobile-ads";
 
 const CoinsTab = (props) => {
 
@@ -11,34 +11,34 @@ const CoinsTab = (props) => {
         ? 'ca-app-pub-3940256099942544~1458002511'
         : 'ca-app-pub-3940256099942544~3347511713'
 
-    // const loadAdmod = async () =>{
-    //     await AdMobInterstitial.setAdUnitID(AdUnitID)
-    //     await AdMobInterstitial.requestAdAsync({ servePersonalizedAds: true})
-    // }
-    //
-    // AdMobInterstitial.addEventListener('rewardedVideoUserDidEarnReward', (reward)=>{
-    //     console.log('ANSWER rewardedVideoUserDidEarnReward', reward)
-    // })
-    //
-    // AdMobInterstitial.addEventListener('rewardedVideoDidFailToLoad', ()=>{
-    //     console.log('ANSWER rewardedVideoDidFailToLoad')
-    //     loadAdmod()
-    // })
-    //
-    // AdMobInterstitial.addEventListener('rewardedVideoDidDismiss', ()=>{
-    //     console.log('ANSWER rewardedVideoDidDismiss')
-    //     loadAdmod()
-    // })
+    const rewarded = RewardedAd.createForAdRequest(AdUnitID, {
+        requestNonPersonalizedAdsOnly: true,
+    });
 
-    const admodHendler = async () =>{
-        //await AdMobInterstitial.showAdAsync()
+    const admodHendler = () =>{
+        rewarded.show();
     }
-    //
-    // React.useEffect(()=>{
-    //     return ()=>{
-    //         AdMobInterstitial.removeAllListeners()
-    //     }
-    // },[])
+
+    useEffect(() => {
+        const unsubscribeLoaded = rewarded.addAdEventListener(
+            RewardedAdEventType.LOADED,
+            () => {
+                console.log('LOADED ');
+        });
+        const unsubscribeEarned = rewarded.addAdEventListener(
+            RewardedAdEventType.EARNED_REWARD,
+            reward => {
+                console.log('User earned reward of ', reward);
+            },
+        );
+
+        rewarded.load();
+
+        return () => {
+            unsubscribeLoaded();
+            unsubscribeEarned();
+        };
+    }, []);
 
     return (
         <CoinsContainer>

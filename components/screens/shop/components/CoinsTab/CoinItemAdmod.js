@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
+import {Platform} from "react-native";
 import Text from "../../../../common/Text/Text";
 import ItemWrapper from "../../../collections/components/common/ItemWrapper";
-import CollectButton from "../../../collections/components/common/CollectButton";
+
 
 const CoinItemAdmod = (props) => {
     return (
