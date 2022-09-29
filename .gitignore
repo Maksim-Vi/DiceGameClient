@@ -76,3 +76,5 @@ dist/
 
 ios/
 android/
+
+credentials.json

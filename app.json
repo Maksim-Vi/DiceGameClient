@@ -1,51 +1,6 @@
 {
-  "expo": {
-    "name": "DiceGame",
-    "slug": "dicegame",
-    "owner": "kastom",
-    "version": "1.0.0",
-    "orientation": "portrait",
-    "icon": "./assets/dice/play_dice.png",
-    "userInterfaceStyle": "light",
-    "splash": {
-      "image": "./assets/dice/play_dice.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff",
-      "fontSize": "18px"
-    },
-    "updates": {
-      "fallbackToCacheTimeout": 0
-    },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
-    "ios": {
-      "supportsTablet": false,
-      "infoPlist": {
-        "NSAppTransportSecurity": {
-          "NSAllowsArbitraryLoads": true,
-          "GADIsAdManagerApp": true
-        },
-        "NSUserTrackingUsageDescription": true
-      },
-      "config": {
-        "googleMobileAdsAppId": "ca-app-pub-3940256099942544~1458002511"
-      },
-      "bundleIdentifier": "com.anonymous.DiceGame"
-    },
-    "android": {
-      "adaptiveIcon": {
-        "backgroundColor": "#FFFFFF"
-      },
-      "config": {
-        "googleMobileAdsAppId": "ca-app-pub-3940256099942544~3347511713"
-      },
-      "package": "com.anonymous.DiceGame"
-    },
-    "extra": {
-      "eas": {
-        "projectId": "a5e5cb05-164b-405b-9ee0-6e83cf5f8084"
-      }
-    }
+  "react-native-google-mobile-ads": {
+    "android_app_id": "ca-app-pub-3940256099942544~3347511713",
+    "ios_app_id": "ca-app-pub-3940256099942544~1458002511"
   }
 }

@@ -5,17 +5,22 @@
   "build": {
     "development": {
       "distribution": "internal",
+      "env": {
+        "APP_ENV": "development"
+      },
       "android": {
-        "gradleCommand": ":app:assembleDebug"
+        "buildType": "apk"
       },
       "ios": {
-        "buildConfiguration": "Debug"
+        "simulator": true
       }
     },
-    "preview": {
-      "distribution": "internal"
-    },
-    "production": {}
+    "production": {
+      "env": {
+        "API_URL": "https://dicegame-server.herokuapp.com/api",
+        "APP_ENV": "production"
+      }
+    }
   },
   "submit": {
     "production": {}
