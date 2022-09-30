@@ -7,8 +7,7 @@ const Screens = () => {
 
     const { user } = useContext(UserContext);
 
-   //return user.auth ? <Navigator /> : <AuthNavigation />
-   return <Navigator /> 
+   return user.auth ? <Navigator /> : <AuthNavigation />
 }
 
 export default Screens
