@@ -5,7 +5,7 @@ import coins from "../../../../../assets/topPanel/coins.png";
 
 const Coins = (props) =>{
     return <CoinsContainer {...props}>
-        <CoinsImage source={coins} />
+        <CoinsImage source={coins} resizeMode="cover"/>
         <Text blod medium center>{props.coins}</Text>
     </CoinsContainer>
 }

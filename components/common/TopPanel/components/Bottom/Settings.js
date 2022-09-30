@@ -16,7 +16,7 @@ const Settings = (props) =>{
     return (
         <SettingsContainer>
             <SettingsBtn onPress={Logout}>
-                <SettingsImg source={settings} />
+                <SettingsImg source={settings} resizeMode='stretch'/>
             </SettingsBtn>
         </SettingsContainer>
     )
@@ -37,7 +37,6 @@ const SettingsBtn = styled.TouchableWithoutFeedback`
 const SettingsImg = styled.Image`
   width: 100%;
   height: 100%;
-  resizeMode: 'stretch'
 `
 
 export default Settings

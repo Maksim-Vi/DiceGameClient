@@ -11,7 +11,7 @@ const GameWithOpponent = (props) => {
 
     return (
         <OpponentContainer onPress={hendelClick}>
-            <GameImage source={gameIcon} />
+            <GameImage source={gameIcon} resizeMode={ 'stretch'}/>
             <TextCont madium heavy color={'#ff9d4d'} center>Fight&Opp.</TextCont>
         </OpponentContainer>
     );

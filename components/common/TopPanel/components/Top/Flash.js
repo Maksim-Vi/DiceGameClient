@@ -5,7 +5,7 @@ import flash from "../../../../../assets/topPanel/flash.png";
 
 const Flash = (props) =>{
     return <CrystalsContainer>
-        <FlashImage source={flash} />
+        <FlashImage source={flash} resizeMode="cover"/>
         <Text blod medium>{props.crystals}</Text>
     </CrystalsContainer>
 }

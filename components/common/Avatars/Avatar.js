@@ -6,7 +6,7 @@ const Avatar = (props) => {
     return (
         <AvatarContainer>
             <UserInfoBtn>
-                <AvatarImg source={getAvatarById(props.avatarId)} />
+                <AvatarImg source={getAvatarById(props.avatarId)} resizeMode={ 'stretch'} />
             </UserInfoBtn>
         </AvatarContainer>
     )
@@ -21,7 +21,6 @@ const AvatarContainer = styled.View`
 const AvatarImg = styled.Image`
   width: 100%;
   height: 100%;
-  resizeMode: 'stretch'
 `
 const UserInfoBtn = styled.TouchableWithoutFeedback`
  

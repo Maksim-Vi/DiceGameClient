@@ -8,7 +8,7 @@ const UserInfo = (props) =>{
     const {avatarId, user, experience} = props.userData
     return (
         <UserInfoContainer>
-            <Avatar avatarId={avatarId}/>
+            <Avatar avatarId={avatarId} />
             <AvatarIfoContainer>
                 <UserName madium heavy>{user ? user.username : ''}</UserName>
                 <Experience experience={experience}/>

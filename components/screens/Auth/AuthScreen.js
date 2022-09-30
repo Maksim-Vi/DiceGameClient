@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import BackgroundWrapper from '../../common/BackgroundWrapper/BackgroundWrapper'
 import mainBg from '../../../assets/bg/main_bg.jpg'
 import styled from 'styled-components'
@@ -7,7 +7,6 @@ import { useNavigation } from '@react-navigation/native'
 import LoginScreen from './Login/LoginScreen'
 import { postLoginApi } from '../../protocol/API/API'
 import {Keyboard, Platform, TouchableWithoutFeedback} from 'react-native'
-import { UserContext } from '../../utils/UserProvider'
 import C_LOGIN from '../../protocol/messages/clients/C_LOGIN'
 import Divider from "../../common/Divider/Divider";
 

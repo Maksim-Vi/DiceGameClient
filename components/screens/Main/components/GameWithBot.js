@@ -11,7 +11,7 @@ const GameWithBot = (props) => {
 
     return (
        <BotContainer onPress={hendelClick}>
-           <GameImage source={gameIcon} />
+           <GameImage source={gameIcon} resizeMode={ 'stretch'}/>
            <TextCont madium heavy color={'#ff9d4d'} center>Fight&Bot</TextCont>
        </BotContainer>
     );

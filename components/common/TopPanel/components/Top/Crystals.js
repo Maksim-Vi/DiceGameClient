@@ -5,7 +5,7 @@ import star from "../../../../../assets/topPanel/diamond.png";
 
 const Crystals = (props) =>{
     return <CrystalsContainer {...props}>
-        <CrystalsImage source={star} />
+        <CrystalsImage source={star} resizeMode="cover"/>
         <Text blod medium center>{props.crystals}</Text>
     </CrystalsContainer>
 }

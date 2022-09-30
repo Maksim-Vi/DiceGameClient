@@ -7,7 +7,6 @@ import {
 	Animated,
 } from 'react-native';
 import styled from 'styled-components';
-import ButtonBack from '../../common/Buttons/Back/ButtonBack';
 import Text from "../../common/Text/Text";
 
 const ObjectAnimated = ({ value, opacity, y }) => (

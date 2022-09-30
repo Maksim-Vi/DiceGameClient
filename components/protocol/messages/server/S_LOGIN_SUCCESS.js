@@ -19,7 +19,6 @@ export default class S_LOGIN_SUCCESS {
     }
 
     exec() {
-        console.log('USER', this.data.user)
         store.login(this.data)
         store.dispatch(setCurrentUser(this.data.user))
         store.dispatch(setActiveItems(this.data.user.activeItems || {dice: 13, square: 14}))

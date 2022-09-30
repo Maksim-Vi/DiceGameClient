@@ -26,7 +26,6 @@ const MainScreen = () => {
             <GameWithOpponent index={1} hendlerPlayGame={hendlerPlayGame}/>
             <GameWithOpponentByTime index={2} hendlerPlayGame={hendlerPlayGame} />
         </GamesContainer>
-        {/*<PlayButton onPress={hendlerPlayGame}><Text large heavy color={'#fff'}>Play</Text></PlayButton>*/}
       </MainContainer>
 
     </BackgroundWrapper>

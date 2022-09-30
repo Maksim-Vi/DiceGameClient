@@ -10,6 +10,7 @@ import TabsShop from "./Tabs/TabsShop";
 import FlashTab from "./FlashTab/FlashTab";
 import DiamondsTab from "./DiamondsTab/DiamondsTab";
 import CoinsTab from "./CoinsTab/CoinsTab";
+import Text from '../../../common/Text/Text';
 
 const ShopContainer = (props) => {
 
@@ -28,12 +29,16 @@ const ShopContainer = (props) => {
         }
     }
 
+    console.log('ANSWER', activeTab);
+
     return (
         <StoreContainer>
             <TopPanelStores coins={props.user.coins} crystals={props.user.crystals} />
             <Divider color={'white'}/>
             <TabsShop activeTab={activeTab} handelActiveTab={handelActiveTab}/>
 
+            <Text>test</Text>
+            
             {getTabContext(activeTab)}
         </StoreContainer>
     );
