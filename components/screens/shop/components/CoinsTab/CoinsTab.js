@@ -4,6 +4,13 @@ import {Platform, StyleSheet} from "react-native";
 import CoinItem from "./CoinItem";
 import CoinItemAdmod from "./CoinItemAdmod";
 import {RewardedAdEventType, RewardedInterstitialAd, TestIds} from "react-native-google-mobile-ads";
+import { getCoinsBonus } from '../../../../protocol/API/API';
+import { store } from '../../../../redux/redux-store';
+import { updateCurrentUserCoins } from '../../../../redux/reducers/players/PlayersReducer';
+
+const AdUnitID = Platform.OS === 'ios'
+    ? 'ca-app-pub-3940256099942544~1458002511'
+    : 'ca-app-pub-3940256099942544~3347511713'
 
 const internal = RewardedInterstitialAd.createForAdRequest(TestIds.REWARDED_INTERSTITIAL,{
     requestNonPersonalizedAdsOnly: true
@@ -12,18 +19,20 @@ const internal = RewardedInterstitialAd.createForAdRequest(TestIds.REWARDED_INTE
 const CoinsTab = (props) => {
 
     const [loadInternal, setLadInternal] = useState(false)
-    const AdUnitID = Platform.OS === 'ios'
-        ? 'ca-app-pub-3940256099942544~1458002511'
-        : 'ca-app-pub-3940256099942544~3347511713'
-
+   
     const loadReclam = () =>{
         const unsubscribeLoaded = internal.addAdEventListener(RewardedAdEventType.LOADED,()=>{
             setLadInternal(true)
         })
-        const unsubscribeClosed = internal.addAdEventListener(RewardedAdEventType.EARNED_REWARD,(reward)=>{
-            console.log('User earned reward of ', reward);
-            setLadInternal(false)
+        const unsubscribeClosed = internal.addAdEventListener(RewardedAdEventType.EARNED_REWARD, async ()=>{
+            const getBonusCoins = await getCoinsBonus(props.user.username)
+
+            if(getBonusCoins && getBonusCoins.success){
+                store.dispatch(updateCurrentUserCoins(getBonusCoins.updatedCoins))
+            }
+            
             internal.load()
+             
         })
 
         internal.load()

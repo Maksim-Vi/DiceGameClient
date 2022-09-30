@@ -69,6 +69,54 @@ export const postRegisterApi = async (username, email, password) => {
     })
 }
 
+export const getCoinsBonus = async (username) =>{
+    return await fetch(`${URL}/addCoinsToUserByUsername`, {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({username: username})
+    })
+    .then((response) => response.json())
+    .then((json) => { return json })
+    .catch((err) => {
+        console.log(`login ERROR`, err);
+    })
+}
+
+export const getDiamondsBonus = async (username) =>{
+    return await fetch(`${URL}/addDiamondsToUserByUsername`, {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({username: username})
+    })
+    .then((response) => response.json())
+    .then((json) => { return json })
+    .catch((err) => {
+        console.log(`login ERROR`, err);
+    })
+}
+
+export const getFlashBonus = async (username) =>{
+    return await fetch(`${URL}/addFlashToUserByUsername`, {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({username: username})
+    })
+    .then((response) => response.json())
+    .then((json) => { return json })
+    .catch((err) => {
+        console.log(`login ERROR`, err);
+    })
+}
+
 export const getText = async () =>{
     return await fetch(`${URL}/test`, {
         method: 'GET',

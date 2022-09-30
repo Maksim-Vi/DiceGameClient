@@ -1,25 +1,77 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from "styled-components";
 import {StyleSheet} from "react-native";
-import Text from "../../../../common/Text/Text";
 import DiamondsItem from "./DiamondsItem";
+import {RewardedAdEventType, RewardedInterstitialAd, TestIds} from "react-native-google-mobile-ads";
+import DiamondItemAdmod from './DiamondItemAdmod';
+import { getDiamondsBonus } from '../../../../protocol/API/API';
+import { updateCurrentUserCrystals } from '../../../../redux/reducers/players/PlayersReducer';
+import { store } from '../../../../redux/redux-store';
+
+const AdUnitID = Platform.OS === 'ios'
+    ? 'ca-app-pub-3940256099942544~1458002511'
+    : 'ca-app-pub-3940256099942544~3347511713'
+
+const internal = RewardedInterstitialAd.createForAdRequest(TestIds.REWARDED_INTERSTITIAL,{
+    requestNonPersonalizedAdsOnly: true
+})
 
 const DiamondsTab = (props) => {
-    return (
-        <DiamondsContainer>
-            <DiamondsScroll showsVerticalScrollIndicator={false} contentContainerStyle={styles.scroll}>
-                <DiamondsScrollContainer>
-                    <DiamondsItem />
-                    <DiamondsItem />
-                    <DiamondsItem />
-                    <DiamondsItem />
-                    <DiamondsItem />
-                    <DiamondsItem />
-                </DiamondsScrollContainer>
-                <DiamondsCardLast />
-            </DiamondsScroll>
-        </DiamondsContainer>
-    )
+
+  const [loadInternal, setLadInternal] = useState(false)
+   
+  const loadReclam = () =>{
+      const unsubscribeLoaded = internal.addAdEventListener(RewardedAdEventType.LOADED,()=>{
+          setLadInternal(true)
+      })
+      const unsubscribeClosed = internal.addAdEventListener(RewardedAdEventType.EARNED_REWARD, async ()=>{
+          const getBonus = await getDiamondsBonus(props.user.username)
+
+          if(getBonus && getBonus.success){
+            store.dispatch(updateCurrentUserCrystals(getBonus.updatedCrystals))
+          }
+          
+          internal.load()
+           
+      })
+
+      internal.load()
+
+      return () => {
+          unsubscribeLoaded()
+          unsubscribeClosed()
+      }
+  }
+  
+  const admodHendler = () =>{
+    if(loadInternal){
+      internal.show()
+    }
+  }
+
+  useEffect(() => {
+      const unsubscribeInternalEvents = loadReclam()
+      
+      return unsubscribeInternalEvents
+  }, []);
+
+  return (
+      <DiamondsContainer>
+          <DiamondsScroll showsVerticalScrollIndicator={false} contentContainerStyle={styles.scroll}>
+              <DiamondsScrollContainer>
+                  <DiamondItemAdmod admodHendler={admodHendler} 
+                                    btnText={loadInternal ? 'watch video' : 'waiting video'}/>
+                  <DiamondsItem />
+                  <DiamondsItem />
+                  <DiamondsItem />
+                  <DiamondsItem />
+                  <DiamondsItem />
+                  <DiamondsItem />
+              </DiamondsScrollContainer>
+              <DiamondsCardLast />
+          </DiamondsScroll>
+      </DiamondsContainer>
+  )
 }
 
 const DiamondsContainer = styled.View`

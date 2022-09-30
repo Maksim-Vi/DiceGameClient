@@ -22,9 +22,9 @@ const ShopContainer = (props) => {
 
     const getTabContext = (tab) =>{
         switch (tab) {
-            case 'coins': return <CoinsTab />
-            case 'diamonds': return <DiamondsTab />
-            case 'flash': return <FlashTab />
+            case 'coins': return <CoinsTab user={props.user}/>
+            case 'diamonds': return <DiamondsTab user={props.user}/>
+            case 'flash': return <FlashTab user={props.user}/>
             default: return null
         }
     }
