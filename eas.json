@@ -6,6 +6,9 @@
     "development": {
       "developmentClient": true,
       "distribution": "internal",
+      "env": {
+        "APP_ENV": "development"
+      },
       "ios":{
         "simulator": true
       }
@@ -13,7 +16,12 @@
     "preview": {
       "distribution": "internal"
     },
-    "production": {}
+    "production": {
+      "env": {
+        "API_URL": "https://dicegame-server.herokuapp.com/api",
+        "APP_ENV": "production"
+      }
+    }
   },
   "submit": {
     "production": {}

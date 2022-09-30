@@ -9,10 +9,10 @@ import { store } from '../../../../redux/redux-store';
 import { updateCurrentUserCoins } from '../../../../redux/reducers/players/PlayersReducer';
 
 const AdUnitID = Platform.OS === 'ios'
-    ? 'ca-app-pub-3940256099942544~1458002511'
-    : 'ca-app-pub-3940256099942544~3347511713'
+    ?  process.env.NODE_ENV !== 'development' ? 'ca-app-pub-6421975370931679/8219230470' : TestIds.REWARDED_INTERSTITIAL
+    : process.env.NODE_ENV !== 'development' ? 'ca-app-pub-6421975370931679/7194208820' : TestIds.REWARDED_INTERSTITIAL
 
-const internal = RewardedInterstitialAd.createForAdRequest(TestIds.REWARDED_INTERSTITIAL,{
+const internal = RewardedInterstitialAd.createForAdRequest(AdUnitID,{
     requestNonPersonalizedAdsOnly: true
 })
 

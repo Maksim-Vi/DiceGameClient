@@ -10,7 +10,7 @@ let reconnectTimeout = null;
 let reconnecting = false;
 
 const getWSUrl = () =>{
-    const inProduction = false
+    const inProduction = process.env.NODE_ENV !== 'development' ? true : false;
     const port = 3000
 
     const protocol = inProduction ? 'wss' : 'ws';

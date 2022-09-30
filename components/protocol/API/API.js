@@ -3,7 +3,9 @@ import Constants from "expo-constants";
 import {openServerConnection} from "../websocet";
 
 const getUrl = () =>{
-    const inProduction = false;
+    console.log('ANSWER env', process.env);
+
+    const inProduction = process.env.NODE_ENV !== 'development' ? true : false;
     const port = 3000
     const inExpo = Constants.manifest && Constants.manifest.debuggerHost;
     const inBrowser = typeof document !== 'undefined';
