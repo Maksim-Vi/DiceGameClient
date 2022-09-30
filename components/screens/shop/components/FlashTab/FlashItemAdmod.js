@@ -1,16 +1,20 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import styled from "styled-components";
-import {Platform} from "react-native";
 import Text from "../../../../common/Text/Text";
 import ItemWrapper from "../../../collections/components/common/ItemWrapper";
-
+import img from '../../../../../assets/shop/lightning.png'
 
 const FlashItemAdmod = (props) => {
     return (
         <ItemWrapper>
-            <Text>Admod</Text>
+           <ItemContainer>
+                <Text heavy medium color={'#fff'}>Watching video</Text>
+                <ItemImg source={img} resizeMode={ 'stretch'}/>
+                <Text blod small color={'#fff'} center>get <Text blod medium color={'rgb(255,157,77)'}>3</Text> flash!</Text>
+            </ItemContainer>
+            
             <AdmodButton onPress={props.admodHendler}>
-                <Text>{props.btnText}</Text>
+                <Text blod small color={'#fff'}>{props.btnText}</Text>
             </AdmodButton>
         </ItemWrapper>
     );
@@ -27,5 +31,17 @@ const AdmodButton = styled.TouchableOpacity`
   width: 80%;
   height: 30px;
 `
+
+const ItemContainer = styled.View`
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+`
+const ItemImg = styled.Image`
+  width: 70px;
+  height: 70px;
+  margin-bottom: 10px;
+`
+
 
 export default FlashItemAdmod;

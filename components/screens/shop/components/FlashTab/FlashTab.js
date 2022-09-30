@@ -61,12 +61,11 @@ const FlashTab = (props) => {
               <FlashScrollContainer>
                   <FlashItemAdmod admodHendler={admodHendler} 
                                   btnText={loadInternal ? 'watch video' : 'waiting video'}/>
-                  <FlashItem />
-                  <FlashItem />
-                  <FlashItem />
-                  <FlashItem />
-                  <FlashItem />
-                  <FlashItem />
+                  <FlashItem flash={'1'} price={'1.99'}/>
+                  <FlashItem flash={'3'} price={'4.99'}/>
+                  <FlashItem flash={'5'} price={'7.99'}/>
+                  <FlashItem flash={'10'} price={'12.00'}/>
+                  <FlashItem flash={'30'} price={'25.99'}/>
               </FlashScrollContainer>
               <FlashCardLast />
           </FlashScroll>

@@ -34,8 +34,6 @@ const ShopContainer = (props) => {
             <TopPanelStores coins={props.user.coins} crystals={props.user.crystals} />
             <Divider color={'white'}/>
             <TabsShop activeTab={activeTab} handelActiveTab={handelActiveTab}/>
-
-            <Text>test</Text>
             
             {getTabContext(activeTab)}
         </StoreContainer>

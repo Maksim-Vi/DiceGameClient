@@ -62,12 +62,13 @@ const DiamondsTab = (props) => {
               <DiamondsScrollContainer>
                   <DiamondItemAdmod admodHendler={admodHendler} 
                                     btnText={loadInternal ? 'watch video' : 'waiting video'}/>
-                  <DiamondsItem />
-                  <DiamondsItem />
-                  <DiamondsItem />
-                  <DiamondsItem />
-                  <DiamondsItem />
-                  <DiamondsItem />
+                  <DiamondsItem diamonds={'3'} price={'1.99'}/>
+                  <DiamondsItem diamonds={'5'} price={'4.99'}/>
+                  <DiamondsItem diamonds={'10'} price={'9.99'}/>
+                  <DiamondsItem diamonds={'20'} price={'18.99'}/>
+                  <DiamondsItem diamonds={'30'} price={'29.99'}/>
+                  <DiamondsItem diamonds={'50'} price={'49.99'}/>
+                  <DiamondsItem diamonds={'100'} price={'99.00'}/>
               </DiamondsScrollContainer>
               <DiamondsCardLast />
           </DiamondsScroll>
