@@ -50,7 +50,7 @@ const BoardItem = (props) => {
 
   return (
       <ItemContainer {...props} width={width} onPress={hendlerClick} enabled={true} activeOpacity={.8}>
-        <SquaresImage  style={getSelectedSquares()} source={getSquare()}/>
+        <SquaresImage  style={getSelectedSquares()} source={getSquare()} resizeMode={'stretch'}/>
         {getDiceNumber() !== "" &&
             <DiceImage  width={width} source={getDiceNumber()}/>
         }
@@ -101,7 +101,6 @@ const SquaresImage = styled.Image`
   align-items: center;
   justify-content: center;
   margin: 0px 10px 10px 10px;
-  resizeMode: 'stretch';
   
   ${props =>{
     if(props.item > 0){

@@ -17,7 +17,7 @@ const Dice = (props) => {
     return diceImg
   }
 
-  return getDiceNumber() !== "" && <DiceImage width={width} isShow={props.diceNumber ? true : false} source={getDiceNumber()} />
+  return getDiceNumber() !== "" && <DiceImage width={width} isShow={props.diceNumber ? true : false} source={getDiceNumber()} resizeMode={ 'stretch'}/>
 }
 
 const DiceImage = styled.Image`
