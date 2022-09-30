@@ -1,50 +1,57 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
 import {Platform, StyleSheet} from "react-native";
 import CoinItem from "./CoinItem";
 import CoinItemAdmod from "./CoinItemAdmod";
-import {RewardedAd, RewardedAdEventType} from "react-native-google-mobile-ads";
+import {RewardedAdEventType, RewardedInterstitialAd, TestIds} from "react-native-google-mobile-ads";
+
+const internal = RewardedInterstitialAd.createForAdRequest(TestIds.REWARDED_INTERSTITIAL,{
+    requestNonPersonalizedAdsOnly: true
+})
 
 const CoinsTab = (props) => {
 
+    const [loadInternal, setLadInternal] = useState(false)
     const AdUnitID = Platform.OS === 'ios'
         ? 'ca-app-pub-3940256099942544~1458002511'
         : 'ca-app-pub-3940256099942544~3347511713'
 
-    const rewarded = RewardedAd.createForAdRequest(AdUnitID, {
-        requestNonPersonalizedAdsOnly: true,
-    });
+    const loadReclam = () =>{
+        const unsubscribeLoaded = internal.addAdEventListener(RewardedAdEventType.LOADED,()=>{
+            setLadInternal(true)
+        })
+        const unsubscribeClosed = internal.addAdEventListener(RewardedAdEventType.EARNED_REWARD,(reward)=>{
+            console.log('User earned reward of ', reward);
+            setLadInternal(false)
+            internal.load()
+        })
 
+        internal.load()
+
+        return () => {
+            unsubscribeLoaded()
+            unsubscribeClosed()
+        }
+    }
+    
     const admodHendler = () =>{
-        rewarded.show();
+      if(loadInternal){
+        internal.show()
+      }
     }
 
     useEffect(() => {
-        const unsubscribeLoaded = rewarded.addAdEventListener(
-            RewardedAdEventType.LOADED,
-            () => {
-                console.log('LOADED ');
-        });
-        const unsubscribeEarned = rewarded.addAdEventListener(
-            RewardedAdEventType.EARNED_REWARD,
-            reward => {
-                console.log('User earned reward of ', reward);
-            },
-        );
-
-        rewarded.load();
-
-        return () => {
-            unsubscribeLoaded();
-            unsubscribeEarned();
-        };
+        const unsubscribeInternalEvents = loadReclam()
+        
+        return unsubscribeInternalEvents
     }, []);
 
     return (
         <CoinsContainer>
             <CoinsScroll showsVerticalScrollIndicator={false} contentContainerStyle={styles.scroll}>
                 <CoinsScrollContainer>
-                    <CoinItemAdmod admodHendler={admodHendler}/>
+                    <CoinItemAdmod admodHendler={admodHendler} 
+                                   btnText={loadInternal ? 'watch video' : 'waiting video'}/>
                     <CoinItem />
                     <CoinItem />
                     <CoinItem />

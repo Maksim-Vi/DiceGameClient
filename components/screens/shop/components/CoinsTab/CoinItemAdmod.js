@@ -10,7 +10,7 @@ const CoinItemAdmod = (props) => {
         <ItemWrapper>
             <Text>Admod</Text>
             <AdmodButton onPress={props.admodHendler}>
-                <Text>watch video</Text>
+                <Text>{props.btnText}</Text>
             </AdmodButton>
         </ItemWrapper>
     );

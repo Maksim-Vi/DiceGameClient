@@ -29,8 +29,6 @@ const ShopContainer = (props) => {
         }
     }
 
-    console.log('ANSWER', activeTab);
-
     return (
         <StoreContainer>
             <TopPanelStores coins={props.user.coins} crystals={props.user.crystals} />
