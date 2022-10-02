@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start:dev": "APP_ENV=staging expo start",
-    "start": "APP_ENV=staging expo start --dev-client",
+    "start:dev": "expo start",
+    "start": "expo start --dev-client",
     "android": "expo run:android",
     "ios": "expo run:ios",
     "expo:build:android": "expo build:android",

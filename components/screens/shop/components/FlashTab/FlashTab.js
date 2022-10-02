@@ -7,10 +7,11 @@ import { getFlashBonus } from '../../../../protocol/API/API';
 import { updateCurrentUserFlash } from '../../../../redux/reducers/players/PlayersReducer';
 import FlashItemAdmod from './FlashItemAdmod';
 import { store } from '../../../../redux/redux-store';
+const { APP_TYPE } = Constants.manifest?.extra;
 
 const AdUnitID = Platform.OS === 'ios'
-    ?  process.env.NODE_ENV !== 'development' ? 'ca-app-pub-6421975370931679/8219230470' : TestIds.REWARDED_INTERSTITIAL
-    : process.env.NODE_ENV !== 'development' ? 'ca-app-pub-6421975370931679/7194208820' : TestIds.REWARDED_INTERSTITIAL
+    ?  APP_TYPE !== 'development' ? 'ca-app-pub-6421975370931679/8219230470' : TestIds.REWARDED_INTERSTITIAL
+    : APP_TYPE !== 'development' ? 'ca-app-pub-6421975370931679/7194208820' : TestIds.REWARDED_INTERSTITIAL
 
 
 const internal = RewardedInterstitialAd.createForAdRequest(AdUnitID,{
