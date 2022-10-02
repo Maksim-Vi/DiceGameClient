@@ -7,7 +7,8 @@
       "developmentClient": true,
       "distribution": "internal",
       "env": {
-        "APP_ENV": "development"
+        "APP_ENV": "development",
+        "NODE_ENV": "development"
       },
       "ios":{
         "simulator": true
@@ -16,7 +17,8 @@
     "production": {
       "env": {
         "API_URL": "https://dicegame-server.herokuapp.com/api",
-        "APP_ENV": "production"
+        "APP_ENV": "production",
+        "NODE_ENV": "production"
       }
     }
   },

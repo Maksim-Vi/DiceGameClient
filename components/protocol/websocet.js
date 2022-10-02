@@ -3,6 +3,7 @@ import { setLoaded } from "../redux/reducers/Websocket/WebsocketReducer";
 import { store } from "../redux/redux-store";
 import { hendleMessage } from "./MessageManager";
 import Constants from "expo-constants";
+const { APP_TYPE, APP_PROD_URL } = Constants.manifest?.extra;
 
 export let websocket;
 
@@ -10,15 +11,15 @@ let reconnectTimeout = null;
 let reconnecting = false;
 
 const getWSUrl = () =>{
-    const inProduction = process.env.NODE_ENV !== 'development' ? true : false;
+    const inProduction = APP_TYPE !== 'development' ? true : false;
     const port = 3000
 
     const protocol = inProduction ? 'wss' : 'ws';
 
     if(Platform.OS === 'android'){
-        return inProduction ? `${protocol}://dicegame-server.herokuapp.com/` : `${protocol}://10.0.2.2:${port}/`
+        return inProduction ? `${protocol}://${APP_PROD_URL}/` : `${protocol}://10.0.2.2:${port}/`
     } else {
-        return inProduction ? `${protocol}://dicegame-server.herokuapp.com/` : `${protocol}://${Constants.manifest.debuggerHost.split(`:`).shift()}:${port}/`
+        return inProduction ? `${protocol}://${APP_PROD_URL}/` : `${protocol}://${Constants.manifest.debuggerHost.split(`:`).shift()}:${port}/`
     }
 }
 
