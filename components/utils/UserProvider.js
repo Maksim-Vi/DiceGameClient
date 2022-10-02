@@ -1,11 +1,11 @@
 import { createContext, useCallback, useEffect, useState } from "react";
 import { AsyncStorage } from "react-native";
 import C_LOGIN from "../protocol/messages/clients/C_LOGIN";
+import { postLoginApi } from "../protocol/API/API";
 import { setCurrentUser } from "../redux/reducers/players/PlayersReducer";
 import { store } from "../redux/redux-store";
-import {postLoginApi} from "../protocol/API/API";
 
-export const UserContext = createContext({ name: '', auth: false });
+export const UserContext = createContext({ token: '', id: '', username: '', password: '', data: null, auth: false });
 const storageName = 'UserData'
 
 const UserProvider = ({ children }) => {
@@ -13,23 +13,28 @@ const UserProvider = ({ children }) => {
     const [user, setUser] = useState({token: '', id: '', username: '', password: '', data: null, auth: false });
     
     const login = useCallback((data) => {
-        setUser({
-          token: data.token,
-          id: data.user.id,
-          username: data.user.name,
-          password: data.user.password,
-          data: data,
-          auth: true });
-        store.dispatch(setCurrentUser(data.user))
-        AsyncStorage.setItem(storageName, JSON.stringify({
+      setUser({
+        token: data.token,
+        id: data.user.id,
+        username: data.user.username,
+        password: data.user.password,
+        data: data,
+        auth: false 
+      });
+     
+      AsyncStorage.setItem(storageName, JSON.stringify({
           userID: data.user.id,
-          username: data.user.name,
+          username: data.user.username,
           password: data.user.password,
           token: data.token,
           data: data
       }))
-      },[])
+      store.dispatch(setCurrentUser(data.user))
+    },[])
     
+    const setAuth = useCallback(() =>{
+      setUser({...user, auth: true});
+    },[])
     
     const logout = useCallback(() => {
         setUser({token: '', id: '', username: '', password: '', data: null, auth: false });
@@ -37,6 +42,7 @@ const UserProvider = ({ children }) => {
     })
 
     store.logout = logout
+    store.setAuth = setAuth
     store.login = login
 
     const getDataFromStorage = async () => {

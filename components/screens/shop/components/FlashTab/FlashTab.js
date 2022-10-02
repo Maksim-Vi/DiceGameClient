@@ -60,7 +60,7 @@ const FlashTab = (props) => {
           <FlashScroll showsVerticalScrollIndicator={false} contentContainerStyle={styles.scroll}>
               <FlashScrollContainer>
                   <FlashItemAdmod admodHendler={admodHendler} 
-                                  btnText={loadInternal ? 'watch video' : 'waiting video'}/>
+                                  loadInternal={loadInternal} />
                   <FlashItem flash={'1'} price={'1.99'}/>
                   <FlashItem flash={'3'} price={'4.99'}/>
                   <FlashItem flash={'5'} price={'7.99'}/>

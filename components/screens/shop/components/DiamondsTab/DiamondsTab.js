@@ -61,7 +61,7 @@ const DiamondsTab = (props) => {
           <DiamondsScroll showsVerticalScrollIndicator={false} contentContainerStyle={styles.scroll}>
               <DiamondsScrollContainer>
                   <DiamondItemAdmod admodHendler={admodHendler} 
-                                    btnText={loadInternal ? 'watch video' : 'waiting video'}/>
+                                    loadInternal={loadInternal} />
                   <DiamondsItem diamonds={'3'} price={'1.99'}/>
                   <DiamondsItem diamonds={'5'} price={'4.99'}/>
                   <DiamondsItem diamonds={'10'} price={'9.99'}/>

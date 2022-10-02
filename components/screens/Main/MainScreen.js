@@ -8,6 +8,11 @@ import {StatusBar,StyleSheet} from "react-native";
 import GameWithBot from "./components/GameWithBot";
 import GameWithOpponent from "./components/GameWithOpponent";
 import GameWithOpponentByTime from "./components/GameWithOpponentByTime";
+import { useRefreshToken } from '../../utils/refreshTokenHook'
+import { selectLoginUser } from '../../redux/reducers/login/LoginReducer'
+import { store } from '../../redux/redux-store'
+import Text from '../../common/Text/Text'
+import { getText } from '../../protocol/API/API'
 
 const MainScreen = () => {
 
@@ -47,6 +52,7 @@ const PlayButton = styled.TouchableOpacity`
   border: 1px solid #000;
   padding: 10px 50px;
   margin-top: 20px;
+  margin-bottom: 100px;
 `;
 
 const styles = StyleSheet.create({

@@ -13,8 +13,8 @@ const FlashItemAdmod = (props) => {
                 <Text blod small color={'#fff'} center>get <Text blod medium color={'rgb(255,157,77)'}>3</Text> flash!</Text>
             </ItemContainer>
             
-            <AdmodButton onPress={props.admodHendler}>
-                <Text blod small color={'#fff'}>{props.btnText}</Text>
+            <AdmodButton {...props} onPress={props.admodHendler}>
+                <Text blod small color={'#fff'}>{props.loadInternal ? 'watch video' : 'waiting video'}</Text>
             </AdmodButton>
         </ItemWrapper>
     );
@@ -25,7 +25,7 @@ const AdmodButton = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
   flex-direction: row;
-  background-color: rgba(20, 197, 55, 0.84);
+  background-color: ${props => !props.loadInternal ? 'grey' : `green`};
   border-radius: 10px;
   border: 1px solid rgb(255, 157, 77);
   width: 80%;

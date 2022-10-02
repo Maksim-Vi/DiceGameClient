@@ -60,7 +60,7 @@ const CoinsTab = (props) => {
             <CoinsScroll showsVerticalScrollIndicator={false} contentContainerStyle={styles.scroll}>
                 <CoinsScrollContainer>
                     <CoinItemAdmod admodHendler={admodHendler} 
-                                   btnText={loadInternal ? 'watch video' : 'waiting video'}/>
+                                   loadInternal={loadInternal} />
                     <CoinItem coins={'10'} price={'1.99'}/>
                     <CoinItem coins={'20'} price={'5.99'}/>
                     <CoinItem coins={'50'} price={'9.99'}/>
