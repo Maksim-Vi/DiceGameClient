@@ -7,6 +7,7 @@ import { getFlashBonus } from '../../../../protocol/API/API';
 import { updateCurrentUserFlash } from '../../../../redux/reducers/players/PlayersReducer';
 import FlashItemAdmod from './FlashItemAdmod';
 import { store } from '../../../../redux/redux-store';
+import Constants from "expo-constants";
 const { APP_TYPE } = Constants.manifest?.extra;
 
 const AdUnitID = Platform.OS === 'ios'

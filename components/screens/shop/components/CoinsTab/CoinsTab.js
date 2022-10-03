@@ -7,6 +7,7 @@ import {RewardedAdEventType, RewardedInterstitialAd, TestIds} from "react-native
 import { getCoinsBonus } from '../../../../protocol/API/API';
 import { store } from '../../../../redux/redux-store';
 import { updateCurrentUserCoins } from '../../../../redux/reducers/players/PlayersReducer';
+import Constants from "expo-constants";
 const { APP_TYPE } = Constants.manifest?.extra;
 
 const AdUnitID = Platform.OS === 'ios'

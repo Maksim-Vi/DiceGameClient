@@ -8,11 +8,6 @@ import {StatusBar,StyleSheet} from "react-native";
 import GameWithBot from "./components/GameWithBot";
 import GameWithOpponent from "./components/GameWithOpponent";
 import GameWithOpponentByTime from "./components/GameWithOpponentByTime";
-import { useRefreshToken } from '../../utils/refreshTokenHook'
-import { selectLoginUser } from '../../redux/reducers/login/LoginReducer'
-import { store } from '../../redux/redux-store'
-import Text from '../../common/Text/Text'
-import { getText } from '../../protocol/API/API'
 
 const MainScreen = () => {
 

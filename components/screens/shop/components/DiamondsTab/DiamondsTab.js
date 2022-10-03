@@ -7,6 +7,7 @@ import DiamondItemAdmod from './DiamondItemAdmod';
 import { getDiamondsBonus } from '../../../../protocol/API/API';
 import { updateCurrentUserCrystals } from '../../../../redux/reducers/players/PlayersReducer';
 import { store } from '../../../../redux/redux-store';
+import Constants from "expo-constants";
 const { APP_TYPE } = Constants.manifest?.extra;
 
 const AdUnitID = Platform.OS === 'ios'
