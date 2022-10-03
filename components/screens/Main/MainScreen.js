@@ -8,6 +8,7 @@ import {StatusBar,StyleSheet} from "react-native";
 import GameWithBot from "./components/GameWithBot";
 import GameWithOpponent from "./components/GameWithOpponent";
 import GameWithOpponentByTime from "./components/GameWithOpponentByTime";
+import Text from '../../common/Text/Text'
 
 const MainScreen = () => {
 
@@ -21,11 +22,12 @@ const MainScreen = () => {
       <TopMain />
 
       <MainContainer>
-        <GamesContainer horizontal={true} showsHorizontalScrollIndicator={false} contentContainerStyle={styles.scrollView}>
-            <GameWithBot index={0} hendlerPlayGame={hendlerPlayGame}/>
-            <GameWithOpponent index={1} hendlerPlayGame={hendlerPlayGame}/>
-            <GameWithOpponentByTime index={2} hendlerPlayGame={hendlerPlayGame} />
-        </GamesContainer>
+        {/* <GamesContainer horizontal={true} showsHorizontalScrollIndicator={false} contentContainerStyle={styles.scrollView}>
+           
+        </GamesContainer> */}
+        <GameWithBot index={0} hendlerPlayGame={hendlerPlayGame}/>
+        <GameWithOpponent index={1} hendlerPlayGame={hendlerPlayGame}/>
+        <GameWithOpponentByTime index={2} hendlerPlayGame={hendlerPlayGame} />
       </MainContainer>
 
     </BackgroundWrapper>
@@ -36,6 +38,7 @@ const MainContainer = styled.View`
   flex: 1;
   align-items: center;
   justify-content: center;
+  flex-direction: row;
   width: 100%;
 `
 const GamesContainer = styled.ScrollView`

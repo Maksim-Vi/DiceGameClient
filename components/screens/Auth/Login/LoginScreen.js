@@ -1,5 +1,7 @@
 import React, { useRef } from 'react';
+import { Controller } from "react-hook-form";
 import styled from 'styled-components';
+import Text from '../../../common/Text/Text';
 
 const LoginScreen = (props) => {
 
@@ -9,9 +11,17 @@ const LoginScreen = (props) => {
     refPass.current.focus();
   }
 
+  const getErrPassword = () =>{
+    if(!props.errors.password ) return 
+
+    return props.errors.password.type === 'minLength'
+    ? <Text color={'red'}>this field should have more then 6 symbols.</Text>
+    : <Text color={'red'}>this field is required.</Text>
+  }
+
   return (
         <InputsContainer>
-          <Name placeholder='Name' 
+          {/* <Name placeholder='Name' 
                 placeholderTextColor='#838383' 
                 returnKeyType='next' 
                 value={props.inputData.name}
@@ -25,7 +35,39 @@ const LoginScreen = (props) => {
                     value={props.inputData.password}
                     onChangeText={(value)=> props.onChangeInputs('password',value)}
                     onSubmitEditing={props.hendlerLogin} 
-                    />
+                    /> */}
+
+          <Controller control={props.control} 
+                      rules={{ required: true }}
+                      name="name"
+                      render={({ field: { onChange, onBlur, value } }) => (
+                        <Name placeholder='Name' 
+                              placeholderTextColor='#838383' 
+                              returnKeyType='next' 
+                              value={value}
+                              onBlur={onBlur}
+                              onChangeText={onChange}
+                              onSubmitEditing={nextFieldFocus}/>
+                      )}
+          />
+          {props.errors.name && <Text color={'red'}>this field is required.</Text>}
+
+          <Controller control={props.control} 
+                      rules={{ required: true, minLength: 6 }}
+                      name="password"
+                      render={({ field: { onChange, onBlur, value } }) => (
+                        <Password ref={refPass}
+                                  placeholder='Password' 
+                                  placeholderTextColor='#838383' 
+                                  secureTextEntry={true}
+                                  value={value}
+                                  onBlur={onBlur}
+                                  onChangeText={onChange} 
+                        /> 
+                      )}
+          />
+          {getErrPassword()}
+
         </InputsContainer>
   )
 }

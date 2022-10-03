@@ -20,8 +20,10 @@ const internal = RewardedInterstitialAd.createForAdRequest(AdUnitID,{
 
 const CoinsTab = (props) => {
 
+    console.log('ANSWER', AdUnitID)
+
     const [loadInternal, setLadInternal] = useState(false)
-   
+    
     const loadReclam = () =>{
         const unsubscribeLoaded = internal.addAdEventListener(RewardedAdEventType.LOADED,()=>{
             setLadInternal(true)
@@ -42,6 +44,7 @@ const CoinsTab = (props) => {
         return () => {
             unsubscribeLoaded()
             unsubscribeClosed()
+            setLadInternal(false)
         }
     }
     

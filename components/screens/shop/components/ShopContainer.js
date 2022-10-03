@@ -29,6 +29,13 @@ const ShopContainer = (props) => {
         }
     }
 
+    React.useEffect(()=>{
+        return () =>{
+            setActiveTab('coins')
+        }
+    }, [])
+
+
     return (
         <StoreContainer>
             <TopPanelStores coins={props.user.coins} crystals={props.user.crystals} />

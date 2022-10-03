@@ -9,21 +9,25 @@ import { postLoginApi } from '../../protocol/API/API'
 import {Keyboard, Platform, TouchableWithoutFeedback} from 'react-native'
 import C_LOGIN from '../../protocol/messages/clients/C_LOGIN'
 import Divider from "../../common/Divider/Divider";
+import { useForm } from 'react-hook-form'
 
 const AuthScreen = () => {
 
   const navigation = useNavigation()
-  const [inputData, setInputChange] = useState({
-    name: 'Max',
-    password: 'qwerty'
-  })
+
+  const { control, handleSubmit, formState: { errors } } = useForm({
+    defaultValues: {
+      name: '',
+      password: ''
+    }
+  });
 
   const onChangeInputs = (name, event) =>{
     setInputChange({...inputData, [name]: event})
   }
 
-  const hendlerLogin = async () =>{
-    const data = await postLoginApi(inputData.name,inputData.password)
+  const hendlerLogin = async (dataForm) =>{
+    const data = await postLoginApi(dataForm.name,dataForm.password)
 
     if(data && data.success){
      navigation.navigate('LoadingProject')
@@ -41,9 +45,12 @@ const AuthScreen = () => {
       <BackgroundWrapper gackground={mainBg}>
         <TouchableWithoutFeedback style={{flex: 1}} onPress={Keyboard.dismiss} accessible={false}>
           <AuthContainer>
-            <LoginScreen hendlerLogin={hendlerLogin} onChangeInputs={onChangeInputs} inputData={inputData}/>
+            <LoginScreen hendlerLogin={hendlerLogin} 
+                         onChangeInputs={onChangeInputs}
+                         control={control} 
+                         errors={errors} />
             <ButtonContainer >
-              <LoginBtn onPress={hendlerLogin}><Text small heavy color='#fff' center>Login</Text></LoginBtn>
+              <LoginBtn onPress={handleSubmit(hendlerLogin)}><Text small heavy color='#fff' center>Login</Text></LoginBtn>
               <Divider text={'or'} padding={10} color={'black'}/>
               <RegisterBtn onPress={hendlerRegister}><Text small heavy color='#fff' center>Register</Text></RegisterBtn>
             </ButtonContainer>
