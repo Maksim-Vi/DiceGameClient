@@ -4,7 +4,10 @@ import styled from "styled-components";
 
 const ButtonWithText = (props) => {
     return (
-        <CollectBtn {...props} onPress={props.clickHandler}>
+        <CollectBtn {...props} 
+                    onPress={props.clickHandler} 
+                    style={{ borderBottomWidth: 3 }}
+                    activeOpacity={0.9}>
             <Text small heavy color='#fff' center>{props.text}</Text>
         </CollectBtn>
     )
@@ -19,7 +22,7 @@ const CollectBtn = styled.TouchableOpacity`
   ${(props)=>{
     return props.color 
             ? `background-color: ${props.color};` 
-            : 'background-color: rgba(20, 197, 55, 0.84);'
+            : 'background-color: #5eba7d;'
   }};
   border-radius: 10px;
   ${(props)=>{
@@ -27,9 +30,8 @@ const CollectBtn = styled.TouchableOpacity`
             ? `border: 1px solid ${props.borderColor};` 
             : 'border: 1px solid rgb(255, 157, 77);'
   }};
-  //padding: 5px 50px 5px 50px;
-  width: 33%;
-  height: 30px;
+  width: ${(props) =>  props.width ? props.width : '33%'};
+  height: ${(props) =>  props.height ? props.height : '30px'};
 `
 
 export default ButtonWithText;

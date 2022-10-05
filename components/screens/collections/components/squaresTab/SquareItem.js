@@ -6,7 +6,7 @@ import CollectButton from "../common/CollectButton";
 
 const SquareItem = ({squareItem,isActive, isCollected, setModalVisible}) => {
     return (
-        <SquareCard>
+        <SquareCard style={{ borderBottomWidth: 8 }}>
             <SquareImage source={getCollectionSquareImg(squareItem.sortIndex)}/>
             <Text center>{squareItem.name}</Text>
             <CollectButton item={squareItem}
@@ -21,7 +21,7 @@ const SquareCard = styled.View`
   display: flex;
   align-items: center;
   justify-content: space-around;
-  width: 40%;
+  width: 35%;
   height: 180px;
   border-radius: 20px;
   margin: 10px auto;

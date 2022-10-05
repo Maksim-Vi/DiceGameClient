@@ -6,7 +6,7 @@ import CollectButton from "../common/CollectButton";
 
 const DiceItem = ({diceItem, isActive, isCollected, setModalVisible}) => {
     return (
-        <DiceCard>
+        <DiceCard style={{ borderBottomWidth: 8 }}>
             <DiceImage source={getCollectionDiceImg(diceItem.sortIndex)}/>
             <Text center>{diceItem.name}</Text>
             <CollectButton item={diceItem}
@@ -21,7 +21,7 @@ const DiceCard = styled.View`
   display: flex;
   align-items: center;
   justify-content: space-around;
-  width: 40%;
+  width: 35%;
   height: 180px;
   border-radius: 20px;
   margin: 10px auto;

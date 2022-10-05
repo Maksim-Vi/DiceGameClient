@@ -3,20 +3,29 @@ import styled from "styled-components";
 import Text from "../../../Text/Text";
 import Experience from "../Top/Experience";
 import Avatar from "../../../Avatars/Avatar";
+import { useDispatch } from "react-redux";
+import { setAvatarPopup } from "../../../../redux/reducers/popups/PopupsReducer";
 
 const UserInfo = (props) =>{
-    const {avatarId, user, experience} = props.userData
+  
+  const {avatarId, user, experience} = props.userData
 
-    return (
-        <UserInfoContainer>
-            <Avatar avatarId={avatarId} />
-              
-            <AvatarIfoContainer>
-                <UserName madium heavy>{user ? user.username : ''}</UserName>
-                <Experience experience={experience}/>
-            </AvatarIfoContainer>
-        </UserInfoContainer>
-    )
+  const dispatch = useDispatch()
+
+  const hendelAvatar = () =>{
+    dispatch(setAvatarPopup({visible: true, data: null}))
+  }
+
+  return (
+      <UserInfoContainer>
+          <Avatar avatarId={avatarId} hendelAvatar={hendelAvatar}/>
+            
+          <AvatarIfoContainer>
+              <UserName madium heavy>{user ? user.username : ''}</UserName>
+              <Experience experience={experience}/>
+          </AvatarIfoContainer>
+      </UserInfoContainer>
+  )
 }
 
 const UserInfoContainer = styled.View`

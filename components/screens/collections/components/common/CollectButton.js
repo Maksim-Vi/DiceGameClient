@@ -40,11 +40,11 @@ const CollectButton = ({item,isActive,isCollected,setModalVisible}) => {
 
     const getButtonActiveOrSelect = () =>{
         if(isActive && isCollected){
-            return <SelectedBtn disabled>
+            return <SelectedBtn disabled style={{ borderBottomWidth: 3 }} activeOpacity={0.9}>
                 <Text small heavy color='#fff' center>Selected</Text>
             </SelectedBtn>
         } else if(!isActive && isCollected){
-            return <CollectBtn onPress={selectNewItem}>
+            return <CollectBtn onPress={selectNewItem} style={{ borderBottomWidth: 3 }} activeOpacity={0.9}>
                 <Text small heavy color='#fff' center>Select</Text>
             </CollectBtn>
         }
@@ -62,7 +62,7 @@ const CollectButton = ({item,isActive,isCollected,setModalVisible}) => {
         <React.Fragment>
             {isCollected
                 ? getButtonActiveOrSelect()
-                : <CollectBtn onPress={clickHandler}>
+                : <CollectBtn onPress={clickHandler} style={{ borderBottomWidth: 3 }} activeOpacity={0.9}>
                     {image && <PriceImage source={image}/>}
                     {price && <Text small heavy color='#fff' center>{price}</Text>}
                     {textBtn && <Text small heavy color='#fff' center>{textBtn}</Text>}

@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const ItemWrapper = ({children}) => {
     return (
-        <ItemContainer>
+        <ItemContainer style={{ borderBottomWidth: 5 }}>
             {children}
         </ItemContainer>
     );

@@ -4,7 +4,10 @@ import styled from "styled-components";
 
 const ButtonWithImage = (props) => {
     return (
-        <CollectBtn {...props} onPress={props.clickHandler}>
+        <CollectBtn {...props} 
+                    onPress={props.clickHandler}
+                    style={{ borderBottomWidth: 3 }}
+                    activeOpacity={0.9}>
             <PriceImage source={props.image}/>
             <Text small heavy color='#fff' center>{props.price}</Text>
         </CollectBtn>
@@ -24,7 +27,7 @@ const CollectBtn = styled.TouchableOpacity`
   ${(props)=>{
     return props.color 
             ? `background-color: ${props.color};` 
-            : 'background-color: rgba(20, 197, 55, 0.84);'
+            : 'background-color: #5eba7d;'
   }};
   border-radius: 10px;
   ${(props)=>{

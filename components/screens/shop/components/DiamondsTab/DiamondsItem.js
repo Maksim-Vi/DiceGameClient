@@ -17,7 +17,7 @@ const DiamondsItem = (props) => {
                 <Text blod small color={'#fff'} center>get <Text blod medium color={'rgb(255,157,77)'}>{props.diamonds}</Text> diamonds!</Text>
             </ItemContainer>
             
-            <Button onPress={clickHendler}>
+            <Button onPress={clickHendler} style={{ borderBottomWidth: 3 }} activeOpacity={0.9}>
                 <Text blod small color={'#fff'}>{props.price}$</Text>
             </Button>
         </ItemWrapper>

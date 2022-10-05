@@ -13,7 +13,7 @@ const FlashItemAdmod = (props) => {
                 <Text blod small color={'#fff'} center>get <Text blod medium color={'rgb(255,157,77)'}>3</Text> flash!</Text>
             </ItemContainer>
             
-            <AdmodButton {...props} onPress={props.admodHendler}>
+            <AdmodButton {...props} onPress={props.admodHendler} style={{ borderBottomWidth: 3 }} activeOpacity={0.9}>
                 <Text blod small color={'#fff'}>{props.loadInternal ? 'watch video' : 'waiting video'}</Text>
             </AdmodButton>
         </ItemWrapper>

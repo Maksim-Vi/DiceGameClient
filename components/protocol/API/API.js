@@ -1,8 +1,9 @@
 import {openServerConnection} from "../websocet";
 import { store } from "../../redux/redux-store";
-import { selectLoginUser, setLoginUser, setToken } from "../../redux/reducers/login/LoginReducer";
-import { getRefreshToken, useRefreshToken } from "../../utils/refreshTokenHook";
+import { setLoginUser, setToken } from "../../redux/reducers/login/LoginReducer";
+import { getRefreshToken } from "../../utils/refreshTokenHook";
 import { getFetchUrl } from "./urlApi";
+import { setCurrentUser } from "../../redux/reducers/players/PlayersReducer";
 
 export const postLoginApi = async (username, password) => {
     let data = { username: username, password: password }
@@ -86,6 +87,26 @@ export const getFlashBonus = async (username) =>{
     }
 
     return await getFetchUrl('addFlashToUserByUsername','POST', {username: username}, refreshToken, callback)
+}
+
+export const setNewAvatar = async (username, avatarId) =>{
+
+    const refreshToken = async (request, type, bodyData) =>{
+        if(request && type){
+            getRefreshToken()
+            getText()
+        }   
+    }
+
+    const callback = (json) =>{
+        if(json){
+            console.log('ANS', json.updateUser);
+            
+            store.dispatch(setCurrentUser(json.updateUser))
+        }
+    }
+
+    return await getFetchUrl('setNewAvatar','POST', {username: username, avatarId: avatarId}, refreshToken, callback)
 }
 
 export const getText = async () =>{

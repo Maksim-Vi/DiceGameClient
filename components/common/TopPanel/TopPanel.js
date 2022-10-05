@@ -32,7 +32,7 @@ const TopMain = (props) => {
                 crystals: props.user.crystals,
                 experience: props.user.experience,
                 flash: props.user.flash,
-                avatarId: null
+                avatarId: props.user.avatar
             })
         }
     },[props.user])
