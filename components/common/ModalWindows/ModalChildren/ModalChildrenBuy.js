@@ -132,7 +132,7 @@ const BuyContainer = styled.View`
   display: flex;
   align-items: center;
   background-color: white;
-  borderRadius: 10px;
+  border-radius: 10px;
   width: 100%;
   height: 40%;
 `

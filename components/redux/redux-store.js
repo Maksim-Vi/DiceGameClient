@@ -4,6 +4,7 @@ import LoginReducer from './reducers/login/LoginReducer';
 import PlayersReducer from './reducers/players/PlayersReducer';
 import WebsocketReducer from './reducers/Websocket/WebsocketReducer';
 import CollectionsReducer from "./reducers/collections/CollectionsReducer";
+import PopupsReducer from './reducers/popups/PopupsReducer';
 
 export const store = configureStore({
   reducer: {
@@ -13,6 +14,7 @@ export const store = configureStore({
     players: PlayersReducer,
     games: GameReducer,
     collections: CollectionsReducer,
+    popups: PopupsReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
 });

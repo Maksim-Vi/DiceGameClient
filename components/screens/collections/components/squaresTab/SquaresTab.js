@@ -2,8 +2,8 @@ import React from 'react';
 import styled from "styled-components";
 import {StyleSheet} from "react-native";
 import SquareItem from "./SquareItem";
-import ModalWrapper from "../../../../common/ModalWondows/ModalWrapper";
-import ModalChildrenBuy from "../../../../common/ModalWondows/ModalChildren/ModalChildrenBuy";
+import ModalWrapper from "../../../../common/ModalWindows/ModalWrapper";
+import ModalChildrenBuy from "../../../../common/ModalWindows/ModalChildren/ModalChildrenBuy";
 
 const SquaresTab = (props) => {
 

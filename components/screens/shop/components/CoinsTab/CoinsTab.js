@@ -20,8 +20,6 @@ const internal = RewardedInterstitialAd.createForAdRequest(AdUnitID,{
 
 const CoinsTab = (props) => {
 
-    console.log('ANSWER', AdUnitID)
-
     const [loadInternal, setLadInternal] = useState(false)
     
     const loadReclam = () =>{

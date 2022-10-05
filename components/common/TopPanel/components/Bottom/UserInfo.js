@@ -6,9 +6,11 @@ import Avatar from "../../../Avatars/Avatar";
 
 const UserInfo = (props) =>{
     const {avatarId, user, experience} = props.userData
+
     return (
         <UserInfoContainer>
             <Avatar avatarId={avatarId} />
+              
             <AvatarIfoContainer>
                 <UserName madium heavy>{user ? user.username : ''}</UserName>
                 <Experience experience={experience}/>
@@ -35,6 +37,10 @@ const AvatarIfoContainer = styled.View`
   width: 50%;
   margin-left: 5px;
 `
+const AvatarBtn = styled.TouchableWithoutFeedback`
+
+`
+
 const UserName = styled(Text)`
 `
 
