@@ -3,9 +3,10 @@ import styled from "styled-components";
 import Modal from "react-native-modal";
 import DefaultBG from './ModalBackgrounds/DefaultBG';
 import Close from '../Buttons/Close/Close';
+import { StatusBar } from 'react-native';
 
 const ModalWrapper = (props) => {
-
+   
     const {modalBG, swipe, modalVisible,setModalVisible,children} = props
 
     const renderModalBG = () =>{
@@ -23,6 +24,8 @@ const ModalWrapper = (props) => {
                animationInTiming={300}
                animationOut={'slideOutDown'}
                animationOutTiming={300}
+               coverScreen={true}
+               statusBarTranslucent={true}
                onSwipeComplete={() => setModalVisible(false)}
                swipeDirection={swipe ? swipe : null}
                isVisible={modalVisible}>

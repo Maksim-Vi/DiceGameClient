@@ -22,10 +22,12 @@ export default class S_LOGIN_SUCCESS {
         store.dispatch(setCurrentUser(this.data.user))
         store.dispatch(setActiveItems(this.data.user.activeItems || {dice: 13, square: 14}))
         store.dispatch(addAvailableCollectionItems(this.data.user.availableCollectionItems || {dice: [13], square: [14],gameBackgrounds:[1]}))
-       
+        
+        store.setAuth()
         setTimeout(()=>{
-            store.setAuth()
-            window.navigation.navigate('MainScreen')
+            if(window.navigation){
+                window.navigation.navigate('MainScreen')
+            }
         },1500)
     }
 

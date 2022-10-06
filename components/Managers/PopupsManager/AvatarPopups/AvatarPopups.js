@@ -1,10 +1,8 @@
-import { produceWithPatches } from 'immer'
 import React from 'react'
-import { StyleSheet } from 'react-native'
+import { StyleSheet, useWindowDimensions } from 'react-native'
 import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import images from '../../../../assets/dynamicLoadImage'
-import Avatar from '../../../common/Avatars/Avatar'
 import ButtonWithText from '../../../common/Buttons/ButtonWithText'
 import ModalWrapper from '../../../common/ModalWindows/ModalWrapper'
 import Text from '../../../common/Text/Text'
@@ -12,7 +10,8 @@ import { setNewAvatar } from '../../../protocol/API/API'
 import { setAvatarPopup } from '../../../redux/reducers/popups/PopupsReducer'
 
 const AvatarPopups = (props) =>{
-
+ 
+    const { height, width } = useWindowDimensions();
     const dispatch = useDispatch()
 
     const closeModal = () =>{
@@ -37,12 +36,18 @@ const AvatarPopups = (props) =>{
              <Scroll showsVerticalScrollIndicator={false} contentContainerStyle={styles.scroll}>
                 <AvatarsGrid>
                     {images.avatars.map((ava,index)=>{
-                        return <AvaCard style={{ borderBottomWidth: 8 }}>
+                        
+                        const isActive = +index === +props.user.avatar || (+props.user.avatar === null && index === 0)
+                        
+                        return <AvaCard key={index} style={{ borderBottomWidth: 8 }}>
                             <Text center>ava {index}</Text>
                             <Ava>
                                 <AvatarImg source={ava} resizeMode={ 'stretch'} />
                             </Ava>
-                            <ButtonWithText width={'80%'} text={'select'} clickHandler={() => selectAvatar(index)}/>
+                            <ButtonWithText width={'80%'} 
+                                            disabled={isActive} 
+                                            text={'select'} 
+                                            clickHandler={() => selectAvatar(index)}/>
                         </AvaCard>
                     })}
                 </AvatarsGrid>
@@ -51,7 +56,7 @@ const AvatarPopups = (props) =>{
         </AvatarContainer>
     }
 
-    return <ModalWrapper modalBG={'default'} width={'100%'} height={'70%'} modalVisible={true} setModalVisible={closeModal}>
+    return <ModalWrapper modalBG={'default'} width={width - 50} height={height / 1.5} modalVisible={true} setModalVisible={closeModal}>
            {renderAvatarPopup()}
     </ModalWrapper>
 }

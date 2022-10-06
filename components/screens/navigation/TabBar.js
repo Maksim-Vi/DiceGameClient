@@ -3,6 +3,7 @@ import mainIcon from '../../../assets/nav/main.png'
 import shopIcon from '../../../assets/nav/shop.png'
 import collectionsIcon from '../../../assets/nav/collections.png'
 import Text from "../../common/Text/Text";
+import { NativeModules, Platform } from "react-native";
 
 export default TabBar = ({ state, navigation }) => {
   const onPress = (route, isFocused) => {
@@ -51,17 +52,37 @@ export default TabBar = ({ state, navigation }) => {
 };
 
 const TabsContainer = styled.View`
-  height: 50px;
   background-color: rgb(1,1,70);
   flex-direction: row;
   align-items: flex-end;
   justify-content: space-around;
+  ${()=>{
+    if(Platform.OS === 'ios' && NativeModules.DeviceInfo.isIPhoneX_deprecated){
+      return `
+        height: 70px;
+      `
+    } else {
+      return `
+        height: 50px;
+      `
+    }
+  }}
 `;
 
 const TabIconContainer = styled.TouchableOpacity`
   align-items: center;
   text-align: center;
-  margin-bottom: 10px;
+  ${()=>{
+    if(Platform.OS === 'ios' && NativeModules.DeviceInfo.isIPhoneX_deprecated){
+      return `
+        margin-bottom: 30px;
+      `
+    } else {
+      return `
+        margin-bottom: 10px;
+      `
+    }
+  }}
 `;
 
 const NavImage = styled.Image`

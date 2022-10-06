@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const DefaultBG = ({children}, props) =>{
+const DefaultBG = (props) =>{
     return <Container {...props}>
-        {children}
+        {props.children}
     </Container>
 }
 
@@ -13,8 +13,8 @@ const Container = styled.View`
   background-color: #f6dcb9;
   border: 5px solid #b5491d;
   border-radius: 20px;
-  width: ${(props) =>  props.width ? props.width : '100%'};
-  height: ${(props) =>  props.height ? props.height : '50%'};
+  width: ${(props) =>  props.width ? `${Math.floor(props.width)}px`  : '100%'};
+  height: ${(props) =>  props.height ? `${Math.floor(props.height)}px` : '50%'};
 `
 
 export default DefaultBG

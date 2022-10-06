@@ -8,7 +8,6 @@ import {StatusBar,StyleSheet} from "react-native";
 import GameWithBot from "./components/GameWithBot";
 import GameWithOpponent from "./components/GameWithOpponent";
 import GameWithOpponentByTime from "./components/GameWithOpponentByTime";
-import Text from '../../common/Text/Text'
 
 const MainScreen = () => {
 

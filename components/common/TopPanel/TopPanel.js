@@ -66,7 +66,7 @@ const TopPanel = styled.View`
   ${()=>{
     if(Platform.OS === 'ios' && NativeModules.DeviceInfo.isIPhoneX_deprecated){
       return `
-        margin-top: 35px;
+        margin-top: 50px;
       `
     }
   }}

@@ -3,14 +3,22 @@ import Text from "../Text/Text";
 import styled from "styled-components";
 
 const ButtonWithText = (props) => {
-    return (
-        <CollectBtn {...props} 
-                    onPress={props.clickHandler} 
-                    style={{ borderBottomWidth: 3 }}
-                    activeOpacity={0.9}>
-            <Text small heavy color='#fff' center>{props.text}</Text>
-        </CollectBtn>
-    )
+
+  const btnClickHendler = () =>{
+    if(props.disabled) return 
+
+    props.clickHandler()
+  }
+  
+  return (
+      <CollectBtn {...props} 
+                  disabled={props.disabled || false}
+                  onPress={btnClickHendler} 
+                  style={{ borderBottomWidth: 3 }}
+                  activeOpacity={0.9}>
+          <Text small heavy color='#fff' center>{props.text}</Text>
+      </CollectBtn>
+  )
 }
 
 const CollectBtn = styled.TouchableOpacity`
@@ -20,6 +28,13 @@ const CollectBtn = styled.TouchableOpacity`
   flex-direction: row;
   margin: 5px;
   ${(props)=>{
+    
+    if(props.disabled){
+        return `
+            background-color: gray;
+        `
+    }
+
     return props.color 
             ? `background-color: ${props.color};` 
             : 'background-color: #5eba7d;'

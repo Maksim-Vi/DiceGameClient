@@ -51,8 +51,8 @@ const UserProvider = ({ children }) => {
           const dataLogin = await postLoginApi(data.data.user.username,data.data.user.password)
 
           if(dataLogin && dataLogin.success){
-              login(dataLogin)
-              new C_LOGIN(dataLogin.user.username,dataLogin.user.password)
+              //login(dataLogin)
+              //new C_LOGIN(dataLogin.user.username,dataLogin.user.password)
           } else {
               logout()
               alert('Login is failed check your name and password')

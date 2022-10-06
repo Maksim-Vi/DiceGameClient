@@ -4,10 +4,12 @@ import styled from 'styled-components'
 import { selectMyUser } from '../../redux/reducers/players/PlayersReducer'
 import { selectAvatarPopup } from '../../redux/reducers/popups/PopupsReducer'
 import AvatarPopups from './AvatarPopups/AvatarPopups'
+import {StatusBar} from "react-native";
 
 const PopupsManager = (props) =>{
 
   return <PopupConteiner>
+    <StatusBar hidden={true} style="light"/>
     {props.avatarPopup.visible && <AvatarPopups user={props.user}/>}
   </PopupConteiner>
 }
