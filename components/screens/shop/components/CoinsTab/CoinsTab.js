@@ -23,18 +23,20 @@ const CoinsTab = (props) => {
     const [loadInternal, setLadInternal] = useState(false)
     
     const loadReclam = () =>{
-        const unsubscribeLoaded = internal.addAdEventListener(RewardedAdEventType.LOADED,()=>{
+        const unsubscribeLoaded = internal.addAdEventListener(RewardedAdEventType.LOADED,(data)=>{
             setLadInternal(true)
         })
-        const unsubscribeClosed = internal.addAdEventListener(RewardedAdEventType.EARNED_REWARD, async ()=>{
+        const unsubscribeClosed = internal.addAdEventListener(RewardedAdEventType.EARNED_REWARD, async (data)=>{
             const getBonusCoins = await getCoinsBonus(props.user.username)
 
             if(getBonusCoins && getBonusCoins.success){
                 store.dispatch(updateCurrentUserCoins(getBonusCoins.updatedCoins))
+                setLadInternal(false)
             }
             
-            internal.load()
-             
+            setTimeout(()=>{
+                internal.load()
+            },5000)
         })
 
         internal.load()
@@ -42,19 +44,28 @@ const CoinsTab = (props) => {
         return () => {
             unsubscribeLoaded()
             unsubscribeClosed()
-            setLadInternal(false)
         }
     }
     
     const admodHendler = () =>{
-      if(loadInternal){
+      if(loadInternal && internal.loaded){
         internal.show()
       }
     }
 
     useEffect(() => {
+        if(internal.loaded){
+            setLadInternal(true)
+        }
+    }, [internal.loaded]);
+
+    useEffect(() => {
         const unsubscribeInternalEvents = loadReclam()
-        
+
+        if(internal.loaded){
+            setLadInternal(true)
+        }
+
         return unsubscribeInternalEvents
     }, []);
 

@@ -8,7 +8,7 @@ import AvatarPopups from './AvatarPopups/AvatarPopups'
 const PopupsManager = (props) =>{
 
   return <PopupConteiner>
-      {props.avatarPopup.visible && <AvatarPopups user={props.user}/>}
+    {props.avatarPopup.visible && <AvatarPopups user={props.user}/>}
   </PopupConteiner>
 }
 

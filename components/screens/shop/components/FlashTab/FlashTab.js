@@ -31,10 +31,10 @@ const FlashTab = (props) => {
 
           if(getBonus && getBonus.success){
             store.dispatch(updateCurrentUserFlash(getBonus.updatedFlash))
+            setTimeout(()=>{
+              internal.load()
+            },5000)
           }
-          
-          internal.load()
-           
       })
 
       internal.load()
@@ -46,10 +46,15 @@ const FlashTab = (props) => {
   }
   
   const admodHendler = () =>{
-    if(loadInternal){
+    if(loadInternal && internal.loaded){
       internal.show()
     }
   }
+  useEffect(() => {
+    if(internal.loaded){
+        setLadInternal(true)
+    }
+  }, [internal.loaded]);
 
   useEffect(() => {
       const unsubscribeInternalEvents = loadReclam()

@@ -99,9 +99,7 @@ export const setNewAvatar = async (username, avatarId) =>{
     }
 
     const callback = (json) =>{
-        if(json){
-            console.log('ANS', json.updateUser);
-            
+        if(json){ 
             store.dispatch(setCurrentUser(json.updateUser))
         }
     }
