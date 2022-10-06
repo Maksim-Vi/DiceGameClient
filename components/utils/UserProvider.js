@@ -1,5 +1,4 @@
 import { createContext, useCallback, useEffect, useState } from "react";
-import { AsyncStorage } from "react-native";
 import C_LOGIN from "../protocol/messages/clients/C_LOGIN";
 import { postLoginApi } from "../protocol/API/API";
 import { setCurrentUser } from "../redux/reducers/players/PlayersReducer";
@@ -22,13 +21,13 @@ const UserProvider = ({ children }) => {
         auth: false 
       });
      
-      AsyncStorage.setItem(storageName, JSON.stringify({
-          userID: data.user.id,
-          username: data.user.username,
-          password: data.user.password,
-          token: data.token,
-          data: data
-      }))
+      // AsyncStorage.setItem(storageName, JSON.stringify({
+      //     userID: data.user.id,
+      //     username: data.user.username,
+      //     password: data.user.password,
+      //     token: data.token,
+      //     data: data
+      // }))
       store.dispatch(setCurrentUser(data.user))
     },[])
     
@@ -38,7 +37,7 @@ const UserProvider = ({ children }) => {
     
     const logout = useCallback(() => {
         setUser({token: '', id: '', username: '', password: '', data: null, auth: false });
-        AsyncStorage.removeItem(storageName)
+        // AsyncStorage.removeItem(storageName)
     })
 
     store.logout = logout
@@ -46,7 +45,8 @@ const UserProvider = ({ children }) => {
     store.login = login
 
     const getDataFromStorage = async () => {
-      const data = JSON.parse(await AsyncStorage.getItem(storageName))
+      // const data = JSON.parse(await AsyncStorage.getItem(storageName))
+      const data = undefined
       if(data && data.data.token && data.data.user){
           const dataLogin = await postLoginApi(data.data.user.username,data.data.user.password)
 

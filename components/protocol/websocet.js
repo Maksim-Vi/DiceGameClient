@@ -1,4 +1,4 @@
-import { AsyncStorage, Platform } from "react-native";
+import { Platform } from "react-native";
 import { setLoaded } from "../redux/reducers/Websocket/WebsocketReducer";
 import { store } from "../redux/redux-store";
 import { hendleMessage } from "./MessageManager";
@@ -51,10 +51,10 @@ function openWSHandler() {
 function errorWSHandler(error) {
 
     const close = async () =>{
-        const data = JSON.parse(await AsyncStorage.getItem('UserData'))
-        if(data){
-            AsyncStorage.removeItem('UserData')
-        }
+        // const data = JSON.parse(await AsyncStorage.getItem('UserData'))
+        // if(data){
+        //     AsyncStorage.removeItem('UserData')
+        // }
         store.logout()
     }
 

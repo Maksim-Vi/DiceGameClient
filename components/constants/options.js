@@ -1,6 +1,7 @@
 export const screenOptions = {
     headerShown: false,
-    presentation: 'transparentModal'
+    presentation: 'transparentModal',
+    gestureEnabled: false
 }
 
 export const tabsScreenOptions = {
