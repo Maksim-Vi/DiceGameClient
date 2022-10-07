@@ -6,8 +6,9 @@ export default TextStyle = ({...props}) => {
 }
 
 const Text = styled.Text`
-    color: ${props => props.color ? props.color : '#fff'}
-
+    color: ${props => props.color ? props.color : '#fff'};
+    font-family: 'Dilo-World';
+    
     ${({title,large,madium,small})=>{
         switch (true) {
             case title: return 'font-size: 32px'

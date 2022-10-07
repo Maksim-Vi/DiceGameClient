@@ -62,7 +62,7 @@ const LoadingProject = () => {
 	return (
 		<BackgroundWrapper gackground={mainBg}>
 			<LoadingContainer>
-				<Text title heavy color={'#fff'} center>Knocky Dice</Text>
+				<Text title heavy color={'#fff'} style={{ fontFamily: 'Dilo-World' }}  center>Knocky Dice</Text>
 				<View style={styles.container}>
 					<View style={[styles.groupColumn, {
 						transform: [{ rotateZ: '45deg' }],

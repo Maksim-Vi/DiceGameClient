@@ -6,8 +6,13 @@ import { NavigationContainer, useNavigation, useNavigationContainerRef } from '@
 import React from 'react';
 import styled from 'styled-components';
 import PopupsManager from './components/Managers/PopupsManager/PopupsManager';
+import { useFonts } from 'expo-font';
 
 export default function App() {
+
+  const [fontsLoaded] = useFonts({
+    'Dilo-World': require('./assets/fonts/DiloWorld.ttf'),
+  });
 
   window.navigation = null
   const navigationRef = useNavigationContainerRef();
@@ -16,6 +21,8 @@ export default function App() {
       window.navigation = navigationRef.current
   }, [])
 
+  if (!fontsLoaded) return null;
+  
   return  (
     <Provider store={store}>
       <UserProvider>

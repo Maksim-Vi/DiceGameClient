@@ -18,7 +18,10 @@ const UserInfo = (props) =>{
 
   return (
       <UserInfoContainer>
-          <Avatar avatarId={avatarId} hendelAvatar={hendelAvatar}/>
+          <AvatarContainer>
+            <Avatar width={50} height={50} avatarId={avatarId} hendelAvatar={hendelAvatar}/>
+          </AvatarContainer>
+          
             
           <AvatarIfoContainer>
               <UserName madium heavy>{user ? user.username : ''}</UserName>
@@ -46,8 +49,9 @@ const AvatarIfoContainer = styled.View`
   width: 50%;
   margin-left: 5px;
 `
-const AvatarBtn = styled.TouchableWithoutFeedback`
-
+const AvatarContainer = styled.View`
+  width: 50px;
+  height: 50px;
 `
 
 const UserName = styled(Text)`

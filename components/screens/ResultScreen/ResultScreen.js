@@ -8,6 +8,8 @@ import {selectCurrentUserId} from "../../redux/reducers/players/PlayersReducer";
 import mainBg from "../../../assets/bg/main_bg.jpg";
 import BackgroundWrapper from "../../common/BackgroundWrapper/BackgroundWrapper";
 import {store} from "../../redux/redux-store";
+import Winner from "./components/Winner";
+import Loser from "./components/Loser";
 
 const ResultScreen = (props) => {
 
@@ -19,47 +21,11 @@ const ResultScreen = (props) => {
     }
 
     const getWinner = (winner) =>{
-       if(!winner) return null
-
-       return (
-           <Winner>
-               <Text>
-                   <Text title heavy color={'#ff9d4d'}> {winner.player.username}</Text>
-                   Place №1
-               </Text>
-
-               <ItemsWinContainer>
-                   <Text medium heavy color={'#fff'}>coins: {winner.items.coins}</Text>
-                   <Text medium heavy color={'#fff'}>crystals: {winner.items.crystals}</Text>
-               </ItemsWinContainer>
-
-               <Text medium heavy color={'#ff9d4d'}>
-                   Combinations: <Text title heavy color={'#000'}> {winner.items.scores}</Text>
-               </Text>
-           </Winner>
-       )
+        return <Winner winner={winner}/>
     }
 
     const getLoser = (loser) => {
-        if(!loser) return null
-
-        return (
-            <Loser>
-                <Text>
-                    <Text large heavy color={'black'}>{loser.player.username}</Text>
-                    Place №2
-                </Text>
-
-                <ItemsWinContainer>
-                    <Text medium heavy color={'#fff'}>coins: {loser.items.coins}</Text>
-                    <Text medium heavy color={'#fff'}>crystals: {loser.items.crystals}</Text>
-                </ItemsWinContainer>
-
-                <Text medium heavy color={'#fff'}>
-                    Combinations: <Text title heavy color={'#000'}> {loser.items.scores}</Text>
-                </Text>
-            </Loser>
-        )
+        return <Loser loser={loser}/>
     }
 
     const renderResult = () =>{
@@ -76,6 +42,10 @@ const ResultScreen = (props) => {
 
         return (
             <Result>
+                <TitleContainer style={{ borderBottomWidth: 5 }}>
+                    <TitleText title heavy color={'#fff'}>{Winner ? 'You Win' : 'You Lose'}</TitleText>
+                </TitleContainer>
+
                 {getWinner(Winner)}
                 {getLoser(Loser)}
             </Result>
@@ -86,7 +56,7 @@ const ResultScreen = (props) => {
         <BackgroundWrapper gackground={mainBg}>
             <ResultContainer>
                 {renderResult()}
-                <PlayButton onPress={hendlerCloseResult}><Text large heavy color={'#fff'}>Continue</Text></PlayButton>
+                <PlayButton onPress={hendlerCloseResult} style={{ borderBottomWidth: 5 }}><Text large heavy color={'#fff'}>Continue</Text></PlayButton>
             </ResultContainer>
         </BackgroundWrapper>
 
@@ -99,28 +69,30 @@ const ResultContainer = styled.View`
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
+    width: 100%;
 `
 
+const TitleContainer = styled.View`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 60%;
+    height: 60px;
+    margin-bottom: 100px;
+    border-radius: 15px;
+    background-color: #e63349;
+    border: 2px solid #a61429;
+`
+
+const TitleText = styled(Text)`
+    text-shadow: 4px 4px 6px rgba(66, 68, 90, 1);
+`
 const Result = styled.View`
   align-items: center;
   flex-direction: column;
+  width: 100%;
 `
-
-const ItemsWinContainer = styled.View`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  width: 70%;
-`
-
-const Winner = styled.View`
-    align-items: center;
-`
-const Loser = styled.View`
-    align-items: center;
-    margin-top: 20px;
-`
-
 const PlayButton = styled.TouchableOpacity`
   background-color: #ff9d4d;
   border-radius: 10px;

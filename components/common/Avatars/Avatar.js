@@ -4,10 +4,16 @@ import styled from "styled-components";
 
 const Avatar = (props) => {
 
+  const onHenderAvatar = () =>{
+    if(props.hendelAvatar){
+      props.hendelAvatar()
+    }
+  }
+
   return (
-    <UserInfoBtn onPress={props.hendelAvatar}>
-      <AvatarContainer>
-          <AvatarImg source={getAvatarById(props.avatarId)} resizeMode={ 'stretch'} />
+    <UserInfoBtn onPress={onHenderAvatar}>
+      <AvatarContainer {...props}>
+          <AvatarImg source={getAvatarById(+props.avatarId)} resizeMode={ 'stretch'} />
       </AvatarContainer>
     </UserInfoBtn>
   )
@@ -17,7 +23,8 @@ const Avatar = (props) => {
 const AvatarContainer = styled.View`
   border: 2px solid rgba(255, 255, 255, 0.7);
   border-radius: 10px;
-  width: 45%;
+  ${props=>props.width ? `${props.width}px` : '50px'}
+  ${props=>props.height ? `${props.height}px` : '50px'}
 `
 const AvatarImg = styled.Image`
   width: 100%;
