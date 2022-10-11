@@ -42,12 +42,6 @@ const BoardItem = (props) => {
     }
   }
 
-  // return (
-  //   <ItemContainer {...props} width={width} onPress={hendlerClick} enabled={true} activeOpacity={.8}>
-  //     <Text small blod>{props.item > 0 ? props.item : ''}</Text>
-  //   </ItemContainer>
-  // )
-
   return (
       <ItemContainer {...props} width={width} onPress={hendlerClick} enabled={true} activeOpacity={.8}>
         <SquaresImage  style={getSelectedSquares()} source={getSquare()} resizeMode={'stretch'}/>
@@ -58,32 +52,6 @@ const BoardItem = (props) => {
   )
 }
 
-// const ItemContainer = styled.TouchableOpacity`
-//   flex-grow: 1;
-//   width: 22%;
-//   height: 50px;
-//   align-items: center;
-//   justify-content: center;
-//   border-radius: 10px;
-//   border: ${props => props.item > 0 ? '1px solid #dbdbdb' : '1px solid #dbdbdb96'} ;
-//
-//   ${props =>{
-//     if(props.item > 0){
-//         if(props.winPoints){
-//           if(props.item === +props.winPoints.number && +props.winPoints.count === 2){
-//             return 'background-color: #60ac31'
-//           } else if(props.item === +props.winPoints.number && +props.winPoints.count === 3){
-//             return 'background-color: #4b0082'
-//           }
-//         }
-//         return 'background-color: #deb887'
-//     } else {
-//       return 'background-color: #deb88745'
-//     }
-//   }
-//   };
-//   margin: 0px 10px 10px 10px;
-// `
 const ItemContainer = styled.TouchableOpacity`
   position: relative;
   flex-grow: 1;
@@ -101,21 +69,6 @@ const SquaresImage = styled.Image`
   align-items: center;
   justify-content: center;
   margin: 0px 10px 10px 10px;
-  
-  ${props =>{
-    if(props.item > 0){
-        if(props.winPoints){
-          if(props.item === +props.winPoints.number && +props.winPoints.count === 2){
-            return `border: 2px solid #60ac31; border-radius: 10px;`
-          } else if(props.item === +props.winPoints.number && +props.winPoints.count === 3){
-            return 'border: 2px solid #4b0082; border-radius: 10px;'
-          }
-        }
-        return 'border: 2px solid #deb887; border-radius: 10px;'
-    } else {
-      return 'border: 2px solid #deb88745; border-radius: 10px;'
-    }
-  }};
 `
 
 const DiceImage = styled.Image`

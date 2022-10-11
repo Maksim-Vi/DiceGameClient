@@ -21,7 +21,7 @@ const SquareCard = styled.View`
   display: flex;
   align-items: center;
   justify-content: space-around;
-  width: 35%;
+  width: 40%;
   height: 180px;
   border-radius: 20px;
   margin: 10px auto;

@@ -8,7 +8,7 @@
     "icon": "./assets/loadGame/icon-game.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/loadGame/load-img-game.jpeg",
+      "image": "./assets/loadGame/load-img-game.png",
       "resizeMode": "cover",
       "backgroundColor": "#ffffff",
       "fontSize": "18px"

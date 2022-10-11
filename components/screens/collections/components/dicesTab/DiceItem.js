@@ -3,26 +3,30 @@ import Text from "../../../../common/Text/Text";
 import styled from "styled-components";
 import {getCollectionDiceImg} from "../../../../utils/utils";
 import CollectButton from "../common/CollectButton";
+import { useWindowDimensions } from 'react-native';
 
 const DiceItem = ({diceItem, isActive, isCollected, setModalVisible}) => {
-    return (
-        <DiceCard style={{ borderBottomWidth: 8 }}>
-            <DiceImage source={getCollectionDiceImg(diceItem.sortIndex)}/>
-            <Text center>{diceItem.name}</Text>
-            <CollectButton item={diceItem}
-                           setModalVisible={setModalVisible}
-                           isActive={isActive}
-                           isCollected={isCollected}/>
-        </DiceCard>
-    );
+
+  const {width,height} = useWindowDimensions()
+
+  return (
+      <DiceCard width={width} height={height} style={{ borderBottomWidth: 8 }}>
+          <DiceImage source={getCollectionDiceImg(diceItem.sortIndex)}/>
+          <Text center>{diceItem.name}</Text>
+          <CollectButton item={diceItem}
+                          setModalVisible={setModalVisible}
+                          isActive={isActive}
+                          isCollected={isCollected}/>
+      </DiceCard>
+  );
 }
 
 const DiceCard = styled.View`
   display: flex;
   align-items: center;
   justify-content: space-around;
-  width: 35%;
-  height: 180px;
+  width: 40%;
+  height: 200px;
   border-radius: 20px;
   margin: 10px auto;
   background-color: rgba(220, 220, 220, 0.73);

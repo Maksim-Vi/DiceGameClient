@@ -2,15 +2,18 @@ import React from 'react';
 import gameIcon from "../../../../assets/dice/game_1V1.png";
 import styled from "styled-components";
 import Text from "../../../common/Text/Text";
+import { useWindowDimensions } from 'react-native';
 
 const GameWithBot = (props) => {
+
+  const {width,height} = useWindowDimensions()
 
   const hendelClick = () =>{
       props.hendlerPlayGame(1)
   }
 
   return (
-      <BotContainer onPress={hendelClick} style={{ borderBottomWidth: 8 }}>
+      <BotContainer width={width} height={height} onPress={hendelClick} style={{ borderBottomWidth: 8 }}>
         <TextCont small heavy color={'#ff9d4d'} center>tap to play</TextCont>
         <GameImage source={gameIcon} resizeMode={ 'stretch'}/>
         <TextCont madium heavy color={'#ff9d4d'} center>Fight&Bot</TextCont>
@@ -22,7 +25,7 @@ const BotContainer = styled.TouchableOpacity`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 130px;
+  width: ${props=> `${props.width ? (props.width / 3) - 10 : 130}px`};
   height: 180px;
   border-radius: 20px;
   margin: 10px auto;
