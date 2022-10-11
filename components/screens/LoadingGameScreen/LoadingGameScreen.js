@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import styled from 'styled-components';
 import ButtonBack from '../../common/Buttons/Back/ButtonBack';
+import { setTimingAnimated } from '../../utils/Animation';
 
 const ObjectAnimated = ({ value, opacity, y }) => (
 	<Animated.View
@@ -29,14 +30,6 @@ const ObjectAnimated = ({ value, opacity, y }) => (
 const LoadingGameScreen = () => {
 
 	const animatedValue = React.useRef(new Animated.Value(0)).current;
-
-	const setTimingAnimated = (originalValue, newValue, duration) => {
-		return Animated.timing(originalValue, {
-			toValue: newValue,
-			duration,
-			useNativeDriver: false,
-		});
-	}
 
 	const animate = () => {
 		Animated.sequence([

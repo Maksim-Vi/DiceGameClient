@@ -4,10 +4,19 @@ import { createStackNavigator } from "@react-navigation/stack";
 import AuthScreen from '../Auth/AuthScreen';
 import RegisterScreen from '../Auth/Register/RegisterScreen';
 import LoadingProject from "../LoadingProject/LoadingProject";
+import { useNavigation } from '@react-navigation/native';
 
 const AuthStack = createStackNavigator();
 
 const AuthNavigation = () => {
+
+  const navigation = useNavigation()
+
+  React.useEffect(()=>{
+    window.navigation = navigation
+    navigationAction = navigation
+  }, [navigation])
+
   return (
     <AuthStack.Navigator screenOptions={screenOptions} >
         <AuthStack.Screen name="AuthScreen" component={AuthScreen} />

@@ -3,13 +3,46 @@ import styled from 'styled-components'
 import Text from '../../../common/Text/Text'
 import place from '../../../../assets/result/place_2.png'
 import Avatar from '../../../common/Avatars/Avatar'
+import { setTimingAnimated } from '../../../utils/Animation'
+import { Animated, Easing } from 'react-native'
 
 const Loser = ({loser}) => {
+
+    const animatedValue = React.useRef(new Animated.Value(0)).current;
+   
+    const animateWinner = () => {
+		Animated.sequence([
+            Animated.delay(1500),
+			setTimingAnimated(animatedValue, 1.1, 500, Easing.ease),
+			setTimingAnimated(animatedValue, 1, 400, Easing.ease),
+            Animated.delay(500),
+            setTimingAnimated(animatedValue, 0.9, 700, Easing.ease)
+		]).start();
+	}
+   
+    React.useEffect(()=>{
+        animateWinner()
+    },[])
+
    
     if(!loser) return null
 
     return (
-        <LoserContainer style={{ borderBottomWidth: 5 }}>
+        <LoserContainer style={{ 
+            borderBottomWidth: 5,
+            opacity: animatedValue.interpolate({
+                inputRange: [0, 1],
+                outputRange: [0, 1],
+            }),
+            transform: [
+                {
+                    scale: animatedValue.interpolate({
+                        inputRange: [0, 1],
+                        outputRange: [0, 1]
+                    })
+                }
+            ]
+        }}>
             <PlaceContainer>
                 <Place source={place} resizeMode={ 'stretch'}/>
                 <Avatar width={50} height={50} avatarId={loser.player.avatar}/>
@@ -32,7 +65,7 @@ const Loser = ({loser}) => {
     )
 }
 
-const LoserContainer = styled.View`
+const LoserContainer = styled(Animated.View)`
     display: flex;
     flex-direction: row;
     align-items: center;

@@ -30,3 +30,48 @@ export const getCollectionSquareImg = (id) => {
    return diceUrl
 }
 
+export const getResultScreenData = () =>{
+    return  {
+        gameId: 13234241,
+        players: [
+        {id: 6, username: 'Max', avatar: 3, side: 0, activeItems: 0, inGame: true},
+        {id: 66, username: 'Tetris', avatar: 5, side: 1, activeItems: 0, inGame: true}
+        ],
+        userResultItems:{
+            scores: 30,
+            coins: 3,
+            crystals: 1,
+        },
+        opponentResultItems:{
+        scores: 50,
+        coins: 0,
+        crystals: 0,
+        },
+        userWin: false,
+        opponentWin: true
+    }
+}
+
+export const getStartGameData = () =>{
+    return  {
+        isStarted:true,
+        gameSettings:{
+            gameId:"70aa11c2-1e15-4a0f-892e-c85585e6c47a",
+            isStarted:true,
+            maxPlayers:2,
+            countPlayers:2,
+            bot:true,
+            players:[
+                {"id":123456789,"username":"Bot","avatar":3,"inGame":true,"side":1},
+                {"id":6,"username":"Max","avatar":"3","side":2,"activeItems":{"dice":2,"square":11},"inGame":true}
+            ],
+            table:{row:3,column:3},
+            gameTime:360
+        },
+        gameData:{
+            player1:[0,0,0,0,0,0,0,0,0],
+            player2:[0,0,0,0,0,0,0,0,0]
+        }
+    } 
+}
+

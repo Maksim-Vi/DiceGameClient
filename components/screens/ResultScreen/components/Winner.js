@@ -3,15 +3,44 @@ import styled from 'styled-components'
 import Avatar from '../../../common/Avatars/Avatar'
 import Text from '../../../common/Text/Text'
 import place from '../../../../assets/result/place_1.png'
+import { setTimingAnimated } from '../../../utils/Animation'
+import { Animated, Easing } from 'react-native'
 
 const Winner = ({winner}) => {
+    
+    const animatedValue = React.useRef(new Animated.Value(0)).current;
    
+    const animateWinner = () => {
+		Animated.sequence([
+            Animated.delay(1000),
+			setTimingAnimated(animatedValue, 1.1, 500, Easing.ease),
+			setTimingAnimated(animatedValue, 1, 400, Easing.ease),
+		]).start();
+	}
+   
+    React.useEffect(()=>{
+        animateWinner()  
+    },[])
+
+     
     if(!winner) return null
 
-    console.log('ANSWER', winner);
-
     return (
-        <WinnerContainer style={{ borderBottomWidth: 5 }}>
+        <WinnerContainer style={{ 
+            borderBottomWidth: 5,
+            opacity: animatedValue.interpolate({
+                inputRange: [0, 1],
+                outputRange: [0, 1],
+            }),
+            transform: [
+                {
+                    scale: animatedValue.interpolate({
+                        inputRange: [0, 1],
+                        outputRange: [0, 1]
+                    })
+                }
+            ]
+        }}>
             <PlaceContainer>
                 <Place source={place} resizeMode={ 'stretch'}/>
                 <Avatar width={50} height={50} avatarId={winner.player.avatar}/>
@@ -34,7 +63,7 @@ const Winner = ({winner}) => {
     )
 }
 
-const WinnerContainer = styled.View`
+const WinnerContainer = styled(Animated.View)`
     display: flex;
     flex-direction: row;
     align-items: center;

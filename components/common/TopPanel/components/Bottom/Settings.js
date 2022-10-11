@@ -1,6 +1,6 @@
 import React, {useContext} from "react";
 import styled from "styled-components";
-import settings from "../../../../../assets/topPanel/settings.png";
+import settings from "../../../../../assets/topPanel/exit.png";
 import {UserContext} from "../../../../utils/UserProvider";
 import C_LEAVE_SOCKET from "../../../../protocol/messages/clients/C_LEAVE_SOCKET";
 
@@ -32,11 +32,12 @@ const SettingsContainer = styled.View`
 `
 
 const SettingsBtn = styled.TouchableWithoutFeedback`
- 
+
 `
 const SettingsImg = styled.Image`
-  width: 100%;
-  height: 100%;
+    margin: auto;
+    width: 80%;
+    height: 80%;
 `
 
 export default Settings

@@ -9,6 +9,7 @@ import ShopScreen from "../shop/ShopScreen";
 import TabBar from "./TabBar";
 import ResultScreen from "../ResultScreen/ResultScreen";
 import React from "react";
+import { useNavigation } from "@react-navigation/native";
 
 const AppStack = createStackNavigator();
 const TabsNav = createBottomTabNavigator();
@@ -24,6 +25,14 @@ const TabNavScreen = () => {
 };
 
 export default function Navigator() {
+
+  const navigation = useNavigation()
+
+  React.useEffect(()=>{
+    window.navigation = navigation
+    navigationAction = navigation
+  }, [navigation])
+
 
   return (
     <AppStack.Navigator screenOptions={screenOptions} >

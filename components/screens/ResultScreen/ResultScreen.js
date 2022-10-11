@@ -10,15 +10,25 @@ import BackgroundWrapper from "../../common/BackgroundWrapper/BackgroundWrapper"
 import {store} from "../../redux/redux-store";
 import Winner from "./components/Winner";
 import Loser from "./components/Loser";
+import { Animated, Easing } from "react-native";
+import { setTimingAnimated } from "../../utils/Animation";
 
 const ResultScreen = (props) => {
-
+	
+    const animatedValue = React.useRef(new Animated.Value(0)).current;
     const navigation = useNavigation()
 
     const hendlerCloseResult = () => {
         navigation.navigate('MainScreen')
         store.dispatch(setCountScores(null))
     }
+
+	const animateWinerText = () => {
+		Animated.sequence([
+			setTimingAnimated(animatedValue, 1.2, 500, Easing.ease),
+			setTimingAnimated(animatedValue, 1, 600, Easing.ease),
+		]).start();
+	}
 
     const getWinner = (winner) =>{
         return <Winner winner={winner}/>
@@ -42,8 +52,22 @@ const ResultScreen = (props) => {
 
         return (
             <Result>
-                <TitleContainer style={{ borderBottomWidth: 5 }}>
-                    <TitleText title heavy color={'#fff'}>{Winner ? 'You Win' : 'You Lose'}</TitleText>
+                <TitleContainer style={{ 
+                    borderBottomWidth: 5,
+                    opacity: animatedValue.interpolate({
+                        inputRange: [0, 1],
+                        outputRange: [0, 1],
+                    }),
+                    transform: [
+                        {
+                            scale: animatedValue.interpolate({
+                                inputRange: [0, 1],
+                                outputRange: [0, 1]
+                            })
+                        }
+                    ]
+                }}>
+                    <TitleText title heavy color={'#fff'}>{props.result.userWin ? 'You Win' : 'You Lose'}</TitleText>
                 </TitleContainer>
 
                 {getWinner(Winner)}
@@ -51,6 +75,12 @@ const ResultScreen = (props) => {
             </Result>
         )
     }
+
+    React.useEffect(() => {
+		animateWinerText();
+	  return () => {}
+	}, [])
+	
 
     return (
         <BackgroundWrapper gackground={mainBg}>
@@ -72,7 +102,7 @@ const ResultContainer = styled.View`
     width: 100%;
 `
 
-const TitleContainer = styled.View`
+const TitleContainer = styled(Animated.View)`
     display: flex;
     align-items: center;
     justify-content: center;
