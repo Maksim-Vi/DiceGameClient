@@ -62,8 +62,24 @@ export const getStartGameData = () =>{
             countPlayers:2,
             bot:true,
             players:[
-                {"id":123456789,"username":"Bot","avatar":3,"inGame":true,"side":1},
-                {"id":6,"username":"Max","avatar":"3","side":2,"activeItems":{"dice":2,"square":11},"inGame":true}
+                {
+                    id:123456789,
+                    username:"Bot",
+                    avatar:3,
+                    inGame:true,
+                    side:1
+                },
+                {
+                    id:6,
+                    username:"Max",
+                    avatar: "3",
+                    side:2,
+                    activeItems:{
+                        dice:2,
+                        square:11
+                    },
+                    inGame:true
+                }
             ],
             table:{row:3,column:3},
             gameTime:360

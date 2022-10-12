@@ -105,20 +105,18 @@ const BoardItem = (props) => {
 const ItemContainer = styled.TouchableOpacity`
   position: relative;
   flex-grow: 1;
-  width: 22%;
-  height: 50px;
+  width: 25%;
+  height: auto;
   align-items: center;
   justify-content: center;
-  margin: 0px 10px 10px 10px;
+  margin: 5px;
 `
 
 const SquaresImage = styled.Image`
-  flex-grow: 1;
   width: 65px;
-  height: 50px;
+  height: 65px;
   align-items: center;
   justify-content: center;
-  margin: 0px 10px 10px 10px;
 `
 
 const SquaresAnim = styled(Animated.Image)`

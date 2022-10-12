@@ -4,7 +4,7 @@ import mainBg from '../../../assets/bg/main_bg.jpg'
 import styled from 'styled-components'
 import TopMain from '../../common/TopPanel/TopPanel'
 import C_QUICK_PLAY from '../../protocol/messages/clients/games/C_QUICK_PLAY'
-import {StatusBar} from "react-native";
+import {NativeModules, Platform, StatusBar} from "react-native";
 import GameWithBot from "./components/GameWithBot";
 import GameWithOpponent from "./components/GameWithOpponent";
 import GameWithOpponentByTime from "./components/GameWithOpponentByTime";
@@ -47,8 +47,19 @@ const Test = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
   position: absolute;
-  top: 0;
-  right: 30px;
+  ${()=>{
+    if(Platform.OS === 'ios' && NativeModules.DeviceInfo.isIPhoneX_deprecated){
+      return `
+        top: 0;
+        right: 30px;
+      `
+    } else {
+      return `
+        top: 20%;
+        left: 10px;
+      `
+    }
+  }}
   width: 100px;
   height: 30px;
   border-radius: 20px;
@@ -57,29 +68,12 @@ const Test = styled.TouchableOpacity`
   border: 2px solid #ed9f39;
   margin-bottom: 100px;
 `
-
 const MainContainer = styled.View`
   flex: 1;
   align-items: center;
   justify-content: space-around;
   flex-direction: row;
   width: 100%;
-`
-
-const ScoresContainer = styled.View`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    flex-direction: row;
-    margin-top: 100px;
-    ${props=>{
-        if(props.width < 400){
-            return 'width: 70%'
-        } else {
-          return 'width: 70%'
-        }
-    }}
 `
 
 export default MainScreen

@@ -4,12 +4,12 @@ import Text from '../../../../common/Text/Text'
 import C_SCORE from '../../../../protocol/messages/clients/games/C_SCORE'
 import BoardItem from '../BoardItem/BoardItem'
 import {Animated, Dimensions, Easing} from "react-native";
+import BoardUserInfo from './BoardUserInfo'
 
 const ScoreBoardUser = (props) => {
 
     const width = Dimensions.get('window').width;
-    const selectedAnim = React.useRef(new Animated.Value(1)).current;
-
+   
     const selectBoardItem = (index) =>{
         if(props.diceScore && props.isYouMove){
             new C_SCORE(props.user.id, props.user.username, props.currentGameId, index, props.diceScore)
@@ -59,30 +59,8 @@ const ScoreBoardUser = (props) => {
         return props.winPoints[column].sum
     }
 
-    React.useEffect(()=>{
-        if(props.isYouMove){
-            Animated.loop(
-                Animated.sequence([
-                    Animated.timing(selectedAnim, {
-                        toValue: 1.03,
-                        duration: 1000,
-                        useNativeDriver: true,
-                        easing: Easing.linear,
-                    }),
-                    Animated.timing(selectedAnim, {
-                        toValue: 1,
-                        duration: 1000,
-                        useNativeDriver: true,
-                        easing: Easing.linear,
-                    })
-                ])
-            ).start();
-        }
-    },[props.isYouMove])
-
     return (
         <ScoreBoardUserContainer>
-            {props.isYouMove && <WhoThrow  style={[{transform: [{ scale: selectedAnim }]}]}/>}
             <WinPoints width={width}>
                 <Column center>{getColumnNumber('column1')}</Column>
                 <Column center>{getColumnNumber('column2')}</Column>
@@ -93,8 +71,7 @@ const ScoreBoardUser = (props) => {
                 {DrowBoard()}
             </ScoresContainer>
 
-            <Name large blod color={'#000'} center>{props.user.username || ''}</Name>
-            <CountScores large blod color={'#000'}>{props.countScores ? props.countScores.scoresUser : 0}</CountScores>
+            <BoardUserInfo user={props.user} countScores={props.countScores}/>
         </ScoreBoardUserContainer>
     )
 }
@@ -133,28 +110,9 @@ const WinPoints = styled.View`
     }
   }}
 `
-
-const Name = styled(Text)`
-`
-
-const CountScores = styled(Text)`
-  position: absolute;
-  right: -22px;
-  top: 0;
-`
 const Column = styled(Text)`
   width: 33%;
   height: 20px;
-`
-
-const WhoThrow = styled(Animated.View)`
-  position: absolute;
-  left: 0;
-  right: 0;
-  width: 70%;
-  height: 200px;
-  border: 2px solid rgba(255, 157, 77, 0.56);
-  border-radius: 10px;
 `
 
 export default ScoreBoardUser

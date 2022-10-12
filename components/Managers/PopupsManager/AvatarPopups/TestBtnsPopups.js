@@ -4,9 +4,9 @@ import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import ModalWrapper from '../../../common/ModalWindows/ModalWrapper'
 import Text from '../../../common/Text/Text'
-import { setResultGame } from '../../../redux/reducers/game/GameReducer'
+import { setGame, setGameSettings, setIsGameStarted, setResultGame } from '../../../redux/reducers/game/GameReducer'
 import { setTestBtnsPopup } from '../../../redux/reducers/popups/PopupsReducer'
-import { getResultScreenData } from '../../../utils/utils'
+import { getResultScreenData, getStartGameData } from '../../../utils/utils'
 
 const TestBtnsPopups = () =>{
  
@@ -24,7 +24,14 @@ const TestBtnsPopups = () =>{
     }
 
     const hendelStartGameClick = () =>{
+        const currentGame = getStartGameData()
+        dispatch(setGame(currentGame))
+        dispatch(setGameSettings(currentGame.gameSettings))
+
         closeModal()
+
+        dispatch(setIsGameStarted(true))
+        window.navigation.navigate('GameScreen')
     }
 
     const renderPopup = () =>{
