@@ -8,11 +8,11 @@ const BoardUserInfo = (props) => {
      
   const {width} = useWindowDimensions()
 
-  console.log('ANSWER', width);
-
   return (
       <BoardAvatarContainer width={width}>
-          <CountScores width={width} large blod color={'#000'}>{props.countScores ? props.countScores.scoresUser : 0}</CountScores>
+          <CountContainer width={width}>
+            <CountScores large blod color={'#fff'}>{props.countScores ? props.countScores.scoresUser : 0}</CountScores>
+          </CountContainer>
           <Avatar avatarId={props.user.avatar}/>
           <Name large blod color={'#000'} center>{props.user.username || ''}</Name>
       </BoardAvatarContainer>
@@ -47,23 +47,30 @@ const BoardAvatarContainer = styled.View`
 
 const CountScores = styled(Text)`
   text-align: center;
+`
+const CountContainer = styled.View`
+  background-color: #354d57;
+  border-radius: 5px;
+  border: 2px solid #d6dbdd;
   ${(props)=>{
       if(props.width <= 400){
         return `
           margin-bottom: 10px;
+          width: 50px;
         `
       } else if(props.width > 400 && props.width <= 550){
         return `
           margin-bottom: 20px;
+          width: 70px;
         `
       } else if(props.width > 550){
         return `
           margin-bottom: 30px;
+          width: 100px;
         `
       }
   }}
 `
-
 const Name = styled(Text)`
 `
 

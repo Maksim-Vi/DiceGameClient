@@ -12,7 +12,9 @@ const BoardOpponentInfo = (props) => {
       <BoardAvatarContainer width={width} height={height}>
           <Name large blod color={'#000'} center>{props.opponent.username || ''}</Name>
           <Avatar avatarId={props.opponent.avatar}/>
-          <CountScores width={width} large blod color={'#000'}>{props.countScores ? props.countScores.scoresUser : 0}</CountScores>
+          <CountContainer width={width}>
+            <CountScores width={width} large blod color={'#fff'}>{props.countScores ? props.countScores.scoresUser : 0}</CountScores>
+          </CountContainer>
       </BoardAvatarContainer>
   )
 };
@@ -44,19 +46,26 @@ const BoardAvatarContainer = styled.View`
 
 const CountScores = styled(Text)`
   text-align: center;
-  margin-top: 10px;
+`
+const CountContainer = styled.View`
+  background-color: #354d57;
+  border-radius: 5px;
+  border: 2px solid #d6dbdd;
   ${(props)=>{
       if(props.width <= 400){
         return `
           margin-top: 10px;
+          width: 50px;
         `
       } else if(props.width > 400 && props.width <= 550){
         return `
-          margin-top: 30px;
+          margin-top: 20px;
+          width: 70px;
         `
       } else if(props.width > 550){
         return `
           margin-top: 30px;
+          width: 100px;
         `
       }
   }}

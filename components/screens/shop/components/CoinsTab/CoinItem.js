@@ -18,7 +18,7 @@ const CoinItem = (props) => {
             </ItemContainer>
             
             <Button onPress={clickHendler} style={{ borderBottomWidth: 3 }} activeOpacity={0.9}>
-                <Text blod small color={'#fff'}>{props.price}$</Text>
+                <Text blod small color={'#fff'}>{props.price}#</Text>
             </Button>
         </ItemWrapper>
     );
