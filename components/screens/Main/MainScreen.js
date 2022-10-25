@@ -69,7 +69,7 @@ const Test = styled.TouchableOpacity`
   margin-bottom: 100px;
 `
 const MainContainer = styled.View`
-  flex: 1;
+  flex: .8;
   align-items: center;
   justify-content: space-around;
   flex-direction: row;

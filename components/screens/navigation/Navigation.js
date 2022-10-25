@@ -10,6 +10,7 @@ import TabBar from "./TabBar";
 import ResultScreen from "../ResultScreen/ResultScreen";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
+import RoadScreen from "../Road/RoadScreen";
 
 const AppStack = createStackNavigator();
 const TabsNav = createBottomTabNavigator();
@@ -40,6 +41,7 @@ export default function Navigator() {
       <AppStack.Screen name="GameScreen" component={GameScreen} />
       <AppStack.Screen name="ResultScreen" component={ResultScreen} />
       <AppStack.Screen name="LoadingGameScreen" component={LoadingGameScreen} />
+      <AppStack.Screen name="RoadScreen" component={RoadScreen} />
     </AppStack.Navigator>
   );
 }
