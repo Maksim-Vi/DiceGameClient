@@ -7,13 +7,13 @@ import Text from '../../../../common/Text/Text';
 const BoardOpponentInfo = (props) => {
         
   const {width,height} = useWindowDimensions()
-  
+  console.log('ANSWER', props.countScores);
   return (
       <BoardAvatarContainer width={width} height={height}>
           <Name large blod color={'#000'} center>{props.opponent.username || ''}</Name>
           <Avatar avatarId={props.opponent.avatar}/>
           <CountContainer width={width}>
-            <CountScores width={width} large blod color={'#fff'}>{props.countScores ? props.countScores.scoresUser : 0}</CountScores>
+            <CountScores width={width} large blod color={'#fff'}>{props.countScores ? props.countScores.scoresOpponent : 0}</CountScores>
           </CountContainer>
       </BoardAvatarContainer>
   )

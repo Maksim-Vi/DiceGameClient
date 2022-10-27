@@ -107,6 +107,7 @@ const ItemContainer = styled.TouchableOpacity`
   flex-grow: 1;
   width: 25%;
   height: auto;
+  display: flex;
   align-items: center;
   justify-content: center;
   margin: 5px;
@@ -121,7 +122,10 @@ const SquaresImage = styled.Image`
 
 const SquaresAnim = styled(Animated.Image)`
   position: absolute;
-  top: -18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* top: -18px; */
   width: 80px;
   height: 80px;
   margin: auto;
@@ -129,7 +133,10 @@ const SquaresAnim = styled(Animated.Image)`
 
 const DiceImage = styled.Image`
   position: absolute;
-  top: -2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* top: -2px; */
   flex-grow: 1;
   width: 45px;
   height: 45px;
