@@ -51,10 +51,20 @@ export const getFetchUrl = async (request, type, bodyData,refreshToken, callback
             return response.json()
         })
         .then((json) => { 
-            callback(json)
+            if(json.success){
+                callback(json)
+            }
+            
             return json
         })
-        .catch((err) => { console.log(`fetch ERROR`, err) }) 
+        .catch((err) => { 
+            console.log(`fetch ERROR`, err) 
+            return {
+                status: 500,
+                success: false,
+                message: 'oops, Sorry but game not working now try later!'
+            }
+        }) 
     } else {
         return await fetch(`${getUrl()}/${request}`,{
             method: type,
@@ -75,11 +85,19 @@ export const getFetchUrl = async (request, type, bodyData,refreshToken, callback
             return response.json()
         })
         .then((json) => { 
-            callback(json)
+            if(json.success){
+                callback(json)
+            }
+        
             return json
         })
         .catch((err) => { 
             console.log(`fetch ERROR req`, err)
+            return {
+                status: 500,
+                success: false,
+                message: 'oops, Sorry but game not working now try later!'
+            }
         }) 
     }
 }

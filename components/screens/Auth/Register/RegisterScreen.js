@@ -37,7 +37,7 @@ const RegisterScreen = () => {
     if(data && data.success){
       navigation.goBack()
     } else {
-      alert('Register is failed check your name email and password')
+      alert(data.message)
     }
   }
 

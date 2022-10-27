@@ -9,6 +9,7 @@ export let websocket;
 
 let reconnectTimeout = null;
 let reconnecting = false;
+let tryToReconect = false;
 
 const getWSUrl = () =>{
     const inProduction = APP_TYPE !== 'development' ? true : false;
@@ -33,7 +34,6 @@ export const openServerConnection = () => {
     }
 
     const url = getWSUrl()
-    console.log('ANSWER', url)
 
     websocket = new WebSocket(url);
 
@@ -44,27 +44,17 @@ export const openServerConnection = () => {
 }
 
 function openWSHandler() {
+    console.log('open connection to server')
+
     reconnecting = false;
-    // clearInterval(reconnectTimeout);
+    tryToReconect = false;
 }
 
 function errorWSHandler(error) {
-
-    const close = async () =>{
-        // const data = JSON.parse(await AsyncStorage.getItem('UserData'))
-        // if(data){
-        //     AsyncStorage.removeItem('UserData')
-        // }
-        store.logout()
-    }
-
     console.error(`[error] ${error.message}`);
 
     reconnecting = true;
     store.dispatch(setLoaded(false))
-    clearInterval(reconnectTimeout);
-    reconnectWebsocket();
-    close()
 }
 
 async function closeWSHandler(event) {
@@ -74,12 +64,18 @@ async function closeWSHandler(event) {
     } else {
         console.log('[close] Connection died');
     }
-    const data = JSON.parse(await AsyncStorage.getItem('UserData'))
-    if(data){
+    
+    if(!reconnecting){
         reconnecting = true;
+        tryToReconect = true
 
         clearInterval(reconnectTimeout);
         reconnectWebsocket();
+    } else if(tryToReconect){
+        tryToReconect = false
+
+        store.logout()
+        alert('oops, Sorry! game is rebooted please try to connect later!')
     }
 }
 

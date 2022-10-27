@@ -28,12 +28,12 @@ const AuthScreen = () => {
 
   const hendlerLogin = async (dataForm) =>{
     const data = await postLoginApi(dataForm.name,dataForm.password)
-
+    
     if(data && data.success){
      navigation.navigate('LoadingProject')
      new C_LOGIN(data.user.username,data.user.password)
     } else {
-      alert('Login is failed check your name and password')
+      alert(data.message)
     }
   }
 
