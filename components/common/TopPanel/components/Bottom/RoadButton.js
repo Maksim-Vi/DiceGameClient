@@ -15,7 +15,7 @@ const RoadButton = () =>{
 
     return (
         <RoadBtn onPress={() => OpenRoad()}>
-            <InfoButton count={10}/>
+            <InfoButton count={1}/>
             <RoadImg source={roadImg} resizeMode='stretch'/>
         </RoadBtn>
     )
