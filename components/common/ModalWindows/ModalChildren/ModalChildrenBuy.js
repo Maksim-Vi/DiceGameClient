@@ -10,6 +10,7 @@ import C_BUY_GAME_ITEM from "../../../protocol/messages/clients/collections/C_BU
 import {selectUserCoins, selectUserCrystals} from "../../../redux/reducers/players/PlayersReducer";
 import {store} from "../../../redux/redux-store";
 import {setPaymentBuyRealMoney} from "../../../utils/PaymentHelper";
+import { getCollectionSquareImg} from "../../../utils/utils";
 
 const ModalChildrenBuy = (props) => {
 
@@ -87,10 +88,6 @@ const ModalChildrenBuy = (props) => {
         }
     }
 
-    const closeModal = () =>{
-        props.setModalVisible(false)
-    }
-
     const confirmModal = (type,price,itemId) =>{
         const userCoins = selectUserCoins(store.getState())
         const userCrystals = selectUserCrystals(store.getState())
@@ -110,18 +107,19 @@ const ModalChildrenBuy = (props) => {
         props.setModalVisible(false)
     }
 
+    if(!props.openItem) return null
+
     return (
         <BuyContainer>
-            <Title large blod center color={'#62a0d7'}>Buy {props.titleItemName}</Title>
+            <SquareImage source={getCollectionSquareImg(props.openItem.sortIndex)}/>
 
             <Context>
                 <Text large blod center color={'#fff'}>
-                    Are you sure, that you want to buy {props.titleItemName}?
+                    Are you sure, that you want to buy {props.openItem.name}?
                 </Text>
             </Context>
 
             <ButtonContainer>
-                <ButtonWithText text={'No'} color={'#ec5526'} borderColor={'#a11c0c'} clickHandler={closeModal}/>
                 {getButtons()}
             </ButtonContainer>
         </BuyContainer>
@@ -129,28 +127,25 @@ const ModalChildrenBuy = (props) => {
 }
 
 const BuyContainer = styled.View`
-  display: flex;
-  align-items: center;
-  background-color: white;
-  border-radius: 10px;
-  width: 100%;
-  height: 40%;
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 20px;
+    width: 100%;
+    height: 100%;
 `
 
-const Title = styled(Text)`
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-`
 const Context = styled.View`
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  height: 50%;
+  height: 30%;
   background-color: #ffc398;
   border: 2px solid rgba(255, 190, 78, 0.77);
   border-radius: 10px;
+  margin-top: 20px;
 `
 
 const ButtonContainer = styled.View`
@@ -159,8 +154,13 @@ const ButtonContainer = styled.View`
   justify-content: space-around;
   flex-wrap: wrap;
   flex-direction: row;
-  width: 90%;
+  width: 100%;
   margin-top: 10px;
+`
+const SquareImage = styled.Image`
+    margin-top: 10px;
+  width: 100px;
+  height: 100px;
 `
 
 export default ModalChildrenBuy;

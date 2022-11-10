@@ -23,8 +23,10 @@ const SquaresTab = (props) => {
 
     const Model = () =>{
         return (
-            <ModalWrapper modalVisible={modal.visible} setModalVisible={setModalVisible}>
-                <ModalChildrenBuy titleItemName={modal.modalName} openItem={modal.openItem} setModalVisible={setModalVisible}/>
+            <ModalWrapper modalBG={'default'} height={400} modalVisible={modal.visible} setModalVisible={()=> setModalVisible(false)}>
+                <ModalChildrenBuy titleItemName={modal.modalName} 
+                                  openItem={modal.openItem} 
+                                  setModalVisible={setModalVisible}/>
             </ModalWrapper>
         )
     }
