@@ -3,9 +3,9 @@ import { connect } from 'react-redux'
 import styled from 'styled-components'
 import { selectMyUser } from '../../redux/reducers/players/PlayersReducer'
 import { selectAvatarPopup, selectTestBtnsPopup } from '../../redux/reducers/popups/PopupsReducer'
-import AvatarPopups from './AvatarPopups/AvatarPopups'
+import AvatarPopups from './popupsComponents/AvatarPopups'
 import {StatusBar} from "react-native";
-import TestBtnsPopups from './AvatarPopups/TestBtnsPopups'
+import TestBtnsPopups from './popupsComponents/TestBtnsPopups'
 
 const PopupsManager = (props) =>{
 

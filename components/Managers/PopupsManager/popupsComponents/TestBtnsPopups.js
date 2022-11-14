@@ -34,10 +34,16 @@ const TestBtnsPopups = () =>{
         window.navigation.navigate('GameScreen')
     }
 
+    const hendelLoadingGameClick = () =>{
+        window.navigation.navigate('LoadingGameScreen')
+        closeModal()
+    }
+
     const renderPopup = () =>{
         return <Container>
             <Test onPress={hendelStartGameClick} style={{ borderBottomWidth: 8 }}><Text color={'#000'}>StartGame</Text></Test>
             <Test onPress={hendelResultClick} style={{ borderBottomWidth: 8 }}><Text color={'#000'}>Result</Text></Test>
+            <Test onPress={hendelLoadingGameClick} style={{ borderBottomWidth: 8 }}><Text color={'#000'}>Loading-Game</Text></Test>
         </Container>
     }
 
@@ -59,12 +65,11 @@ const Test = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
   width: 230px;
-  height: 80px;
+  height: 60px;
   border-radius: 20px;
   margin: 10px auto;
   background-color: #ffefb1;
   border: 2px solid #ed9f39;
-  margin-bottom: 100px;
 `
 
 export default TestBtnsPopups

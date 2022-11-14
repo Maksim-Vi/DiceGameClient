@@ -5,8 +5,8 @@ import Screens from './components/screens/Screens';
 import { NavigationContainer, useNavigationContainerRef } from '@react-navigation/native';
 import React from 'react';
 import styled from 'styled-components';
-import PopupsManager from './components/Managers/PopupsManager/PopupsManager';
 import { useFonts } from 'expo-font';
+import PopupsManager from './components/managers/popupsManager/PopupsManager';
 
 export const navigationAction = null
 
