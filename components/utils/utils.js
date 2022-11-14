@@ -16,18 +16,18 @@ export const getCollectionDiceImg = (id) => {
 }
 
 export const getCollectionSquareImg = (id) => {
-    let diceUrl = null
+    let squareUrl = null
 
    try {
         if(id){
-            diceUrl = images.squares[id]
+            squareUrl = images.squares[id]
        }
    } catch (e){
        console.error('cannot loaded dice by name, set default')
-       diceUrl = images.squares['1']
+       squareUrl = images.squares['1']
    }
 
-   return diceUrl
+   return squareUrl
 }
 
 export const getResultScreenData = () =>{

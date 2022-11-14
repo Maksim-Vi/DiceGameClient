@@ -10,7 +10,7 @@ import C_BUY_GAME_ITEM from "../../../protocol/messages/clients/collections/C_BU
 import {selectUserCoins, selectUserCrystals} from "../../../redux/reducers/players/PlayersReducer";
 import {store} from "../../../redux/redux-store";
 import {setPaymentBuyRealMoney} from "../../../utils/PaymentHelper";
-import { getCollectionSquareImg} from "../../../utils/utils";
+import { getCollectionDiceImg, getCollectionSquareImg} from "../../../utils/utils";
 
 const ModalChildrenBuy = (props) => {
 
@@ -107,11 +107,19 @@ const ModalChildrenBuy = (props) => {
         props.setModalVisible(false)
     }
 
+    getItemImgByType = () =>{
+        if(props.type === 'dices'){
+            return getCollectionDiceImg(props.openItem.sortIndex)
+        }
+
+        return getCollectionSquareImg(props.openItem.sortIndex)
+    }
+
     if(!props.openItem) return null
 
     return (
         <BuyContainer>
-            <SquareImage source={getCollectionSquareImg(props.openItem.sortIndex)}/>
+            <SquareImage source={getItemImgByType()}/>
 
             <Context>
                 <Text large blod center color={'#fff'}>

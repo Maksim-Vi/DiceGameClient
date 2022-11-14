@@ -26,6 +26,7 @@ const SquaresTab = (props) => {
             <ModalWrapper modalBG={'default'} height={400} modalVisible={modal.visible} setModalVisible={()=> setModalVisible(false)}>
                 <ModalChildrenBuy titleItemName={modal.modalName} 
                                   openItem={modal.openItem} 
+                                  type={'squares'}
                                   setModalVisible={setModalVisible}/>
             </ModalWrapper>
         )
