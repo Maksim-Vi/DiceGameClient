@@ -5,12 +5,14 @@ import imagesGameSquares from "../../../../../assets/dynamicLoadGameSquares";
 import imagesGameDices from "../../../../../assets/dynamicLoadGameDices";
 import animOne from "../../../../../assets/animation/anim-light-one.png";
 import animTwo from "../../../../../assets/animation/anim-purpure-two.png";
+import { setTimingAnimated } from '../../../../utils/Animation';
 
 const BoardItem = (props) => {
 
   const width = Dimensions.get('window').width;
 
   const spinValue = React.useRef(new Animated.Value(0))
+  const animatedValue = React.useRef(new Animated.Value(1))
   const opacityValue = React.useRef(new Animated.Value(0))
 
   const [showAnim, setShowAnim] = React.useState(false)
@@ -25,8 +27,14 @@ const BoardItem = (props) => {
     outputRange: [0,1],
   })
 
+  const scaleData = animatedValue.current.interpolate({
+    inputRange: [0, 1],
+    outputRange: [0, 1]
+  })
+
   const hendlerClick = () =>{
     if(props.selectBoardItem && props.item === 0){
+      setDiceInPlaceAnim()
       props.selectBoardItem(props.index)
     }
   }
@@ -81,6 +89,14 @@ const BoardItem = (props) => {
     }
   }
 
+  const setDiceInPlaceAnim = () =>{
+    Animated.sequence([
+      setTimingAnimated(animatedValue.current, 1.2, 150, Easing.ease),
+      setTimingAnimated(animatedValue.current, 1, 50, Easing.ease),
+    ]).start();
+  }
+
+
   const stopAnimation = () =>{
     if(showAnim){
       opacityValue.current.setValue(0)
@@ -92,7 +108,11 @@ const BoardItem = (props) => {
       <ItemContainer {...props} width={width} onPress={hendlerClick} enabled={true} activeOpacity={.8}>
         <SquaresImage source={getSquare()} resizeMode={'stretch'}/>
         {getDiceNumber() !== "" &&
-            <DiceImage  width={width} source={getDiceNumber()}/>
+            <DiceImage  width={width} 
+                        style={{
+                          transform: [{scale: scaleData}]
+                        }}
+                        source={getDiceNumber()}/>
         }
         <SquaresAnim style={{
           opacity: opacityData,
@@ -125,37 +145,20 @@ const SquaresAnim = styled(Animated.Image)`
   display: flex;
   align-items: center;
   justify-content: center;
-  /* top: -18px; */
   width: 80px;
   height: 80px;
   margin: auto;
 `
 
-const DiceImage = styled.Image`
+const DiceImage = styled(Animated.Image)`
   position: absolute;
   display: flex;
   align-items: center;
   justify-content: center;
-  /* top: -2px; */
   flex-grow: 1;
   width: 45px;
   height: 45px;
   z-index: 1;
 `
 
-
 export default BoardItem
-
-
-// const getSelectedSquaresOld = () =>{
-//   if(props.item > 0){
-//     if(props.winPoints){
-//       if(props.item === +props.winPoints.number && +props.winPoints.count === 2){
-//         return {borderColor: "#60ac31", borderWidth: 3}
-//       } else if(props.item === +props.winPoints.number && +props.winPoints.count === 3){
-//          return {borderColor: "#4b0082", borderWidth: 3}
-//       }
-//     }
-//      return {borderColor: "#deb887", borderWidth: 3}
-//   }
-// }

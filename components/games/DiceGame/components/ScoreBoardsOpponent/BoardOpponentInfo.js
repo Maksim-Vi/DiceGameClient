@@ -7,7 +7,6 @@ import Text from '../../../../common/Text/Text';
 const BoardOpponentInfo = (props) => {
         
   const {width,height} = useWindowDimensions()
-  console.log('ANSWER', props.countScores);
   return (
       <BoardAvatarContainer width={width} height={height}>
           <Name large blod color={'#000'} center>{props.opponent.username || ''}</Name>
