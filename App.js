@@ -3,10 +3,11 @@ import { store } from './components/redux/redux-store';
 import UserProvider from './components/utils/UserProvider';
 import Screens from './components/screens/Screens';
 import { NavigationContainer, useNavigationContainerRef } from '@react-navigation/native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useFonts } from 'expo-font';
 import PopupsManager from './components/managers/popupsManager/PopupsManager';
+import ChatManager from './components/managers/chatManager/ChatManager';
 
 export const navigationAction = null
 
@@ -17,6 +18,12 @@ export default function App() {
   });
 
   const navigationRef = useNavigationContainerRef();
+
+  useEffect(()=>{
+    const chatManager = new ChatManager()
+    store.chatManager = chatManager
+    window.chatManager = chatManager
+  })
   
   if (!fontsLoaded) return null;
   

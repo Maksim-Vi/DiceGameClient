@@ -5,18 +5,21 @@ import collectionsIcon from '../../../assets/nav/collections.png'
 import chatIcon from '../../../assets/nav/chat.png'
 import Text from "../../common/Text/Text";
 import { NativeModules, Platform } from "react-native";
-import { useEffect } from "react";
 
 export default TabBar = ({ state, navigation }) => {
 
   const onPress = (route, isFocused) => {
-    const event = navigation.emit({
-      type: "tabPress",
-      target: route.key,
-      canPreventDefault: true,
-    });
+    // const event = navigation.emit({
+    //   type: "tabPress",
+    //   target: route.key,
+    //   canPreventDefault: true,
+    // });
 
-    if (!isFocused && !event.defaultPrevented) {
+    // if (!isFocused && !event.defaultPrevented) {
+    //   navigation.navigate({ name: route.name, merge: true });
+    // }
+
+    if (!isFocused) {
       navigation.navigate({ name: route.name, merge: true });
     }
   };

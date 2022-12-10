@@ -18,3 +18,18 @@ export const store = configureStore({
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
 });
+
+export const subscribe = (eventName, listener) => {
+  document.addEventListener(eventName, (event)=>{
+      listener(event.detail.data)
+  });
+}
+
+export const unsubscribe = (eventName, listener) => {
+  document.removeEventListener(eventName, listener);
+}
+
+export const publish = (eventName, data) => {
+  const event = new CustomEvent(eventName, { detail: data });
+  document.dispatchEvent(event);
+}
