@@ -5,8 +5,10 @@ import collectionsIcon from '../../../assets/nav/collections.png'
 import chatIcon from '../../../assets/nav/chat.png'
 import Text from "../../common/Text/Text";
 import { NativeModules, Platform } from "react-native";
+import { useEffect } from "react";
 
 export default TabBar = ({ state, navigation }) => {
+
   const onPress = (route, isFocused) => {
     const event = navigation.emit({
       type: "tabPress",
@@ -46,8 +48,11 @@ export default TabBar = ({ state, navigation }) => {
       
         return (
           <TabIconContainer key={index} focused={isFocused} onPress={() => onPress(route, isFocused)}>
-             <NavImage source={getIconName(route)} />
-             <Text heavy medium color={'#ff9d4d'}>{getText(route)}</Text>
+            <NavImage source={getIconName(route)} />
+            <Text heavy medium color={'#ff9d4d'}>{getText(route)}</Text>
+            {isFocused &&
+              <Active style={{ borderTopWidth: 4, borderBottomWidth: 0 }}/>
+            }
           </TabIconContainer>
         );
       })}
@@ -56,10 +61,13 @@ export default TabBar = ({ state, navigation }) => {
 };
 
 const TabsContainer = styled.View`
-  background-color: rgb(1,1,70);
+  position: absolute;
+  bottom: 0;
+  display: flex;
   flex-direction: row;
   align-items: flex-end;
   justify-content: space-around;
+  width: 100%;
   ${()=>{
     if(Platform.OS === 'ios' && NativeModules.DeviceInfo.isIPhoneX_deprecated){
       return `
@@ -74,12 +82,14 @@ const TabsContainer = styled.View`
 `;
 
 const TabIconContainer = styled.TouchableOpacity`
+  position: relative;
+  display: flex;
   align-items: center;
   text-align: center;
   ${()=>{
     if(Platform.OS === 'ios' && NativeModules.DeviceInfo.isIPhoneX_deprecated){
       return `
-        margin-bottom: 30px;
+        margin-bottom: 20px;
       `
     } else {
       return `
@@ -92,4 +102,15 @@ const TabIconContainer = styled.TouchableOpacity`
 const NavImage = styled.Image`
   width: 55px;
   height: 55px;
+`;
+
+const Active = styled.View`
+  position: absolute;
+  top: -10px;
+  width: 70px;
+  height: 500px;
+  background-color: rgba(220, 220, 220, 0.1);
+  border: 2px solid rgba(229, 229, 229, 0.5);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 `;
