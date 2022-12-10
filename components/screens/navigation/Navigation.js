@@ -1,16 +1,17 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import { screenOptions, tabsScreenOptions } from "../../constants/options";
-import CollectionsScreen from "../collections/CollectionsScreen";
+import CollectionsScreen from "../Collections/CollectionsScreen";
 import GameScreen from "../Game/GameScreen";
 import LoadingGameScreen from "../LoadingGameScreen/LoadingGameScreen";
 import MainScreen from "../Main/MainScreen";
-import ShopScreen from "../shop/ShopScreen";
+import ShopScreen from "../Shop/ShopScreen";
 import TabBar from "./TabBar";
 import ResultScreen from "../ResultScreen/ResultScreen";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import RoadScreen from "../Road/RoadScreen";
+import ChatScreen from "../Chat/ChatScreen";
 
 const AppStack = createStackNavigator();
 const TabsNav = createBottomTabNavigator();
@@ -21,6 +22,7 @@ const TabNavScreen = () => {
       <TabsNav.Screen name="ShopScreen" component={ShopScreen} />
       <TabsNav.Screen name="MainScreen" component={MainScreen} />
       <TabsNav.Screen name="CollectionsScreen" component={CollectionsScreen} />
+      <TabsNav.Screen name="ChatScreen" component={ChatScreen} />
     </TabsNav.Navigator>
   );
 };

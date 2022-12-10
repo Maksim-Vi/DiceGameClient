@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
 import Text from "../../../../common/Text/Text";
-import ItemWrapper from "../../../collections/components/common/ItemWrapper";
+import ItemWrapper from "../../../Collections/components/common/ItemWrapper";
 import img from '../../../../../assets/shop/lightning.png'
 
 const FlashItem = (props) => {

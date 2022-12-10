@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { UserContext } from '../utils/UserProvider';
-import AuthNavigation from './navigation/AuthNavigation';
-import Navigator from './navigation/Navigation';
+import AuthNavigation from './Navigation/AuthNavigation';
+import Navigator from './Navigation/Navigation';
 
 const Screens = () => {
 
