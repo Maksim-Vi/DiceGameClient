@@ -58,14 +58,13 @@ function errorWSHandler(error) {
 }
 
 async function closeWSHandler(event) {
-
     if (event.wasClean) {
         console.log(`[close] Connection closed cleanly, code=${event.code} reason=${event.reason}`);
     } else {
         console.log('[close] Connection died');
     }
     
-    if(!reconnecting){
+    if(!reconnecting && websocket){
         reconnecting = true;
         tryToReconect = true
 
@@ -94,6 +93,15 @@ function reconnectWebsocket() {
             openServerConnection();
         }
     }, 1000);
+}
+
+export const closeWebsocletAfterLeaveGame = () =>{
+    if (websocket) {
+        reconnecting = true
+        tryToReconect = false
+
+        websocket.close();
+    }
 }
 
 export const sendMessageWS = (message) =>{

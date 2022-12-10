@@ -27,6 +27,7 @@ export default class S_LOGIN_SUCCESS {
         setTimeout(()=>{
             if(window.navigation){
                 window.navigation.navigate('MainScreen')
+                window.chatManager.connectionToChatRoom('general')
             }
         },1500)
     }

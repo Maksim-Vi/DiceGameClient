@@ -49,4 +49,5 @@ export const hendleMessage = (data) =>{
     gameHendleMessage(data)
     usersHendleMessage(data)
     collectionHendleMessage(data)
+    window.chatManager.chatMassageHandler(data)
 }
