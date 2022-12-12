@@ -2,6 +2,10 @@ import C_ENTER_IN_CHAT from "../../protocol/messages/clients/chat/C_ENTER_IN_CHA
 import C_SEND_MESSAGE from "../../protocol/messages/clients/chat/C_SEND_MESSAGE"
 import EventDispatcher from "../../redux/EventDispatcher"
 import eventsType from "../../redux/eventsType"
+import image from '../../../assets/chat/tabs/group.png'
+import clan from '../../../assets/chat/tabs/clan.png'
+import { store } from "../../redux/redux-store"
+import { addChatTab, cleanChatTabs } from "../../redux/reducers/chat/ChatReducer"
 
 class ChatManager {
     constructor(){
@@ -27,7 +31,6 @@ class ChatManager {
     chatMassageHandler = (data) =>{
         switch (data.name) {
             case 'S_CHAT_ENTER':
-                console.log('data',data)
                 this.addChatChanel(data.chatRoom, data.username)
                 break;
             case 'S_SEND_MESSAGE':
@@ -45,10 +48,35 @@ class ChatManager {
     addChatChanel = (roomChanel) =>{
         if(this.chat && this.chat.channels){
             if(!this.chat.channels[roomChanel]){
+                this.addChatTabs(roomChanel)
                 return this.createNewChanel(roomChanel)
             }
             console.log('connect to chanel failed');
         }
+    }
+
+    addChatTabs = (roomChanel) =>{
+        let chatTabs = {}
+        switch (roomChanel) {
+            case 'general':
+                chatTabs = {
+                    chanelName: roomChanel, 
+                    image: image,
+                    sortIndex: 0,
+                }
+                break;
+            case 'clan':
+                chatTabs = {
+                    chanelName: roomChanel, 
+                    image: clan,
+                    sortIndex: 1,
+                }
+                break;
+            default:
+                break;
+        }
+
+        chatTabs && store.dispatch(addChatTab(chatTabs))
     }
 
     createNewChanel = (roomChanel) =>{
@@ -99,6 +127,8 @@ class ChatManager {
         this.chat = {
             channels: {}
         }
+
+        store.dispatch(cleanChatTabs())
     }
 
     testedManager = () =>{

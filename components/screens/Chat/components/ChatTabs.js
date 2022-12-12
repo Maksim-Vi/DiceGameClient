@@ -2,23 +2,26 @@ import React from 'react'
 import styled from 'styled-components';
 import Tab from './Tabs/Tab';
 import image from '../../../../assets/chat/tabs/group.png'
-import clan from '../../../../assets/chat/tabs/clan.png'
 import friends from '../../../../assets/chat/tabs/friends.png'
+import { useSelector } from 'react-redux';
 
-const arrTabs = [
+const arrTabsDefault = [
     {chanelName: 'general', image: image},
-    {chanelName: 'clubs', image: clan}, 
-    {chanelName: 'friends', image: friends}, 
 ]
 
 const ChatTabs = () => {
 
+    const chatTabs = useSelector(state => state.chat.chatTabs)
+
     const getTabs = () =>{
         let tabs = []
 
-        arrTabs.forEach(tab=>{
-            tabs.push(<Tab tabName={tab.chanelName} image={tab.image}/>)
+        const tabsArray = chatTabs && chatTabs.length > 0 ? chatTabs : arrTabsDefault
+
+        tabsArray.forEach((tab, index)=>{
+            tabs.push(<Tab key={index} tabName={tab.chanelName} image={tab.image}/>)
         })
+
 
         return tabs
     }
@@ -27,6 +30,7 @@ const ChatTabs = () => {
     return (
         <ChatTabsContainer>
             {getTabs()}
+            <Tab tabName={'friends'} image={friends}/>
         </ChatTabsContainer>
     )
 }

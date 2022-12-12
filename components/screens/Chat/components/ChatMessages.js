@@ -21,12 +21,6 @@ class ChatMessages extends React.Component {
         this.subscriber = EventDispatcher.subscribe(eventsType.UPDATE_CHAT_CHANELS, this.updateChatChanelsMessage)
     }
 
-    shouldComponentUpdate(nextProps, nextState){
-        return this.state.chanelData !== nextState.chanelData
-    }
-
-    componentDidUpdate(prevProps, prevState){}
-
     componentWillUnmount(){
         EventDispatcher.unsubscribe(this.subscriber)
     }
