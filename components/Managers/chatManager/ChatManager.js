@@ -1,4 +1,7 @@
 import C_ENTER_IN_CHAT from "../../protocol/messages/clients/chat/C_ENTER_IN_CHAT"
+import C_SEND_MESSAGE from "../../protocol/messages/clients/chat/C_SEND_MESSAGE"
+import EventDispatcher from "../../redux/EventDispatcher"
+import eventsType from "../../redux/eventsType"
 
 class ChatManager {
     constructor(){
@@ -24,15 +27,20 @@ class ChatManager {
     chatMassageHandler = (data) =>{
         switch (data.name) {
             case 'S_CHAT_ENTER':
-                this.addChatChanel(data.room, data.username)
+                console.log('data',data)
+                this.addChatChanel(data.chatRoom, data.username)
                 break;
             case 'S_SEND_MESSAGE':
                 console.log('S_SEND_MESSAGE', data);
-                this.updateChatChanel()
+                this.updateChatChanel(data.chatRoom, data.username, data.chatMessage, data.date)
                 break;
             default:             
                 break;
         }
+    }
+
+    sendChatMessage = (username, chatRoom, chatMessage) =>{
+        new C_SEND_MESSAGE(username, chatRoom, chatMessage)
     }
 
     addChatChanel = (roomChanel) =>{
@@ -40,21 +48,37 @@ class ChatManager {
             if(!this.chat.channels[roomChanel]){
                 return this.createNewChanel(roomChanel)
             }
-
-            return this.updateChatChanel(roomChanel)
+            console.log('connect to chanel failed');
         }
     }
 
     createNewChanel = (roomChanel) =>{
-        this.chat.channels[roomChanel] = {
-            unreadMessages: 0,
-            messages: []
+        if(roomChanel){
+            this.chat.channels[roomChanel] = {
+                unreadMessages: 0,
+                messages: []
+            }
+            console.log('connect to chanel', roomChanel, this.chat.channels);
         }
-        console.log('connect to chanel', roomChanel, this.chat.channels);
     }
 
-    updateChatChanel = (roomChanel) =>{
+    updateChatChanel = (roomChanel, username, chatMessage, date) =>{
+        if(this.chat.channels[roomChanel]){
+            this.chat.channels[roomChanel].unreadMessages += 1
+            this.chat.channels[roomChanel].messages.push({
+                username: username,
+                chatMessage: chatMessage,
+                date: date
+            })
+            
+            EventDispatcher.publish(eventsType.UPDATE_CHAT_CHANELS, this.chat.channels)
+        }
+    }
 
+    clearUnreadMessages = (roomChanel) =>{
+        if(this.chat.channels[roomChanel]){
+            this.chat.channels[roomChanel].unreadMessages = 0
+        }
     }
 
     clearChatChanel = (roomChanel) =>{

@@ -1,10 +1,13 @@
 import React, { useEffect } from 'react'
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import ChatInput from './ChatInput';
 import ChatMessages from './ChatMessages';
 import ChatTabs from './ChatTabs';
 
 const ChatContainer = () => {
+
+    const user = useSelector(state => state.players.myUser)
 
     useEffect(()=>{
     },[])
@@ -13,8 +16,8 @@ const ChatContainer = () => {
         <ChatWrapper>
             <Container>
                 <ChatTabs />
-                <ChatMessages />
-                <ChatInput />
+                <ChatMessages chatChanel={'general'}/>
+                <ChatInput username={user.username} chatChanel={'general'}/>
             </Container>
         </ChatWrapper>
     )
