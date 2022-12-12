@@ -56,9 +56,9 @@ const DicesTab = (props) => {
 }
 
 const DicesContainer = styled.View`
-  display: flex;
-  width: 100%;
-  height: 100%;
+    flex: .83;
+    display: flex;
+    width: 100%;
 `
 const DicesScroll = styled.ScrollView`
   display: flex;

@@ -81,9 +81,9 @@ const FlashTab = (props) => {
 }
 
 const FlashContainer = styled.View`
+  flex: .83;
   display: flex;
   width: 100%;
-  height: 100%;
 `
 const FlashScroll = styled.ScrollView`
   display: flex;

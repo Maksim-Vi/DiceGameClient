@@ -90,9 +90,9 @@ const CoinsTab = (props) => {
 }
 
 const CoinsContainer = styled.View`
+  flex: .83;
   display: flex;
   width: 100%;
-  height: 100%;
 `
 const CoinsScroll = styled.ScrollView`
   display: flex;

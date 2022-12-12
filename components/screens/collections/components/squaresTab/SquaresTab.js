@@ -57,9 +57,9 @@ const SquaresTab = (props) => {
 }
 
 const Square = styled.View`
+  flex: .83;
   display: flex;
   width: 100%;
-  height: 100%;
 `
 
 const SquaresScroll = styled.ScrollView`

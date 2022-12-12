@@ -85,9 +85,9 @@ const DiamondsTab = (props) => {
 }
 
 const DiamondsContainer = styled.View`
+  flex: .83;
   display: flex;
   width: 100%;
-  height: 100%;
 `
 const DiamondsScroll = styled.ScrollView`
   display: flex;
