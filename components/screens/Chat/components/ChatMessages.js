@@ -1,51 +1,17 @@
 import React from 'react'
+import { StyleSheet } from 'react-native';
 import styled from 'styled-components';
-import Text from '../../../common/Text/Text';
 import EventDispatcher from '../../../redux/EventDispatcher';
 import eventsType from '../../../redux/eventsType';
-
-// const ChatMessages = (props) => {
-
-//     const [chanelData, setChanelData] = useState(null)
-
-//     const updateChatChanelsMessage = (data) =>{
-//         if(data[props.chatChanel]){
-//             setChanelData(data[props.chatChanel])
-//             window.chatManager.clearUnreadMessages(props.chatChanel)
-//         }
-//     }
-
-//     useEffect(() => {
-//         const subscriber = EventDispatcher.subscribe(eventsType.UPDATE_CHAT_CHANELS, updateChatChanelsMessage)
-
-//         return () => {
-//             EventDispatcher.unsubscribe(subscriber)
-//         }
-//     }, [])
-
-//     useEffect(()=>{
-//         console.log('chanelData',chanelData);
-//     },[chanelData])
-    
-
-    // return (
-    //     <ChatMessagesContainer>
-    //         {chanelData &&
-    //             chanelData.messages.map((mess, index) => {
-    //                 return <MessageContainer key={index}>
-    //                     <Text madium heavy color={'black'}>{mess.username}: </Text><Text color={'black'}>{mess.chatMessage}</Text>
-    //                 </MessageContainer>
-    //             })
-    //         }
-    //     </ChatMessagesContainer>
-    // )
-// }
+import Message from './Message/Message';
 
 class ChatMessages extends React.Component {
     constructor(props){
         super(props)
 
+        this.scrollView = null
         this.subscriber = null
+
         this.state = {
             chanelData: null
         }
@@ -55,9 +21,11 @@ class ChatMessages extends React.Component {
         this.subscriber = EventDispatcher.subscribe(eventsType.UPDATE_CHAT_CHANELS, this.updateChatChanelsMessage)
     }
 
-    componentDidUpdate(nextProps, nextState){
+    shouldComponentUpdate(nextProps, nextState){
         return this.state.chanelData !== nextState.chanelData
     }
+
+    componentDidUpdate(prevProps, prevState){}
 
     componentWillUnmount(){
         EventDispatcher.unsubscribe(this.subscriber)
@@ -75,13 +43,19 @@ class ChatMessages extends React.Component {
     render(){
         return (
             <ChatMessagesContainer>
-                {this.state.chanelData &&
-                    this.state.chanelData.messages.map((mess, index) => {
-                        return <MessageContainer key={index}>
-                            <Text madium heavy color={'black'}>{mess.username}: </Text><Text color={'black'}>{mess.chatMessage}</Text>
-                        </MessageContainer>
-                    })
-                }
+                <ChatScroll ref={ref => {this.scrollView = ref}}
+                            onContentSizeChange={() => this.scrollView.scrollToEnd({animated: true})}
+                            showsVerticalScrollIndicator={true} 
+                            contentContainerStyle={styles.scroll}>
+                    <ChatScrollContainer>
+                        {this.state.chanelData &&
+                            this.state.chanelData.messages.map((mess, index) => {
+                                return <Message key={index} mess={mess} index={index} />
+                            })
+                        }
+                    </ChatScrollContainer>
+                </ChatScroll>
+               
             </ChatMessagesContainer>
         )
     }
@@ -89,18 +63,25 @@ class ChatMessages extends React.Component {
 
 const ChatMessagesContainer = styled.View`
     flex: .7;
-    justify-content: flex-end;
     width: 95%;
     height: 100%;
-    background-color: rgba(220, 220, 220, 0.73);
+    background-color: #0b61abb0;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 `
-const MessageContainer = styled.View`
-    display: flex;
-    flex-direction: row;
-    margin-left: 10px;
-    width: 70%;
-    height: 50px;
-    border-radius: 10px;
+const ChatScroll = styled.ScrollView`
+  display: flex;
 `
+
+const ChatScrollContainer = styled.View`
+    justify-content: flex-end;
+`
+const styles = StyleSheet.create({
+    scroll:{
+        display: 'flex',
+        flexGrow: 1, 
+        justifyContent: 'flex-end'
+    }
+})
 
 export default ChatMessages

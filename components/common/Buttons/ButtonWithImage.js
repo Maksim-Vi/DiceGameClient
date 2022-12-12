@@ -9,7 +9,7 @@ const ButtonWithImage = (props) => {
                     style={{ borderBottomWidth: 3 }}
                     activeOpacity={0.9}>
             <PriceImage source={props.image}/>
-            <Text small heavy color='#fff' center>{props.price}</Text>
+            {props.text && <Text small heavy color='#fff' center>{props.text}</Text>}
         </CollectBtn>
     )
 }

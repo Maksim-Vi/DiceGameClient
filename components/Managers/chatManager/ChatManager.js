@@ -31,7 +31,6 @@ class ChatManager {
                 this.addChatChanel(data.chatRoom, data.username)
                 break;
             case 'S_SEND_MESSAGE':
-                console.log('S_SEND_MESSAGE', data);
                 this.updateChatChanel(data.chatRoom, data.username, data.chatMessage, data.date)
                 break;
             default:             
@@ -58,7 +57,7 @@ class ChatManager {
                 unreadMessages: 0,
                 messages: []
             }
-            console.log('connect to chanel', roomChanel, this.chat.channels);
+            console.log('connect to chanel', roomChanel);
         }
     }
 

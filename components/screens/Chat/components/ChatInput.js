@@ -1,7 +1,9 @@
 import React from 'react'
 import { useState } from 'react';
 import styled from 'styled-components';
-import ButtonWithText from '../../../common/Buttons/ButtonWithText';
+import ButtonImage from '../../../common/Buttons/ButtonImage';
+import send from '../../../../assets/chat/send.png';
+import smile from '../../../../assets/chat/smile.png';
 import { store } from '../../../redux/redux-store';
 
 const ChatInput = (props) => {
@@ -13,21 +15,32 @@ const ChatInput = (props) => {
     }
 
     const sendMessageHandler = () =>{
-        store.chatManager.sendChatMessage(props.username, props.chatChanel, message)
-        setMessage('')
+        if(message && message !== ''){
+            store.chatManager.sendChatMessage(props.username, props.chatChanel, message)
+            setMessage('')
+        }
+    }
+
+    const openSmiles = () =>{
+
     }
 
     return (
         <ChatInputContainer>
-            <ChatField placeholder='tap to her =)'
+            <ChatField placeholder='Press here to chat...'
                        placeholderTextColor='#838383'
                        value={message}
+                       maxLength={100}
                        onChangeText={(value) => onChangeInput(value)} />
             
-            <ButtonWithText text={'send'} 
-                            width={'50px'}
-                            height={'50px'}
-                            clickHandler={()=> sendMessageHandler()}/>
+            <ButtonImage image={smile}
+                         width={35}
+                         height={35}
+                         clickHandler={()=> openSmiles()}/>
+            <ButtonImage image={send}
+                         width={35}
+                         height={35}
+                         clickHandler={()=> sendMessageHandler()}/>
         </ChatInputContainer>
     )
 }
@@ -40,19 +53,18 @@ const ChatInputContainer = styled.View`
     flex-direction: row;
     margin: 0 10px;
     width: 95%;
-    background-color: rgba(220, 220, 220, 0.73);
+    background-color: #0b61abb0;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
 `
 const ChatField = styled.TextInput`
-    width: 80%;
+    width: 70%;
     height: 50px;
     margin: 10px auto;
     padding: 5px 20px;
-    color: #c6c6c6;
-    background-color: #404040;
+    color: #000;
+    background-color: #d5dbe1;
     border-radius: 50px;
     justify-content: center;
-    border: 2px solid rgb(255,157,77);
 `
 export default ChatInput

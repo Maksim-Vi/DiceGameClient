@@ -1,21 +1,38 @@
 import React from 'react'
 import styled from 'styled-components';
+import Tab from './Tabs/Tab';
+
+const arrTabs = ['general','clubs', 'friends']
 
 const ChatTabs = () => {
 
-   return (
-        <ChatTabsContainer>
+    const getTabs = () =>{
+        let tabs = []
 
+        arrTabs.forEach(tab=>{
+            tabs.push(<Tab tabName={tab}/>)
+        })
+
+        return tabs
+    }
+
+
+    return (
+        <ChatTabsContainer>
+            {getTabs()}
         </ChatTabsContainer>
-   )
+    )
 }
 
 const ChatTabsContainer = styled.View`
-    flex: .1;
-    width: 95%;
-    background-color: rgba(220, 220, 220, 0.73);
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+    flex: .08;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: row;
+    width: 70%;
+    background-color: #0b61abb0;
+    border-radius: 10px;
 `
 
 export default ChatTabs
