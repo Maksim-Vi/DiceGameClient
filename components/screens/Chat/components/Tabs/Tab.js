@@ -1,22 +1,30 @@
 import React from 'react'
 import styled from 'styled-components'
+import Text from '../../../../common/Text/Text'
 
-const Tab = () => {
-  return (
-    <TabContainer>
-
-    </TabContainer>
-  )
+const Tab = (props) => {
+    return (
+        <TabContainer activeOpacity={0.9}>
+            <Image source={props.image} />
+            <Text small>{props.tabName}</Text>
+        </TabContainer>
+    )
 }
 
 const TabContainer = styled.TouchableOpacity`
-  align-items: center;
-  justify-content: center;
-  width: 30%;
-  height: 40px;
-  border-radius: 10px;
-  flex-basis: auto;
-  background-color: #166bb4;  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 30%;
+    padding: 2px 0;
+    margin: 10px 0;
+    border-radius: 10px;
+    background-color: #025198c9;  
+`
+const Image = styled.Image`
+    width: 25px;
+    height: 25px;
 `
 
 export default Tab
