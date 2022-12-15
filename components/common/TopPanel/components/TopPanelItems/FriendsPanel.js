@@ -11,7 +11,7 @@ const FriendsPanel = (props) => {
         navigaion.navigate('FriendsScreen')
     }
 
-    return <ButtonWithImage color={'rgba(13, 64, 194, 0.88)'}
+    return <ButtonWithImage color={'rgb(1,1,70)'}
                             width={45}
                             height={45}
                             borderColor={'#fff0'}

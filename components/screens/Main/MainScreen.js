@@ -1,6 +1,7 @@
 import React  from 'react'
 import BackgroundWrapper from '../../common/BackgroundWrapper/BackgroundWrapper'
 import mainBg from '../../../assets/bg/main_bg.jpg'
+import freeCoins from '../../../assets/shop/profits.png'
 import styled from 'styled-components'
 import TopMain from '../../common/TopPanel/TopPanel'
 import C_QUICK_PLAY from '../../protocol/messages/clients/games/C_QUICK_PLAY'
@@ -12,6 +13,8 @@ import { setTestBtnsPopup } from '../../redux/reducers/popups/PopupsReducer'
 import { useDispatch, useSelector } from 'react-redux'
 import Text from '../../common/Text/Text'
 import { selectMyUser } from '../../redux/reducers/players/PlayersReducer'
+import ButtonImage from "../../common/Buttons/ButtonImage";
+import FreeGift from "./components/FreeGift";
 
 const MainScreen = () => {
 
@@ -37,7 +40,9 @@ const MainScreen = () => {
           <Text color={'#000'}>Test Buttons</Text>
         </Test>
       }
-     
+
+      <FreeGift />
+
     </BackgroundWrapper>
   )
 }
