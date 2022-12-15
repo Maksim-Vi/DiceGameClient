@@ -25,21 +25,21 @@ const ModalChildrenBuy = (props) => {
                 image = coins
                 price = props.openItem.price.coins
                 return <ButtonWithImage image={image}
-                                        price={price}
+                                        text={price}
                                         clickHandler={()=>confirmModal('coins',price,props.openItem.id)}/>
             }
             case 'diamonds':{
                 image = diamonds
                 price = props.openItem.price.diamonds
                 return <ButtonWithImage image={image}
-                                        price={price}
+                                        text={price}
                                         clickHandler={()=>confirmModal('diamonds',price,props.openItem.id)}/>
             }
             case 'realmoney':{
                 image = money
                 price = props.openItem.price.money
                 return <ButtonWithImage image={image}
-                                        price={price}
+                                        text={price}
                                         clickHandler={()=>confirmModal('realmoney',price,props.openItem.id)}/>
             }
             case 'coins-diamonds':

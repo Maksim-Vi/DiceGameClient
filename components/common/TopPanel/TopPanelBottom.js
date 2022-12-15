@@ -10,7 +10,6 @@ const TopPanelBottom = (props) => {
             <UserInfo userData={props.userData}/>
           
             <PanelEndContainer>
-                <Settings />
                 <RoadButton />
             </PanelEndContainer>
         </PanelBottom>
@@ -22,7 +21,7 @@ const PanelBottom = styled.View`
     flex-direction: row;
     align-items: flex-start;
     justify-content: space-between;
-    width: 100%;
+    width: 98%;
     margin-top: 10px;
 `
 const PanelEndContainer = styled.View`

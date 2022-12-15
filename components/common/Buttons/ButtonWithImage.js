@@ -8,22 +8,30 @@ const ButtonWithImage = (props) => {
                     onPress={props.clickHandler}
                     style={{ borderBottomWidth: 3 }}
                     activeOpacity={0.9}>
-            <PriceImage source={props.image}/>
-            <Text small heavy color='#fff' center>{props.price}</Text>
+            <PriceImage {...props} source={props.image}/>
+            {props.text && <Text small heavy color='#fff' center>{props.text}</Text>}
         </CollectBtn>
     )
 }
 
 const PriceImage = styled.Image`
-  width: 20px;
-  height: 20px;
+  ${(props)=>{
+    return props.width
+            ? `width: ${props.width}px;`
+            : 'width: 30px;'
+  }};
+  ${(props)=>{
+    return props.height
+            ? `height: ${props.height}px;`
+            : 'height: 30px;'
+  }};
 `
 const CollectBtn = styled.TouchableOpacity`
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: row;
-  margin: 5px;
+  //margin: 5px;
   ${(props)=>{
     return props.color 
             ? `background-color: ${props.color};` 
@@ -35,7 +43,11 @@ const CollectBtn = styled.TouchableOpacity`
             ? `border: 1px solid ${props.borderColor};` 
             : 'border: 1px solid rgb(255, 157, 77);'
   }};
-  padding: 5px 40px 5px 40px;
+  ${(props)=>{
+    return props.padding || props.padding === 0
+            ? `padding: ${props.padding}px;`
+            : ' padding: 5px 40px 5px 40px;'
+  }};
 `
 
 export default ButtonWithImage;

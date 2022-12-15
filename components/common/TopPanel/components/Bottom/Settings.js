@@ -27,7 +27,6 @@ const SettingsContainer = styled.View`
   width: 50px;
   height: 50px;
   border-radius: 10px;
-  margin-right: 10px;
   background-color: rgba(13, 64, 194, 0.88);
 `
 
