@@ -3,12 +3,16 @@ import styled from "styled-components";
 import settings from "../../../../../assets/topPanel/exit.png";
 import {UserContext} from "../../../../utils/UserProvider";
 import C_LEAVE_SOCKET from "../../../../protocol/messages/clients/C_LEAVE_SOCKET";
+import {setSettingsMenuPopup} from "../../../../redux/reducers/popups/PopupsReducer";
+import {useDispatch} from "react-redux";
 
 const Settings = (props) =>{
 
+    const dispatch = useDispatch()
     const { logout } = useContext(UserContext);
 
     const Logout = () =>{
+        dispatch(setSettingsMenuPopup({visible: false, data: null}))
         new C_LEAVE_SOCKET()
         logout()
     }
