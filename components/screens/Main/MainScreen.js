@@ -41,7 +41,7 @@ const MainScreen = () => {
         </Test>
       }
 
-      <FreeGift />
+      <FreeGift myUser={myUser}/>
 
     </BackgroundWrapper>
   )

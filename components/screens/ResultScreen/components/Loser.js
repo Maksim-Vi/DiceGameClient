@@ -43,23 +43,26 @@ const Loser = ({loser}) => {
                 }
             ]
         }}>
-            <PlaceContainer>
-                <Place source={place} resizeMode={ 'stretch'}/>
-                <Avatar width={50} height={50} avatarId={loser.player.avatar}/>
-            </PlaceContainer>
+            <Container>
+                <PlaceContainer>
+                    <Place source={place} resizeMode={ 'stretch'}/>
+                    <Avatar width={50} height={50} avatarId={loser.player.avatar}/>
+                </PlaceContainer>
 
-            <NameTextContainer>
-                <Text title heavy color={'#170231'}>{loser.player.username}</Text>
-                <Text color={'#fff'}>Place №2</Text>
-            </NameTextContainer>
+                <NameTextContainer>
+                    <Text title heavy color={'#170231'}>{loser.player.username}</Text>
+                    <Text color={'#fff'}>Place №2</Text>
+                </NameTextContainer>
 
-            <WinsContainer>
-                <Text medium heavy color={'#fff'}>coins: {loser.items.coins}</Text>
-                <Text medium heavy color={'#fff'}>crystals: {loser.items.crystals}</Text>
-                <Text medium heavy color={'#000'}> Combinations: 
-                    <Text large heavy color={'#fff'}> {loser.items.scores}</Text> 
-                </Text>
-            </WinsContainer>
+                <WinsContainer>
+                    <Text medium heavy color={'#fff'}>coins: {loser.items.coins}</Text>
+                    <Text medium heavy color={'#fff'}>crystals: {loser.items.crystals}</Text>
+                    <Text medium heavy color={'#000'}> Combinations:
+                        <Text large heavy color={'#fff'}> {loser.items.scores}</Text>
+                    </Text>
+                </WinsContainer>
+            </Container>
+
 
         </LoserContainer>
     )
@@ -75,6 +78,15 @@ const LoserContainer = styled(Animated.View)`
     margin: 10px auto;
     background-color: #02b7f5;
     border: 2px solid #076e91;
+`
+
+const Container = styled.View`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    width: 100%;
+    padding: 5px;
 `
 
 const PlaceContainer = styled.View`

@@ -9,7 +9,6 @@ import Constants from "expo-constants";
 import {getCoinsBonus} from "../../../protocol/API/API";
 import {store} from "../../../redux/redux-store";
 import {updateCurrentUserCoins} from "../../../redux/reducers/players/PlayersReducer";
-import {useSelector} from "react-redux";
 const { APP_TYPE } = Constants.manifest?.extra;
 
 const AdUnitID = Platform.OS === 'ios'
@@ -22,7 +21,6 @@ const internal = RewardedInterstitialAd.createForAdRequest(AdUnitID,{
 
 const FreeGift = (props) => {
 
-    const user = useSelector(state => state.players)
     const [loadInternal, setLadInternal] = useState(false)
     const animatedValue = React.useRef(new Animated.Value(1)).current;
 
@@ -44,7 +42,7 @@ const FreeGift = (props) => {
         })
 
         const unsubscribeClosed = internal.addAdEventListener(RewardedAdEventType.EARNED_REWARD, async (data)=>{
-            const getBonusCoins = await getCoinsBonus(user.username)
+            const getBonusCoins = await getCoinsBonus(props.myUser.username)
 
             if(getBonusCoins && getBonusCoins.success){
                 store.dispatch(updateCurrentUserCoins(getBonusCoins.updatedCoins))
@@ -78,6 +76,7 @@ const FreeGift = (props) => {
     useEffect(()=>{
         animate()
 
+        internal.load()
         const unsubscribeInternalEvents = loadReclam()
 
         if(internal.loaded){
@@ -85,7 +84,7 @@ const FreeGift = (props) => {
         }
 
         return ()=>{
-            unsubscribeInternalEvents
+            unsubscribeInternalEvents()
             animatedValue.stopAnimation()
         }
     },[])
