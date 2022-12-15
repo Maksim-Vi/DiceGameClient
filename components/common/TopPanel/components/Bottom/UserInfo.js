@@ -35,7 +35,7 @@ const UserInfoContainer = styled.View`
   display: flex;
   flex-direction: row;
   padding: 5px;
-  margin-left: 10px;
+  margin-left: 5px;
   border-radius: 10px;
   width: 130px;
   height: 60px;
