@@ -4,24 +4,25 @@ import freeCoins from "../../../../assets/shop/profits.png";
 import styled from "styled-components";
 import {Animated, Easing, Platform} from "react-native";
 import {setTimingAnimated} from "../../../utils/Animation";
-import {RewardedAdEventType, RewardedInterstitialAd, TestIds} from "react-native-google-mobile-ads";
-import Constants from "expo-constants";
+import {
+    TestIds,
+    useRewardedInterstitialAd,
+} from "react-native-google-mobile-ads";
 import {getCoinsBonus} from "../../../protocol/API/API";
 import {store} from "../../../redux/redux-store";
 import {updateCurrentUserCoins} from "../../../redux/reducers/players/PlayersReducer";
-const { APP_TYPE } = Constants.manifest?.extra;
+import {APP_TYPE} from '@env'
 
 const AdUnitID = Platform.OS === 'ios'
-    ?  APP_TYPE !== 'development' ? 'ca-app-pub-6421975370931679/8219230470' : TestIds.REWARDED_INTERSTITIAL
-    : APP_TYPE !== 'development' ? 'ca-app-pub-6421975370931679/7194208820' : TestIds.REWARDED_INTERSTITIAL
-
-const internal = RewardedInterstitialAd.createForAdRequest(AdUnitID,{
-    requestNonPersonalizedAdsOnly: true
-})
+    ?  APP_TYPE !== 'development' ? 'ca-app-pub-6421975370931679/8219230470' : TestIds.GAM_REWARDED_INTERSTITIAL
+    : APP_TYPE !== 'development' ? 'ca-app-pub-6421975370931679/7194208820' : TestIds.GAM_REWARDED_INTERSTITIAL
 
 const FreeGift = (props) => {
 
-    const [loadInternal, setLadInternal] = useState(false)
+    const { isLoaded, isClosed, load, show, isEarnedReward } =  useRewardedInterstitialAd(AdUnitID, {
+        requestNonPersonalizedAdsOnly: true,
+    })
+
     const animatedValue = React.useRef(new Animated.Value(1)).current;
 
     const animate = () => {
@@ -33,64 +34,42 @@ const FreeGift = (props) => {
         ).start()
     }
 
-    const loadReclam = () =>{
+    const admodHendler = () =>{
+        if(isLoaded){
+            show()
+        }
+    }
 
-        internal.load()
-
-        const unsubscribeLoaded = internal.addAdEventListener(RewardedAdEventType.LOADED,(data)=>{
-            setLadInternal(true)
-        })
-
-        const unsubscribeClosed = internal.addAdEventListener(RewardedAdEventType.EARNED_REWARD, async (data)=>{
+    const getBonusByView = async () =>{
+        if (isClosed && isEarnedReward) {
             const getBonusCoins = await getCoinsBonus(props.myUser.username)
 
             if(getBonusCoins && getBonusCoins.success){
                 store.dispatch(updateCurrentUserCoins(getBonusCoins.updatedCoins))
-                setLadInternal(false)
             }
 
-            setTimeout(()=>{
-                internal.load()
-            },5000)
-        })
-
-        return () => {
-            unsubscribeLoaded()
-            unsubscribeClosed()
+            load()
         }
     }
 
-    const admodHendler = () =>{
-        if(loadInternal && internal.loaded){
-            internal.show()
-        }
-    }
+    useEffect(()=>{
+        load()
+    },[load])
 
     useEffect(() => {
-        if(internal.loaded){
-            setLadInternal(true)
-        }
-    }, [internal.loaded]);
+        getBonusByView()
+    }, [isClosed]);
 
 
     useEffect(()=>{
         animate()
 
-        internal.load()
-        const unsubscribeInternalEvents = loadReclam()
-
-        if(internal.loaded){
-            setLadInternal(true)
-        }
-
         return ()=>{
-            unsubscribeInternalEvents()
             animatedValue.stopAnimation()
         }
     },[])
 
-
-    if(!loadInternal && !internal.loaded) return null
+    if(!isLoaded) return null
 
     return (
         <FreeCoinsContainer style={{
@@ -107,6 +86,7 @@ const FreeGift = (props) => {
         </FreeCoinsContainer>
     )
 }
+
 
 const FreeCoinsContainer = styled(Animated.View)`
   position: absolute;

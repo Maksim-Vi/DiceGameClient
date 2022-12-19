@@ -12,15 +12,23 @@ import Winner from "./components/Winner";
 import Loser from "./components/Loser";
 import { Animated, Easing } from "react-native";
 import { setTimingAnimated } from "../../utils/Animation";
+import { useInterstitialAd, TestIds } from 'react-native-google-mobile-ads';
 
 const ResultScreen = (props) => {
-	
+
+    const { isLoaded, isClosed, load, show } = useInterstitialAd(TestIds.INTERSTITIAL, {
+        requestNonPersonalizedAdsOnly: true,
+    });
     const animatedValue = React.useRef(new Animated.Value(0)).current;
     const navigation = useNavigation()
 
     const hendlerCloseResult = () => {
-        navigation.navigate('MainScreen')
-        store.dispatch(setCountScores(null))
+        if (isLoaded) {
+            show();
+        } else {
+            navigation.navigate('MainScreen')
+            store.dispatch(setCountScores(null))
+        }
     }
 
 	const animateWinerText = () => {
@@ -80,13 +88,25 @@ const ResultScreen = (props) => {
 		animateWinerText();
 	  return () => {}
 	}, [])
-	
+
+    React.useEffect(() => {
+        load();
+    }, [load]);
+
+    React.useEffect(() => {
+        if (isClosed) {
+            navigation.navigate('MainScreen')
+            store.dispatch(setCountScores(null))
+        }
+    }, [isClosed, navigation]);
 
     return (
         <BackgroundWrapper gackground={mainBg}>
             <ResultContainer>
                 {renderResult()}
-                <PlayButton onPress={hendlerCloseResult} style={{ borderBottomWidth: 5 }}><Text large heavy color={'#fff'}>Continue</Text></PlayButton>
+                <PlayButton onPress={hendlerCloseResult} style={{ borderBottomWidth: 5 }}>
+                    <Text large heavy color={'#fff'}>Continue</Text>
+                </PlayButton>
             </ResultContainer>
         </BackgroundWrapper>
 

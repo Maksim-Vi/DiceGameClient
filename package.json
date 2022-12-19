@@ -4,7 +4,8 @@
   "main": "index.js",
   "scripts": {
     "start:dev": "expo start",
-    "start": "expo start --dev-client",
+    "start": "APP_TYPE=development expo start --dev-client",
+    "start:prod": "APP_TYPE=production expo start --dev-client",
     "android": "expo run:android",
     "ios": "expo run:ios",
     "expo:build:android": "expo build:android",
@@ -35,6 +36,7 @@
     "react-dom": "18.0.0",
     "react-hook-form": "^7.36.1",
     "react-native": "0.69.6",
+    "react-native-dotenv": "^3.4.6",
     "react-native-eject": "^0.1.2",
     "react-native-event-listeners": "^1.0.7",
     "react-native-gesture-handler": "~2.5.0",

@@ -2,13 +2,15 @@ import React from 'react';
 import ButtonWithImage from "../../../Buttons/ButtonWithImage";
 import settings from "../../../../../assets/topPanel/friends.png";
 import {useNavigation} from "@react-navigation/native";
+import {Alert} from "react-native";
 
 const FriendsPanel = (props) => {
 
-    const navigaion = useNavigation()
+    //const navigaion = useNavigation()
 
     const openFriendsPopup = () => {
-        navigaion.navigate('FriendsScreen')
+        Alert.alert('Coming Soon!', 'Friends will be available after some time. Have a good game!')
+        //navigaion.navigate('FriendsScreen')
     }
 
     return <ButtonWithImage color={'rgb(1,1,70)'}
