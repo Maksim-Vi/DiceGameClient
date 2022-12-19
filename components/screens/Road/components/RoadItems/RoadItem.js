@@ -23,8 +23,8 @@ const RoadItemContainer = styled.TouchableOpacity`
     height: 20px;
     ${(props)=>{
         return `
-            top: ${props.top}%;
-            left: ${props.left}%;
+            top: ${props.top}px;
+            left: ${props.left}px;
         `
     }}
 `

@@ -6,8 +6,9 @@ import RoadItem from './RoadItem';
 const RoadItems = (props) => {
   return (
       <RoadItemsContainer>
-            {roadMap.map(map=>{
-                return <RoadItem top={map.pos.top} 
+            {roadMap.map((map, index)=>{
+                return <RoadItem key={index}
+                                 top={map.pos.top}
                                  left={map.pos.left} 
                                  type={map.type}
                                  price={map.price}
