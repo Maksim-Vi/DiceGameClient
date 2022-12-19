@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import ButtonImage from "../../../common/Buttons/ButtonImage";
 import freeCoins from "../../../../assets/shop/profits.png";
 import styled from "styled-components";
