@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import SpriteSheet from "../../SpriteSheet";
-import AnimFaer from "../../../../../assets/animation/spriteSheet/firewark-yellow/Firework.png";
+import AnimFaer from "../../../../../assets/animation/spriteSheet/firewark-yellow/firework-2.png";
 import styled from "styled-components";
 
 const FireworkColor = (props) => {
@@ -9,18 +9,18 @@ const FireworkColor = (props) => {
     const play = (type) => {
         mummy.play({
             type: type,
-            fps: Number(10),
+            fps: Number(14),
             loop: false,
             resetAfterFinish: true,
             onFinish: () => {
-                stop()
+                // stop()
             }
         });
     };
 
     const stop = () => {
         mummy.stop(() => {
-            play('start')
+            // play('start')
         });
     };
 

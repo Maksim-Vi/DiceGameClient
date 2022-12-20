@@ -224,34 +224,3 @@ export default class SpriteSheet extends React.PureComponent {
         };
     };
 }
-
-// export default class SpriteSheet extends React.PureComponent {
-//     constructor() {
-//         super();
-//
-//         const value =
-//     }
-//
-//     render() {
-//         return (
-//             <View style={[styles.container, this.props.style]}>
-//                 <Animated.Image
-//                     style={[styles.img, {
-//                             transform: [
-//                                 {translateX: 0},
-//                             ]
-//                     }]}
-//                     source={this.props.source}
-//                 />
-//             </View>
-//         )
-//     }
-// }
-//
-// const styles = StyleSheet.create({
-//     container: {
-//         aspectRatio: 1,
-//         overflow: 'hidden',
-//     },
-//     img: {}
-// })

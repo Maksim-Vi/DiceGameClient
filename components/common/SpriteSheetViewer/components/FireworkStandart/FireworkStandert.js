@@ -3,24 +3,24 @@ import SpriteSheet from "../../SpriteSheet";
 import AnimFaer from "../../../../../assets/animation/spriteSheet/firewark-yellow/Firework.png";
 import styled from "styled-components";
 
-const FireworkStandert = (props) => {
+const FireworkStandart = (props) => {
     let mummy = null
 
     const play = (type) => {
         mummy.play({
             type: type,
-            fps: Number(10),
+            fps: Number(18),
             loop: false,
             resetAfterFinish: true,
             onFinish: () => {
-                stop()
+                // stop()
             }
         });
     };
 
     const stop = () => {
         mummy.stop(() => {
-            play('start')
+            // play('start')
         });
     };
 
@@ -53,4 +53,4 @@ const SpriteContainer = styled.View`
   justify-content: center;
 `
 
-export default FireworkStandert;
+export default FireworkStandart;
