@@ -9,12 +9,14 @@ import { setTestBtnsPopup } from '../../../redux/reducers/popups/PopupsReducer'
 import { getResultScreenData, getStartGameData } from '../../../utils/utils'
 import FireworkStandart from "../../../common/SpriteSheetViewer/components/FireworkStandart/FireworkStandert";
 import FireworkColor from "../../../common/SpriteSheetViewer/components/FireworkColor/FireworkColor";
+import Stars from "../../../common/SpriteSheetViewer/components/Stars/Stars";
 
 const TestBtnsPopups = () =>{
 
     const [anim, setAnim] = React.useState({
         showFirst: false,
         showSecond: false,
+        showThird: false,
     })
 
     const { height, width } = useWindowDimensions();
@@ -66,6 +68,9 @@ const TestBtnsPopups = () =>{
                 <TextAnim onPress={()=>hendelAnim('showSecond')} style={{ borderBottomWidth: 8 }}>
                     <Text center color={'#000'}>show 2 Anim</Text>
                 </TextAnim>
+                <TextAnim onPress={()=>hendelAnim('showThird')} style={{ borderBottomWidth: 8 }}>
+                    <Text center color={'#000'}>show 3 Anim</Text>
+                </TextAnim>
             </AnimBtnContainer>
         </Container>
     }
@@ -76,6 +81,7 @@ const TestBtnsPopups = () =>{
         <AnimContainer>
             {anim.showFirst && <FireworkStandart />}
             {anim.showSecond && <FireworkColor />}
+            {anim.showThird && <Stars />}
         </AnimContainer>
     </ModalWrapper>
 }

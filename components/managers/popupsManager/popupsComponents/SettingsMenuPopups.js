@@ -15,19 +15,9 @@ const SettingsMenuPopups = (props) => {
         dispatch(setSettingsMenuPopup({visible: false, data: null}))
     }
 
-    return <ModalWrapper modalBG={'default'} width={width - 50} height={height / 8} modalVisible={true} setModalVisible={closeModal}>
-        <Container>
-            <Settings />
-        </Container>
+    return <ModalWrapper modalBG={'default'} width={width - 50} height={height / 3} modalVisible={true}>
+            <Settings closeModal={closeModal}/>
     </ModalWrapper>
 }
-
-const Container = styled.View`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-`
 
 export default SettingsMenuPopups;
