@@ -39,16 +39,16 @@ const Settings = (props) =>{
                         <Text large blod center color={'#0c6fb6'}>mute/unmute sounds</Text>
                     </SoundsContainer>
                 </Btn>
+                <Btn onPress={()=>console.log('support')} activeOpacity={0.9}>
+                    <SupportContainer style={{ borderBottomWidth: 3 }}>
+                        <Img source={support} resizeMode='stretch'/>
+                        <Text large blod center color={'#0c6fb6'}>support</Text>
+                    </SupportContainer>
+                </Btn>
                 <Btn onPress={Logout} activeOpacity={0.9}>
                     <LeaveContainer style={{ borderBottomWidth: 3 }}>
                         <Img source={exit} resizeMode='stretch'/>
                         <Text large blod center color={'#0c6fb6'}>leave game</Text>
-                    </LeaveContainer>
-                </Btn>
-                <Btn onPress={()=>console.log('support')} activeOpacity={0.9}>
-                    <LeaveContainer style={{ borderBottomWidth: 3 }}>
-                        <Img source={support} resizeMode='stretch'/>
-                        <Text large blod center color={'#0c6fb6'}>support</Text>
                     </LeaveContainer>
                 </Btn>
             </ContentContainer>
@@ -87,6 +87,8 @@ const ReturnContainer = styled.View`
 `
 const SoundsContainer = styled(ReturnContainer)``
 const LeaveContainer = styled(ReturnContainer)``
+const SupportContainer = styled(ReturnContainer)``
+
 const Info = styled.View`
   width: 50%;
 `

@@ -3,8 +3,13 @@ import styled from 'styled-components'
 import Text from '../../../../common/Text/Text'
 
 const Tab = (props) => {
+
+    const openTab = () =>{
+
+    }
+
     return (
-        <TabContainer activeOpacity={0.9}>
+        <TabContainer activeOpacity={0.9} onPress={openTab}>
             <Image source={props.image} />
             <Text small>{props.tabName}</Text>
         </TabContainer>
@@ -23,6 +28,11 @@ const TabContainer = styled.TouchableOpacity`
     background-color: #025198c9;  
 `
 const Image = styled.Image`
+    width: 25px;
+    height: 25px;
+`
+
+const TabButton = styled.TouchableWithoutFeedback`
     width: 25px;
     height: 25px;
 `

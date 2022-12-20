@@ -6,7 +6,7 @@ import {useDispatch} from "react-redux";
 import Settings from "../../../common/TopPanel/components/Bottom/Settings";
 import styled from "styled-components";
 
-const SettingsMenuPopups = (props) => {
+const SettingsMenuPopups = () => {
 
     const { height, width } = useWindowDimensions();
     const dispatch = useDispatch()

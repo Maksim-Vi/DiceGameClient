@@ -1,9 +1,7 @@
 import { EventRegister } from 'react-native-event-listeners'
 
 export default new class EventDispatcher {
-  constructor(){
-
-  }
+  constructor(){}
 
   publish = (eventName, data) => {
     EventRegister.emit(eventName, { detail: data })

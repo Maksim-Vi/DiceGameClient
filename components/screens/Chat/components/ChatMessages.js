@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import EventDispatcher from '../../../redux/EventDispatcher';
 import eventsType from '../../../redux/eventsType';
 import Message from './Message/Message';
+import ChatMassagesController from "./Controllers/ChatMessagesController";
 
 class ChatMessages extends React.Component {
     constructor(props){
@@ -13,8 +14,10 @@ class ChatMessages extends React.Component {
         this.subscriber = null
 
         this.state = {
-            chanelData: null
+            chanelData: window.chatManager.chat.channels[this.props.chatChanel] || null
         }
+
+        this.ChatMassagesController = new ChatMassagesController()
     }
 
     componentDidMount(){
@@ -44,7 +47,7 @@ class ChatMessages extends React.Component {
                     <ChatScrollContainer>
                         {this.state.chanelData &&
                             this.state.chanelData.messages.map((mess, index) => {
-                                return <Message key={index} mess={mess} index={index} />
+                                return this.ChatMassagesController.hendlerMessagesChat(mess, index)
                             })
                         }
                     </ChatScrollContainer>

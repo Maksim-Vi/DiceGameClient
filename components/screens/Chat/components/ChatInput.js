@@ -33,10 +33,10 @@ const ChatInput = (props) => {
                        maxLength={100}
                        onChangeText={(value) => onChangeInput(value)} />
             
-            <ButtonImage image={smile}
-                         width={35}
-                         height={35}
-                         clickHandler={()=> openSmiles()}/>
+            {/*<ButtonImage image={smile}*/}
+            {/*             width={35}*/}
+            {/*             height={35}*/}
+            {/*             clickHandler={()=> openSmiles()}/>*/}
             <ButtonImage image={send}
                          width={35}
                          height={35}
@@ -60,7 +60,7 @@ const ChatInputContainer = styled.View`
 const ChatField = styled.TextInput`
     width: 70%;
     height: 50px;
-    margin: 10px auto;
+    margin: 0 5px;
     padding: 5px 20px;
     color: #000;
     background-color: #d5dbe1;

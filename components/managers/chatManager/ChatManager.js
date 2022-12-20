@@ -10,7 +10,6 @@ import { addChatTab, cleanChatTabs } from "../../redux/reducers/chat/ChatReducer
 class ChatManager {
     constructor(){
 
-        this.config = {}
         this.chat = {
             channels: {},
         }
@@ -34,7 +33,7 @@ class ChatManager {
                 this.addChatChanel(data.chatRoom, data.username)
                 break;
             case 'S_SEND_MESSAGE':
-                this.updateChatChanel(data.chatRoom, data.username, data.chatMessage, data.date)
+                this.updateChatChanel(data.chatRoom, data.username, data.chatMessage, data.date, 'message')
                 break;
             default:             
                 break;
@@ -85,20 +84,28 @@ class ChatManager {
                 unreadMessages: 0,
                 messages: []
             }
+            this.addInfoMessageStartChat(roomChanel)
             console.log('connect to chanel', roomChanel);
         }
     }
 
-    updateChatChanel = (roomChanel, username, chatMessage, date) =>{
+    updateChatChanel = (roomChanel, username, chatMessage, date, type) =>{
         if(this.chat.channels[roomChanel]){
             this.chat.channels[roomChanel].unreadMessages += 1
             this.chat.channels[roomChanel].messages.push({
                 username: username,
                 chatMessage: chatMessage,
-                date: date
+                date: date,
+                type: type // privet, admin, info, etc
             })
             
             EventDispatcher.publish(eventsType.UPDATE_CHAT_CHANELS, this.chat.channels)
+        }
+    }
+
+    addInfoMessageStartChat = (roomChanel) =>{
+        if(roomChanel) {
+            this.updateChatChanel(roomChanel, 'info', 'Welcome to the chat!',new Date(),'info')
         }
     }
 
@@ -129,10 +136,6 @@ class ChatManager {
         }
 
         store.dispatch(cleanChatTabs())
-    }
-
-    testedManager = () =>{
-        console.log('test chat Manager');
     }
 
 }

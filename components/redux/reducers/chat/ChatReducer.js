@@ -13,8 +13,7 @@ export const chatReducerSlice = createSlice({
             state.activeChanel = action.payload
         },
         addChatTab: (state, action) => {
-            const isAddTab = state.chatTabs.length > 0 &&
-                state.chatTabs.find(tab => tab.chanelName !== action.payload.chanelName)
+            const isAddTab = state.chatTabs.find(tab => tab.chanelName.toLowerCase() === action.payload.chanelName.toLowerCase())
 
             if (!isAddTab) {
                 state.chatTabs.push(action.payload)
