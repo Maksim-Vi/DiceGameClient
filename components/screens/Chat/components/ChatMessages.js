@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {memo} from 'react'
 import { StyleSheet } from 'react-native';
 import styled from 'styled-components';
 import EventDispatcher from '../../../redux/EventDispatcher';
@@ -39,7 +39,7 @@ class ChatMessages extends React.Component {
 
     render(){
         return (
-            <ChatMessagesContainer>
+            <ChatMessagesContainer openEmoji={this.props.openEmoji}>
                 <ChatScroll ref={ref => {this.scrollView = ref}}
                             onContentSizeChange={() => this.scrollView.scrollToEnd({animated: true})}
                             showsVerticalScrollIndicator={true} 
@@ -59,7 +59,7 @@ class ChatMessages extends React.Component {
 }
 
 const ChatMessagesContainer = styled.View`
-    flex: .7;
+    flex: ${(props) => props.openEmoji ? '.3' : '.7' };
     width: 95%;
     height: 100%;
     background-color: #0b61abb0;
@@ -81,4 +81,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default ChatMessages
+export default memo(ChatMessages)

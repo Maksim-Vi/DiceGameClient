@@ -16,11 +16,11 @@ const MessageContainer = styled.View`
   align-items: center;
   width: 90%;
   height: auto;
-  padding: 10px;
+  padding: 15px;
   border-radius: 10px;
   margin: 5px auto;
   white-space: pre-wrap;
-  background-color: rgba(6, 139, 215, 0.79);
+  background-color: rgba(255, 216, 88, 0.87);
 `
 
 const MessageText = styled(Text)`

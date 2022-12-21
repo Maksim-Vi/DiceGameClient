@@ -38,6 +38,8 @@
     "react-native": "0.69.6",
     "react-native-dotenv": "^3.4.6",
     "react-native-eject": "^0.1.2",
+    "react-native-emoji-selector": "^0.2.0",
+    "react-native-emoticons": "^1.0.13",
     "react-native-event-listeners": "^1.0.7",
     "react-native-gesture-handler": "~2.5.0",
     "react-native-google-mobile-ads": "^8.1.0",

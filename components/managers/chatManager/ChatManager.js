@@ -91,21 +91,42 @@ class ChatManager {
 
     updateChatChanel = (roomChanel, username, chatMessage, date, type) =>{
         if(this.chat.channels[roomChanel]){
-            this.chat.channels[roomChanel].unreadMessages += 1
+            this.chat.channels[roomChanel].unreadMessages = this.chat.channels[roomChanel].unreadMessages + 1
             this.chat.channels[roomChanel].messages.push({
                 username: username,
                 chatMessage: chatMessage,
                 date: date,
                 type: type // privet, admin, info, etc
             })
-            
+
+            this.getAllUnreadMessages()
             EventDispatcher.publish(eventsType.UPDATE_CHAT_CHANELS, this.chat.channels)
         }
+    }
+
+    getAllUnreadMessages = () =>{
+        let unread = 0
+
+        if(this.chat.channels){
+            Object.entries(this.chat.channels).forEach(([key, chanel])=>{
+                unread += chanel.unreadMessages
+            })
+        }
+
+        EventDispatcher.publish(eventsType.UPDATE_CHAT_UNREAD_MESSAGES, unread)
     }
 
     addInfoMessageStartChat = (roomChanel) =>{
         if(roomChanel) {
             this.updateChatChanel(roomChanel, 'info', 'Welcome to the chat!',new Date(),'info')
+        }
+    }
+
+    clearAllUnreadMessages = () =>{
+        if(this.chat.channels){
+            Object.entries(this.chat.channels).forEach(([key, chanel])=>{
+                this.clearUnreadMessages(key)
+            })
         }
     }
 
