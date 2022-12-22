@@ -4,7 +4,7 @@ import S_UPDATE_USER_EXP from "./messages/server/users/S_UPDATE_USER_EXP";
 import S_UPDATE_USER_FLASH from "./messages/server/users/S_UPDATE_USER_FLASH";
 import S_UPDATE_USER_MONEY from "./messages/server/users/S_UPDATE_USER_MONEY";
 
-export const usersHendleMessage = (data) =>{
+export const usersHandlerMessage = (data) =>{
     switch (data.name) {
         case 'S_UPDATE_USER_EXP':
             new S_UPDATE_USER_EXP(data.lvl, data.levelExp, data.progress)

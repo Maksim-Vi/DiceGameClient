@@ -4,9 +4,10 @@ import S_LOGIN_FAILED from './messages/server/S_LOGIN_FAILED';
 import S_CREATE_ACCOUNT_SUCCESS from './messages/server/S_CREATE_ACCOUNT_SUCCESS';
 import S_CREATE_ACCOUNT_FAILED from './messages/server/S_CREATE_ACCOUNT_FAILED';
 import S_CLIENT_LOADED from './messages/server/S_CLIENT_LOADED';
-import { gameHendleMessage } from './GameMessageManager';
-import {usersHendleMessage} from "./UsersMessageManager";
-import {collectionHendleMessage} from "./collectionMessageManager";
+import { gameHandlerMessage } from './GameMessageManager';
+import {usersHandlerMessage} from "./UsersMessageManager";
+import {collectionHandlerMessage} from "./collectionMessageManager";
+import {roadHandlerMessage} from "./RoadMessageManager";
 
 export const hendleMessage = (data) =>{
     switch (data.name) {
@@ -46,8 +47,9 @@ export const hendleMessage = (data) =>{
             break;
     }
 
-    gameHendleMessage(data)
-    usersHendleMessage(data)
-    collectionHendleMessage(data)
+    gameHandlerMessage(data)
+    gameHandlerMessage(data)
+    collectionHandlerMessage(data)
+    roadHandlerMessage(data)
     window.chatManager.chatMassageHandler(data)
 }

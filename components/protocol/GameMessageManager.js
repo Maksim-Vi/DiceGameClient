@@ -16,7 +16,7 @@ import S_OPPONENT_THROW from "./messages/server/games/S_OPPONENT_THROW";
 import S_COUNT_SCORES from "./messages/server/games/S_COUNT_SCORES";
 import S_GAME_BROKEN from "./messages/server/games/S_GAME_BROKEN";
 
-export const gameHendleMessage = (data) =>{
+export const gameHandlerMessage = (data) =>{
     switch (data.name) {
         case 'S_CREATED_GAME':
             new S_CREATED_GAME(data.gameId)
