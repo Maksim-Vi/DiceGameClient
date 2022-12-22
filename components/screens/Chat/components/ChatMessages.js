@@ -1,9 +1,10 @@
-import React from 'react'
+import React, {memo} from 'react'
 import { StyleSheet } from 'react-native';
 import styled from 'styled-components';
 import EventDispatcher from '../../../redux/EventDispatcher';
 import eventsType from '../../../redux/eventsType';
 import Message from './Message/Message';
+import ChatMassagesController from "./Controllers/ChatMessagesController";
 
 class ChatMessages extends React.Component {
     constructor(props){
@@ -13,8 +14,10 @@ class ChatMessages extends React.Component {
         this.subscriber = null
 
         this.state = {
-            chanelData: null
+            chanelData: window.chatManager.chat.channels[this.props.chatChanel] || null
         }
+
+        this.ChatMassagesController = new ChatMassagesController()
     }
 
     componentDidMount(){
@@ -36,7 +39,7 @@ class ChatMessages extends React.Component {
 
     render(){
         return (
-            <ChatMessagesContainer>
+            <ChatMessagesContainer openEmoji={this.props.openEmoji}>
                 <ChatScroll ref={ref => {this.scrollView = ref}}
                             onContentSizeChange={() => this.scrollView.scrollToEnd({animated: true})}
                             showsVerticalScrollIndicator={true} 
@@ -44,7 +47,7 @@ class ChatMessages extends React.Component {
                     <ChatScrollContainer>
                         {this.state.chanelData &&
                             this.state.chanelData.messages.map((mess, index) => {
-                                return <Message key={index} mess={mess} index={index} />
+                                return this.ChatMassagesController.hendlerMessagesChat(mess, index)
                             })
                         }
                     </ChatScrollContainer>
@@ -56,7 +59,7 @@ class ChatMessages extends React.Component {
 }
 
 const ChatMessagesContainer = styled.View`
-    flex: .7;
+    flex: ${(props) => props.openEmoji ? '.3' : '.7' };
     width: 95%;
     height: 100%;
     background-color: #0b61abb0;
@@ -78,4 +81,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default ChatMessages
+export default memo(ChatMessages)

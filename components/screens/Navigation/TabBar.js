@@ -4,63 +4,108 @@ import shopIcon from '../../../assets/nav/shop.png'
 import collectionsIcon from '../../../assets/nav/collections.png'
 import chatIcon from '../../../assets/nav/chat.png'
 import Text from "../../common/Text/Text";
-import { NativeModules, Platform } from "react-native";
+import {NativeModules, Platform} from "react-native";
+import InfoButton from "../../common/Info/InfoButton";
+import React from "react";
+import EventDispatcher from "../../redux/EventDispatcher";
+import eventsType from "../../redux/eventsType";
 
-export default TabBar = ({ state, navigation }) => {
+class TabBar extends React.PureComponent {
+    constructor(props){
+        super(props)
 
-  const onPress = (route, isFocused) => {
-    // const event = navigation.emit({
-    //   type: "tabPress",
-    //   target: route.key,
-    //   canPreventDefault: true,
-    // });
+        this.state={
+            unreadMessages: 0,
+            activeTab: 'MainScreen'
+        }
 
-    // if (!isFocused && !event.defaultPrevented) {
-    //   navigation.navigate({ name: route.name, merge: true });
-    // }
-
-    if (!isFocused) {
-      navigation.navigate({ name: route.name, merge: true });
+        this.subscriber = null
     }
-  };
 
-  const getIconName = (route) => {
-    switch (route.name) {
-      case "MainScreen": return mainIcon;
-      case "ShopScreen": return shopIcon;
-      case "CollectionsScreen": return collectionsIcon;
-      case "ChatScreen": return chatIcon;
-      default: return startGameIcon
+    componentDidMount(){
+        this.subscriber = EventDispatcher.subscribe(eventsType.UPDATE_CHAT_UNREAD_MESSAGES, this.updateChatUnreadMessages)
     }
-  };
-  const getText = (route) => {
-    switch (route.name) {
-      case "MainScreen": return 'Home';
-      case "ShopScreen": return 'Shop';
-      case "CollectionsScreen": return 'Collection';
-      case "ChatScreen": return 'Chat';
 
-      default: return 'Home'
+    componentWillUnmount(){
+        EventDispatcher.unsubscribe(this.subscriber)
     }
-  };
 
-  return (
-    <TabsContainer>
-      {state.routes.map((route, index) => {
-        const isFocused = state.index === index;
-      
-        return (
-          <TabIconContainer key={index} focused={isFocused} onPress={() => onPress(route, isFocused)}>
-            <NavImage source={getIconName(route)} />
-            <Text heavy medium color={'#ff9d4d'}>{getText(route)}</Text>
-            {isFocused &&
-              <Active style={{ borderTopWidth: 4, borderBottomWidth: 0 }}/>
+    updateChatUnreadMessages = (data) =>{
+        if(this.state.activeTab !== 'ChatScreen') {
+            this.setState({
+                unreadMessages: data
+            })
+        }
+    }
+
+    clearUnreadMessages = () =>{
+        window.chatManager.clearAllUnreadMessages()
+        this.setState({unreadMessages: 0})
+    }
+
+    onPress = (route, isFocused) => {
+        if (!isFocused) {
+            if(route.name === 'ChatScreen'){
+                this.clearUnreadMessages()
             }
-          </TabIconContainer>
+            this.setState({activeTab: route.name})
+            this.props.navigation.navigate({name: route.name, merge: true});
+        }
+    };
+
+    getIconName = (route) => {
+        switch (route.name) {
+            case "MainScreen":
+                return mainIcon;
+            case "ShopScreen":
+                return shopIcon;
+            case "CollectionsScreen":
+                return collectionsIcon;
+            case "ChatScreen":
+                return chatIcon;
+            default:
+                return startGameIcon
+        }
+    };
+
+    getText = (route) => {
+        switch (route.name) {
+            case "MainScreen":
+                return 'Home';
+            case "ShopScreen":
+                return 'Shop';
+            case "CollectionsScreen":
+                return 'Collection';
+            case "ChatScreen":
+                return 'Chat';
+
+            default:
+                return 'Home'
+        }
+    };
+
+    render() {
+        return (
+            <TabsContainer>
+                {this.props.state.routes.map((route, index) => {
+                    const isFocused = this.props.state.index === index;
+
+                    return (
+                        <TabIconContainer key={index} focused={isFocused} onPress={() => this.onPress(route, isFocused)}>
+                            <NavImage source={this.getIconName(route)}/>
+                            <Text heavy medium color={'#ff9d4d'}>{this.getText(route)}</Text>
+                            {isFocused &&
+                                <Active style={{borderTopWidth: 4, borderBottomWidth: 0}}/>
+                            }
+                            {route.name === 'ChatScreen' && !isFocused && this.state.unreadMessages > 0 &&
+                                <InfoButton count={this.state.unreadMessages}/>
+                            }
+                        </TabIconContainer>
+                    );
+                })}
+            </TabsContainer>
         );
-      })}
-    </TabsContainer>
-  );
+    }
 };
 
 const TabsContainer = styled.View`
@@ -71,8 +116,8 @@ const TabsContainer = styled.View`
   align-items: flex-end;
   justify-content: space-around;
   width: 100%;
-  ${()=>{
-    if(Platform.OS === 'ios' && NativeModules.DeviceInfo.isIPhoneX_deprecated){
+  ${() => {
+    if (Platform.OS === 'ios' && NativeModules.DeviceInfo.isIPhoneX_deprecated) {
       return `
         height: 70px;
       `
@@ -89,8 +134,8 @@ const TabIconContainer = styled.TouchableOpacity`
   display: flex;
   align-items: center;
   text-align: center;
-  ${()=>{
-    if(Platform.OS === 'ios' && NativeModules.DeviceInfo.isIPhoneX_deprecated){
+  ${() => {
+    if (Platform.OS === 'ios' && NativeModules.DeviceInfo.isIPhoneX_deprecated) {
       return `
         margin-bottom: 20px;
       `
@@ -117,3 +162,5 @@ const Active = styled.View`
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 `;
+
+export default TabBar

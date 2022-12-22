@@ -6,13 +6,16 @@ import Dice from './Dice/Dice'
 import GameModel from './GameModel/GameModel'
 import ScoreBoardOpponent from './ScoreBoardsOpponent/ScoreBoardOpponent'
 import ScoreBoardUser from './ScoreBoardsUser/ScoreBoardUser'
-import {NativeModules, Platform} from "react-native";
+import {Animated, Easing, NativeModules, Platform} from "react-native";
+import {setTimingAnimated} from "../../../utils/Animation";
 
 class GameContainer extends React.Component {
     constructor(){
         super()
 
         this.state = {
+            showStartGameText: false,
+            showThrowBtn: false,
             opponent: {username: ''},
             boardData:{
                 userBoard: [],
@@ -25,6 +28,7 @@ class GameContainer extends React.Component {
         }
 
        this.gameModel = null
+       this.StartGameAnimatedValue = new Animated.Value(0)
     }
 
     componentDidMount(){
@@ -59,7 +63,9 @@ class GameContainer extends React.Component {
                this.state.boardData.userBoard !== prevState.boardData.userBoard ||
                this.state.boardData.opponentBoard !== prevState.boardData.opponentBoard ||
                this.state.boardData.winPointsData !== prevState.boardData.winPointsData ||
-               this.state.opponent !== prevState.opponent
+               this.state.opponent !== prevState.opponent ||
+               this.state.showStartGameText !== prevState.showStartGameText ||
+               this.state.showThrowBtn !== prevState.showThrowBtn
     }
 
     componentDidUpdate(nextProps){
@@ -121,6 +127,15 @@ class GameContainer extends React.Component {
         }
     }
 
+    animateStartGameText = () => {
+        Animated.sequence([
+            setTimingAnimated(this.StartGameAnimatedValue, 1.2, 500, Easing.ease),
+            setTimingAnimated(this.StartGameAnimatedValue, 1, 600, Easing.ease),
+        ]).start(()=>{
+            this.setState({showThrowBtn: true, showStartGameText: false})
+        });
+    }
+
     render(){
         const {boardData, winPointsData, opponent} = this.state
         return (
@@ -140,24 +155,50 @@ class GameContainer extends React.Component {
                                     countScores={this.props.countScores}
                                     isYouMove={this.props.isYouMove}
                                     activeItems={this.props.activeItems}
+                                    setThrowBtn={()=>{
+                                        this.setState({showStartGameText: true})
+                                        this.animateStartGameText()
+                                    }}
                                     winPoints={winPointsData ? winPointsData.userWinPoints : null}
                                     diceScore={this.props.throwData ? this.props.throwData.diceScore : 0}
                                     board={boardData ? boardData.userBoard : null}/>
                 </ScoresContainer>
-            
+
                 <ButtonContainer>
-                    <ThrowButton onPress={this.hendlerThrowGame}
-                                 activeOpacity={this.props.isYouMove ? 1 : 0.6} 
-                                 disabled={!this.props.isYouMove}>
-                        <Text large heavy color={'#fff'}>Throw Dice</Text>
-                    </ThrowButton>
+                    {this.state.showThrowBtn &&
+                        <ThrowButton onPress={this.hendlerThrowGame}
+                                     activeOpacity={this.props.isYouMove ? 1 : 0.6}
+                                     disabled={!this.props.isYouMove}>
+                            <Text large heavy color={'#fff'}>Throw Dice</Text>
+                        </ThrowButton>
+                    }
                 </ButtonContainer>
+
+                {this.state.showStartGameText &&
+                    <StartGameTextContainer style={{
+                        opacity: this.StartGameAnimatedValue.interpolate({
+                            inputRange: [0, 1],
+                            outputRange: [0, 1],
+                        }),
+                        transform: [
+                            {
+                                scale: this.StartGameAnimatedValue.interpolate({
+                                    inputRange: [0, 1],
+                                    outputRange: [0, 1]
+                                })
+                            }
+                        ]
+                    }}>
+                        <StartGameText title heavy color={'#fff'}>Start Game</StartGameText>
+                    </StartGameTextContainer>
+                }
             </Game>
         )
     }
 }
 
 const Game = styled.View`
+    position: relative;
     flex: 1;
     align-items: center;
     justify-content: space-evenly;
@@ -200,6 +241,20 @@ const ThrowButton = styled.TouchableOpacity`
           `
         }
     }}
+`
+
+const StartGameTextContainer = styled(Animated.View)`
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 90%;
+`
+
+const StartGameText = styled(Text)`
+    font-size: 52px;
+    text-shadow: 4px 4px 6px rgba(66, 68, 90, 1);
 `
 
 export default GameContainer

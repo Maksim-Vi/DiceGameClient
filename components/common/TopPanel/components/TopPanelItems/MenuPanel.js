@@ -12,7 +12,7 @@ const MenuPanel = (props) => {
         dispatch(setSettingsMenuPopup({visible: true, data: null}))
     }
 
-    return <ButtonWithImage color={'rgba(13, 64, 194, 0.88)'}
+    return <ButtonWithImage color={'rgb(1,1,70)'}
                             width={45}
                             height={45}
                             borderColor={'#fff0'}

@@ -41,23 +41,26 @@ const Winner = ({winner}) => {
                 }
             ]
         }}>
-            <PlaceContainer>
-                <Place source={place} resizeMode={ 'stretch'}/>
-                <Avatar width={50} height={50} avatarId={winner.player.avatar}/>
-            </PlaceContainer>
+            <Container>
+                <PlaceContainer>
+                    <Place source={place} resizeMode={ 'stretch'}/>
+                    <Avatar width={50} height={50} avatarId={winner.player.avatar}/>
+                </PlaceContainer>
 
-            <NameTextContainer>
-                <Text title heavy color={'#170231'}>{winner.player.username}</Text>
-                <Text color={'#fff'}>Place №1</Text>
-            </NameTextContainer>
+                <NameTextContainer>
+                    <Text title heavy color={'#170231'}>{winner.player.username}</Text>
+                    <Text color={'#fff'}>Place №1</Text>
+                </NameTextContainer>
 
-            <WinsContainer>
-                <Text medium heavy color={'#fff'}>coins: {winner.items.coins}</Text>
-                <Text medium heavy color={'#fff'}>crystals: {winner.items.crystals}</Text>
-                <Text medium heavy color={'#000'}> Combinations: 
-                    <Text large heavy color={'#fff'}> {winner.items.scores}</Text> 
-                </Text>
-            </WinsContainer>
+                <WinsContainer>
+                    <Text medium heavy color={'#fff'}>coins: {winner.items.coins}</Text>
+                    <Text medium heavy color={'#fff'}>crystals: {winner.items.crystals}</Text>
+                    <Text medium heavy color={'#000'}> Combinations:
+                        <Text large heavy color={'#fff'}> {winner.items.scores}</Text>
+                    </Text>
+                </WinsContainer>
+
+            </Container>
 
         </WinnerContainer>
     )
@@ -67,6 +70,7 @@ const WinnerContainer = styled(Animated.View)`
     display: flex;
     flex-direction: row;
     align-items: center;
+   justify-content: space-around;
     width: 90%;
     height: 80px;
     border-radius: 15px;
@@ -74,6 +78,14 @@ const WinnerContainer = styled(Animated.View)`
     border: 2px solid #955d3d;
 `
 
+const Container = styled.View`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    width: 100%;
+    padding: 5px;
+`
 const PlaceContainer = styled.View`
     display: flex;
     flex-direction: row;
@@ -95,7 +107,6 @@ const WinsContainer = styled.View`
     justify-content: center;
     text-align: center;
     margin-left: auto;
-    margin-right: 20px;
 `
 
 export default Winner

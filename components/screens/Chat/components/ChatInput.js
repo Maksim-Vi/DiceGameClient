@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {memo, useEffect} from 'react'
 import { useState } from 'react';
 import styled from 'styled-components';
 import ButtonImage from '../../../common/Buttons/ButtonImage';
@@ -8,28 +8,44 @@ import { store } from '../../../redux/redux-store';
 
 const ChatInput = (props) => {
 
-    const [message, setMessage] = useState('')
+    const checkIsDeleteSmile = (newMessage) =>{
+        const withEmojis = /\p{Extended_Pictographic}/ug
+
+        let emoji = newMessage.match(withEmojis)
+        if(emoji){
+            return emoji.length
+        }
+
+        return emoji
+    }
 
     const onChangeInput = (value) =>{
-        setMessage(value)
+
+        const countEmoji = checkIsDeleteSmile(value)
+
+        props.setMessageData({
+            ...props.messageData,
+            addEmojiCount: countEmoji && countEmoji !== null ? countEmoji : props.messageData.addEmojiCount,
+            message: value
+        })
     }
 
     const sendMessageHandler = () =>{
-        if(message && message !== ''){
-            store.chatManager.sendChatMessage(props.username, props.chatChanel, message)
-            setMessage('')
+        if(props.messageData.message && props.messageData.message !== ''){
+            window.chatManager.sendChatMessage(props.username, props.chatChanel, props.messageData.message)
+            props.setMessageData({openEmoji: props.messageData.openEmoji,addEmojiCount: 0,message: ''})
         }
     }
 
     const openSmiles = () =>{
-
+        props.setMessageData({...props.messageData, openEmoji: !props.messageData.openEmoji})
     }
 
     return (
         <ChatInputContainer>
             <ChatField placeholder='Press here to chat...'
                        placeholderTextColor='#838383'
-                       value={message}
+                       value={props.messageData.message}
                        maxLength={100}
                        onChangeText={(value) => onChangeInput(value)} />
             
@@ -60,11 +76,11 @@ const ChatInputContainer = styled.View`
 const ChatField = styled.TextInput`
     width: 70%;
     height: 50px;
-    margin: 10px auto;
+    margin: 0 5px;
     padding: 5px 20px;
     color: #000;
     background-color: #d5dbe1;
     border-radius: 50px;
     justify-content: center;
 `
-export default ChatInput
+export default memo(ChatInput)

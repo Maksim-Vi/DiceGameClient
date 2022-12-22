@@ -10,7 +10,6 @@ import { addChatTab, cleanChatTabs } from "../../redux/reducers/chat/ChatReducer
 class ChatManager {
     constructor(){
 
-        this.config = {}
         this.chat = {
             channels: {},
         }
@@ -34,7 +33,7 @@ class ChatManager {
                 this.addChatChanel(data.chatRoom, data.username)
                 break;
             case 'S_SEND_MESSAGE':
-                this.updateChatChanel(data.chatRoom, data.username, data.chatMessage, data.date)
+                this.updateChatChanel(data.chatRoom, data.username, data.chatMessage, data.date, 'message')
                 break;
             default:             
                 break;
@@ -85,20 +84,49 @@ class ChatManager {
                 unreadMessages: 0,
                 messages: []
             }
+            this.addInfoMessageStartChat(roomChanel)
             console.log('connect to chanel', roomChanel);
         }
     }
 
-    updateChatChanel = (roomChanel, username, chatMessage, date) =>{
+    updateChatChanel = (roomChanel, username, chatMessage, date, type) =>{
         if(this.chat.channels[roomChanel]){
-            this.chat.channels[roomChanel].unreadMessages += 1
+            this.chat.channels[roomChanel].unreadMessages = this.chat.channels[roomChanel].unreadMessages + 1
             this.chat.channels[roomChanel].messages.push({
                 username: username,
                 chatMessage: chatMessage,
-                date: date
+                date: date,
+                type: type // privet, admin, info, etc
             })
-            
+
+            this.getAllUnreadMessages()
             EventDispatcher.publish(eventsType.UPDATE_CHAT_CHANELS, this.chat.channels)
+        }
+    }
+
+    getAllUnreadMessages = () =>{
+        let unread = 0
+
+        if(this.chat.channels){
+            Object.entries(this.chat.channels).forEach(([key, chanel])=>{
+                unread += chanel.unreadMessages
+            })
+        }
+
+        EventDispatcher.publish(eventsType.UPDATE_CHAT_UNREAD_MESSAGES, unread)
+    }
+
+    addInfoMessageStartChat = (roomChanel) =>{
+        if(roomChanel) {
+            this.updateChatChanel(roomChanel, 'info', 'Welcome to the chat!',new Date(),'info')
+        }
+    }
+
+    clearAllUnreadMessages = () =>{
+        if(this.chat.channels){
+            Object.entries(this.chat.channels).forEach(([key, chanel])=>{
+                this.clearUnreadMessages(key)
+            })
         }
     }
 
@@ -129,10 +157,6 @@ class ChatManager {
         }
 
         store.dispatch(cleanChatTabs())
-    }
-
-    testedManager = () =>{
-        console.log('test chat Manager');
     }
 
 }

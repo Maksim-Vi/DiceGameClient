@@ -30,7 +30,7 @@ const ChatTabs = () => {
     return (
         <ChatTabsContainer>
             {getTabs()}
-            <Tab tabName={'friends'} image={friends}/>
+            {/*<Tab tabName={'friends'} image={friends}/>*/}
         </ChatTabsContainer>
     )
 }
