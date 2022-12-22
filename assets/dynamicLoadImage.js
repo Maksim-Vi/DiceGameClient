@@ -5,6 +5,7 @@ const images = {
         3: require('./collections/dices/d_3/dice_1.png'),
         4: require('./collections/dices/d_4/dice_1.png'),
         5: require('./collections/dices/d_5/dice_1.png'),
+        6: require('./collections/dices/d_6/dice_1.png'),
     },
     squares: {
         1: require('./collections/squares/1.png'),
@@ -16,6 +17,9 @@ const images = {
         7: require('./collections/squares/7.png'),
         8: require('./collections/squares/8.png'),
         9: require('./collections/squares/9.png'),
+        10: require('./collections/squares/10.png'),
+        11: require('./collections/squares/11.png'),
+        12: require('./collections/squares/12.png'),
     },
     avatars:[
         require('./avatars/default-avatar.png'),
