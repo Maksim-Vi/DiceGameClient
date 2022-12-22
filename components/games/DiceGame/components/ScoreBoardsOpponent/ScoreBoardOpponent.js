@@ -1,73 +1,79 @@
-import React from 'react'
+import React, {useState} from 'react'
 import styled from 'styled-components'
 import Text from '../../../../common/Text/Text'
 import BoardItem from '../BoardItem/BoardItem'
 import {Dimensions, NativeModules, Platform} from "react-native";
 import BoardOpponentInfo from './BoardOpponentInfo';
 
-const OppIndexView = [6, 7, 8,3, 4, 5,0, 1, 2]
+const OppIndexView = [6, 7, 8, 3, 4, 5, 0, 1, 2]
 
 const ScoreBoardOpponent = (props) => {
 
-  const width = Dimensions.get('window').width;
-  
-  const DrowBoard = () =>{
+    const [viewAvatarContainer, setViewAvatarContainer] = useState(false)
+    const width = Dimensions.get('window').width;
 
-    const checkWinPiontsByColumn = (i) =>{
-        const columnIndex = [[0,3,6],[1,4,7],[2,5,8]]
-        let data = null
-        columnIndex.flat().forEach(index=>{
-            if(index === i && (index === 0 || index === 3 || index ===6)){
-                data = props.winPoints['column1']
-            } else if(index === i && (index === 1 || index === 4 || index === 7)) {
-                data = props.winPoints['column2']
-            } else if(index === i && (index === 2 || index === 5 || index === 8)) {
-                data = props.winPoints['column3']
-            }
+    const DrowBoard = () => {
+
+        const checkWinPiontsByColumn = (i) => {
+            const columnIndex = [[0, 3, 6], [1, 4, 7], [2, 5, 8]]
+            let data = null
+            columnIndex.flat().forEach(index => {
+                if (index === i && (index === 0 || index === 3 || index === 6)) {
+                    data = props.winPoints['column1']
+                } else if (index === i && (index === 1 || index === 4 || index === 7)) {
+                    data = props.winPoints['column2']
+                } else if (index === i && (index === 2 || index === 5 || index === 8)) {
+                    data = props.winPoints['column3']
+                }
+            })
+
+            return data
+        }
+
+        const BoardsItem = []
+
+        if (!props.board || props.board.length === 0) return []
+
+        OppIndexView.forEach(index => {
+            const winPoints = checkWinPiontsByColumn(index)
+
+            BoardsItem.push(<BoardItem key={index}
+                                       item={props.board[index]}
+                                       activeItems={props.activeItems}
+                                       setViewAvatarContainer={setViewAvatarContainer}
+                                       delay={index * 100}
+                                       winPoints={winPoints}/>)
         })
 
-        return data
+        return BoardsItem
     }
 
-    const BoardsItem = []
+    const getColumnNumber = (column) => {
+        if (!props.winPoints) return ''
+        if (props.winPoints.length === 0) return ''
+        if (!props.winPoints[column] || isNaN(props.winPoints[column].sum)) return ''
 
-    if(!props.board || props.board.length === 0) return []
+        return props.winPoints[column].sum
+    }
 
-    OppIndexView.forEach(index=>{
-        const winPoints = checkWinPiontsByColumn(index)
-        
-        BoardsItem.push(<BoardItem key={index}
-                                   item={props.board[index]}
-                                   activeItems={props.activeItems}
-                                   winPoints={winPoints}/>)
-    })
+    return (
+        <ScoreBoardOpponentContainer>
+            <ScoresContainer width={width}>
+                {DrowBoard()}
+            </ScoresContainer>
 
-    return BoardsItem
-  }
+            <WinPoints width={width}>
+                <Column center>{getColumnNumber('column1')}</Column>
+                <Column center>{getColumnNumber('column2')}</Column>
+                <Column center>{getColumnNumber('column3')}</Column>
+            </WinPoints>
 
-  const getColumnNumber = (column) =>{
-    if(!props.winPoints) return ''
-    if(props.winPoints.length === 0) return ''
-    if(!props.winPoints[column] || isNaN(props.winPoints[column].sum)) return ''
-
-    return props.winPoints[column].sum
-  }
-
-  return (
-    <ScoreBoardOpponentContainer>
-        <ScoresContainer width={width}>
-          {DrowBoard()}
-        </ScoresContainer>
-
-        <WinPoints width={width}>
-            <Column center>{getColumnNumber('column1')}</Column>
-            <Column center>{getColumnNumber('column2')}</Column>
-            <Column center>{getColumnNumber('column3')}</Column>
-        </WinPoints>
-
-        <BoardOpponentInfo opponent={props.opponent} countScores={props.countScores}/>
-    </ScoreBoardOpponentContainer>
-  )
+            {viewAvatarContainer &&
+                <BoardOpponentInfo opponent={props.opponent}
+                                   countScores={props.countScores} />
+            }
+        </ScoreBoardOpponentContainer>
+    )
 }
 
 const ScoreBoardOpponentContainer = styled.View`
@@ -75,8 +81,8 @@ const ScoreBoardOpponentContainer = styled.View`
   align-items: center;
   text-align: center;
   justify-content: center;
-  ${()=>{
-    if(Platform.OS === 'ios' && NativeModules.DeviceInfo.isIPhoneX_deprecated){
+  ${() => {
+    if (Platform.OS === 'ios' && NativeModules.DeviceInfo.isIPhoneX_deprecated) {
       return 'margin-top: 50px;'
     }
   }}
@@ -88,8 +94,8 @@ const ScoresContainer = styled.View`
   justify-content: center;
   flex-wrap: wrap;
   flex-direction: row;
-  ${props=>{
-    if(props.width < 400){
+  ${props => {
+    if (props.width < 400) {
       return 'width: 70%'
     } else {
       return 'width: 70%'
@@ -103,8 +109,8 @@ const WinPoints = styled.View`
   justify-content: space-around;
   text-align: center;
   flex-direction: row;
-  ${props=>{
-    if(props.width < 400){
+  ${props => {
+    if (props.width < 400) {
       return 'width: 70%'
     } else {
       return 'width: 70%'
@@ -112,7 +118,7 @@ const WinPoints = styled.View`
   }}
 `
 const Name = styled(Text)`
-    margin-top: 10px;
+  margin-top: 10px;
 `
 const CountScores = styled(Text)`
   position: absolute;

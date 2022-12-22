@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import styled from 'styled-components'
 import Text from '../../../../common/Text/Text'
 import C_SCORE from '../../../../protocol/messages/clients/games/C_SCORE'
@@ -8,6 +8,7 @@ import BoardUserInfo from './BoardUserInfo'
 
 const ScoreBoardUser = (props) => {
 
+    const [viewAvatarContainer, setViewAvatarContainer] = useState(false)
     const width = Dimensions.get('window').width;
    
     const selectBoardItem = (index) =>{
@@ -45,6 +46,8 @@ const ScoreBoardUser = (props) => {
                                      winPoints={winPoints}
                                      activeItems={props.activeItems}
                                      index={i}
+                                     delay={i * 100}
+                                     setViewAvatarContainer={setViewAvatarContainer}
                                      selectBoardItem={selectBoardItem}/>)
         })
   
@@ -71,7 +74,11 @@ const ScoreBoardUser = (props) => {
                 {DrowBoard()}
             </ScoresContainer>
 
-            <BoardUserInfo user={props.user} countScores={props.countScores}/>
+            {viewAvatarContainer &&
+                <BoardUserInfo user={props.user}
+                               setThrowBtn={props.setThrowBtn}
+                               countScores={props.countScores}/>
+            }
         </ScoreBoardUserContainer>
     )
 }

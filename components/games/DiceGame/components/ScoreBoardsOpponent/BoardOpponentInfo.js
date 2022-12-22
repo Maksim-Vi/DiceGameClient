@@ -1,24 +1,88 @@
-import React from 'react';
-import { useWindowDimensions } from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {Animated, Easing, useWindowDimensions} from 'react-native';
 import styled from 'styled-components';
 import Avatar from '../../../../common/Avatars/Avatar';
 import Text from '../../../../common/Text/Text';
+import {setTimingAnimated} from "../../../../utils/Animation";
+
+const initialScale = 0
+const startX = 0
+const startY = 0
+
+const endX = 0
+const endY = 0
 
 const BoardOpponentInfo = (props) => {
-        
-  const {width,height} = useWindowDimensions()
+
+    const {width, height} = useWindowDimensions()
+    const showAvatar = React.useRef(new Animated.Value(0)).current;
+    const transformAvatar = React.useRef(new Animated.Value(0)).current;
+    const [viewScores, setViewScores] = useState(false)
+
+    const startAnimation = () =>{
+        Animated.sequence([
+            setTimingAnimated(showAvatar, 1, 800, Easing.ease),
+        ]).start(()=>{
+            transformToPlace()
+        });
+    }
+
+    const transformToPlace = () =>{
+        Animated.sequence([
+            Animated.delay(500),
+            setTimingAnimated(transformAvatar, 1, 800, Easing.ease),
+        ]).start(()=>{
+            setViewScores(true)
+        })
+    }
+
+    useEffect(()=>{
+        startAnimation()
+    }, [])
+
   return (
-      <BoardAvatarContainer width={width} height={height}>
+      <BoardAvatarContainer width={width}
+                            height={height}
+                            style={{
+                                opacity: showAvatar.interpolate({
+                                    inputRange: [0, 1],
+                                    outputRange: [0, 1],
+                                }),
+                                transform: [
+                                    {
+                                        scale: showAvatar.interpolate({
+                                            inputRange: [0,1],
+                                            outputRange: [0,1]
+                                        })
+                                    },
+                                    {
+                                        translateX: transformAvatar.interpolate({
+                                            inputRange: [0, 1],
+                                            outputRange: [-(width / 2), endX]
+                                        })
+                                    },
+                                    {
+                                        translateY: transformAvatar.interpolate({
+                                            inputRange: [0, 1],
+                                            outputRange: [((height / 3) / 10), endY]
+                                        })
+                                    }
+                                ]
+                            }}
+      >
           <Name large blod color={'#000'} center>{props.opponent.username || ''}</Name>
           <Avatar avatarId={props.opponent.avatar}/>
-          <CountContainer width={width}>
-            <CountScores width={width} large blod color={'#fff'}>{props.countScores ? props.countScores.scoresOpponent : 0}</CountScores>
-          </CountContainer>
+          {viewScores &&
+              <CountContainer width={width}>
+                  <CountScores width={width} large blod
+                               color={'#fff'}>{props.countScores ? props.countScores.scoresOpponent : 0}</CountScores>
+              </CountContainer>
+          }
       </BoardAvatarContainer>
   )
 };
 
-const BoardAvatarContainer = styled.View`
+const BoardAvatarContainer = styled(Animated.View)`
   position: absolute;
   right: -12%;
   ${(props)=>{
