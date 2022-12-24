@@ -8,7 +8,7 @@ import RoadContainer from './components/RoadContainer';
 const RoadScreen = (props) => {
     return (
         <BackgroundWrapper gackground={mainBg}>
-            <ButtonBack />
+            <ButtonBack goMainPage={true}/>
             <RoadContainer />
         </BackgroundWrapper>
     );

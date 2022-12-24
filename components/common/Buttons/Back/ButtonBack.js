@@ -3,12 +3,17 @@ import React from 'react'
 import styled from 'styled-components';
 import {Ionicons} from '@expo/vector-icons'
 
-const ButtonBack = () => {
+const ButtonBack = (props) => {
 
     const navigation = useNavigation()
 
     const goBack = () =>{
-        navigation.navigate('MainScreen')
+        if(props.leaveGame){
+            props.leaveGame()
+        }
+        if(props.goMainPage){
+            navigation.navigate('MainScreen')
+        }
     }
 
     return (

@@ -51,10 +51,11 @@ function openWSHandler() {
 }
 
 function errorWSHandler(error) {
-    console.error(`[error] ${error.message}`);
+    console.warn(`[error] ${error.message}`);
 
     reconnecting = true;
     store.dispatch(setLoaded(false))
+    reconnectWebsocket();
 }
 
 async function closeWSHandler(event) {

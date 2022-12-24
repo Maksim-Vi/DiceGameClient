@@ -48,7 +48,7 @@ export const hendleMessage = (data) =>{
     }
 
     gameHandlerMessage(data)
-    gameHandlerMessage(data)
+    usersHandlerMessage(data)
     collectionHandlerMessage(data)
     roadHandlerMessage(data)
     window.chatManager.chatMassageHandler(data)
