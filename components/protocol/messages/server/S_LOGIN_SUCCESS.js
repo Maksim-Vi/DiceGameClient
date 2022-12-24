@@ -22,14 +22,14 @@ export default class S_LOGIN_SUCCESS {
         store.dispatch(setCurrentUser(this.data.user))
         store.dispatch(setActiveItems(this.data.user.activeItems || {dice: 13, square: 14}))
         store.dispatch(addAvailableCollectionItems(this.data.user.availableCollectionItems || {dice: [13], square: [14],gameBackgrounds:[1]}))
-        
         store.setAuth()
+        window.chatManager.connectionToChatRoom('general')
+
         setTimeout(()=>{
             if(window.navigation){
                 window.navigation.navigate('MainScreen')
-                window.chatManager.connectionToChatRoom('general')
             }
-        },1500)
+        },5000)
     }
 
 	getLogText() {

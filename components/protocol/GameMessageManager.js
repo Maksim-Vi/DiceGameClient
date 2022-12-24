@@ -15,6 +15,7 @@ import S_LEAVE_GAME from './messages/server/games/S_LEAVE_GAME';
 import S_OPPONENT_THROW from "./messages/server/games/S_OPPONENT_THROW";
 import S_COUNT_SCORES from "./messages/server/games/S_COUNT_SCORES";
 import S_GAME_BROKEN from "./messages/server/games/S_GAME_BROKEN";
+import S_CAN_JOIN_TO_GAME from "./messages/server/games/S_CAN_JOIN_TO_GAME";
 
 export const gameHandlerMessage = (data) =>{
     switch (data.name) {
@@ -22,7 +23,7 @@ export const gameHandlerMessage = (data) =>{
             new S_CREATED_GAME(data.gameId)
             break;
         case 'S_CAN_JOIN_TO_GAME':
-            new C_JOIN_TO_GAME(data.gameId)
+            new S_CAN_JOIN_TO_GAME(data.gameId)
             break;
         case 'S_JOIN_SUCCESS':
             new S_JOIN_SUCCESS(data)
