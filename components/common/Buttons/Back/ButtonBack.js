@@ -17,7 +17,7 @@ const ButtonBack = (props) => {
     }
 
     return (
-        <GameBack onPress={goBack}>
+        <GameBack {...props} onPress={goBack}>
             <Ionicons name='arrow-back' size={38} color={'#000'} />
         </GameBack>   
     )
@@ -25,8 +25,8 @@ const ButtonBack = (props) => {
 
 const GameBack = styled.TouchableOpacity`
 	position: absolute;
-	top: 20px;
-	left: 10px;
+	top: ${props=> props.top ? props.top : '20px'};
+	left: ${props=> props.left ? props.left : '10px'};
     z-index: 1;
 `
 

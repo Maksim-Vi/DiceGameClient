@@ -3,22 +3,31 @@ import locked from "../../../../../assets/road/locked.png";
 import claimed from "../../../../../assets/road/claimed.png";
 import ready from "../../../../../assets/road/ready.png";
 import styled from "styled-components";
-import { typesRoadBtns } from '../utils';
+import C_CLAIM_MISSION from "../../../../protocol/messages/clients/road/C_CLAIM_MISSION";
 
 const RoadButton = (props) => {
+  const {isAvailableExecute,isFinished,isClaimed} = props.mission
 
   const getButtonByType = () =>{
-    switch (props.type) {
-      case typesRoadBtns.locked: return <LockedImg source={locked} resizeMode={ 'stretch'}/>
-      case typesRoadBtns.ready: return <ReadyImg source={ready} resizeMode={ 'stretch'}/>
-      case typesRoadBtns.claimed: return <ClaimedImg source={claimed} resizeMode={ 'stretch'}/>
-      default:
-          break;
+    if(isClaimed)
+      return <ClaimedImg source={claimed} resizeMode={ 'stretch'}/>
+    if(isFinished && !isClaimed)
+      return <ReadyImg source={ready} resizeMode={ 'stretch'}/>
+    if(!isAvailableExecute && !isFinished && !isClaimed)
+      return <LockedImg style={{opacity: 0.6}} source={locked} resizeMode={ 'stretch'}/>
+
+    return <LockedImg source={locked} resizeMode={ 'stretch'}/>
   }
+
+  const clickHandler = () =>{
+    if(isFinished && !isClaimed){
+      new C_CLAIM_MISSION(props.mission.missionNumber)
+    }
   }
 
   return (
-      <RoadButtonContainer activeOpacity={0.9}>
+      <RoadButtonContainer onPress={clickHandler}
+                           activeOpacity={0.9}>
           {getButtonByType()}
       </RoadButtonContainer>
   )

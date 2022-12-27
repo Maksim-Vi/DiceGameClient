@@ -2,10 +2,12 @@ import React from 'react';
 import styled from "styled-components";
 import Text from '../../../common/Text/Text';
 import RoadItems from './RoadItems/RoadItems';
+import RoadInfoMission from "./RoadInfoMission/RoadInfoMission";
 
 const RoadContainer = (props) => {
     return (
         <Container>
+            <RoadInfoMission />
            <RoadItems />
         </Container>
     );
