@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Text from "../../common/Text/Text";
-import {connect} from "react-redux";
+import {connect, useSelector} from "react-redux";
 import {selectResultGame, setCountScores} from "../../redux/reducers/game/GameReducer";
 import React from "react";
 import {useNavigation} from "@react-navigation/native";
@@ -13,9 +13,11 @@ import Loser from "./components/Loser";
 import { Animated, Easing } from "react-native";
 import { setTimingAnimated } from "../../utils/Animation";
 import { useInterstitialAd, TestIds } from 'react-native-google-mobile-ads';
+import {resetCountShowAd, setCountShowAd} from "../../redux/reducers/AD/AdvertisingReducer";
 
 const ResultScreen = (props) => {
 
+    const advertising = useSelector(state => state.advertising)
     const { isLoaded, isClosed, load, show } = useInterstitialAd(TestIds.INTERSTITIAL, {
         requestNonPersonalizedAdsOnly: true,
     });
@@ -23,11 +25,12 @@ const ResultScreen = (props) => {
     const navigation = useNavigation()
 
     const hendlerCloseResult = () => {
-        if (isLoaded) {
+        if (isLoaded && advertising.countShowless === advertising.numberCanMissGameAd) {
             show();
         } else {
             navigation.navigate('MainScreen')
             store.dispatch(setCountScores(null))
+            store.dispatch(setCountShowAd())
         }
     }
 
@@ -97,6 +100,7 @@ const ResultScreen = (props) => {
         if (isClosed) {
             navigation.navigate('MainScreen')
             store.dispatch(setCountScores(null))
+            store.dispatch(resetCountShowAd())
         }
     }, [isClosed, navigation]);
 
