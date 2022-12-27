@@ -8,6 +8,7 @@ import { gameHandlerMessage } from './GameMessageManager';
 import {usersHandlerMessage} from "./UsersMessageManager";
 import {collectionHandlerMessage} from "./collectionMessageManager";
 import {roadHandlerMessage} from "./RoadMessageManager";
+import S_LANGUAGE_INFO from "./messages/server/S_LANGUAGE_INFO";
 
 export const hendleMessage = (data) =>{
     switch (data.name) {
@@ -34,6 +35,10 @@ export const hendleMessage = (data) =>{
         }
         case 'S_CREATE_ACCOUNT_FAILED':{
             new S_CREATE_ACCOUNT_FAILED(data)
+            break;
+        }
+        case 'S_LANGUAGE_INFO':{
+            new S_LANGUAGE_INFO(data.phrases)
             break;
         }
 
