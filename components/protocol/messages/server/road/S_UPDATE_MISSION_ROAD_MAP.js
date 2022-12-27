@@ -6,15 +6,13 @@ import {
 } from "../../../../redux/reducers/road/RoadReducer";
 
 export default class S_UPDATE_MISSION_ROAD_MAP {
-    constructor(username, missions, coins, diamonds){
+    constructor(username, missions){
 
         this.MESSAG_ENAME = 'S_UPDATE_MISSION_ROAD_MAP'
         this.showLog = true
 
         this.username = username
         this.missions =  typeof missions === 'string' ? JSON.parse(missions) : missions
-        this.coins = coins
-        this.diamonds = diamonds
 
         this.init()
     }

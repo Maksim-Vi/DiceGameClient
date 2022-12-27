@@ -1,8 +1,7 @@
 import {store} from "../../../../redux/redux-store";
 import {
-    selectMyUser, updateCurrentUserCoins,
+    updateCurrentUserCoins,
     updateCurrentUserCrystals,
-    updateCurrentUserExp
 } from "../../../../redux/reducers/players/PlayersReducer";
 
 export default class S_UPDATE_USER_MONEY {

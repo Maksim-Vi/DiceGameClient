@@ -11,7 +11,7 @@ const RoadItems = (props) => {
     const [roadMissions, srtRoadMissions] = useState(null)
 
     const getRoadMissionByPlace = (index) =>{
-        const mission = props.roadMissions[index]
+        const mission = roadMissions[index]
 
         if(mission){
             return {
