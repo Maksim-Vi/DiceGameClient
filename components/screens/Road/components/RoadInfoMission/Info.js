@@ -18,7 +18,7 @@ const Info = (props) => {
 
     return (
         <InfoContainer>
-            <Name>{props.activeMission.missionName}</Name>
+            <Name madium numberOfLines={3}>{props.activeMission.missionName}</Name>
 
             <WonPriceContainer>
                 <PriceImg source={getImageByType()} resizeMode={'stretch'}/>

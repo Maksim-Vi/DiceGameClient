@@ -1,21 +1,27 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components/native';
 
 export default TextStyle = ({...props}) => {
-    return <Text {...props}>{props.children}</Text>
+    return <Text {...props} adjustsFontSizeToFit numberOfLines={props.numberOfLines || 0}>
+        {props.children}
+    </Text>
 }
 
 const Text = styled.Text`
     color: ${props => props.color ? props.color : '#fff'};
     font-family: 'Dilo-World';
     
-    ${({title,large,madium,small})=>{
-        switch (true) {
+    ${({title,large,madium,small,fontSize})=>{
+        if(title || large || madium || small){
+          switch (true) {
             case title: return 'font-size: 32px'
             case large: return 'font-size: 20px'
             case madium: return 'font-size: 16px'
             case small: return 'font-size: 13px'
             default: return 'font-size: 14px'
+          }  
+        } else if(fontSize){
+          return `font-size: ${fontSize}px`
         }
     }}
 
