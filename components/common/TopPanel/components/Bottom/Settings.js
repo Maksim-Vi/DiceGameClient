@@ -1,10 +1,11 @@
-import React, {useContext, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import styled from "styled-components";
 import exit from "../../../../../assets/topPanel/settingsPopup/exit.png";
 import goBack from "../../../../../assets/topPanel/settingsPopup/back.png";
 import muteSounds from "../../../../../assets/topPanel/settingsPopup/silent.png";
 import unmuteSounds from "../../../../../assets/topPanel/settingsPopup/high-volume.png";
 import support from "../../../../../assets/topPanel/settingsPopup/support.png";
+import lang from "../../../../../assets/topPanel/settingsPopup/language.png";
 import {UserContext} from "../../../../utils/UserProvider";
 import C_LEAVE_SOCKET from "../../../../protocol/messages/clients/C_LEAVE_SOCKET";
 import {setSettingsMenuPopup} from "../../../../redux/reducers/popups/PopupsReducer";
@@ -13,9 +14,16 @@ import Text from "../../../Text/Text";
 import {getCurrentData} from "../../../../utils/utils";
 import {selectTranslation} from "../../../../redux/reducers/language/LanguageReducer";
 import defaultTranslation from "../../../../redux/reducers/language/defaultTranslation";
+import {selectMyUser} from "../../../../redux/reducers/players/PlayersReducer";
+import SelectDropdown from 'react-native-select-dropdown'
+import {StyleSheet} from 'react-native';
+import C_CHANGE_LANGUAGE from "../../../../protocol/messages/clients/C_CHANGE_LANGUAGE";
+
+const selectedData = ['EN', 'UA']
 
 const Settings = (props) =>{
 
+    const [language, setLanguage] = useState('EN')
     const [mute, setMute] = useState(false)
     const dispatch = useDispatch()
     const { logout } = useContext(UserContext);
@@ -26,6 +34,19 @@ const Settings = (props) =>{
         logout()
     }
 
+    const useSelectCheckBox = (data) =>{
+        if(props.user.language !== data){
+            setLanguage(data)
+            new C_CHANGE_LANGUAGE(data)
+        }
+    }
+
+    useEffect(()=>{
+        if(props.user && props.user.language){
+            setLanguage(props.user.language)
+        }
+    },[])
+
     return (
         <SettingsContainer>
             <ContentContainer>
@@ -34,6 +55,27 @@ const Settings = (props) =>{
                         <Img source={goBack} resizeMode='stretch'/>
                         <Text  large blod center color={'#0c6fb6'}>{props.back}</Text>
                     </ReturnContainer>
+                </Btn>
+                <Btn onPress={()=>{}} activeOpacity={1}>
+                    <LanguageContainer  style={{ borderBottomWidth: 3 }}>
+                        <ImgSelect source={lang} resizeMode='stretch'/>
+                        <SelectDropdown
+                            data={selectedData}
+                            onSelect={useSelectCheckBox}
+                            defaultButtonText={language}
+                            buttonTextAfterSelection={(selectedItem, index) => {
+                                return selectedItem
+                            }}
+                            rowTextForSelection={(item, index) => {
+                                return item
+                            }}
+                            buttonStyle={styles.dropdown1BtnStyle}
+                            buttonTextStyle={styles.dropdown1BtnTxtStyle(props)}
+                            dropdownStyle={styles.dropdown1DropdownStyle}
+                            rowStyle={styles.dropdown1RowStyle}
+                            rowTextStyle={styles.dropdown1RowTxtStyle(props)}
+                        />
+                    </LanguageContainer>
                 </Btn>
                 <Btn onPress={()=>setMute(!mute)} activeOpacity={0.9}>
                     <SoundsContainer  style={{ borderBottomWidth: 3 }}>
@@ -90,6 +132,7 @@ const ReturnContainer = styled.View`
 const SoundsContainer = styled(ReturnContainer)``
 const LeaveContainer = styled(ReturnContainer)``
 const SupportContainer = styled(ReturnContainer)``
+const LanguageContainer = styled(ReturnContainer)``
 
 const Info = styled.View`
   width: 50%;
@@ -106,7 +149,41 @@ const Img = styled.Image`
     height: 30px;
     margin-right: 20px;
 `
+
+const ImgSelect = styled.Image`
+    width: 30px;
+    height: 30px;
+`
+
+const styles = StyleSheet.create({
+    dropdown1BtnStyle: {
+        backgroundColor: 'rgba(255,255,255,0)',
+    },
+    dropdown1BtnTxtStyle: (props)=> {
+        return {
+            color: '#0c6fb6',
+            textAlign: 'left',
+            fontFamily: props.user && props.user.language !== 'EN' ? 'Gogono-Cocoa' : 'Dilo-World'
+        }
+    },
+    dropdown1DropdownStyle: {
+        backgroundColor: 'rgba(239,239,239,0)'
+    },
+    dropdown1RowStyle: {
+        backgroundColor: '#EFEFEF',
+        borderBottomColor: '#C5C5C5'
+    },
+    dropdown1RowTxtStyle: (props)=> {
+        return {
+            color: '#0c6fb6',
+            textAlign: 'center',
+            fontFamily: props.user && props.user.language !== 'EN' ? 'Gogono-Cocoa' : 'Dilo-World'
+        }
+    },
+});
+
 const mapStateToProps = (state) => ({
+    user: selectMyUser(state),
     back: selectTranslation(state,defaultTranslation.TR_RETURN_TO_GAME),
     support: selectTranslation(state,defaultTranslation.TR_SUPPORT),
     muteUnmute: selectTranslation(state,defaultTranslation.TR_MUTE_UNMUTE),
