@@ -4,7 +4,9 @@ import styled from 'styled-components';
 import ButtonImage from '../../../common/Buttons/ButtonImage';
 import send from '../../../../assets/chat/send.png';
 import smile from '../../../../assets/chat/smile.png';
-import { store } from '../../../redux/redux-store';
+import {selectTranslation} from "../../../redux/reducers/language/LanguageReducer";
+import {store} from "../../../redux/redux-store";
+import defaultTranslation from "../../../redux/reducers/language/defaultTranslation";
 
 const ChatInput = (props) => {
 
@@ -43,7 +45,7 @@ const ChatInput = (props) => {
 
     return (
         <ChatInputContainer>
-            <ChatField placeholder='Press here to chat...'
+            <ChatField placeholder={selectTranslation(store.getState(),defaultTranslation.TR_PLACEHOLDER)}
                        placeholderTextColor='#838383'
                        value={props.messageData.message}
                        maxLength={100}
@@ -83,4 +85,5 @@ const ChatField = styled.TextInput`
     border-radius: 50px;
     justify-content: center;
 `
+
 export default memo(ChatInput)

@@ -5,8 +5,11 @@ import money from '../../../../../assets/collections/money.png'
 import Text from "../../../../common/Text/Text";
 import styled from "styled-components";
 import C_SET_ACTIVE_GAME_ITEM from "../../../../protocol/messages/clients/collections/C_SET_ACTIVE_GAME_ITEM";
+import {selectTranslation} from "../../../../redux/reducers/language/LanguageReducer";
+import defaultTranslation from "../../../../redux/reducers/language/defaultTranslation";
+import {connect} from "react-redux";
 
-const CollectButton = ({item,isActive,isCollected,setModalVisible}) => {
+const CollectButton = ({item,isActive,isCollected,setModalVisible, ...props}) => {
 
     let image = ''
     let textBtn = ''
@@ -32,7 +35,7 @@ const CollectButton = ({item,isActive,isCollected,setModalVisible}) => {
         case 'coins-realmoney':
         case 'diamonds-realmoney':
         case 'coins-diamonds-realmoney':{
-            textBtn = 'buy'
+            textBtn = props.buy
             break
         }
         default:{}
@@ -41,11 +44,11 @@ const CollectButton = ({item,isActive,isCollected,setModalVisible}) => {
     const getButtonActiveOrSelect = () =>{
         if(isActive && isCollected){
             return <SelectedBtn disabled style={{ borderBottomWidth: 3 }} activeOpacity={0.9}>
-                <Text small heavy color='#fff' center>Selected</Text>
+                <Text setShadow={true} small heavy color='#fff' center>{props.selected}</Text>
             </SelectedBtn>
         } else if(!isActive && isCollected){
             return <CollectBtn onPress={selectNewItem} style={{ borderBottomWidth: 3 }} activeOpacity={0.9}>
-                <Text small heavy color='#fff' center>Select</Text>
+                <Text setShadow={true} small heavy color='#fff' center>{props.select}</Text>
             </CollectBtn>
         }
     }
@@ -64,8 +67,8 @@ const CollectButton = ({item,isActive,isCollected,setModalVisible}) => {
                 ? getButtonActiveOrSelect()
                 : <CollectBtn onPress={clickHandler} style={{ borderBottomWidth: 3 }} activeOpacity={0.9}>
                     {image && <PriceImage source={image}/>}
-                    {price && <Text small heavy color='#fff' center>{price}</Text>}
-                    {textBtn && <Text small heavy color='#fff' center>{textBtn}</Text>}
+                    {price && <Text setShadow={true} small heavy color='#fff' center>{price}</Text>}
+                    {textBtn && <Text setShadow={true} small heavy color='#fff' center>{textBtn}</Text>}
                 </CollectBtn>
             }
         </React.Fragment>
@@ -102,4 +105,10 @@ const SelectedBtn = styled.TouchableOpacity`
   height: 30px;
 `
 
-export default CollectButton;
+const mapStateToProps = (state) => ({
+    select: selectTranslation(state,defaultTranslation.TR_SELECT),
+    selected: selectTranslation(state,defaultTranslation.TR_SELECTED),
+    buy: selectTranslation(state,defaultTranslation.TR_BUY),
+})
+
+export default connect(mapStateToProps)(CollectButton);

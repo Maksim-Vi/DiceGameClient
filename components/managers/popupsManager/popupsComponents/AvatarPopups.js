@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, useWindowDimensions } from 'react-native'
-import { useDispatch } from 'react-redux'
+import {connect, useDispatch} from 'react-redux'
 import styled from 'styled-components'
 import images from '../../../../assets/dynamicLoadImage'
 import ButtonWithText from '../../../common/Buttons/ButtonWithText'
@@ -8,6 +8,8 @@ import ModalWrapper from '../../../common/ModalWindows/ModalWrapper'
 import Text from '../../../common/Text/Text'
 import { setNewAvatar } from '../../../protocol/API/API'
 import { setAvatarPopup } from '../../../redux/reducers/popups/PopupsReducer'
+import {selectTranslation} from "../../../redux/reducers/language/LanguageReducer";
+import defaultTranslation from "../../../redux/reducers/language/defaultTranslation";
 
 const AvatarPopups = (props) =>{
  
@@ -32,7 +34,7 @@ const AvatarPopups = (props) =>{
 
     const renderAvatarPopup = () =>{
         return <AvatarContainer>
-             <Text title blod color={'blue'} center>Avatars</Text>
+             <Text setShadow={true} title blod color={'#fefefe'} center>{props.avatarsText}</Text>
              <Scroll showsVerticalScrollIndicator={false} contentContainerStyle={styles.scroll}>
                 <AvatarsGrid>
                     {images.avatars.map((ava,index)=>{
@@ -40,13 +42,13 @@ const AvatarPopups = (props) =>{
                         const isActive = +index === +props.user.avatar || (+props.user.avatar === null && index === 0)
                         
                         return <AvaCard key={index} style={{ borderBottomWidth: 8 }}>
-                            <Text center>ava {index}</Text>
+                            <Text center>{props.ava} {index}</Text>
                             <Ava>
-                                <AvatarImg source={ava} resizeMode={ 'stretch'} />
+                                <AvatarImg source={ava} resizeMode={'stretch'} />
                             </Ava>
                             <ButtonWithText width={'80%'} 
                                             disabled={isActive} 
-                                            text={'select'} 
+                                            text={isActive ? props.selected : props.select}
                                             clickHandler={() => selectAvatar(index)}/>
                         </AvaCard>
                     })}
@@ -106,4 +108,11 @@ const styles = StyleSheet.create({
     }
 })
 
-export default AvatarPopups
+const mapStateToProps = (state) => ({
+    avatarsText: selectTranslation(state,defaultTranslation.TR_AVATAR),
+    select: selectTranslation(state,defaultTranslation.TR_SELECT),
+    selected: selectTranslation(state,defaultTranslation.TR_SELECTED),
+    ava: selectTranslation(state,defaultTranslation.TR_AVA),
+})
+
+export default connect(mapStateToProps)(AvatarPopups);

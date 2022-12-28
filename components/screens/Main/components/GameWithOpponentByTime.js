@@ -3,6 +3,9 @@ import gameIcon from "../../../../assets/dice/play_dice.png";
 import styled from "styled-components";
 import Text from "../../../common/Text/Text";
 import { useWindowDimensions } from 'react-native';
+import {selectTranslation} from "../../../redux/reducers/language/LanguageReducer";
+import defaultTranslation from "../../../redux/reducers/language/defaultTranslation";
+import {connect} from "react-redux";
 
 const GameWithOpponentByTime = (props) => {
 
@@ -16,9 +19,9 @@ const GameWithOpponentByTime = (props) => {
 
   return (
       <OpponentContainer width={width} height={height} onPress={hendelClick} style={{ borderBottomWidth: 8 }}>
-        <TextCont small heavy color={'#ff9d4d'} center>tap to play</TextCont>
+        <TextCont numberOfLines={1} setShadow={true} small heavy color={'#ff9d4d'} center>{props.tap_to_play}</TextCont>
         <GameImage source={gameIcon} resizeMode={ 'stretch'}/>
-        <TextCont madium heavy color={'#ff9d4d'} center>Fight&Opp. by time</TextCont>
+        <TextCont numberOfLines={2} setShadow={true} madium heavy color={'#ff9d4d'} center>{props.fightOppByTime}</TextCont>
       </OpponentContainer>
   );
 };
@@ -41,9 +44,12 @@ const GameImage = styled.Image`
   margin: 10px auto;
 `
 const TextCont = styled(Text)`
-  width: 80px;
-  font-family: 'Dilo-World';
   text-shadow: 1px 1px 1px #000;
 `
 
-export default GameWithOpponentByTime;
+const mapStateToProps = (state) => ({
+    tap_to_play: selectTranslation(state,defaultTranslation.TR_TAP_TO_PLAY),
+    fightOppByTime: selectTranslation(state,defaultTranslation.TR_FIGHT_OPP_BY_TIME),
+})
+
+export default connect(mapStateToProps)(GameWithOpponentByTime);

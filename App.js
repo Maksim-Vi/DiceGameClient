@@ -15,6 +15,7 @@ export default function App() {
 
   const [fontsLoaded] = useFonts({
     'Dilo-World': require('./assets/fonts/DiloWorld.ttf'),
+    'Gogono-Cocoa': require('./assets/fonts/GogonoCocoa.otf'),
   });
 
   const navigationRef = useNavigationContainerRef();
@@ -33,7 +34,6 @@ export default function App() {
         <NavigationContainer ref={navigationRef}>
           <AppContainer>
             <Screens />
-
             <PopupsManager />
           </AppContainer>
         </NavigationContainer>

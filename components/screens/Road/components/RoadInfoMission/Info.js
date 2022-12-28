@@ -4,6 +4,7 @@ import styled from "styled-components";
 import {rewardType} from "../utils";
 import coins from "../../../../../assets/topPanel/coins.png";
 import diamond from "../../../../../assets/topPanel/diamond.png";
+import TextWithoutShadow from "../../../../common/Text/TextWithoutShadow";
 
 const Info = (props) => {
 
@@ -18,7 +19,7 @@ const Info = (props) => {
 
     return (
         <InfoContainer>
-            <Name madium numberOfLines={3}>{props.activeMission.missionName}</Name>
+            <Name small numberOfLines={2}>{props.activeMission.missionName}</Name>
 
             <WonPriceContainer>
                 <PriceImg source={getImageByType()} resizeMode={'stretch'}/>
@@ -38,9 +39,10 @@ const InfoContainer = styled.View`
   height: 50%;
 `
 
-const Name = styled(Text)`
+const Name = styled(TextWithoutShadow)`
   width: 50%;
   height: 100%;
+  margin-top: 7px;
 `
 const WonPriceContainer = styled.View`
   display: flex;

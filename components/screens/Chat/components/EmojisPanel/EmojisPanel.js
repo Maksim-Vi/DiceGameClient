@@ -20,7 +20,7 @@ const EmojisPanel = (props) => {
     return (
         <EmojiContainer>
             <EmojiSelector category={Categories.emotion}
-                           columns={5}
+                           columns={7}
                            theme={'#0b61abb0'}
                            showSearchBar={false}
                            showSectionTitles={false}

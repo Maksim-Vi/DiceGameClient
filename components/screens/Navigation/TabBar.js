@@ -9,6 +9,9 @@ import InfoButton from "../../common/Info/InfoButton";
 import React from "react";
 import EventDispatcher from "../../redux/EventDispatcher";
 import eventsType from "../../redux/eventsType";
+import {selectTranslation} from "../../redux/reducers/language/LanguageReducer";
+import defaultTranslation from "../../redux/reducers/language/defaultTranslation";
+import {connect} from "react-redux";
 
 class TabBar extends React.PureComponent {
     constructor(props){
@@ -71,16 +74,16 @@ class TabBar extends React.PureComponent {
     getText = (route) => {
         switch (route.name) {
             case "MainScreen":
-                return 'Home';
+                return this.props.home;
             case "ShopScreen":
-                return 'Shop';
+                return this.props.shop;
             case "CollectionsScreen":
-                return 'Collection';
+                return this.props.collection;
             case "ChatScreen":
-                return 'Chat';
+                return this.props.chat;
 
             default:
-                return 'Home'
+                return this.props.home
         }
     };
 
@@ -93,7 +96,7 @@ class TabBar extends React.PureComponent {
                     return (
                         <TabIconContainer key={index} focused={isFocused} onPress={() => this.onPress(route, isFocused)}>
                             <NavImage source={this.getIconName(route)}/>
-                            <Text heavy medium color={'#ff9d4d'}>{this.getText(route)}</Text>
+                            <Text setShadow={true} heavy medium color={'#ff9d4d'}>{this.getText(route)}</Text>
                             {isFocused &&
                                 <Active style={{borderTopWidth: 4, borderBottomWidth: 0}}/>
                             }
@@ -163,4 +166,11 @@ const Active = styled.View`
   border-top-right-radius: 10px;
 `;
 
-export default TabBar
+const mapStateToProps = (state) => ({
+    shop: selectTranslation(state,defaultTranslation.TR_SHOP),
+    collection: selectTranslation(state,defaultTranslation.TR_COLLECTION),
+    home: selectTranslation(state,defaultTranslation.TR_HOME),
+    chat: selectTranslation(state,defaultTranslation.TR_CHAT),
+})
+
+export default connect(mapStateToProps)(TabBar);

@@ -8,7 +8,11 @@ const ButtonImage = (props) => {
                     onPress={props.clickHandler}
                     activeOpacity={0.9}>
             <Image {...props} source={props.image}/>
-            {props.text && <Text small heavy color='#fff' center>{props.text}</Text>}
+            {props.text && <TextBtn style={{
+                textShadowColor: 'rgba(0, 0, 0, 0.5)',
+                textShadowOffset: {width: -1, height: 1},
+                textShadowRadius: 1
+            }} small heavy color='#fff' center>{props.text}</TextBtn>}
         </CollectBtn>
     )
 }
@@ -32,5 +36,7 @@ const CollectBtn = styled.TouchableOpacity`
   flex-direction: row;
   margin: 5px;
 `
+
+const TextBtn = styled(Text)``
 
 export default ButtonImage;

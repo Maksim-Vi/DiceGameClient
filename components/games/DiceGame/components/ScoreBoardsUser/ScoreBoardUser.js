@@ -5,6 +5,7 @@ import C_SCORE from '../../../../protocol/messages/clients/games/C_SCORE'
 import BoardItem from '../BoardItem/BoardItem'
 import {Animated, Dimensions, Easing} from "react-native";
 import BoardUserInfo from './BoardUserInfo'
+import TextWithoutShadow from "../../../../common/Text/TextWithoutShadow";
 
 const ScoreBoardUser = (props) => {
 
@@ -117,7 +118,7 @@ const WinPoints = styled.View`
     }
   }}
 `
-const Column = styled(Text)`
+const Column = styled(TextWithoutShadow)`
   width: 33%;
   height: 20px;
 `

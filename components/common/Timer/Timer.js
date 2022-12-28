@@ -28,6 +28,9 @@ export default class Timer {
 
         let now = new Date() / 1000;
         let diff = Math.floor(this._time - now);
+
+        result.totalTime = diff;
+
         if(diff <= 0) {
             clearInterval(this.interval);
             result.totalTime = diff;
@@ -42,7 +45,6 @@ export default class Timer {
         diff -= result.minutes * 60;
         result.seconds = Math.floor(diff);
 
-        result.totalTime = diff;
         this._callback(result);
     }
 }

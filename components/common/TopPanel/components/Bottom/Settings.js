@@ -8,9 +8,11 @@ import support from "../../../../../assets/topPanel/settingsPopup/support.png";
 import {UserContext} from "../../../../utils/UserProvider";
 import C_LEAVE_SOCKET from "../../../../protocol/messages/clients/C_LEAVE_SOCKET";
 import {setSettingsMenuPopup} from "../../../../redux/reducers/popups/PopupsReducer";
-import {useDispatch} from "react-redux";
+import {connect, useDispatch} from "react-redux";
 import Text from "../../../Text/Text";
 import {getCurrentData} from "../../../../utils/utils";
+import {selectTranslation} from "../../../../redux/reducers/language/LanguageReducer";
+import defaultTranslation from "../../../../redux/reducers/language/defaultTranslation";
 
 const Settings = (props) =>{
 
@@ -30,25 +32,25 @@ const Settings = (props) =>{
                 <Btn onPress={props.closeModal} activeOpacity={0.9}>
                     <ReturnContainer  style={{ borderBottomWidth: 3 }}>
                         <Img source={goBack} resizeMode='stretch'/>
-                        <Text  large blod center color={'#0c6fb6'}>return to game</Text>
+                        <Text  large blod center color={'#0c6fb6'}>{props.back}</Text>
                     </ReturnContainer>
                 </Btn>
                 <Btn onPress={()=>setMute(!mute)} activeOpacity={0.9}>
                     <SoundsContainer  style={{ borderBottomWidth: 3 }}>
                         <Img source={mute ? muteSounds : unmuteSounds} resizeMode='stretch'/>
-                        <Text large blod center color={'#0c6fb6'}>mute/unmute sounds</Text>
+                        <Text large blod center color={'#0c6fb6'}>{props.muteUnmute}</Text>
                     </SoundsContainer>
                 </Btn>
                 <Btn onPress={()=>console.log('support')} activeOpacity={0.9}>
                     <SupportContainer style={{ borderBottomWidth: 3 }}>
                         <Img source={support} resizeMode='stretch'/>
-                        <Text large blod center color={'#0c6fb6'}>support</Text>
+                        <Text large blod center color={'#0c6fb6'}>{props.support}</Text>
                     </SupportContainer>
                 </Btn>
                 <Btn onPress={Logout} activeOpacity={0.9}>
                     <LeaveContainer style={{ borderBottomWidth: 3 }}>
                         <Img source={exit} resizeMode='stretch'/>
-                        <Text large blod center color={'#0c6fb6'}>leave game</Text>
+                        <Text large blod center color={'#0c6fb6'}>{props.leaveGame}</Text>
                     </LeaveContainer>
                 </Btn>
             </ContentContainer>
@@ -104,5 +106,11 @@ const Img = styled.Image`
     height: 30px;
     margin-right: 20px;
 `
+const mapStateToProps = (state) => ({
+    back: selectTranslation(state,defaultTranslation.TR_RETURN_TO_GAME),
+    support: selectTranslation(state,defaultTranslation.TR_SUPPORT),
+    muteUnmute: selectTranslation(state,defaultTranslation.TR_MUTE_UNMUTE),
+    leaveGame: selectTranslation(state,defaultTranslation.TR_LEAVE_GAME),
+})
 
-export default Settings
+export default connect(mapStateToProps)(Settings);

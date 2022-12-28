@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
-import Text from "../../../../common/Text/Text";
+import TextWithoutShadow from "../../../../common/Text/TextWithoutShadow";
 
 const ProgressBar = (props) => {
     return (
@@ -31,7 +31,7 @@ const Progress = styled.View`
   background-color: rgb(132, 171, 62);
 `
 
-const TextCount = styled(Text)`
+const TextCount = styled(TextWithoutShadow)`
   position: absolute;
   width: 100%;
 `

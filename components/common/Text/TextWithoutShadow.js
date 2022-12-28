@@ -3,17 +3,8 @@ import styled from 'styled-components/native';
 import {connect} from "react-redux";
 import {selectMyUser} from "../../redux/reducers/players/PlayersReducer";
 
-const TextStyle = ({...props}) => {
-
-    const ShadowStyle = {
-        textShadowColor: props.shadowColor || 'rgba(0, 0, 0, 0.9)',
-        textShadowOffset: props.shadowOffset || {width: 0, height: 1},
-        textShadowRadius: props.shadowRadius || 2,
-        elevation: 6,
-    }
-
+const TextWithoutShadowStyle = ({...props}) => {
     return <Text {...props}
-                 style={props.setShadow && ShadowStyle}
                  adjustsFontSizeToFit
                  numberOfLines={props.numberOfLines || 0}>
         {props.children}
@@ -62,4 +53,4 @@ const mapStateToProps = (state) =>{
     }
 }
 
-export default connect(mapStateToProps)(TextStyle);
+export default connect(mapStateToProps)(TextWithoutShadowStyle);

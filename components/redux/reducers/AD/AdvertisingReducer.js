@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 let initialState = {
-    leftTimeShowGiftAd: 0,
+    leftTimeShowGiftAd: -1,
     numberCanMissGameAd: 5,
     countShowless: 0
 }

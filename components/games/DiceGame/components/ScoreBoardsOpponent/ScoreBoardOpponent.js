@@ -4,6 +4,7 @@ import Text from '../../../../common/Text/Text'
 import BoardItem from '../BoardItem/BoardItem'
 import {Dimensions, NativeModules, Platform} from "react-native";
 import BoardOpponentInfo from './BoardOpponentInfo';
+import TextWithoutShadow from "../../../../common/Text/TextWithoutShadow";
 
 const OppIndexView = [6, 7, 8, 3, 4, 5, 0, 1, 2]
 
@@ -125,7 +126,7 @@ const CountScores = styled(Text)`
   right: -22px;
   bottom: 0;
 `
-const Column = styled(Text)`
+const Column = styled(TextWithoutShadow)`
   width: 33%;
   height: 20px;
 `
