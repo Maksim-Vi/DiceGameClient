@@ -1,6 +1,9 @@
 import React from 'react';
 import styled from "styled-components";
 import Text from "../../../../common/Text/Text";
+import {selectTranslation} from "../../../../redux/reducers/language/LanguageReducer";
+import defaultTranslation from "../../../../redux/reducers/language/defaultTranslation";
+import {connect} from "react-redux";
 
 const TabsCollection = (props) => {
     return (
@@ -8,12 +11,12 @@ const TabsCollection = (props) => {
             <TabButton tabName={'dices'}
                        activeTab={props.activeTab}
                        onPress={() => props.handelActiveTab('dices')}>
-                <Text>dices</Text>
+                <Text setShadow={true}>{props.dices}</Text>
             </TabButton>
             <TabButton tabName={'squares'}
                        activeTab={props.activeTab}
                        onPress={() => props.handelActiveTab('squares')}>
-                <Text>squares</Text>
+                <Text setShadow={true}>{props.squares}</Text>
             </TabButton>
         </Tabs>
     );
@@ -43,6 +46,9 @@ const TabButton = styled.TouchableOpacity`
   }}
   
 `
+const mapStateToProps = (state) => ({
+    dices: selectTranslation(state,defaultTranslation.TR_DICES),
+    squares: selectTranslation(state,defaultTranslation.TR_SQUARES),
+})
 
-
-export default TabsCollection;
+export default connect(mapStateToProps)(TabsCollection);

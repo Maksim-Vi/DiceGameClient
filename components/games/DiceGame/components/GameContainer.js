@@ -8,6 +8,9 @@ import ScoreBoardOpponent from './ScoreBoardsOpponent/ScoreBoardOpponent'
 import ScoreBoardUser from './ScoreBoardsUser/ScoreBoardUser'
 import {Animated, Easing, NativeModules, Platform} from "react-native";
 import {setTimingAnimated} from "../../../utils/Animation";
+import {selectTranslation} from "../../../redux/reducers/language/LanguageReducer";
+import defaultTranslation from "../../../redux/reducers/language/defaultTranslation";
+import {connect} from "react-redux";
 
 class GameContainer extends React.Component {
     constructor(){
@@ -68,12 +71,12 @@ class GameContainer extends React.Component {
                this.state.showThrowBtn !== prevState.showThrowBtn
     }
 
-    componentDidUpdate(nextProps){
+    componentDidUpdate(nextProps,nextState){
         if(this.props.gameSettings !== nextProps.gameSettings){
             this.gameModel.setData(this.props.currentGame, this.props.gameSettings)
         }
 
-        if(this.props.scores !== nextProps.scores){
+        if(this.state.showThrowBtn && this.props.scores !== nextProps.scores){
             const {userId, username, userScores, opponentsScores} = this.props.scores
             let boardData = this.state.boardData
             let winPointsData = this.state.winPointsData
@@ -89,6 +92,8 @@ class GameContainer extends React.Component {
     }
 
     getThrowData = () =>{
+        if(!this.state.showThrowBtn) return
+
         if(this.props.isYouMove){
             return this.props.throwData ? this.props.throwData.diceScore : 0
         }
@@ -169,7 +174,7 @@ class GameContainer extends React.Component {
                         <ThrowButton onPress={this.hendlerThrowGame}
                                      activeOpacity={this.props.isYouMove ? 1 : 0.6}
                                      disabled={!this.props.isYouMove}>
-                            <Text large heavy color={'#fff'}>Throw Dice</Text>
+                            <Text large heavy color={'#fff'}>{this.props.throwText}</Text>
                         </ThrowButton>
                     }
                 </ButtonContainer>
@@ -189,7 +194,7 @@ class GameContainer extends React.Component {
                             }
                         ]
                     }}>
-                        <StartGameText title heavy color={'#fff'}>Start Game</StartGameText>
+                        <StartGameText title heavy color={'#fff'}>{this.props.startGameText}</StartGameText>
                     </StartGameTextContainer>
                 }
             </Game>
@@ -257,4 +262,9 @@ const StartGameText = styled(Text)`
     text-shadow: 4px 4px 6px rgba(66, 68, 90, 1);
 `
 
-export default GameContainer
+const mapStateToProps = (state) => ({
+    throwText: selectTranslation(state,defaultTranslation.TR_THROW_DICE),
+    startGameText: selectTranslation(state,defaultTranslation.TR_START_GAME),
+})
+
+export default connect(mapStateToProps)(GameContainer);

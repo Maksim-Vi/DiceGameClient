@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Text from "../../common/Text/Text";
-import {connect} from "react-redux";
+import {connect, useSelector} from "react-redux";
 import {selectResultGame, setCountScores} from "../../redux/reducers/game/GameReducer";
 import React from "react";
 import {useNavigation} from "@react-navigation/native";
@@ -13,9 +13,13 @@ import Loser from "./components/Loser";
 import { Animated, Easing } from "react-native";
 import { setTimingAnimated } from "../../utils/Animation";
 import { useInterstitialAd, TestIds } from 'react-native-google-mobile-ads';
+import {resetCountShowAd, setCountShowAd} from "../../redux/reducers/AD/AdvertisingReducer";
+import {selectTranslation} from "../../redux/reducers/language/LanguageReducer";
+import defaultTranslation from "../../redux/reducers/language/defaultTranslation";
 
 const ResultScreen = (props) => {
 
+    const advertising = useSelector(state => state.advertising)
     const { isLoaded, isClosed, load, show } = useInterstitialAd(TestIds.INTERSTITIAL, {
         requestNonPersonalizedAdsOnly: true,
     });
@@ -23,11 +27,12 @@ const ResultScreen = (props) => {
     const navigation = useNavigation()
 
     const hendlerCloseResult = () => {
-        if (isLoaded) {
+        if (isLoaded && advertising.countShowless === advertising.numberCanMissGameAd) {
             show();
         } else {
             navigation.navigate('MainScreen')
             store.dispatch(setCountScores(null))
+            store.dispatch(setCountShowAd())
         }
     }
 
@@ -75,7 +80,7 @@ const ResultScreen = (props) => {
                         }
                     ]
                 }}>
-                    <TitleText title heavy color={'#fff'}>{props.result.userWin ? 'You Win' : 'You Lose'}</TitleText>
+                    <TitleText title heavy color={'#fff'}>{props.result.userWin ? props.winText : props.loseText}</TitleText>
                 </TitleContainer>
 
                 {getWinner(Winner)}
@@ -97,6 +102,7 @@ const ResultScreen = (props) => {
         if (isClosed) {
             navigation.navigate('MainScreen')
             store.dispatch(setCountScores(null))
+            store.dispatch(resetCountShowAd())
         }
     }, [isClosed, navigation]);
 
@@ -105,7 +111,7 @@ const ResultScreen = (props) => {
             <ResultContainer>
                 {renderResult()}
                 <PlayButton onPress={hendlerCloseResult} style={{ borderBottomWidth: 5 }}>
-                    <Text large heavy color={'#fff'}>Continue</Text>
+                    <Text large heavy color={'#fff'}>{props.continue}</Text>
                 </PlayButton>
             </ResultContainer>
         </BackgroundWrapper>
@@ -153,7 +159,10 @@ const PlayButton = styled.TouchableOpacity`
 
 const mapStateToProps = (state) => ({
     userId: selectCurrentUserId(state),
-    result: selectResultGame(state)
+    result: selectResultGame(state),
+    winText: selectTranslation(state, defaultTranslation.TR_YOU_WIN),
+    loseText: selectTranslation(state, defaultTranslation.TR_YOU_LOSE),
+    continue: selectTranslation(state, defaultTranslation.TR_CONTINUE),
 });
 
 export default connect(mapStateToProps)(ResultScreen);

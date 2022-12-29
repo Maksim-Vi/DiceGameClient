@@ -5,8 +5,11 @@ import Text from '../../../common/Text/Text'
 import place from '../../../../assets/result/place_1.png'
 import { setTimingAnimated } from '../../../utils/Animation'
 import { Animated, Easing } from 'react-native'
+import {selectTranslation} from "../../../redux/reducers/language/LanguageReducer";
+import defaultTranslation from "../../../redux/reducers/language/defaultTranslation";
+import {connect} from "react-redux";
 
-const Winner = ({winner}) => {
+const Winner = ({winner, ...props}) => {
     
     const animatedValue = React.useRef(new Animated.Value(0)).current;
    
@@ -49,13 +52,13 @@ const Winner = ({winner}) => {
 
                 <NameTextContainer>
                     <Text title heavy color={'#170231'}>{winner.player.username}</Text>
-                    <Text color={'#fff'}>Place №1</Text>
+                    <Text color={'#fff'}>{props.place} №1</Text>
                 </NameTextContainer>
 
                 <WinsContainer>
-                    <Text medium heavy color={'#fff'}>coins: {winner.items.coins}</Text>
-                    <Text medium heavy color={'#fff'}>crystals: {winner.items.crystals}</Text>
-                    <Text medium heavy color={'#000'}> Combinations:
+                    <Text medium heavy color={'#fff'}>{props.coins}: {winner.items.coins}</Text>
+                    <Text medium heavy color={'#fff'}>{props.diamonds}: {winner.items.crystals}</Text>
+                    <Text medium heavy color={'#000'}> {props.combinations}:
                         <Text large heavy color={'#fff'}> {winner.items.scores}</Text>
                     </Text>
                 </WinsContainer>
@@ -108,5 +111,11 @@ const WinsContainer = styled.View`
     text-align: center;
     margin-left: auto;
 `
+const mapStateToProps = (state) => ({
+    place: selectTranslation(state,defaultTranslation.TR_PLACE),
+    coins: selectTranslation(state,defaultTranslation.TR_COINS),
+    diamonds: selectTranslation(state,defaultTranslation.TR_DIAMONDS),
+    combinations: selectTranslation(state,defaultTranslation.TR_COMBINATIONS),
+})
 
-export default Winner
+export default connect(mapStateToProps)(Winner);

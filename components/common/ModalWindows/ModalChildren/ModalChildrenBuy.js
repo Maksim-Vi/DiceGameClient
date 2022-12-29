@@ -11,6 +11,9 @@ import {selectUserCoins, selectUserCrystals} from "../../../redux/reducers/playe
 import {store} from "../../../redux/redux-store";
 import {setPaymentBuyRealMoney} from "../../../utils/PaymentHelper";
 import { getCollectionDiceImg, getCollectionSquareImg} from "../../../utils/utils";
+import {selectTranslation} from "../../../redux/reducers/language/LanguageReducer";
+import defaultTranslation from "../../../redux/reducers/language/defaultTranslation";
+import {connect} from "react-redux";
 
 const ModalChildrenBuy = (props) => {
 
@@ -107,7 +110,7 @@ const ModalChildrenBuy = (props) => {
         props.setModalVisible(false)
     }
 
-    getItemImgByType = () =>{
+    const getItemImgByType = () =>{
         if(props.type === 'dices'){
             return getCollectionDiceImg(props.openItem.sortIndex)
         }
@@ -122,8 +125,8 @@ const ModalChildrenBuy = (props) => {
             <SquareImage source={getItemImgByType()}/>
 
             <Context>
-                <Text large blod center color={'#fff'}>
-                    Are you sure, that you want to buy {props.openItem.name}?
+                <Text setShadow={true} large blod center color={'#fff'}>
+                    {props.confirmInfo} {props.openItem.name}?
                 </Text>
             </Context>
 
@@ -171,4 +174,9 @@ const SquareImage = styled.Image`
   height: 100px;
 `
 
-export default ModalChildrenBuy;
+const mapStateToProps = (state) => ({
+    confirmInfo: selectTranslation(state,defaultTranslation.TR_COLLECTIONS_CONFIRM_INFO),
+    fightOpp: selectTranslation(state,defaultTranslation.TR_FIGHT_OPP),
+})
+
+export default connect(mapStateToProps)(ModalChildrenBuy);

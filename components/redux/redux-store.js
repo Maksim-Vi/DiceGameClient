@@ -6,10 +6,15 @@ import WebsocketReducer from './reducers/Websocket/WebsocketReducer';
 import CollectionsReducer from "./reducers/collections/CollectionsReducer";
 import PopupsReducer from './reducers/popups/PopupsReducer';
 import ChatReducer from './reducers/chat/ChatReducer';
+import RoadReducer from "./reducers/road/RoadReducer";
+import AdvertisingReducer from "./reducers/AD/AdvertisingReducer";
+import LanguageReducer from "./reducers/language/LanguageReducer";
 
 export const store = configureStore({
   reducer: {
     websocketMessages: WebsocketReducer,
+    advertising: AdvertisingReducer,
+    language: LanguageReducer,
     login: LoginReducer,
 
     players: PlayersReducer,
@@ -17,6 +22,7 @@ export const store = configureStore({
     collections: CollectionsReducer,
     popups: PopupsReducer,
     chat: ChatReducer,
+    road: RoadReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
 });

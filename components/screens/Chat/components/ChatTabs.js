@@ -2,8 +2,10 @@ import React from 'react'
 import styled from 'styled-components';
 import Tab from './Tabs/Tab';
 import image from '../../../../assets/chat/tabs/group.png'
-import friends from '../../../../assets/chat/tabs/friends.png'
 import { useSelector } from 'react-redux';
+import {selectTranslation} from "../../../redux/reducers/language/LanguageReducer";
+import defaultTranslation from "../../../redux/reducers/language/defaultTranslation";
+import {store} from "../../../redux/redux-store";
 
 const arrTabsDefault = [
     {chanelName: 'general', image: image},
@@ -19,7 +21,9 @@ const ChatTabs = () => {
         const tabsArray = chatTabs && chatTabs.length > 0 ? chatTabs : arrTabsDefault
 
         tabsArray.forEach((tab, index)=>{
-            tabs.push(<Tab key={index} tabName={tab.chanelName} image={tab.image}/>)
+            const getTranslate = tab.chanelName === 'general' ? defaultTranslation.TR_GENERAL : ''
+
+            tabs.push(<Tab key={index} tabName={selectTranslation(store.getState(),getTranslate)} image={tab.image}/>)
         })
 
 

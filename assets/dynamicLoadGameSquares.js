@@ -8,6 +8,9 @@ const imagesGameSquares = {
     11: require('./collections/squares/7.png'),
     10: require('./collections/squares/8.png'),
     12: require('./collections/squares/9.png'),
+    15: require('./collections/squares/10.png'),
+    16: require('./collections/squares/11.png'),
+    17: require('./collections/squares/12.png'),
 };
 
 export default imagesGameSquares;

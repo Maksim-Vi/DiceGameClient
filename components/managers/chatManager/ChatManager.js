@@ -6,6 +6,8 @@ import image from '../../../assets/chat/tabs/group.png'
 import clan from '../../../assets/chat/tabs/clan.png'
 import { store } from "../../redux/redux-store"
 import { addChatTab, cleanChatTabs } from "../../redux/reducers/chat/ChatReducer"
+import {selectTranslation} from "../../redux/reducers/language/LanguageReducer";
+import defaultTranslation from "../../redux/reducers/language/defaultTranslation";
 
 class ChatManager {
     constructor(){
@@ -118,7 +120,8 @@ class ChatManager {
 
     addInfoMessageStartChat = (roomChanel) =>{
         if(roomChanel) {
-            this.updateChatChanel(roomChanel, 'info', 'Welcome to the chat!',new Date(),'info')
+            const welcomeChat = selectTranslation(store.getState(),defaultTranslation.TR_WELCOME_IRC)
+            this.updateChatChanel(roomChanel, 'info', welcomeChat,new Date(),'info')
         }
     }
 

@@ -4,26 +4,31 @@ import Text from '../../../../common/Text/Text';
 import tooltip from '../../../../../assets/road/tooltip.png'
 import coins from '../../../../../assets/topPanel/coins.png'
 import diamond from '../../../../../assets/topPanel/diamond.png'
-import { typesRoadBtns } from '../utils';
+import {rewardType} from '../utils';
 
 const RoadItemInfo = (props) => {
 
     const getPriceImgByType = () =>{
         switch (props.rewardType) {
-            case 'coins': return coins
-            case 'diamonds': return diamond
+            case rewardType.coins: return coins
+            case rewardType.diamonds: return diamond
             default:
                 break;
         }
     }
 
-    if(props.type === typesRoadBtns.claimed) return null
+    const getOpacity = () =>{
+        if(!props.isAvailableExecute && !props.isClaimed && !props.isFinished) return 0.6
+        return 1
+    }
+
+    if(props.isClaimed) return null
 
     return (
         <RoadItemInfoContainer>
-             <Background source={tooltip} resizeMode={'contain'}>
+             <Background style={{opacity: getOpacity()}} source={tooltip} resizeMode={'contain'}>
                 <PriceImg source={getPriceImgByType()} resizeMode={ 'stretch'}/>
-                <Text large blod color={'#000'}>{props.price}</Text>
+                <Text large blod color={'#000'}>{props.rewardQuantity}</Text>
              </Background>
         </RoadItemInfoContainer>
     )

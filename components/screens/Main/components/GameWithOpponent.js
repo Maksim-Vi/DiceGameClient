@@ -3,6 +3,9 @@ import gameIcon from "../../../../assets/dice/icons8-dices-98.png";
 import styled from "styled-components";
 import Text from "../../../common/Text/Text";
 import { useWindowDimensions } from 'react-native';
+import {selectTranslation} from "../../../redux/reducers/language/LanguageReducer";
+import defaultTranslation from "../../../redux/reducers/language/defaultTranslation";
+import {connect} from "react-redux";
 
 const GameWithOpponent = (props) => {
 
@@ -14,9 +17,9 @@ const GameWithOpponent = (props) => {
 
   return (
       <OpponentContainer width={width} height={height} onPress={hendelClick} style={{ borderBottomWidth: 8 }}>
-        <TextCont small heavy color={'#ff9d4d'} center>tap to play</TextCont>
+        <TextCont numberOfLines={1} setShadow={true} small heavy color={'#ff9d4d'} center>{props.tap_to_play}</TextCont>
         <GameImage source={gameIcon} resizeMode={ 'stretch'}/>
-        <TextCont madium heavy color={'#ff9d4d'} center>Fight&Opp.</TextCont>
+        <TextCont numberOfLines={1} setShadow={true} madium heavy color={'#ff9d4d'} center>{props.fightOpp}</TextCont>
       </OpponentContainer>
   );
 };
@@ -38,8 +41,11 @@ const GameImage = styled.Image`
   margin: 10px auto;
 `
 const TextCont = styled(Text)`
-  font-family: 'Dilo-World';
-  text-shadow: 1px 1px 1px #000;
 `
 
-export default GameWithOpponent;
+const mapStateToProps = (state) => ({
+    tap_to_play: selectTranslation(state,defaultTranslation.TR_TAP_TO_PLAY),
+    fightOpp: selectTranslation(state,defaultTranslation.TR_FIGHT_OPP),
+})
+
+export default connect(mapStateToProps)(GameWithOpponent);

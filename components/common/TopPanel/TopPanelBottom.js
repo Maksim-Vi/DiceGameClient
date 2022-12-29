@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
 import RoadButton from './components/Bottom/RoadButton';
-import Settings from "./components/Bottom/Settings";
 import UserInfo from "./components/Bottom/UserInfo";
 
 const TopPanelBottom = (props) => {

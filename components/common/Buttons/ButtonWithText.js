@@ -11,12 +11,14 @@ const ButtonWithText = (props) => {
   }
   
   return (
-      <CollectBtn {...props} 
+      <CollectBtn {...props}
+                  style={{
+                      borderBottomWidth: 3,
+                  }}
                   disabled={props.disabled || false}
-                  onPress={btnClickHendler} 
-                  style={{ borderBottomWidth: 3 }}
+                  onPress={btnClickHendler}
                   activeOpacity={0.9}>
-          <Text small heavy color='#fff' center>{props.text}</Text>
+          <Text setShadow={true} small heavy color='#fff' center>{props.text}</Text>
       </CollectBtn>
   )
 }

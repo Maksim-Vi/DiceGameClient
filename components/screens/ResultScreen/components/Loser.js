@@ -5,8 +5,11 @@ import place from '../../../../assets/result/place_2.png'
 import Avatar from '../../../common/Avatars/Avatar'
 import { setTimingAnimated } from '../../../utils/Animation'
 import { Animated, Easing } from 'react-native'
+import {selectTranslation} from "../../../redux/reducers/language/LanguageReducer";
+import defaultTranslation from "../../../redux/reducers/language/defaultTranslation";
+import {connect} from "react-redux";
 
-const Loser = ({loser}) => {
+const Loser = ({loser, ...props}) => {
 
     const animatedValue = React.useRef(new Animated.Value(0)).current;
    
@@ -51,13 +54,13 @@ const Loser = ({loser}) => {
 
                 <NameTextContainer>
                     <Text title heavy color={'#170231'}>{loser.player.username}</Text>
-                    <Text color={'#fff'}>Place №2</Text>
+                    <Text color={'#fff'}>{props.place} №2</Text>
                 </NameTextContainer>
 
                 <WinsContainer>
-                    <Text medium heavy color={'#fff'}>coins: {loser.items.coins}</Text>
-                    <Text medium heavy color={'#fff'}>crystals: {loser.items.crystals}</Text>
-                    <Text medium heavy color={'#000'}> Combinations:
+                    <Text medium heavy color={'#fff'}>{props.coins}: {loser.items.coins}</Text>
+                    <Text medium heavy color={'#fff'}>{props.diamonds}: {loser.items.crystals}</Text>
+                    <Text medium heavy color={'#000'}> {props.combinations}:
                         <Text large heavy color={'#fff'}> {loser.items.scores}</Text>
                     </Text>
                 </WinsContainer>
@@ -112,5 +115,11 @@ const WinsContainer = styled.View`
     margin-left: auto;
     margin-right: 20px;
 `
+const mapStateToProps = (state) => ({
+    place: selectTranslation(state,defaultTranslation.TR_PLACE),
+    coins: selectTranslation(state,defaultTranslation.TR_COINS),
+    diamonds: selectTranslation(state,defaultTranslation.TR_DIAMONDS),
+    combinations: selectTranslation(state,defaultTranslation.TR_COMBINATIONS),
+})
 
-export default Loser
+export default connect(mapStateToProps)(Loser);

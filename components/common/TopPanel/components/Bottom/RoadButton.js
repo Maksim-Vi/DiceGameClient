@@ -4,10 +4,12 @@ import styled from "styled-components";
 import roadImg from "../../../../../assets/road/road-icon.png";
 import InfoButton from "../../../Info/InfoButton";
 import Text from "../../../Text/Text";
+import {useSelector} from "react-redux";
 
 const RoadButton = () =>{
 
     const navigaion = useNavigation()
+    const availableToClaimMissionsRoad = useSelector(state => state.road.availableToClaimMissionsRoad)
     
     const OpenRoad = () => {
         navigaion.navigate('RoadScreen')
@@ -15,7 +17,7 @@ const RoadButton = () =>{
 
     return (
         <RoadBtn onPress={() => OpenRoad()}>
-            <InfoButton count={1}/>
+            {availableToClaimMissionsRoad > 0 && <InfoButton count={availableToClaimMissionsRoad}/>}
             <RoadImg source={roadImg} resizeMode='stretch'/>
         </RoadBtn>
     )

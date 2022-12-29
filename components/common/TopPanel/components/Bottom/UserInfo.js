@@ -24,7 +24,7 @@ const UserInfo = (props) =>{
           
             
           <AvatarIfoContainer>
-              <UserName madium heavy>{user ? user.username : ''}</UserName>
+              <UserName numberOfLines={2} madium heavy>{user ? user.username : ''}</UserName>
               <Experience experience={experience}/>
           </AvatarIfoContainer>
       </UserInfoContainer>
@@ -44,7 +44,7 @@ const UserInfoContainer = styled.View`
 const AvatarIfoContainer = styled.View`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   width: 50%;
   margin-left: 5px;

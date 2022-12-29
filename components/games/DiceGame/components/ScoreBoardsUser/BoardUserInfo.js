@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Avatar from '../../../../common/Avatars/Avatar';
 import Text from '../../../../common/Text/Text';
 import {setTimingAnimated} from "../../../../utils/Animation";
+import TextWithoutShadow from "../../../../common/Text/TextWithoutShadow";
 
 const initialScale = 0
 const startX = 0
@@ -110,7 +111,7 @@ const BoardAvatarContainer = styled(Animated.View)`
   }}
 `
 
-const CountScores = styled(Text)`
+const CountScores = styled(TextWithoutShadow)`
   text-align: center;
 `
 const CountContainer = styled.View`
