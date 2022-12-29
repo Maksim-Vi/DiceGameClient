@@ -38,7 +38,7 @@ export const hendleMessage = (data) =>{
             break;
         }
         case 'S_LANGUAGE_INFO':{
-            new S_LANGUAGE_INFO(data.phrases)
+            new S_LANGUAGE_INFO(data.phrases, data.language)
             break;
         }
 

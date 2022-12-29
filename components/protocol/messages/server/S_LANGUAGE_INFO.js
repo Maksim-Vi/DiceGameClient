@@ -1,13 +1,15 @@
 import {store} from "../../../redux/redux-store";
 import {setAllTranslations} from "../../../redux/reducers/language/LanguageReducer";
+import {updateCurrentUserLanguage} from "../../../redux/reducers/players/PlayersReducer";
 
 export default class S_LANGUAGE_INFO {
-    constructor(phrases){
+    constructor(phrases,language){
 
         this.MESSAG_ENAME = 'S_LANGUAGE_INFO'
         this.showLog = false
 
         this.phrases = phrases
+        this.language = language
 
         this.init()
     }
@@ -19,6 +21,7 @@ export default class S_LANGUAGE_INFO {
 
     exec() {
         store.dispatch(setAllTranslations(this.phrases))
+        store.dispatch(updateCurrentUserLanguage(this.language))
     }
 
     getLogText() {

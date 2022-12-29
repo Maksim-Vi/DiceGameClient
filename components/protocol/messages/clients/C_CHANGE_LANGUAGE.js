@@ -3,25 +3,26 @@ import {store} from "../../../redux/redux-store";
 import {sendMessageWS} from "../../websocet";
 
 export default class C_CHANGE_LANGUAGE  {
-    constructor(lenguage){
+    constructor(language){
 
         this.MESSAGE_NAME = 'C_CHANGE_LANGUAGE'
         this.clientIdWebsocket = null
         this.showLog = true
 
         this.username = null
-        this.lenguage = lenguage
+        this.language = language
 
         this.init()
     }
 
     init() {
+        this.selectUserData()
         this.getLogText()
         this.exec()
     }
 
     exec() {
-        sendMessageWS({ name: this.MESSAGE_NAME, username: this.username, language: this.lenguage })
+        sendMessageWS({ name: this.MESSAGE_NAME, username: this.username, language: this.language })
     }
 
     selectUserData = () =>{

@@ -12,6 +12,11 @@ export const playersReducerSlice = createSlice({
     setCurrentUser: (state, action) =>{
       state.myUser = action.payload
     },
+    updateCurrentUserLanguage: (state, action) =>{
+      if(state.myUser){
+        state.myUser.language = action.payload
+      }
+    },
     updateCurrentUserFlash: (state, action) =>{
       if(state.myUser){
         state.myUser.flash = action.payload
@@ -38,7 +43,7 @@ export const playersReducerSlice = createSlice({
   },
 });
 
-export const {setCurrentUser,updateCurrentUserExp, updateCurrentUserFlash, setActiveItems,updateCurrentUserCoins,updateCurrentUserCrystals} = playersReducerSlice.actions;
+export const {setCurrentUser,updateCurrentUserLanguage, updateCurrentUserExp, updateCurrentUserFlash, setActiveItems,updateCurrentUserCoins,updateCurrentUserCrystals} = playersReducerSlice.actions;
 
 export const selectMyUser = state => state.players.myUser;
 export const selectCurrentUserId = state => state.players.myUser.id;
