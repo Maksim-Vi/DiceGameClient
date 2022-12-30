@@ -51,11 +51,9 @@ function openWSHandler() {
 }
 
 function errorWSHandler(error) {
-    console.warn(`[error] ${error.message}`);
+    console.log(`[error] ${error.message}`);
 
-    reconnecting = true;
     store.dispatch(setLoaded(false))
-    reconnectWebsocket();
 }
 
 async function closeWSHandler(event) {
@@ -64,12 +62,11 @@ async function closeWSHandler(event) {
     } else {
         console.log('[close] Connection died');
     }
-    
+
     if(!reconnecting && websocket){
         reconnecting = true;
         tryToReconect = true
 
-        clearInterval(reconnectTimeout);
         reconnectWebsocket();
     } else if(tryToReconect){
         tryToReconect = false

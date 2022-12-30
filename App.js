@@ -8,8 +8,9 @@ import styled from 'styled-components';
 import { useFonts } from 'expo-font';
 import PopupsManager from './components/managers/popupsManager/PopupsManager';
 import ChatManager from './components/managers/chatManager/ChatManager';
+import { MMKV } from 'react-native-mmkv'
 
-export const navigationAction = null
+export const storage = new MMKV()
 
 export default function App() {
 
@@ -24,7 +25,7 @@ export default function App() {
     const chatManager = new ChatManager()
     store.chatManager = chatManager
     window.chatManager = chatManager
-  })
+  },[])
   
   if (!fontsLoaded) return null;
   

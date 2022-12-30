@@ -15,11 +15,10 @@ export default class S_CLIENT_LOADED {
     init() {
         this.getLogText()
         this.exec()
-        store.dispatch(setClientIdWebsocket(this.clientId))
     }
 
     exec() {
-
+        store.dispatch(setClientIdWebsocket(this.clientId))
     }
 
 	getLogText() {

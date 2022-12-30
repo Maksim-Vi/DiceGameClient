@@ -1,76 +1,83 @@
-import { createContext, useCallback, useEffect, useState } from "react";
+import {createContext, useCallback, useEffect, useState} from "react";
 import C_LOGIN from "../protocol/messages/clients/C_LOGIN";
-import { postLoginApi } from "../protocol/API/API";
-import { setCurrentUser } from "../redux/reducers/players/PlayersReducer";
-import { store } from "../redux/redux-store";
+import {postLoginApi} from "../protocol/API/API";
+import {setCurrentUser} from "../redux/reducers/players/PlayersReducer";
+import {store} from "../redux/redux-store";
+import {setLogout} from "../redux/reducers/login/LoginReducer";
+import {storage} from "../../App";
+import {useNavigation} from "@react-navigation/native";
 
-export const UserContext = createContext({ token: '', id: '', username: '', password: '', data: null, auth: false });
+export const UserContext = createContext({token: '', id: '', username: '', password: '', data: null, auth: false});
 const storageName = 'UserData'
 
-const UserProvider = ({ children }) => {
-    
-    const [user, setUser] = useState({token: '', id: '', username: '', password: '', data: null, auth: false });
-    
-    const login = useCallback((data) => {
-      setUser({
-        token: data.token,
-        id: data.user.id,
-        username: data.user.username,
-        password: data.user.password,
-        data: data,
-        auth: false 
-      });
-     
-      // AsyncStorage.setItem(storageName, JSON.stringify({
-      //     userID: data.user.id,
-      //     username: data.user.username,
-      //     password: data.user.password,
-      //     token: data.token,
-      //     data: data
-      // }))
-      store.dispatch(setCurrentUser(data.user))
-    },[])
-    
-    const setAuth = useCallback(() =>{
-      setUser({...user, auth: true});
-    },[])
-    
+const UserProvider = ({children}) => {
+
+    const [user, setUser] = useState({token: '', id: '', username: '', password: '', data: null, auth: false});
+
+    const login = useCallback(async (data) => {
+        setUser({
+            token: data.token,
+            id: data.user.id,
+            username: data.user.username,
+            password: data.user.password,
+            data: data,
+            auth: false
+        });
+        storage.set(storageName, JSON.stringify({
+                token: data.token,
+                user:{
+                    id: data.user.id,
+                    username: data.user.username,
+                    password: data.user.password,
+                }
+        }))
+        store.dispatch(setCurrentUser(data.user))
+    }, [])
+
+    const setAuth = useCallback(() => {
+        setUser({...user, auth: true});
+    }, [])
+
     const logout = useCallback(() => {
-        setUser({token: '', id: '', username: '', password: '', data: null, auth: false });
-        // AsyncStorage.removeItem(storageName)
+        setUser({token: '', id: '', username: '', password: '', data: null, auth: false});
+        storage.set(storageName, '')
+        store.dispatch(setLogout())
     })
+
+    const getDataFromStorage = async () => {
+        const value = storage.getString(storageName)
+        if(value){
+            const data = JSON.parse(value)
+
+            if (data && data.token && data.user.username) {
+                const dataLogin = await postLoginApi(data.user.username, data.user.password)
+
+                if (dataLogin && dataLogin.success) {
+                    navigation.navigate('LoadingProject')
+                    new C_LOGIN(data.user.username,data.user.password)
+                } else {
+                    logout()
+                }
+            } else {
+                logout()
+            }
+        } else {
+            logout()
+        }
+    }
 
     store.logout = logout
     store.setAuth = setAuth
     store.login = login
 
-    const getDataFromStorage = async () => {
-      // const data = JSON.parse(await AsyncStorage.getItem(storageName))
-      const data = undefined
-      if(data && data.data.token && data.data.user){
-          const dataLogin = await postLoginApi(data.data.user.username,data.data.user.password)
-
-          if(dataLogin && dataLogin.success){
-              //login(dataLogin)
-              //new C_LOGIN(dataLogin.user.username,dataLogin.user.password)
-          } else {
-              logout()
-              alert('Login is failed check your name and password')
-          }
-      } else {
-        logout()
-      }
-    }
-
-    useEffect(()=>{
-      getDataFromStorage()
+    useEffect(() => {
+        getDataFromStorage()
     }, [login])
-
-  
+    
     return (
-      <UserContext.Provider value={{ user, login, logout }}>
-        {children}
-      </UserContext.Provider>
+        <UserContext.Provider value={{user, login, logout}}>
+            {children}
+        </UserContext.Provider>
     );
 }
 
