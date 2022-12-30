@@ -33,7 +33,6 @@ export default function Navigator() {
 
   React.useEffect(()=>{
     window.navigation = navigation
-    navigationAction = navigation
   }, [navigation])
 
 

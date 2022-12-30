@@ -14,7 +14,6 @@ const AuthNavigation = () => {
 
   React.useEffect(()=>{
     window.navigation = navigation
-    navigationAction = navigation
   }, [navigation])
 
   return (

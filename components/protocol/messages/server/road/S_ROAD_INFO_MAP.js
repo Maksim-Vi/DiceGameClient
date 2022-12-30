@@ -27,6 +27,10 @@ export default class S_ROAD_INFO_MAP {
             store.dispatch(setRoadMissions(this.missions))
             this.checkMissions(this.missions)
         }
+
+        setTimeout(()=>{
+            store.setAuth()
+        },5000)
     }
 
     checkMissions = (missions) =>{
