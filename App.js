@@ -8,9 +8,9 @@ import styled from 'styled-components';
 import { useFonts } from 'expo-font';
 import PopupsManager from './components/managers/popupsManager/PopupsManager';
 import ChatManager from './components/managers/chatManager/ChatManager';
-// import { MMKV } from 'react-native-mmkv'
+import { MMKV } from 'react-native-mmkv'
 
-// export const storage = new MMKV()
+export const storage = new MMKV()
 
 export default function App() {
 
