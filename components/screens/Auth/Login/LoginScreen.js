@@ -21,22 +21,6 @@ const LoginScreen = (props) => {
 
   return (
         <InputsContainer>
-          {/* <Name placeholder='Name' 
-                placeholderTextColor='#838383' 
-                returnKeyType='next' 
-                value={props.inputData.name}
-                onChangeText={(value)=> props.onChangeInputs('name',value)}
-                onSubmitEditing={nextFieldFocus}/>
-          <Password ref={refPass}
-                    placeholder='Password' 
-                    placeholderTextColor='#838383' 
-                    secureTextEntry={true} 
-                    returnKeyType='go' 
-                    value={props.inputData.password}
-                    onChangeText={(value)=> props.onChangeInputs('password',value)}
-                    onSubmitEditing={props.hendlerLogin} 
-                    /> */}
-
           <Controller control={props.control} 
                       rules={{ required: true }}
                       name="name"

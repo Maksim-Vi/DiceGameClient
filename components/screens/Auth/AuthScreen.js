@@ -12,13 +12,12 @@ import Divider from "../../common/Divider/Divider";
 import { useForm } from 'react-hook-form'
 
 const AuthScreen = () => {
-
   const navigation = useNavigation()
 
   const { control, handleSubmit, formState: { errors } } = useForm({
     defaultValues: {
-      name: 'Max',
-      password: 'qwerty'
+      name: '',
+      password: ''
     }
   });
 
