@@ -2,18 +2,17 @@ import { Platform } from "react-native"
 import Constants from "expo-constants";
 import { selectToken } from "../../redux/reducers/login/LoginReducer";
 import { store } from "../../redux/redux-store";
-const { APP_TYPE, APP_PROD_URL } = Constants.manifest?.extra;
 
 export const getUrl = () =>{
     
-    const inProduction = APP_TYPE !== 'development' ? true : false;
+    const inProduction = process.env.APP_TYPE !== 'development' ? true : false;
     const port = 3000
     const inExpo = Constants.manifest && Constants.manifest.debuggerHost;
     const inBrowser = typeof document !== 'undefined';
 
     const apiDomain =
         inProduction
-            ? APP_PROD_URL
+            ? process.env.APP_PROD_URL
             : inExpo
                 ? Constants.manifest.debuggerHost.split(`:`).shift()
                 : inBrowser
