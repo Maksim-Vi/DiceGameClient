@@ -5,7 +5,6 @@ import {setCurrentUser} from "../redux/reducers/players/PlayersReducer";
 import {store} from "../redux/redux-store";
 import {setLogout} from "../redux/reducers/login/LoginReducer";
 import {storage} from "../../App";
-import {useNavigation} from "@react-navigation/native";
 
 export const UserContext = createContext({token: '', id: '', username: '', password: '', data: null, auth: false});
 const storageName = 'UserData'
