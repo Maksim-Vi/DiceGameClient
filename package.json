@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start:dev": "expo start",
-    "start": "APP_TYPE=development expo start --dev-client --reset-cache",
-    "start:prod": "APP_TYPE=production expo start --dev-client",
+    "start": "expo start",
+    "start:dev": "expo start --dev-client",
+    "start:tunnel": "expo start --tunnel",
     "android": "expo run:android",
     "ios": "expo run:ios",
     "expo:build:android": "expo build:android",
