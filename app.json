@@ -37,7 +37,7 @@
     },
     "extra": {
       "APP_TYPE": "development",
-      "APP_PROD_URL": "knockydice-server.herokuapp.com",
+      "APP_PROD_URL": "knockydice-server.onrender.com",
       "eas": {
         "projectId": "a5e5cb05-164b-405b-9ee0-6e83cf5f8084"
       }

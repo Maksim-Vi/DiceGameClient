@@ -31,6 +31,8 @@ export const getUrl = () =>{
 export const getFetchUrl = async (request, type, bodyData,refreshToken, callback) =>{
     let token = selectToken(store.getState())
 
+    console.log(`${getUrl()}/${request}`)
+
     if(type === 'GET'){
         return await fetch(`${getUrl()}/${request}`,{
             method: type,

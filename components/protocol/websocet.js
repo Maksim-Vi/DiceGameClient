@@ -34,6 +34,8 @@ export const openServerConnection = () => {
 
     const url = getWSUrl()
 
+    console.log('ANSWER', url)
+
     websocket = new WebSocket(url);
 
     websocket.onopen = openWSHandler;
