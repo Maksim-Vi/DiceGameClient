@@ -11,7 +11,9 @@ const SettingsMenuPopups = () => {
 
     const { height, width } = useWindowDimensions();
     const dispatch = useDispatch()
-    const heightPopup = isIphoneX ? 2.5 : 1.5
+    const heightPopup = Platform.OS === 'ios'
+        ? isIphoneX ? height / 2.5 : height / 1.5
+        : 2
 
     const closeModal = () =>{
         dispatch(setSettingsMenuPopup({visible: false, data: null}))

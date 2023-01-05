@@ -71,7 +71,7 @@ const BoardOpponentInfo = (props) => {
                                 ]
                             }}
       >
-          <Name large blod color={'#000'} center>{props.opponent.username || ''}</Name>
+          <Name numberOfLines={1} large blod color={'#000'} center>{props.opponent.username || ''}</Name>
           <Avatar avatarId={props.opponent.avatar}/>
           {viewScores &&
               <CountContainer width={width}>

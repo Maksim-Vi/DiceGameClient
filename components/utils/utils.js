@@ -1,4 +1,6 @@
 import images from "../../assets/dynamicLoadImage";
+import {selectMyUser} from "../redux/reducers/players/PlayersReducer";
+import {store} from "../redux/redux-store";
 
 export const getCollectionDiceImg = (id) => {
     let diceUrl = null
@@ -31,10 +33,11 @@ export const getCollectionSquareImg = (id) => {
 }
 
 export const getResultScreenData = () =>{
+    const myUser = selectMyUser(store.getState())
     return  {
         gameId: 13234241,
         players: [
-        {id: 6, username: 'Max', avatar: 3, side: 0, activeItems: 0, inGame: true},
+        {id: myUser.id, username: myUser.username, avatar: myUser.avatar, side: 0, activeItems: 0, inGame: true},
         {id: 66, username: 'Tetris', avatar: 5, side: 1, activeItems: 0, inGame: true}
         ],
         userResultItems:{

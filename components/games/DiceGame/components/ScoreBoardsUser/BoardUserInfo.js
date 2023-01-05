@@ -80,7 +80,7 @@ const BoardUserInfo = (props) => {
             }
 
             <Avatar avatarId={props.user.avatar}/>
-            <Name large blod color={'#000'} center>{props.user.username || ''}</Name>
+            <Name numberOfLines={1} large blod color={'#000'} center>{props.user.username || ''}</Name>
         </BoardAvatarContainer>
     )
 };

@@ -11,6 +11,7 @@ import TopPanelBottom from "./TopPanelBottom";
 import PricesItemsPanel from "./components/TopPanelItems/PricesItemsPanel";
 import MenuPanel from "./components/TopPanelItems/MenuPanel";
 import FriendsPanel from "./components/TopPanelItems/FriendsPanel";
+import {Platform} from "react-native";
 
 const TopMain = (props) => {
 
@@ -54,7 +55,13 @@ const Panel = styled.View`
   display: flex;
   align-items: center;
   width: 100%;
-
+  ${()=>{
+    if(Platform.OS !== 'ios'){
+      return `
+        margin-top: 10px;
+      `
+    }
+  }}
 `
 
 const TopPanel = styled.View`

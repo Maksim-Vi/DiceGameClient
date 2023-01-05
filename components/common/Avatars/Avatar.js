@@ -4,14 +4,14 @@ import styled from "styled-components";
 
 const Avatar = (props) => {
 
-  const onHenderAvatar = () =>{
+  const onHandlerAvatar = () =>{
     if(props.hendelAvatar){
       props.hendelAvatar()
     }
   }
 
   return (
-    <UserInfoBtn onPress={onHenderAvatar}>
+    <UserInfoBtn onPress={onHandlerAvatar}>
       <AvatarContainer {...props}>
           <AvatarImg source={getAvatarById(+props.avatarId)} resizeMode={ 'stretch'} />
       </AvatarContainer>

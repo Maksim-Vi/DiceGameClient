@@ -51,14 +51,14 @@ const Winner = ({winner, ...props}) => {
                 </PlaceContainer>
 
                 <NameTextContainer>
-                    <Text title heavy color={'#170231'}>{winner.player.username}</Text>
+                    <Text numberOfLines={1} title heavy color={'#170231'}>{winner.player.username}</Text>
                     <Text color={'#fff'}>{props.place} №1</Text>
                 </NameTextContainer>
 
                 <WinsContainer>
-                    <Text medium heavy color={'#fff'}>{props.coins}: {winner.items.coins}</Text>
-                    <Text medium heavy color={'#fff'}>{props.diamonds}: {winner.items.crystals}</Text>
-                    <Text medium heavy color={'#000'}> {props.combinations}:
+                    <Text numberOfLines={1} medium heavy color={'#fff'}>{props.coins}: {winner.items.coins}</Text>
+                    <Text numberOfLines={1} medium heavy color={'#fff'}>{props.diamonds}: {winner.items.crystals}</Text>
+                    <Text numberOfLines={1} medium heavy color={'#000'}> {props.combinations}:
                         <Text large heavy color={'#fff'}> {winner.items.scores}</Text>
                     </Text>
                 </WinsContainer>
@@ -84,7 +84,7 @@ const WinnerContainer = styled(Animated.View)`
 const Container = styled.View`
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-evenly;
     flex-direction: row;
     width: 100%;
     padding: 5px;
@@ -103,13 +103,14 @@ const Place = styled.Image`
 const NameTextContainer = styled.View`
     display: flex;
     flex-direction: column;
+    width: 20%;
 `
 const WinsContainer = styled.View`
     display: flex;
     flex-direction: column;
     justify-content: center;
     text-align: center;
-    margin-left: auto;
+    margin-right: 20px;
 `
 const mapStateToProps = (state) => ({
     place: selectTranslation(state,defaultTranslation.TR_PLACE),
