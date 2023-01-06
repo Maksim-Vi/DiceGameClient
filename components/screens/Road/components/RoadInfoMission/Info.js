@@ -5,8 +5,12 @@ import {rewardType} from "../utils";
 import coins from "../../../../../assets/topPanel/coins.png";
 import diamond from "../../../../../assets/topPanel/diamond.png";
 import TextWithoutShadow from "../../../../common/Text/TextWithoutShadow";
+import {selectTranslation} from "../../../../redux/reducers/language/LanguageReducer";
+import {store} from "../../../../redux/redux-store";
 
 const Info = (props) => {
+
+    const translation = selectTranslation(store.getState(), props.activeMission.missionName)
 
     const getImageByType = () =>{
         switch (props.activeMission.rewardType) {
@@ -19,7 +23,7 @@ const Info = (props) => {
 
     return (
         <InfoContainer>
-            <Name small numberOfLines={2}>{props.activeMission.missionName}</Name>
+            <Name small numberOfLines={2}>{translation}</Name>
 
             <WonPriceContainer>
                 <PriceImg source={getImageByType()} resizeMode={'stretch'}/>
