@@ -44,6 +44,8 @@ const AuthScreen = () => {
       <BackgroundWrapper gackground={mainBg}>
         <TouchableWithoutFeedback style={{flex: 1}} onPress={Keyboard.dismiss} accessible={false}>
           <AuthContainer>
+            <Text title heavy color={'#fff'} center>Knocky Dice</Text>
+
             <LoginScreen hendlerLogin={hendlerLogin} 
                          onChangeInputs={onChangeInputs}
                          control={control} 
@@ -61,6 +63,7 @@ const AuthScreen = () => {
 
 const AuthContainer = styled.View`
   flex: 1;
+  display: flex;
   align-items: center;
   justify-content: center;
 `

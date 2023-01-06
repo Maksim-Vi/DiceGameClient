@@ -9,6 +9,7 @@ import {usersHandlerMessage} from "./UsersMessageManager";
 import {collectionHandlerMessage} from "./collectionMessageManager";
 import {roadHandlerMessage} from "./RoadMessageManager";
 import S_LANGUAGE_INFO from "./messages/server/S_LANGUAGE_INFO";
+import S_USERS_ONLINE from "./messages/server/S_USERS_ONLINE";
 
 export const hendleMessage = (data) =>{
     switch (data.name) {
@@ -39,6 +40,10 @@ export const hendleMessage = (data) =>{
         }
         case 'S_LANGUAGE_INFO':{
             new S_LANGUAGE_INFO(data.phrases, data.language)
+            break;
+        }
+        case 'S_USERS_ONLINE':{
+            new S_USERS_ONLINE(data.usersOnline)
             break;
         }
 

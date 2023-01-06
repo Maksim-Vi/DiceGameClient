@@ -74,6 +74,8 @@ const RegisterScreen = () => {
                         <Ionicons name='arrow-back' size={38} color={'#000'}/>
                     </GameBack>
                     <InputsContainer>
+                        <Text title heavy color={'#fff'} center>Knocky Dice</Text>
+
                         <Controller control={control}
                                     rules={{required: true}}
                                     name="username"

@@ -13,6 +13,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import Text from '../../common/Text/Text'
 import {selectMyUser} from '../../redux/reducers/players/PlayersReducer'
 import FreeGift from "./components/FreeGift";
+import OnlineUsers from "./components/OnlineUsers";
 
 const MainScreen = () => {
 
@@ -28,11 +29,13 @@ const MainScreen = () => {
             <StatusBar hidden={true} style="light"/>
             <TopMain/>
 
+
             <MainContainer>
                 <GameWithBot index={0} hendlerPlayGame={hendlerPlayGame}/>
                 <GameWithOpponent index={1} hendlerPlayGame={hendlerPlayGame}/>
                 <GameWithOpponentByTime index={2} hendlerPlayGame={hendlerPlayGame}/>
             </MainContainer>
+            <OnlineUsers />
 
             {myUser && (myUser.admin === 'true' || myUser.admin === true) && <Test onPress={() => {
                 dispatch(setTestBtnsPopup({visible: true}))
