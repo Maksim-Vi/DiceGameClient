@@ -1,27 +1,55 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Text from "../../../../common/Text/Text";
 import styled from "styled-components";
 import {getCollectionDiceImg} from "../../../../utils/utils";
 import CollectButton from "../common/CollectButton";
-import { useWindowDimensions } from 'react-native';
+import {Animated, Easing, useWindowDimensions} from 'react-native';
 
 const DiceItem = ({diceItem, isActive, isCollected, setModalVisible}) => {
 
-  const {width,height} = useWindowDimensions()
+    const {width, height} = useWindowDimensions()
+    const showPlace = React.useRef(new Animated.Value(0))
 
-  return (
-      <DiceCard width={width} height={height} style={{ borderBottomWidth: 8 }}>
-          <DiceImage source={getCollectionDiceImg(diceItem.sortIndex)}/>
-          <Text center>{diceItem.name}</Text>
-          <CollectButton item={diceItem}
-                          setModalVisible={setModalVisible}
-                          isActive={isActive}
-                          isCollected={isCollected}/>
-      </DiceCard>
-  );
+    const showPlaceAnim = () => {
+        Animated.timing(showPlace.current, {
+            toValue: 1,
+            duration: 200,
+            easing: Easing.linear,
+            useNativeDriver: true,
+        }).start();
+    }
+
+    useEffect(() => {
+        showPlaceAnim()
+    }, [])
+
+    return (
+        <DiceCard width={width} height={height} style={{
+            borderBottomWidth: 8,
+            opacity: showPlace.current.interpolate({
+                inputRange: [0, 1],
+                outputRange: [0, 1],
+            }),
+            transform: [
+                {
+                    scale: showPlace.current.interpolate({
+                        inputRange: [0, 1],
+                        outputRange: [0, 1]
+                    })
+                }
+            ]
+        }}>
+            <DiceImage source={getCollectionDiceImg(diceItem.sortIndex)}/>
+            <Text center>{diceItem.name}</Text>
+            <CollectButton item={diceItem}
+                           setModalVisible={setModalVisible}
+                           isActive={isActive}
+                           isCollected={isCollected}/>
+        </DiceCard>
+    );
 }
 
-const DiceCard = styled.View`
+const DiceCard = styled(Animated.View)`
   display: flex;
   align-items: center;
   justify-content: space-around;

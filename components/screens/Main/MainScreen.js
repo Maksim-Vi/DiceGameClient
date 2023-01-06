@@ -14,6 +14,7 @@ import Text from '../../common/Text/Text'
 import {selectMyUser} from '../../redux/reducers/players/PlayersReducer'
 import FreeGift from "./components/FreeGift";
 import OnlineUsers from "./components/OnlineUsers";
+import SlideScreen from "../../common/AnimationScreens/SlideScreen";
 
 const MainScreen = () => {
 
@@ -25,27 +26,28 @@ const MainScreen = () => {
     }
 
     return (
-        <BackgroundWrapper gackground={mainBg}>
-            <StatusBar hidden={true} style="light"/>
-            <TopMain/>
+            <BackgroundWrapper gackground={mainBg}>
+                <StatusBar hidden={true} style="light"/>
+                <TopMain/>
 
 
-            <MainContainer>
-                <GameWithBot index={0} hendlerPlayGame={hendlerPlayGame}/>
-                <GameWithOpponent index={1} hendlerPlayGame={hendlerPlayGame}/>
-                <GameWithOpponentByTime index={2} hendlerPlayGame={hendlerPlayGame}/>
-            </MainContainer>
-            <OnlineUsers />
+                <MainContainer>
+                    <GameWithBot index={0} hendlerPlayGame={hendlerPlayGame}/>
+                    <GameWithOpponent index={1} hendlerPlayGame={hendlerPlayGame}/>
+                    <GameWithOpponentByTime index={2} hendlerPlayGame={hendlerPlayGame}/>
+                </MainContainer>
+                <OnlineUsers />
 
-            {myUser && (myUser.admin === 'true' || myUser.admin === true) && <Test onPress={() => {
-                dispatch(setTestBtnsPopup({visible: true}))
-            }} style={{borderBottomWidth: 3}}>
-                <Text color={'#000'}>Test Buttons</Text>
-            </Test>
-            }
+                {myUser && (myUser.admin === 'true' || myUser.admin === true) && <Test onPress={() => {
+                    dispatch(setTestBtnsPopup({visible: true}))
+                }} style={{borderBottomWidth: 3}}>
+                    <Text color={'#000'}>Test Buttons</Text>
+                </Test>
+                }
 
-            <FreeGift myUser={myUser}/>
-        </BackgroundWrapper>
+
+                <FreeGift myUser={myUser}/>
+            </BackgroundWrapper>
     )
 }
 

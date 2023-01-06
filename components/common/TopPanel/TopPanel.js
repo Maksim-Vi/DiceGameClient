@@ -5,15 +5,19 @@ import {
     selectMyUser,
     selectUserCoins,
     selectUserCrystals,
-    selectUserExperience, selectUserFlash
+    selectUserExperience,
+    selectUserFlash
 } from "../../redux/reducers/players/PlayersReducer";
 import TopPanelBottom from "./TopPanelBottom";
 import PricesItemsPanel from "./components/TopPanelItems/PricesItemsPanel";
 import MenuPanel from "./components/TopPanelItems/MenuPanel";
 import FriendsPanel from "./components/TopPanelItems/FriendsPanel";
-import {Platform} from "react-native";
+import {Animated, Easing, Platform} from "react-native";
+import {setTimingAnimated} from "../../utils/Animation";
 
 const TopMain = (props) => {
+
+    const scaleAnim = React.useRef(new Animated.Value(0)).current;
 
     const [userData, setUserData] = React.useState({
         user: null,
@@ -23,6 +27,16 @@ const TopMain = (props) => {
         experience: null,
         avatarId: null
     })
+
+    React.useEffect(() => {
+        Animated.sequence([
+            setTimingAnimated(scaleAnim, 1, 500, Easing.ease),
+        ]).start();
+
+        return ()=>{
+            scaleAnim.setValue(0)
+        }
+    },[]);
 
     React.useEffect(()=>{
         if(props.user){
@@ -39,7 +53,20 @@ const TopMain = (props) => {
 
     return (
         <Panel>
-            <TopPanel>
+            <TopPanel style={{
+                opacity: scaleAnim.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [0, 1],
+                }),
+                transform: [
+                    {
+                        scale: scaleAnim.interpolate({
+                            inputRange: [0, 1],
+                            outputRange: [0, 1]
+                        })
+                    }
+                ]
+            }}>
                 <FriendsPanel />
                 <PricesItemsPanel userData={userData}/>
                 <MenuPanel />
@@ -64,7 +91,7 @@ const Panel = styled.View`
   }}
 `
 
-const TopPanel = styled.View`
+const TopPanel = styled(Animated.View)`
   display: flex;
   align-items: flex-end;
   justify-content: space-around;

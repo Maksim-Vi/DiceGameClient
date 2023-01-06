@@ -16,6 +16,7 @@ import {useDispatch} from "react-redux";
 import {selectLeftTimeShowGiftAd, setLeftTimeShowAd} from "../../../redux/reducers/AD/AdvertisingReducer";
 import Timer from "../../../common/Timer/Timer";
 import GiftTimer from "./Gift/GiftTimer";
+import SlideScreen from "../../../common/AnimationScreens/SlideScreen";
 
 const timeToWait = 660
 const AdUnitID = Platform.OS === 'ios'
@@ -131,10 +132,12 @@ const FreeGift = (props) => {
                 }
             ]
         }}>
-            <ButtonImage width={50} height={50} image={freeCoins} clickHandler={()=> admodHendler()}/>
-            {timeData && (timeData.hours > 0 || timeData.minutes > 0 || timeData.seconds > 0) &&
-                <GiftTimer timeData={timeData}/>
-            }
+            <SlideScreen left={false}>
+                <ButtonImage width={50} height={50} image={freeCoins} clickHandler={()=> admodHendler()}/>
+                {timeData && (timeData.hours > 0 || timeData.minutes > 0 || timeData.seconds > 0) &&
+                    <GiftTimer timeData={timeData}/>
+                }
+            </SlideScreen>
         </FreeCoinsContainer>
     )
 }

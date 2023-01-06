@@ -5,6 +5,7 @@ import Experience from "../Top/Experience";
 import Avatar from "../../../Avatars/Avatar";
 import { useDispatch } from "react-redux";
 import { setAvatarPopup } from "../../../../redux/reducers/popups/PopupsReducer";
+import SlideScreen from "../../../AnimationScreens/SlideScreen";
 
 const UserInfo = (props) =>{
   
@@ -17,17 +18,20 @@ const UserInfo = (props) =>{
   }
 
   return (
-      <UserInfoContainer>
-          <AvatarContainer>
-            <Avatar width={50} height={50} avatarId={avatarId} hendelAvatar={hendelAvatar}/>
-          </AvatarContainer>
-          
-            
-          <AvatarIfoContainer>
-              <UserName numberOfLines={2} madium heavy>{user ? user.username : ''}</UserName>
-              <Experience experience={experience}/>
-          </AvatarIfoContainer>
-      </UserInfoContainer>
+      <SlideScreen left={true}>
+          <UserInfoContainer>
+              <AvatarContainer>
+                  <Avatar width={50} height={50} avatarId={avatarId} hendelAvatar={hendelAvatar}/>
+              </AvatarContainer>
+
+
+              <AvatarIfoContainer>
+                  <UserName numberOfLines={2} madium heavy>{user ? user.username : ''}</UserName>
+                  <Experience experience={experience}/>
+              </AvatarIfoContainer>
+          </UserInfoContainer>
+      </SlideScreen>
+
   )
 }
 

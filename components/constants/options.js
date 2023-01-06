@@ -1,7 +1,12 @@
+export const screenOptionsAuth = {
+    headerShown: false,
+    gestureEnabled: false,
+    presentation: 'modal',
+}
+
 export const screenOptions = {
     headerShown: false,
-    presentation: 'transparentModal',
-    gestureEnabled: false
+    gestureEnabled: false,
 }
 
 export const tabsScreenOptions = {

@@ -1,12 +1,43 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Text from "../../../../common/Text/Text";
 import styled from "styled-components";
 import { getCollectionSquareImg} from "../../../../utils/utils";
 import CollectButton from "../common/CollectButton";
+import {Animated, Easing} from "react-native";
 
 const SquareItem = ({squareItem,isActive, isCollected, setModalVisible}) => {
+
+    const showPlace = React.useRef(new Animated.Value(0))
+
+    const showPlaceAnim = () => {
+        Animated.timing(showPlace.current, {
+            toValue: 1,
+            duration: 200,
+            easing: Easing.linear,
+            useNativeDriver: true,
+        }).start();
+    }
+
+    useEffect(() => {
+        showPlaceAnim()
+    }, [])
+
     return (
-        <SquareCard style={{ borderBottomWidth: 8 }}>
+        <SquareCard style={{
+            borderBottomWidth: 8,
+            opacity: showPlace.current.interpolate({
+                inputRange: [0, 1],
+                outputRange: [0, 1],
+            }),
+            transform: [
+                {
+                    scale: showPlace.current.interpolate({
+                        inputRange: [0, 1],
+                        outputRange: [0, 1]
+                    })
+                }
+            ]
+        }}>
             <SquareImage source={getCollectionSquareImg(squareItem.sortIndex)}/>
             <Text center>{squareItem.name}</Text>
             <CollectButton item={squareItem}
@@ -17,7 +48,7 @@ const SquareItem = ({squareItem,isActive, isCollected, setModalVisible}) => {
     );
 }
 
-const SquareCard = styled.View`
+const SquareCard = styled(Animated.View)`
   display: flex;
   align-items: center;
   justify-content: space-around;

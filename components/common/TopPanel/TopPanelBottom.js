@@ -2,14 +2,17 @@ import React from 'react';
 import styled from "styled-components";
 import RoadButton from './components/Bottom/RoadButton';
 import UserInfo from "./components/Bottom/UserInfo";
+import SlideScreen from "../AnimationScreens/SlideScreen";
 
 const TopPanelBottom = (props) => {
     return (
         <PanelBottom>
             <UserInfo userData={props.userData}/>
-          
+
             <PanelEndContainer>
-                <RoadButton />
+                <SlideScreen left={false}>
+                    <RoadButton />
+                </SlideScreen>
             </PanelEndContainer>
         </PanelBottom>
     );
