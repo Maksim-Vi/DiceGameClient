@@ -12,12 +12,10 @@ import {getCoinsBonus} from "../../../protocol/API/API";
 import {store} from "../../../redux/redux-store";
 import {updateCurrentUserCoins} from "../../../redux/reducers/players/PlayersReducer";
 import {APP_TYPE} from '@env'
-import {useDispatch, useSelector} from "react-redux";
-import {setLeftTimeShowAd} from "../../../redux/reducers/AD/AdvertisingReducer";
+import {useDispatch} from "react-redux";
+import {selectLeftTimeShowGiftAd, setLeftTimeShowAd} from "../../../redux/reducers/AD/AdvertisingReducer";
 import Timer from "../../../common/Timer/Timer";
-import Text from "../../../common/Text/Text";
 import GiftTimer from "./Gift/GiftTimer";
-
 
 const timeToWait = 660
 const AdUnitID = Platform.OS === 'ios'
@@ -27,7 +25,7 @@ const AdUnitID = Platform.OS === 'ios'
 const FreeGift = (props) => {
 
     const dispatch = useDispatch()
-    const leftTimeShowGiftAd = useSelector(state => state.advertising.leftTimeShowGiftAd)
+    const leftTimeShowGiftAd = selectLeftTimeShowGiftAd(store.getState())
     const animatedValue = React.useRef(new Animated.Value(1)).current;
     const { isLoaded, isClosed, load, show, isEarnedReward } =  useRewardedInterstitialAd(AdUnitID, {
         requestNonPersonalizedAdsOnly: true,
@@ -42,6 +40,7 @@ const FreeGift = (props) => {
 
     const updateTimeData = (data) =>{
         if(data.hours === 0 && data.minutes === 0 && data.seconds === 0){
+            timer.stop()
             load()
             animate()
             dispatch(setLeftTimeShowAd(-1))
@@ -64,6 +63,8 @@ const FreeGift = (props) => {
     const admodHendler = () =>{
         if(isLoaded && leftTimeShowGiftAd && leftTimeShowGiftAd <= 0){
             show()
+        } else {
+            load()
         }
     }
 
@@ -73,41 +74,38 @@ const FreeGift = (props) => {
 
             if(getBonusCoins && getBonusCoins.success){
                 store.dispatch(updateCurrentUserCoins(getBonusCoins.updatedCoins))
+
+                timer.start(getBonusCoins.giftWatchedTime)
+                dispatch(setLeftTimeShowAd(getBonusCoins.giftWatchedTime))
             }
 
             animatedValue.stopAnimation()
 
-            const calcTime = Math.floor(new Date() / 1000) + timeToWait
-            timer.start(calcTime)
-            dispatch(setLeftTimeShowAd(calcTime))
         } else if(isClosed && !isEarnedReward){
             load()
         }
     }
 
     useEffect(()=>{
-        if(leftTimeShowGiftAd && leftTimeShowGiftAd <= 0){
-            load()
-        }
-    },[load])
-
-    useEffect(()=>{
         timer.stop()
 
         if(leftTimeShowGiftAd && leftTimeShowGiftAd > 0){
-            const calcTime = leftTimeShowGiftAd - Math.floor(new Date() / 1000)
-            timer.start(calcTime)
+            timer.start(leftTimeShowGiftAd)
         }
 
         return ()=>{
             if(timeData.hours > 0 || timeData.minutes > 0 || timeData.seconds > 0){
                 timer.stop()
                 timer = null
-                const calcTime = Math.floor(new Date() / 1000) + timeData.totalTime
-                dispatch(setLeftTimeShowAd(calcTime))
             }
         }
     },[])
+
+    useEffect(()=>{
+        if(leftTimeShowGiftAd && leftTimeShowGiftAd <= 0){
+            load()
+        }
+    },[load, leftTimeShowGiftAd])
 
     useEffect(() => {
         getBonusByView()
@@ -121,8 +119,6 @@ const FreeGift = (props) => {
             animatedValue.stopAnimation()
         }
     },[])
-
-    //if(!isLoaded) return null
 
     return (
         <FreeCoinsContainer style={{

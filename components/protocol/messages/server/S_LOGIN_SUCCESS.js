@@ -1,6 +1,7 @@
 import {setActiveItems, setCurrentUser} from "../../../redux/reducers/players/PlayersReducer"
 import { store } from "../../../redux/redux-store"
 import {addAvailableCollectionItems} from "../../../redux/reducers/collections/CollectionsReducer";
+import {setLeftTimeShowAd} from "../../../redux/reducers/AD/AdvertisingReducer";
 
 export default class S_LOGIN_SUCCESS {
     constructor(data){
@@ -20,16 +21,10 @@ export default class S_LOGIN_SUCCESS {
 
     exec() {
         store.dispatch(setCurrentUser(this.data.user))
+        store.dispatch(setLeftTimeShowAd(this.data.user.giftWatchedTime))
         store.dispatch(setActiveItems(this.data.user.activeItems || {dice: 13, square: 14}))
         store.dispatch(addAvailableCollectionItems(this.data.user.availableCollectionItems || {dice: [13], square: [14],gameBackgrounds:[1]}))
         window.chatManager.connectionToChatRoom('general')
-
-        // setTimeout(()=>{
-        //     store.setAuth()
-        //     // if(window.navigation){
-        //     //     window.navigation.navigate('MainScreen')
-        //     // }
-        // },5000)
     }
 
 	getLogText() {

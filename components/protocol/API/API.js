@@ -4,6 +4,7 @@ import { setLoginUser, setToken } from "../../redux/reducers/login/LoginReducer"
 import { getRefreshToken } from "../../utils/refreshTokenHook";
 import { getFetchUrl } from "./urlApi";
 import { setCurrentUser } from "../../redux/reducers/players/PlayersReducer";
+import {setLeftTimeShowAd} from "../../redux/reducers/AD/AdvertisingReducer";
 
 export const postLoginApi = async (username, password) => {
     let data = { username: username, password: password }
@@ -51,7 +52,9 @@ export const getCoinsBonus = async (username) =>{
     }
 
     const callback = (json) =>{
-       
+        // if(json.giftWatchedTime){
+        //     store.dispatch(setLeftTimeShowAd(json.giftWatchedTime))
+        // }
     }
 
     return await getFetchUrl('addCoinsToUserByUsername','POST', {username: username}, refreshToken, callback)

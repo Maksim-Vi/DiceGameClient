@@ -24,5 +24,7 @@ export const advertisingReducerSlice = createSlice({
 
 export const { setCountShowAd, resetCountShowAd, setLeftTimeShowAd } = advertisingReducerSlice.actions;
 
+export const selectLeftTimeShowGiftAd = state => state.advertising.leftTimeShowGiftAd
+
 export default advertisingReducerSlice.reducer;
 
