@@ -2,7 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 
 let initialState = {
     loaded: false,
-    clinetIdWebsocket: null
+    clinetIdWebsocket: null,
+    activeTabApp: 'MainScreen'
 }
 
 export const websocketReducerSlice = createSlice({
@@ -14,13 +15,16 @@ export const websocketReducerSlice = createSlice({
     },
     setClientIdWebsocket: (state, action) =>{
       state.clinetIdWebsocket = action.payload
+    },
+    setActiveTabApp: (state, action) =>{
+      state.activeTabApp = action.payload
     }
   },
 });
 
-export const { setLoaded, setClientIdWebsocket } = websocketReducerSlice.actions;
+export const { setLoaded,setActiveTabApp, setClientIdWebsocket } = websocketReducerSlice.actions;
 
-export const selectLoaded = state => state.websocketMessages.loaded;
+export const selectActiveTabApp = state => state.websocketMessages.activeTabApp;
 export const selectClientIdWebsocket = state => state.websocketMessages.clinetIdWebsocket;
 
 export default websocketReducerSlice.reducer;

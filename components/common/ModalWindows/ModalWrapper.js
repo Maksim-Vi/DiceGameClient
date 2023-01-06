@@ -15,6 +15,10 @@ const ModalWrapper = (props) => {
                     {setModalVisible && <Close close={setModalVisible}/>}
                     {children}
                 </DefaultBG>
+            case 'bg_black': return <React.Fragment>
+                    {setModalVisible && <Close close={setModalVisible}/>}
+                    {children}
+                </React.Fragment>
             default: return children
         }
     }

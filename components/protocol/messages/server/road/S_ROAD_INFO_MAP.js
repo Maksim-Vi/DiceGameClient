@@ -30,7 +30,7 @@ export default class S_ROAD_INFO_MAP {
 
         setTimeout(()=>{
             store.setAuth()
-        },5000)
+        },2000)
     }
 
     checkMissions = (missions) =>{

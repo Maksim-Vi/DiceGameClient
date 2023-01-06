@@ -12,6 +12,8 @@ import eventsType from "../../redux/eventsType";
 import {selectTranslation} from "../../redux/reducers/language/LanguageReducer";
 import defaultTranslation from "../../redux/reducers/language/defaultTranslation";
 import {connect} from "react-redux";
+import {setActiveTabApp} from "../../redux/reducers/Websocket/WebsocketReducer";
+import {store} from "../../redux/redux-store";
 
 class TabBar extends React.PureComponent {
     constructor(props){
@@ -52,6 +54,7 @@ class TabBar extends React.PureComponent {
                 this.clearUnreadMessages()
             }
             this.setState({activeTab: route.name})
+            store.dispatch(setActiveTabApp(route.name))
             this.props.navigation.navigate({name: route.name, merge: true});
         }
     };

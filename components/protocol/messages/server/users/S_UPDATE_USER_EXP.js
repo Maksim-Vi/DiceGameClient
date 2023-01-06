@@ -1,5 +1,6 @@
 import {store} from "../../../../redux/redux-store";
 import {selectMyUser, updateCurrentUserExp} from "../../../../redux/reducers/players/PlayersReducer";
+import {setLevelUpPopup} from "../../../../redux/reducers/popups/PopupsReducer";
 
 export default class S_UPDATE_USER_EXP {
     constructor(lvl, levelExp,progress){
@@ -22,7 +23,10 @@ export default class S_UPDATE_USER_EXP {
 
     exec() {
         if(this.user.experience.lvl < this.lvl){
-            alert(`congrats you get new lvl ${this.lvl}`)
+            store.dispatch(setLevelUpPopup({visible: true, data: {
+                newLvl: this.lvl,
+                prevLvl: this.user.experience.lvl
+            }}))
         }
 
         store.dispatch(updateCurrentUserExp({
