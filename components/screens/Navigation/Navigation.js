@@ -12,6 +12,7 @@ import RoadScreen from "../Road/RoadScreen";
 import ChatScreen from "../Chat/ChatScreen";
 import FriendsScreen from "../Friends/FriendsScreen";
 import TabBar from "./TabBar";
+import UserInfoScreen from "../UserInfo/UserInfoScreen";
 
 const options = {
     headerStyleInterpolator: HeaderStyleInterpolators.forFade,
@@ -52,6 +53,7 @@ export default function Navigator() {
       <AppStack.Screen options={options} name="LoadingGameScreen" component={LoadingGameScreen} />
       <AppStack.Screen options={options} name="RoadScreen" component={RoadScreen} />
       <AppStack.Screen options={options} name="FriendsScreen" component={FriendsScreen} />
+      <AppStack.Screen options={options} name="UserInfoScreen" component={UserInfoScreen} />
     </AppStack.Navigator>
   );
 }
