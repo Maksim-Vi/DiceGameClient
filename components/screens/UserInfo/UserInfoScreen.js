@@ -90,7 +90,7 @@ const ProfileContext = styled.View`
   flex-direction: row;
   justify-content: space-around;
   width: 100%;
-  margin-top: 20%;
+  margin-top: 10%;
 `
 
 

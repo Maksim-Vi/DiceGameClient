@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 let initialState = {
   myUser: {},
+  statistics: {},
   activeItems: {},
   usersOnline: 0
 }
@@ -44,6 +45,9 @@ export const playersReducerSlice = createSlice({
     setUsersOnline: (state, action) =>{
       state.usersOnline = action.payload
     },
+    setStatistics: (state, action) =>{
+      state.statistics = action.payload
+    },
   },
 });
 
@@ -55,7 +59,8 @@ export const {
   setActiveItems,
   updateCurrentUserCoins,
   updateCurrentUserCrystals,
-  setUsersOnline
+  setUsersOnline,
+  setStatistics
 } = playersReducerSlice.actions;
 
 export const selectMyUser = state => state.players.myUser;

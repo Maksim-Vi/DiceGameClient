@@ -27,7 +27,7 @@ const GiftTimer = (props) => {
     return (
         <React.Fragment>
             {timeData && (timeData.hours > 0 || timeData.minutes > 0 || timeData.seconds > 0) &&
-                <Text>{time}</Text>
+                <Text center>{time}</Text>
             }
         </React.Fragment>
     )

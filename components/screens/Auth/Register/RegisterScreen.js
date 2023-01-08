@@ -18,6 +18,7 @@ const RegisterScreen = () => {
 
     const navigation = useNavigation()
     const [showPassword, setShowPassword] = useState(true)
+    const [disableBtn, setEnableBtn] = useState(false)
     const {register, control, handleSubmit, formState: {errors}} = useForm({
         defaultValues: {
             username: '',
@@ -36,10 +37,11 @@ const RegisterScreen = () => {
 
     const hendlerRegister = async (dataForm) => {
         const data = await postRegisterApi(dataForm.username, dataForm.email, dataForm.password)
-
+        setEnableBtn(true)
         if (data && data.success) {
             navigation.goBack()
         } else {
+            setEnableBtn(false)
             alert(data.message)
         }
     }
@@ -92,7 +94,7 @@ const RegisterScreen = () => {
                         {errors.username && <Text color={'red'}>this field is required.</Text>}
 
                         <Controller control={control}
-                                    rules={{required: true, pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/}}
+                                    rules={{required: true, pattern: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/}}
                                     name="email"
                                     render={({field: {onChange, onBlur, value}}) => (
                                         <Email ref={refEmail}
@@ -131,7 +133,7 @@ const RegisterScreen = () => {
                         {getErrPassword()}
                     </InputsContainer>
                     <BtnContainer>
-                        <RegisterBtn onPress={handleSubmit(hendlerRegister)}>
+                        <RegisterBtn disabled={disableBtn} onPress={handleSubmit(hendlerRegister)}>
                             <Text small heavy color='#fff'>Register</Text>
                         </RegisterBtn>
                     </BtnContainer>
@@ -205,6 +207,13 @@ const RegisterBtn = styled.TouchableOpacity`
   border: 1px solid #000;
   width: 80%;
   height: 40px;
+  ${props=>{
+    if(props.disabled){
+      return `
+            background-color: gray;
+        `
+    }
+  }}
 `
 const PasswordContainer = styled.View`
   position: relative;

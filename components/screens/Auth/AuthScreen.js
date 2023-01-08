@@ -13,7 +13,7 @@ import { useForm } from 'react-hook-form'
 
 const AuthScreen = () => {
   const navigation = useNavigation()
-
+  const [disableBtn, setEnableBtn] = useState(false)
   const { control, handleSubmit, formState: { errors } } = useForm({
     defaultValues: {
       name: '',
@@ -51,7 +51,7 @@ const AuthScreen = () => {
                          control={control} 
                          errors={errors} />
             <ButtonContainer >
-              <LoginBtn onPress={handleSubmit(hendlerLogin)}><Text small heavy color='#fff' center>Login</Text></LoginBtn>
+              <LoginBtn disabled={disableBtn} onPress={handleSubmit(hendlerLogin)}><Text small heavy color='#fff' center>Login</Text></LoginBtn>
               <Divider text={'or'} padding={10} color={'black'}/>
               <RegisterBtn onPress={hendlerRegister}><Text small heavy color='#fff' center>Register</Text></RegisterBtn>
             </ButtonContainer>
@@ -82,6 +82,13 @@ const LoginBtn = styled.TouchableOpacity`
   border: 1px solid #000;
   width: 80%;
   height: 40px;
+  ${props=>{
+    if(props.disabled){
+      return `
+            background-color: gray;
+        `
+    }
+  }}
 `
 const RegisterBtn = styled.TouchableOpacity`
   align-items: center;
