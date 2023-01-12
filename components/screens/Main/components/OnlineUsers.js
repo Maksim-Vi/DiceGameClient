@@ -1,10 +1,13 @@
 import React, {Component} from 'react';
 import Text from "../../../common/Text/Text";
 import styled from "styled-components";
-import {selectUsersOnline} from "../../../redux/reducers/players/PlayersReducer";
+import {selectMyUser, selectUsersOnline} from "../../../redux/reducers/players/PlayersReducer";
 import {connect} from "react-redux";
 
 const OnlineUsers = (props) => {
+
+    if(props.usersOnline && (props.usersOnline < 100 || !props.user.admin)) return null
+
     return (
         <OnlineUserContainer>
             <Text blod large center>
@@ -29,6 +32,7 @@ const OnlineUserContainer = styled.View`
 `
 
 const mapStateToProps = (state) => ({
+    user: selectMyUser(state),
     usersOnline: selectUsersOnline(state),
 })
 

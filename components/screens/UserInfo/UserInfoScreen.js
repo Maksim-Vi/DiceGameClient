@@ -14,6 +14,7 @@ import diamonds from '../../../assets/topPanel/diamond.png'
 import flash from '../../../assets/topPanel/flash.png'
 import lvl from '../../../assets/topPanel/star_lvl.png'
 import CardInfoLvl from "./components/CardInfoLvl";
+import {NativeModules, Platform} from "react-native";
 
 const UserInfoScreen = (props) => {
 
@@ -57,6 +58,15 @@ const UserInfoContainer = styled.View`
   display: flex;
   align-items: center;
   margin-top: 25%;
+  ${()=>{
+    if(Platform.OS === 'ios' && NativeModules.DeviceInfo.isIPhoneX_deprecated){
+      return `
+        margin-top: 25%;
+      `
+    } else {
+      return `margin-top: 5%;`
+    }
+  }}
 `
 
 const ProfileTitle = styled.View`
