@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import ModalWrapper from '../../../common/ModalWindows/ModalWrapper'
 import Text from '../../../common/Text/Text'
 import { setGame, setGameSettings, setIsGameStarted, setResultGame } from '../../../redux/reducers/game/GameReducer'
-import {setLevelUpPopup, setTestBtnsPopup} from '../../../redux/reducers/popups/PopupsReducer'
+import {setLevelUpPopup, setSevenDaysGiftPopup, setTestBtnsPopup} from '../../../redux/reducers/popups/PopupsReducer'
 import { getResultScreenData, getStartGameData } from '../../../utils/utils'
 import FireworkStandart from "../../../common/SpriteSheetViewer/components/FireworkStandart/FireworkStandert";
 import FireworkColor from "../../../common/SpriteSheetViewer/components/FireworkColor/FireworkColor";
@@ -47,6 +47,11 @@ const TestBtnsPopups = () =>{
         closeModal()
     }
 
+    const handelSevenDaysGiftClick = () =>{
+        dispatch(setSevenDaysGiftPopup({visible: true, data: null}))
+        closeModal()
+    }
+
     const handelLvlUpClick = () =>{
         dispatch(setLevelUpPopup({visible: true, data: {
             newLvl: 10,
@@ -69,6 +74,7 @@ const TestBtnsPopups = () =>{
             <Test onPress={handelResultClick} style={{ borderBottomWidth: 8 }}><Text color={'#000'}>Result</Text></Test>
             <Test onPress={handelLoadingGameClick} style={{ borderBottomWidth: 8 }}><Text color={'#000'}>Loading-Game</Text></Test>
             <Test onPress={handelLvlUpClick} style={{ borderBottomWidth: 8 }}><Text color={'#000'}>Lvl up</Text></Test>
+            <Test onPress={handelSevenDaysGiftClick} style={{ borderBottomWidth: 8 }}><Text color={'#000'}>Seven Days Gift</Text></Test>
             <AnimBtnContainer>
                 <TextAnim onPress={()=>handelAnim('showFirst')} style={{ borderBottomWidth: 8 }}>
                     <Text center color={'#000'}>show 1 Anim</Text>

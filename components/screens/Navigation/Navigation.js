@@ -13,6 +13,7 @@ import ChatScreen from "../Chat/ChatScreen";
 import FriendsScreen from "../Friends/FriendsScreen";
 import TabBar from "./TabBar";
 import UserInfoScreen from "../UserInfo/UserInfoScreen";
+import SevenDaysGift from "../../managers/popupsManager/popupsComponents/SevenDays/SevenDaysGift";
 
 const options = {
     headerStyleInterpolator: HeaderStyleInterpolators.forFade,
