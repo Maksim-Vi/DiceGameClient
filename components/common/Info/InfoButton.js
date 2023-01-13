@@ -21,6 +21,7 @@ const InfoContainer = styled.View`
     height: 20px;
     background: #CB3131;
     border: 2px solid white;
+  z-index: 1;
 `
 
 export default InfoButton

@@ -1,6 +1,6 @@
 import {setUsersOnline} from "../../../../redux/reducers/players/PlayersReducer";
 import {store} from "../../../../redux/redux-store";
-import {setGiftsData} from "../../../../redux/reducers/gifts/GiftsReducer";
+import {setAvailableToClaimGift, setGiftsData} from "../../../../redux/reducers/gifts/GiftsReducer";
 
 export default class S_SEVEN_DAYS_GIFTS {
     constructor(sevenDaysGifts){
@@ -15,6 +15,7 @@ export default class S_SEVEN_DAYS_GIFTS {
 
     init() {
         this.getLogText()
+        this.calcAvailableToClaimGift()
         this.exec()
     }
 
@@ -23,6 +24,17 @@ export default class S_SEVEN_DAYS_GIFTS {
             giftType: 'sevenDaysGifts',
             giftData: this.sevenDaysGifts
         }))
+    }
+
+    calcAvailableToClaimGift = () =>{
+        let count = 0
+        this.sevenDaysGifts.forEach(item=>{
+            if(item.isAvailableClaim && !item.isClaimed){
+                count += 1
+            }
+        })
+
+        store.dispatch(setAvailableToClaimGift(count))
     }
 
     getLogText() {

@@ -16,7 +16,7 @@ const RoadButton = () =>{
     }
 
     return (
-        <RoadBtn onPress={() => OpenRoad()}>
+        <RoadBtn onPress={OpenRoad}>
             {availableToClaimMissionsRoad > 0 && <InfoButton count={availableToClaimMissionsRoad}/>}
             <RoadImg source={roadImg} resizeMode='stretch'/>
         </RoadBtn>
@@ -34,8 +34,8 @@ const RoadBtn = styled.TouchableOpacity`
 `
 const RoadImg = styled.Image`
     margin: auto;
-    width: 90%;
-    height: 90%;
+    width: 75%;
+    height: 75%;
 `
 
 export default RoadButton

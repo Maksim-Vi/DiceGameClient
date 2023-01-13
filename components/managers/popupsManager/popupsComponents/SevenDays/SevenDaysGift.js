@@ -34,7 +34,7 @@ const SevenDaysGift = (props) => {
                             return (
                                 <DaysCard key={item.id} title={giftLocalData.title} giftItem={item}>
                                     <ImageGift source={giftLocalData.icon}/>
-                                    <Text setShadow={true} madium blod center>{item.rewardQuantity}</Text>
+                                    <Text setShadow={true} large blod center>{item.rewardQuantity}</Text>
                                 </DaysCard>
                             )
                         })

@@ -75,11 +75,12 @@ const Test = styled.TouchableOpacity`
   margin-bottom: 100px;
 `
 const MainContainer = styled.View`
-  flex: .8;
+  align-content: center;
   align-items: center;
   justify-content: space-around;
   flex-direction: row;
   width: 100%;
+  margin-top: 50%;
 `
 
 const SpriteContainer = styled.View`
