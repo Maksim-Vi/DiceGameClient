@@ -5,7 +5,6 @@ import {selectResultGame, setCountScores} from "../../redux/reducers/game/GameRe
 import React from "react";
 import {useNavigation} from "@react-navigation/native";
 import {selectCurrentUserId} from "../../redux/reducers/players/PlayersReducer";
-import mainBg from "../../../assets/bg/main_bg.jpg";
 import BackgroundWrapper from "../../common/BackgroundWrapper/BackgroundWrapper";
 import {store} from "../../redux/redux-store";
 import Winner from "./components/Winner";

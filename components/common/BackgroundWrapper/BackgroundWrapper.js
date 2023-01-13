@@ -10,8 +10,6 @@ const BackgroundWrapper = (props) => {
 
     const bg = dynamicLoadImage.bg[props.TR_BG_TYPE] || dynamicLoadImage.bg.main_bg
 
-    console.log(props.TR_BG_TYPE)
-
     return (
         <ContainerApp>
             <Background source={props.gackground ? props.gackground : bg} resizeMode="cover">

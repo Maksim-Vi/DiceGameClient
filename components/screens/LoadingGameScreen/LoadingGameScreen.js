@@ -1,6 +1,5 @@
 import React from 'react'
 import BackgroundWrapper from '../../common/BackgroundWrapper/BackgroundWrapper'
-import mainBg from '../../../assets/bg/main_bg.jpg'
 import styled from 'styled-components';
 import ButtonBack from '../../common/Buttons/Back/ButtonBack';
 import UserFrame from "./components/UserFrame";

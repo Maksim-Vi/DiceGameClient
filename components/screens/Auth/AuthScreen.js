@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import BackgroundWrapper from '../../common/BackgroundWrapper/BackgroundWrapper'
-import mainBg from '../../../assets/bg/main_bg.jpg'
 import styled from 'styled-components'
 import Text from '../../common/Text/Text'
 import { useNavigation } from '@react-navigation/native'

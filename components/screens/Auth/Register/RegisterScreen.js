@@ -1,7 +1,6 @@
 import React, {useRef, useState} from 'react'
 import {Ionicons} from '@expo/vector-icons'
 import styled from 'styled-components';
-import mainBg from '../../../../assets/bg/main_bg.jpg'
 import BackgroundWrapper from '../../../common/BackgroundWrapper/BackgroundWrapper';
 import Text from '../../../common/Text/Text';
 import {useNavigation} from '@react-navigation/native';

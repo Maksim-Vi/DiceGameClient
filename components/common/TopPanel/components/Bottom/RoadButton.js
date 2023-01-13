@@ -30,7 +30,7 @@ const RoadBtn = styled.TouchableOpacity`
     border-radius: 10px;
     margin-right: 5px;
     margin-top: 5px;
-    background-color: rgba(13, 64, 194, 0.88);
+    background-color: rgb(1,1,70);
 `
 const RoadImg = styled.Image`
     margin: auto;

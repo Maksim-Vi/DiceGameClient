@@ -1,7 +1,6 @@
 import React from 'react'
 import BackgroundWrapper from '../../common/BackgroundWrapper/BackgroundWrapper'
 import styled from 'styled-components'
-import mainBg from '../../../assets/bg/main_bg.jpg'
 import GameWrapper from '../../games/DiceGame/GameWrapper'
 import C_ABORDED_GAME from '../../protocol/messages/clients/games/C_ABORDED_GAME'
 import { store } from '../../redux/redux-store'

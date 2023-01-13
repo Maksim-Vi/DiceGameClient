@@ -46,7 +46,7 @@ const UserInfoContainer = styled.View`
   border-radius: 10px;
   width: 130px;
   height: 60px;
-  background-color: rgba(13, 64, 194, 0.88);
+  background-color: rgb(1,1,70);
 `
 const AvatarIfoContainer = styled.View`
   display: flex;

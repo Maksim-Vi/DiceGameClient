@@ -1,6 +1,5 @@
 import React from 'react'
 import BackgroundWrapper from '../../common/BackgroundWrapper/BackgroundWrapper'
-import mainBg from '../../../assets/bg/main_bg.jpg'
 import {
 	StyleSheet,
 	View,
@@ -53,7 +52,7 @@ const LoadingProject = () => {
 	}, [])
 	
 	return (
-		<BackgroundWrapper gackground={mainBg}>
+		<BackgroundWrapper>
 			<LoadingContainer>
 				<Text title heavy color={'#fff'} center>Knocky Dice</Text>
 				<View style={styles.container}>
