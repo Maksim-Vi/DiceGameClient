@@ -9,6 +9,7 @@ import {Keyboard, Platform, TouchableWithoutFeedback} from 'react-native'
 import C_LOGIN from '../../protocol/messages/clients/C_LOGIN'
 import Divider from "../../common/Divider/Divider";
 import { useForm } from 'react-hook-form'
+import bag from '../../../assets/bg/main_bg.jpg'
 
 const AuthScreen = () => {
   const navigation = useNavigation()
@@ -40,14 +41,14 @@ const AuthScreen = () => {
   }
 
   return (
-      <BackgroundWrapper>
+      <BackgroundWrapper gackground={bag}>
         <TouchableWithoutFeedback style={{flex: 1}} onPress={Keyboard.dismiss} accessible={false}>
           <AuthContainer>
             <Text title heavy color={'#fff'} center>Knocky Dice</Text>
 
-            <LoginScreen hendlerLogin={hendlerLogin} 
+            <LoginScreen hendlerLogin={hendlerLogin}
                          onChangeInputs={onChangeInputs}
-                         control={control} 
+                         control={control}
                          errors={errors} />
             <ButtonContainer >
               <LoginBtn disabled={disableBtn} onPress={handleSubmit(hendlerLogin)}><Text small heavy color='#fff' center>Login</Text></LoginBtn>
@@ -56,7 +57,7 @@ const AuthScreen = () => {
             </ButtonContainer>
           </AuthContainer>
         </TouchableWithoutFeedback>
-      </BackgroundWrapper>  
+      </BackgroundWrapper>
   )
 }
 

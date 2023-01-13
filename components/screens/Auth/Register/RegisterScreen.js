@@ -10,6 +10,7 @@ import {Controller, useForm} from 'react-hook-form';
 import ButtonImage from "../../../common/Buttons/ButtonImage";
 import showPass from "../../../../assets/loadGame/show.png";
 import hidePass from "../../../../assets/loadGame/hide.png";
+import bag from '../../../../assets/bg/main_bg.jpg'
 
 const RegisterScreen = () => {
     const refEmail = useRef()
@@ -66,7 +67,7 @@ const RegisterScreen = () => {
     }
 
     return (
-        <BackgroundWrapper>
+        <BackgroundWrapper gackground={bag}>
             <TouchableWithoutFeedback style={{flex: 1}} onPress={Keyboard.dismiss} accessible={false}>
                 <Container>
                     <GameBack onPress={() => {

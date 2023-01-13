@@ -7,9 +7,8 @@ import {sevenDaysInfo} from "./utils";
 import ButtonBack from "../../../../common/Buttons/Back/ButtonBack";
 import {transitionState} from "../../../../utils/utils";
 import {setSevenDaysGiftPopup} from "../../../../redux/reducers/popups/PopupsReducer";
-import {useDispatch} from "react-redux";
-import CircleAroundAnim from "../../../../common/AnimationScreens/CicleAroundAnim";
-import circle from '../../../../../assets/animation/sun-rays2.png'
+import {connect, useDispatch} from "react-redux";
+import {selectSevenDaysGifts} from "../../../../redux/reducers/gifts/GiftsReducer";
 
 const SevenDaysGift = (props) => {
 
@@ -20,6 +19,8 @@ const SevenDaysGift = (props) => {
         dispatch(setSevenDaysGiftPopup({visible: false, data: null}))
     }
 
+    if(!props.giftData) return null
+
     return (
         <ModalWrapper modalBG={'bg_black'} modalVisible={true} >
             <ButtonBack leaveGame={leaveGift} colorIcon={'#fefefe'}/>
@@ -28,11 +29,12 @@ const SevenDaysGift = (props) => {
 
                 <CardsContainer>
                     {
-                        sevenDaysInfo.map(item => {
+                        props.giftData.map((item,index) => {
+                            const giftLocalData = sevenDaysInfo[index]
                             return (
-                                <DaysCard key={item.id} title={item.title}>
-                                    <ImageGift source={item.icon}/>
-                                    <Text setShadow={true} madium blod center>123</Text>
+                                <DaysCard key={item.id} title={giftLocalData.title} giftItem={item}>
+                                    <ImageGift source={giftLocalData.icon}/>
+                                    <Text setShadow={true} madium blod center>{item.rewardQuantity}</Text>
                                 </DaysCard>
                             )
                         })
@@ -71,4 +73,8 @@ const ImageGift = styled.Image`
   margin-bottom: 10px;
 `
 
-export default SevenDaysGift;
+const mapStateToProps = (state) => ({
+    giftData: selectSevenDaysGifts(state)
+});
+
+export default connect(mapStateToProps)(SevenDaysGift);

@@ -8,6 +8,7 @@ import {
 import styled from 'styled-components';
 import Text from "../../common/Text/Text";
 import { setTimingAnimated } from '../../utils/Animation';
+import bag from '../../../assets/bg/main_bg.jpg'
 
 const ObjectAnimated = ({ value, opacity, y }) => (
 	<Animated.View
@@ -52,7 +53,7 @@ const LoadingProject = () => {
 	}, [])
 	
 	return (
-		<BackgroundWrapper>
+		<BackgroundWrapper gackground={bag}>
 			<LoadingContainer>
 				<Text title heavy color={'#fff'} center>Knocky Dice</Text>
 				<View style={styles.container}>
