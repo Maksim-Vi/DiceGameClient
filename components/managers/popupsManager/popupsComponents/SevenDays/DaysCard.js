@@ -4,10 +4,10 @@ import DaysCardTitle from "./DaysCardTitle";
 
 const DaysCard = (props) => {
     return (
-        <DaysCardContainer style={{ borderBottomWidth: 5 }}>
-            <DaysCardTitle title={props.title}/>
-            {props.children}
-        </DaysCardContainer>
+            <DaysCardContainer activeOpacity={0.9} style={{borderBottomWidth: 5}}>
+                <DaysCardTitle title={props.title}/>
+                {props.children}
+            </DaysCardContainer>
     )
 }
 
@@ -22,6 +22,7 @@ const DaysCardContainer = styled.TouchableOpacity`
   border-radius: 20px;
   background-color: #ffefb1;
   border: 2px solid #ed9f39;
+  z-index: 2;
 `
 
 export default DaysCard;

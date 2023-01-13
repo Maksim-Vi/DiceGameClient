@@ -10,6 +10,8 @@ import {collectionHandlerMessage} from "./collectionMessageManager";
 import {roadHandlerMessage} from "./RoadMessageManager";
 import S_LANGUAGE_INFO from "./messages/server/S_LANGUAGE_INFO";
 import S_USERS_ONLINE from "./messages/server/S_USERS_ONLINE";
+import S_SEVEN_DAYS_GIFTS from "./messages/server/gifts/S_SEVEN_DAYS_GIFTS";
+import {giftsHandlerMessage} from "./GiftsMessageManager";
 
 export const hendleMessage = (data) =>{
     switch (data.name) {
@@ -61,5 +63,6 @@ export const hendleMessage = (data) =>{
     usersHandlerMessage(data)
     collectionHandlerMessage(data)
     roadHandlerMessage(data)
+    giftsHandlerMessage(data)
     window.chatManager.chatMassageHandler(data)
 }

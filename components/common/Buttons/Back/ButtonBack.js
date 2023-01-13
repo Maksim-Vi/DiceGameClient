@@ -21,7 +21,7 @@ const ButtonBack = (props) => {
 
     return (
         <GameBack {...props} onPress={goBack}>
-            <Ionicons name='arrow-back' size={38} color={'#000'} />
+            <Ionicons name='arrow-back' size={38} color={props.colorIcon ? props.colorIcon : '#000'} />
         </GameBack>   
     )
 }

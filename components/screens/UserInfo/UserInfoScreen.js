@@ -6,7 +6,7 @@ import ButtonBack from "../../common/Buttons/Back/ButtonBack";
 import Text from "../../common/Text/Text";
 import CardInfo from "./components/CardInfo";
 import Avatar from "../../common/Avatars/Avatar";
-import {useDispatch, useSelector} from "react-redux";
+import {connect, useDispatch, useSelector} from "react-redux";
 import {setAvatarPopup} from "../../redux/reducers/popups/PopupsReducer";
 import Statistic from "./components/Statistic";
 import coins from '../../../assets/topPanel/coins.png'
@@ -15,6 +15,10 @@ import flash from '../../../assets/topPanel/flash.png'
 import lvl from '../../../assets/topPanel/star_lvl.png'
 import CardInfoLvl from "./components/CardInfoLvl";
 import {NativeModules, Platform} from "react-native";
+import {selectCurrentUserId} from "../../redux/reducers/players/PlayersReducer";
+import {selectResultGame} from "../../redux/reducers/game/GameReducer";
+import {selectTranslation} from "../../redux/reducers/language/LanguageReducer";
+import defaultTranslation from "../../redux/reducers/language/defaultTranslation";
 
 const UserInfoScreen = (props) => {
 
@@ -31,7 +35,7 @@ const UserInfoScreen = (props) => {
 
             <UserInfoContainer>
                 <ProfileTitle>
-                    <Text setShadow={true} large blod center>Profile</Text>
+                    <Text setShadow={true} large blod center>{props.profile}</Text>
                 </ProfileTitle>
 
                 <ProfileAvatarInfo>
@@ -47,7 +51,12 @@ const UserInfoScreen = (props) => {
                     <CardInfo icon={flash} price={myUser.flash}/>
                 </ProfileContext>
 
-                <Statistic />
+                <Statistic botStatistic={props.botStatistic}
+                           oppStatistic={props.oppStatistic}
+                           gamePlayed={props.gamePlayed}
+                           gameWon={props.gameWon}
+                           gameLose={props.gameLose}
+                />
             </UserInfoContainer>
         </BackgroundWrapper>
     )
@@ -103,5 +112,13 @@ const ProfileContext = styled.View`
   margin-top: 10%;
 `
 
+const mapStateToProps = (state) => ({
+    profile: selectTranslation(state, defaultTranslation.TR_PROFILE),
+    botStatistic: selectTranslation(state, defaultTranslation.TR_BOT_STATISTIC),
+    oppStatistic: selectTranslation(state, defaultTranslation.TR_OPP_STATISTIC),
+    gamePlayed: selectTranslation(state, defaultTranslation.TR_GAME_PLAYED),
+    gameWon: selectTranslation(state, defaultTranslation.TR_GAME_WON),
+    gameLose: selectTranslation(state, defaultTranslation.TR_GAME_LOSE),
+});
 
-export default UserInfoScreen;
+export default connect(mapStateToProps)(UserInfoScreen);
