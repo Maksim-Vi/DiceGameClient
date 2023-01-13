@@ -1,6 +1,14 @@
 import images from "../../assets/dynamicLoadImage";
 import {selectMyUser} from "../redux/reducers/players/PlayersReducer";
 import {store} from "../redux/redux-store";
+import {setActiveTabApp} from "../redux/reducers/Websocket/WebsocketReducer";
+
+export const transitionState = (tab) =>{
+    if(window.navigation){
+        window.navigation.navigate(tab)
+        store.dispatch(setActiveTabApp(tab))
+    }
+}
 
 export const getCollectionDiceImg = (id) => {
     let diceUrl = null

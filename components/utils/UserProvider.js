@@ -49,10 +49,10 @@ const UserProvider = ({children}) => {
             const data = JSON.parse(value)
 
             if (data && data.token && data.user.username) {
+                navigation.navigate('LoadingProject')
                 const dataLogin = await postLoginApi(data.user.username, data.user.password)
 
                 if (dataLogin && dataLogin.success) {
-                    navigation.navigate('LoadingProject')
                     new C_LOGIN(data.user.username,data.user.password)
                 } else {
                     logout()

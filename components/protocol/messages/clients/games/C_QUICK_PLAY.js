@@ -2,6 +2,7 @@ import { selectMyUser } from "../../../../redux/reducers/players/PlayersReducer"
 import { selectClientIdWebsocket } from "../../../../redux/reducers/Websocket/WebsocketReducer"
 import { store } from "../../../../redux/redux-store"
 import { sendMessageWS } from "../../../websocet"
+import {transitionState} from "../../../../utils/utils";
 
 // 1: 'play_robot',
 // 2: 'play_opponent',
@@ -41,7 +42,8 @@ export default class C_QUICK_PLAY {
     }
 
     loadLoadingScreen = () =>{
-        window.navigation.navigate('LoadingGameScreen')
+        //window.navigation.navigate('LoadingGameScreen')
+        transitionState('LoadingGameScreen')
     }
 
     setClientId(){

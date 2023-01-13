@@ -1,5 +1,6 @@
 import { setIsGameStarted } from "../../../../redux/reducers/game/GameReducer"
 import { store } from "../../../../redux/redux-store"
+import {transitionState} from "../../../../utils/utils";
 
 export default class S_START_GAME {
     constructor(data){
@@ -20,7 +21,8 @@ export default class S_START_GAME {
     exec() {
         store.dispatch(setIsGameStarted(true))
         setTimeout(()=>{
-            window.navigation.navigate('GameScreen')
+            //window.navigation.navigate('GameScreen')
+            transitionState('GameScreen')
         }, 2000)
     }
 

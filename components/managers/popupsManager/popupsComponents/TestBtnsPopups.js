@@ -6,7 +6,7 @@ import ModalWrapper from '../../../common/ModalWindows/ModalWrapper'
 import Text from '../../../common/Text/Text'
 import { setGame, setGameSettings, setIsGameStarted, setResultGame } from '../../../redux/reducers/game/GameReducer'
 import {setLevelUpPopup, setSevenDaysGiftPopup, setTestBtnsPopup} from '../../../redux/reducers/popups/PopupsReducer'
-import { getResultScreenData, getStartGameData } from '../../../utils/utils'
+import {getResultScreenData, getStartGameData, transitionState} from '../../../utils/utils'
 import FireworkStandart from "../../../common/SpriteSheetViewer/components/FireworkStandart/FireworkStandert";
 import FireworkColor from "../../../common/SpriteSheetViewer/components/FireworkColor/FireworkColor";
 import {store} from "../../../redux/redux-store";
@@ -28,7 +28,8 @@ const TestBtnsPopups = () =>{
     const handelResultClick = () =>{
         dispatch(setResultGame(getResultScreenData()))
         closeModal()
-        navigation.navigate('ResultScreen')
+        //navigation.navigate('ResultScreen')
+        transitionState('ResultScreen')
     }
 
     const handelStartGameClick = () =>{
@@ -39,11 +40,13 @@ const TestBtnsPopups = () =>{
         closeModal()
 
         dispatch(setIsGameStarted(true))
-        window.navigation.navigate('GameScreen')
+        //window.navigation.navigate('GameScreen')
+        transitionState('GameScreen')
     }
 
     const handelLoadingGameClick = () =>{
-        window.navigation.navigate('LoadingGameScreen')
+        //window.navigation.navigate('LoadingGameScreen')
+        transitionState('LoadingGameScreen')
         closeModal()
     }
 

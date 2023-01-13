@@ -12,13 +12,13 @@ const GameWithOpponentByTime = (props) => {
 
   const {width,height} = useWindowDimensions()
 
-  const hendelClick = () =>{
+  const handelClick = () =>{
       alert('coming soon')
-      //props.hendlerPlayGame(3)
+      //props.handlerPlayGame(3)
   }
 
   return (
-      <OpponentContainer width={width} height={height} onPress={hendelClick} style={{ borderBottomWidth: 8 }}>
+      <OpponentContainer width={width} height={height} onPress={handelClick} style={{ borderBottomWidth: 8 }}>
         <TextCont numberOfLines={1} setShadow={true} small heavy color={'#ff9d4d'} center>{props.tap_to_play}</TextCont>
         <GameImage source={gameIcon} resizeMode={ 'stretch'}/>
         <TextCont numberOfLines={2} setShadow={true} madium heavy color={'#ff9d4d'} center>{props.fightOppByTime}</TextCont>

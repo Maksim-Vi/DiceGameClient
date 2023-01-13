@@ -4,7 +4,7 @@ import mainBg from '../../../assets/bg/main_bg.jpg'
 import styled from 'styled-components'
 import TopMain from '../../common/TopPanel/TopPanel'
 import C_QUICK_PLAY from '../../protocol/messages/clients/games/C_QUICK_PLAY'
-import {NativeModules, Platform, StatusBar} from "react-native";
+import {Animated, Easing, NativeModules, Platform, StatusBar} from "react-native";
 import GameWithBot from "./components/GameWithBot";
 import GameWithOpponent from "./components/GameWithOpponent";
 import GameWithOpponentByTime from "./components/GameWithOpponentByTime";
@@ -14,14 +14,13 @@ import Text from '../../common/Text/Text'
 import {selectMyUser} from '../../redux/reducers/players/PlayersReducer'
 import FreeGift from "./components/FreeGift";
 import OnlineUsers from "./components/OnlineUsers";
-import SlideScreen from "../../common/AnimationScreens/SlideScreen";
 
 const MainScreen = () => {
 
     const dispatch = useDispatch()
     const myUser = useSelector(selectMyUser)
 
-    const hendlerPlayGame = (gameType) => {
+    const handlerPlayGame = (gameType) => {
         new C_QUICK_PLAY(gameType)
     }
 
@@ -30,11 +29,10 @@ const MainScreen = () => {
                 <StatusBar hidden={true} style="light"/>
                 <TopMain/>
 
-
                 <MainContainer>
-                    <GameWithBot index={0} hendlerPlayGame={hendlerPlayGame}/>
-                    <GameWithOpponent index={1} hendlerPlayGame={hendlerPlayGame}/>
-                    <GameWithOpponentByTime index={2} hendlerPlayGame={hendlerPlayGame}/>
+                    <GameWithBot index={0} handlerPlayGame={handlerPlayGame}/>
+                    <GameWithOpponent index={1} handlerPlayGame={handlerPlayGame}/>
+                    <GameWithOpponentByTime index={2} handlerPlayGame={handlerPlayGame}/>
                 </MainContainer>
                 <OnlineUsers />
 
@@ -89,6 +87,9 @@ const SpriteContainer = styled.View`
   position: absolute;
   top: 20%;
   width: 100%;
+  height: 50%;
+  z-index: 1;
+  background: rgba(255, 127, 80, 0.37);
 `
 
 export default MainScreen

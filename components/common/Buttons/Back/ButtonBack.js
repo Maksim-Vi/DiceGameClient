@@ -2,6 +2,8 @@ import { useNavigation } from '@react-navigation/native'
 import React from 'react'
 import styled from 'styled-components';
 import {Ionicons} from '@expo/vector-icons'
+import {store} from "../../../redux/redux-store";
+import {setActiveTabApp} from "../../../redux/reducers/Websocket/WebsocketReducer";
 
 const ButtonBack = (props) => {
 
@@ -13,6 +15,7 @@ const ButtonBack = (props) => {
         }
         if(props.goMainPage){
             navigation.navigate('MainScreen')
+            store.dispatch(setActiveTabApp('MainScreen'))
         }
     }
 

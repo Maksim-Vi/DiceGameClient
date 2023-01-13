@@ -1,5 +1,6 @@
 import {store} from "../../../redux/redux-store";
 import {setCurrentUser} from "../../../redux/reducers/players/PlayersReducer";
+import {transitionState} from "../../../utils/utils";
 
 export default class S_CREATE_ACCOUNT_SUCCESS {
     constructor(data){
@@ -21,7 +22,8 @@ export default class S_CREATE_ACCOUNT_SUCCESS {
         store.login(this.data)
         store.dispatch(setCurrentUser(this.data.user))
         setTimeout(()=>{
-            window.navigation.navigate('MainScreen')
+            //window.navigation.navigate('MainScreen')
+            transitionState('MainScreen')
         },1500)
     }
 

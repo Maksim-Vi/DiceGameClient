@@ -1,3 +1,4 @@
+import {transitionState} from "../../../../utils/utils";
 
 export default class S_GAME_BROKEN {
     constructor(gameId){
@@ -16,7 +17,8 @@ export default class S_GAME_BROKEN {
     }
 
     exec() {
-       window.navigation.navigate('MainScreen')
+       //window.navigation.navigate('MainScreen')
+        transitionState('MainScreen')
     }
 
 	getLogText() {

@@ -16,6 +16,7 @@ import { useInterstitialAd, TestIds } from 'react-native-google-mobile-ads';
 import {resetCountShowAd, setCountShowAd} from "../../redux/reducers/AD/AdvertisingReducer";
 import {selectTranslation} from "../../redux/reducers/language/LanguageReducer";
 import defaultTranslation from "../../redux/reducers/language/defaultTranslation";
+import {setActiveTabApp} from "../../redux/reducers/Websocket/WebsocketReducer";
 
 const ResultScreen = (props) => {
 
@@ -31,6 +32,7 @@ const ResultScreen = (props) => {
             show();
         } else {
             navigation.navigate('MainScreen')
+            store.dispatch(setActiveTabApp('MainScreen'))
             store.dispatch(setCountScores(null))
             store.dispatch(setCountShowAd())
         }
@@ -101,6 +103,7 @@ const ResultScreen = (props) => {
     React.useEffect(() => {
         if (isClosed) {
             navigation.navigate('MainScreen')
+            store.dispatch(setActiveTabApp('MainScreen'))
             store.dispatch(setCountScores(null))
             store.dispatch(resetCountShowAd())
         }
