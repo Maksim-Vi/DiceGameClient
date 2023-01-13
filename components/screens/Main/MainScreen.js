@@ -1,10 +1,9 @@
 import React from 'react'
 import BackgroundWrapper from '../../common/BackgroundWrapper/BackgroundWrapper'
-import mainBg from '../../../assets/bg/main_bg.jpg'
 import styled from 'styled-components'
 import TopMain from '../../common/TopPanel/TopPanel'
 import C_QUICK_PLAY from '../../protocol/messages/clients/games/C_QUICK_PLAY'
-import {Animated, Easing, NativeModules, Platform, StatusBar} from "react-native";
+import {NativeModules, Platform, StatusBar} from "react-native";
 import GameWithBot from "./components/GameWithBot";
 import GameWithOpponent from "./components/GameWithOpponent";
 import GameWithOpponentByTime from "./components/GameWithOpponentByTime";
@@ -25,7 +24,7 @@ const MainScreen = () => {
     }
 
     return (
-            <BackgroundWrapper gackground={mainBg}>
+            <BackgroundWrapper>
                 <StatusBar hidden={true} style="light"/>
                 <TopMain/>
 

@@ -6,7 +6,7 @@ import ButtonBack from "../../common/Buttons/Back/ButtonBack";
 
 const FriendsScreen = (props) => {
     return (
-        <BackgroundWrapper gackground={mainBg}>
+        <BackgroundWrapper>
             <ButtonBack goMainPage={true}/>
 
         </BackgroundWrapper>

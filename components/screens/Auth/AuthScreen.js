@@ -41,7 +41,7 @@ const AuthScreen = () => {
   }
 
   return (
-      <BackgroundWrapper gackground={mainBg}>
+      <BackgroundWrapper>
         <TouchableWithoutFeedback style={{flex: 1}} onPress={Keyboard.dismiss} accessible={false}>
           <AuthContainer>
             <Text title heavy color={'#fff'} center>Knocky Dice</Text>

@@ -9,7 +9,7 @@ const ChatScreen = () => {
 
 
    return (
-    <BackgroundWrapper gackground={mainBg}>
+    <BackgroundWrapper>
         <SlideScreen left={false}>
             <StatusBar hidden={true} style="light"/>
         

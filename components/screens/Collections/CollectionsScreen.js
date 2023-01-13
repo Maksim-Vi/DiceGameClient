@@ -6,7 +6,7 @@ import SlideScreen from "../../common/AnimationScreens/SlideScreen";
 
 const CollectionsScreen = () => {
     return (
-        <BackgroundWrapper gackground={mainBg}>
+        <BackgroundWrapper>
             <SlideScreen left={true}>
                 <CollectionsContainer/>
             </SlideScreen>

@@ -1,4 +1,6 @@
 export default {
+    TR_BG_TYPE: 'TR_BG_TYPE',
+
     TR_LOGIN: 'TR_LOGIN',
     TR_OR: 'TR_OR',
     TR_REGISTER: 'TR_REGISTER',

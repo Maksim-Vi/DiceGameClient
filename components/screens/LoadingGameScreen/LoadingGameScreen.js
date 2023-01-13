@@ -17,7 +17,7 @@ const LoadingGameScreen = () => {
 	}
 
 	return (
-		<BackgroundWrapper gackground={mainBg}>    
+		<BackgroundWrapper>
 			<ButtonBack leaveGame={leaveGame} goMainPage={true}/>
 			<LoadingContainer>
 				<OpponentFrame />

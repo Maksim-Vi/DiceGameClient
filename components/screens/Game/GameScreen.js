@@ -16,7 +16,7 @@ const GameScreen = () => {
   }
 
   return (
-    <BackgroundWrapper gackground={mainBg}> 
+    <BackgroundWrapper>
       <GameBack onPress={leaveGame}>
           <Ionicons name='arrow-back' size={38} color={'#000'} />
       </GameBack>  

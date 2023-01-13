@@ -30,7 +30,7 @@ const UserInfoScreen = (props) => {
     }
 
     return (
-        <BackgroundWrapper gackground={mainBg}>
+        <BackgroundWrapper>
             <ButtonBack goMainPage={true} />
 
             <UserInfoContainer>

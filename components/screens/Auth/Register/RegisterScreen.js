@@ -67,7 +67,7 @@ const RegisterScreen = () => {
     }
 
     return (
-        <BackgroundWrapper gackground={mainBg}>
+        <BackgroundWrapper>
             <TouchableWithoutFeedback style={{flex: 1}} onPress={Keyboard.dismiss} accessible={false}>
                 <Container>
                     <GameBack onPress={() => {

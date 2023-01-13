@@ -110,7 +110,7 @@ const ResultScreen = (props) => {
     }, [isClosed, navigation]);
 
     return (
-        <BackgroundWrapper gackground={mainBg}>
+        <BackgroundWrapper>
             <ResultContainer>
                 {renderResult()}
                 <PlayButton onPress={hendlerCloseResult} style={{ borderBottomWidth: 5 }}>

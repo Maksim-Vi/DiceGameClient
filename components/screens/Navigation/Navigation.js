@@ -13,7 +13,6 @@ import ChatScreen from "../Chat/ChatScreen";
 import FriendsScreen from "../Friends/FriendsScreen";
 import TabBar from "./TabBar";
 import UserInfoScreen from "../UserInfo/UserInfoScreen";
-import SevenDaysGift from "../../managers/popupsManager/popupsComponents/SevenDays/SevenDaysGift";
 
 const options = {
     headerStyleInterpolator: HeaderStyleInterpolators.forFade,
@@ -54,7 +53,7 @@ export default function Navigator() {
       <AppStack.Screen options={options} name="LoadingGameScreen" component={LoadingGameScreen} />
       <AppStack.Screen options={options} name="RoadScreen" component={RoadScreen} />
       <AppStack.Screen options={options} name="FriendsScreen" component={FriendsScreen} />
-      <AppStack.Screen options={options} name="UserInfoScreen" component={UserInfoScreen} />
+      <AppStack.Screen options={{ presentation: 'transparentModal'}} name="UserInfoScreen" component={UserInfoScreen} />
     </AppStack.Navigator>
   );
 }

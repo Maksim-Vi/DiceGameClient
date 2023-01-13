@@ -33,7 +33,17 @@ const images = {
         require('./avatars/8.png'),
         require('./avatars/9.png'),
         require('./avatars/10.png'),
-    ]
+    ],
+    bg:{
+        1: require('./bg/nightStars.jpg'),
+        'nightStars': require('./bg/nightStars.jpg'),
+        2: require('./bg/skyNight.png'),
+        'skyNight': require('./bg/skyNight.png'),
+        3: require('./bg/greenMountains.jpg'),
+        'greenMountains': require('./bg/greenMountains.jpg'),
+
+        'main_bg': require('./bg/main_bg.jpg'),
+    }
 };
 
 export default images;
