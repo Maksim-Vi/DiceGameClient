@@ -5,6 +5,8 @@ import {storage} from "../../../App";
 import {transitionState} from "../../utils/utils";
 import styled from "styled-components";
 import {useNavigation} from "@react-navigation/native";
+import ChatManager from "../../managers/chatManager/ChatManager";
+import {store} from "../../redux/redux-store";
 
 const Load = (props) => {
 
@@ -14,6 +16,12 @@ const Load = (props) => {
     React.useEffect(()=>{
         window.navigation = navigation
     }, [navigation])
+
+    useEffect(()=>{
+        const chatManager = new ChatManager()
+        store.chatManager = chatManager
+        window.chatManager = chatManager
+    },[])
 
     useEffect(()=>{
         const value = storage.getString('UserData')

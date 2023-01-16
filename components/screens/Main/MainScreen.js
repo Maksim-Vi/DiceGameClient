@@ -13,8 +13,6 @@ import Text from '../../common/Text/Text'
 import {selectMyUser} from '../../redux/reducers/players/PlayersReducer'
 import FreeGift from "./components/FreeGift";
 import OnlineUsers from "./components/OnlineUsers";
-import ChatManager from "../../managers/chatManager/ChatManager";
-import {store} from "../../redux/redux-store";
 
 const MainScreen = () => {
 
@@ -24,6 +22,10 @@ const MainScreen = () => {
     const handlerPlayGame = (gameType) => {
         new C_QUICK_PLAY(gameType)
     }
+
+    useEffect(()=>{
+        window.chatManager.connectionToChatRoom('general')
+    },[])
 
     return (
             <BackgroundWrapper>
