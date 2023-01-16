@@ -5,6 +5,7 @@ import Avatar from "../../../common/Avatars/Avatar";
 import {selectMyUser} from "../../../redux/reducers/players/PlayersReducer";
 import {store} from "../../../redux/redux-store";
 import {setTimingAnimated} from "../../../utils/Animation";
+import Text from "../../../common/Text/Text";
 
 const UserFrame = () => {
 
@@ -19,9 +20,9 @@ const UserFrame = () => {
         ]).start();
     }
 
-    React.useEffect(()=>{
+    React.useEffect(() => {
         animateStart()
-    },[])
+    }, [])
 
     return (
         <UserContainer style={{
@@ -39,14 +40,24 @@ const UserFrame = () => {
             ]
         }}>
             <Avatar avatarId={user.avatar}/>
+            <NameContainer>
+                <Text setShadow={true} large blod center>{user.username}</Text>
+            </NameContainer>
         </UserContainer>
     );
 };
 
 const UserContainer = styled(Animated.View)`
-    display: flex;
-    width: 100px;
-    height: 100px;
+  display: flex;
+  width: 100px;
+  height: 100px;
+`
+
+const NameContainer = styled.View`
+  margin-top: 10px;
+  background-color: rgba(72, 72, 72, 0.35);
+  border-radius: 20px;
+  border: 3px solid rgba(31, 31, 31, 0.07);
 `
 
 export default UserFrame;
