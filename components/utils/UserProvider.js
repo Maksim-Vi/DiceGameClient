@@ -5,6 +5,7 @@ import {setCurrentUser} from "../redux/reducers/players/PlayersReducer";
 import {store} from "../redux/redux-store";
 import {setLogout} from "../redux/reducers/login/LoginReducer";
 import {storage} from "../../App";
+import {transitionState} from "./utils";
 
 export const UserContext = createContext({token: '', id: '', username: '', password: '', data: null, auth: false});
 const storageName = 'UserData'
@@ -35,12 +36,14 @@ const UserProvider = ({children}) => {
 
     const setAuth = useCallback(() => {
         setUser({...user, auth: true});
+        transitionState('App')
     }, [])
 
     const logout = useCallback(() => {
         setUser({token: '', id: '', username: '', password: '', data: null, auth: false});
         storage.set(storageName, '')
         store.dispatch(setLogout())
+        transitionState('AuthScreen')
     })
 
     const getDataFromStorage = async () => {
@@ -49,7 +52,7 @@ const UserProvider = ({children}) => {
             const data = JSON.parse(value)
 
             if (data && data.token && data.user.username) {
-                navigation.navigate('LoadingProject')
+                transitionState('LoadingProject')
                 const dataLogin = await postLoginApi(data.user.username, data.user.password)
 
                 if (dataLogin && dataLogin.success) {

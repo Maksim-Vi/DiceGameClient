@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import BackgroundWrapper from '../../common/BackgroundWrapper/BackgroundWrapper'
 import styled from 'styled-components'
 import TopMain from '../../common/TopPanel/TopPanel'
@@ -13,6 +13,8 @@ import Text from '../../common/Text/Text'
 import {selectMyUser} from '../../redux/reducers/players/PlayersReducer'
 import FreeGift from "./components/FreeGift";
 import OnlineUsers from "./components/OnlineUsers";
+import ChatManager from "../../managers/chatManager/ChatManager";
+import {store} from "../../redux/redux-store";
 
 const MainScreen = () => {
 

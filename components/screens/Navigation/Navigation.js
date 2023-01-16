@@ -13,6 +13,10 @@ import ChatScreen from "../Chat/ChatScreen";
 import FriendsScreen from "../Friends/FriendsScreen";
 import TabBar from "./TabBar";
 import UserInfoScreen from "../UserInfo/UserInfoScreen";
+import AuthScreen from "../Auth/AuthScreen";
+import RegisterScreen from "../Auth/Register/RegisterScreen";
+import LoadingProject from "../LoadingProject/LoadingProject";
+import Load from "../LoadingGameScreen/Load";
 
 const options = {
     headerStyleInterpolator: HeaderStyleInterpolators.forFade,
@@ -47,13 +51,19 @@ export default function Navigator() {
 
   return (
     <AppStack.Navigator screenOptions={screenOptions} >
-      <AppStack.Screen options={options} name="App" component={TabNavScreen} />
-      <AppStack.Screen options={optionsGame} name="GameScreen" component={GameScreen} />
-      <AppStack.Screen options={options} name="ResultScreen" component={ResultScreen} />
-      <AppStack.Screen options={options} name="LoadingGameScreen" component={LoadingGameScreen} />
-      <AppStack.Screen options={options} name="RoadScreen" component={RoadScreen} />
-      <AppStack.Screen options={options} name="FriendsScreen" component={FriendsScreen} />
-      <AppStack.Screen options={{ presentation: 'transparentModal'}} name="UserInfoScreen" component={UserInfoScreen} />
+        <AppStack.Screen options={options} name="Load" component={Load}/>
+
+        <AppStack.Screen name="AuthScreen" component={AuthScreen}/>
+        <AppStack.Screen name="RegisterScreen" component={RegisterScreen}/>
+        <AppStack.Screen name="LoadingProject" component={LoadingProject} />
+
+        <AppStack.Screen options={options} name="App" component={TabNavScreen}/>
+        <AppStack.Screen options={optionsGame} name="GameScreen" component={GameScreen}/>
+        <AppStack.Screen options={options} name="ResultScreen" component={ResultScreen}/>
+        <AppStack.Screen options={options} name="LoadingGameScreen" component={LoadingGameScreen}/>
+        <AppStack.Screen options={options} name="RoadScreen" component={RoadScreen}/>
+        <AppStack.Screen options={options} name="FriendsScreen" component={FriendsScreen}/>
+        <AppStack.Screen options={{ presentation: 'transparentModal'}} name="UserInfoScreen" component={UserInfoScreen} />
     </AppStack.Navigator>
   );
 }
