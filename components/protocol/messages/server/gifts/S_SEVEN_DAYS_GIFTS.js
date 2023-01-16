@@ -1,4 +1,3 @@
-import {setUsersOnline} from "../../../../redux/reducers/players/PlayersReducer";
 import {store} from "../../../../redux/redux-store";
 import {setAvailableToClaimGift, setGiftsData} from "../../../../redux/reducers/gifts/GiftsReducer";
 

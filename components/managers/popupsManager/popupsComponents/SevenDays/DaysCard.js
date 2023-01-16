@@ -15,42 +15,44 @@ const DaysCard = (props) => {
     let isDisabled = !isAvailableClaim && !isClaimed
 
     const rotValue = React.useRef(new Animated.Value(0)).current;
+    const anim = React.useRef(
+        Animated.loop(
+            Animated.sequence([
+                setTimingAnimated(rotValue, 1, 300, Easing.ease, true),
+                setTimingAnimated(rotValue, 2, 300, Easing.ease, true),
+                setTimingAnimated(rotValue, 0, 300, Easing.ease, true),
+                setTimingAnimated(rotValue, 1, 300, Easing.ease, true),
+                setTimingAnimated(rotValue, 2, 300, Easing.ease, true),
+                setTimingAnimated(rotValue, 0, 300, Easing.ease, true),
+                Animated.delay(2000),
+            ])
+        )
+    )
     const rotate = rotValue.interpolate({
         inputRange: [0, 1, 2],
         outputRange: ['0deg', '5deg', '-5deg']
     })
 
-    const rotateStartAnim = () =>{
-        if(isDisabled) return
-
-        Animated.sequence([
-            setTimingAnimated(rotValue, 1, 300, Easing.ease, true),
-            setTimingAnimated(rotValue, 2, 300, Easing.ease, true),
-            setTimingAnimated(rotValue, 0, 300, Easing.ease, true),
-            setTimingAnimated(rotValue, 1, 300, Easing.ease, true),
-            setTimingAnimated(rotValue, 2, 300, Easing.ease, true),
-            setTimingAnimated(rotValue, 0, 300, Easing.ease, true),
-        ]).start(()=>{
-            setTimeout(()=>{
-                rotateStartAnim()
-            },2000)
-        });
-    }
 
     const claimGift = () =>{
         if(isAvailableClaim && !isClaimed){
             new C_CLAIM_SEVEN_DAYS_GIFTS(dayNumber)
-            rotValue.stopAnimation()
+            anim.current.stop()
             rotValue.setValue(0)
         }
     }
 
     useEffect(() => {
         if(isAvailableClaim && !isClaimed){
-            rotateStartAnim()
+            anim.current.start()
+        } else {
+            anim.current.stop()
+            rotValue.setValue(0)
         }
+
         return () => {
-            rotValue.stopAnimation()
+            anim.current.stop()
+            rotValue.setValue(0)
         };
     },[]);
 

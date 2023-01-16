@@ -18,9 +18,7 @@ const SevenDaysGiftButton = () =>{
 
     return (
         <RoadBtn onPress={OpenSevenDays}>
-{/*
-            {availableToClaim && availableToClaim > 0 && <InfoButton count={availableToClaim || 0}/>}
-*/}
+            {availableToClaim && +availableToClaim > 0 ? <InfoButton count={String(availableToClaim)}/> : null}
             <RoadImg source={Img} resizeMode='stretch'/>
             <TextSeven heavy large color={'#000'}>7-d</TextSeven>
         </RoadBtn>

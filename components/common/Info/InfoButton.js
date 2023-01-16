@@ -1,11 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import Text from '../Text/Text';
+import TextWithoutShadowStyle from '../Text/TextWithoutShadow';
 
 const InfoButton = ({count}) =>{
+
     return (
         <InfoContainer>
-            <Text small color={'#fff'} center>{count}</Text>
+            <TextCount small color={'#fff'} center>{count}</TextCount>
         </InfoContainer>
     )
 }
@@ -23,5 +24,7 @@ const InfoContainer = styled.View`
     border: 2px solid white;
   z-index: 1;
 `
+
+const TextCount = styled(TextWithoutShadowStyle)``
 
 export default InfoButton
