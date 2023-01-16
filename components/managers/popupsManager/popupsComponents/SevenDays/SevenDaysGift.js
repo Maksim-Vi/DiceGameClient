@@ -26,7 +26,10 @@ const SevenDaysGift = (props) => {
         <ModalWrapper modalBG={'bg_black'} modalVisible={true} >
             <ButtonBack leaveGame={leaveGift} colorIcon={'#fefefe'}/>
             <SevenDaysContainer>
-                <SevenDaysTitle setShadow={true} title blod center>Daily Rewards</SevenDaysTitle>
+                <TitleContainer>
+                    <SevenDaysTitle setShadow={true} title blod center>Daily Rewards</SevenDaysTitle>
+                </TitleContainer>
+
                 <SevenDaysDesc setShadow={true} madium blod center>get more reward after:</SevenDaysDesc>
                 <NextRewardTimer />
 
@@ -68,7 +71,15 @@ const CardsContainer = styled.View`
   margin-top: 10%;
 `
 
+const TitleContainer = styled.View`
+  padding: 10px 20px;
+  border-radius: 15px;
+  background-color: #e63349;
+  border: 2px solid #a61429;
+  margin-bottom: 10px;
+`
 const SevenDaysTitle = styled(Text)`
+ 
 `
 const SevenDaysDesc = styled(Text)`
 `
