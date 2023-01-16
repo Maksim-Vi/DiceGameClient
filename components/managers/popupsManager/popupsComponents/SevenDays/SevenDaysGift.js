@@ -9,6 +9,7 @@ import {transitionState} from "../../../../utils/utils";
 import {setSevenDaysGiftPopup} from "../../../../redux/reducers/popups/PopupsReducer";
 import {connect, useDispatch} from "react-redux";
 import {selectSevenDaysGifts} from "../../../../redux/reducers/gifts/GiftsReducer";
+import NextRewardTimer from "./NextRewardTimer";
 
 const SevenDaysGift = (props) => {
 
@@ -25,7 +26,9 @@ const SevenDaysGift = (props) => {
         <ModalWrapper modalBG={'bg_black'} modalVisible={true} >
             <ButtonBack leaveGame={leaveGift} colorIcon={'#fefefe'}/>
             <SevenDaysContainer>
-                <SevenDaysTitle setShadow={true} title blod center>Daily Gifts</SevenDaysTitle>
+                <SevenDaysTitle setShadow={true} title blod center>Daily Rewards</SevenDaysTitle>
+                <SevenDaysDesc setShadow={true} madium blod center>get more reward after:</SevenDaysDesc>
+                <NextRewardTimer />
 
                 <CardsContainer>
                     {
@@ -62,9 +65,12 @@ const CardsContainer = styled.View`
   flex-wrap: wrap;
   width: 90%;
   height: auto;
+  margin-top: 10%;
 `
 
 const SevenDaysTitle = styled(Text)`
+`
+const SevenDaysDesc = styled(Text)`
 `
 
 const ImageGift = styled.Image`
