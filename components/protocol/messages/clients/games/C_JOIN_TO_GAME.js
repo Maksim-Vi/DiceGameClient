@@ -9,7 +9,10 @@ export default class C_JOIN_TO_GAME {
         this.MESSAGE_NAME = 'C_JOIN_TO_GAME'
         this.clientIdWebsocket = null
         this.showLog = true
-        
+
+        this.difficultGame = {
+            Easy: 'Easy', Medium: 'Medium', Hard: 'Hard'
+        }
         this.id = ''
         this.username = ''
         this.gameId = gameId
@@ -25,7 +28,7 @@ export default class C_JOIN_TO_GAME {
     }
 
     exec() {
-        sendMessageWS({ name: this.MESSAGE_NAME, clientIdWs: this.clientIdWebsocket, userId: this.id,  username: this.username, gameId: this.gameId })
+        sendMessageWS({ name: this.MESSAGE_NAME, clientIdWs: this.clientIdWebsocket, userId: this.id,  username: this.username, gameId: this.gameId, difficultGame: this.difficultGame.Medium })
     }
 
     selectUserData = () =>{
