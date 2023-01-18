@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, {useEffect, useState} from 'react'
 import BackgroundWrapper from '../../common/BackgroundWrapper/BackgroundWrapper'
 import styled from 'styled-components'
 import Text from '../../common/Text/Text'
@@ -10,10 +10,11 @@ import C_LOGIN from '../../protocol/messages/clients/C_LOGIN'
 import Divider from "../../common/Divider/Divider";
 import { useForm } from 'react-hook-form'
 import bag from '../../../assets/bg/main_bg.jpg'
+import GoogleAuth from "./Google/GoogleAuth";
 
 const AuthScreen = () => {
   const navigation = useNavigation()
-  const [disableBtn, setEnableBtn] = useState(false)
+  const [disableBtn, setDisableBtn] = useState(false)
   const { control, handleSubmit, formState: { errors } } = useForm({
     defaultValues: {
       name: '',
@@ -25,18 +26,19 @@ const AuthScreen = () => {
     setInputChange({...inputData, [name]: event})
   }
 
-  const hendlerLogin = async (dataForm) =>{
+  const handlerLogin = async (dataForm) =>{
     const data = await postLoginApi(dataForm.name,dataForm.password)
-    
+    setDisableBtn(true)
     if(data && data.success){
      navigation.navigate('LoadingProject')
      new C_LOGIN(data.user.username,data.user.password)
     } else {
+      setDisableBtn(false)
       alert(data.message)
     }
   }
 
-  const hendlerRegister = () =>{
+  const handlerRegister = () =>{
     navigation.navigate('RegisterScreen')
   }
 
@@ -46,14 +48,14 @@ const AuthScreen = () => {
           <AuthContainer>
             <Text title heavy color={'#fff'} center>Knocky Dice</Text>
 
-            <LoginScreen hendlerLogin={hendlerLogin}
-                         onChangeInputs={onChangeInputs}
+            <LoginScreen onChangeInputs={onChangeInputs}
                          control={control}
                          errors={errors} />
             <ButtonContainer >
-              <LoginBtn disabled={disableBtn} onPress={handleSubmit(hendlerLogin)}><Text small heavy color='#fff' center>Login</Text></LoginBtn>
+              <LoginBtn disabled={disableBtn} onPress={handleSubmit(handlerLogin)}><Text small heavy color='#fff' center>Login</Text></LoginBtn>
               <Divider text={'or'} padding={10} color={'black'}/>
-              <RegisterBtn onPress={hendlerRegister}><Text small heavy color='#fff' center>Register</Text></RegisterBtn>
+              <RegisterBtn onPress={handlerRegister}><Text small heavy color='#fff' center>Register</Text></RegisterBtn>
+              <GoogleAuth />
             </ButtonContainer>
           </AuthContainer>
         </TouchableWithoutFeedback>

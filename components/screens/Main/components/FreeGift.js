@@ -18,7 +18,6 @@ import Timer from "../../../common/Timer/Timer";
 import GiftTimer from "./Gift/GiftTimer";
 import SlideScreen from "../../../common/AnimationScreens/SlideScreen";
 
-const timeToWait = 660
 const AdUnitID = Platform.OS === 'ios'
     ?  APP_TYPE !== 'development' ? 'ca-app-pub-6421975370931679/8219230470' : TestIds.GAM_REWARDED_INTERSTITIAL
     : APP_TYPE !== 'development' ? 'ca-app-pub-6421975370931679/7194208820' : TestIds.GAM_REWARDED_INTERSTITIAL
@@ -28,7 +27,7 @@ const FreeGift = (props) => {
     const dispatch = useDispatch()
     const leftTimeShowGiftAd = selectLeftTimeShowGiftAd(store.getState())
     const animatedValue = React.useRef(new Animated.Value(1)).current;
-    const { isLoaded, isClosed, load, show, isEarnedReward } =  useRewardedInterstitialAd(AdUnitID, {
+    const { isLoaded, isClosed, load, show, isEarnedReward } =  useRewardedInterstitialAd(TestIds.GAM_REWARDED_INTERSTITIAL, {
         requestNonPersonalizedAdsOnly: true,
     })
     const [timeData, setTimeData] = useState({

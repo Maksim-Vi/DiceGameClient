@@ -15,12 +15,18 @@
       },
       "android":{
         "buildType": "apk"
+      },
+      "cache": {
+        "key": "whatever"
       }
     },
     "production": {
       "ios":{},
       "android":{
         "buildType": "apk"
+      },
+      "cache": {
+        "key": "whatever"
       }
     }
   },

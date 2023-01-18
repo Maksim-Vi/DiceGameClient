@@ -28,6 +28,29 @@ export const postLoginApi = async (username, password) => {
     return await getFetchUrl('login', 'POST', data, refreshToken, callback)
 }
 
+export const postGoogleLoginOrRegister = async (username, password, email, googleAvatar) => {
+    let data = { username: username, password: password, email: email, googleAvatar: googleAvatar }
+
+    console.log('postGoogleLoginOrRegister', data)
+    const refreshToken = (equest, type, bodyData) =>{
+
+    }
+
+    const callback = (json) =>{
+        openServerConnection()
+        store.login(json)
+
+        store.dispatch(setLoginUser({
+            id: json.user.id,
+            username: json.user.username,
+            password: json.user.password
+        }))
+        store.dispatch(setToken(json.token))
+    }
+
+    return await getFetchUrl('googleLoginOrRegister', 'POST', data, refreshToken, callback)
+}
+
 export const postRegisterApi = async (username, email, password) => {
     let data = { username: username, email: email.toLowerCase(), password: password }
    
