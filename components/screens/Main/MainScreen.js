@@ -24,7 +24,9 @@ const MainScreen = () => {
     }
 
     useEffect(()=>{
-        window.chatManager.connectionToChatRoom('general')
+        if(!window.chatManager.chat.channels['general']){
+            window.chatManager.connectionToChatRoom('general')
+        }
     },[])
 
     return (
@@ -45,7 +47,6 @@ const MainScreen = () => {
                     <Text color={'#000'}>Test Buttons</Text>
                 </Test>
                 }
-
 
                 <FreeGift myUser={myUser}/>
             </BackgroundWrapper>

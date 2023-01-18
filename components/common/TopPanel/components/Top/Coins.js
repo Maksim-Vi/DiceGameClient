@@ -1,11 +1,22 @@
-import React from "react";
+import React, {useEffect, useRef} from "react";
 import Text from "../../../Text/Text";
 import styled from "styled-components";
-import coins from "../../../../../assets/topPanel/coins.png";
+import AnimatedLottieView from "lottie-react-native";
+import coinsAnim from "../../../../../assets/animation/lottieAnim/coin-topPanel.json";
 
 const Coins = (props) =>{
+
+    const lottieRef = useRef(null)
+
+    useEffect(()=>{
+        lottieRef.current.play(88, 180)
+    })
+
     return <CoinsContainer {...props}>
-        <CoinsImage source={coins} resizeMode="cover"/>
+        <AnimatedLottieView loop autoPlay={false}
+                            ref={lottieRef}
+                            source={coinsAnim}
+                            style={{position: 'absolute',top: -5,left: -8,width: 50,height: 50}}/>
         <Text setShadow={true} blod medium center>{props.coins}</Text>
     </CoinsContainer>
 }

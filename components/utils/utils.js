@@ -49,7 +49,7 @@ export const getResultScreenData = () =>{
         {id: 66, username: 'Tetris', avatar: 5, side: 1, activeItems: 0, inGame: true}
         ],
         userResultItems:{
-            scores: 30,
+            scores: 80,
             coins: 3,
             crystals: 1,
         },
@@ -58,8 +58,8 @@ export const getResultScreenData = () =>{
         coins: 0,
         crystals: 0,
         },
-        userWin: false,
-        opponentWin: true
+        userWin: true,
+        opponentWin: false
     }
 }
 

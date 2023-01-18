@@ -7,85 +7,28 @@ import {
 } from 'react-native';
 import styled from 'styled-components';
 import Text from "../../common/Text/Text";
-import { setTimingAnimated } from '../../utils/Animation';
 import bag from '../../../assets/bg/main_bg.jpg'
-
-const ObjectAnimated = ({ value, opacity, y }) => (
-	<Animated.View
-		style={[styles.diamond, {
-			opacity: value.interpolate({
-				inputRange: [0, 1, 2, 3, 4, 5, 6, 7],
-				outputRange: opacity,
-			}),
-			transform: [{
-				rotateY: value.interpolate({
-					inputRange: [0, 1, 2, 3, 4, 5, 6, 7],
-					outputRange: y,
-				}),
-			}],
-		}]}
-	/>
-);
+import coinsAnim from "../../../assets/animation/lottieAnim/loadDices.json";
+import starsAnim from "../../../assets/animation/lottieAnim/purpure-stars.json";
+import AnimatedLottieView from "lottie-react-native";
 
 const LoadingProject = () => {
-
-	const animatedValue = React.useRef(new Animated.Value(0)).current;
-
-	const animate = () => {
-		Animated.sequence([
-			setTimingAnimated(animatedValue, 0, 200),
-			setTimingAnimated(animatedValue, 1, 200),
-			setTimingAnimated(animatedValue, 2, 200),
-			setTimingAnimated(animatedValue, 3, 200),
-			setTimingAnimated(animatedValue, 4, 200),
-			setTimingAnimated(animatedValue, 5, 200),
-			setTimingAnimated(animatedValue, 6, 200),
-			setTimingAnimated(animatedValue, 7, 200),
-		]).start(() => {
-			animatedValue.setValue(0);
-			animate();
-		});
-	}
-
-	React.useEffect(() => {
-		animate();
-	  return () => {}
-	}, [])
 	
 	return (
 		<BackgroundWrapper gackground={bag}>
 			<LoadingContainer>
 				<Text title heavy color={'#fff'} center>Knocky Dice</Text>
 				<View style={styles.container}>
-					<View style={[styles.groupColumn, {
-						transform: [{ rotateZ: '45deg' }],
-					}]}
-					>
-						<View style={styles.groupRow}>
-							<ObjectAnimated
-								value={animatedValue}
-								opacity={[1, 0, 0, 0, 1, 1, 1, 1]}
-								y={['180deg', '0deg', '0deg', '0deg', '0deg', '0deg', '0deg', '0deg']}
-							/>
-							<ObjectAnimated
-								value={animatedValue}
-								opacity={[1, 1, 0, 0, 0, 1, 1, 1]}
-								y={['0deg', '0deg', '180deg', '0deg', '0deg', '0deg', '0deg', '0deg']}
-							/>
-						</View>
-						<View style={styles.groupRow}>
-							<ObjectAnimated
-								value={animatedValue}
-								opacity={[1, 1, 1, 1, 0, 0, 0, 1]}
-								y={['0deg', '0deg', '0deg', '0deg', '180deg', '0deg', '0deg', '0deg']}
-							/>
-							<ObjectAnimated
-								value={animatedValue}
-								opacity={[1, 1, 1, 0, 0, 0, 1, 1]}
-								y={['0deg', '0deg', '0deg', '180deg', '0deg', '0deg', '0deg', '0deg']}
-							/>
-						</View>
-					</View>
+					<AnimatedLottieView loop
+										autoPlay
+										source={starsAnim}
+										style={{position: 'absolute', opacity: 0.8, width: 400, height: 400}} />
+					<AnimatedLottieView loop autoPlay source={coinsAnim} style={{width: 400, height: 400}}/>
+					<AnimatedLottieView loop
+										autoPlay
+										source={starsAnim}
+										style={{position: 'absolute', bottom: -10, opacity: 0.8, width: 400, height: 400}} />
+
 				</View>
 				<Text small color={'#fff'} center>welcome to the us! created by 2022</Text>
 			</LoadingContainer>

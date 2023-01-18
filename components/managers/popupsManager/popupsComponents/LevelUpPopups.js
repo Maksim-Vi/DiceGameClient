@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React from 'react';
 import ModalWrapper from "../../../common/ModalWindows/ModalWrapper";
-import {Animated, Easing, useWindowDimensions} from "react-native";
+import {Animated, Easing} from "react-native";
 import {selectLevelUpPopup, setLevelUpPopup} from "../../../redux/reducers/popups/PopupsReducer";
 import {connect, useDispatch} from "react-redux";
 import Text from "../../../common/Text/Text";
@@ -10,11 +10,12 @@ import defaultTranslation from "../../../redux/reducers/language/defaultTranslat
 import styled from "styled-components";
 import img from '../../../../assets/common/star.png'
 import {setTimingAnimated} from "../../../utils/Animation";
+import coinsAnim from "../../../../assets/animation/lottieAnim/nextLvl.json";
+import AnimatedLottieView from "lottie-react-native";
 
 const LevelUpPopup = (props) => {
 
     const animatedTitle = React.useRef(new Animated.Value(0)).current;
-    const animatedStar = React.useRef(new Animated.Value(0)).current;
     const dispatch = useDispatch()
 
     const animateTitle = () => {
@@ -22,16 +23,9 @@ const LevelUpPopup = (props) => {
             Animated.delay(500),
             setTimingAnimated(animatedTitle, 1.1, 500, Easing.ease),
             setTimingAnimated(animatedTitle, 1, 400, Easing.ease),
-        ]).start(()=> animateStar());
-    }
-
-    const animateStar = () => {
-        Animated.sequence([
-            Animated.delay(100),
-            setTimingAnimated(animatedStar, 1.1, 500, Easing.ease),
-            setTimingAnimated(animatedStar, 1, 400, Easing.ease),
         ]).start();
     }
+
 
     const textTitleRender = () =>{
         return (
@@ -57,22 +51,9 @@ const LevelUpPopup = (props) => {
 
     const starRender = () =>{
         return (
-            <StarContainer style={{
-                opacity: animatedStar.interpolate({
-                    inputRange: [0, 1],
-                    outputRange: [0, 1],
-                }),
-                transform: [
-                    {
-                        scale: animatedStar.interpolate({
-                            inputRange: [0, 1],
-                            outputRange: [0, 1]
-                        })
-                    }
-                ]
-            }}>
+            <StarContainer>
                 <Lvl><Text title heavy center>{props.lvlUp.data.newLvl}</Text></Lvl>
-                <StarImg source={img} resizeMode={'stretch'}/>
+                <AnimatedLottieView loop={false} autoPlay source={coinsAnim} style={{width: 300, height: 300}}/>
             </StarContainer>
         )
     }
@@ -113,11 +94,6 @@ const TitleContainer = styled(Animated.View)`
   display: flex;
   align-items: center;
   text-align: center;
-`
-
-const StarImg = styled.Image`
-  width: 120px;
-  height: 120px;
 `
 
 const Lvl = styled.View`

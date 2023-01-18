@@ -44,6 +44,12 @@ const TestBtnsPopups = () =>{
         transitionState('GameScreen')
     }
 
+    const handelLoadingProjectClick = () =>{
+        //window.navigation.navigate('LoadingGameScreen')
+        transitionState('LoadingProject')
+        closeModal()
+    }
+
     const handelLoadingGameClick = () =>{
         //window.navigation.navigate('LoadingGameScreen')
         transitionState('LoadingGameScreen')
@@ -75,6 +81,7 @@ const TestBtnsPopups = () =>{
         return <Container>
             <Test onPress={handelStartGameClick} style={{ borderBottomWidth: 8 }}><Text color={'#000'}>StartGame</Text></Test>
             <Test onPress={handelResultClick} style={{ borderBottomWidth: 8 }}><Text color={'#000'}>Result</Text></Test>
+            <Test onPress={handelLoadingProjectClick} style={{ borderBottomWidth: 8 }}><Text color={'#000'}>Loading-Project</Text></Test>
             <Test onPress={handelLoadingGameClick} style={{ borderBottomWidth: 8 }}><Text color={'#000'}>Loading-Game</Text></Test>
             <Test onPress={handelLvlUpClick} style={{ borderBottomWidth: 8 }}><Text color={'#000'}>Lvl up</Text></Test>
             <Test onPress={handelSevenDaysGiftClick} style={{ borderBottomWidth: 8 }}><Text color={'#000'}>Seven Days Gift</Text></Test>

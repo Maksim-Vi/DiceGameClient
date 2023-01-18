@@ -16,7 +16,7 @@ import UserInfoScreen from "../UserInfo/UserInfoScreen";
 import AuthScreen from "../Auth/AuthScreen";
 import RegisterScreen from "../Auth/Register/RegisterScreen";
 import LoadingProject from "../LoadingProject/LoadingProject";
-import Load from "../LoadingGameScreen/Load";
+import Load from "../LoadingProject/Load";
 
 const options = {
     headerStyleInterpolator: HeaderStyleInterpolators.forFade,

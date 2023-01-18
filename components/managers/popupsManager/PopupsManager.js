@@ -23,7 +23,7 @@ const PopupsManager = (props) => {
 
             {props.avatarPopup.visible && <AvatarPopups user={props.user}/>}
             {props.settingsPopup.visible && <SettingsMenuPopups/>}
-            {props.lvlUpPopup.visible && props.activeTabApp === 'MainScreen' && <LevelUpPopup/>}
+            {props.lvlUpPopup.visible && props.activeTabApp === 'App' && <LevelUpPopup/>}
             {props.sevenDaysPopup.visible && <SevenDaysGift />}
 
 

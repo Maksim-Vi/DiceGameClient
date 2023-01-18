@@ -1,18 +1,20 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import styled from "styled-components";
 import DaysCardTitle from "./DaysCardTitle";
 import BlackBgCard from "../../../../common/BackgroundWrapper/BlackBGCard";
 import {Animated, Easing} from "react-native";
 import {setTimingAnimated} from "../../../../utils/Animation";
-import calendar from '../../../../../assets/Gifts/calendar.png'
+import coinsAnim from '../../../../../assets/animation/lottieAnim/coins.json'
 import CalendarView from "./CalendarView";
 import C_CLAIM_SEVEN_DAYS_GIFTS from "../../../../protocol/messages/clients/gifts/C_CLAIM_SEVEN_DAYS_GIFTS";
+import AnimatedLottieView from "lottie-react-native";
 
 const DaysCard = (props) => {
 
-   const {giftItem: {isAvailableClaim,isClaimed,dayNumber}} = props
-
+    const {giftItem: {isAvailableClaim, isClaimed, dayNumber}} = props
     let isDisabled = !isAvailableClaim && !isClaimed
+
+    const [isAnim,setLottie] = useState(false)
 
     const rotValue = React.useRef(new Animated.Value(0)).current;
     const anim = React.useRef(
@@ -34,16 +36,18 @@ const DaysCard = (props) => {
     })
 
 
-    const claimGift = () =>{
-        if(isAvailableClaim && !isClaimed){
+    const claimGift = () => {
+        if (isAvailableClaim && !isClaimed) {
             new C_CLAIM_SEVEN_DAYS_GIFTS(dayNumber)
+            setLottie(true)
             anim.current.stop()
             rotValue.setValue(0)
         }
     }
 
+
     useEffect(() => {
-        if(isAvailableClaim && !isClaimed){
+        if (isAvailableClaim && !isClaimed) {
             anim.current.start()
         } else {
             anim.current.stop()
@@ -54,7 +58,7 @@ const DaysCard = (props) => {
             anim.current.stop()
             rotValue.setValue(0)
         };
-    },[]);
+    }, []);
 
     return (
         <DaysCardContainer activeOpacity={isDisabled || isClaimed ? 1 : 0.9}
@@ -63,8 +67,9 @@ const DaysCard = (props) => {
             <DaysCardTitle title={props.title}/>
             {props.children}
 
-            {isClaimed && <CalendarView />}
-            {isDisabled && <BlackBgCard />}
+            {isClaimed && <CalendarView/>}
+            {isAnim && <AnimatedLottieView loop={false} autoPlay source={coinsAnim} style={{position: 'absolute', width: 300, height: 300}}/>}
+            {isDisabled && <BlackBgCard/>}
         </DaysCardContainer>
     )
 }

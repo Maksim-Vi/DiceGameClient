@@ -16,6 +16,8 @@ import {resetCountShowAd, setCountShowAd} from "../../redux/reducers/AD/Advertis
 import {selectTranslation} from "../../redux/reducers/language/LanguageReducer";
 import defaultTranslation from "../../redux/reducers/language/defaultTranslation";
 import {setActiveTabApp} from "../../redux/reducers/Websocket/WebsocketReducer";
+import coinsAnim from "../../../assets/animation/lottieAnim/confetti.json";
+import AnimatedLottieView from "lottie-react-native";
 
 const ResultScreen = (props) => {
 
@@ -86,6 +88,8 @@ const ResultScreen = (props) => {
 
                 {getWinner(Winner)}
                 {getLoser(Loser)}
+                {Winner.player.id === props.userId &&
+                    <AnimatedLottieView loop={false} autoPlay source={coinsAnim} style={{/*width: 300, height: 300*/}}/>}
             </Result>
         )
     }
@@ -112,6 +116,7 @@ const ResultScreen = (props) => {
         <BackgroundWrapper>
             <ResultContainer>
                 {renderResult()}
+                {}
                 <PlayButton onPress={hendlerCloseResult} style={{ borderBottomWidth: 5 }}>
                     <Text large heavy color={'#fff'}>{props.continue}</Text>
                 </PlayButton>
