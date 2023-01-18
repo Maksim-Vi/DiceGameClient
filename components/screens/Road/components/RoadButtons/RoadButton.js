@@ -5,7 +5,7 @@ import ready from "../../../../../assets/road/ready.png";
 import styled from "styled-components";
 import C_CLAIM_MISSION from "../../../../protocol/messages/clients/road/C_CLAIM_MISSION";
 import AnimatedLottieView from "lottie-react-native";
-import coinsAnim from "../../../../../assets/animation/lottieAnim/coins.json";
+import coinsAnim from "../../../../../assets/animation/lottieAnim/stars-fly.json";
 
 const RoadButton = (props) => {
 
@@ -24,9 +24,16 @@ const RoadButton = (props) => {
   }
 
   const clickHandler = () =>{
+    setLottie(true)
+    setTimeout(()=>{
+      setLottie(false)
+    },3000)
     if(isFinished && !isClaimed){
       new C_CLAIM_MISSION(props.mission.missionNumber)
       setLottie(true)
+      setTimeout(()=>{
+        setLottie(false)
+      },3000)
     }
   }
 
@@ -34,7 +41,7 @@ const RoadButton = (props) => {
       <RoadButtonContainer onPress={clickHandler}
                            activeOpacity={0.9}>
           {getButtonByType()}
-        {isAnim && <AnimatedLottieView loop={false} autoPlay source={coinsAnim} style={{position: 'absolute', width: 300, height: 300}}/>}
+        {isAnim && <AnimatedLottieView loop={false} autoPlay source={coinsAnim} style={{position: 'absolute', top: -13, width: 150, height: 150}}/>}
       </RoadButtonContainer>
   )
 };
