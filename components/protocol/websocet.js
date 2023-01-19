@@ -3,6 +3,7 @@ import { setLoaded } from "../redux/reducers/Websocket/WebsocketReducer";
 import { store } from "../redux/redux-store";
 import { hendleMessage } from "./MessageManager";
 import Constants from "expo-constants";
+import {transitionState} from "../utils/utils";
 
 export let websocket;
 
@@ -74,7 +75,8 @@ async function closeWSHandler(event) {
     } else if(tryToReconect){
         tryToReconect = false
 
-        store.logout()
+        //store.logout()
+        transitionState('AuthScreen')
         alert('oops, Sorry! game is rebooted please try to connect later!')
     }
 }
