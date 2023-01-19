@@ -4,7 +4,6 @@ import { selectToken } from "../../redux/reducers/login/LoginReducer";
 import { store } from "../../redux/redux-store";
 
 export const getUrl = () =>{
-    console.log('APP_TYPE', process.env.APP_TYPE)
     const inProduction = process.env.APP_TYPE !== 'development' ? true : false;
     const port = 3000
     const inExpo = Constants.manifest && Constants.manifest.debuggerHost;
@@ -30,8 +29,6 @@ export const getUrl = () =>{
 
 export const getFetchUrl = async (request, type, bodyData,refreshToken, callback) =>{
     let token = selectToken(store.getState())
-
-    console.log(`${getUrl()}/${request}`)
 
     if(type === 'GET'){
         return await fetch(`${getUrl()}/${request}`,{

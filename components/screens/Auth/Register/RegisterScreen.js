@@ -36,8 +36,9 @@ const RegisterScreen = () => {
     }
 
     const hendlerRegister = async (dataForm) => {
-        const data = await postRegisterApi(dataForm.username, dataForm.email, dataForm.password)
         setEnableBtn(true)
+        const data = await postRegisterApi(dataForm.username, dataForm.email, dataForm.password)
+        
         if (data && data.success) {
             setEnableBtn(false)
             navigation.goBack()

@@ -27,8 +27,9 @@ const AuthScreen = () => {
     }
 
     const handlerLogin = async (dataForm) => {
-        const data = await postLoginApi(dataForm.name, dataForm.password)
         setDisableBtn(true)
+        const data = await postLoginApi(dataForm.name, dataForm.password)
+
         if (data && data.success) {
             setDisableBtn(false)
             navigation.navigate('LoadingProject')

@@ -12,8 +12,6 @@ let reconnecting = false;
 let tryToReconect = false;
 
 const getWSUrl = () =>{
-    console.log('ws APP_TYPE', process.env.APP_TYPE)
-
     const inProduction = process.env.APP_TYPE !== 'development' ? true : false;
     const port = 3000
 
@@ -36,8 +34,6 @@ export const openServerConnection = () => {
     }
 
     const url = getWSUrl()
-
-    console.log('ANSWER', url)
 
     websocket = new WebSocket(url);
 
