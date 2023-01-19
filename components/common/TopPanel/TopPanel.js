@@ -12,8 +12,9 @@ import TopPanelBottom from "./TopPanelBottom";
 import PricesItemsPanel from "./components/TopPanelItems/PricesItemsPanel";
 import MenuPanel from "./components/TopPanelItems/MenuPanel";
 import FriendsPanel from "./components/TopPanelItems/FriendsPanel";
-import {Animated, Easing, Platform} from "react-native";
+import {Animated, Easing, NativeModules, Platform} from "react-native";
 import {setTimingAnimated} from "../../utils/Animation";
+import {getIosModel} from "../../utils/utils";
 
 const TopMain = (props) => {
 
@@ -33,13 +34,13 @@ const TopMain = (props) => {
             setTimingAnimated(scaleAnim, 1, 500, Easing.ease),
         ]).start();
 
-        return ()=>{
+        return () => {
             scaleAnim.setValue(0)
         }
-    },[]);
+    }, []);
 
-    React.useEffect(()=>{
-        if(props.user){
+    React.useEffect(() => {
+        if (props.user) {
             setUserData({
                 user: props.user,
                 coins: props.user.coins,
@@ -49,7 +50,7 @@ const TopMain = (props) => {
                 avatarId: props.user.avatar
             })
         }
-    },[props.user])
+    }, [props.user])
 
     return (
         <Panel>
@@ -67,9 +68,9 @@ const TopMain = (props) => {
                     }
                 ]
             }}>
-                <FriendsPanel />
+                <FriendsPanel/>
                 <PricesItemsPanel userData={userData}/>
-                <MenuPanel />
+                <MenuPanel/>
             </TopPanel>
 
             <TopPanelBottom userData={userData}/>
@@ -82,10 +83,16 @@ const Panel = styled.View`
   display: flex;
   align-items: center;
   width: 100%;
-  ${()=>{
-    if(Platform.OS !== 'ios'){
+  margin-top: 10px;
+  ${() => {
+    const isIos = getIosModel()
+    if (isIos >= 14) {
       return `
-        margin-top: 10px;
+        margin-top: 50px;
+      `
+    } else if(isIos >= 10 && isIos < 14){
+      return `
+        margin-top: 0px;
       `
     }
   }}

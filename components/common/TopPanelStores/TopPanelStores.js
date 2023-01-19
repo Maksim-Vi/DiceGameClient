@@ -3,6 +3,7 @@ import styled from "styled-components";
 import {NativeModules, Platform} from "react-native";
 import Coins from "../TopPanel/components/Top/Coins";
 import Crystals from "../TopPanel/components/Top/Crystals";
+import {getIosModel} from "../../utils/utils";
 
 const TopPanelStores = (props) => {
     return (
@@ -20,13 +21,20 @@ const TopPanel = styled.View`
     align-items: center;
     width: 100%;
     ${()=>{
-    if(Platform.OS === 'ios' && NativeModules.DeviceInfo.isIPhoneX_deprecated){
+      const isIos = getIosModel()
+    if(Platform.OS === 'ios' && isIos >= 10 && isIos < 14){
         return `
          height: 80px;
          justify-content: flex-end;
          padding-bottom: 10px;
       `
-    } else {
+    } else if(Platform.OS === 'ios' && isIos >= 14){
+      return `
+         height: 100px;
+         justify-content: flex-end;
+         padding-bottom: 10px;
+      `
+    }else {
         return `
          height: 50px;
          justify-content: space-around;

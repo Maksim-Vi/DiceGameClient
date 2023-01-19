@@ -3,13 +3,10 @@ import { store } from './components/redux/redux-store';
 import UserProvider from './components/utils/UserProvider';
 import Screens from './components/screens/Screens';
 import { NavigationContainer, useNavigationContainerRef } from '@react-navigation/native';
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { useFonts } from 'expo-font';
 import PopupsManager from './components/managers/popupsManager/PopupsManager';
-import { MMKV } from 'react-native-mmkv'
-
-export const storage = new MMKV()
 
 export default function App() {
 

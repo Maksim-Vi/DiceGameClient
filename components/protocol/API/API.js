@@ -31,7 +31,6 @@ export const postLoginApi = async (username, password) => {
 export const postGoogleLoginOrRegister = async (username, password, email, googleAvatar) => {
     let data = { username: username, password: password, email: email, googleAvatar: googleAvatar }
 
-    console.log('postGoogleLoginOrRegister', data)
     const refreshToken = (equest, type, bodyData) =>{
 
     }

@@ -5,32 +5,25 @@
   "build": {
     "development": {
       "developmentClient": true,
-      "distribution": "internal",
       "env": {
         "APP_ENV": "development",
         "NODE_ENV": "development"
       },
       "ios":{
-        "simulator": true
+        "simulator": true,
+        "resourceClass": "m1-medium"
       },
       "android":{
         "buildType": "apk"
-      },
-      "cache": {
-        "key": "whatever"
       }
     },
     "production": {
-      "ios":{},
+      "ios":{
+        "resourceClass": "m1-medium"
+      },
       "android":{
         "buildType": "apk"
-      },
-      "cache": {
-        "key": "whatever"
       }
     }
-  },
-  "submit": {
-    "production": {}
   }
 }

@@ -7,6 +7,7 @@ import Info from "./Info";
 import RoadTimer from "./RoadTimer";
 import {Animated, Easing, NativeModules, Platform} from "react-native";
 import {setTimingAnimated} from "../../../../utils/Animation";
+import {getIosModel} from "../../../../utils/utils";
 
 const RoadInfoMission = (props) => {
 
@@ -65,7 +66,8 @@ const RoadInfoContainer = styled(Animated.View)`
   justify-content: space-between;
   flex-direction: column;
   ${()=>{
-    if(Platform.OS === 'ios' && NativeModules.DeviceInfo.isIPhoneX_deprecated){
+    const isIos = getIosModel()
+    if (Platform.OS === 'ios' && isIos >= 10) {
       return `
         width: 90%;
         top: 6%;

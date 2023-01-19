@@ -4,8 +4,10 @@ import {NativeModules, Platform, useWindowDimensions} from "react-native";
 import {setSettingsMenuPopup} from "../../../redux/reducers/popups/PopupsReducer";
 import {useDispatch} from "react-redux";
 import Settings from "../../../common/TopPanel/components/Bottom/Settings";
+import {getIosModel} from "../../../utils/utils";
 
-const isIphoneX = Platform.OS === 'ios' && NativeModules.DeviceInfo.isIPhoneX_deprecated
+const isIos = getIosModel()
+const isIphoneX = Platform.OS === 'ios' && isIos >= 10
 
 const SettingsMenuPopups = () => {
 

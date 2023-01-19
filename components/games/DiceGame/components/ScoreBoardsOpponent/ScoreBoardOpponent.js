@@ -5,6 +5,7 @@ import BoardItem from '../BoardItem/BoardItem'
 import {Dimensions, NativeModules, Platform} from "react-native";
 import BoardOpponentInfo from './BoardOpponentInfo';
 import TextWithoutShadow from "../../../../common/Text/TextWithoutShadow";
+import {getIosModel} from "../../../../utils/utils";
 
 const OppIndexView = [6, 7, 8, 3, 4, 5, 0, 1, 2]
 
@@ -83,7 +84,8 @@ const ScoreBoardOpponentContainer = styled.View`
   text-align: center;
   justify-content: center;
   ${() => {
-    if (Platform.OS === 'ios' && NativeModules.DeviceInfo.isIPhoneX_deprecated) {
+    const isIos = getIosModel()
+    if (Platform.OS === 'ios' && isIos >= 10) {
       return 'margin-top: 50px;'
     }
   }}

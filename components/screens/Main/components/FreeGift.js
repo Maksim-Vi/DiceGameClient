@@ -17,6 +17,8 @@ import {selectLeftTimeShowGiftAd, setLeftTimeShowAd} from "../../../redux/reduce
 import Timer from "../../../common/Timer/Timer";
 import GiftTimer from "./Gift/GiftTimer";
 import SlideScreen from "../../../common/AnimationScreens/SlideScreen";
+import AnimatedLottieView from "lottie-react-native";
+import coins from '../../../../assets/animation/lottieAnim/coins-drop.json'
 
 const AdUnitID = Platform.OS === 'ios'
     ?  APP_TYPE !== 'development' ? 'ca-app-pub-6421975370931679/8219230470' : TestIds.GAM_REWARDED_INTERSTITIAL
@@ -30,6 +32,7 @@ const FreeGift = (props) => {
     const { isLoaded, isClosed, load, show, isEarnedReward } =  useRewardedInterstitialAd(TestIds.GAM_REWARDED_INTERSTITIAL, {
         requestNonPersonalizedAdsOnly: true,
     })
+    const [lottieAnim, setLottieAnim] = useState(false)
     const [timeData, setTimeData] = useState({
         days: 0,
         hours: 0,
@@ -43,6 +46,7 @@ const FreeGift = (props) => {
             timer.stop()
             load()
             animate()
+            setLottieAnim(false)
             dispatch(setLeftTimeShowAd(-1))
         }
 
@@ -77,6 +81,9 @@ const FreeGift = (props) => {
 
                 timer.start(getBonusCoins.giftWatchedTime)
                 dispatch(setLeftTimeShowAd(getBonusCoins.giftWatchedTime))
+                setTimeout(()=>{
+                    setLottieAnim(true)
+                },500)
             }
 
             animatedValue.stopAnimation()
@@ -135,6 +142,11 @@ const FreeGift = (props) => {
                 <ButtonImage width={50} height={50} image={freeCoins} clickHandler={()=> admodHendler()}/>
                 {timeData && (timeData.hours > 0 || timeData.minutes > 0 || timeData.seconds > 0) &&
                     <GiftTimer timeData={timeData}/>
+                }
+                {lottieAnim &&
+                    <AnimatedLottieView source={coins} loop={false} autoPlay
+                                        onAnimationFinish={()=>{setLottieAnim(false)}}
+                                        style={{position: 'absolute', bottom: 0, right: 0,width: 100, height: 250}} />
                 }
             </SlideScreen>
         </FreeCoinsContainer>

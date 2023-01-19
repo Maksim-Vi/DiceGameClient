@@ -7,12 +7,6 @@ import C_LOGIN from "../../../protocol/messages/clients/C_LOGIN";
 
 const GoogleAuth = (props) => {
 
-    const [userInfo, setUserInfo] = useState({
-        username: '',
-        password: '',
-        email: '',
-        avatar: ''
-    });
     const [request, response, promptAsync] = Google.useAuthRequest({
         androidClientId: "1099319501210-58fuql0uvef2o44vhla2uscid51enl8v.apps.googleusercontent.com",
         iosClientId: "1099319501210-b1957g9adhkvoqkimq9h9j6mud5doqjp.apps.googleusercontent.com",
@@ -32,8 +26,6 @@ const GoogleAuth = (props) => {
             userInfoResponse.json().then(async data => {
                 const password = data.id + 'googleLoginKnockyDice'
                 const googleUserData = await postGoogleLoginOrRegister(data.name, password, data.email, data.picture)
-
-                console.log('googleUserData',googleUserData);
 
                 if(googleUserData && googleUserData.success){
                     navigation.navigate('LoadingProject')

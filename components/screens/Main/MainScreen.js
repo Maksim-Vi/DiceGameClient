@@ -13,6 +13,7 @@ import Text from '../../common/Text/Text'
 import {selectMyUser} from '../../redux/reducers/players/PlayersReducer'
 import FreeGift from "./components/FreeGift";
 import OnlineUsers from "./components/OnlineUsers";
+import {getIosModel} from "../../utils/utils";
 
 const MainScreen = () => {
 
@@ -59,7 +60,8 @@ const Test = styled.TouchableOpacity`
   justify-content: center;
   position: absolute;
   ${() => {
-    if (Platform.OS === 'ios' && NativeModules.DeviceInfo.isIPhoneX_deprecated) {
+    const isIos = getIosModel()
+    if (Platform.OS === 'ios' && isIos >= 10) {
       return `
         top: 0;
         right: 30px;

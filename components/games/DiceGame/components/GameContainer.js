@@ -11,6 +11,7 @@ import {setTimingAnimated} from "../../../utils/Animation";
 import {selectTranslation} from "../../../redux/reducers/language/LanguageReducer";
 import defaultTranslation from "../../../redux/reducers/language/defaultTranslation";
 import {connect} from "react-redux";
+import {getIosModel} from "../../../utils/utils";
 
 class GameContainer extends React.Component {
     constructor(){
@@ -214,7 +215,8 @@ const ScoresContainer = styled.View`
     justify-content: space-between;
     flex: 0.9;
   ${()=>{
-    if(Platform.OS === 'ios' && NativeModules.DeviceInfo.isIPhoneX_deprecated){
+    const isIos = getIosModel()
+    if(Platform.OS === 'ios' && isIos >= 10){
       return ' flex: 0.8;'
     } else {
       return ' flex: 0.9;'

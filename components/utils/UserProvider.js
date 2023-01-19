@@ -4,7 +4,7 @@ import {postLoginApi} from "../protocol/API/API";
 import {setCurrentUser} from "../redux/reducers/players/PlayersReducer";
 import {store} from "../redux/redux-store";
 import {setLogout} from "../redux/reducers/login/LoginReducer";
-import {storage} from "../../App";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {transitionState} from "./utils";
 
 export const UserContext = createContext({token: '', id: '', username: '', password: '', data: null, auth: false});
@@ -23,7 +23,7 @@ const UserProvider = ({children}) => {
             data: data,
             auth: false
         });
-        storage.set(storageName, JSON.stringify({
+        await AsyncStorage.setItem(storageName, JSON.stringify({
                 token: data.token,
                 user:{
                     id: data.user.id,
@@ -39,15 +39,15 @@ const UserProvider = ({children}) => {
         transitionState('App')
     }, [])
 
-    const logout = useCallback(() => {
+    const logout = useCallback(async () => {
         setUser({token: '', id: '', username: '', password: '', data: null, auth: false});
-        storage.set(storageName, '')
+        await AsyncStorage.setItem(storageName, '')
         store.dispatch(setLogout())
         transitionState('AuthScreen')
     })
 
     const getDataFromStorage = async () => {
-        const value = storage.getString(storageName)
+        const value = await AsyncStorage.getItem(storageName)
         if(value){
             const data = JSON.parse(value)
 

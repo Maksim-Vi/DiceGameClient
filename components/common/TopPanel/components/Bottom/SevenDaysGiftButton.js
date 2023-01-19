@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Img from "../../../../../assets/Gifts/calendar.png";
+import Img from "../../../../../assets/Gifts/calender7-icon.png";
 import InfoButton from "../../../Info/InfoButton";
 import TextWithoutShadowStyle from "../../../Text/TextWithoutShadow";
 import {setSevenDaysGiftPopup} from "../../../../redux/reducers/popups/PopupsReducer";
@@ -20,7 +20,6 @@ const SevenDaysGiftButton = () =>{
         <RoadBtn onPress={OpenSevenDays}>
             {availableToClaim && +availableToClaim > 0 ? <InfoButton count={String(availableToClaim)}/> : null}
             <RoadImg source={Img} resizeMode='stretch'/>
-            <TextSeven heavy large color={'#000'}>7-d</TextSeven>
         </RoadBtn>
     )
 }

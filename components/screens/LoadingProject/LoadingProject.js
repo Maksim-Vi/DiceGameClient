@@ -3,17 +3,19 @@ import BackgroundWrapper from '../../common/BackgroundWrapper/BackgroundWrapper'
 import {
 	StyleSheet,
 	View,
-	Animated,
+	Animated, useWindowDimensions,
 } from 'react-native';
 import styled from 'styled-components';
 import Text from "../../common/Text/Text";
 import bag from '../../../assets/bg/main_bg.jpg'
-import coinsAnim from "../../../assets/animation/lottieAnim/loadDices.json";
+import dices from "../../../assets/animation/lottieAnim/loadDices.json";
 import starsAnim from "../../../assets/animation/lottieAnim/purpure-stars.json";
 import AnimatedLottieView from "lottie-react-native";
 
 const LoadingProject = () => {
-	
+
+	const { height, width } = useWindowDimensions();
+
 	return (
 		<BackgroundWrapper gackground={bag}>
 			<LoadingContainer>
@@ -23,7 +25,7 @@ const LoadingProject = () => {
 										autoPlay
 										source={starsAnim}
 										style={{position: 'absolute', opacity: 0.8, width: 400, height: 400}} />
-					<AnimatedLottieView loop autoPlay source={coinsAnim} style={{width: 400, height: 400}}/>
+					<AnimatedLottieView loop autoPlay source={dices} style={{width: 350, height: 350}} speed={1.2}/>
 					<AnimatedLottieView loop
 										autoPlay
 										source={starsAnim}

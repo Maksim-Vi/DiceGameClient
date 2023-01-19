@@ -2,12 +2,41 @@ import images from "../../assets/dynamicLoadImage";
 import {selectMyUser} from "../redux/reducers/players/PlayersReducer";
 import {store} from "../redux/redux-store";
 import {setActiveTabApp} from "../redux/reducers/Websocket/WebsocketReducer";
+import DeviceInfo from "react-native-device-info";
+import {Platform} from "react-native";
 
 export const transitionState = (tab) =>{
     if(window.navigation){
         window.navigation.navigate(tab)
         store.dispatch(setActiveTabApp(tab))
     }
+}
+
+export const getIosModel = () =>{
+    if(Platform.OS !== 'ios') return 0
+
+    const model = DeviceInfo.getModel()
+
+    const iosModels = [
+        'iPhone XS','iPhone XR','iPhone XS Max',
+        'iPhone 10','iPhone 10 Pro','iPhone 10 Pro Max',
+        'iPhone 11','iPhone 11 Pro','iPhone 11 Pro Max',
+        'iPhone 12 mini','iPhone 12','iPhone 12 Pro','iPhone 12 Pro Max',
+        'iPhone 13 mini','iPhone 13','iPhone 13 Pro','iPhone 13 Pro Max',
+        'iPhone 14','iPhone 14 Plus',
+        //'iPhone 14 Pro','iPhone 14 Pro Max'
+    ]
+
+    if(model && (model.includes('iPhone 14 Pro') || model.includes('iPhone 14 Pro Max'))){
+        return 14
+    }
+
+    if(model){
+        const isIos = iosModels.find(modelIos => modelIos.toLowerCase() === model.toLowerCase())
+        return !!isIos ? 10 : 9
+    }
+
+    return 0
 }
 
 export const getCollectionDiceImg = (id) => {

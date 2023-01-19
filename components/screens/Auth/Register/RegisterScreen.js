@@ -39,6 +39,7 @@ const RegisterScreen = () => {
         const data = await postRegisterApi(dataForm.username, dataForm.email, dataForm.password)
         setEnableBtn(true)
         if (data && data.success) {
+            setEnableBtn(false)
             navigation.goBack()
         } else {
             setEnableBtn(false)

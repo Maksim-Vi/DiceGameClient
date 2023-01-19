@@ -1,7 +1,7 @@
 import React, {useContext, useEffect} from 'react';
 import bg from "../../../assets/loadGame/load-img-game.png";
 import {UserContext} from "../../utils/UserProvider";
-import {storage} from "../../../App";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {transitionState} from "../../utils/utils";
 import styled from "styled-components";
 import {useNavigation} from "@react-navigation/native";
@@ -23,8 +23,8 @@ const Load = (props) => {
         window.chatManager = chatManager
     },[])
 
-    useEffect(()=>{
-        const value = storage.getString('UserData')
+    useEffect(async ()=>{
+        const value = await AsyncStorage.getItem('UserData')
 
         if(user.auth){
             transitionState('App')

@@ -16,6 +16,7 @@ import CardInfoLvl from "./components/CardInfoLvl";
 import {NativeModules, Platform} from "react-native";
 import {selectTranslation} from "../../redux/reducers/language/LanguageReducer";
 import defaultTranslation from "../../redux/reducers/language/defaultTranslation";
+import {getIosModel} from "../../utils/utils";
 
 const UserInfoScreen = (props) => {
 
@@ -65,7 +66,8 @@ const UserInfoContainer = styled.View`
   align-items: center;
   margin-top: 25%;
   ${()=>{
-    if(Platform.OS === 'ios' && NativeModules.DeviceInfo.isIPhoneX_deprecated){
+    const isIos = getIosModel()
+    if (Platform.OS === 'ios' && isIos >= 10) {
       return `
         margin-top: 25%;
       `

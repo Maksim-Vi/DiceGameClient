@@ -14,6 +14,7 @@ import defaultTranslation from "../../redux/reducers/language/defaultTranslation
 import {connect} from "react-redux";
 import {setActiveTabApp} from "../../redux/reducers/Websocket/WebsocketReducer";
 import {store} from "../../redux/redux-store";
+import {getIosModel} from "../../utils/utils";
 
 class TabBar extends React.PureComponent {
     constructor(props){
@@ -123,7 +124,8 @@ const TabsContainer = styled.View`
   justify-content: space-around;
   width: 100%;
   ${() => {
-    if (Platform.OS === 'ios' && NativeModules.DeviceInfo.isIPhoneX_deprecated) {
+    const isIos = getIosModel()
+    if (Platform.OS === 'ios' && isIos >= 10) {
       return `
         height: 70px;
       `
@@ -141,7 +143,8 @@ const TabIconContainer = styled.TouchableOpacity`
   align-items: center;
   text-align: center;
   ${() => {
-    if (Platform.OS === 'ios' && NativeModules.DeviceInfo.isIPhoneX_deprecated) {
+    const isIos = getIosModel()
+    if (Platform.OS === 'ios' && isIos >= 10) {
       return `
         margin-bottom: 20px;
       `

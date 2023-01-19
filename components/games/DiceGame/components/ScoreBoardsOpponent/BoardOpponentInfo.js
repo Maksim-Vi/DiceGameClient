@@ -20,118 +20,115 @@ const BoardOpponentInfo = (props) => {
     const transformAvatar = React.useRef(new Animated.Value(0)).current;
     const [viewScores, setViewScores] = useState(false)
 
-    const startAnimation = () =>{
+    const startAnimation = () => {
         Animated.sequence([
             setTimingAnimated(showAvatar, 1, 800, Easing.ease),
-        ]).start(()=>{
+        ]).start(() => {
             transformToPlace()
         });
     }
 
-    const transformToPlace = () =>{
+    const transformToPlace = () => {
         Animated.sequence([
             Animated.delay(500),
             setTimingAnimated(transformAvatar, 1, 800, Easing.ease),
-        ]).start(()=>{
+        ]).start(() => {
             setViewScores(true)
         })
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         startAnimation()
     }, [])
 
-  return (
-      <BoardAvatarContainer width={width}
-                            height={height}
-                            style={{
-                                opacity: showAvatar.interpolate({
-                                    inputRange: [0, 1],
-                                    outputRange: [0, 1],
-                                }),
-                                transform: [
-                                    {
-                                        scale: showAvatar.interpolate({
-                                            inputRange: [0,1],
-                                            outputRange: [0,1]
-                                        })
-                                    },
-                                    {
-                                        translateX: transformAvatar.interpolate({
-                                            inputRange: [0, 1],
-                                            outputRange: [-(width / 2), endX]
-                                        })
-                                    },
-                                    {
-                                        translateY: transformAvatar.interpolate({
-                                            inputRange: [0, 1],
-                                            outputRange: [((height / 3) / 10), endY]
-                                        })
-                                    }
-                                ]
-                            }}
-      >
-          <Name numberOfLines={1} large blod color={'#000'} center>{props.opponent.username || ''}</Name>
-          <Avatar avatarId={props.opponent.avatar}/>
-          {viewScores &&
-              <CountContainer width={width}>
-                  <CountScores width={width} large blod
-                               color={'#fff'}>{props.countScores ? props.countScores.scoresOpponent : 0}</CountScores>
-              </CountContainer>
-          }
-      </BoardAvatarContainer>
-  )
+    return (
+        <BoardAvatarContainer width={width}
+                              height={height}
+                              style={{
+                                  opacity: showAvatar.interpolate({
+                                      inputRange: [0, 1],
+                                      outputRange: [0, 1],
+                                  }),
+                                  transform: [
+                                      {
+                                          scale: showAvatar.interpolate({
+                                              inputRange: [0, 1],
+                                              outputRange: [0, 1]
+                                          })
+                                      },
+                                      {
+                                          translateX: transformAvatar.interpolate({
+                                              inputRange: [0, 1],
+                                              outputRange: [-(width / 2), endX]
+                                          })
+                                      },
+                                      {
+                                          translateY: transformAvatar.interpolate({
+                                              inputRange: [0, 1],
+                                              outputRange: [((height / 3) / 10), endY]
+                                          })
+                                      }
+                                  ]
+                              }}
+        >
+            <Name numberOfLines={1} large blod color={'#000'} center>{props.opponent.username || ''}</Name>
+            <Avatar avatarId={props.opponent.avatar}/>
+            {viewScores &&
+                <CountContainer width={width}>
+                    <Text large blod color={'#fff'}
+                          center>{props.countScores ? props.countScores.scoresOpponent : 0}</Text>
+                </CountContainer>
+            }
+        </BoardAvatarContainer>
+    )
 };
 
 const BoardAvatarContainer = styled(Animated.View)`
   position: absolute;
   right: -12%;
-  ${(props)=>{
-       if(props.width <= 400){
-        return `
+  ${(props) => {
+    if (props.width <= 400) {
+      return `
           bottom: 0;
           width: 50px;
           height: 50px;
         `
-      } else if(props.width > 400 && props.width <= 550){
-        return `
+    } else if (props.width > 400 && props.width <= 550) {
+      return `
           bottom: -10%;
           width: 70px;
           height: 70px;
         `
-      } else if(props.width > 550){
-        return `
+    } else if (props.width > 550) {
+      return `
           width: 100px;
           height: 100px;
         `
-      }
+    }
   }}
 `
 
-const CountScores = styled(TextWithoutShadow)`
-  text-align: center;
-`
 const CountContainer = styled.View`
   background-color: #354d57;
   border-radius: 5px;
   border: 2px solid #d6dbdd;
-  ${(props)=>{
-      if(props.width <= 400){
-        return `
+  ${(props) => {
+    if (props.width <= 400) {
+      return `
           margin-top: 10px;
           width: 50px;
         `
-      } else if(props.width > 400 && props.width <= 550){
-        return `
+    } else if (props.width > 400 && props.width <= 550) {
+      return `
           margin-top: 20px;
           width: 70px;
         `
-      } else if(props.width > 550){
-        return `
+    } else if (props.width > 550) {
+      return `
           margin-top: 30px;
           width: 100px;
         `
-      }
+    }
   }}
 `
 

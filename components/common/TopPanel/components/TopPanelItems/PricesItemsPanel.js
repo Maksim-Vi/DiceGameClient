@@ -4,6 +4,7 @@ import Crystals from "../Top/Crystals";
 import Flash from "../Top/Flash";
 import {NativeModules, Platform} from "react-native";
 import styled from 'styled-components'
+import {getIosModel} from "../../../../utils/utils";
 
 const PricesItemsPanel = ({userData}) => {
     return (
@@ -27,13 +28,6 @@ const TopPanelContainer = styled.View`
   align-items: center;
   justify-content: center;
   width: 70%;
-  ${()=>{
-    if(Platform.OS === 'ios' && NativeModules.DeviceInfo.isIPhoneX_deprecated){
-      return `
-        margin-top: 50px;
-      `
-    }
-  }}
 `
 const TopPanelItemsContainer = styled.View`
     height: 50px;
@@ -44,13 +38,6 @@ const TopPanelItemsContainer = styled.View`
     background-color: rgb(1,1,70);
     width: 100%;
     border-radius: 15px;
-     ${()=>{
-        if(Platform.OS === 'ios' && !NativeModules.DeviceInfo.isIPhoneX_deprecated){
-           return `
-            margin-top: 5px;
-           `
-        }
-    }}
 `
 const ElementsContainer = styled.View`
     display: flex;
@@ -66,7 +53,8 @@ const ProgressContainer = styled.View`
   background-color: rgb(1,1,70);
   height: 0.1px;
   ${()=>{
-    if(Platform.OS === 'ios' && NativeModules.DeviceInfo.isIPhoneX_deprecated){
+    const isIos = getIosModel()
+    if(Platform.OS === 'ios' && isIos >= 10){
       return `
          width: 90%;
          border-radius: 5px;
