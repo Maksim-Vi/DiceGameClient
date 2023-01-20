@@ -4,6 +4,7 @@ import { store } from "../redux/redux-store";
 import { hendleMessage } from "./MessageManager";
 import Constants from "expo-constants";
 import {transitionState} from "../utils/utils";
+import {getUrl} from "./API/urlApi";
 
 export let websocket;
 
@@ -34,6 +35,8 @@ export const openServerConnection = () => {
     }
 
     const url = getWSUrl()
+
+    console.log('ANSWER', url)
 
     websocket = new WebSocket(url);
 

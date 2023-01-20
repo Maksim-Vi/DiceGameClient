@@ -4,14 +4,19 @@ import Text from "../../../common/Text/Text";
 import * as Google from "expo-auth-session/providers/google";
 import {postGoogleLoginOrRegister} from "../../../protocol/API/API";
 import C_LOGIN from "../../../protocol/messages/clients/C_LOGIN";
+import {makeRedirectUri} from "expo-auth-session";
 
 const GoogleAuth = (props) => {
 
-    const [request, response, promptAsync] = Google.useAuthRequest({
-        androidClientId: "1099319501210-58fuql0uvef2o44vhla2uscid51enl8v.apps.googleusercontent.com",
-        iosClientId: "1099319501210-b1957g9adhkvoqkimq9h9j6mud5doqjp.apps.googleusercontent.com",
-        expoClientId: "1099319501210-362q2oj64cfbg73o2c2ncpjnra07788j.apps.googleusercontent.com"
-    });
+    const [request, response, promptAsync] = Google.useAuthRequest(
+        {
+            androidClientId: "1099319501210-58fuql0uvef2o44vhla2uscid51enl8v.apps.googleusercontent.com",
+            iosClientId: "1099319501210-b1957g9adhkvoqkimq9h9j6mud5doqjp.apps.googleusercontent.com",
+            expoClientId: "1099319501210-362q2oj64cfbg73o2c2ncpjnra07788j.apps.googleusercontent.com",
+            //redirectUri: makeRedirectUri({ useProxy: true })
+        },
+        //{ useProxy: true }
+    );
 
     const handlerGoogle = () =>{
         promptAsync({ useProxy: false, showInRecents: true })

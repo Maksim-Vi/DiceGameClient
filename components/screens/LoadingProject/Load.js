@@ -23,7 +23,7 @@ const Load = (props) => {
         window.chatManager = chatManager
     },[])
 
-    useEffect(async ()=>{
+    const getCatchData = async () =>{
         const value = await AsyncStorage.getItem('UserData')
 
         if(user.auth){
@@ -41,6 +41,10 @@ const Load = (props) => {
         } else {
             transitionState('AuthScreen')
         }
+    }
+
+    useEffect(()=>{
+        getCatchData()
     },[])
 
     return <ContainerApp><Background source={bg} resizeMode="cover" /></ContainerApp>

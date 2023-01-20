@@ -1,9 +1,9 @@
 {
   "expo": {
-    "name": "Knocky Dice",
+    "name": "knocky dice",
     "slug": "dicegame",
     "owner": "kastom",
-    "version": "1.1.6",
+    "version": "1.1.7",
     "orientation": "portrait",
     "icon": "./assets/loadGame/icon-game.png",
     "userInterfaceStyle": "light",
@@ -27,16 +27,16 @@
           "GADIsAdManagerApp": true
         }
       },
-      "bundleIdentifier": "com.anonymous.KnockyDice"
+      "bundleIdentifier": "com.anonymous.knockydice"
     },
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.anonymous.KnockyDice"
+      "package": "com.anonymous.knockydice"
     },
     "extra": {
-      "APP_TYPE": "development",
+      "APP_TYPE": "production",
       "APP_PROD_URL": "knockydice-server.onrender.com",
       "eas": {
         "projectId": "a5e5cb05-164b-405b-9ee0-6e83cf5f8084"
