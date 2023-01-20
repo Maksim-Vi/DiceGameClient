@@ -1,23 +1,87 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import BackgroundWrapper from '../../common/BackgroundWrapper/BackgroundWrapper'
 import {
 	StyleSheet,
 	View,
-	Animated, useWindowDimensions,
+	Animated, Easing,
 } from 'react-native';
 import styled from 'styled-components';
 import Text from "../../common/Text/Text";
 import bag from '../../../assets/bg/main_bg.jpg'
+import three from '../../../assets/collections/dices/d_4/dice_3.png'
+import six from '../../../assets/collections/dices/d_4/dice_6.png'
 import dices from "../../../assets/animation/lottieAnim/loadDices.json";
 import starsAnim from "../../../assets/animation/lottieAnim/purpure-stars.json";
 import AnimatedLottieView from "lottie-react-native";
+import ButtonBack from "../../common/Buttons/Back/ButtonBack";
+import {setTimingAnimated} from "../../utils/Animation";
 
 const LoadingProject = () => {
+	const animFirstValue = React.useRef(new Animated.Value(0)).current;
+	const animFirstRotValue = React.useRef(new Animated.Value(0)).current;
 
-	const { height, width } = useWindowDimensions();
+	const animSecondValue = React.useRef(new Animated.Value(0)).current;
+	const animSecondRotValue = React.useRef(new Animated.Value(0)).current;
+
+	const animFirstDice = () => {
+		Animated.loop(
+			Animated.sequence([
+				setTimingAnimated(animFirstValue, 0, 100, Easing.ease),
+				setTimingAnimated(animFirstValue, 1, 200, Easing.ease),
+				setTimingAnimated(animFirstValue, 2, 300, Easing.ease),
+
+				setTimingAnimated(animFirstValue, 3, 300, Easing.ease),
+				setTimingAnimated(animFirstRotValue, 1, 300, Easing.ease),
+				setTimingAnimated(animFirstValue, 2, 300, Easing.ease),
+				setTimingAnimated(animFirstValue, 3, 300, Easing.ease),
+				setTimingAnimated(animFirstRotValue, 0, 300, Easing.ease),
+				setTimingAnimated(animFirstValue, 2, 300, Easing.ease),
+
+				Animated.delay(2000)
+			])
+		).start();
+
+	}
+
+	const animSecondDice = () => {
+		Animated.loop(
+			Animated.sequence([
+				Animated.delay(2000),
+
+				setTimingAnimated(animSecondValue, 0, 100, Easing.ease),
+				setTimingAnimated(animSecondValue, 1, 200, Easing.ease),
+				setTimingAnimated(animSecondValue, 2, 300, Easing.ease),
+
+				setTimingAnimated(animSecondValue, 3, 300, Easing.ease),
+				setTimingAnimated(animSecondRotValue, 1, 300, Easing.ease),
+				setTimingAnimated(animSecondValue, 2, 300, Easing.ease),
+				setTimingAnimated(animSecondValue, 3, 300, Easing.ease),
+				setTimingAnimated(animSecondRotValue, 0, 300, Easing.ease),
+				setTimingAnimated(animSecondValue, 2, 300, Easing.ease),
+			])
+		).start();
+	}
+
+	useEffect(()=>{
+		animFirstDice()
+		animSecondDice()
+
+		return ()=>{
+			animFirstValue.stopAnimation()
+			animFirstRotValue.stopAnimation()
+			animSecondValue.stopAnimation()
+			animSecondRotValue.stopAnimation()
+
+			animFirstValue.setValue(0)
+			animFirstRotValue.setValue(0)
+			animSecondValue.setValue(0)
+			animSecondRotValue.setValue(0)
+		}
+	}, [])
 
 	return (
 		<BackgroundWrapper gackground={bag}>
+			<ButtonBack goMainPage={true}/>
 			<LoadingContainer>
 				<Text title heavy color={'#fff'} center>Knocky Dice</Text>
 				<View style={styles.container}>
@@ -25,7 +89,55 @@ const LoadingProject = () => {
 										autoPlay
 										source={starsAnim}
 										style={{position: 'absolute', opacity: 0.8, width: 400, height: 400}} />
-					<AnimatedLottieView loop autoPlay source={dices} style={{width: 350, height: 350}} speed={1.2}/>
+					<DicesContainer>
+						<DiceThree style={{
+							transform: [
+								{
+									translateY: animFirstValue.interpolate({
+										inputRange: [0,1,2,3],
+										outputRange: [0, 5, 0, -80]
+									})
+								},
+								{
+									scaleY: animFirstValue.interpolate({
+										inputRange: [0, 1, 2],
+										outputRange: [1, 0.8, 1]
+									})
+								},
+								{
+									rotate: animFirstRotValue.interpolate({
+										inputRange: [0,1],
+										outputRange: ['0deg','360deg']
+									})
+								}
+							]
+						}}
+								   source={three}/>
+						<DiceSix style={{
+							transform: [
+								{
+									translateY: animSecondValue.interpolate({
+										inputRange: [0,1,2,3],
+										outputRange: [0, 5, 0, -80]
+									})
+								},
+								{
+									scaleY: animSecondValue.interpolate({
+										inputRange: [0, 1, 2],
+										outputRange: [1, 0.8, 1]
+									})
+								},
+								{
+									rotate: animSecondRotValue.interpolate({
+										inputRange: [0,1],
+										outputRange: ['0deg','360deg']
+									})
+								}
+							]
+						}}
+								 source={six}/>
+					</DicesContainer>
+
 					<AnimatedLottieView loop
 										autoPlay
 										source={starsAnim}
@@ -45,6 +157,24 @@ const LoadingContainer = styled.View`
     align-items: center;
     justify-content: center;
 	padding: 150px 0 20px 0;
+`
+
+const DicesContainer = styled.View`
+ 	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	flex-direction: row;
+	width: 50%;
+`
+
+const DiceThree = styled(Animated.Image)`
+   width: 80px;
+	height: 80px;
+`
+
+const DiceSix = styled(Animated.Image)`
+	width: 80px;
+	height: 80px;
 `
 const styles = StyleSheet.create({
 	container: {
