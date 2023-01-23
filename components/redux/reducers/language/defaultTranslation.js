@@ -62,7 +62,8 @@ export default {
     TR_GAME_WON: 'TR_GAME_WON',
     TR_GAME_LOSE: 'TR_GAME_LOSE',
 
-    TR_DAILY_GIFT: 'TR_DAILY_GIFT',
+    TR_DAILY_TITLE: 'TR_DAILY_TITLE',
+    TR_DAILY_DESC: 'TR_DAILY_DESC',
     TR_DAY_1: 'TR_DAY_1',
     TR_DAY_2: 'TR_DAY_2',
     TR_DAY_3: 'TR_DAY_3',

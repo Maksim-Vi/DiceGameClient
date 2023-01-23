@@ -10,6 +10,8 @@ import {setSevenDaysGiftPopup} from "../../../../redux/reducers/popups/PopupsRed
 import {connect, useDispatch} from "react-redux";
 import {selectSevenDaysGifts} from "../../../../redux/reducers/gifts/GiftsReducer";
 import NextRewardTimer from "./NextRewardTimer";
+import {store} from "../../../../redux/redux-store";
+import {selectTranslation} from "../../../../redux/reducers/language/LanguageReducer";
 
 const SevenDaysGift = (props) => {
 
@@ -27,18 +29,19 @@ const SevenDaysGift = (props) => {
             <ButtonBack leaveGame={leaveGift} colorIcon={'#fefefe'}/>
             <SevenDaysContainer>
                 <TitleContainer>
-                    <SevenDaysTitle setShadow={true} title blod center>Daily Rewards</SevenDaysTitle>
+                    <SevenDaysTitle setShadow={true} title blod center>{props.dailyTitle}</SevenDaysTitle>
                 </TitleContainer>
 
-                <SevenDaysDesc setShadow={true} madium blod center>get more reward after:</SevenDaysDesc>
+                <SevenDaysDesc setShadow={true} madium blod center>{props.dailyDesc}</SevenDaysDesc>
                 <NextRewardTimer />
 
                 <CardsContainer>
                     {
                         props.giftData.map((item,index) => {
                             const giftLocalData = sevenDaysInfo[index]
+                            const getTitle = selectTranslation(store.getState(), giftLocalData.title)
                             return (
-                                <DaysCard key={item.id} title={giftLocalData.title} giftItem={item}>
+                                <DaysCard key={item.id} title={getTitle} giftItem={item} typeReward={giftLocalData.typeReward}>
                                     <ImageGift source={giftLocalData.icon}/>
                                     <Text setShadow={true} large blod center>{item.rewardQuantity}</Text>
                                 </DaysCard>
@@ -91,7 +94,9 @@ const ImageGift = styled.Image`
 `
 
 const mapStateToProps = (state) => ({
-    giftData: selectSevenDaysGifts(state)
+    giftData: selectSevenDaysGifts(state),
+    dailyTitle: selectTranslation(state,'TR_DAILY_TITLE'),
+    dailyDesc: selectTranslation(state,'TR_DAILY_DESC'),
 });
 
 export default connect(mapStateToProps)(SevenDaysGift);

@@ -34,11 +34,11 @@ const Statistic = (props) => {
                 </Block>
                 <Block>
                     <Text numberOfLines={1} blod madium color={'black'} center>{props.gameWon}: </Text>
-                    <Text numberOfLines={1} blod large color={'black'}>{statistics.opponent.games || 0}</Text>
+                    <Text numberOfLines={1} blod large color={'black'}>{statistics.opponent.won || 0}</Text>
                 </Block>
                 <Block>
                     <Text numberOfLines={1} blod madium color={'black'} center>{props.gameLose}: </Text>
-                    <Text numberOfLines={1} blod large color={'black'}>{statistics.opponent.games || 0}</Text>
+                    <Text numberOfLines={1} blod large color={'black'}>{statistics.opponent.lost || 0}</Text>
                 </Block>
             </UsersTab>
         </ProfileStatistic>

@@ -5,6 +5,7 @@ import BlackBgCard from "../../../../common/BackgroundWrapper/BlackBGCard";
 import {Animated, Easing} from "react-native";
 import {setTimingAnimated} from "../../../../utils/Animation";
 import coinsAnim from '../../../../../assets/animation/lottieAnim/coins.json'
+import diamondsAnim from '../../../../../assets/animation/lottieAnim/diamond-evaporate.json'
 import CalendarView from "./CalendarView";
 import C_CLAIM_SEVEN_DAYS_GIFTS from "../../../../protocol/messages/clients/gifts/C_CLAIM_SEVEN_DAYS_GIFTS";
 import AnimatedLottieView from "lottie-react-native";
@@ -68,7 +69,15 @@ const DaysCard = (props) => {
             {props.children}
 
             {isClaimed && <CalendarView/>}
-            {isAnim && <AnimatedLottieView loop={false} autoPlay source={coinsAnim} style={{position: 'absolute', width: 300, height: 300}}/>}
+            {isAnim &&
+                <AnimatedLottieView loop={false}
+                                    autoPlay
+                                    source={props.typeReward === 'coins' ? coinsAnim:  diamondsAnim}
+                                    style={props.typeReward === 'coins'
+                                        ? {position: 'absolute', width: 300, height: 300}
+                                        : {position: 'absolute', bottom: 0, width: 500, height: 500}
+                }/>
+            }
             {isDisabled && <BlackBgCard/>}
         </DaysCardContainer>
     )

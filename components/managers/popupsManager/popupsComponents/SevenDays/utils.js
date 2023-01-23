@@ -10,30 +10,37 @@ export const sevenDaysInfo = [
     {
         id: 1,
         title: 'TR_DAY_1',
-        icon: coins1
+        icon: coins1,
+        typeReward: 'coins'
     }, {
         id: 2,
         title: 'TR_DAY_2',
-        icon: coins2
+        icon: coins2,
+        typeReward: 'coins'
     }, {
         id: 3,
         title: 'TR_DAY_3',
-        icon: coins3
+        icon: coins3,
+        typeReward: 'coins'
     }, {
         id: 4,
         title: 'TR_DAY_4',
-        icon: diamond4
+        icon: diamond4,
+        typeReward: 'diamond'
     }, {
         id: 5,
         title: 'TR_DAY_5',
-        icon: coins5
+        icon: coins5,
+        typeReward: 'coins'
     }, {
         id: 6,
         title: 'TR_DAY_6',
-        icon: coins6
+        icon: coins6,
+        typeReward: 'coins'
     },{
         id: 7,
         title: 'TR_DAY_7',
-        icon: diamond7
+        icon: diamond7,
+        typeReward: 'diamond'
     },
 ]
