@@ -62,31 +62,19 @@ const Dice = (props) => {
 
 const DiceImage =  styled(Animated.Image)`
   ${props=>{
-    if(props.width < 350){
+    if(props.width < 380){
       return 'width: 50px;'
     } else {
-      return 'width: 70px; '
+      return 'width: 60px; '
     }
   }}
   ${props=>{
-    if(props.width < 350){
+    if(props.width < 380){
       return 'height: 50px;'
     } else {
-      return 'height: 70px;'
+      return 'height: 60px;'
     }
   }}
 `
 
 export default Dice
-
-// display: ${props=>{
-//     if(Platform.OS === 'ios') {
-//       if (props.isShow) {
-//         return 'block;'
-//       } else {
-//   return 'none;'
-// }
-// } else {
-//   return 'block;'
-// }
-// }};

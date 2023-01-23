@@ -31,7 +31,9 @@ const OpponentFrame = () => {
     const loadOpponent = () =>{
         let index = 0
         animTimer = setInterval(() => {
-            setAnimData({...animData, src: animData.arrDices[index]})
+            if(animData.arrDices[index]){
+                setAnimData({...animData, src: animData.arrDices[index]})
+            }
             index++
 
             if(index > animData.arrDices.length) {
@@ -66,7 +68,7 @@ const OpponentFrame = () => {
                 }
             ]
         }}>
-            <DiceImg source={animData.src} resizeMode={ 'stretch'} />
+            <DiceImg source={animData.src ? animData.src : ''} resizeMode={ 'stretch'} />
         </OpponentContainer>
     );
 };

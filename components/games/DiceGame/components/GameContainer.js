@@ -6,7 +6,7 @@ import Dice from './Dice/Dice'
 import GameModel from './GameModel/GameModel'
 import ScoreBoardOpponent from './ScoreBoardsOpponent/ScoreBoardOpponent'
 import ScoreBoardUser from './ScoreBoardsUser/ScoreBoardUser'
-import {Animated, Easing, NativeModules, Platform} from "react-native";
+import {Animated, Dimensions, Easing, NativeModules, Platform, useWindowDimensions} from "react-native";
 import {setTimingAnimated} from "../../../utils/Animation";
 import {selectTranslation} from "../../../redux/reducers/language/LanguageReducer";
 import defaultTranslation from "../../../redux/reducers/language/defaultTranslation";
@@ -31,6 +31,8 @@ class GameContainer extends React.Component {
                 opponentWinPoints: null
             }
         }
+
+        this.dimensions = Dimensions.get('window')
 
         this.gameModel = null
         this.StartGameAnimatedValue = new Animated.Value(0)
@@ -147,7 +149,7 @@ class GameContainer extends React.Component {
         const {boardData, winPointsData, opponent} = this.state
         return (
             <Game>
-                <GameFrame>
+                <GameFrame width={this.dimensions.width} height={this.dimensions.height}>
                     <GameBG style={{borderBottomWidth: 5, borderTopWidth: 5}}>
                         <ScoreBoardOpponent board={boardData ? boardData.opponentBoard : null}
                                             winPoints={winPointsData ? winPointsData.opponentWinPoints : null}
@@ -189,16 +191,13 @@ class GameContainer extends React.Component {
 
                     </UsersInfoContainer>
                 </GameFrame>
-
-                <ButtonContainer>
-                    {this.state.showThrowBtn &&
-                        <ThrowButton onPress={this.hendlerThrowGame}
+                {this.state.showThrowBtn &&
+                    <ButtonContainer onPress={this.hendlerThrowGame}
                                      activeOpacity={this.props.isYouMove ? 1 : 0.6}
                                      disabled={!this.props.isYouMove}>
-                            <Text large heavy color={'#fff'}>{this.props.throwText}</Text>
-                        </ThrowButton>
-                    }
-                </ButtonContainer>
+                        <Text large heavy color={this.props.isYouMove ? '#07AB6396' : '#fff'}>{this.props.throwText}</Text>
+                    </ButtonContainer>
+                }
 
                 {this.state.showStartGameText &&
                     <StartGameTextContainer style={{
@@ -241,14 +240,14 @@ const GameFrame = styled.View`
   padding: 10px;
   background: rgba(1, 1, 70, 0.82);
   width: 75%;
-  height: 70%;
-  margin: 50px 10px;
+  height: 75%;
+  margin: 10px;
   border-radius: 20px;
 `
 const GameBG = styled.View`
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   width: 100%;
   height: 100%;
   background-color: rgba(176, 176, 176, 0.75);
@@ -260,7 +259,7 @@ const UsersInfoContainer = styled.View`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 60%;
+  height: 55%;
   margin-left: 20px;
 `
 
@@ -280,6 +279,8 @@ const User = styled.View`
 `
 
 const SpaceThrow = styled.View`
+  flex: 0.15;
+  margin: 10px 0 15px 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -290,31 +291,17 @@ const SpaceThrow = styled.View`
   border-radius: 20px;
 `
 
-const ButtonContainer = styled.View`
+const ButtonContainer = styled.TouchableOpacity`
+  position: absolute;
+  bottom: 0;
   display: flex;
   align-items: center;
   justify-content: center;
+  opacity: ${(props)=> props.activeOpacity ? props.activeOpacity : 0.1};
   flex: 0.3;
   width: 100%;
-  margin-top: 30px;
-`
-
-const ThrowButton = styled.TouchableOpacity`
-  border-radius: 10px;
-  border: 1px solid #000;
-  padding: 10px 50px;
-
-  ${(props) => {
-    if (props.disabled) {
-      return `
-                background-color: gray;
-            `
-    } else {
-      return `
-                background-color: green;
-          `
-    }
-  }}
+  height: 12%;
+  margin-top: 10px;
 `
 
 const StartGameTextContainer = styled(Animated.View)`

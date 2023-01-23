@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react'
 import styled from 'styled-components'
-import {Animated, Dimensions, Easing} from "react-native";
+import {Animated, Dimensions, Easing, Image} from "react-native";
 import imagesGameSquares from "../../../../../assets/dynamicLoadGameSquares";
 import imagesGameDices from "../../../../../assets/dynamicLoadGameDices";
 import animOne from "../../../../../assets/animation/anim-light-one.png";
@@ -9,7 +9,7 @@ import {setTimingAnimated} from '../../../../utils/Animation';
 
 const BoardItem = (props) => {
 
-    const width = Dimensions.get('window').width;
+    const {width} = Dimensions.get('window');
 
     const showPlace = React.useRef(new Animated.Value(0))
     const spinValue = React.useRef(new Animated.Value(0))
@@ -41,7 +41,9 @@ const BoardItem = (props) => {
     }
 
     const getSquare = () => {
-        return imagesGameSquares[props.activeItems ? props.activeItems.square : 13]
+        const square = imagesGameSquares[props.activeItems ? props.activeItems.square : 13]
+
+        return square ? square : ''
     }
 
     const getDiceNumber = () => {
@@ -51,7 +53,7 @@ const BoardItem = (props) => {
             diceImg = imagesGameDices[props.activeItems ? props.activeItems.dice : 14][+props.item]
         }
 
-        return diceImg
+        return diceImg ? diceImg : ''
     }
 
     const getSelectedSquares = () => {
@@ -66,8 +68,9 @@ const BoardItem = (props) => {
                 }
 
                 stopAnimation()
-                return null
+                return ''
             }
+            return ''
         }
 
         stopAnimation()
@@ -134,22 +137,25 @@ const BoardItem = (props) => {
             ]
         }}>
             <ItemContainer {...props}
-                           width={width}
                            onPress={hendlerClick}
                            enabled={true}
                            activeOpacity={.8}>
-                <SquaresImage source={getSquare()} resizeMode={'stretch'}/>
+                {getSquare() !== '' &&
+                    <SquaresImage width={width}
+                               source={getSquare()}
+                               resizeMode={'stretch'}/>
+                }
                 {getDiceNumber() !== "" &&
                     <DiceImage width={width}
-                               style={{
-                                   transform: [{scale: scaleData}]
-                               }}
-                               source={getDiceNumber()}/>
+                               style={{transform: [{scale: scaleData}]}}
+                               source={getDiceNumber()}
+                               resizeMode={'stretch'}/>
                 }
-                <SquaresAnim style={{
-                    opacity: opacityData,
-                    transform: [{rotate: rotateData}]
-                }} source={getSelectedSquares()} resizeMode={'stretch'}/>
+                {getSelectedSquares() !== '' &&
+                    <SquaresAnim style={{opacity: opacityData, transform: [{rotate: rotateData}]}}
+                              width={width} source={getSelectedSquares()}
+                              resizeMode={'stretch'}/>
+                }
             </ItemContainer>
         </AnimConatiner>
 
@@ -158,13 +164,12 @@ const BoardItem = (props) => {
 
 const AnimConatiner = styled(Animated.View)`
   position: relative;
-  flex-grow: 1;
-  width: 25%;
+  width: 33%;
   height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 5px;
+  padding: 5px;
 `
 const ItemContainer = styled.TouchableOpacity`
   display: flex;
@@ -173,8 +178,24 @@ const ItemContainer = styled.TouchableOpacity`
 `
 
 const SquaresImage = styled.Image`
-  width: 65px;
-  height: 65px;
+  ${(props)=> {
+    if(props.width > 420){
+      return `
+        width: 65px;
+        height: 65px
+      `;
+    } else if(props.width > 380 && props.width < 420){
+      return `
+        width: 55px;
+        height: 55px
+      `;
+    } else if(props.width < 380){
+      return `
+        width: 45px;
+        height: 45px
+      `;
+    }
+  }};
   align-items: center;
   justify-content: center;
 `
@@ -184,8 +205,24 @@ const SquaresAnim = styled(Animated.Image)`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 80px;
-  height: 80px;
+  ${(props)=> {
+    if(props.width > 420){
+      return `
+        width: ${65 * 1.5}px;
+        height: ${65 * 1.5}px;
+      `;
+    } else if(props.width > 380 && props.width < 420){
+      return `
+        width: ${55 * 1.5}px;
+        height: ${55 * 1.5}px;
+      `;
+    } else if(props.width < 380){
+      return `
+        width: ${45 * 1.5}px;
+        height: ${45 * 1.5}px;
+      `;
+    }
+  }};
   margin: auto;
 `
 
@@ -195,8 +232,24 @@ const DiceImage = styled(Animated.Image)`
   align-items: center;
   justify-content: center;
   flex-grow: 1;
-  width: 45px;
-  height: 45px;
+  ${(props)=> {
+    if(props.width > 420){
+      return `
+        width: ${65 / 1.5}px
+        height: ${65 / 1.5}px
+      `;
+    }  else if(props.width > 380 && props.width < 420){
+      return `
+        width: ${55 / 1.5}px;
+        height: ${55 / 1.5}px;
+      `;
+    } else if(props.width < 380){
+      return `
+        width: ${45 / 1.5}px;
+        height: ${45 / 1.5}px;
+      `;
+    }
+  }};
   z-index: 1;
 `
 

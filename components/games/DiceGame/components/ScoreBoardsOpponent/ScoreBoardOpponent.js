@@ -70,46 +70,33 @@ const ScoreBoardOpponent = (props) => {
     )
 }
 const ScoreBoardOpponentContainer = styled.View`
-  
+  flex: 0.5;
+  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `
 
 const ScoresContainer = styled.View`
   display: flex;
+  align-content: center;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
   flex-direction: row;
-  ${props => {
-    if (props.width < 400) {
-      return 'width: 70%'
-    } else {
-      return 'width: 70%'
-    }
-  }}
+  width: 100%;
+  height: 90%;
 `
 
 const WinPoints = styled.View`
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
   text-align: center;
   flex-direction: row;
-  ${props => {
-    if (props.width < 400) {
-      return 'width: 70%'
-    } else {
-      return 'width: 70%'
-    }
-  }}
+  width: 100%;
 `
-const Name = styled(Text)`
-  margin-top: 10px;
-`
-const CountScores = styled(Text)`
-  position: absolute;
-  right: -22px;
-  bottom: 0;
-`
+
 const Column = styled(TextWithoutShadow)`
   width: 33%;
   height: 20px;

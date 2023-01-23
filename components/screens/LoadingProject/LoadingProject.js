@@ -81,7 +81,6 @@ const LoadingProject = () => {
 
 	return (
 		<BackgroundWrapper gackground={bag}>
-			<ButtonBack goMainPage={true}/>
 			<LoadingContainer>
 				<Text title heavy color={'#fff'} center>Knocky Dice</Text>
 				<View style={styles.container}>

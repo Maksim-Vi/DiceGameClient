@@ -33,14 +33,17 @@ const MainScreen = () => {
     return (
             <BackgroundWrapper>
                 <StatusBar hidden={true} style="light"/>
-                <TopMain/>
+                <MainFrame>
+                    <TopMain/>
 
-                <MainContainer>
-                    <GameWithBot index={0} handlerPlayGame={handlerPlayGame}/>
-                    <GameWithOpponent index={1} handlerPlayGame={handlerPlayGame}/>
-                    <GameWithOpponentByTime index={2} handlerPlayGame={handlerPlayGame}/>
-                </MainContainer>
-                <OnlineUsers />
+                    <MainContainer>
+                        <GameWithBot index={0} handlerPlayGame={handlerPlayGame}/>
+                        <GameWithOpponent index={1} handlerPlayGame={handlerPlayGame}/>
+                        <GameWithOpponentByTime index={2} handlerPlayGame={handlerPlayGame}/>
+                    </MainContainer>
+                    <OnlineUsers />
+                </MainFrame>
+
 
                 {myUser && (myUser.admin === 'true' || myUser.admin === true) && <Test onPress={() => {
                     dispatch(setTestBtnsPopup({visible: true}))
@@ -81,22 +84,22 @@ const Test = styled.TouchableOpacity`
   border: 2px solid #ed9f39;
   margin-bottom: 100px;
 `
+const MainFrame = styled.View`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 65%;
+`
+
 const MainContainer = styled.View`
+  display: flex;
   align-content: center;
   align-items: center;
   justify-content: space-around;
   flex-direction: row;
   width: 100%;
-  margin-top: 50%;
-`
-
-const SpriteContainer = styled.View`
-  position: absolute;
-  top: 20%;
-  width: 100%;
-  height: 50%;
-  z-index: 1;
-  background: rgba(255, 127, 80, 0.37);
+  //margin-top: 50%;
 `
 
 export default MainScreen

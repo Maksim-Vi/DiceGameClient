@@ -6,13 +6,14 @@ import C_ABORDED_GAME from '../../protocol/messages/clients/games/C_ABORDED_GAME
 import { store } from '../../redux/redux-store'
 import { selectCurrentGameId } from '../../redux/reducers/game/GameReducer'
 import {Ionicons} from '@expo/vector-icons'
-import {transitionState} from "../../utils/utils";
 
 const GameScreen = () => {
 
   const leaveGame = () =>{
-    const leaveGameId = selectCurrentGameId(store.getState())
-    new C_ABORDED_GAME(leaveGameId)
+        const leaveGameId = selectCurrentGameId(store.getState())
+        if(leaveGameId){
+            new C_ABORDED_GAME(leaveGameId)
+        }
   }
 
   return (

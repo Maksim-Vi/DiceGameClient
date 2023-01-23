@@ -74,10 +74,11 @@ const ChatInputContainer = styled.View`
     background-color: #0b61abb0;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
+    margin-bottom: 20px;
 `
 const ChatField = styled.TextInput`
     width: 70%;
-    height: 50px;
+    height: 80%;
     margin: 0 5px;
     padding: 5px 20px;
     color: #000;

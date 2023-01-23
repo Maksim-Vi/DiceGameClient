@@ -75,22 +75,22 @@ const ScoreBoardUser = (props) => {
 }
 
 const ScoreBoardUserContainer = styled.View`
-  
+  flex: 0.5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
 `
 
 const ScoresContainer = styled.View`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    flex-direction: row;
-    ${props=>{
-        if(props.width < 400){
-            return 'width: 70%'
-        } else {
-          return 'width: 70%'
-        }
-    }}
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  flex-direction: row;
+  width: 100%;
+  height: 90%;
 `
 const WinPoints = styled.View`
   display: flex;
@@ -98,13 +98,7 @@ const WinPoints = styled.View`
   justify-content: space-around;
   text-align: center;
   flex-direction: row;
-  ${props=>{
-    if(props.width < 400){
-      return 'width: 70%'
-    } else {
-      return 'width: 70%'
-    }
-  }}
+  width: 100%;
 `
 
 const Column = styled(TextWithoutShadow)`

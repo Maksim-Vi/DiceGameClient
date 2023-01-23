@@ -37,6 +37,7 @@ const EmojiContainer = styled.View`
   height: 100%;
   border-radius: 10px;
   background-color: #0b61abb0;
+  margin-bottom: 10px;
 `
 
 export default EmojisPanel;
