@@ -12,7 +12,7 @@ import {
   selectThrowData
 } from '../../redux/reducers/game/GameReducer'
 import {selectActiveItems, selectMyUser} from '../../redux/reducers/players/PlayersReducer'
-import GameContainer from './components/GameContainer'
+import GameContainer from "./components/GameContainer";
 
 const GameWrapper = (props) => {
   

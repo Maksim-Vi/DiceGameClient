@@ -80,9 +80,7 @@ const BoardItem = (props) => {
             duration: props.delay + 100,
             easing: Easing.linear,
             useNativeDriver: true,
-        }).start(()=>{
-            props.setViewAvatarContainer(true)
-        });
+        }).start();
     }
 
     const getAnim = () => {

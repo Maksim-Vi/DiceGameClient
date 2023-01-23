@@ -1,17 +1,14 @@
-import React, {useState} from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import Text from '../../../../common/Text/Text'
 import BoardItem from '../BoardItem/BoardItem'
-import {Dimensions, NativeModules, Platform} from "react-native";
-import BoardOpponentInfo from './BoardOpponentInfo';
+import {Dimensions} from "react-native";
 import TextWithoutShadow from "../../../../common/Text/TextWithoutShadow";
-import {getIosModel} from "../../../../utils/utils";
 
 const OppIndexView = [6, 7, 8, 3, 4, 5, 0, 1, 2]
 
 const ScoreBoardOpponent = (props) => {
 
-    const [viewAvatarContainer, setViewAvatarContainer] = useState(false)
     const width = Dimensions.get('window').width;
 
     const DrowBoard = () => {
@@ -42,7 +39,6 @@ const ScoreBoardOpponent = (props) => {
             BoardsItem.push(<BoardItem key={index}
                                        item={props.board[index]}
                                        activeItems={props.activeItems}
-                                       setViewAvatarContainer={setViewAvatarContainer}
                                        delay={index * 100}
                                        winPoints={winPoints}/>)
         })
@@ -70,25 +66,11 @@ const ScoreBoardOpponent = (props) => {
                 <Column center>{getColumnNumber('column3')}</Column>
             </WinPoints>
 
-            {viewAvatarContainer &&
-                <BoardOpponentInfo opponent={props.opponent}
-                                   countScores={props.countScores} />
-            }
         </ScoreBoardOpponentContainer>
     )
 }
-
 const ScoreBoardOpponentContainer = styled.View`
-  position: relative;
-  align-items: center;
-  text-align: center;
-  justify-content: center;
-  ${() => {
-    const isIos = getIosModel()
-    if (Platform.OS === 'ios' && isIos >= 10) {
-      return 'margin-top: 50px;'
-    }
-  }}
+  
 `
 
 const ScoresContainer = styled.View`

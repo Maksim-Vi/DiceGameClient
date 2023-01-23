@@ -6,6 +6,7 @@ import C_ABORDED_GAME from '../../protocol/messages/clients/games/C_ABORDED_GAME
 import { store } from '../../redux/redux-store'
 import { selectCurrentGameId } from '../../redux/reducers/game/GameReducer'
 import {Ionicons} from '@expo/vector-icons'
+import {transitionState} from "../../utils/utils";
 
 const GameScreen = () => {
 

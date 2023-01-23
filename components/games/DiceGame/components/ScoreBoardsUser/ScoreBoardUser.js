@@ -1,15 +1,12 @@
-import React, {useState} from 'react'
+import React from 'react'
 import styled from 'styled-components'
-import Text from '../../../../common/Text/Text'
 import C_SCORE from '../../../../protocol/messages/clients/games/C_SCORE'
 import BoardItem from '../BoardItem/BoardItem'
-import {Animated, Dimensions, Easing} from "react-native";
-import BoardUserInfo from './BoardUserInfo'
+import {Dimensions} from "react-native";
 import TextWithoutShadow from "../../../../common/Text/TextWithoutShadow";
 
 const ScoreBoardUser = (props) => {
 
-    const [viewAvatarContainer, setViewAvatarContainer] = useState(false)
     const width = Dimensions.get('window').width;
    
     const selectBoardItem = (index) =>{
@@ -48,7 +45,6 @@ const ScoreBoardUser = (props) => {
                                      activeItems={props.activeItems}
                                      index={i}
                                      delay={i * 100}
-                                     setViewAvatarContainer={setViewAvatarContainer}
                                      selectBoardItem={selectBoardItem}/>)
         })
   
@@ -74,22 +70,14 @@ const ScoreBoardUser = (props) => {
             <ScoresContainer width={width}>
                 {DrowBoard()}
             </ScoresContainer>
-
-            {viewAvatarContainer &&
-                <BoardUserInfo user={props.user}
-                               setThrowBtn={props.setThrowBtn}
-                               countScores={props.countScores}/>
-            }
         </ScoreBoardUserContainer>
     )
 }
 
 const ScoreBoardUserContainer = styled.View`
-    position: relative;
-    align-items: center;
-    text-align: center;
-    justify-content: center;
+  
 `
+
 const ScoresContainer = styled.View`
     display: flex;
     align-items: center;
@@ -118,6 +106,7 @@ const WinPoints = styled.View`
     }
   }}
 `
+
 const Column = styled(TextWithoutShadow)`
   width: 33%;
   height: 20px;
