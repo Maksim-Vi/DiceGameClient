@@ -5,6 +5,7 @@ import { hendleMessage } from "./MessageManager";
 import Constants from "expo-constants";
 import {transitionState} from "../utils/utils";
 import {getUrl} from "./API/urlApi";
+import {setInfoPopup} from "../redux/reducers/popups/PopupsReducer";
 
 export let websocket;
 
@@ -76,7 +77,7 @@ async function closeWSHandler(event) {
 
         //store.logout()
         transitionState('AuthScreen')
-        alert('oops, Sorry! game is rebooted please try to connect later!')
+        store.dispatch(setInfoPopup({visible: true, data: {text: 'Oops, Sorry! game is rebooted please try to connect later!'}}))
     }
 }
 

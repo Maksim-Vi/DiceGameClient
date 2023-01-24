@@ -3,13 +3,15 @@ import ButtonWithImage from "../../../Buttons/ButtonWithImage";
 import settings from "../../../../../assets/topPanel/friends.png";
 import {useNavigation} from "@react-navigation/native";
 import {Alert} from "react-native";
+import {setInfoPopup} from "../../../../redux/reducers/popups/PopupsReducer";
+import {useDispatch} from "react-redux";
 
 const FriendsPanel = (props) => {
 
-    //const navigaion = useNavigation()
+    const dispatch = useDispatch()
 
     const openFriendsPopup = () => {
-        Alert.alert('Coming Soon!', 'Friends will be available after some time. Have a good game!')
+        dispatch(setInfoPopup({visible: true, data: {text: 'Friends will be available after some time. Have a good game!'}}))
         //navigaion.navigate('FriendsScreen')
     }
 

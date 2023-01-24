@@ -3,6 +3,7 @@ import { store } from "../../../../redux/redux-store"
 import { sendMessageWS } from "../../../websocet"
 import {selectMyUser} from "../../../../redux/reducers/players/PlayersReducer";
 import {selectCurrentGameId} from "../../../../redux/reducers/game/GameReducer";
+import {setInfoPopup} from "../../../../redux/reducers/popups/PopupsReducer";
 
 export default class C_PAY_BY_GAME {
     constructor(gameId){
@@ -29,7 +30,7 @@ export default class C_PAY_BY_GAME {
         if(this.flash > 0){
             sendMessageWS({ name: this.MESSAG_ENAME, clientIdWs: this.clientIdWebsocket, gameId: this.gameId, username: this.username })
         } else {
-            alert('Ups, you used all your flash! please by or wait a cuple of time.')
+            store.dispatch(setInfoPopup({visible: true, data: {text: 'Ups, you used all your flash! please wait a couple of times.'}}))
         }
     }
 

@@ -12,6 +12,8 @@ import S_LANGUAGE_INFO from "./messages/server/S_LANGUAGE_INFO";
 import S_USERS_ONLINE from "./messages/server/S_USERS_ONLINE";
 import S_SEVEN_DAYS_GIFTS from "./messages/server/gifts/S_SEVEN_DAYS_GIFTS";
 import {giftsHandlerMessage} from "./GiftsMessageManager";
+import S_RECONNECT_FAILED from "./messages/server/S_RECONNECT_FAILED";
+import S_RECONNECT_SUCCESS from "./messages/server/S_RECONNECT_SUCCESS";
 
 export const hendleMessage = (data) =>{
     switch (data.name) {
@@ -30,6 +32,14 @@ export const hendleMessage = (data) =>{
         }
         case 'S_LOGIN_FAILED':{
             new S_LOGIN_FAILED(data)
+            break;
+        }
+        case 'S_RECONNECT_SUCCESS':{
+            new S_RECONNECT_SUCCESS(data.message)
+            break;
+        }
+        case 'S_RECONNECT_FAILED':{
+            new S_RECONNECT_FAILED(data.error)
             break;
         }
         case 'S_CREATE_ACCOUNT_SUCCESS':{

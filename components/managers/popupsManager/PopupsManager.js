@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import styled from 'styled-components'
 import {selectMyUser} from '../../redux/reducers/players/PlayersReducer'
 import {
-    selectAvatarPopup,
+    selectAvatarPopup, selectInfoPopup,
     selectLevelUpPopup,
     selectSettingsPopup, selectSevenDaysGiftPopup,
     selectTestBtnsPopup
@@ -15,6 +15,7 @@ import SettingsMenuPopups from "./popupsComponents/SettingsMenuPopups";
 import LevelUpPopup from "./popupsComponents/LevelUpPopups";
 import {selectActiveTabApp} from "../../redux/reducers/Websocket/WebsocketReducer";
 import SevenDaysGift from "./popupsComponents/SevenDays/SevenDaysGift";
+import InfoPopups from "./popupsComponents/InfoPopups";
 
 const PopupsManager = (props) => {
     return (
@@ -25,6 +26,7 @@ const PopupsManager = (props) => {
             {props.settingsPopup.visible && <SettingsMenuPopups/>}
             {props.lvlUpPopup.visible && (props.activeTabApp === 'App' || props.activeTabApp === 'MainScreen') && <LevelUpPopup/>}
             {props.sevenDaysPopup.visible && <SevenDaysGift />}
+            {props.infoPopup.visible && <InfoPopups />}
 
 
             {props.testBtnsPopup.visible && <TestBtnsPopups/>}
@@ -44,6 +46,7 @@ const mapStateToProps = (state) => ({
     settingsPopup: selectSettingsPopup(state),
     lvlUpPopup: selectLevelUpPopup(state),
     sevenDaysPopup: selectSevenDaysGiftPopup(state),
+    infoPopup: selectInfoPopup(state),
     testBtnsPopup: selectTestBtnsPopup(state),
     user: selectMyUser(state),
     activeTabApp: selectActiveTabApp(state),

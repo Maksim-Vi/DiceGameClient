@@ -11,8 +11,12 @@ import Divider from "../../common/Divider/Divider";
 import {useForm} from 'react-hook-form'
 import bag from '../../../assets/bg/main_bg.jpg'
 import GoogleAuth from "./Google/GoogleAuth";
+import {setInfoPopup} from "../../redux/reducers/popups/PopupsReducer";
+import {useDispatch} from "react-redux";
 
 const AuthScreen = () => {
+
+    const dispatch = useDispatch()
     const navigation = useNavigation()
     const [disableBtn, setDisableBtn] = useState(false)
     const {control, handleSubmit, formState: {errors}} = useForm({
@@ -36,7 +40,7 @@ const AuthScreen = () => {
             new C_LOGIN(data.user.username, data.user.password)
         } else {
             setDisableBtn(false)
-            alert(data.message)
+            dispatch(setInfoPopup({visible: true, data: {text: data.message}}))
         }
     }
 

@@ -1,5 +1,6 @@
 import {updateCurrentUserFlash} from "../../../../redux/reducers/players/PlayersReducer";
 import {store} from "../../../../redux/redux-store";
+import {setInfoPopup} from "../../../../redux/reducers/popups/PopupsReducer";
 
 const status = {
     success: 1,
@@ -30,9 +31,10 @@ export default class S_UPDATE_USER_FLASH {
                 store.dispatch(updateCurrentUserFlash(this.flash))
             }
         } else if(this.status === status.dontHaveFlesh){
-            alert('Ops, you dont have flesh')
+            store.dispatch(setInfoPopup({visible: true, data: {text: 'Ops, you dont have flesh'}}))
         } else if(this.status === status.cannotPay){
-            alert('Ops, server cannot get pay for game')
+            store.dispatch(setInfoPopup({visible: true, data: {text: 'Ops, server cannot get pay for game'}}))
+
         }
     }
 

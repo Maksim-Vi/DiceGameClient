@@ -3,11 +3,14 @@ import styled from "styled-components";
 import Text from "../../../../common/Text/Text";
 import ItemWrapper from "../../../Collections/components/common/ItemWrapper";
 import img from '../../../../../assets/shop/chest.png'
+import {setInfoPopup} from "../../../../redux/reducers/popups/PopupsReducer";
+import {useDispatch} from "react-redux";
 
 const DiamondsItem = (props) => {
 
+    const dispatch = useDispatch()
     const clickHendler = () =>{
-        alert('coming soon =)')
+        dispatch(setInfoPopup({visible: true, data: {text: 'Coming Soon =)'}}))
     }
     
     return (

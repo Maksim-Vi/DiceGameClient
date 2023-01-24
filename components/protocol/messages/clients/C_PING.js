@@ -11,8 +11,6 @@ export default class C_PING {
         this.showLog = false
         this.username = ''
 
-        this.showLog = false
-
         this.init()
     }
 

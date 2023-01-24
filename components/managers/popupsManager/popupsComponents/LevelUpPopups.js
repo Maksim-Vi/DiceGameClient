@@ -8,7 +8,6 @@ import ButtonWithText from "../../../common/Buttons/ButtonWithText";
 import {selectTranslation} from "../../../redux/reducers/language/LanguageReducer";
 import defaultTranslation from "../../../redux/reducers/language/defaultTranslation";
 import styled from "styled-components";
-import img from '../../../../assets/common/star.png'
 import {setTimingAnimated} from "../../../utils/Animation";
 import coinsAnim from "../../../../assets/animation/lottieAnim/nextLvl.json";
 import AnimatedLottieView from "lottie-react-native";

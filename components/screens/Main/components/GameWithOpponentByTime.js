@@ -6,6 +6,8 @@ import { useWindowDimensions } from 'react-native';
 import {selectTranslation} from "../../../redux/reducers/language/LanguageReducer";
 import defaultTranslation from "../../../redux/reducers/language/defaultTranslation";
 import {connect} from "react-redux";
+import {store} from "../../../redux/redux-store";
+import {setInfoPopup} from "../../../redux/reducers/popups/PopupsReducer";
 
 const GameWithOpponentByTime = (props) => {
 
@@ -13,7 +15,7 @@ const GameWithOpponentByTime = (props) => {
   const {width,height} = useWindowDimensions()
 
   const handelClick = () =>{
-      alert('coming soon')
+      store.dispatch(setInfoPopup({visible: true, data: {text: 'Coming Soon =)'}}))
       //props.handlerPlayGame(3)
   }
 

@@ -5,9 +5,12 @@ import * as Google from "expo-auth-session/providers/google";
 import {postGoogleLoginOrRegister} from "../../../protocol/API/API";
 import C_LOGIN from "../../../protocol/messages/clients/C_LOGIN";
 import {makeRedirectUri} from "expo-auth-session";
+import {useDispatch} from "react-redux";
+import {setInfoPopup} from "../../../redux/reducers/popups/PopupsReducer";
 
 const GoogleAuth = (props) => {
 
+    const dispatch = useDispatch()
     const [request, response, promptAsync] = Google.useAuthRequest(
         {
             androidClientId: "1099319501210-58fuql0uvef2o44vhla2uscid51enl8v.apps.googleusercontent.com",
@@ -36,7 +39,7 @@ const GoogleAuth = (props) => {
                     navigation.navigate('LoadingProject')
                     new C_LOGIN(googleUserData.user.username,googleUserData.user.password)
                 } else {
-                    alert(data.message)
+                    dispatch(setInfoPopup({visible: true, data: {text: data.message}}))
                 }
             });
         }

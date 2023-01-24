@@ -14,6 +14,7 @@ import { getCollectionDiceImg, getCollectionSquareImg} from "../../../utils/util
 import {selectTranslation} from "../../../redux/reducers/language/LanguageReducer";
 import defaultTranslation from "../../../redux/reducers/language/defaultTranslation";
 import {connect} from "react-redux";
+import {setInfoPopup} from "../../../redux/reducers/popups/PopupsReducer";
 
 const ModalChildrenBuy = (props) => {
 
@@ -100,7 +101,7 @@ const ModalChildrenBuy = (props) => {
             (type === 'diamonds' && userCrystals < price)
         ) {
             props.setModalVisible(false)
-            return alert(`Sorry but you dont have ${type}! play more and then you could buy something =)`)
+            return store.dispatch(setInfoPopup({visible: true, data: {text: `Sorry but you dont have ${type}! play more and then you could buy something =)`}}))
         }
         if(type === 'money'){
             setPaymentBuyRealMoney()

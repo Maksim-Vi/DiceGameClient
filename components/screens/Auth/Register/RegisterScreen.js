@@ -11,11 +11,15 @@ import ButtonImage from "../../../common/Buttons/ButtonImage";
 import showPass from "../../../../assets/loadGame/show.png";
 import hidePass from "../../../../assets/loadGame/hide.png";
 import bag from '../../../../assets/bg/main_bg.jpg'
+import {setInfoPopup} from "../../../redux/reducers/popups/PopupsReducer";
+import {useDispatch} from "react-redux";
 
 const RegisterScreen = () => {
+
     const refEmail = useRef()
     const refPassword = useRef()
 
+    const dispatch = useDispatch()
     const navigation = useNavigation()
     const [showPassword, setShowPassword] = useState(true)
     const [disableBtn, setEnableBtn] = useState(false)
@@ -44,7 +48,7 @@ const RegisterScreen = () => {
             navigation.goBack()
         } else {
             setEnableBtn(false)
-            alert(data.message)
+            dispatch(setInfoPopup({visible: true, data: {text: data.message}}))
         }
     }
 
