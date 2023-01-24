@@ -8,19 +8,91 @@ import { store } from "../../redux/redux-store"
 import { addChatTab, cleanChatTabs } from "../../redux/reducers/chat/ChatReducer"
 import {selectTranslation} from "../../redux/reducers/language/LanguageReducer";
 import defaultTranslation from "../../redux/reducers/language/defaultTranslation";
+import Filter from "leo-profanity";
 
 class ChatManager {
     constructor(){
 
         this.chat = {
             channels: {},
+            filter: null
         }
 
         this.init()
     }
 
     init = () =>{
+        this.chat.filter = Filter
 
+        this.chat.filter.add(this.chat.filter.getDictionary('en'))
+        this.chat.filter.add(this.chat.filter.getDictionary('ru'))
+
+        this.addBlockedDataToFilter()
+    }
+
+    validMessage = (str) => {
+        let isInvalid = false
+        const urlRegex = new RegExp('^(https?:\\/\\/)?'+ // protocol
+            '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
+            '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+            '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
+            '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
+            '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+
+        const phoneRegex = /[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}/im;
+        const emailRegex = /(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/;
+
+        const splitedStr = str.split(' ')
+        if(splitedStr && splitedStr.length > 0){
+            splitedStr.forEach(string=>{
+                if(urlRegex.test(string) || phoneRegex.test(string) || emailRegex.test(string)){
+                    isInvalid = true
+                }
+            })
+        }
+
+        if(isInvalid){
+            this.addBlockMessageToUser('general')
+            return isInvalid
+        }
+
+        return isInvalid
+    }
+
+    addBlockedDataToFilter = () =>{
+        if(this.chat.filter){
+            let newBadWordsRus = [
+                'сука', 'дура', 'гандон', 'пидарас', 'дурак','лох','пидор','бля','блять',
+                'хуй','пизда','вагина','член', 'бздун','бзднуть','бздюх','блудилище',
+                'выпердеть', 'высраться','выссаться', 'говно','гавно', 'говенка','говноед',
+                'говномес', 'говночист', 'говяга', 'говнюк', 'говняный', 'говна пирога',
+                'глиномес', 'изговнять', 'гнида', 'гнидас', 'гнидазавр','гниданидзе','гондон','гондольер',
+                'даун','даунитто','дерьмо','дерьмодемон', 'дерьмище','дрисня','дрист','дристануть','обдристаться',
+                'дерьмак', 'дристун','дрочить','дрочила','суходрочер','дебил','дебилоид','дрочка','драчун','задрот',
+                'дцпшник','елда','елдаклык','елдище','жопа','жопошник','залупа','залупиться','залупинец','засеря',
+                'засранец','засрать','защеканец','изговнять','идиот','изосрать','курва','кретин','кретиноид','курвырь',
+                'лезбуха','лох','минетчица','мокрощелка','мудак','мудень','мудила','мудозвон','мудацкая','мудасраная дерьмопроелдина',
+                'мусор','педрик','пердеж','пердение','пердельник','пердун','пидор','пидорасина','пидорормитна','пидорюга',
+                'педерастер','педобратва','дружки педигрипал','писька','писюн','спидозный пес','ссаная псина','спидораковый',
+                'срать', 'спермер','спермобак','спермодун','срака','сракаборец','сракалюб','срун','сука','сучара',
+                'сучище','титьки','трипер','хер','херня','херовина','хероед','охереть','пошел на хер','хитрожопый','хрен моржовый','шлюха',
+                'шлюшидзе', 'хуйня','ебаный','еблан','ебанько','ебло','уебан','уебок','уёбок','урод','конченый','конченный','лошара'
+            ];
+
+            let newBadWordsUA = [
+               'гній','курва','шалава','шлюха','шмара','стерво','вилупок','їбати','дупа','дупця','дебіл','дурень','кляча','дібіл',
+                'їбаний','ебаний'
+            ];
+
+            this.chat.filter.add(newBadWordsRus)
+            this.chat.filter.add(newBadWordsUA)
+        }
+    }
+
+    filterMessage = (mess) =>{
+        const filteredMessage = this.chat.filter.clean(mess);
+
+        return filteredMessage
     }
 
     connectionToChatRoom = (chatRoom) =>{
@@ -123,6 +195,11 @@ class ChatManager {
             const welcomeChat = selectTranslation(store.getState(),defaultTranslation.TR_WELCOME_IRC)
             this.updateChatChanel(roomChanel, 'info', welcomeChat,new Date(),'info')
         }
+    }
+
+    addBlockMessageToUser = (roomChanel) =>{
+        const mess = 'you use blocked text (url, phone, email)'
+        this.updateChatChanel(roomChanel, 'block', mess, new Date(),'block')
     }
 
     clearAllUnreadMessages = () =>{

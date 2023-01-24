@@ -195,7 +195,7 @@ class GameContainer extends React.Component {
                     <ButtonContainer onPress={this.hendlerThrowGame}
                                      activeOpacity={this.props.isYouMove ? 1 : 0.6}
                                      disabled={!this.props.isYouMove}>
-                        <Text large heavy color={this.props.isYouMove ? '#07AB6396' : '#fff'}>{this.props.throwText}</Text>
+                        <Text large heavy color={this.props.isYouMove ? '#095937' : 'rgba(255,255,255,0.51)'}>{this.props.throwText}</Text>
                     </ButtonContainer>
                 }
 

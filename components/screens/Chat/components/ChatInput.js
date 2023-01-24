@@ -1,5 +1,4 @@
 import React, {memo, useEffect} from 'react'
-import { useState } from 'react';
 import styled from 'styled-components';
 import ButtonImage from '../../../common/Buttons/ButtonImage';
 import send from '../../../../assets/chat/send.png';
@@ -34,7 +33,18 @@ const ChatInput = (props) => {
 
     const sendMessageHandler = () =>{
         if(props.messageData.message && props.messageData.message !== ''){
-            window.chatManager.sendChatMessage(props.username, props.chatChanel, props.messageData.message)
+            let filteredMessage = props.messageData.message
+
+            if(window.chatManager && window.chatManager.chat.filter){
+                filteredMessage = window.chatManager.filterMessage(props.messageData.message);
+            }
+
+            const isInvalid = window.chatManager.validMessage(props.messageData.message)
+            if(isInvalid){
+                return props.setMessageData({openEmoji: props.messageData.openEmoji,addEmojiCount: 0,message: ''})
+            }
+
+            window.chatManager.sendChatMessage(props.username, props.chatChanel, filteredMessage)
             props.setMessageData({openEmoji: props.messageData.openEmoji,addEmojiCount: 0,message: ''})
         }
     }
