@@ -56,7 +56,7 @@ function openWSHandler() {
 
 function errorWSHandler(error) {
     console.log(`[error] ${error.message}`);
-
+    store.dispatch(setClientIdWebsocket(null))
     store.dispatch(setLoaded(false))
 }
 
