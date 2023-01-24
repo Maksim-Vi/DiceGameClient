@@ -6,7 +6,7 @@ import {connect} from "react-redux";
 
 const OnlineUsers = (props) => {
 
-    if(props.usersOnline && (props.usersOnline < 100 || !props.user.admin)) return null
+    if(typeof props.usersOnline === 'number' && (props.usersOnline < 100 || !props.user.admin)) return null
 
     return (
         <OnlineUserContainer>
@@ -23,7 +23,7 @@ const OnlineUsers = (props) => {
 
 const OnlineUserContainer = styled.View`
   position: absolute;
-  bottom: 32%;
+  bottom: -20px;
   width: 100%;
   display: flex;
   align-items: center;
