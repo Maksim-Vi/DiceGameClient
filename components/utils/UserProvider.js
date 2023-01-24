@@ -6,6 +6,7 @@ import {store} from "../redux/redux-store";
 import {setLogout} from "../redux/reducers/login/LoginReducer";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {transitionState} from "./utils";
+import {setClientIdWebsocket} from "../redux/reducers/Websocket/WebsocketReducer";
 
 export const UserContext = createContext({token: '', id: '', username: '', password: '', data: null, auth: false});
 const storageName = 'UserData'
@@ -43,6 +44,7 @@ const UserProvider = ({children}) => {
         setUser({token: '', id: '', username: '', password: '', data: null, auth: false});
         await AsyncStorage.setItem(storageName, '')
         store.dispatch(setLogout())
+        store.dispatch(setClientIdWebsocket(null))
         transitionState('AuthScreen')
     })
 

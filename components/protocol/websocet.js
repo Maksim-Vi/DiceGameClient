@@ -1,5 +1,5 @@
 import { Platform } from "react-native";
-import { setLoaded } from "../redux/reducers/Websocket/WebsocketReducer";
+import {setClientIdWebsocket, setLoaded} from "../redux/reducers/Websocket/WebsocketReducer";
 import { store } from "../redux/redux-store";
 import { hendleMessage } from "./MessageManager";
 import Constants from "expo-constants";
@@ -102,6 +102,7 @@ export const closeWebsocletAfterLeaveGame = () =>{
     if (websocket) {
         reconnecting = true
         tryToReconect = false
+        store.dispatch(setClientIdWebsocket(null))
 
         websocket.close();
     }

@@ -1,10 +1,10 @@
-import { selectMyUser } from "../../../redux/reducers/players/PlayersReducer"
-import { selectClientIdWebsocket } from "../../../redux/reducers/Websocket/WebsocketReducer"
-import { store } from "../../../redux/redux-store"
+import {selectMyUser} from "../../../redux/reducers/players/PlayersReducer"
+import {selectClientIdWebsocket, setClientIdWebsocket} from "../../../redux/reducers/Websocket/WebsocketReducer"
+import {store} from "../../../redux/redux-store"
 import {closeWebsocletAfterLeaveGame, sendMessageWS} from "../../websocet"
 
 export default class C_LEAVE_SOCKET {
-    constructor(){
+    constructor() {
 
         this.MESSAG_ENAME = 'C_LEAVE_SOCKET'
         this.clientIdWebsocket = null
@@ -24,29 +24,35 @@ export default class C_LEAVE_SOCKET {
     }
 
     exec() {
-       sendMessageWS({ name: this.MESSAG_ENAME, clientIdWs: this.clientIdWebsocket, id: this.id, username: this.username })
+        sendMessageWS({
+            name: this.MESSAG_ENAME,
+            clientIdWs: this.clientIdWebsocket,
+            id: this.id,
+            username: this.username
+        })
 
-       window.chatManager.clearAllChanels()
+        window.chatManager.clearAllChanels()
+        store.dispatch(setClientIdWebsocket(null))
 
-       closeWebsocletAfterLeaveGame()
+        closeWebsocletAfterLeaveGame()
     }
 
-    getUserData = () =>{
+    getUserData = () => {
         const myUser = selectMyUser(store.getState())
-        if(myUser){
+        if (myUser) {
             this.id = myUser.id
             this.username = myUser.username
         }
-       
+
     }
 
-    setClientId(){
+    setClientId() {
         this.clientIdWebsocket = selectClientIdWebsocket(store.getState())
     }
 
-	getLogText() {
-        if(this.showLog){
-		    console.log(`${this.MESSAG_ENAME}, name: ${this.username}`);
+    getLogText() {
+        if (this.showLog) {
+            console.log(`${this.MESSAG_ENAME}, name: ${this.username}`);
         }
     }
 
