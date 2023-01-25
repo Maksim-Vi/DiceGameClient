@@ -6,6 +6,7 @@ import TextWithoutShadowStyle from "../../../Text/TextWithoutShadow";
 import {setSevenDaysGiftPopup} from "../../../../redux/reducers/popups/PopupsReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {selectAvailableToClaim} from "../../../../redux/reducers/gifts/GiftsReducer";
+import Sounds, {soundsType} from "../../../../utils/Sounds";
 
 const SevenDaysGiftButton = () =>{
 
@@ -13,6 +14,7 @@ const SevenDaysGiftButton = () =>{
     const availableToClaim = useSelector(selectAvailableToClaim)
 
     const OpenSevenDays = () => {
+        Sounds.loadAndPlayFile(soundsType.click2)
         dispatch(setSevenDaysGiftPopup({visible: true, data: null}))
     }
 

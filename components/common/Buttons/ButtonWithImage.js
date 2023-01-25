@@ -1,11 +1,20 @@
 import React from 'react';
 import Text from "../Text/Text";
 import styled from "styled-components";
+import Sounds, {soundsType} from "../../utils/Sounds";
 
 const ButtonWithImage = (props) => {
+
+    const onClickBtn = () =>{
+        Sounds.loadAndPlayFile(soundsType.click2)
+        if(props.clickHandler){
+            props.clickHandler()
+        }
+    }
+
     return (
         <CollectBtn {...props} 
-                    onPress={props.clickHandler}
+                    onPress={onClickBtn}
                     style={{ borderBottomWidth: 3 }}
                     activeOpacity={0.9}>
             <PriceImage {...props} source={props.image}/>

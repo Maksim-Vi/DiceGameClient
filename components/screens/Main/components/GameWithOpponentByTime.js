@@ -8,6 +8,7 @@ import defaultTranslation from "../../../redux/reducers/language/defaultTranslat
 import {connect} from "react-redux";
 import {store} from "../../../redux/redux-store";
 import {setInfoPopup} from "../../../redux/reducers/popups/PopupsReducer";
+import Sounds, {soundsType} from "../../../utils/Sounds";
 
 const GameWithOpponentByTime = (props) => {
 
@@ -15,6 +16,7 @@ const GameWithOpponentByTime = (props) => {
   const {width,height} = useWindowDimensions()
 
   const handelClick = () =>{
+      Sounds.loadAndPlayFile(soundsType.click2)
       store.dispatch(setInfoPopup({visible: true, data: {text: 'Coming Soon =)'}}))
       //props.handlerPlayGame(3)
   }

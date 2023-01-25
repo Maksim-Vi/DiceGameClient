@@ -6,12 +6,14 @@ import { useWindowDimensions } from 'react-native';
 import {selectTranslation} from "../../../redux/reducers/language/LanguageReducer";
 import defaultTranslation from "../../../redux/reducers/language/defaultTranslation";
 import {connect} from "react-redux";
+import Sounds, {soundsType} from "../../../utils/Sounds";
 
 const GameWithOpponent = (props) => {
 
   const {width,height} = useWindowDimensions()
 
   const handelClick = () =>{
+      Sounds.loadAndPlayFile(soundsType.click2)
       props.handlerPlayGame(2)
   }
 

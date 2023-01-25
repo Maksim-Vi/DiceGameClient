@@ -4,12 +4,14 @@ import styled from 'styled-components';
 import {Ionicons} from '@expo/vector-icons'
 import {store} from "../../../redux/redux-store";
 import {setActiveTabApp} from "../../../redux/reducers/Websocket/WebsocketReducer";
+import Sounds, {soundsType} from "../../../utils/Sounds";
 
 const ButtonBack = (props) => {
 
     const navigation = useNavigation()
 
     const goBack = () =>{
+        Sounds.loadAndPlayFile(soundsType.click2)
         if(props.leaveGame){
             props.leaveGame()
         }

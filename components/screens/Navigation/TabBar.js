@@ -15,6 +15,7 @@ import {connect} from "react-redux";
 import {setActiveTabApp} from "../../redux/reducers/Websocket/WebsocketReducer";
 import {store} from "../../redux/redux-store";
 import {getIosModel} from "../../utils/utils";
+import Sounds, {soundsType} from "../../utils/Sounds";
 
 class TabBar extends React.PureComponent {
     constructor(props){
@@ -57,6 +58,7 @@ class TabBar extends React.PureComponent {
             this.setState({activeTab: route.name})
             store.dispatch(setActiveTabApp(route.name))
             this.props.navigation.navigate({name: route.name, merge: true});
+            Sounds.loadAndPlayFile(soundsType.click2)
         }
     };
 

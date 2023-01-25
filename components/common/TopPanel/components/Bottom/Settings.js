@@ -18,6 +18,7 @@ import {selectMyUser} from "../../../../redux/reducers/players/PlayersReducer";
 import SelectDropdown from 'react-native-select-dropdown'
 import {StyleSheet} from 'react-native';
 import C_CHANGE_LANGUAGE from "../../../../protocol/messages/clients/C_CHANGE_LANGUAGE";
+import Sounds, {soundsType} from "../../../../utils/Sounds";
 
 const selectedData = ['EN', 'UA']
 
@@ -29,16 +30,27 @@ const Settings = (props) =>{
     const { logout } = useContext(UserContext);
 
     const Logout = () =>{
+        Sounds.loadAndPlayFile(soundsType.click2)
         dispatch(setSettingsMenuPopup({visible: false, data: null}))
         new C_LEAVE_SOCKET()
         logout()
     }
 
     const useSelectCheckBox = (data) =>{
+        Sounds.loadAndPlayFile(soundsType.click2)
         if(props.user.language !== data){
             setLanguage(data)
             new C_CHANGE_LANGUAGE(data)
         }
+    }
+
+    const setMuteUnmute = () =>{
+        Sounds.loadAndPlayFile(soundsType.click2)
+        setMute(!mute)
+    }
+
+    const setSupport = () =>{
+        Sounds.loadAndPlayFile(soundsType.click2)
     }
 
     useEffect(()=>{
@@ -77,13 +89,13 @@ const Settings = (props) =>{
                         />
                     </LanguageContainer>
                 </Btn>
-                <Btn onPress={()=>setMute(!mute)} activeOpacity={0.9}>
+                <Btn onPress={setMuteUnmute} activeOpacity={0.9}>
                     <SoundsContainer  style={{ borderBottomWidth: 3 }}>
                         <Img source={mute ? muteSounds : unmuteSounds} resizeMode='stretch'/>
                         <Text large blod center color={'#0c6fb6'}>{props.muteUnmute}</Text>
                     </SoundsContainer>
                 </Btn>
-                <Btn onPress={()=>console.log('support')} activeOpacity={0.9}>
+                <Btn onPress={setSupport} activeOpacity={0.9}>
                     <SupportContainer style={{ borderBottomWidth: 3 }}>
                         <Img source={support} resizeMode='stretch'/>
                         <Text large blod center color={'#0c6fb6'}>{props.support}</Text>

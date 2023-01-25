@@ -9,6 +9,7 @@ import SlideScreen from "../../../AnimationScreens/SlideScreen";
 import {useNavigation} from "@react-navigation/native";
 import {store} from "../../../../redux/redux-store";
 import {setActiveTabApp} from "../../../../redux/reducers/Websocket/WebsocketReducer";
+import Sounds, {soundsType} from "../../../../utils/Sounds";
 
 const UserInfo = (props) => {
 
@@ -16,6 +17,7 @@ const UserInfo = (props) => {
     const navigation = useNavigation()
 
     const hendelAvatar = () => {
+        Sounds.loadAndPlayFile(soundsType.click2)
         navigation.navigate('UserInfoScreen')
         store.dispatch(setActiveTabApp('UserInfoScreen'))
     }

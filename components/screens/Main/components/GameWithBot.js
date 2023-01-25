@@ -6,13 +6,14 @@ import { useWindowDimensions } from 'react-native';
 import {selectTranslation} from "../../../redux/reducers/language/LanguageReducer";
 import {connect} from "react-redux";
 import defaultTranslation from "../../../redux/reducers/language/defaultTranslation";
-import {selectMyUser} from "../../../redux/reducers/players/PlayersReducer";
+import Sounds, {soundsType} from "../../../utils/Sounds";
 
 const GameWithBot = (props) => {
 
   const {width,height} = useWindowDimensions()
 
   const handelClick = () =>{
+      Sounds.loadAndPlayFile(soundsType.click2)
       props.handlerPlayGame(1)
   }
 

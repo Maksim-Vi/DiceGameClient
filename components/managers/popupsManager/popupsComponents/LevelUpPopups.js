@@ -11,6 +11,7 @@ import styled from "styled-components";
 import {setTimingAnimated} from "../../../utils/Animation";
 import coinsAnim from "../../../../assets/animation/lottieAnim/nextLvl.json";
 import AnimatedLottieView from "lottie-react-native";
+import Sounds, {soundsType} from "../../../utils/Sounds";
 
 const LevelUpPopup = (props) => {
 
@@ -62,6 +63,7 @@ const LevelUpPopup = (props) => {
     }
 
     React.useEffect(()=>{
+        Sounds.loadAndPlayFile(soundsType.LvlUp)
         animateTitle()
     },[])
 

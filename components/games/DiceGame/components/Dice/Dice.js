@@ -3,6 +3,7 @@ import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import imagesGameDices from "../../../../../assets/dynamicLoadGameDices";
 import { setTimingAnimated } from '../../../../utils/Animation';
+import Sounds, {soundsType} from "../../../../utils/Sounds";
 
 const Dice = (props) => {
  
@@ -20,6 +21,7 @@ const Dice = (props) => {
   }
 
   const throwAnim = () =>{
+    Sounds.loadAndPlayFile(soundsType.throwDice)
     Animated.sequence([
 			setTimingAnimated(animatedValue, 1, 200, Easing.ease),
 			setTimingAnimated(animatedValue, 1.3, 100, Easing.ease),

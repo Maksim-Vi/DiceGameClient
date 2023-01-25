@@ -13,6 +13,7 @@ import bag from '../../../assets/bg/main_bg.jpg'
 import GoogleAuth from "./Google/GoogleAuth";
 import {setInfoPopup} from "../../redux/reducers/popups/PopupsReducer";
 import {useDispatch} from "react-redux";
+import Sounds, {soundsType} from "../../utils/Sounds";
 
 const AuthScreen = () => {
 
@@ -31,6 +32,7 @@ const AuthScreen = () => {
     }
 
     const handlerLogin = async (dataForm) => {
+        Sounds.loadAndPlayFile(soundsType.click2)
         setDisableBtn(true)
         const data = await postLoginApi(dataForm.name, dataForm.password)
 
@@ -45,6 +47,7 @@ const AuthScreen = () => {
     }
 
     const handlerRegister = () => {
+        Sounds.loadAndPlayFile(soundsType.click2)
         navigation.navigate('RegisterScreen')
     }
 

@@ -14,7 +14,6 @@ import { getCollectionDiceImg, getCollectionSquareImg} from "../../../utils/util
 import {selectTranslation} from "../../../redux/reducers/language/LanguageReducer";
 import defaultTranslation from "../../../redux/reducers/language/defaultTranslation";
 import {connect} from "react-redux";
-import {setInfoPopup} from "../../../redux/reducers/popups/PopupsReducer";
 
 const ModalChildrenBuy = (props) => {
 
@@ -50,36 +49,23 @@ const ModalChildrenBuy = (props) => {
             case 'coins-realmoney':
             case 'diamonds-realmoney':
             case 'coins-diamonds-realmoney':{
-                let coins, diamonds, money = ''
-                if(props.openItem.type === 'coins-diamonds'){
-                    coins = `${props.openItem.price.coins} coins`
-                    diamonds = `${props.openItem.price.diamonds} diamonds`
-                } else if(props.openItem.type === 'coins-realmoney') {
-                    coins = `${props.openItem.price.coins} coins`
-                    diamonds = `${props.openItem.price.money} $`
-                } else if(props.openItem.type === 'diamonds-realmoney'){
-                    coins = `${props.openItem.price.diamonds} diamonds`
-                    diamonds = `${props.openItem.price.money} $`
-                } else if(props.openItem.type === 'coins-diamonds-realmoney'){
-                    coins = `${props.openItem.price.coins} coins`
-                    diamonds = `${props.openItem.price.diamonds} diamonds`
-                    money = `${props.openItem.price.money} $`
-                }
                 return (
                     <React.Fragment>
-                        {coins !== '' && <ButtonWithText text={coins}
+                        {coins !== '' && <ButtonWithImage text={props.openItem.price.coins}
+                                                          image={coins}
                                                          clickHandler={()=>confirmModal(
                                                              'coins',
                                                              props.openItem.price.coins,
                                                              props.openItem.id
                                                          )}/>}
-                        {diamonds !== '' && <ButtonWithText text={diamonds}
+                        {diamonds !== '' && <ButtonWithImage text={diamonds}
+                                                             image={diamonds}
                                                             clickHandler={()=>confirmModal(
                                                                 'diamonds',
                                                                 props.openItem.price.diamonds,
                                                                 props.openItem.id
                                                             )}/>}
-                        {money !== '' && <ButtonWithText text={money}
+                        {money !== '' && <ButtonWithText text={`${props.openItem.price.money} $`}
                                                          clickHandler={()=>confirmModal(
                                                              'money',
                                                              props.openItem.price.money,
@@ -100,9 +86,10 @@ const ModalChildrenBuy = (props) => {
             (type === 'coins' && userCoins < price) ||
             (type === 'diamonds' && userCrystals < price)
         ) {
-            props.setModalVisible(false)
-            return store.dispatch(setInfoPopup({visible: true, data: {text: `Sorry but you dont have ${type}! play more and then you could buy something =)`}}))
+            alert(`Sorry but you dont have ${type}! play more and then you could buy something =)`)
+            return props.setModalVisible(false)
         }
+
         if(type === 'money'){
             setPaymentBuyRealMoney()
         }

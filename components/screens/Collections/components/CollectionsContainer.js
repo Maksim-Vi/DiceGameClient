@@ -11,12 +11,14 @@ import DicesTab from "./dicesTab/DicesTab";
 import SquaresTab from "./squaresTab/SquaresTab";
 import {selectAvailableCollectionItems, selectGameItems} from "../../../redux/reducers/collections/CollectionsReducer";
 import TopPanelStores from "../../../common/TopPanelStores/TopPanelStores";
+import Sounds, {soundsType} from "../../../utils/Sounds";
 
 const CollectionsContainer = (props) => {
 
     const [activeTab,setActiveTab] = useState('dices')
 
     const handelActiveTab = (tab) =>{
+        Sounds.loadAndPlayFile(soundsType.click2)
         setActiveTab(tab)
     }
 

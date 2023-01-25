@@ -1,12 +1,14 @@
 import React from 'react';
 import {getAvatarById} from "../TopPanel/utils";
 import styled from "styled-components";
+import Sounds, {soundsType} from "../../utils/Sounds";
 
 const Avatar = (props) => {
 
   const onHandlerAvatar = () =>{
     if(props.hendelAvatar){
-      props.hendelAvatar()
+        Sounds.loadAndPlayFile(soundsType.click2)
+        props.hendelAvatar()
     }
   }
 

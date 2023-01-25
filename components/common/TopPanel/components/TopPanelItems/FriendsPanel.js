@@ -5,12 +5,14 @@ import {useNavigation} from "@react-navigation/native";
 import {Alert} from "react-native";
 import {setInfoPopup} from "../../../../redux/reducers/popups/PopupsReducer";
 import {useDispatch} from "react-redux";
+import Sounds, {soundsType} from "../../../../utils/Sounds";
 
 const FriendsPanel = (props) => {
 
     const dispatch = useDispatch()
 
     const openFriendsPopup = () => {
+        Sounds.loadAndPlayFile(soundsType.click2)
         dispatch(setInfoPopup({visible: true, data: {text: 'Friends will be available after some time. Have a good game!'}}))
         //navigaion.navigate('FriendsScreen')
     }

@@ -10,6 +10,7 @@ import { setNewAvatar } from '../../../protocol/API/API'
 import { setAvatarPopup } from '../../../redux/reducers/popups/PopupsReducer'
 import {selectTranslation} from "../../../redux/reducers/language/LanguageReducer";
 import defaultTranslation from "../../../redux/reducers/language/defaultTranslation";
+import Sounds, {soundsType} from "../../../utils/Sounds";
 
 const AvatarPopups = (props) =>{
  
@@ -47,7 +48,7 @@ const AvatarPopups = (props) =>{
                                 <AvatarImg source={ava} resizeMode={'stretch'} />
                             </Ava>
                             <ButtonWithText width={'80%'} 
-                                            disabled={isActive} 
+                                            disabled={isActive}
                                             text={isActive ? props.selected : props.select}
                                             clickHandler={() => selectAvatar(index)}/>
                         </AvaCard>

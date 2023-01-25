@@ -18,6 +18,7 @@ import defaultTranslation from "../../redux/reducers/language/defaultTranslation
 import {setActiveTabApp} from "../../redux/reducers/Websocket/WebsocketReducer";
 import coinsAnim from "../../../assets/animation/lottieAnim/confetti.json";
 import AnimatedLottieView from "lottie-react-native";
+import Sounds, {soundsType} from "../../utils/Sounds";
 
 const ResultScreen = (props) => {
 
@@ -95,7 +96,8 @@ const ResultScreen = (props) => {
     }
 
     React.useEffect(() => {
-		animateWinerText();
+        Sounds.loadAndPlayFile(soundsType.roundFinish)
+        animateWinerText();
 	  return () => {}
 	}, [])
 

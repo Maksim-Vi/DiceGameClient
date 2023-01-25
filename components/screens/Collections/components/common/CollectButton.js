@@ -8,6 +8,7 @@ import C_SET_ACTIVE_GAME_ITEM from "../../../../protocol/messages/clients/collec
 import {selectTranslation} from "../../../../redux/reducers/language/LanguageReducer";
 import defaultTranslation from "../../../../redux/reducers/language/defaultTranslation";
 import {connect} from "react-redux";
+import Sounds, {soundsType} from "../../../../utils/Sounds";
 
 const CollectButton = ({item,isActive,isCollected,setModalVisible, ...props}) => {
 
@@ -54,10 +55,12 @@ const CollectButton = ({item,isActive,isCollected,setModalVisible, ...props}) =>
     }
 
     const selectNewItem = () =>{
+        Sounds.loadAndPlayFile(soundsType.click2)
         new C_SET_ACTIVE_GAME_ITEM(item.collectionType,item.id)
     }
 
     const clickHandler = () =>{
+        Sounds.loadAndPlayFile(soundsType.click2)
         setModalVisible(true,item)
     }
 

@@ -5,6 +5,7 @@ import roadImg from "../../../../../assets/road/road-icon.png";
 import InfoButton from "../../../Info/InfoButton";
 import Text from "../../../Text/Text";
 import {useSelector} from "react-redux";
+import Sounds, {soundsType} from "../../../../utils/Sounds";
 
 const RoadButton = () =>{
 
@@ -12,6 +13,7 @@ const RoadButton = () =>{
     const availableToClaimMissionsRoad = useSelector(state => state.road.availableToClaimMissionsRoad)
     
     const OpenRoad = () => {
+        Sounds.loadAndPlayFile(soundsType.click2)
         navigaion.navigate('RoadScreen')
     }
 

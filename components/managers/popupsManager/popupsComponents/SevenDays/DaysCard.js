@@ -9,6 +9,7 @@ import diamondsAnim from '../../../../../assets/animation/lottieAnim/diamond-eva
 import CalendarView from "./CalendarView";
 import C_CLAIM_SEVEN_DAYS_GIFTS from "../../../../protocol/messages/clients/gifts/C_CLAIM_SEVEN_DAYS_GIFTS";
 import AnimatedLottieView from "lottie-react-native";
+import Sounds, {soundsType} from "../../../../utils/Sounds";
 
 const DaysCard = (props) => {
 
@@ -39,6 +40,7 @@ const DaysCard = (props) => {
 
     const claimGift = () => {
         if (isAvailableClaim && !isClaimed) {
+            Sounds.loadAndPlayFile(soundsType.moneyDrop2)
             new C_CLAIM_SEVEN_DAYS_GIFTS(dayNumber)
             setLottie(true)
             anim.current.stop()

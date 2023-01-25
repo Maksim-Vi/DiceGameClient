@@ -1,26 +1,28 @@
 import React from 'react';
 import Text from "../Text/Text";
 import styled from "styled-components";
+import Sounds, {soundsType} from "../../utils/Sounds";
 
 const ButtonWithText = (props) => {
 
-  const btnClickHendler = () =>{
-    if(props.disabled) return 
+    const btnClickHendler = () => {
+        if (props.disabled) return
 
-    props.clickHandler()
-  }
-  
-  return (
-      <CollectBtn {...props}
-                  style={{
-                      borderBottomWidth: 3,
-                  }}
-                  disabled={props.disabled || false}
-                  onPress={btnClickHendler}
-                  activeOpacity={0.9}>
-          <Text setShadow={true} small heavy color='#fff' center>{props.text}</Text>
-      </CollectBtn>
-  )
+        Sounds.loadAndPlayFile(soundsType.click2)
+        props.clickHandler()
+    }
+
+    return (
+        <CollectBtn {...props}
+                    style={{
+                        borderBottomWidth: 3,
+                    }}
+                    disabled={props.disabled || false}
+                    onPress={btnClickHendler}
+                    activeOpacity={0.9}>
+            <Text setShadow={true} small heavy color='#fff' center>{props.text}</Text>
+        </CollectBtn>
+    )
 }
 
 const CollectBtn = styled.TouchableOpacity`
@@ -29,26 +31,26 @@ const CollectBtn = styled.TouchableOpacity`
   justify-content: center;
   flex-direction: row;
   margin: 5px;
-  ${(props)=>{
-    
-    if(props.disabled){
-        return `
+  ${(props) => {
+
+    if (props.disabled) {
+      return `
             background-color: gray;
         `
     }
 
-    return props.color 
-            ? `background-color: ${props.color};` 
+    return props.color
+            ? `background-color: ${props.color};`
             : 'background-color: #5eba7d;'
   }};
   border-radius: 10px;
-  ${(props)=>{
-    return props.borderColor 
-            ? `border: 1px solid ${props.borderColor};` 
+  ${(props) => {
+    return props.borderColor
+            ? `border: 1px solid ${props.borderColor};`
             : 'border: 1px solid rgb(255, 157, 77);'
   }};
-  width: ${(props) =>  props.width ? props.width : '33%'};
-  height: ${(props) =>  props.height ? props.height : '30px'};
+  width: ${(props) => props.width ? props.width : '33%'};
+  height: ${(props) => props.height ? props.height : '30px'};
 `
 
 export default ButtonWithText;

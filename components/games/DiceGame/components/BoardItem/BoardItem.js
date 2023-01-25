@@ -6,6 +6,7 @@ import imagesGameDices from "../../../../../assets/dynamicLoadGameDices";
 import animOne from "../../../../../assets/animation/anim-light-one.png";
 import animTwo from "../../../../../assets/animation/anim-purpure-two.png";
 import {setTimingAnimated} from '../../../../utils/Animation';
+import Sounds, {soundsType} from "../../../../utils/Sounds";
 
 const BoardItem = (props) => {
 
@@ -103,6 +104,7 @@ const BoardItem = (props) => {
     }
 
     const setDiceInPlaceAnim = () => {
+        Sounds.loadAndPlayFile(soundsType.drop)
         Animated.sequence([
             setTimingAnimated(animatedValue.current, 1.2, 150, Easing.ease),
             setTimingAnimated(animatedValue.current, 1, 50, Easing.ease),

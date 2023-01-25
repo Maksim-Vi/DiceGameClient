@@ -19,6 +19,7 @@ import GiftTimer from "./Gift/GiftTimer";
 import SlideScreen from "../../../common/AnimationScreens/SlideScreen";
 import AnimatedLottieView from "lottie-react-native";
 import coins from '../../../../assets/animation/lottieAnim/coins-drop.json'
+import Sounds, {soundsType} from "../../../utils/Sounds";
 
 const AdUnitID = Platform.OS === 'ios'
     ?  APP_TYPE !== 'development' ? 'ca-app-pub-6421975370931679/8219230470' : TestIds.GAM_REWARDED_INTERSTITIAL
@@ -66,6 +67,7 @@ const FreeGift = (props) => {
 
     const admodHendler = () =>{
         if(isLoaded && leftTimeShowGiftAd && leftTimeShowGiftAd <= 0){
+            Sounds.loadAndPlayFile(soundsType.click)
             show()
         } else {
             load()
@@ -82,6 +84,7 @@ const FreeGift = (props) => {
                 timer.start(getBonusCoins.giftWatchedTime)
                 dispatch(setLeftTimeShowAd(getBonusCoins.giftWatchedTime))
                 setTimeout(()=>{
+                    Sounds.loadAndPlayFile(soundsType.moneyDrop)
                     setLottieAnim(true)
                 },500)
             }

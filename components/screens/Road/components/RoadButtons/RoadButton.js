@@ -6,6 +6,7 @@ import styled from "styled-components";
 import C_CLAIM_MISSION from "../../../../protocol/messages/clients/road/C_CLAIM_MISSION";
 import AnimatedLottieView from "lottie-react-native";
 import coinsAnim from "../../../../../assets/animation/lottieAnim/stars-fly.json";
+import Sounds, {soundsType} from "../../../../utils/Sounds";
 
 const RoadButton = (props) => {
 
@@ -24,11 +25,8 @@ const RoadButton = (props) => {
   }
 
   const clickHandler = () =>{
-    setLottie(true)
-    setTimeout(()=>{
-      setLottie(false)
-    },3000)
     if(isFinished && !isClaimed){
+      Sounds.loadAndPlayFile(soundsType.click2)
       new C_CLAIM_MISSION(props.mission.missionNumber)
       setLottie(true)
       setTimeout(()=>{

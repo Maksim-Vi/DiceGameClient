@@ -13,6 +13,7 @@ import hidePass from "../../../../assets/loadGame/hide.png";
 import bag from '../../../../assets/bg/main_bg.jpg'
 import {setInfoPopup} from "../../../redux/reducers/popups/PopupsReducer";
 import {useDispatch} from "react-redux";
+import Sounds, {soundsType} from "../../../utils/Sounds";
 
 const RegisterScreen = () => {
 
@@ -40,6 +41,7 @@ const RegisterScreen = () => {
     }
 
     const hendlerRegister = async (dataForm) => {
+        Sounds.loadAndPlayFile(soundsType.click2)
         setEnableBtn(true)
         const data = await postRegisterApi(dataForm.username, dataForm.email, dataForm.password)
         
