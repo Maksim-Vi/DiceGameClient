@@ -1,19 +1,21 @@
 import {createContext, useCallback, useEffect, useState} from "react";
 import C_LOGIN from "../protocol/messages/clients/C_LOGIN";
 import {postLoginApi} from "../protocol/API/API";
-import {setCurrentUser} from "../redux/reducers/players/PlayersReducer";
+import {setCurrentUser, updateCurrentUserSound} from "../redux/reducers/players/PlayersReducer";
 import {store} from "../redux/redux-store";
 import {setLogout} from "../redux/reducers/login/LoginReducer";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {transitionState} from "./utils";
 import {setClientIdWebsocket} from "../redux/reducers/Websocket/WebsocketReducer";
+import {setSoundInfo} from "../redux/reducers/language/LanguageReducer";
 
-export const UserContext = createContext({token: '', id: '', username: '', password: '', data: null, auth: false});
+export const UserContext = createContext({token: '', id: '', username: '', password: '', sound: true, data: null, auth: false});
 const storageName = 'UserData'
+const storageNameSound = 'soundData'
 
 const UserProvider = ({children}) => {
 
-    const [user, setUser] = useState({token: '', id: '', username: '', password: '', data: null, auth: false});
+    const [user, setUser] = useState({token: '', id: '', username: '', password: '', sound: true, data: null, auth: false});
 
     const login = useCallback(async (data) => {
         setUser({
@@ -21,6 +23,7 @@ const UserProvider = ({children}) => {
             id: data.user.id,
             username: data.user.username,
             password: data.user.password,
+            sound: data.user.isSoundOn,
             data: data,
             auth: false
         });
@@ -32,8 +35,22 @@ const UserProvider = ({children}) => {
                     password: data.user.password,
                 }
         }))
+        await AsyncStorage.setItem(storageNameSound, JSON.stringify({sound: data.user.isSoundOn}))
         store.dispatch(setCurrentUser(data.user))
     }, [])
+
+    const setSound = useCallback(async (sound)=>{
+        setUser({...user, sound: sound});
+
+        const value = await AsyncStorage.getItem(storageNameSound)
+        if(value) {
+            const data = JSON.parse(value)
+            if (data && data.user.sound) {
+                const newData = {...data, sound: sound}
+                await AsyncStorage.setItem(storageNameSound, JSON.stringify(newData))
+            }
+        }
+    },[])
 
     const setAuth = useCallback(() => {
         setUser({...user, auth: true});
@@ -41,7 +58,7 @@ const UserProvider = ({children}) => {
     }, [])
 
     const logout = useCallback(async () => {
-        setUser({token: '', id: '', username: '', password: '', data: null, auth: false});
+        setUser({token: '', id: '', username: '', password: '', sound: user.sound, data: null, auth: false});
         await AsyncStorage.setItem(storageName, '')
         store.dispatch(setLogout())
         store.dispatch(setClientIdWebsocket(null))
@@ -49,6 +66,15 @@ const UserProvider = ({children}) => {
     })
 
     const getDataFromStorage = async () => {
+        const sound = await AsyncStorage.getItem(storageName)
+        if(sound){
+            const soundParse = JSON.parse(sound)
+            if(soundParse){
+                store.dispatch(setSoundInfo(soundParse.sound))
+                store.dispatch(updateCurrentUserSound(soundParse.sound))
+            }
+        }
+
         const value = await AsyncStorage.getItem(storageName)
         if(value){
             const data = JSON.parse(value)
@@ -73,13 +99,14 @@ const UserProvider = ({children}) => {
     store.logout = logout
     store.setAuth = setAuth
     store.login = login
+    store.setSound = setSound
 
     useEffect(() => {
         getDataFromStorage()
     }, [login])
     
     return (
-        <UserContext.Provider value={{user, login, logout}}>
+        <UserContext.Provider value={{user, login, logout,setSound}}>
             {children}
         </UserContext.Provider>
     );

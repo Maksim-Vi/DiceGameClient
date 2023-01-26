@@ -20,6 +20,7 @@ export default class S_SOUND_INFO {
     }
 
     exec() {
+        store.setSound(this.sound)
         store.dispatch(setSoundInfo(this.sound))
         store.dispatch(updateCurrentUserSound(this.sound))
     }
