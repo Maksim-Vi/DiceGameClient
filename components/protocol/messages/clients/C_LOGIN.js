@@ -1,14 +1,13 @@
-import { selectClientIdWebsocket } from "../../../redux/reducers/Websocket/WebsocketReducer"
-import { store } from "../../../redux/redux-store"
-import { sendMessageWS } from "../../websocet"
+import {sendMessageWS} from "../../websocet"
 
 export default class C_LOGIN {
-    constructor(username, password){
+    constructor(clientIdWebsocket, username, password) {
 
         this.MESSAG_ENAME = 'C_LOGIN'
         this.clientIdWebsocket = null
         this.showLog = true
 
+        this.clientIdWebsocket = clientIdWebsocket
         this.username = username
         this.password = password
 
@@ -16,24 +15,24 @@ export default class C_LOGIN {
     }
 
     init() {
-        this.getLogText()
-        this.setClientId()
         this.exec()
+        this.getLogText()
     }
 
     exec() {
-        setTimeout(()=>{
-            sendMessageWS({ name: this.MESSAG_ENAME, clientIdWs: this.clientIdWebsocket, username: this.username, password: this.password  })
-        },2000)
-    }
-    
-    setClientId(){
-        this.clientIdWebsocket = selectClientIdWebsocket(store.getState())
+        setTimeout(() => {
+            sendMessageWS({
+                name: this.MESSAG_ENAME,
+                clientIdWs: this.clientIdWebsocket,
+                username: this.username,
+                password: this.password
+            })
+        }, 2000)
     }
 
-	getLogText() {
-        if(this.showLog){
-		    console.log(`${this.MESSAG_ENAME}, name: ${this.username}`);
+    getLogText() {
+        if (this.showLog) {
+            console.log(`${this.MESSAG_ENAME}, name: ${this.username}`);
         }
     }
 

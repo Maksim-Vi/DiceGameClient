@@ -4,7 +4,6 @@ import { setLoginUser, setToken } from "../../redux/reducers/login/LoginReducer"
 import { getRefreshToken } from "../../utils/refreshTokenHook";
 import { getFetchUrl } from "./urlApi";
 import { setCurrentUser } from "../../redux/reducers/players/PlayersReducer";
-import {setLeftTimeShowAd} from "../../redux/reducers/AD/AdvertisingReducer";
 
 export const postLoginApi = async (username, password) => {
     let data = { username: username, password: password }
@@ -14,15 +13,15 @@ export const postLoginApi = async (username, password) => {
     }
 
     const callback = (json) =>{
-        openServerConnection()
         store.login(json)
-    
+
         store.dispatch(setLoginUser({ 
             id: json.user.id, 
             username: json.user.username, 
             password: json.user.password
         }))
         store.dispatch(setToken(json.token))
+        openServerConnection()
     }
 
     return await getFetchUrl('login', 'POST', data, refreshToken, callback)

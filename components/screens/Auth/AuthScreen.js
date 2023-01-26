@@ -39,7 +39,7 @@ const AuthScreen = () => {
         if (data && data.success) {
             setDisableBtn(false)
             navigation.navigate('LoadingProject')
-            new C_LOGIN(data.user.username, data.user.password)
+            // new C_LOGIN(data.user.username, data.user.password)
         } else {
             setDisableBtn(false)
             dispatch(setInfoPopup({visible: true, data: {text: data.message}}))

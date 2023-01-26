@@ -6,7 +6,7 @@ export default class S_RECONNECT_FAILED {
         this.MESSAG_ENAME = 'S_RECONNECT_FAILED'
         this.showLog = true
 
-        this.message = error
+        this.message = error.message
 
         this.init()
     }
@@ -22,7 +22,7 @@ export default class S_RECONNECT_FAILED {
 
 	getLogText() {
         if(this.showLog){
-		    console.log(`${this.MESSAG_ENAME}`);
+		    console.log(`${this.MESSAG_ENAME} ${this.message}`);
         }
     }
 

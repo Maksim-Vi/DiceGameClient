@@ -33,7 +33,7 @@ export default class C_CHANGE_LANGUAGE  {
 
     getLogText() {
         if(this.showLog){
-            console.log(`${this.MESSAGE_NAME} lenguage: ${this.lenguage}`);
+            console.log(`${this.MESSAGE_NAME} language: ${this.language}`);
         }
     }
 

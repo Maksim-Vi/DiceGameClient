@@ -3,7 +3,7 @@ import C_LOGIN from "../protocol/messages/clients/C_LOGIN";
 import {postLoginApi} from "../protocol/API/API";
 import {setCurrentUser, updateCurrentUserSound} from "../redux/reducers/players/PlayersReducer";
 import {store} from "../redux/redux-store";
-import {setLogout} from "../redux/reducers/login/LoginReducer";
+import {setLoginUser, setLogout} from "../redux/reducers/login/LoginReducer";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {transitionState} from "./utils";
 import {setClientIdWebsocket} from "../redux/reducers/Websocket/WebsocketReducer";
@@ -81,10 +81,11 @@ const UserProvider = ({children}) => {
 
             if (data && data.token && data.user.username) {
                 transitionState('LoadingProject')
+                store.dispatch(setLoginUser({id: data.user.id, username: data.user.username, password: data.user.password}))
                 const dataLogin = await postLoginApi(data.user.username, data.user.password)
 
                 if (dataLogin && dataLogin.success) {
-                    new C_LOGIN(data.user.username,data.user.password)
+                    console.log('AUTO LOGIN SUCCESS')
                 } else {
                     logout()
                 }
