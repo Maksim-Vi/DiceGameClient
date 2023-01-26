@@ -10,10 +10,10 @@ import {collectionHandlerMessage} from "./collectionMessageManager";
 import {roadHandlerMessage} from "./RoadMessageManager";
 import S_LANGUAGE_INFO from "./messages/server/S_LANGUAGE_INFO";
 import S_USERS_ONLINE from "./messages/server/S_USERS_ONLINE";
-import S_SEVEN_DAYS_GIFTS from "./messages/server/gifts/S_SEVEN_DAYS_GIFTS";
 import {giftsHandlerMessage} from "./GiftsMessageManager";
 import S_RECONNECT_FAILED from "./messages/server/S_RECONNECT_FAILED";
 import S_RECONNECT_SUCCESS from "./messages/server/S_RECONNECT_SUCCESS";
+import S_SOUND_INFO from "./messages/server/S_SOUND_INFO";
 
 export const hendleMessage = (data) =>{
     switch (data.name) {
@@ -56,6 +56,10 @@ export const hendleMessage = (data) =>{
         }
         case 'S_USERS_ONLINE':{
             new S_USERS_ONLINE(data.usersOnline)
+            break;
+        }
+        case 'S_SOUND_INFO':{
+            new S_SOUND_INFO(data.username, data.sound)
             break;
         }
 

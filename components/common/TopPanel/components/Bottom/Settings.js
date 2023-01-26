@@ -12,17 +12,19 @@ import {setSettingsMenuPopup} from "../../../../redux/reducers/popups/PopupsRedu
 import {connect, useDispatch} from "react-redux";
 import Text from "../../../Text/Text";
 import {getCurrentData} from "../../../../utils/utils";
-import {selectTranslation} from "../../../../redux/reducers/language/LanguageReducer";
+import {selectSoundsInfo, selectTranslation, setSoundInfo} from "../../../../redux/reducers/language/LanguageReducer";
 import defaultTranslation from "../../../../redux/reducers/language/defaultTranslation";
 import {selectMyUser} from "../../../../redux/reducers/players/PlayersReducer";
 import SelectDropdown from 'react-native-select-dropdown'
 import {StyleSheet} from 'react-native';
 import C_CHANGE_LANGUAGE from "../../../../protocol/messages/clients/C_CHANGE_LANGUAGE";
 import Sounds, {soundsType} from "../../../../utils/Sounds";
+import C_CHANGE_SOUND from "../../../../protocol/messages/clients/C_CHANGE_SOUND";
 
 const selectedData = ['EN', 'UA']
 
 const Settings = (props) =>{
+
 
     const [language, setLanguage] = useState('EN')
     const [mute, setMute] = useState(false)
@@ -46,6 +48,7 @@ const Settings = (props) =>{
 
     const setMuteUnmute = () =>{
         Sounds.loadAndPlayFile(soundsType.click2)
+        new C_CHANGE_SOUND(!mute)
         setMute(!mute)
     }
 
@@ -56,6 +59,10 @@ const Settings = (props) =>{
     useEffect(()=>{
         if(props.user && props.user.language){
             setLanguage(props.user.language)
+        }
+
+        if(props.sounds && props.sounds){
+            setMute(props.sounds)
         }
     },[])
 
@@ -91,7 +98,7 @@ const Settings = (props) =>{
                 </Btn>
                 <Btn onPress={setMuteUnmute} activeOpacity={0.9}>
                     <SoundsContainer  style={{ borderBottomWidth: 3 }}>
-                        <Img source={mute ? muteSounds : unmuteSounds} resizeMode='stretch'/>
+                        <Img source={mute ? unmuteSounds : muteSounds} resizeMode='stretch'/>
                         <Text large blod center color={'#0c6fb6'}>{props.muteUnmute}</Text>
                     </SoundsContainer>
                 </Btn>
@@ -200,6 +207,7 @@ const mapStateToProps = (state) => ({
     support: selectTranslation(state,defaultTranslation.TR_SUPPORT),
     muteUnmute: selectTranslation(state,defaultTranslation.TR_MUTE_UNMUTE),
     leaveGame: selectTranslation(state,defaultTranslation.TR_LEAVE_GAME),
+    sounds: selectSoundsInfo(state),
 })
 
 export default connect(mapStateToProps)(Settings);

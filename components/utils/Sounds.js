@@ -1,4 +1,6 @@
 import Sound from 'react-native-sound'
+import {selectSoundsInfo} from "../redux/reducers/language/LanguageReducer";
+import {store} from "../redux/redux-store";
 
 
 export const soundsType = {
@@ -17,16 +19,22 @@ export const soundsType = {
 export default new class Sounds {
     constructor() {
 
+        this.enableSounds = false
         this.loadSound = null
 
         this.init()
     }
 
     init = () =>{
+        this.enableSounds = selectSoundsInfo(store.getState())
         Sound.setCategory('Playback');
     }
 
     loadAndPlayFile = (fileName) =>{
+        this.enableSounds = selectSoundsInfo(store.getState())
+
+        if(!this.enableSounds) return
+
         try {
              this.loadSound = new Sound(fileName, (error) => {
                 if (error) return console.log('failed to load the sound');

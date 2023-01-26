@@ -2,7 +2,8 @@ import {createSlice} from '@reduxjs/toolkit';
 import defaultTranslation from "./defaultTranslation";
 
 let initialState = {
-    translations: defaultTranslation
+    translations: defaultTranslation,
+    sound: true,
 }
 
 export const languageReducerSlice = createSlice({
@@ -21,10 +22,13 @@ export const languageReducerSlice = createSlice({
 
             state.translations = translationObj
         },
+        setSoundInfo: (state,action) =>{
+            state.sound = action.payload
+        }
     },
 });
 
-export const {setAllTranslations} = languageReducerSlice.actions;
+export const {setAllTranslations, setSoundInfo} = languageReducerSlice.actions;
 
 export const selectTranslation = (state, param) => {
     const getTranslationByParam = () =>{
@@ -43,6 +47,8 @@ export const selectTranslation = (state, param) => {
 
     return getTranslationByParam()
 };
+
+export const selectSoundsInfo = state => state.language.sound;
 
 export default languageReducerSlice.reducer;
 

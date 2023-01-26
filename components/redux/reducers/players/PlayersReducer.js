@@ -19,6 +19,11 @@ export const playersReducerSlice = createSlice({
         state.myUser.language = action.payload
       }
     },
+    updateCurrentUserSound: (state, action) =>{
+      if(state.myUser){
+        state.myUser.isSoundOn = action.payload
+      }
+    },
     updateCurrentUserFlash: (state, action) =>{
       if(state.myUser){
         state.myUser.flash = action.payload
@@ -53,6 +58,7 @@ export const playersReducerSlice = createSlice({
 
 export const {
   setCurrentUser,
+  updateCurrentUserSound,
   updateCurrentUserLanguage,
   updateCurrentUserExp,
   updateCurrentUserFlash,
