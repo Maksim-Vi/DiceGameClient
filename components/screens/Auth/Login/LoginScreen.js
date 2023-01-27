@@ -33,7 +33,7 @@ const LoginScreen = (props) => {
                         rules={{required: true}}
                         name="name"
                         render={({field: {onChange, onBlur, value}}) => (
-                            <Name placeholder='Name'
+                            <Name placeholder='Name or email'
                                   placeholderTextColor='#838383'
                                   returnKeyType='next'
                                   value={value}
