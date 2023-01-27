@@ -26,7 +26,7 @@ const RoadButton = (props) => {
 
   const clickHandler = () =>{
     if(isFinished && !isClaimed){
-      Sounds.loadAndPlayFile(soundsType.click2)
+      Sounds.loadAndPlayFile(soundsType.stars)
       new C_CLAIM_MISSION(props.mission.missionNumber)
       setLottie(true)
       setTimeout(()=>{

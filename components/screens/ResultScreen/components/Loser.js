@@ -8,6 +8,7 @@ import { Animated, Easing } from 'react-native'
 import {selectTranslation} from "../../../redux/reducers/language/LanguageReducer";
 import defaultTranslation from "../../../redux/reducers/language/defaultTranslation";
 import {connect} from "react-redux";
+import Sounds, {soundsType} from "../../../utils/Sounds";
 
 const Loser = ({loser, ...props}) => {
 
@@ -24,6 +25,9 @@ const Loser = ({loser, ...props}) => {
 	}
    
     React.useEffect(()=>{
+        if(loser.player.id === props.userId){
+            Sounds.loadAndPlayFile(soundsType.roundFinishLose)
+        }
         animateWinner()
     },[])
 

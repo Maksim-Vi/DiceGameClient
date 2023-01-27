@@ -30,6 +30,7 @@ const ResultScreen = (props) => {
     const navigation = useNavigation()
 
     const hendlerCloseResult = () => {
+        Sounds.loadAndPlayFile(soundsType.click2)
         if (isLoaded && advertising.countShowless === advertising.numberCanMissGameAd) {
             show();
         } else {
@@ -48,11 +49,11 @@ const ResultScreen = (props) => {
 	}
 
     const getWinner = (winner) =>{
-        return <Winner winner={winner}/>
+        return <Winner winner={winner} userId={props.userId}/>
     }
 
     const getLoser = (loser) => {
-        return <Loser loser={loser}/>
+        return <Loser loser={loser} userId={props.userId}/>
     }
 
     const renderResult = () =>{
@@ -96,7 +97,6 @@ const ResultScreen = (props) => {
     }
 
     React.useEffect(() => {
-        Sounds.loadAndPlayFile(soundsType.roundFinish)
         animateWinerText();
 	  return () => {}
 	}, [])

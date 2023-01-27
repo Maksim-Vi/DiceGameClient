@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {useCallback, useEffect} from 'react'
 import styled from 'styled-components'
 import {Animated, Dimensions, Easing, Image} from "react-native";
 import imagesGameSquares from "../../../../../assets/dynamicLoadGameSquares";
@@ -17,7 +17,7 @@ const BoardItem = (props) => {
     const animatedValue = React.useRef(new Animated.Value(1))
     const opacityValue = React.useRef(new Animated.Value(0))
 
-    const [showAnim, setShowAnim] = React.useState(false)
+    const [squaresSource, setAnimSquaresSource] = React.useState(animOne)
 
     const rotateData = spinValue.current.interpolate({
         inputRange: [0, 1],
@@ -61,20 +61,14 @@ const BoardItem = (props) => {
         if (props.item > 0) {
             if (props.winPoints) {
                 if (props.item === +props.winPoints.number && +props.winPoints.count === 2) {
-                    getAnim()
                     return animOne
                 } else if (props.item === +props.winPoints.number && +props.winPoints.count === 3) {
-                    getAnim()
                     return animTwo
                 }
-
-                stopAnimation()
                 return ''
             }
             return ''
         }
-
-        stopAnimation()
         return ''
     }
 
@@ -88,19 +82,17 @@ const BoardItem = (props) => {
     }
 
     const getAnim = () => {
-        if (!showAnim) {
-            spinValue.current.setValue(0);
-            opacityValue.current.setValue(1);
+        stopAnimation()
+        opacityValue.current.setValue(1);
 
+        Animated.loop(
             Animated.timing(spinValue.current, {
                 toValue: 1,
                 duration: 10000,
                 easing: Easing.linear,
                 useNativeDriver: true,
-            }).start(() => getAnim());
-
-            setShowAnim(true)
-        }
+            })
+        ).start()
     }
 
     const setDiceInPlaceAnim = () => {
@@ -111,17 +103,30 @@ const BoardItem = (props) => {
         ]).start();
     }
 
-
     const stopAnimation = () => {
-        if (showAnim) {
-            opacityValue.current.setValue(0)
-            setShowAnim(false)
-        }
+        opacityValue.current.setValue(0)
+        spinValue.current.setValue(0)
+        opacityValue.current.stopAnimation()
+        spinValue.current.stopAnimation()
+        setAnimSquaresSource('')
     }
 
     useEffect(() => {
         showPlaceAnim()
+
+        return ()=>{
+            stopAnimation()
+        }
     }, [])
+
+    useEffect(() => {
+        if(props.winPoints && props.winPoints.count && props.item === +props.winPoints.number){
+            getAnim()
+            setAnimSquaresSource(getSelectedSquares())
+        } else {
+            stopAnimation()
+        }
+    }, [props.winPoints])
 
     return (
         <AnimConatiner style={{
@@ -153,9 +158,9 @@ const BoardItem = (props) => {
                                source={getDiceNumber()}
                                resizeMode={'stretch'}/>
                 }
-                {getSelectedSquares() !== '' &&
+                {squaresSource &&
                     <SquaresAnim style={{opacity: opacityData, transform: [{rotate: rotateData}]}}
-                              width={width} source={getSelectedSquares()}
+                              width={width} source={squaresSource}
                               resizeMode={'stretch'}/>
                 }
             </ItemContainer>

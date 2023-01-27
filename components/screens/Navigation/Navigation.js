@@ -58,7 +58,7 @@ export default function Navigator() {
         <AppStack.Screen name="LoadingProject" component={LoadingProject} />
 
         <AppStack.Screen options={options} name="App" component={TabNavScreen}/>
-        <AppStack.Screen options={optionsGame} name="GameScreen" component={GameScreen}/>
+        <AppStack.Screen options={options} name="GameScreen" component={GameScreen}/>
         <AppStack.Screen options={options} name="ResultScreen" component={ResultScreen}/>
         <AppStack.Screen options={options} name="LoadingGameScreen" component={LoadingGameScreen}/>
         <AppStack.Screen options={options} name="RoadScreen" component={RoadScreen}/>

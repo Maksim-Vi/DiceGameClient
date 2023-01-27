@@ -2,7 +2,6 @@ import Sound from 'react-native-sound'
 import {selectSoundsInfo} from "../redux/reducers/language/LanguageReducer";
 import {store} from "../redux/redux-store";
 
-
 export const soundsType = {
      drop: require('../../sounds/drop.mp3') ,
      click: require('../../sounds/click.mp3') ,
@@ -14,6 +13,13 @@ export const soundsType = {
      throwDice2: require('../../sounds/throw-dice2.mp3') ,
      LvlUp: require('../../sounds/LvlUp.mp3') ,
      roundFinish: require('../../sounds/round-finish.mp3') ,
+    roundFinishLose: require('../../sounds/lose.mp3') ,
+    accept: require('../../sounds/acept.mp3') ,
+    dzen: require('../../sounds/dzen.mp3') ,
+    stars: require('../../sounds/stars2.mp3') ,
+    startLoad: require('../../sounds/start-load.mp3') ,
+    startLoad2: require('../../sounds/start-load2.mp3') ,
+    salut: require('../../sounds/zvuk-saljuta.mp3') ,
 }
 
 export default new class Sounds {
@@ -36,6 +42,7 @@ export default new class Sounds {
         if(!this.enableSounds) return
 
         try {
+            this.stopFile()
              this.loadSound = new Sound(fileName, (error) => {
                 if (error) return console.log('failed to load the sound');
                  this.playFile()

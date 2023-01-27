@@ -10,11 +10,10 @@ import Text from "../../common/Text/Text";
 import bag from '../../../assets/bg/main_bg.jpg'
 import three from '../../../assets/collections/dices/d_4/dice_3.png'
 import six from '../../../assets/collections/dices/d_4/dice_6.png'
-import dices from "../../../assets/animation/lottieAnim/loadDices.json";
 import starsAnim from "../../../assets/animation/lottieAnim/purpure-stars.json";
 import AnimatedLottieView from "lottie-react-native";
-import ButtonBack from "../../common/Buttons/Back/ButtonBack";
 import {setTimingAnimated} from "../../utils/Animation";
+import Sounds, {soundsType} from "../../utils/Sounds";
 
 const LoadingProject = () => {
 	const animFirstValue = React.useRef(new Animated.Value(0)).current;
