@@ -6,7 +6,6 @@ import {useNavigation} from '@react-navigation/native'
 import LoginScreen from './Login/LoginScreen'
 import {postLoginApi} from '../../protocol/API/API'
 import {Keyboard, Platform, TouchableWithoutFeedback} from 'react-native'
-import C_LOGIN from '../../protocol/messages/clients/C_LOGIN'
 import Divider from "../../common/Divider/Divider";
 import {useForm} from 'react-hook-form'
 import bag from '../../../assets/bg/main_bg.jpg'
@@ -14,6 +13,7 @@ import GoogleAuth from "./Google/GoogleAuth";
 import {setInfoPopup} from "../../redux/reducers/popups/PopupsReducer";
 import {useDispatch} from "react-redux";
 import Sounds, {soundsType} from "../../utils/Sounds";
+import ChangeUserNameGoogle from "../../managers/popupsManager/popupsComponents/GooglePopups/ChangeUserNameGoogle";
 
 const AuthScreen = () => {
 
@@ -39,7 +39,6 @@ const AuthScreen = () => {
         if (data && data.success) {
             setDisableBtn(false)
             navigation.navigate('LoadingProject')
-            // new C_LOGIN(data.user.username, data.user.password)
         } else {
             setDisableBtn(false)
             dispatch(setInfoPopup({visible: true, data: {text: data.message}}))
@@ -67,7 +66,7 @@ const AuthScreen = () => {
                         <Divider text={'or'} padding={10} color={'black'}/>
                         <RegisterBtn onPress={handlerRegister}><Text small heavy color='#fff'
                                                                      center>Register</Text></RegisterBtn>
-                        <GoogleAuth/>
+                        <GoogleAuth />
                     </ButtonContainer>
                 </AuthContainer>
             </TouchableWithoutFeedback>

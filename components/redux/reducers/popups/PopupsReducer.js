@@ -7,6 +7,7 @@ let initialState = {
    lvlUpPopup: {visible: false, data: null},
    sevenDaysGift: {visible: false, data: null},
    infoPopup: {visible: false, data: null},
+   googleConfirmUsernamePopup: {visible: false, data: null},
 }
 
 export const popupsReducerSlice = createSlice({
@@ -31,10 +32,21 @@ export const popupsReducerSlice = createSlice({
     setInfoPopup: (state, action) =>{
       state.infoPopup = action.payload
     },
+    setGoogleConfirmUsernamePopup: (state, action) =>{
+      state.googleConfirmUsernamePopup = action.payload
+    },
   },
 });
 
-export const {setTestBtnsPopup, setLevelUpPopup, setAvatarPopup, setSettingsMenuPopup, setSevenDaysGiftPopup, setInfoPopup} = popupsReducerSlice.actions;
+export const {
+    setTestBtnsPopup,
+    setLevelUpPopup,
+    setAvatarPopup,
+    setSettingsMenuPopup,
+    setSevenDaysGiftPopup,
+    setInfoPopup,
+    setGoogleConfirmUsernamePopup
+} = popupsReducerSlice.actions;
 
 export const selectAvatarPopup = state => state.popups.avatarPopup;
 export const selectLevelUpPopup = state => state.popups.lvlUpPopup;
@@ -42,6 +54,7 @@ export const selectSettingsPopup = state => state.popups.settingsPopup;
 export const selectTestBtnsPopup = state => state.popups.testBtnsPopup;
 export const selectSevenDaysGiftPopup = state => state.popups.sevenDaysGift;
 export const selectInfoPopup = state => state.popups.infoPopup;
+export const selectGoogleConfirmUsernamePopup = state => state.popups.googleConfirmUsernamePopup;
 
 export default popupsReducerSlice.reducer;
 

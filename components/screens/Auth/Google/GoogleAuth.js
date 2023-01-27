@@ -1,12 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import styled from "styled-components";
 import Text from "../../../common/Text/Text";
 import * as Google from "expo-auth-session/providers/google";
 import {postGoogleLoginOrRegister} from "../../../protocol/API/API";
-import C_LOGIN from "../../../protocol/messages/clients/C_LOGIN";
-import {makeRedirectUri} from "expo-auth-session";
 import {useDispatch} from "react-redux";
-import {setInfoPopup} from "../../../redux/reducers/popups/PopupsReducer";
+import {setGoogleConfirmUsernamePopup, setInfoPopup} from "../../../redux/reducers/popups/PopupsReducer";
 import Sounds, {soundsType} from "../../../utils/Sounds";
 
 const GoogleAuth = (props) => {
@@ -35,11 +33,12 @@ const GoogleAuth = (props) => {
                 const password = data.id + 'googleLoginKnockyDice'
                 const googleUserData = await postGoogleLoginOrRegister(data.name, password, data.email, data.picture)
 
-                if(googleUserData && googleUserData.success){
+                if(googleUserData && googleUserData.success && (googleUserData.create || !googleUserData.user.isFinishRegistration) ){
+                    dispatch(setGoogleConfirmUsernamePopup({visible: true, data: {username: googleUserData.user.username, email: googleUserData.user.email}}))
+                } else if(googleUserData && googleUserData.success && (!googleUserData.create || googleUserData.user.isFinishRegistration)) {
                     navigation.navigate('LoadingProject')
-                    new C_LOGIN(googleUserData.user.username,googleUserData.user.password)
                 } else {
-                    dispatch(setInfoPopup({visible: true, data: {text: data.message}}))
+                    dispatch(setInfoPopup({visible: true, data: {text: googleUserData.message}}))
                 }
             });
         }
@@ -52,7 +51,7 @@ const GoogleAuth = (props) => {
     }, [response]);
 
 
-    return  <GoogleBtn disabled={!request} onPress={handlerGoogle}><Text small heavy color='#000' center>Google login</Text></GoogleBtn>
+    return <GoogleBtn disabled={!request} onPress={handlerGoogle}><Text small heavy color='#000' center>Google login</Text></GoogleBtn>
 }
 
 const GoogleBtn = styled.TouchableOpacity`

@@ -4,6 +4,7 @@ import { setLoginUser, setToken } from "../../redux/reducers/login/LoginReducer"
 import { getRefreshToken } from "../../utils/refreshTokenHook";
 import { getFetchUrl } from "./urlApi";
 import { setCurrentUser } from "../../redux/reducers/players/PlayersReducer";
+import {setGoogleConfirmUsernamePopup} from "../../redux/reducers/popups/PopupsReducer";
 
 export const postLoginApi = async (username, password) => {
     let data = { username: username, password: password }
@@ -15,9 +16,9 @@ export const postLoginApi = async (username, password) => {
     const callback = (json) =>{
         store.login(json)
 
-        store.dispatch(setLoginUser({ 
-            id: json.user.id, 
-            username: json.user.username, 
+        store.dispatch(setLoginUser({
+            id: json.user.id,
+            username: json.user.username,
             password: json.user.password
         }))
         store.dispatch(setToken(json.token))
@@ -35,7 +36,35 @@ export const postGoogleLoginOrRegister = async (username, password, email, googl
     }
 
     const callback = (json) =>{
-        openServerConnection()
+        if(json.user.isFinishRegistration){
+            store.login(json)
+
+            store.dispatch(setLoginUser({
+                id: json.user.id,
+                username: json.user.username,
+                password: json.user.password
+            }))
+            store.dispatch(setToken(json.token))
+            openServerConnection()
+        } else {
+            store.dispatch(setGoogleConfirmUsernamePopup({visible: true, data: {username: json.user.username, email: json.user.email}}))
+        }
+    }
+
+    return await getFetchUrl('googleLoginOrRegister', 'POST', data, refreshToken, callback)
+}
+
+export const postUpdateGoogleUsername = async (username, email) => {
+    let data = { username: username, email: email }
+
+    const refreshToken = (equest, type, bodyData) =>{
+        if(request && type){
+            getRefreshToken()
+            postUpdateGoogleUsername(bodyData.username,bodyData.email)
+        }
+    }
+
+    const callback = (json) =>{
         store.login(json)
 
         store.dispatch(setLoginUser({
@@ -44,9 +73,11 @@ export const postGoogleLoginOrRegister = async (username, password, email, googl
             password: json.user.password
         }))
         store.dispatch(setToken(json.token))
+
+        openServerConnection()
     }
 
-    return await getFetchUrl('googleLoginOrRegister', 'POST', data, refreshToken, callback)
+    return await getFetchUrl('googleConfirmOrChangeName', 'POST', data, refreshToken, callback)
 }
 
 export const postRegisterApi = async (username, email, password) => {

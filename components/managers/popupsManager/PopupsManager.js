@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import styled from 'styled-components'
 import {selectMyUser} from '../../redux/reducers/players/PlayersReducer'
 import {
-    selectAvatarPopup, selectInfoPopup,
+    selectAvatarPopup, selectGoogleConfirmUsernamePopup, selectInfoPopup,
     selectLevelUpPopup,
     selectSettingsPopup, selectSevenDaysGiftPopup,
     selectTestBtnsPopup
@@ -16,6 +16,7 @@ import LevelUpPopup from "./popupsComponents/LevelUpPopups";
 import {selectActiveTabApp} from "../../redux/reducers/Websocket/WebsocketReducer";
 import SevenDaysGift from "./popupsComponents/SevenDays/SevenDaysGift";
 import InfoPopups from "./popupsComponents/InfoPopups";
+import ChangeUserNameGoogle from "./popupsComponents/GooglePopups/ChangeUserNameGoogle";
 
 const PopupsManager = (props) => {
     return (
@@ -27,6 +28,7 @@ const PopupsManager = (props) => {
             {props.lvlUpPopup.visible && (props.activeTabApp === 'App' || props.activeTabApp === 'MainScreen') && <LevelUpPopup/>}
             {props.sevenDaysPopup.visible && <SevenDaysGift />}
             {props.infoPopup.visible && <InfoPopups />}
+            {props.googleConfirmUsernamePopup.visible && <ChangeUserNameGoogle />}
 
 
             {props.testBtnsPopup.visible && <TestBtnsPopups/>}
@@ -50,6 +52,7 @@ const mapStateToProps = (state) => ({
     testBtnsPopup: selectTestBtnsPopup(state),
     user: selectMyUser(state),
     activeTabApp: selectActiveTabApp(state),
+    googleConfirmUsernamePopup: selectGoogleConfirmUsernamePopup(state),
 });
 
 export default connect(mapStateToProps)(PopupsManager);
