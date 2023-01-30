@@ -39,12 +39,16 @@ export const getIosModel = () =>{
     return 0
 }
 
-export const getCollectionDiceImg = (id) => {
+export const getCollectionDiceImg = (item, id) => {
     let diceUrl = null
 
    try {
         if(id){
-            diceUrl = images.dices[id]
+            if(item.image &&  item.image !== ''){
+                diceUrl = {url: item.image}
+            } else {
+                diceUrl = images.dices[id]
+            }
        }
    } catch (e){
        console.error('cannot loaded dice by name, set default')
@@ -54,13 +58,18 @@ export const getCollectionDiceImg = (id) => {
    return diceUrl
 }
 
-export const getCollectionSquareImg = (id) => {
+export const getCollectionSquareImg = (item, id) => {
     let squareUrl = null
 
    try {
         if(id){
-            squareUrl = images.squares[id]
+            if(item.image &&  item.image !== ''){
+                squareUrl = {url: item.image}
+            } else {
+                squareUrl = images.squares[id]
+            }
        }
+
    } catch (e){
        console.error('cannot loaded dice by name, set default')
        squareUrl = images.squares['1']

@@ -59,7 +59,7 @@ const SquareItem = ({squareItem,isActive,isLocked,isSale, isCollected, setModalV
             {renderLockedBG()}
             {renderSaleLabel()}
 
-            <SquareImage source={getCollectionSquareImg(squareItem.sortIndex)}/>
+            <SquareImage source={getCollectionSquareImg(squareItem,squareItem.sortIndex)}/>
             <Text setShadow={true} numberOfLines={1} madium blod center>{squareItem.name}</Text>
             <CollectButton item={squareItem}
                            setModalVisible={setModalVisible}

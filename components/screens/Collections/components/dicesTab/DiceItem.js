@@ -60,7 +60,7 @@ const DiceItem = ({diceItem, isActive,isLocked,isSale, isCollected, setModalVisi
             {renderLockedBG()}
             {renderSaleLabel()}
 
-            <DiceImage source={getCollectionDiceImg(diceItem.sortIndex)}/>
+            <DiceImage source={getCollectionDiceImg(diceItem, diceItem.sortIndex)}/>
             <Text center>{diceItem.name}</Text>
             <CollectButton item={diceItem}
                            setModalVisible={setModalVisible}
