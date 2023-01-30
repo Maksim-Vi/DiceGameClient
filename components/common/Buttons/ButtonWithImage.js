@@ -40,7 +40,7 @@ const CollectBtn = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
   flex-direction: row;
-  //margin: 5px;
+  margin:${(props)=> props.margin ? `${props.margin}px` : '0px'};
   ${(props)=>{
     return props.color 
             ? `background-color: ${props.color};` 

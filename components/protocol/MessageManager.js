@@ -14,6 +14,8 @@ import {giftsHandlerMessage} from "./GiftsMessageManager";
 import S_RECONNECT_FAILED from "./messages/server/S_RECONNECT_FAILED";
 import S_RECONNECT_SUCCESS from "./messages/server/S_RECONNECT_SUCCESS";
 import S_SOUND_INFO from "./messages/server/S_SOUND_INFO";
+import S_DEFAULT_PARAMS from "./messages/server/S_DEFAULT_PARAMS";
+import S_USER_PARAMS from "./messages/server/S_USER_PARAMS";
 
 export const hendleMessage = (data) =>{
     switch (data.name) {
@@ -52,6 +54,14 @@ export const hendleMessage = (data) =>{
         }
         case 'S_LANGUAGE_INFO':{
             new S_LANGUAGE_INFO(data.phrases, data.language)
+            break;
+        }
+        case 'S_DEFAULT_PARAMS':{
+            new S_DEFAULT_PARAMS(data.defaultParams)
+            break;
+        }
+        case 'S_USER_PARAMS':{
+            new S_USER_PARAMS(data.userParams)
             break;
         }
         case 'S_USERS_ONLINE':{

@@ -2,7 +2,7 @@ import React from 'react';
 import styled from "styled-components";
 import Text from "../../../../common/Text/Text";
 import ItemWrapper from "../../../Collections/components/common/ItemWrapper";
-import img from '../../../../../assets/shop/chest.png'
+import img from '../../../../../assets/shop/profits.png'
 
 const DiamondItemAdmod = (props) => {
     return (

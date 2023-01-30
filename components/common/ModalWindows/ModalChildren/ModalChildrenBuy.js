@@ -14,11 +14,17 @@ import { getCollectionDiceImg, getCollectionSquareImg} from "../../../utils/util
 import {selectTranslation} from "../../../redux/reducers/language/LanguageReducer";
 import defaultTranslation from "../../../redux/reducers/language/defaultTranslation";
 import {connect} from "react-redux";
+import TextWithoutShadow from "../../Text/TextWithoutShadow";
+import sale from "../../../../assets/collections/label.png";
 
 const ModalChildrenBuy = (props) => {
 
     const getButtons = () =>{
         if(!props.openItem) return
+
+        const salePrice = typeof props.openItem.salePrice === 'string'
+            ? JSON.parse(props.openItem.salePrice)
+            : props.openItem.salePrice
 
         let image = ''
         let price = ''
@@ -27,6 +33,9 @@ const ModalChildrenBuy = (props) => {
             case 'coins':{
                 image = coins
                 price = props.openItem.price.coins
+                if(props.openItem.isSale === 'true'){
+                    return getSaleBtn('coins',props.openItem.price.coins, salePrice.coins, coins)
+                }
                 return <ButtonWithImage image={image}
                                         text={price}
                                         clickHandler={()=>confirmModal('coins',price,props.openItem.id)}/>
@@ -34,6 +43,11 @@ const ModalChildrenBuy = (props) => {
             case 'diamonds':{
                 image = diamonds
                 price = props.openItem.price.diamonds
+
+                if(props.openItem.isSale === 'true'){
+                    return getSaleBtn('diamonds',props.openItem.price.diamonds, salePrice.diamonds, coins)
+                }
+
                 return <ButtonWithImage image={image}
                                         text={price}
                                         clickHandler={()=>confirmModal('diamonds',price,props.openItem.id)}/>
@@ -41,9 +55,14 @@ const ModalChildrenBuy = (props) => {
             case 'realmoney':{
                 image = money
                 price = props.openItem.price.money
+
+                if(props.openItem.isSale === 'true'){
+                    return getSaleBtn('money',props.openItem.price.money, salePrice.money, coins)
+                }
+
                 return <ButtonWithImage image={image}
                                         text={price}
-                                        clickHandler={()=>confirmModal('realmoney',price,props.openItem.id)}/>
+                                        clickHandler={()=>confirmModal('money',price,props.openItem.id)}/>
             }
             case 'coins-diamonds':
             case 'coins-realmoney':
@@ -51,26 +70,26 @@ const ModalChildrenBuy = (props) => {
             case 'coins-diamonds-realmoney':{
                 return (
                     <React.Fragment>
-                        {coins !== '' && <ButtonWithImage text={props.openItem.price.coins}
-                                                          image={coins}
-                                                         clickHandler={()=>confirmModal(
-                                                             'coins',
-                                                             props.openItem.price.coins,
-                                                             props.openItem.id
-                                                         )}/>}
-                        {diamonds !== '' && <ButtonWithImage text={diamonds}
-                                                             image={diamonds}
-                                                            clickHandler={()=>confirmModal(
-                                                                'diamonds',
-                                                                props.openItem.price.diamonds,
-                                                                props.openItem.id
-                                                            )}/>}
-                        {money !== '' && <ButtonWithText text={`${props.openItem.price.money} $`}
-                                                         clickHandler={()=>confirmModal(
-                                                             'money',
-                                                             props.openItem.price.money,
-                                                             props.openItem.id
-                                                         )}/>}
+                        {coins !== '' && props.openItem.isSale === 'true' && salePrice.coins !== props.openItem.price.coins
+                            ? getSaleBtn('coins',props.openItem.price.coins, salePrice.coins, coins)
+                            : <ButtonWithImage text={props.openItem.price.coins}
+                                             image={coins}
+                                             clickHandler={()=>confirmModal('coins', props.openItem.price.coins, props.openItem.id)}/>}
+                        {diamonds !== '' && props.openItem.isSale === 'true' && salePrice.coins !== props.openItem.price.diamonds
+                            ? getSaleBtn('diamonds',props.openItem.price.diamonds, salePrice.diamonds, diamonds)
+                            : <ButtonWithImage text={diamonds}
+                                             image={diamonds}
+                                             clickHandler={()=>confirmModal('diamonds', props.openItem.price.diamonds, props.openItem.id)}/>}
+                        {
+                            money !== '' && props.openItem.price.money !== ''
+                                ? null
+                                : +props.openItem.price.money > 0 && props.openItem.isSale === 'true' &&
+                                    salePrice.money !== props.openItem.price.money
+                                    ? getSaleBtn('money',props.openItem.price.money, salePrice.money, diamonds)
+                                    : <ButtonWithImage text={`${props.openItem.price.money}`}
+                                                 image={money}
+                                                 margin={2}
+                                                 clickHandler={()=>confirmModal('money',props.openItem.price.money,props.openItem.id)}/>}
                     </React.Fragment>
                 )
             }
@@ -98,6 +117,29 @@ const ModalChildrenBuy = (props) => {
         props.setModalVisible(false)
     }
 
+    const getSaleBtn = (type,price, salePrice, image) =>{
+        if(+price === 0 || +salePrice === 0 && +price === +salePrice) return null
+
+        return (
+            <PriceSale onPress={()=>{confirmModal(type,salePrice,props.openItem.id)}}
+                       style={{ borderBottomWidth: 3 }}
+                       activeOpacity={0.9}>
+                <PriceImage source={image}/>
+                <PriceLine small heavy color='#fff' center>{price}</PriceLine>
+                <Sale setShadow={true} shadowColor={'#fff'} madium heavy color='#9a1515'>{salePrice}</Sale>
+            </PriceSale>
+        )
+    }
+
+    const renderSaleLabel = () =>{
+        if(props.openItem.isSale !== 'true') return null
+
+        return <SaleContainer>
+            <TextSale large blod center color={'#9a1515'} style={{transform: [{rotate: '-60deg'}]}}>sale</TextSale>
+            <SaleImg source={sale} style={{transform: [{rotate: '-20deg'}]}}/>
+        </SaleContainer>
+    }
+
     const getItemImgByType = () =>{
         if(props.type === 'dices'){
             return getCollectionDiceImg(props.openItem.sortIndex)
@@ -111,6 +153,7 @@ const ModalChildrenBuy = (props) => {
     return (
         <BuyContainer>
             <SquareImage source={getItemImgByType()}/>
+            {renderSaleLabel()}
 
             <Context>
                 <Text setShadow={true} large blod center color={'#fff'}>
@@ -153,13 +196,63 @@ const ButtonContainer = styled.View`
   justify-content: space-around;
   flex-wrap: wrap;
   flex-direction: row;
-  width: 100%;
+  width: 90%;
   margin-top: 10px;
 `
 const SquareImage = styled.Image`
     margin-top: 10px;
   width: 100px;
   height: 100px;
+`
+
+const PriceSale = styled.TouchableOpacity`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  background-color:  #5eba7d;
+  border-radius: 10px;
+  border: 1px solid rgb(255, 157, 77);
+  padding: 5px 40px 5px 40px;
+`
+
+const PriceImage = styled.Image`
+  width: 30px;
+  height: 30px;
+`
+
+const PriceLine = styled(TextWithoutShadow)`
+  text-decoration-line: line-through;
+  text-decoration-style: solid;
+  text-decoration-color: #9a1515;
+  margin-right: 5px;
+`
+
+const SaleContainer = styled.View`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: absolute;
+  top: -15px;
+  left: 0px;
+  z-index: 1;
+`
+
+const TextSale = styled(TextWithoutShadow)`
+  position: absolute;
+  top: 45px;
+  left: 28px;
+  z-index: 2;
+`
+
+const SaleImg = styled.Image`
+  width: 100px;
+  height: 100px;
+`
+
+const Sale = styled(Text)`
+ 
 `
 
 const mapStateToProps = (state) => ({

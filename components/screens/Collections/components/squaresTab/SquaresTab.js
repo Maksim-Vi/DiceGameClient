@@ -4,9 +4,12 @@ import {StyleSheet} from "react-native";
 import SquareItem from "./SquareItem";
 import ModalWrapper from "../../../../common/ModalWindows/ModalWrapper";
 import ModalChildrenBuy from "../../../../common/ModalWindows/ModalChildren/ModalChildrenBuy";
+import {useSelector} from "react-redux";
+import {selectMyUser} from "../../../../redux/reducers/players/PlayersReducer";
 
 const SquaresTab = (props) => {
 
+    const user = useSelector(state=> selectMyUser(state))
     const [modal, setModal] = React.useState({
         visible: false,
         modalName: 'Squares',
@@ -37,15 +40,21 @@ const SquaresTab = (props) => {
             <SquaresScroll showsVerticalScrollIndicator={false} contentContainerStyle={styles.scroll}>
                 <SquaresScrollContainer>
                     {props.squares &&
-                        [...props.squares].sort((a,b)=> a.sortIndex > b.sortIndex ? 1 : -1).map(squareItem=>{
-                            const isCollected = props.availableItems.squares.includes(+squareItem.id)
-                            const isActive = +props.activeItems.square === +squareItem.id
+                         [...props.squares].sort((a,b)=> a.sortIndex > b.sortIndex ? 1 : -1).map(squareItem=>{
+                             if(squareItem.available || user.admin) {
+                                const isCollected = props.availableItems.squares.includes(+squareItem.id)
+                                const isActive = +props.activeItems.square === +squareItem.id
+                                const isLocked = squareItem.lvlUnlock > user.experience.lvl
+                                 const isSale = squareItem.isSale === 'true'
 
-                            return <SquareItem key={squareItem.id}
-                                               isActive={isActive}
-                                               isCollected={isCollected}
-                                               squareItem={squareItem}
-                                               setModalVisible={setModalVisible}/>
+                                return <SquareItem key={squareItem.id}
+                                                   isActive={isActive}
+                                                   isCollected={isCollected}
+                                                   isLocked={isLocked}
+                                                   isSale={isSale}
+                                                   squareItem={squareItem}
+                                                   setModalVisible={setModalVisible}/>
+                            }
                         })
                     }
                 </SquaresScrollContainer>

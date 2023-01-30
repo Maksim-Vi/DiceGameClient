@@ -4,8 +4,12 @@ import {StyleSheet} from "react-native";
 import DiceItem from "./DiceItem";
 import ModalWrapper from "../../../../common/ModalWindows/ModalWrapper";
 import ModalChildrenBuy from "../../../../common/ModalWindows/ModalChildren/ModalChildrenBuy";
+import {useSelector} from "react-redux";
+import {selectMyUser} from "../../../../redux/reducers/players/PlayersReducer";
 
 const DicesTab = (props) => {
+
+    const user = useSelector(state=> selectMyUser(state))
     const [modal, setModal] = React.useState({
         visible: false,
         modalName: 'Dices',
@@ -36,15 +40,22 @@ const DicesTab = (props) => {
             <DicesScroll showsVerticalScrollIndicator={false} contentContainerStyle={styles.scroll}>
                 <DiceScrollContainer>
                     {props.dices &&
-                        [...props.dices].sort((a,b)=> a.sortIndex > b.sortIndex ? 1 : -1).map(diceItem=>{
-                            const isCollected = props.availableItems.dices.includes(+diceItem.id)
-                            const isActive = +props.activeItems.dice === +diceItem.id
+                        [...props.dices]
+                            .filter(item => item.available !== 'false' || user.admin)
+                            .sort((a,b)=> a.sortIndex > b.sortIndex ? 1 : -1)
+                            .map(diceItem=>{
+                                const isCollected = props.availableItems.dices.includes(+diceItem.id)
+                                const isActive = +props.activeItems.dice === +diceItem.id
+                                const isLocked = diceItem.lvlUnlock > user.experience.lvl
+                                const isSale = diceItem.isSale === 'true'
 
-                            return <DiceItem key={diceItem.id}
-                                             isActive={isActive}
-                                             isCollected={isCollected}
-                                             diceItem={diceItem}
-                                             setModalVisible={setModalVisible}/>
+                                return <DiceItem key={diceItem.id}
+                                                 isActive={isActive}
+                                                 isCollected={isCollected}
+                                                 isLocked={isLocked}
+                                                 isSale={isSale}
+                                                 diceItem={diceItem}
+                                                 setModalVisible={setModalVisible}/>
                         })
                     }
                 </DiceScrollContainer>
