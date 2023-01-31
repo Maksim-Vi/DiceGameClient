@@ -12,7 +12,7 @@ import {getCoinsBonus} from "../../../protocol/API/API";
 import {store} from "../../../redux/redux-store";
 import {updateCurrentUserCoins} from "../../../redux/reducers/players/PlayersReducer";
 import {APP_TYPE} from '@env'
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {selectLeftTimeShowGiftAd, setLeftTimeShowAd} from "../../../redux/reducers/AD/AdvertisingReducer";
 import Timer from "../../../common/Timer/Timer";
 import GiftTimer from "./Gift/GiftTimer";
@@ -20,17 +20,21 @@ import SlideScreen from "../../../common/AnimationScreens/SlideScreen";
 import AnimatedLottieView from "lottie-react-native";
 import coins from '../../../../assets/animation/lottieAnim/coins-drop.json'
 import Sounds, {soundsType} from "../../../utils/Sounds";
-
-const AdUnitID = Platform.OS === 'ios'
-    ?  APP_TYPE !== 'development' ? 'ca-app-pub-6421975370931679/8219230470' : TestIds.GAM_REWARDED_INTERSTITIAL
-    : APP_TYPE !== 'development' ? 'ca-app-pub-6421975370931679/7194208820' : TestIds.GAM_REWARDED_INTERSTITIAL
+import {selectDefaultParams} from "../../../redux/reducers/language/LanguageReducer";
+import defaultParams from "../../../redux/reducers/language/defaultParams";
 
 const FreeGift = (props) => {
+
+    const ENABLE_AD_PROD = useSelector(state=> selectDefaultParams(state, defaultParams.ENABLE_AD_PROD))
+
+    const AdUnitID = Platform.OS === 'ios'
+        ? APP_TYPE !== 'development' && ENABLE_AD_PROD ? 'ca-app-pub-6421975370931679/8219230470' : TestIds.GAM_REWARDED_INTERSTITIAL
+        : APP_TYPE !== 'development' && ENABLE_AD_PROD ? 'ca-app-pub-6421975370931679/7194208820' : TestIds.GAM_REWARDED_INTERSTITIAL
 
     const dispatch = useDispatch()
     const leftTimeShowGiftAd = selectLeftTimeShowGiftAd(store.getState())
     const animatedValue = React.useRef(new Animated.Value(1)).current;
-    const { isLoaded, isClosed, load, show, isEarnedReward } =  useRewardedInterstitialAd(TestIds.GAM_REWARDED_INTERSTITIAL, {
+    const { isLoaded, isClosed, load, show, isEarnedReward } =  useRewardedInterstitialAd(AdUnitID, {
         requestNonPersonalizedAdsOnly: true,
     })
     const [lottieAnim, setLottieAnim] = useState(false)

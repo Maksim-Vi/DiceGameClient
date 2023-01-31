@@ -9,21 +9,27 @@ import BackgroundWrapper from "../../common/BackgroundWrapper/BackgroundWrapper"
 import {store} from "../../redux/redux-store";
 import Winner from "./components/Winner";
 import Loser from "./components/Loser";
-import { Animated, Easing } from "react-native";
+import {Animated, Easing, Platform} from "react-native";
 import { setTimingAnimated } from "../../utils/Animation";
 import { useInterstitialAd, TestIds } from 'react-native-google-mobile-ads';
 import {resetCountShowAd, setCountShowAd} from "../../redux/reducers/AD/AdvertisingReducer";
-import {selectTranslation} from "../../redux/reducers/language/LanguageReducer";
+import {selectDefaultParams, selectTranslation} from "../../redux/reducers/language/LanguageReducer";
 import defaultTranslation from "../../redux/reducers/language/defaultTranslation";
 import {setActiveTabApp} from "../../redux/reducers/Websocket/WebsocketReducer";
 import coinsAnim from "../../../assets/animation/lottieAnim/confetti.json";
 import AnimatedLottieView from "lottie-react-native";
 import Sounds, {soundsType} from "../../utils/Sounds";
+import defaultParams from "../../redux/reducers/language/defaultParams";
+import {APP_TYPE} from '@env'
 
 const ResultScreen = (props) => {
 
+    const AdUnitID = Platform.OS === 'ios'
+        ? APP_TYPE !== 'development' && props.ENABLE_AD_PROD ? 'ca-app-pub-6421975370931679/8219230470' : TestIds.INTERSTITIAL
+        : APP_TYPE !== 'development' && props.ENABLE_AD_PROD ? 'ca-app-pub-6421975370931679/7194208820' : TestIds.INTERSTITIAL
+
     const advertising = useSelector(state => state.advertising)
-    const { isLoaded, isClosed, load, show } = useInterstitialAd(TestIds.INTERSTITIAL, {
+    const { isLoaded, isClosed, load, show } = useInterstitialAd(AdUnitID, {
         requestNonPersonalizedAdsOnly: true,
     });
     const animatedValue = React.useRef(new Animated.Value(0)).current;
@@ -172,6 +178,7 @@ const mapStateToProps = (state) => ({
     winText: selectTranslation(state, defaultTranslation.TR_YOU_WIN),
     loseText: selectTranslation(state, defaultTranslation.TR_YOU_LOSE),
     continue: selectTranslation(state, defaultTranslation.TR_CONTINUE),
+    ENABLE_AD_PROD: selectDefaultParams(state, defaultParams.ENABLE_AD_PROD)
 });
 
 export default connect(mapStateToProps)(ResultScreen);
