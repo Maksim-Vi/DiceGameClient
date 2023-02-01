@@ -13,8 +13,14 @@ const TextWithoutShadowStyle = ({...props}) => {
 
 const Text = styled.Text`
     color: ${props => props.color ? props.color : '#fff'};
-    font-family: ${props => props.user && props.user.language !== 'EN' ? 'Gogono-Cocoa' : 'Dilo-World'};
-
+    font-family: ${props => {
+      if(!props.fontFamily){
+        return props.user && props.user.language !== 'EN' ? 'Gogono-Cocoa' : 'Dilo-World'
+      } else {
+        return props.fontFamily
+      }
+    }};
+  
     ${({title,large,madium,small,fontSize})=>{
         if(title || large || madium || small){
           switch (true) {

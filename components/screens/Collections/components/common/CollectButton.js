@@ -32,7 +32,7 @@ const CollectButton = ({item,isActive,isSale,isLocked,isCollected,setModalVisibl
         }
         case 'realmoney':{
             image = money
-            price = item.price.money
+            price = `${item.price.money} $`
             break
         }
         case 'coins-diamonds':
@@ -96,8 +96,8 @@ const CollectButton = ({item,isActive,isSale,isLocked,isCollected,setModalVisibl
                 : <CollectBtn onPress={clickHandler} style={{ borderBottomWidth: 3 }} activeOpacity={0.9}>
                     {image && <PriceImage source={image}/>}
                     {price && !isSale
-                        ? <Text setShadow={true} small heavy color='#fff' center>{price}</Text>
-                        : <Price small heavy color='#fff' center>{price}</Price>
+                        ? <Text setShadow={true} fontFamily={item.type === 'realmoney' && 'Gogono-Cocoa'} small heavy color='#fff' center>{price}</Text>
+                        : <Price fontFamily={item.type === 'realmoney' && 'Gogono-Cocoa'} small heavy color='#fff' center>{price}</Price>
                     }
                     {isSale && <SalePrice setShadow={true} shadowColor={'#fff'} madium heavy color='#9a1515'>{getSalePrice()}</SalePrice>}
                     {textBtn && <Text setShadow={true} small heavy color='#fff' center>{textBtn}</Text>}

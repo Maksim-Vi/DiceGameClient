@@ -6,13 +6,14 @@ import Dice from './Dice/Dice'
 import GameModel from './GameModel/GameModel'
 import ScoreBoardOpponent from './ScoreBoardsOpponent/ScoreBoardOpponent'
 import ScoreBoardUser from './ScoreBoardsUser/ScoreBoardUser'
-import {Animated, Dimensions, Easing, NativeModules, Platform, useWindowDimensions} from "react-native";
+import {Animated, Dimensions, Easing} from "react-native";
 import {setTimingAnimated} from "../../../utils/Animation";
 import {selectTranslation} from "../../../redux/reducers/language/LanguageReducer";
 import defaultTranslation from "../../../redux/reducers/language/defaultTranslation";
 import {connect} from "react-redux";
 import BoardUserInfo from "./ScoreBoardsUser/BoardUserInfo";
 import BoardOpponentInfo from "./ScoreBoardsOpponent/BoardOpponentInfo";
+import gameBg from '../../../../assets/bg/gameBG2.jpg'
 
 class GameContainer extends React.Component {
     constructor() {
@@ -151,27 +152,29 @@ class GameContainer extends React.Component {
             <Game>
                 <GameFrame width={this.dimensions.width} height={this.dimensions.height}>
                     <GameBG style={{borderBottomWidth: 5, borderTopWidth: 5}}>
-                        <ScoreBoardOpponent board={boardData ? boardData.opponentBoard : null}
-                                            winPoints={winPointsData ? winPointsData.opponentWinPoints : null}
-                                            oppMove={!this.props.isYouMove}
-                                            activeItems={this.getOpponentActiveItems()}
+                        <BackroundGame source={gameBg} imageStyle={{ borderRadius: 15}} resizeMode="cover" >
+                            <ScoreBoardOpponent board={boardData ? boardData.opponentBoard : null}
+                                                winPoints={winPointsData ? winPointsData.opponentWinPoints : null}
+                                                oppMove={!this.props.isYouMove}
+                                                activeItems={this.getOpponentActiveItems()}
+                                                countScores={this.props.countScores}
+                                                opponent={opponent}/>
+                            <SpaceThrow style={{borderBottomWidth: 3, borderTopWidth: 3}}>
+                                <Dice activeItems={this.getActiveItemsByUser()} diceNumber={this.getThrowData()}/>
+                            </SpaceThrow>
+                            <ScoreBoardUser currentGameId={this.props.currentGameId}
+                                            user={this.props.user}
                                             countScores={this.props.countScores}
-                                            opponent={opponent}/>
-                        <SpaceThrow style={{borderBottomWidth: 3, borderTopWidth: 3}}>
-                            <Dice activeItems={this.getActiveItemsByUser()} diceNumber={this.getThrowData()}/>
-                        </SpaceThrow>
-                        <ScoreBoardUser currentGameId={this.props.currentGameId}
-                                        user={this.props.user}
-                                        countScores={this.props.countScores}
-                                        isYouMove={this.props.isYouMove}
-                                        activeItems={this.props.activeItems}
-                                        setThrowBtn={() => {
-                                            this.setState({showStartGameText: true})
-                                            this.animateStartGameText()
-                                        }}
-                                        winPoints={winPointsData ? winPointsData.userWinPoints : null}
-                                        diceScore={this.props.throwData ? this.props.throwData.diceScore : 0}
-                                        board={boardData ? boardData.userBoard : null}/>
+                                            isYouMove={this.props.isYouMove}
+                                            activeItems={this.props.activeItems}
+                                            setThrowBtn={() => {
+                                                this.setState({showStartGameText: true})
+                                                this.animateStartGameText()
+                                            }}
+                                            winPoints={winPointsData ? winPointsData.userWinPoints : null}
+                                            diceScore={this.props.throwData ? this.props.throwData.diceScore : 0}
+                                            board={boardData ? boardData.userBoard : null}/>
+                        </BackroundGame>
                     </GameBG>
 
                     <UsersInfoContainer>
@@ -214,7 +217,7 @@ class GameContainer extends React.Component {
                             }
                         ]
                     }}>
-                        <StartGameText title heavy color={'#fff'}>{this.props.startGameText}</StartGameText>
+                        <StartGameText isShadow={true} title heavy color={'#000000'}>{this.props.startGameText}</StartGameText>
                     </StartGameTextContainer>
                 }
             </Game>
@@ -248,11 +251,20 @@ const GameBG = styled.View`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  opacity: 1;
   width: 100%;
   height: 100%;
-  background-color: rgba(176, 176, 176, 0.75);
+  /*background-color: rgba(224, 187, 132, 0.91);*/
   border: 2px solid rgba(176, 176, 176, 0.95);
   border-radius: 20px;
+`
+
+const BackroundGame = styled.ImageBackground`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
 `
 
 const UsersInfoContainer = styled.View`
@@ -284,8 +296,8 @@ const SpaceThrow = styled.View`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(73, 73, 73, 0.07);
-  border: 2px solid rgba(73, 73, 73, 0.08);
+  background-color: rgba(73, 73, 73, 0.15);
+  border: 2px solid rgba(73, 73, 73, 0.16);
   width: 80%;
   height: 15%;
   border-radius: 20px;

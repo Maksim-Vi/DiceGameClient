@@ -13,7 +13,6 @@ import GoogleAuth from "./Google/GoogleAuth";
 import {setInfoPopup} from "../../redux/reducers/popups/PopupsReducer";
 import {useDispatch} from "react-redux";
 import Sounds, {soundsType} from "../../utils/Sounds";
-import ChangeUserNameGoogle from "../../managers/popupsManager/popupsComponents/GooglePopups/ChangeUserNameGoogle";
 
 const AuthScreen = () => {
 

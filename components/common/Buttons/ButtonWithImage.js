@@ -18,7 +18,7 @@ const ButtonWithImage = (props) => {
                     style={{ borderBottomWidth: 3 }}
                     activeOpacity={0.9}>
             <PriceImage {...props} source={props.image}/>
-            {props.text && <Text setShadow={true} small heavy color='#fff' center>{props.text}</Text>}
+            {props.text && <Text setShadow={true} fontFamily={props.fontFamily} small heavy color='#fff' center>{props.text}</Text>}
         </CollectBtn>
     )
 }
@@ -40,13 +40,25 @@ const CollectBtn = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
   flex-direction: row;
+  border-radius: 10px;
   margin:${(props)=> props.margin ? `${props.margin}px` : '0px'};
   ${(props)=>{
     return props.color 
             ? `background-color: ${props.color};` 
             : 'background-color: #5eba7d;'
   }};
-  border-radius: 10px;
+  ${(props)=>{
+      if(props.btnWidth){
+          return `
+            width: ${props.btnWidth}%;
+          `
+      }
+      if(props.btnHeight){
+        return `
+           height: ${props.btnHeight}px;
+          `
+      }
+  }};
   ${(props)=>{
     return props.borderColor 
             ? `border: 1px solid ${props.borderColor};` 

@@ -30,7 +30,7 @@ const InfoPopups = () => {
                 </TextContainer>
                 <ButtonWithText  width={'80%'}
                                  height={'40px'}
-                                 text={close}
+                                 text={close !== defaultTranslation.TR_CLOSE ? close : 'close'}
                                  clickHandler={closePopup}/>
             </InfoContainer>
         </ModalWrapper>

@@ -38,6 +38,10 @@ const ModalChildrenBuy = (props) => {
                 }
                 return <ButtonWithImage image={image}
                                         text={price}
+                                        margin={2}
+                                        btnWidth={45}
+                                        btnHeight={30}
+                                        padding={0}
                                         clickHandler={()=>confirmModal('coins',price,props.openItem.id)}/>
             }
             case 'diamonds':{
@@ -50,6 +54,10 @@ const ModalChildrenBuy = (props) => {
 
                 return <ButtonWithImage image={image}
                                         text={price}
+                                        margin={2}
+                                        btnWidth={45}
+                                        btnHeight={30}
+                                        padding={0}
                                         clickHandler={()=>confirmModal('diamonds',price,props.openItem.id)}/>
             }
             case 'realmoney':{
@@ -61,7 +69,12 @@ const ModalChildrenBuy = (props) => {
                 }
 
                 return <ButtonWithImage image={image}
-                                        text={price}
+                                        text={`${price} $`}
+                                        fontFamily={'Gogono-Cocoa'}
+                                        margin={2}
+                                        btnWidth={45}
+                                        btnHeight={30}
+                                        padding={0}
                                         clickHandler={()=>confirmModal('money',price,props.openItem.id)}/>
             }
             case 'coins-diamonds':
@@ -74,22 +87,34 @@ const ModalChildrenBuy = (props) => {
                             ? getSaleBtn('coins',props.openItem.price.coins, salePrice.coins, coins)
                             : <ButtonWithImage text={props.openItem.price.coins}
                                              image={coins}
+                                             margin={2}
+                                             btnWidth={45}
+                                             btnHeight={30}
+                                             padding={0}
                                              clickHandler={()=>confirmModal('coins', props.openItem.price.coins, props.openItem.id)}/>}
                         {diamonds !== '' && props.openItem.isSale === 'true' && salePrice.coins !== props.openItem.price.diamonds
                             ? getSaleBtn('diamonds',props.openItem.price.diamonds, salePrice.diamonds, diamonds)
                             : <ButtonWithImage text={diamonds}
                                              image={diamonds}
+                                             margin={2}
+                                             btnWidth={45}
+                                             btnHeight={30}
+                                             padding={0}
                                              clickHandler={()=>confirmModal('diamonds', props.openItem.price.diamonds, props.openItem.id)}/>}
                         {
-                            money !== '' && props.openItem.price.money !== ''
+                            props.openItem.price.money === '' || +props.openItem.price.money === 0
                                 ? null
                                 : +props.openItem.price.money > 0 && props.openItem.isSale === 'true' &&
                                     salePrice.money !== props.openItem.price.money
-                                    ? getSaleBtn('money',props.openItem.price.money, salePrice.money, diamonds)
-                                    : <ButtonWithImage text={`${props.openItem.price.money}`}
-                                                 image={money}
-                                                 margin={2}
-                                                 clickHandler={()=>confirmModal('money',props.openItem.price.money,props.openItem.id)}/>}
+                                    ? getSaleBtn('money',props.openItem.price.money, salePrice.money, money)
+                                    : <ButtonWithImage text={`${props.openItem.price.money} $`}
+                                                       fontFamily={'Gogono-Cocoa'}
+                                                       image={money}
+                                                       margin={2}
+                                                       btnWidth={45}
+                                                       btnHeight={30}
+                                                       padding={0}
+                                                       clickHandler={()=>confirmModal('money',props.openItem.price.money,props.openItem.id)}/>}
                     </React.Fragment>
                 )
             }
@@ -118,8 +143,6 @@ const ModalChildrenBuy = (props) => {
     }
 
     const getSaleBtn = (type,price, salePrice, image) =>{
-        if(+price === 0 || +salePrice === 0 && +price === +salePrice) return null
-
         return (
             <PriceSale onPress={()=>{confirmModal(type,salePrice,props.openItem.id)}}
                        style={{ borderBottomWidth: 3 }}
@@ -127,6 +150,12 @@ const ModalChildrenBuy = (props) => {
                 <PriceImage source={image}/>
                 <PriceLine small heavy color='#fff' center>{price}</PriceLine>
                 <Sale setShadow={true} shadowColor={'#fff'} madium heavy color='#9a1515'>{salePrice}</Sale>
+                {type === 'money' &&
+                    <Text fontFamily={'Gogono-Cocoa'}
+                          setShadow={true}
+                          madium heavy
+                          color='#fff'> {'\u0024'}</Text>
+                }
             </PriceSale>
         )
     }
@@ -157,7 +186,7 @@ const ModalChildrenBuy = (props) => {
 
             <Context>
                 <Text setShadow={true} large blod center color={'#fff'}>
-                    {props.confirmInfo} {props.openItem.name}?
+                    {props.confirmInfo} {/*{props.openItem.name}?*/}
                 </Text>
             </Context>
 
@@ -212,8 +241,10 @@ const PriceSale = styled.TouchableOpacity`
   flex-direction: row;
   background-color:  #5eba7d;
   border-radius: 10px;
+  margin: 5px;
+  width: 45%;
+  height: 40px;
   border: 1px solid rgb(255, 157, 77);
-  padding: 5px 40px 5px 40px;
 `
 
 const PriceImage = styled.Image`
