@@ -10,7 +10,7 @@ import {
 } from "react-native-google-mobile-ads";
 import {getCoinsBonus} from "../../../protocol/API/API";
 import {store} from "../../../redux/redux-store";
-import {updateCurrentUserCoins} from "../../../redux/reducers/players/PlayersReducer";
+import {selectMyUser, updateCurrentUserCoins} from "../../../redux/reducers/players/PlayersReducer";
 import {APP_TYPE} from '@env'
 import {useDispatch, useSelector} from "react-redux";
 import {selectLeftTimeShowGiftAd, setLeftTimeShowAd} from "../../../redux/reducers/AD/AdvertisingReducer";
@@ -25,6 +25,7 @@ import defaultParams from "../../../redux/reducers/language/defaultParams";
 
 const FreeGift = (props) => {
 
+    const user = useSelector(selectMyUser)
     const ENABLE_AD_PROD = useSelector(state=> selectDefaultParams(state, defaultParams.ENABLE_AD_PROD))
 
     const AdUnitID = Platform.OS === 'ios'
@@ -36,6 +37,10 @@ const FreeGift = (props) => {
     const animatedValue = React.useRef(new Animated.Value(1)).current;
     const { isLoaded, isClosed, load, show, isEarnedReward } =  useRewardedInterstitialAd(AdUnitID, {
         requestNonPersonalizedAdsOnly: true,
+        serverSideVerificationOptions:{
+            userId: String(user.id),
+            customData: JSON.stringify({username: user.username, reward: 10, type: 'coins'})
+        }
     })
     const [lottieAnim, setLottieAnim] = useState(false)
     const [timeData, setTimeData] = useState({
@@ -80,19 +85,10 @@ const FreeGift = (props) => {
 
     const getBonusByView = async () =>{
         if (isClosed && isEarnedReward) {
-            const getBonusCoins = await getCoinsBonus(props.myUser.username)
-
-            if(getBonusCoins && getBonusCoins.success){
-                store.dispatch(updateCurrentUserCoins(getBonusCoins.updatedCoins))
-
-                timer.start(getBonusCoins.giftWatchedTime)
-                dispatch(setLeftTimeShowAd(getBonusCoins.giftWatchedTime))
-                setTimeout(()=>{
-                    Sounds.loadAndPlayFile(soundsType.moneyDrop)
-                    setLottieAnim(true)
-                },500)
-            }
-
+            setTimeout(()=>{
+                Sounds.loadAndPlayFile(soundsType.moneyDrop)
+                setLottieAnim(true)
+            },500)
             animatedValue.stopAnimation()
 
         } else if(isClosed && !isEarnedReward){
@@ -118,6 +114,8 @@ const FreeGift = (props) => {
     useEffect(()=>{
         if(leftTimeShowGiftAd && leftTimeShowGiftAd <= 0){
             load()
+        } else if(leftTimeShowGiftAd && leftTimeShowGiftAd > 0){
+            timer.start(leftTimeShowGiftAd)
         }
     },[load, leftTimeShowGiftAd])
 

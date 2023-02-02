@@ -4,6 +4,7 @@ import S_UPDATE_USER_EXP from "./messages/server/users/S_UPDATE_USER_EXP";
 import S_UPDATE_USER_FLASH from "./messages/server/users/S_UPDATE_USER_FLASH";
 import S_UPDATE_USER_MONEY from "./messages/server/users/S_UPDATE_USER_MONEY";
 import S_UPDATE_USER_STATISTICS from "./messages/server/users/S_UPDATE_USER_STATISTICS";
+import S_UPDATE_USER_ADMOD_TIME from "./messages/server/users/S_UPDATE_USER_ADMOD_TIME";
 
 export const usersHandlerMessage = (data) =>{
     switch (data.name) {
@@ -18,6 +19,9 @@ export const usersHandlerMessage = (data) =>{
             break;
         case 'S_UPDATE_USER_STATISTICS':
             new S_UPDATE_USER_STATISTICS(data.statistics)
+            break;
+        case 'S_UPDATE_USER_ADMOD_TIME':
+            new S_UPDATE_USER_ADMOD_TIME(data.updateTime)
             break;
         default:
             break;

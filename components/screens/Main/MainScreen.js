@@ -38,7 +38,6 @@ const MainScreen = (props) => {
     }
 
     useEffect(()=>{
-        console.log('ANSWER', isRestoreGame)
         if(isRestoreGame){
             restoreGame()
         }

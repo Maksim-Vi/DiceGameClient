@@ -25,8 +25,8 @@ import {APP_TYPE} from '@env'
 const ResultScreen = (props) => {
 
     const AdUnitID = Platform.OS === 'ios'
-        ? APP_TYPE !== 'development' && props.ENABLE_AD_PROD ? 'ca-app-pub-6421975370931679/8219230470' : TestIds.INTERSTITIAL
-        : APP_TYPE !== 'development' && props.ENABLE_AD_PROD ? 'ca-app-pub-6421975370931679/7194208820' : TestIds.INTERSTITIAL
+        ? APP_TYPE !== 'development' && props.ENABLE_AD_PROD ? 'ca-app-pub-6421975370931679~2323680627' : TestIds.INTERSTITIAL
+        : APP_TYPE !== 'development' && props.ENABLE_AD_PROD ? 'ca-app-pub-6421975370931679/4342087577' : TestIds.INTERSTITIAL
 
     const advertising = useSelector(state => state.advertising)
     const { isLoaded, isClosed, load, show } = useInterstitialAd(AdUnitID, {
