@@ -1,5 +1,6 @@
 
 import { store } from "../../../../redux/redux-store"
+import {setRestoreGame} from "../../../../redux/reducers/game/GameReducer";
 
 export default class S_LEAVE_GAME {
     constructor(gameId){
@@ -18,7 +19,7 @@ export default class S_LEAVE_GAME {
     }
 
     exec() {
-
+        store.dispatch(setRestoreGame(false))
     }
 
 	getLogText() {

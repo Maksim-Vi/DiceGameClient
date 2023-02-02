@@ -13,18 +13,36 @@ import Text from '../../common/Text/Text'
 import {selectMyUser} from '../../redux/reducers/players/PlayersReducer'
 import FreeGift from "./components/FreeGift";
 import OnlineUsers from "./components/OnlineUsers";
-import {getIosModel} from "../../utils/utils";
+import {getIosModel, transitionState} from "../../utils/utils";
 import {selectDefaultParams} from "../../redux/reducers/language/LanguageReducer";
 import defaultParams from "../../redux/reducers/language/defaultParams";
+import {selectRestoreGame, setIsGameStarted} from "../../redux/reducers/game/GameReducer";
+import {store} from "../../redux/redux-store";
 
 const MainScreen = (props) => {
 
     const dispatch = useDispatch()
     const myUser = useSelector(selectMyUser)
+    const isRestoreGame = useSelector(selectRestoreGame)
 
     const handlerPlayGame = (gameType) => {
         new C_QUICK_PLAY(gameType)
     }
+
+    const restoreGame = () =>{
+        store.dispatch(setIsGameStarted(true))
+
+        setTimeout(()=>{
+            transitionState('GameScreen')
+        }, 500)
+    }
+
+    useEffect(()=>{
+        console.log('ANSWER', isRestoreGame)
+        if(isRestoreGame){
+            restoreGame()
+        }
+    },[isRestoreGame])
 
     useEffect(()=>{
         if(!window.chatManager.chat.channels['general']){

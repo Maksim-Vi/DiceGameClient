@@ -1,6 +1,6 @@
 
 import { store } from "../../../../redux/redux-store"
-import {setResultGame} from "../../../../redux/reducers/game/GameReducer";
+import {setRestoreGame, setResultGame} from "../../../../redux/reducers/game/GameReducer";
 import {transitionState} from "../../../../utils/utils";
 
 export default class S_GAME_RESULT {
@@ -20,9 +20,9 @@ export default class S_GAME_RESULT {
     }
 
     exec() {
+        store.dispatch(setRestoreGame(false))
         store.dispatch(setResultGame(this.resultData))
         setTimeout(()=>{
-            //window.navigation.navigate('ResultScreen')
             transitionState('ResultScreen')
         },500)
     }

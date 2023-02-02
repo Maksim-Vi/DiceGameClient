@@ -16,6 +16,8 @@ import S_OPPONENT_THROW from "./messages/server/games/S_OPPONENT_THROW";
 import S_COUNT_SCORES from "./messages/server/games/S_COUNT_SCORES";
 import S_GAME_BROKEN from "./messages/server/games/S_GAME_BROKEN";
 import S_CAN_JOIN_TO_GAME from "./messages/server/games/S_CAN_JOIN_TO_GAME";
+import S_USER_LOST_CONNECTION_IN_GAME from "./messages/server/games/S_USER_LOST_CONNECTION_IN_GAME";
+import S_RESTORE_GAME from "./messages/server/games/S_RESTORE_GAME";
 
 export const gameHandlerMessage = (data) =>{
     switch (data.name) {
@@ -62,7 +64,12 @@ export const gameHandlerMessage = (data) =>{
         case 'S_GAME_FINISHED':
             new S_GAME_FINISHED(data.gameId)
             break;
-
+        case 'S_USER_LOST_CONNECTION_IN_GAME':
+            new S_USER_LOST_CONNECTION_IN_GAME(data.leaveUsername, data.opponentUsername)
+            break;
+        case 'S_RESTORE_GAME':
+            new S_RESTORE_GAME(data.username, data.activeGame)
+            break;
 
         case 'S_LEAVE_GAME':
             new S_LEAVE_GAME(data.gameId)

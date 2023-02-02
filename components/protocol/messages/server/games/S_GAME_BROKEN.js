@@ -1,4 +1,6 @@
 import {transitionState} from "../../../../utils/utils";
+import {store} from "../../../../redux/redux-store";
+import {setRestoreGame} from "../../../../redux/reducers/game/GameReducer";
 
 export default class S_GAME_BROKEN {
     constructor(gameId){
@@ -17,7 +19,7 @@ export default class S_GAME_BROKEN {
     }
 
     exec() {
-       //window.navigation.navigate('MainScreen')
+        store.dispatch(setRestoreGame(false))
         transitionState('MainScreen')
     }
 

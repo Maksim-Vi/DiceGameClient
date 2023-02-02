@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import {selectMyUser} from '../../redux/reducers/players/PlayersReducer'
 import {
     selectAvatarPopup, selectGoogleConfirmUsernamePopup, selectInfoPopup,
-    selectLevelUpPopup,
+    selectLevelUpPopup, selectLostConnOpponentPopup,
     selectSettingsPopup, selectSevenDaysGiftPopup,
     selectTestBtnsPopup
 } from '../../redux/reducers/popups/PopupsReducer'
@@ -17,6 +17,7 @@ import {selectActiveTabApp} from "../../redux/reducers/Websocket/WebsocketReduce
 import SevenDaysGift from "./popupsComponents/SevenDays/SevenDaysGift";
 import InfoPopups from "./popupsComponents/InfoPopups";
 import ChangeUserNameGoogle from "./popupsComponents/GooglePopups/ChangeUserNameGoogle";
+import LostConnectionOpponent from "./popupsComponents/Game/LostConnectionOpponent";
 
 const PopupsManager = (props) => {
     return (
@@ -29,6 +30,7 @@ const PopupsManager = (props) => {
             {props.sevenDaysPopup.visible && <SevenDaysGift />}
             {props.infoPopup.visible && <InfoPopups />}
             {props.googleConfirmUsernamePopup.visible && <ChangeUserNameGoogle />}
+            {props.lostConnOpponentPopup.visible && <LostConnectionOpponent />}
 
 
             {props.testBtnsPopup.visible && <TestBtnsPopups/>}
@@ -53,6 +55,7 @@ const mapStateToProps = (state) => ({
     user: selectMyUser(state),
     activeTabApp: selectActiveTabApp(state),
     googleConfirmUsernamePopup: selectGoogleConfirmUsernamePopup(state),
+    lostConnOpponentPopup: selectLostConnOpponentPopup(state),
 });
 
 export default connect(mapStateToProps)(PopupsManager);
