@@ -45,7 +45,7 @@ const UserProvider = ({children}) => {
         const value = await AsyncStorage.getItem(storageNameSound)
         if(value) {
             const data = JSON.parse(value)
-            if (data && data.user.sound) {
+            if (data) {
                 const newData = {...data, sound: sound}
                 await AsyncStorage.setItem(storageNameSound, JSON.stringify(newData))
             }
