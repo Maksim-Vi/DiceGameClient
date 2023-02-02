@@ -68,7 +68,7 @@ export const gameHandlerMessage = (data) =>{
             new S_USER_LOST_CONNECTION_IN_GAME(data.leaveUsername, data.opponentUsername)
             break;
         case 'S_RESTORE_GAME':
-            new S_RESTORE_GAME(data.username, data.activeGame)
+            new S_RESTORE_GAME(data.username, data.activeGame, data.countScores, data.lastThrow)
             break;
 
         case 'S_LEAVE_GAME':
