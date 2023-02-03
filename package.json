@@ -13,6 +13,8 @@
     "eject": "expo eject",
     "prebuild": "npx expo prebuild",
     "create-build:json": "eas build:configure",
+    "eas:update:development": "eas update --branch developmen",
+    "eas:update:production": "eas update --branch production",
     "eas:build:ios": "eas build -p ios --profile production",
     "eas:build:android": "eas build -p android --profile production",
     "eas:build:ios:dev": "eas build -p ios --profile development",

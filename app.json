@@ -3,9 +3,9 @@
     "name": "knocky dice",
     "slug": "dicegame",
     "owner": "kastom",
-    "version": "1.1.8",
+    "version": "1.1.9",
     "orientation": "portrait",
-    "icon": "./assets/loadGame/icon-game.jpeg",
+    "icon": "./assets/loadGame/icon-game.jpg",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/loadGame/load-img-game.png",
@@ -14,7 +14,8 @@
       "fontSize": "18px"
     },
     "updates": {
-      "fallbackToCacheTimeout": 0
+      "fallbackToCacheTimeout": 0,
+      "url": "https://u.expo.dev/a5e5cb05-164b-405b-9ee0-6e83cf5f8084"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -41,6 +42,9 @@
       "eas": {
         "projectId": "a5e5cb05-164b-405b-9ee0-6e83cf5f8084"
       }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
     }
   },
   "react-native-google-mobile-ads": {
