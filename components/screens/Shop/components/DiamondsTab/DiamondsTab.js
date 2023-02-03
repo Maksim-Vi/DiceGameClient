@@ -7,12 +7,10 @@ import DiamondItemAdmod from './DiamondItemAdmod';
 import { getDiamondsBonus } from '../../../../protocol/API/API';
 import { updateCurrentUserCrystals } from '../../../../redux/reducers/players/PlayersReducer';
 import { store } from '../../../../redux/redux-store';
-import Constants from "expo-constants";
-const { APP_TYPE } = Constants.manifest?.extra;
 
 const AdUnitID = Platform.OS === 'ios'
-    ?  APP_TYPE !== 'development' ? 'ca-app-pub-6421975370931679/8219230470' : TestIds.REWARDED_INTERSTITIAL
-    : APP_TYPE !== 'development' ? 'ca-app-pub-6421975370931679/7194208820' : TestIds.REWARDED_INTERSTITIAL
+    ?  process.env.APP_TYPE !== 'development' ? 'ca-app-pub-6421975370931679/8219230470' : TestIds.REWARDED_INTERSTITIAL
+    : process.env.APP_TYPE !== 'development' ? 'ca-app-pub-6421975370931679/7194208820' : TestIds.REWARDED_INTERSTITIAL
 
 
 const internal = RewardedInterstitialAd.createForAdRequest(AdUnitID,{

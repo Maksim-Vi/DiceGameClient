@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import ButtonImage from "../../../common/Buttons/ButtonImage";
 import freeCoins from "../../../../assets/shop/profits.png";
 import styled from "styled-components";
@@ -8,10 +8,8 @@ import {
     TestIds,
     useRewardedInterstitialAd,
 } from "react-native-google-mobile-ads";
-import {getCoinsBonus} from "../../../protocol/API/API";
 import {store} from "../../../redux/redux-store";
-import {selectMyUser, updateCurrentUserCoins} from "../../../redux/reducers/players/PlayersReducer";
-import {APP_TYPE} from '@env'
+import {selectMyUser} from "../../../redux/reducers/players/PlayersReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {selectLeftTimeShowGiftAd, setLeftTimeShowAd} from "../../../redux/reducers/AD/AdvertisingReducer";
 import Timer from "../../../common/Timer/Timer";
@@ -31,8 +29,8 @@ const FreeGift = (props) => {
     const ENABLE_AD_ANDROID_PROD = useSelector(state=> selectDefaultParams(state, defaultParams.ENABLE_AD_ANDROID_PROD))
     
     const AdUnitID = Platform.OS === 'ios'
-        ? APP_TYPE !== 'development' && ENABLE_AD_PROD && ENABLE_AD_IOS_PROD ? 'ca-app-pub-6421975370931679/8219230470' : TestIds.GAM_REWARDED_INTERSTITIAL
-        : APP_TYPE !== 'development' && ENABLE_AD_PROD && ENABLE_AD_ANDROID_PROD ? 'ca-app-pub-6421975370931679/7194208820' : TestIds.GAM_REWARDED_INTERSTITIAL
+        ? process.env.APP_TYPE !== 'development' && ENABLE_AD_PROD && ENABLE_AD_IOS_PROD ? 'ca-app-pub-6421975370931679/8219230470' : TestIds.GAM_REWARDED_INTERSTITIAL
+        : process.env.APP_TYPE !== 'development' && ENABLE_AD_PROD && ENABLE_AD_ANDROID_PROD ? 'ca-app-pub-6421975370931679/7194208820' : TestIds.GAM_REWARDED_INTERSTITIAL
 
     const dispatch = useDispatch()
     const leftTimeShowGiftAd = selectLeftTimeShowGiftAd(store.getState())

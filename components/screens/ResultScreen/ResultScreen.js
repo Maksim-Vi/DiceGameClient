@@ -20,13 +20,12 @@ import coinsAnim from "../../../assets/animation/lottieAnim/confetti.json";
 import AnimatedLottieView from "lottie-react-native";
 import Sounds, {soundsType} from "../../utils/Sounds";
 import defaultParams from "../../redux/reducers/language/defaultParams";
-import {APP_TYPE} from '@env'
 
 const ResultScreen = (props) => {
 
     const AdUnitID = Platform.OS === 'ios'
-        ? APP_TYPE !== 'development' && props.ENABLE_AD_PROD && props.ENABLE_AD_IOS_PROD ? 'ca-app-pub-6421975370931679~2323680627' : TestIds.INTERSTITIAL
-        : APP_TYPE !== 'development' && props.ENABLE_AD_PROD && props.ENABLE_AD_ANDROID_PROD ? 'ca-app-pub-6421975370931679/4342087577' : TestIds.INTERSTITIAL
+        ? process.env.APP_TYPE !== 'development' && props.ENABLE_AD_PROD && props.ENABLE_AD_IOS_PROD ? 'ca-app-pub-6421975370931679~2323680627' : TestIds.INTERSTITIAL
+        : process.env.APP_TYPE !== 'development' && props.ENABLE_AD_PROD && props.ENABLE_AD_ANDROID_PROD ? 'ca-app-pub-6421975370931679/4342087577' : TestIds.INTERSTITIAL
 
     const advertising = useSelector(state => state.advertising)
     const { isLoaded, isClosed, load, show } = useInterstitialAd(AdUnitID, {
