@@ -31,20 +31,24 @@ const LostConnectionOpponent = () => {
     }
 
     return (
-        <ModalWrapper modalBG={'default'} height={height / 3} modalVisible={true}>
+        <ModalWrapper modalBG={'default'} height={height / 2} modalVisible={true}>
             <LoastConnectionOpponentGameContainer>
                 <TextContainer>
                     <Text setShadow={true} large blod center color={'#fefefe'}>{TR_LOST_USER_CONNECTION_GAME}</Text>
                 </TextContainer>
-                <ButtonWithText  width={'80%'}
-                                 height={'40px'}
-                                 text={TR_WAIT}
-                                 clickHandler={closePopup}/>
-                <ButtonWithText  width={'80%'}
-                                 height={'40px'}
-                                 color={'#c53838'}
-                                 text={TR_LEFT_GAME}
-                                 clickHandler={leftGamePopup}/>
+
+                <ButtonContainer>
+                    <ButtonWithText  width={'45%'}
+                                     height={'40px'}
+                                     text={TR_WAIT}
+                                     clickHandler={closePopup}/>
+                    <ButtonWithText  width={'45%'}
+                                     height={'40px'}
+                                     color={'#c53838'}
+                                     text={TR_LEFT_GAME}
+                                     clickHandler={leftGamePopup}/>
+                </ButtonContainer>
+
             </LoastConnectionOpponentGameContainer>
         </ModalWrapper>
     );
@@ -70,10 +74,12 @@ const TextContainer = styled.View`
   height: 60%;
   padding: 20px;
 `
-const TextTitle = styled(TextWithoutShadow)`
-  position: absolute;
-  top: -40px;
-  z-index: 1;
+const ButtonContainer = styled.View`
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: row;
+  width: 100%;
 `
 
 export default LostConnectionOpponent;

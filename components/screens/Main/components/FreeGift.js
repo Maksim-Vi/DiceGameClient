@@ -27,10 +27,12 @@ const FreeGift = (props) => {
 
     const user = useSelector(selectMyUser)
     const ENABLE_AD_PROD = useSelector(state=> selectDefaultParams(state, defaultParams.ENABLE_AD_PROD))
-
+    const ENABLE_AD_IOS_PROD = useSelector(state=> selectDefaultParams(state, defaultParams.ENABLE_AD_IOS_PROD))
+    const ENABLE_AD_ANDROID_PROD = useSelector(state=> selectDefaultParams(state, defaultParams.ENABLE_AD_ANDROID_PROD))
+    
     const AdUnitID = Platform.OS === 'ios'
-        ? APP_TYPE !== 'development' && ENABLE_AD_PROD ? 'ca-app-pub-6421975370931679/8219230470' : TestIds.GAM_REWARDED_INTERSTITIAL
-        : APP_TYPE !== 'development' && ENABLE_AD_PROD ? 'ca-app-pub-6421975370931679/7194208820' : TestIds.GAM_REWARDED_INTERSTITIAL
+        ? APP_TYPE !== 'development' && ENABLE_AD_PROD && ENABLE_AD_IOS_PROD ? 'ca-app-pub-6421975370931679/8219230470' : TestIds.GAM_REWARDED_INTERSTITIAL
+        : APP_TYPE !== 'development' && ENABLE_AD_PROD && ENABLE_AD_ANDROID_PROD ? 'ca-app-pub-6421975370931679/7194208820' : TestIds.GAM_REWARDED_INTERSTITIAL
 
     const dispatch = useDispatch()
     const leftTimeShowGiftAd = selectLeftTimeShowGiftAd(store.getState())

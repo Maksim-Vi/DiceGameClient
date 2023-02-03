@@ -25,8 +25,8 @@ import {APP_TYPE} from '@env'
 const ResultScreen = (props) => {
 
     const AdUnitID = Platform.OS === 'ios'
-        ? APP_TYPE !== 'development' && props.ENABLE_AD_PROD ? 'ca-app-pub-6421975370931679~2323680627' : TestIds.INTERSTITIAL
-        : APP_TYPE !== 'development' && props.ENABLE_AD_PROD ? 'ca-app-pub-6421975370931679/4342087577' : TestIds.INTERSTITIAL
+        ? APP_TYPE !== 'development' && props.ENABLE_AD_PROD && props.ENABLE_AD_IOS_PROD ? 'ca-app-pub-6421975370931679~2323680627' : TestIds.INTERSTITIAL
+        : APP_TYPE !== 'development' && props.ENABLE_AD_PROD && props.ENABLE_AD_ANDROID_PROD ? 'ca-app-pub-6421975370931679/4342087577' : TestIds.INTERSTITIAL
 
     const advertising = useSelector(state => state.advertising)
     const { isLoaded, isClosed, load, show } = useInterstitialAd(AdUnitID, {
@@ -178,7 +178,9 @@ const mapStateToProps = (state) => ({
     winText: selectTranslation(state, defaultTranslation.TR_YOU_WIN),
     loseText: selectTranslation(state, defaultTranslation.TR_YOU_LOSE),
     continue: selectTranslation(state, defaultTranslation.TR_CONTINUE),
-    ENABLE_AD_PROD: selectDefaultParams(state, defaultParams.ENABLE_AD_PROD)
+    ENABLE_AD_PROD: selectDefaultParams(state, defaultParams.ENABLE_AD_PROD),
+    ENABLE_AD_IOS_PROD: selectDefaultParams(state, defaultParams.ENABLE_AD_IOS_PROD),
+    ENABLE_AD_ANDROID_PROD: selectDefaultParams(state, defaultParams.ENABLE_AD_ANDROID_PROD),
 });
 
 export default connect(mapStateToProps)(ResultScreen);
