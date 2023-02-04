@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from "styled-components";
-import {StyleSheet} from "react-native";
+import {Platform, StyleSheet} from "react-native";
 import DiamondsItem from "./DiamondsItem";
 import {RewardedAdEventType, RewardedInterstitialAd, TestIds} from "react-native-google-mobile-ads";
 import DiamondItemAdmod from './DiamondItemAdmod';

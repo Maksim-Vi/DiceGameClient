@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
 import Text from "../../../common/Text/Text";
 import * as Google from "expo-auth-session/providers/google";
@@ -10,6 +10,7 @@ import Sounds, {soundsType} from "../../../utils/Sounds";
 const GoogleAuth = (props) => {
 
     const dispatch = useDispatch()
+    const [disableBtn, setDisableBtn] = useState(false)
     const [request, response, promptAsync] = Google.useAuthRequest(
         {
             androidClientId: "1099319501210-58fuql0uvef2o44vhla2uscid51enl8v.apps.googleusercontent.com",
@@ -19,6 +20,7 @@ const GoogleAuth = (props) => {
     );
 
     const handlerGoogle = () =>{
+        setDisableBtn(true)
         Sounds.loadAndPlayFile(soundsType.click2)
         promptAsync({ useProxy: false, showInRecents: true })
     }
@@ -33,6 +35,7 @@ const GoogleAuth = (props) => {
                 const password = data.id + 'googleLoginKnockyDice'
                 const googleUserData = await postGoogleLoginOrRegister(data.name, password, data.email, data.picture)
 
+                setDisableBtn(false)
                 if(googleUserData && googleUserData.success && (googleUserData.create || !googleUserData.user.isFinishRegistration) ){
                     dispatch(setGoogleConfirmUsernamePopup({visible: true, data: {username: googleUserData.user.username, email: googleUserData.user.email}}))
                 } else if(googleUserData && googleUserData.success && (!googleUserData.create || googleUserData.user.isFinishRegistration)) {
@@ -51,7 +54,7 @@ const GoogleAuth = (props) => {
     }, [response]);
 
 
-    return <GoogleBtn disabled={!request} onPress={handlerGoogle}><Text small heavy color='#000' center>Google login</Text></GoogleBtn>
+    return <GoogleBtn disabled={!request || disableBtn} onPress={handlerGoogle}><Text small heavy color='#000' center>Google login</Text></GoogleBtn>
 }
 
 const GoogleBtn = styled.TouchableOpacity`

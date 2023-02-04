@@ -2,9 +2,7 @@ import { Platform } from "react-native";
 import {setClientIdWebsocket, setLoaded} from "../redux/reducers/Websocket/WebsocketReducer";
 import { store } from "../redux/redux-store";
 import { hendleMessage } from "./MessageManager";
-import Constants from "expo-constants";
 import {transitionState} from "../utils/utils";
-import {getUrl} from "./API/urlApi";
 import {setInfoPopup} from "../redux/reducers/popups/PopupsReducer";
 
 export let websocket;
@@ -22,7 +20,7 @@ const getWSUrl = () =>{
     if(Platform.OS === 'android'){
         return inProduction ? `${protocol}://${process.env.APP_PROD_URL}/` : `${protocol}://10.0.2.2:${port}/`
     } else {
-        return inProduction ? `${protocol}://${process.env.APP_PROD_URL}/` : `${protocol}://${Constants.manifest.debuggerHost.split(`:`).shift()}:${port}/`
+        return inProduction ? `${protocol}://${process.env.APP_PROD_URL}/` : `${protocol}://localhost:${port}/`
     }
 }
 

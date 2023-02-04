@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from "styled-components";
-import {StyleSheet} from "react-native";
+import {Platform, StyleSheet} from "react-native";
 import FlashItem from "./FlashItem";
 import {RewardedAdEventType, RewardedInterstitialAd, TestIds} from "react-native-google-mobile-ads";
 import { getFlashBonus } from '../../../../protocol/API/API';
