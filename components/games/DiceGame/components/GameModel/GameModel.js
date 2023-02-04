@@ -94,6 +94,10 @@ class GameModel {
         return this.getBoardData()
     }
 
+    updateUserWinPoints = (userScores, opponentsScores) =>{
+        this.updateUserBoard(userScores)
+        this.updateOpponentBoard(opponentsScores)
+    }
 
     updateUserBoard(updatedScore){
         this.userBoard = updatedScore

@@ -50,9 +50,6 @@ class GameContainer extends React.Component {
         }
 
         if (this.gameModel) {
-            const {userId, username, userScores, opponentsScores} = this.props.scores
-            this.gameModel.updateScores(userScores, opponentsScores)
-
             let boardData = this.gameModel.getBoardData()
             let winPointsData = this.gameModel.getWinPointsData()
 
@@ -61,6 +58,16 @@ class GameContainer extends React.Component {
                 winPointsData: winPointsData,
                 opponent: this.gameModel._opponent
             })
+
+            if(this.props.isRestore){
+                const {userId, username, userScores, opponentsScores} = this.props.scores
+                this.gameModel.updateUserWinPoints(userScores, opponentsScores)
+                let winPointsData = this.gameModel.getWinPointsData()
+
+                this.setState({
+                    winPointsData: winPointsData,
+                })
+            }
         }
     }
 
