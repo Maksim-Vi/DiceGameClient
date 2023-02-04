@@ -43,8 +43,8 @@ const LevelUpPopup = (props) => {
                     }
                 ]
             }}>
-                <Text title heavy>Congratulate</Text>
-                <Text large heavy>Your level upped</Text>
+                <Text title heavy>{props.congrat}</Text>
+                <Text large heavy>{props.lvlUpped}</Text>
             </TitleContainer>
         )
     }
@@ -105,6 +105,8 @@ const Lvl = styled.View`
 const mapStateToProps = (state) => ({
     lvlUp: selectLevelUpPopup(state),
     continue: selectTranslation(state, defaultTranslation.TR_CONTINUE),
+    congrat: selectTranslation(state, defaultTranslation.TR_CONGRATULATE),
+    lvlUpped: selectTranslation(state, defaultTranslation.TR_LEVEL_UPPED),
 
 })
 

@@ -30,7 +30,6 @@ export default class S_RESTORE_GAME {
     }
 
     exec() {
-        console.log('ANSWER', this.username, this.lastThrow)
         store.dispatch(setRestoreGame(true))
         store.dispatch(setCarrentGameId(this.activeGame.gameSettings.gameId))
         store.dispatch(setGame(this.activeGame))

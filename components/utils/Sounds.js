@@ -42,10 +42,10 @@ export default new class Sounds {
         if(!this.enableSounds) return
 
         try {
-            this.stopFile()
              this.loadSound = new Sound(fileName, (error) => {
                 if (error) return console.log('failed to load the sound');
 
+                 this.stopFile()
                  this.playFile()
             });
             this.loadSound.release();
