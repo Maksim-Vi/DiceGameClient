@@ -71,7 +71,7 @@ class GameModel {
     }
 
     setUserBoard(){
-        const data = this.user.side === 1 
+        const data = this.user.side === 1
             ? this.currentGame.gameData.player1 
             : this.currentGame.gameData.player2
 
@@ -79,7 +79,7 @@ class GameModel {
     }
 
     setOpponentBoard(){
-        const data = this.user.side === 1 
+        const data = this.opponent.side === 1
             ? this.currentGame.gameData.player1 
             : this.currentGame.gameData.player2
 

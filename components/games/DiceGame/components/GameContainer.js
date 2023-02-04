@@ -20,6 +20,7 @@ class GameContainer extends React.Component {
         super()
 
         this.state = {
+            isThrow: false,
             showStartGameText: false,
             showThrowBtn: false,
             opponent: {username: ''},
@@ -44,7 +45,14 @@ class GameContainer extends React.Component {
 
         this.gameModel.setData(this.props.currentGame, this.props.gameSettings)
 
+        if(this.props.isYouMove){
+           this.setState({isThrow: true})
+        }
+
         if (this.gameModel) {
+            const {userId, username, userScores, opponentsScores} = this.props.scores
+            this.gameModel.updateScores(userScores, opponentsScores)
+
             let boardData = this.gameModel.getBoardData()
             let winPointsData = this.gameModel.getWinPointsData()
 
@@ -68,6 +76,7 @@ class GameContainer extends React.Component {
             this.props.isYouMove !== prevProps.isYouMove ||
             this.props.activeThrowBtn !== prevProps.activeThrowBtn ||
             this.state.boardData !== prevState.boardData ||
+            this.state.isThrow !== prevState.isThrow ||
             this.state.boardData.userBoard !== prevState.boardData.userBoard ||
             this.state.boardData.opponentBoard !== prevState.boardData.opponentBoard ||
             this.state.boardData.winPointsData !== prevState.boardData.winPointsData ||
@@ -79,6 +88,12 @@ class GameContainer extends React.Component {
     componentDidUpdate(nextProps, nextState) {
         if (this.props.gameSettings !== nextProps.gameSettings) {
             this.gameModel.setData(this.props.currentGame, this.props.gameSettings)
+        }
+
+        if(this.props.isYouMove !== nextProps.isYouMove && this.props.isYouMove){
+            this.setState({isThrow: true})
+        } else {
+            this.setState({isThrow: false})
         }
 
         if (this.state.showThrowBtn && this.props.scores !== nextProps.scores) {
@@ -106,11 +121,12 @@ class GameContainer extends React.Component {
     }
 
     hendlerThrowGame = () => {
-        if (!this.props.activeThrowBtn) return null
+        if (!this.props.activeThrowBtn || this.state.isThrow) return null
 
         const {id, username} = this.props.user
 
         new C_THROW(id, username, this.props.currentGameId)
+        this.setState({isThrow: true})
     }
 
     getActiveItemsByUser = () => {
@@ -138,6 +154,8 @@ class GameContainer extends React.Component {
     }
 
     animateStartGameText = () => {
+        if(this.props.isRestore) return this.setState({showThrowBtn: true, showStartGameText: false})
+
         Animated.sequence([
             setTimingAnimated(this.StartGameAnimatedValue, 1.2, 500, Easing.ease),
             setTimingAnimated(this.StartGameAnimatedValue, 1, 600, Easing.ease),
@@ -146,8 +164,10 @@ class GameContainer extends React.Component {
         });
     }
 
+
     render() {
-        const {boardData, winPointsData, opponent} = this.state
+        const {isThrow, boardData, winPointsData, opponent} = this.state
+
         return (
             <Game>
                 <GameFrame width={this.dimensions.width} height={this.dimensions.height}>

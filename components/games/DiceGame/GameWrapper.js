@@ -7,7 +7,7 @@ import {
   selectGame,
   selectGameSettings,
   selectIsYouMove,
-  selectOpponentThrowData,
+  selectOpponentThrowData, selectRestoreGame,
   selectScores,
   selectThrowData
 } from '../../redux/reducers/game/GameReducer'
@@ -27,6 +27,7 @@ const GameWrapper = (props) => {
                         scores={props.scores}
                         activeItems={props.activeItems}
                         countScores={props.countScores}
+                        isRestore={props.isRestore}
                         isYouMove={props.isYouMove}
                         activeThrowBtn={props.activeThrowBtn}
                         store={store}/>
@@ -44,6 +45,7 @@ const mapStateToProps = (state) => ({
   countScores: selectCountScores(state),
   isYouMove: selectIsYouMove(state),
   activeThrowBtn: selectActiveThrowBtn(state),
+  isRestore: selectRestoreGame(state),
 });
 
 export default connect(mapStateToProps)(GameWrapper);

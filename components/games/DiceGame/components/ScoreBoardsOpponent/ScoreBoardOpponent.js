@@ -61,9 +61,9 @@ const ScoreBoardOpponent = (props) => {
             </ScoresContainer>
 
             <WinPoints width={width}>
-                <Column center>{getColumnNumber('column1')}</Column>
-                <Column center>{getColumnNumber('column2')}</Column>
-                <Column center>{getColumnNumber('column3')}</Column>
+                <Column center madium blod color={'#000'}>{getColumnNumber('column1')}</Column>
+                <Column center madium blod color={'#000'}>{getColumnNumber('column2')}</Column>
+                <Column center madium blod color={'#000'}>{getColumnNumber('column3')}</Column>
             </WinPoints>
 
         </ScoreBoardOpponentContainer>

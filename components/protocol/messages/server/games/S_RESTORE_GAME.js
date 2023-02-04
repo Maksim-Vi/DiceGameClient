@@ -3,8 +3,7 @@ import {
     setCarrentGameId, setCountScores,
     setGame,
     setGameSettings, setIsYouMove,
-    setOpponentThrowData,
-    setRestoreGame, setScores, setThrowData
+    setRestoreGame, setScores,
 } from "../../../../redux/reducers/game/GameReducer";
 import {store} from "../../../../redux/redux-store";
 import {selectMyUser} from "../../../../redux/reducers/players/PlayersReducer";
@@ -42,17 +41,42 @@ export default class S_RESTORE_GAME {
             store.dispatch(setActiveThrowBtn(false))
         }
 
+        this.getScores()
+
         store.dispatch(setCountScores({
             scoresUser: this.countScores.countScoresUser,
             scoresOpponent: this.countScores.countScoresOpponent
         }))
     }
 
+    getScores = () =>{
+        let mySide = null
+        let oppSide = null
+        this.activeGame.gameSettings.players.forEach(user=> {
+            if(user.username === this.username){
+                mySide = user.side
+            } else {
+                oppSide = user.side
+            }
+        })
+
+        const myScores = this.activeGame.gameData[+mySide === 1 ? 'player1' : 'player2']
+        const oppScores = this.activeGame.gameData[+oppSide === 1 ? 'player1' : 'player2']
+
+        if(myScores && oppScores){
+            store.dispatch(setScores({
+                userId: null,
+                username: null,
+                userScores: myScores,
+                opponentsScores: oppScores
+            }))
+        }
+    }
+
     getUserData = () => {
         const myUser = selectMyUser(store.getState())
         if (myUser) {
             this.id = myUser.id
-            //this.username = myUser.username
         }
     }
 
