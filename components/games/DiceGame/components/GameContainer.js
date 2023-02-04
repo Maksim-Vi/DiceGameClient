@@ -20,7 +20,7 @@ class GameContainer extends React.Component {
         super()
 
         this.state = {
-            isThrow: false,
+            isThrow: true,
             showStartGameText: false,
             showThrowBtn: false,
             opponent: {username: ''},
@@ -46,7 +46,7 @@ class GameContainer extends React.Component {
         this.gameModel.setData(this.props.currentGame, this.props.gameSettings)
 
         if(this.props.isYouMove){
-           this.setState({isThrow: true})
+           this.setState({isThrow: false})
         }
 
         if (this.gameModel) {
@@ -98,8 +98,6 @@ class GameContainer extends React.Component {
         }
 
         if(this.props.isYouMove !== nextProps.isYouMove && this.props.isYouMove){
-            this.setState({isThrow: true})
-        } else {
             this.setState({isThrow: false})
         }
 
@@ -128,7 +126,7 @@ class GameContainer extends React.Component {
     }
 
     hendlerThrowGame = () => {
-        if (!this.props.activeThrowBtn || this.state.isThrow) return null
+        if (!this.props.activeThrowBtn) return null
 
         const {id, username} = this.props.user
 
@@ -223,9 +221,9 @@ class GameContainer extends React.Component {
                 </GameFrame>
                 {this.state.showThrowBtn &&
                     <ButtonContainer onPress={this.hendlerThrowGame}
-                                     activeOpacity={this.props.isYouMove ? 1 : 0.6}
-                                     disabled={!this.props.isYouMove}>
-                        <Text large heavy color={this.props.isYouMove ? '#095937' : 'rgba(255,255,255,0.51)'}>{this.props.throwText}</Text>
+                                     activeOpacity={!this.state.isThrow ? 1 : 0.6}
+                                     disabled={this.state.isThrow}>
+                        <Text large heavy color={!this.state.isThrow ? '#095937' : 'rgba(255,255,255,0.51)'}>{this.props.throwText}</Text>
                     </ButtonContainer>
                 }
 
