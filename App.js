@@ -3,10 +3,11 @@ import { store } from './components/redux/redux-store';
 import UserProvider from './components/utils/UserProvider';
 import Screens from './components/screens/Screens';
 import { NavigationContainer, useNavigationContainerRef } from '@react-navigation/native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import styled from 'styled-components';
 import { useFonts } from 'expo-font';
 import PopupsManager from './components/managers/popupsManager/PopupsManager';
+import NoConnection from "./components/common/NoConnection/NoConnection";
 
 export default function App() {
 
@@ -17,6 +18,10 @@ export default function App() {
 
   const navigationRef = useNavigationContainerRef();
 
+  useEffect(()=>{
+    console.log('APP_TYPE', process.env.APP_TYPE)
+  },[])
+
   if (!fontsLoaded) return null;
   
   return  (
@@ -26,6 +31,7 @@ export default function App() {
           <AppContainer>
             <Screens />
             <PopupsManager />
+            <NoConnection />
           </AppContainer>
         </NavigationContainer>
       </UserProvider>

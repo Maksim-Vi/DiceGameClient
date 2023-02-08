@@ -1,4 +1,5 @@
 import {store} from "../../../redux/redux-store";
+import {setInfoPopup} from "../../../redux/reducers/popups/PopupsReducer";
 
 export default class S_LOGIN_FAILED {
     constructor(data){
@@ -18,6 +19,7 @@ export default class S_LOGIN_FAILED {
 
     exec() {
         store.logout()
+        store.dispatch(setInfoPopup({visible: true, data: {text: this.data.error}}))
     }
 
 	getLogText() {

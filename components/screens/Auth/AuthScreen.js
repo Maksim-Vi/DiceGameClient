@@ -80,7 +80,7 @@ const AuthContainer = styled.View`
   justify-content: center;
 `
 const ButtonContainer = styled.View`
-  width: ${Platform.OS === 'ios' ? '100%' : '80%'};
+  width: 100%;
   margin-top: 30px;
   flex-direction: column;
   align-items: center;

@@ -3,6 +3,7 @@ import { store } from "../../../redux/redux-store"
 import C_RECONNECT from "../clients/C_RECONNECT";
 import C_LOGIN from "../clients/C_LOGIN";
 import {selectLoginUser} from "../../../redux/reducers/login/LoginReducer";
+import {transitionState} from "../../../utils/utils";
 
 export default class S_CLIENT_LOADED {
     constructor(clientId){
@@ -29,6 +30,7 @@ export default class S_CLIENT_LOADED {
         if(WSClientId && WSClientId !== this.clientId){
             new C_RECONNECT(this.clientId)
         } else if ((!WSClientId || WSClientId === null || WSClientId === undefined) && this.username && this.password){
+            transitionState('LoadingProject')
             new C_LOGIN(this.clientId, this.username, this.password)
         }
 

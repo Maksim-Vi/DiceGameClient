@@ -3,7 +3,7 @@
     "name": "knocky dice",
     "slug": "dicegame",
     "owner": "kastom",
-    "version": "1.1.9",
+    "version": "1.1.10",
     "orientation": "portrait",
     "icon": "./assets/loadGame/icon-game.png",
     "userInterfaceStyle": "light",

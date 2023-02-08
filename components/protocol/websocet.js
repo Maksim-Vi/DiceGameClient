@@ -1,15 +1,22 @@
 import { Platform } from "react-native";
-import {setClientIdWebsocket, setLoaded} from "../redux/reducers/Websocket/WebsocketReducer";
+import {
+    selectBadConnection,
+    setBadConnectionWS,
+    setClientIdWebsocket,
+    setLoaded
+} from "../redux/reducers/Websocket/WebsocketReducer";
 import { store } from "../redux/redux-store";
 import { hendleMessage } from "./MessageManager";
 import {transitionState} from "../utils/utils";
-import {setInfoPopup} from "../redux/reducers/popups/PopupsReducer";
+import {selectInfoPopup, setInfoPopup} from "../redux/reducers/popups/PopupsReducer";
 
 export let websocket;
 
 let reconnectTimeout = null;
 let reconnecting = false;
-let tryToReconect = false;
+
+let reconnectFailedCount = 0;
+let reconnectFailed = false;
 
 const getWSUrl = () =>{
     const inProduction = process.env.APP_TYPE !== 'development' ? true : false;
@@ -35,8 +42,6 @@ export const openServerConnection = () => {
 
     const url = getWSUrl()
 
-    console.log('ANSWER', url)
-
     websocket = new WebSocket(url);
 
     websocket.onopen = openWSHandler;
@@ -47,36 +52,36 @@ export const openServerConnection = () => {
 
 function openWSHandler() {
     console.log('open connection to server')
-
+    store.dispatch(setLoaded(true))
     reconnecting = false;
-    tryToReconect = false;
+    reconnectFailed = false;
+    reconnectFailedCount = 0
+    store.dispatch(setBadConnectionWS(false))
+
+    const infoPopup = selectInfoPopup(store.getState())
+    if(infoPopup.visible){
+        store.dispatch(setInfoPopup({visible: false, data: null}))
+    }
 }
 
 function errorWSHandler(error) {
-    console.log(`[error] ${error.message}`);
-    store.dispatch(setClientIdWebsocket(null))
+    console.log(`[error] ${JSON.stringify(error)}`);
+
+    reconnecting = true
     store.dispatch(setLoaded(false))
+    reconnectWebsocket();
+
 }
 
 async function closeWSHandler(event) {
-    if (event.wasClean) {
-        console.log(`[close] Connection closed cleanly, code=${event.code} reason=${event.reason}`);
-    } else {
-        console.log('[close] Connection died');
-    }
+    console.log('[close] Connection died', event);
 
-    if(!reconnecting && websocket){
-        reconnecting = true;
-        tryToReconect = true
+    reconnecting = true
+    reconnectFailedCount += 1
+    reconnectWebsocket();
 
-        reconnectWebsocket();
-    } else if(tryToReconect){
-        tryToReconect = false
+    sendErrorConnectionMessage()
 
-        //store.logout()
-        transitionState('AuthScreen')
-        store.dispatch(setInfoPopup({visible: true, data: {text: 'Oops, Sorry! game is rebooted please try to connect later!'}}))
-    }
 }
 
 function messageWSHandler(event) {
@@ -86,6 +91,8 @@ function messageWSHandler(event) {
 }
 
 function reconnectWebsocket() {
+    if(!reconnecting) return
+
     clearTimeout(reconnectTimeout);
 
     reconnectTimeout = setTimeout (() => {
@@ -99,10 +106,24 @@ function reconnectWebsocket() {
 export const closeWebsocletAfterLeaveGame = () =>{
     if (websocket) {
         reconnecting = true
-        tryToReconect = false
+        reconnectFailed = false
+        reconnectFailedCount = 0
         store.dispatch(setClientIdWebsocket(null))
 
         websocket.close();
+    }
+}
+
+const sendErrorConnectionMessage = () =>{
+    if(!reconnectFailed && reconnectFailedCount >= 10){
+        reconnectFailed = true
+
+        store.dispatch(setBadConnectionWS(false))
+        store.dispatch(setClientIdWebsocket(null))
+        transitionState('AuthScreen')
+        store.dispatch(setInfoPopup({visible: true, data: {text: 'Oops, Sorry! game is rebooted please try to connect later!'}}))
+    } else if(!selectBadConnection(store.getState())){
+        store.dispatch(setBadConnectionWS(true))
     }
 }
 
