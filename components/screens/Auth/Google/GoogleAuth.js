@@ -35,7 +35,6 @@ const GoogleAuth = (props) => {
                 const password = data.id + 'googleLoginKnockyDice'
                 const googleUserData = await postGoogleLoginOrRegister(data.name, password, data.email, data.picture)
 
-                setDisableBtn(false)
                 if(googleUserData && googleUserData.success && (googleUserData.create || !googleUserData.user.isFinishRegistration) ){
                     dispatch(setGoogleConfirmUsernamePopup({visible: true, data: {username: googleUserData.user.username, email: googleUserData.user.email}}))
                 } else if(googleUserData && googleUserData.success && (!googleUserData.create || googleUserData.user.isFinishRegistration)) {
@@ -45,12 +44,17 @@ const GoogleAuth = (props) => {
                 }
             });
         }
+        setDisableBtn(false)
     }
 
     useEffect(() => {
         if (response?.type === "success") {
             getGoogleUserData(response)
+        } else {
+            setDisableBtn(false)
         }
+
+        return ()=> setDisableBtn(false)
     }, [response]);
 
 
