@@ -41,11 +41,11 @@ class GameContainer extends React.Component {
     }
 
     componentDidMount() {
-        this.gameModel = new GameModel(this.props)
+        this.gameModel = new GameModel(this.props, this.state)
 
         this.gameModel.setData(this.props.currentGame, this.props.gameSettings)
 
-        if(this.props.isYouMove){
+        if(this.props.isYouMove && this.props.activeThrowBtn){
            this.setState({isThrow: false})
         }
 
@@ -117,7 +117,7 @@ class GameContainer extends React.Component {
     }
 
     getThrowData = () => {
-        if (!this.state.showThrowBtn) return ''
+        if (!this.state.showThrowBtn) return null
 
         if (this.props.isYouMove) {
             return this.props.throwData ? this.props.throwData.diceScore : 0
@@ -171,7 +171,7 @@ class GameContainer extends React.Component {
 
 
     render() {
-        const {isThrow, boardData, winPointsData, opponent} = this.state
+        const {boardData, winPointsData, opponent} = this.state
 
         return (
             <Game>
@@ -279,7 +279,6 @@ const GameBG = styled.View`
   opacity: 1;
   width: 100%;
   height: 100%;
-  /*background-color: rgba(224, 187, 132, 0.91);*/
   border: 2px solid rgba(176, 176, 176, 0.95);
   border-radius: 20px;
 `

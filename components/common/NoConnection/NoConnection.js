@@ -9,8 +9,6 @@ const NoConnection = (props) => {
 
     const isBadConn = useSelector(selectBadConnection)
 
-    console.log('bad connection', isBadConn)
-
     if(!isBadConn) return
 
     return <NoConnectionContainer {...props}>

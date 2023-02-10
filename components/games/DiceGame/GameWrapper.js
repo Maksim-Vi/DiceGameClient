@@ -7,7 +7,8 @@ import {
   selectGame,
   selectGameSettings,
   selectIsYouMove,
-  selectOpponentThrowData, selectRestoreGame,
+  selectOpponentThrowData,
+  selectRestoreGame,
   selectScores,
   selectThrowData
 } from '../../redux/reducers/game/GameReducer'

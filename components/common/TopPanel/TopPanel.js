@@ -86,13 +86,13 @@ const Panel = styled.View`
   margin-top: 10px;
   ${() => {
     const isIos = getIosModel()
-    if (isIos >= 14) {
+    if (isIos >= 10) {
       return `
         margin-top: 50px;
       `
-    } else if(isIos >= 10 && isIos < 14){
+    } else if(isIos < 10){
       return `
-        margin-top: 0px;
+        margin-top: 10px;
       `
     }
   }}

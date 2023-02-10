@@ -1,16 +1,18 @@
 import {Animated, Dimensions, Easing} from 'react-native'
-import React, { useEffect } from 'react'
+import React, {useCallback, useEffect} from 'react'
 import styled from 'styled-components'
 import imagesGameDices from "../../../../../assets/dynamicLoadGameDices";
 import { setTimingAnimated } from '../../../../utils/Animation';
 import Sounds, {soundsType} from "../../../../utils/Sounds";
 
 const Dice = (props) => {
- 
+
+  if(!props.diceNumber || typeof props.diceNumber !== 'number' && props.diceNumber <= 0) return null
+
   const animatedValue = React.useRef(new Animated.Value(0)).current;
   const width = Dimensions.get('window').width;
 
-  const getDiceNumber = () =>{
+  const getDiceNumber = useCallback(() =>{
     let diceImg = ''
 
     if(props.diceNumber > 0) {
@@ -18,7 +20,7 @@ const Dice = (props) => {
     }
 
     return diceImg
-  }
+  },[props.diceNumber])
 
   const throwAnim = () =>{
     Sounds.loadAndPlayFile(soundsType.throwDice)
