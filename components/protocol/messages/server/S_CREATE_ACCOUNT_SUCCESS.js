@@ -1,13 +1,12 @@
 import {store} from "../../../redux/redux-store";
 import {setCurrentUser} from "../../../redux/reducers/players/PlayersReducer";
-import {transitionState} from "../../../utils/utils";
+import {isProduction, transitionState} from "../../../utils/utils";
 
 export default class S_CREATE_ACCOUNT_SUCCESS {
     constructor(data){
 
         this.MESSAG_ENAME = 'S_CREATE_ACCOUNT_SUCCESS'
-        this.showLog = true
-
+        this.showLog = isProduction() ? false : true
         this.data = data
 
         this.init()

@@ -24,6 +24,7 @@ const CloseContainer = styled.View`
     position: absolute;
     right: -15px;
     top: -15px;
+    z-index: 100;
 `
 const CloseImg = styled.Image`
   width: 35px;

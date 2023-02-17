@@ -1,13 +1,14 @@
 import {sendMessageWS} from "../../websocet"
 import {selectMyUser} from "../../../redux/reducers/players/PlayersReducer";
 import {store} from "../../../redux/redux-store";
+import {isProduction} from "../../../utils/utils";
 
 export default class C_CHANGE_SOUND {
     constructor(sound) {
 
         this.MESSAG_ENAME = 'C_CHANGE_SOUND'
         this.clientIdWebsocket = null
-        this.showLog = true
+        this.showLog = isProduction() ? false : true
 
         this.username = null
         this.sound = sound

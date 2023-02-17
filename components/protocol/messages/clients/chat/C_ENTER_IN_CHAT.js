@@ -2,13 +2,14 @@ import { selectMyUser } from "../../../../redux/reducers/players/PlayersReducer"
 import { selectClientIdWebsocket } from "../../../../redux/reducers/Websocket/WebsocketReducer"
 import { store } from "../../../../redux/redux-store"
 import { sendMessageWS } from "../../../websocet"
+import {isProduction} from "../../../../utils/utils";
 
 export default class C_ENTER_IN_CHAT {
     constructor(chatRoom){
         
         this.MESSAG_ENAME = 'C_ENTER_IN_CHAT'
         this.clientIdWebsocket = null
-        this.showLog = true
+        this.showLog = isProduction() ? false : true
         this.username = ''
         this.chatRoom = chatRoom
         this.init()

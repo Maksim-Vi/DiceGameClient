@@ -15,7 +15,7 @@ import {selectTranslation} from "../../../redux/reducers/language/LanguageReduce
 import defaultTranslation from "../../../redux/reducers/language/defaultTranslation";
 import {connect} from "react-redux";
 import TextWithoutShadow from "../../Text/TextWithoutShadow";
-import sale from "../../../../assets/collections/label.png";
+import sale from "../../../../assets/collections/sale.png";
 
 const ModalChildrenBuy = (props) => {
 
@@ -164,8 +164,8 @@ const ModalChildrenBuy = (props) => {
         if(props.openItem.isSale !== 'true') return null
 
         return <SaleContainer>
-            <TextSale large blod center color={'#9a1515'} style={{transform: [{rotate: '-60deg'}]}}>sale</TextSale>
-            <SaleImg source={sale} style={{transform: [{rotate: '-20deg'}]}}/>
+            {/*<TextSale large blod center color={'#9a1515'} style={{transform: [{rotate: '-60deg'}]}}>sale</TextSale>*/}
+            <SaleImg source={sale} />
         </SaleContainer>
     }
 
@@ -265,9 +265,9 @@ const SaleContainer = styled.View`
   justify-content: center;
   text-align: center;
   position: absolute;
-  top: -15px;
-  left: 0px;
-  z-index: 1;
+  height: auto;
+  top: -20px;
+  right: -30px;
 `
 
 const TextSale = styled(TextWithoutShadow)`
@@ -278,8 +278,8 @@ const TextSale = styled(TextWithoutShadow)`
 `
 
 const SaleImg = styled.Image`
-  width: 100px;
-  height: 100px;
+  width: 150px;
+  height: 150px;
 `
 
 const Sale = styled(Text)`

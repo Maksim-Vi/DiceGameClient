@@ -1,12 +1,13 @@
 import {store} from "../../../redux/redux-store";
 import {setSoundInfo} from "../../../redux/reducers/language/LanguageReducer";
 import {updateCurrentUserSound} from "../../../redux/reducers/players/PlayersReducer";
+import {isProduction} from "../../../utils/utils";
 
 export default class S_SOUND_INFO {
     constructor(username, sound){
 
         this.MESSAG_ENAME = 'S_SOUND_INFO'
-        this.showLog = true
+        this.showLog = isProduction() ? false : true
 
         this.username = username
         this.sound = sound

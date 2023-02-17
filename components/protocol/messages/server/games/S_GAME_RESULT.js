@@ -1,13 +1,13 @@
 
 import { store } from "../../../../redux/redux-store"
 import {setRestoreGame, setResultGame} from "../../../../redux/reducers/game/GameReducer";
-import {transitionState} from "../../../../utils/utils";
+import {isProduction, transitionState} from "../../../../utils/utils";
 
 export default class S_GAME_RESULT {
     constructor(resultData){
 
         this.MESSAG_ENAME = 'S_GAME_RESULT'
-        this.showLog = true
+        this.showLog = isProduction() ? false : true
 
         this.resultData = resultData
 

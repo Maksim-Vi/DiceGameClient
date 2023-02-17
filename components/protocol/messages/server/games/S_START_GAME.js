@@ -1,12 +1,12 @@
 import { setIsGameStarted } from "../../../../redux/reducers/game/GameReducer"
 import { store } from "../../../../redux/redux-store"
-import {transitionState} from "../../../../utils/utils";
+import {isProduction, transitionState} from "../../../../utils/utils";
 
 export default class S_START_GAME {
     constructor(data){
 
         this.MESSAG_ENAME = 'S_START_GAME'
-        this.showLog = true
+        this.showLog = isProduction() ? false : true
 
         this.data = data
 

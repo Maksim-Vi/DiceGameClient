@@ -5,6 +5,10 @@ import {setActiveTabApp} from "../redux/reducers/Websocket/WebsocketReducer";
 import DeviceInfo from "react-native-device-info";
 import {Platform} from "react-native";
 
+export const isProduction = () =>{
+    return process.env.APP_TYPE === 'production'
+}
+
 export const transitionState = (tab) =>{
     if(window.navigation){
         window.navigation.navigate(tab)

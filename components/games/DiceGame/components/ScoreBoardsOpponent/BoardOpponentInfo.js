@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {memo, useEffect} from 'react';
 import {Animated, Easing, useWindowDimensions} from 'react-native';
 import styled from 'styled-components';
 import Avatar from '../../../../common/Avatars/Avatar';
@@ -93,4 +93,4 @@ const CountContainer = styled.View`
 const Name = styled(Text)`
 `
 
-export default BoardOpponentInfo
+export default memo(BoardOpponentInfo)

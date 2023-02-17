@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect} from 'react'
+import React, {memo, useCallback, useEffect} from 'react'
 import styled from 'styled-components'
 import {Animated, Dimensions, Easing, Image} from "react-native";
 import imagesGameSquares from "../../../../../assets/dynamicLoadGameSquares";
@@ -260,4 +260,4 @@ const DiceImage = styled(Animated.Image)`
   z-index: 1;
 `
 
-export default BoardItem
+export default memo(BoardItem)

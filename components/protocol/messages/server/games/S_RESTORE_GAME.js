@@ -3,18 +3,17 @@ import {
     setCarrentGameId, setCountScores,
     setGame,
     setGameSettings, setIsYouMove, setOpponentThrowData,
-    setRestoreGame, setRestoreThrow, setScores, setThrowData,
+    setRestoreGame, setScores, setThrowData,
 } from "../../../../redux/reducers/game/GameReducer";
 import {store} from "../../../../redux/redux-store";
 import {selectMyUser} from "../../../../redux/reducers/players/PlayersReducer";
-import S_THROW from "./S_THROW";
-import S_OPPONENT_THROW from "./S_OPPONENT_THROW";
+import {isProduction} from "../../../../utils/utils";
 
 export default class S_RESTORE_GAME {
     constructor(username, activeGame, countScores,lastThrow,lastThrowData){
 
         this.MESSAG_ENAME = 'S_RESTORE_GAME'
-        this.showLog = true
+        this.showLog = isProduction() ? false : true
 
         this.id = null
         this.username = username

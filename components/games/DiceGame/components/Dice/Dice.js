@@ -1,5 +1,5 @@
 import {Animated, Dimensions, Easing} from 'react-native'
-import React, {useCallback, useEffect} from 'react'
+import React, {memo, useCallback, useEffect} from 'react'
 import styled from 'styled-components'
 import imagesGameDices from "../../../../../assets/dynamicLoadGameDices";
 import { setTimingAnimated } from '../../../../utils/Animation';
@@ -81,4 +81,4 @@ const DiceImage =  styled(Animated.Image)`
   }}
 `
 
-export default Dice
+export default memo(Dice)

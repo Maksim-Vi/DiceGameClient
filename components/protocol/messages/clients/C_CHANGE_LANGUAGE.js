@@ -1,13 +1,14 @@
 import {selectMyUser} from "../../../redux/reducers/players/PlayersReducer";
 import {store} from "../../../redux/redux-store";
 import {sendMessageWS} from "../../websocet";
+import {isProduction} from "../../../utils/utils";
 
 export default class C_CHANGE_LANGUAGE  {
     constructor(language){
 
         this.MESSAGE_NAME = 'C_CHANGE_LANGUAGE'
         this.clientIdWebsocket = null
-        this.showLog = true
+        this.showLog = isProduction() ? false : true
 
         this.username = null
         this.language = language

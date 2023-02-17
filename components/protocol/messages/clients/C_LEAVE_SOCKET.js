@@ -2,13 +2,14 @@ import {selectMyUser} from "../../../redux/reducers/players/PlayersReducer"
 import {selectClientIdWebsocket, setClientIdWebsocket} from "../../../redux/reducers/Websocket/WebsocketReducer"
 import {store} from "../../../redux/redux-store"
 import {closeWebsocletAfterLeaveGame, sendMessageWS} from "../../websocet"
+import {isProduction} from "../../../utils/utils";
 
 export default class C_LEAVE_SOCKET {
     constructor() {
 
         this.MESSAG_ENAME = 'C_LEAVE_SOCKET'
         this.clientIdWebsocket = null
-        this.showLog = true
+        this.showLog = isProduction() ? false : true
 
         this.id = null
         this.username = null

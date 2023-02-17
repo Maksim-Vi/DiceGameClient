@@ -5,7 +5,7 @@ import lock from '../../../../../assets/common/lock.png'
 import {getCollectionDiceImg} from "../../../../utils/utils";
 import CollectButton from "../common/CollectButton";
 import {Animated, Easing, useWindowDimensions} from 'react-native';
-import sale from "../../../../../assets/collections/label.png";
+import sale from "../../../../../assets/collections/sale.png";
 import TextWithoutShadow from "../../../../common/Text/TextWithoutShadow";
 
 const DiceItem = ({diceItem, isActive,isLocked,isSale, isCollected, setModalVisible}) => {
@@ -32,8 +32,8 @@ const DiceItem = ({diceItem, isActive,isLocked,isSale, isCollected, setModalVisi
         if(!isSale) return null
 
         return <SaleContainer>
-            <TextSale large blod center color={'#9a1515'} style={{transform: [{rotate: '-60deg'}]}}>sale</TextSale>
-            <SaleImg source={sale} style={{transform: [{rotate: '-20deg'}]}}/>
+            {/*<TextSale large blod center color={'#9a1515'} style={{transform: [{rotate: '-60deg'}]}}>sale</TextSale>*/}
+            <SaleImg source={sale} />
         </SaleContainer>
     }
 
@@ -55,7 +55,7 @@ const DiceItem = ({diceItem, isActive,isLocked,isSale, isCollected, setModalVisi
                         outputRange: [0, 1]
                     })
                 }
-            ]
+            ],
         }}>
             {renderLockedBG()}
             {renderSaleLabel()}
@@ -98,8 +98,8 @@ const SaleContainer = styled.View`
   justify-content: center;
   text-align: center;
   position: absolute;
-  top: -15px;
-  left: -30px;
+  top: -20px;
+  right: -20px;
   z-index: 1;
 `
 
@@ -111,8 +111,8 @@ const TextSale = styled(TextWithoutShadow)`
 `
 
 const SaleImg = styled.Image`
-  width: 85px;
-  height: 85px;
+  width: 100px;
+  height: 100px;
 `
 
 const DiceImage = styled.Image`

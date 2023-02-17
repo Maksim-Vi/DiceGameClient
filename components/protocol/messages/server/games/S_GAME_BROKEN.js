@@ -1,4 +1,4 @@
-import {transitionState} from "../../../../utils/utils";
+import {isProduction, transitionState} from "../../../../utils/utils";
 import {store} from "../../../../redux/redux-store";
 import {setRestoreGame} from "../../../../redux/reducers/game/GameReducer";
 
@@ -6,7 +6,7 @@ export default class S_GAME_BROKEN {
     constructor(gameId){
 
         this.MESSAG_ENAME = 'S_GAME_BROKEN'
-        this.showLog = true
+        this.showLog = isProduction() ? false : true
 
         this.gameId = gameId
 

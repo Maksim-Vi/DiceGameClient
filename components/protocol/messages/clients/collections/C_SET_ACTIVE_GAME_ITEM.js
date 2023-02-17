@@ -2,13 +2,14 @@ import { sendMessageWS } from "../../../websocet"
 import {selectClientIdWebsocket} from "../../../../redux/reducers/Websocket/WebsocketReducer";
 import {store} from "../../../../redux/redux-store";
 import {selectMyUser} from "../../../../redux/reducers/players/PlayersReducer";
+import {isProduction} from "../../../../utils/utils";
 
 export default class C_SET_ACTIVE_GAME_ITEM {
     constructor(type,itemId){
 
         this.MESSAG_ENAME = 'C_SET_ACTIVE_GAME_ITEM'
         this.clientIdWebsocket = null
-        this.showLog = false
+        this.showLog = isProduction() ? false : false
 
         this.username = ''
         this.type = type

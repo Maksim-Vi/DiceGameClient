@@ -1,11 +1,12 @@
 import {store} from "../../../../redux/redux-store";
 import {setAvailableToClaimGift, setGiftsData} from "../../../../redux/reducers/gifts/GiftsReducer";
+import {isProduction} from "../../../../utils/utils";
 
 export default class S_SEVEN_DAYS_GIFTS {
     constructor(sevenDaysGifts){
 
         this.MESSAG_ENAME = 'S_SEVEN_DAYS_GIFTS'
-        this.showLog = true
+        this.showLog = isProduction() ? false : true
 
         this.sevenDaysGifts = JSON.parse(sevenDaysGifts)
 

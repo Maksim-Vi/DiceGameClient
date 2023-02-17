@@ -2,14 +2,14 @@ import {selectClientIdWebsocket} from "../../../../redux/reducers/Websocket/Webs
 import {store} from "../../../../redux/redux-store";
 import {selectMyUser} from "../../../../redux/reducers/players/PlayersReducer";
 import {sendMessageWS} from "../../../websocet";
+import {isProduction} from "../../../../utils/utils";
 
 export default class C_BUY_GAME_ITEM {
     constructor(type,price,itemId){
 
         this.MESSAG_ENAME = 'C_BUY_GAME_ITEM'
         this.clientIdWebsocket = null
-        this.showLog = true
-
+        this.showLog = isProduction() ? false : true
         this.username = ''
         this.type = type
         this.price = price

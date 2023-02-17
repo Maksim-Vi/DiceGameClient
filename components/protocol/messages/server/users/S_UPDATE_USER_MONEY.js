@@ -3,12 +3,13 @@ import {
     updateCurrentUserCoins,
     updateCurrentUserCrystals,
 } from "../../../../redux/reducers/players/PlayersReducer";
+import {isProduction} from "../../../../utils/utils";
 
 export default class S_UPDATE_USER_MONEY {
     constructor(coins, crystals){
 
         this.MESSAG_ENAME = 'S_UPDATE_USER_MONEY'
-        this.showLog = true
+        this.showLog = isProduction() ? false : true
 
         this.coins = coins
         this.crystals = crystals

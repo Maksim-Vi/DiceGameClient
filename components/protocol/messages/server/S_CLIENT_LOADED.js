@@ -3,14 +3,13 @@ import { store } from "../../../redux/redux-store"
 import C_RECONNECT from "../clients/C_RECONNECT";
 import C_LOGIN from "../clients/C_LOGIN";
 import {selectLoginUser} from "../../../redux/reducers/login/LoginReducer";
-import {transitionState} from "../../../utils/utils";
+import {isProduction, transitionState} from "../../../utils/utils";
 
 export default class S_CLIENT_LOADED {
     constructor(clientId){
 
         this.MESSAG_ENAME = 'S_CLIENT_LOADED'
-        this.showLog = true
-
+        this.showLog = isProduction() ? false : true
         this.clientId = clientId
 
         this.username = null

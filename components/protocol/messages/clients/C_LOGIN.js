@@ -1,11 +1,12 @@
 import {sendMessageWS} from "../../websocet"
+import {isProduction} from "../../../utils/utils";
 
 export default class C_LOGIN {
     constructor(clientIdWebsocket, username, password) {
 
         this.MESSAG_ENAME = 'C_LOGIN'
         this.clientIdWebsocket = null
-        this.showLog = true
+        this.showLog = isProduction() ? false : true
 
         this.clientIdWebsocket = clientIdWebsocket
         this.username = username

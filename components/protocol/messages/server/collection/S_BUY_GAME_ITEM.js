@@ -1,13 +1,14 @@
 import {
-    addAvailableCollectionItems, selectAvailableCollectionItems,
+    addAvailableCollectionItems,
 } from "../../../../redux/reducers/collections/CollectionsReducer";
 import {store} from "../../../../redux/redux-store";
+import {isProduction} from "../../../../utils/utils";
 
 export default class S_BUY_GAME_ITEM {
     constructor(availableCollectionItems,collectionType,itemId){
 
         this.MESSAG_ENAME = 'S_BUY_GAME_ITEM'
-        this.showLog = true
+        this.showLog = isProduction() ? false : true
 
         this.availableCollectionItems = availableCollectionItems
         this.collectionType = collectionType

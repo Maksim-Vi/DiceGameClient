@@ -1,6 +1,7 @@
 import {updateCurrentUserFlash} from "../../../../redux/reducers/players/PlayersReducer";
 import {store} from "../../../../redux/redux-store";
 import {setInfoPopup} from "../../../../redux/reducers/popups/PopupsReducer";
+import {isProduction} from "../../../../utils/utils";
 
 const status = {
     success: 1,
@@ -12,7 +13,7 @@ export default class S_UPDATE_USER_FLASH {
     constructor(status, flash){
 
         this.MESSAG_ENAME = 'S_UPDATE_USER_FLASH'
-        this.showLog = true
+        this.showLog = isProduction() ? false : true
 
         this.status = status
         this.flash = flash

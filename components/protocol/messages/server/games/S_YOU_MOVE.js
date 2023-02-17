@@ -1,12 +1,13 @@
 
 import { setIsYouMove, setActiveThrowBtn } from "../../../../redux/reducers/game/GameReducer"
 import { store } from "../../../../redux/redux-store"
+import {isProduction} from "../../../../utils/utils";
 
 export default class S_YOU_MOVE {
     constructor(gameId){
 
         this.MESSAG_ENAME = 'S_YOU_MOVE'
-        this.showLog = true
+        this.showLog = isProduction() ? false : true
 
         this.gameId = gameId
 

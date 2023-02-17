@@ -1,5 +1,5 @@
 const imagesGameDices = {
-    14: {
+    1: {
         1: require('./collections/dices/d_1/dice_1.png'),
         2: require('./collections/dices/d_1/dice_2.png'),
         3: require('./collections/dices/d_1/dice_3.png'),
@@ -15,7 +15,7 @@ const imagesGameDices = {
         5: require('./collections/dices/d_2/dice_5.png'),
         6: require('./collections/dices/d_2/dice_6.png'),
     },
-    4: {
+    3: {
         1: require('./collections/dices/d_3/dice_1.png'),
         2: require('./collections/dices/d_3/dice_2.png'),
         3: require('./collections/dices/d_3/dice_3.png'),
@@ -23,7 +23,7 @@ const imagesGameDices = {
         5: require('./collections/dices/d_3/dice_5.png'),
         6: require('./collections/dices/d_3/dice_6.png'),
     },
-    1: {
+    4: {
         1: require('./collections/dices/d_4/dice_1.png'),
         2: require('./collections/dices/d_4/dice_2.png'),
         3: require('./collections/dices/d_4/dice_3.png'),
@@ -31,7 +31,7 @@ const imagesGameDices = {
         5: require('./collections/dices/d_4/dice_5.png'),
         6: require('./collections/dices/d_4/dice_6.png'),
     },
-    3: {
+    5: {
         1: require('./collections/dices/d_5/dice_1.png'),
         2: require('./collections/dices/d_5/dice_2.png'),
         3: require('./collections/dices/d_5/dice_3.png'),
@@ -39,13 +39,61 @@ const imagesGameDices = {
         5: require('./collections/dices/d_5/dice_5.png'),
         6: require('./collections/dices/d_5/dice_6.png'),
     },
-    18: {
+    6: {
         1: require('./collections/dices/d_6/dice_1.png'),
         2: require('./collections/dices/d_6/dice_2.png'),
         3: require('./collections/dices/d_6/dice_3.png'),
         4: require('./collections/dices/d_6/dice_4.png'),
         5: require('./collections/dices/d_6/dice_5.png'),
         6: require('./collections/dices/d_6/dice_6.png'),
+    },
+    7: {
+        1: require('./collections/dices/d_7/dice_1.png'),
+        2: require('./collections/dices/d_7/dice_2.png'),
+        3: require('./collections/dices/d_7/dice_3.png'),
+        4: require('./collections/dices/d_7/dice_4.png'),
+        5: require('./collections/dices/d_7/dice_5.png'),
+        6: require('./collections/dices/d_7/dice_6.png'),
+    },
+    8: {
+        1: require('./collections/dices/d_8/dice_1.png'),
+        2: require('./collections/dices/d_8/dice_2.png'),
+        3: require('./collections/dices/d_8/dice_3.png'),
+        4: require('./collections/dices/d_8/dice_4.png'),
+        5: require('./collections/dices/d_8/dice_5.png'),
+        6: require('./collections/dices/d_8/dice_6.png'),
+    },
+    9: {
+        1: require('./collections/dices/d_9/dice_1.png'),
+        2: require('./collections/dices/d_9/dice_2.png'),
+        3: require('./collections/dices/d_9/dice_3.png'),
+        4: require('./collections/dices/d_9/dice_4.png'),
+        5: require('./collections/dices/d_9/dice_5.png'),
+        6: require('./collections/dices/d_9/dice_6.png'),
+    },
+    10: {
+        1: require('./collections/dices/d_10/dice_1.png'),
+        2: require('./collections/dices/d_10/dice_2.png'),
+        3: require('./collections/dices/d_10/dice_3.png'),
+        4: require('./collections/dices/d_10/dice_4.png'),
+        5: require('./collections/dices/d_10/dice_5.png'),
+        6: require('./collections/dices/d_10/dice_6.png'),
+    },
+    11: {
+        1: require('./collections/dices/d_11/dice_1.png'),
+        2: require('./collections/dices/d_11/dice_2.png'),
+        3: require('./collections/dices/d_11/dice_3.png'),
+        4: require('./collections/dices/d_11/dice_4.png'),
+        5: require('./collections/dices/d_11/dice_5.png'),
+        6: require('./collections/dices/d_11/dice_6.png'),
+    },
+    12: {
+        1: require('./collections/dices/d_12/dice_1.png'),
+        2: require('./collections/dices/d_12/dice_2.png'),
+        3: require('./collections/dices/d_12/dice_3.png'),
+        4: require('./collections/dices/d_12/dice_4.png'),
+        5: require('./collections/dices/d_12/dice_5.png'),
+        6: require('./collections/dices/d_12/dice_6.png'),
     },
 };
 

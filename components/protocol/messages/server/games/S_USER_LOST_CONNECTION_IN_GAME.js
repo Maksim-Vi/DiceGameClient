@@ -1,11 +1,12 @@
 import {setLostConnOppPopup} from "../../../../redux/reducers/popups/PopupsReducer";
 import {store} from "../../../../redux/redux-store";
+import {isProduction} from "../../../../utils/utils";
 
 export default class S_USER_LOST_CONNECTION_IN_GAME {
     constructor(leaveUsername, opponentUsername){
 
         this.MESSAG_ENAME = 'S_USER_LOST_CONNECTION_IN_GAME'
-        this.showLog = true
+        this.showLog = isProduction() ? false : true
 
         this.leaveUsername = leaveUsername
         this.opponentUsername = opponentUsername

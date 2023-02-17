@@ -1,5 +1,5 @@
 import React from 'react';
-import gameIcon from "../../../../assets/dice/play_dice.png";
+import gameIcon from "../../../../assets/dice/vs_time2.png";
 import styled from "styled-components";
 import Text from "../../../common/Text/Text";
 import { useWindowDimensions } from 'react-native';
@@ -43,7 +43,7 @@ const OpponentContainer = styled.TouchableOpacity`
   opacity: 0.6;
 `
 const GameImage = styled.Image`
-  width: 80px;
+  width: 100px;
   height: 80px;
   margin: 10px auto;
 `

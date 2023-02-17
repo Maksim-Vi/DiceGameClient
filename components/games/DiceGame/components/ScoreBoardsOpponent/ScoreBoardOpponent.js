@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {memo} from 'react'
 import styled from 'styled-components'
 import Text from '../../../../common/Text/Text'
 import BoardItem from '../BoardItem/BoardItem'
@@ -102,4 +102,4 @@ const Column = styled(TextWithoutShadow)`
   height: 20px;
 `
 
-export default ScoreBoardOpponent
+export default memo(ScoreBoardOpponent)

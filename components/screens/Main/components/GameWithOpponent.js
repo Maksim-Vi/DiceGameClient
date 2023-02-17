@@ -1,5 +1,5 @@
 import React from 'react';
-import gameIcon from "../../../../assets/dice/icons8-dices-98.png";
+import gameIcon from "../../../../assets/dice/vs_person1.png";
 import styled from "styled-components";
 import Text from "../../../common/Text/Text";
 import { useWindowDimensions } from 'react-native';
@@ -38,7 +38,7 @@ const OpponentContainer = styled.TouchableOpacity`
   border: 2px solid #ed9f39;
 `
 const GameImage = styled.Image`
-  width: 80px;
+  width: 100px;
   height: 80px;
   margin: 10px auto;
 `

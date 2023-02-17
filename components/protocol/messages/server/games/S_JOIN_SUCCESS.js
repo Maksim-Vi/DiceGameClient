@@ -1,9 +1,10 @@
+import {isProduction} from "../../../../utils/utils";
 
 export default class S_JOIN_SUCCESS {
     constructor(data){
 
         this.MESSAG_ENAME = 'S_JOIN_SUCCESS'
-        this.showLog = true
+        this.showLog = isProduction() ? false : true
 
         this.data = data
 

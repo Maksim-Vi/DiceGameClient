@@ -2,7 +2,7 @@ import { selectMyUser } from "../../../../redux/reducers/players/PlayersReducer"
 import { selectClientIdWebsocket } from "../../../../redux/reducers/Websocket/WebsocketReducer"
 import { store } from "../../../../redux/redux-store"
 import { sendMessageWS } from "../../../websocet"
-import {transitionState} from "../../../../utils/utils";
+import {isProduction, transitionState} from "../../../../utils/utils";
 
 // 1: 'play_robot',
 // 2: 'play_opponent',
@@ -13,8 +13,7 @@ export default class C_QUICK_PLAY {
 
         this.MESSAG_ENAME = 'C_QUICK_PLAY'
         this.clientIdWebsocket = null
-        this.showLog = true
-
+        this.showLog = isProduction() ? false : true
         this.id = ''
         this.username = ''
         this.gameType = gameType

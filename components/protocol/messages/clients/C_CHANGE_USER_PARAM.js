@@ -1,12 +1,13 @@
 import {selectMyUser} from "../../../redux/reducers/players/PlayersReducer";
 import {store} from "../../../redux/redux-store";
 import {sendMessageWS} from "../../websocet";
+import {isProduction} from "../../../utils/utils";
 
 export default class C_CHANGE_USER_PARAM  {
     constructor(userParam){
 
         this.MESSAGE_NAME = 'C_CHANGE_USER_PARAM'
-        this.showLog = true
+        this.showLog = isProduction() ? false : true
 
         this.username = null
         this.userParam = userParam

@@ -2,14 +2,14 @@ import { selectMyUser } from "../../../../redux/reducers/players/PlayersReducer"
 import { selectClientIdWebsocket } from "../../../../redux/reducers/Websocket/WebsocketReducer"
 import { store } from "../../../../redux/redux-store"
 import { sendMessageWS } from "../../../websocet"
+import {isProduction} from "../../../../utils/utils";
 
 export default class C_JOIN_TO_GAME {
     constructor(gameId){
 
         this.MESSAGE_NAME = 'C_JOIN_TO_GAME'
         this.clientIdWebsocket = null
-        this.showLog = true
-
+        this.showLog = isProduction() ? false : true
         this.difficultGame = {
             Easy: 'Easy', Medium: 'Medium', Hard: 'Hard'
         }

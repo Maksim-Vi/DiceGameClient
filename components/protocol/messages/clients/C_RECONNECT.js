@@ -1,13 +1,13 @@
 import { selectMyUser } from "../../../redux/reducers/players/PlayersReducer"
-import { selectClientIdWebsocket } from "../../../redux/reducers/Websocket/WebsocketReducer"
 import { store } from "../../../redux/redux-store"
-import {closeWebsocletAfterLeaveGame, sendMessageWS} from "../../websocet"
+import {sendMessageWS} from "../../websocet"
+import {isProduction} from "../../../utils/utils";
 
 export default class C_RECONNECT {
     constructor(clientId){
 
         this.MESSAG_ENAME = 'C_RECONNECT'
-        this.showLog = true
+        this.showLog = isProduction() ? false : true
 
         this.clientId = clientId
         this.username = null

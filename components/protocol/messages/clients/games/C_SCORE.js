@@ -1,5 +1,4 @@
 import {
-    selectOpponentThrowData,
     setIsYouMove,
     setOpponentThrowData,
     setThrowData
@@ -7,14 +6,14 @@ import {
 import { selectClientIdWebsocket } from "../../../../redux/reducers/Websocket/WebsocketReducer"
 import { store } from "../../../../redux/redux-store"
 import { sendMessageWS } from "../../../websocet"
+import {isProduction} from "../../../../utils/utils";
 
 export default class C_SCORE {
     constructor(userId, username, gameId, index, score){
 
         this.MESSAG_ENAME = 'C_SCORE'
         this.clientIdWebsocket = null
-        this.showLog = true
-
+        this.showLog = isProduction() ? false : true
         this.userId = userId
         this.username = username
         this.gameId = gameId

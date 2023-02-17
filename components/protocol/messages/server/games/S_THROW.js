@@ -1,12 +1,13 @@
 
 import {setActiveThrowBtn, setOpponentThrowData, setThrowData} from "../../../../redux/reducers/game/GameReducer"
 import { store } from "../../../../redux/redux-store"
+import {isProduction} from "../../../../utils/utils";
 
 export default class S_THROW {
     constructor(userId,username,diceScore){
 
         this.MESSAG_ENAME = 'S_THROW'
-        this.showLog = true
+        this.showLog = isProduction() ? false : true
 
         this.userId = userId
         this.username = username

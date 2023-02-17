@@ -1,14 +1,14 @@
 import {store} from "../../../../redux/redux-store";
 import {sendMessageWS} from "../../../websocet";
 import {selectMyUser} from "../../../../redux/reducers/players/PlayersReducer";
+import {isProduction} from "../../../../utils/utils";
 
 export default class C_CLAIM_MISSION {
     constructor(missionNumber){
 
         this.MESSAG_ENAME = 'C_CLAIM_MISSION'
         this.clientIdWebsocket = null
-        this.showLog = true
-
+        this.showLog = isProduction() ? false : true
         this.username = null
         this.missionNumber = missionNumber
 

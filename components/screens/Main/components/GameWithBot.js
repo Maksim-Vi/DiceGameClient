@@ -1,5 +1,5 @@
 import React from 'react';
-import gameIcon from "../../../../assets/dice/game_1V1.png";
+import gameIcon from "../../../../assets/dice/bot2.png";
 import styled from "styled-components";
 import Text from "../../../common/Text/Text";
 import { useWindowDimensions } from 'react-native';
@@ -39,9 +39,9 @@ const BotContainer = styled.TouchableOpacity`
 
 `
 const GameImage = styled.Image`
-  width: 90px;
-  height: 90px;
-  margin: 10px auto;
+  width: 70px;
+  height: 70px;
+  margin: 15px auto;
 `
 const TextCont = styled(Text)`
   text-shadow: 1px 1px 1px #000;

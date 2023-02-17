@@ -1,12 +1,13 @@
 import {store} from "../../../../redux/redux-store";
 import {setStatistics} from "../../../../redux/reducers/players/PlayersReducer";
+import {isProduction} from "../../../../utils/utils";
 
 export default class S_UPDATE_USER_STATISTICS {
     constructor(statistics) {
 
         this.MESSAG_ENAME = 'S_UPDATE_USER_STATISTICS'
-        this.showLog = true
-        
+        this.showLog = isProduction() ? false : true
+
         this.statistics = typeof statistics === 'string' ? JSON.parse(statistics) : statistics
 
         this.bot = null

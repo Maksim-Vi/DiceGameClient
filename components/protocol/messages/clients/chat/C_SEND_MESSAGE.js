@@ -1,13 +1,14 @@
 import { selectClientIdWebsocket } from "../../../../redux/reducers/Websocket/WebsocketReducer";
 import { store } from "../../../../redux/redux-store";
 import { sendMessageWS } from "../../../websocet";
+import {isProduction} from "../../../../utils/utils";
 
 export default class C_SEND_MESSAGE {
     constructor(username,chatRoom,chatMessage){
         
         this.MESSAG_ENAME = 'C_SEND_MESSAGE'
         this.clientIdWebsocket = null
-        this.showLog = true
+        this.showLog = isProduction() ? false : false
         this.username = username
         this.chatRoom = chatRoom
         this.chatMessage = chatMessage

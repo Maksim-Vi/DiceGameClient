@@ -7,12 +7,13 @@ import {
 } from "../../../../redux/reducers/game/GameReducer"
 import { store } from "../../../../redux/redux-store"
 import C_PAY_BY_GAME from "../../clients/games/C_PAY_BY_GAME";
+import {isProduction} from "../../../../utils/utils";
 
 export default class S_CREATED_GAME {
     constructor(gameId){
 
         this.MESSAG_ENAME = 'S_CREATED_GAME'
-        this.showLog = true
+        this.showLog = isProduction() ? false : true
 
         this.gameId = gameId
 

@@ -1,13 +1,13 @@
-import {selectMyUser, setUsersOnline} from "../../../../redux/reducers/players/PlayersReducer";
+import {selectMyUser} from "../../../../redux/reducers/players/PlayersReducer";
 import {store} from "../../../../redux/redux-store";
 import {sendMessageWS} from "../../../websocet";
+import {isProduction} from "../../../../utils/utils";
 
 export default class C_CLAIM_SEVEN_DAYS_GIFTS {
     constructor(sevenDaysGiftsNumber){
 
         this.MESSAG_ENAME = 'C_CLAIM_SEVEN_DAYS_GIFTS'
-        this.showLog = true
-
+        this.showLog = isProduction() ? false : true
         this.username = null
         this.sevenDaysGiftsNumber = sevenDaysGiftsNumber
 

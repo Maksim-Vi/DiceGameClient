@@ -7,7 +7,6 @@ export const roadHandlerMessage = (data) => {
             new S_ROAD_INFO_MAP(data.username, data.missions)
             break;
         case 'S_UPDATE_MISSION_ROAD_MAP':
-            console.log(data)
             new S_UPDATE_MISSION_ROAD_MAP(data.username, data.missions)
             break;
         default:

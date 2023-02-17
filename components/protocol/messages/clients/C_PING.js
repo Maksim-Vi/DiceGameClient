@@ -2,13 +2,14 @@ import { selectClientIdWebsocket } from "../../../redux/reducers/Websocket/Webso
 import { store } from "../../../redux/redux-store"
 import { sendMessageWS } from "../../websocet"
 import {selectMyUser} from "../../../redux/reducers/players/PlayersReducer";
+import {isProduction} from "../../../utils/utils";
 
 export default class C_PING {
     constructor(){
         
         this.MESSAG_ENAME = 'C_PING'
         this.clientIdWebsocket = null
-        this.showLog = false
+        this.showLog = isProduction() ? false : false
         this.username = ''
 
         this.init()

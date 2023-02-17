@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {memo} from 'react'
 import styled from 'styled-components'
 import C_SCORE from '../../../../protocol/messages/clients/games/C_SCORE'
 import BoardItem from '../BoardItem/BoardItem'
@@ -106,4 +106,4 @@ const Column = styled(TextWithoutShadow)`
   height: 20px;
 `
 
-export default ScoreBoardUser
+export default memo(ScoreBoardUser)

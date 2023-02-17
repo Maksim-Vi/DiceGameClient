@@ -1,11 +1,12 @@
 import { setGame, setGameSettings } from "../../../../redux/reducers/game/GameReducer"
 import { store } from "../../../../redux/redux-store"
+import {isProduction} from "../../../../utils/utils";
 
 export default class S_GAME_SETTINGS {
     constructor(currentGame,gameSettings){
 
         this.MESSAG_ENAME = 'S_GAME_SETTINGS'
-        this.showLog = true
+        this.showLog = isProduction() ? false : true
 
         this.currentGame = currentGame
         this.gameSettings = gameSettings

@@ -1,11 +1,12 @@
 import {store} from "../../../redux/redux-store";
 import {setAllDefaultParams} from "../../../redux/reducers/language/LanguageReducer";
+import {isProduction} from "../../../utils/utils";
 
 export default class S_DEFAULT_PARAMS {
     constructor(defaultParams){
 
         this.MESSAG_ENAME = 'S_DEFAULT_PARAMS'
-        this.showLog = true
+        this.showLog = isProduction() ? false : true
 
         this.defaultParams = typeof defaultParams === "string" ? JSON.parse(defaultParams) : defaultParams
 

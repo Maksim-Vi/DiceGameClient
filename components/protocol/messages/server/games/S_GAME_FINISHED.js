@@ -1,11 +1,11 @@
 
-import { store } from "../../../../redux/redux-store"
+import {isProduction} from "../../../../utils/utils";
 
 export default class S_GAME_FINISHED {
     constructor(gameId){
 
         this.MESSAG_ENAME = 'S_GAME_FINISHED'
-        this.showLog = true
+        this.showLog = isProduction() ? false : true
 
         this.gameId = gameId
 

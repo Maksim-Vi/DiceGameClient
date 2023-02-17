@@ -4,12 +4,13 @@ import {
     setCurrentActiveMission,
     setRoadMissions
 } from "../../../../redux/reducers/road/RoadReducer";
+import {isProduction} from "../../../../utils/utils";
 
 export default class S_UPDATE_MISSION_ROAD_MAP {
     constructor(username, missions){
 
         this.MESSAG_ENAME = 'S_UPDATE_MISSION_ROAD_MAP'
-        this.showLog = true
+        this.showLog = isProduction() ? false : true
 
         this.username = username
         this.missions =  typeof missions === 'string' ? JSON.parse(missions) : missions

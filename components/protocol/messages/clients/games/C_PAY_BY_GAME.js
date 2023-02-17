@@ -2,16 +2,15 @@ import { selectClientIdWebsocket } from "../../../../redux/reducers/Websocket/We
 import { store } from "../../../../redux/redux-store"
 import { sendMessageWS } from "../../../websocet"
 import {selectMyUser} from "../../../../redux/reducers/players/PlayersReducer";
-import {selectCurrentGameId} from "../../../../redux/reducers/game/GameReducer";
 import {setInfoPopup} from "../../../../redux/reducers/popups/PopupsReducer";
+import {isProduction} from "../../../../utils/utils";
 
 export default class C_PAY_BY_GAME {
     constructor(gameId){
 
         this.MESSAG_ENAME = 'C_PAY_BY_GAME'
         this.clientIdWebsocket = null
-        this.showLog = true
-
+        this.showLog = isProduction() ? false : true
         this.username = ''
         this.flash = ''
         this.gameId = gameId

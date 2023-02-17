@@ -1,9 +1,10 @@
+import {isProduction} from "../../../../utils/utils";
 
 export default class S_WAITING_OPPONENT {
     constructor(data){
 
         this.MESSAG_ENAME = 'S_WAITING_OPPONENT'
-        this.showLog = true
+        this.showLog = isProduction() ? false : true
 
         this.data = data
 
