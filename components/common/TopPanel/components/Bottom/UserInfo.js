@@ -31,7 +31,7 @@ const UserInfo = (props) => {
 
 
                 <AvatarIfoContainer>
-                    <UserName numberOfLines={2} madium heavy>{user ? user.username : ''}</UserName>
+                    <UserName numberOfLines={1} ellipsizeMode='middle' large heavy>{user ? user.username : ''}</UserName>
                     <Experience experience={experience}/>
                 </AvatarIfoContainer>
             </UserInfoContainer>
