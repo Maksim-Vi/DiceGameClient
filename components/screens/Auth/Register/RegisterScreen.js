@@ -84,7 +84,7 @@ const RegisterScreen = () => {
                         <Ionicons name='arrow-back' size={38} color={'#000'}/>
                     </GameBack>
                     <InputsContainer>
-                        <Text title heavy color={'#fff'} center>Knocky Dice</Text>
+                        <Text setShadow={true} title heavy color={'#fff'} center>Knocky Dice</Text>
 
                         <Controller control={control}
                                     rules={{required: true}}
@@ -142,7 +142,7 @@ const RegisterScreen = () => {
                     </InputsContainer>
                     <BtnContainer>
                         <RegisterBtn disabled={disableBtn} onPress={handleSubmit(hendlerRegister)}>
-                            <Text small heavy color='#fff'>Register</Text>
+                            <Text setShadow={true} small heavy color='#fff'>Register</Text>
                         </RegisterBtn>
                     </BtnContainer>
                 </Container>

@@ -40,7 +40,15 @@ const BoardUserInfo = (props) => {
             </CountContainer>
 
             <Avatar avatarId={props.user.avatar}/>
-            <Name numberOfLines={1} large blod color={'#000'} center>{props.user.username || ''}</Name>
+            <Name setShadow={true}
+                  shadowRadius={1}
+                  shadowOffset={{width: -1, height: 2}}
+                  shadowColor={'rgb(204,30,30)'}
+                  numberOfLines={3}
+                  large blod color={'#fff'}
+                  center>
+                {props.user.username || ''}
+            </Name>
         </BoardAvatarContainer>
     )
 };
@@ -93,6 +101,7 @@ const CountContainer = styled.View`
   }}
 `
 const Name = styled(Text)`
+
 `
 
 export default memo(BoardUserInfo)

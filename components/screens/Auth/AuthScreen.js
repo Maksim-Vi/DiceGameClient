@@ -53,17 +53,17 @@ const AuthScreen = () => {
         <BackgroundWrapper gackground={bag}>
             <TouchableWithoutFeedback style={{flex: 1}} onPress={Keyboard.dismiss} accessible={false}>
                 <AuthContainer>
-                    <Text title heavy color={'#fff'} center>Knocky Dice</Text>
+                    <Text setShadow={true} title heavy color={'#fff'} center>Knocky Dice</Text>
 
                     <LoginScreen onChangeInputs={onChangeInputs}
                                  control={control}
                                  errors={errors}/>
                     <ButtonContainer>
-                        <LoginBtn disabled={disableBtn} onPress={handleSubmit(handlerLogin)}><Text small heavy
+                        <LoginBtn disabled={disableBtn} onPress={handleSubmit(handlerLogin)}><Text setShadow={true} small heavy
                                                                                                    color='#fff'
                                                                                                    center>Login</Text></LoginBtn>
                         <Divider text={'or'} padding={10} color={'black'}/>
-                        <RegisterBtn onPress={handlerRegister}><Text small heavy color='#fff'
+                        <RegisterBtn onPress={handlerRegister}><Text setShadow={true} small heavy color='#fff'
                                                                      center>Register</Text></RegisterBtn>
                         <GoogleAuth />
                     </ButtonContainer>

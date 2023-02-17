@@ -223,7 +223,14 @@ class GameContainer extends React.PureComponent {
                     <ButtonContainer onPress={this.hendlerThrowGame}
                                      activeOpacity={!this.state.isThrow ? 1 : 0.6}
                                      disabled={this.state.isThrow}>
-                        <Text large heavy color={!this.state.isThrow ? '#168f45' : 'rgba(255,255,255,0.62)'}>{this.props.throwText}</Text>
+                        <Text setShadow={true}
+                              shadowRadius={5}
+                              shadowOffset={{width: -1, height: 2}}
+                              shadowColor={'rgb(204,30,30)'}
+                              large heavy
+                              color={!this.state.isThrow ? '#168f45' : 'rgba(255,255,255,0.62)'}>
+                            {this.props.throwText}
+                        </Text>
                     </ButtonContainer>
                 }
 

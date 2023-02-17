@@ -31,7 +31,15 @@ const BoardOpponentInfo = (props) => {
                                   })
                               }}
         >
-            <Name numberOfLines={1} large blod color={'#000'} center>{props.opponent.username || ''}</Name>
+            <Name setShadow={true}
+                  shadowRadius={1}
+                  shadowOffset={{width: -1, height: 2}}
+                  shadowColor={'rgb(204,30,30)'}
+                  numberOfLines={3}
+                  large blod color={'#fff'}
+                  center>
+                {props.opponent.username || ''}
+            </Name>
             <Avatar avatarId={props.opponent.avatar}/>
 
             <CountContainer width={width}>
