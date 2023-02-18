@@ -39,7 +39,7 @@ const UserFrame = () => {
                 }
             ]
         }}>
-            <Avatar avatarId={user.avatar} avatarFrame={true}/>
+            <Avatar width={80} height={80} avatarId={user.avatar} avatarFrame={true}/>
             <NameContainer>
                 <Text setShadow={true} large blod center>{user.username}</Text>
             </NameContainer>
@@ -49,11 +49,14 @@ const UserFrame = () => {
 
 const UserContainer = styled(Animated.View)`
   display: flex;
-  width: 100px;
-  height: 100px;
+  align-items: center;
+  justify-content: center;
+  width: 150px;
+  height: 150px;
 `
 
 const NameContainer = styled.View`
+  width: 100%;
   margin-top: 10px;
   background-color: rgba(72, 72, 72, 0.35);
   border-radius: 20px;
