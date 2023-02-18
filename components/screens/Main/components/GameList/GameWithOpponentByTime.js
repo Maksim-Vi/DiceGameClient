@@ -1,14 +1,14 @@
 import React from 'react';
-import gameIcon from "../../../../assets/dice/vs_time2.png";
+import gameIcon from "../../../../../assets/dice/vs_time2.png";
 import styled from "styled-components";
-import Text from "../../../common/Text/Text";
+import Text from "../../../../common/Text/Text";
 import { useWindowDimensions } from 'react-native';
-import {selectTranslation} from "../../../redux/reducers/language/LanguageReducer";
-import defaultTranslation from "../../../redux/reducers/language/defaultTranslation";
+import {selectTranslation} from "../../../../redux/reducers/language/LanguageReducer";
+import defaultTranslation from "../../../../redux/reducers/language/defaultTranslation";
 import {connect} from "react-redux";
-import {store} from "../../../redux/redux-store";
-import {setInfoPopup} from "../../../redux/reducers/popups/PopupsReducer";
-import Sounds, {soundsType} from "../../../utils/Sounds";
+import {store} from "../../../../redux/redux-store";
+import {setInfoPopup} from "../../../../redux/reducers/popups/PopupsReducer";
+import Sounds, {soundsType} from "../../../../utils/Sounds";
 
 const GameWithOpponentByTime = (props) => {
 
@@ -24,7 +24,7 @@ const GameWithOpponentByTime = (props) => {
   return (
       <OpponentContainer width={width} height={height} onPress={handelClick} style={{ borderBottomWidth: 8 }}>
         <TextCont numberOfLines={1} setShadow={true} small heavy color={'#ff9d4d'} center>{props.tap_to_play}</TextCont>
-        <GameImage source={gameIcon} resizeMode={ 'stretch'}/>
+        <GameImage source={gameIcon} resizeMode={'contain'}/>
         <TextCont numberOfLines={2} setShadow={true} madium heavy color={'#ff9d4d'} center>{props.fightOppByTime}</TextCont>
       </OpponentContainer>
   );

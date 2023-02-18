@@ -37,7 +37,7 @@ const UserInfoScreen = (props) => {
                 </ProfileTitle>
 
                 <ProfileAvatarInfo>
-                    <Avatar width={100} height={100} avatarId={myUser.avatar} hendelAvatar={handelAvatar}/>
+                    <Avatar width={100} height={100} avatarFrame={true} avatarId={myUser.avatar} hendelAvatar={handelAvatar}/>
                     <UserName setShadow={true} large blod center>{myUser.username}</UserName>
                 </ProfileAvatarInfo>
 

@@ -226,7 +226,7 @@ class GameContainer extends React.PureComponent {
                         <Text setShadow={true}
                               shadowRadius={5}
                               shadowOffset={{width: -1, height: 2}}
-                              shadowColor={'rgb(204,30,30)'}
+                              shadowColor={!this.state.isThrow ? 'rgba(204,30,30)' : 'rgb(204,30,30,0)'}
                               large heavy
                               color={!this.state.isThrow ? '#168f45' : 'rgba(255,255,255,0.62)'}>
                             {this.props.throwText}

@@ -14,6 +14,8 @@ import bag from '../../../../assets/bg/main_bg.jpg'
 import {setInfoPopup} from "../../../redux/reducers/popups/PopupsReducer";
 import {useDispatch} from "react-redux";
 import Sounds, {soundsType} from "../../../utils/Sounds";
+import logo from "../../../../assets/common/logo.png";
+import Logo from "../../../common/Logo/Logo";
 
 const RegisterScreen = () => {
 
@@ -84,7 +86,7 @@ const RegisterScreen = () => {
                         <Ionicons name='arrow-back' size={38} color={'#000'}/>
                     </GameBack>
                     <InputsContainer>
-                        <Text setShadow={true} title heavy color={'#fff'} center>Knocky Dice</Text>
+                        <Logo />
 
                         <Controller control={control}
                                     rules={{required: true}}

@@ -6,6 +6,7 @@ import C_ABORDED_GAME from '../../protocol/messages/clients/games/C_ABORDED_GAME
 import {store} from '../../redux/redux-store'
 import {selectCurrentGameId} from '../../redux/reducers/game/GameReducer'
 import {Ionicons} from '@expo/vector-icons'
+import back from "../../../assets/common/btns/button_page_back.png";
 
 const GameScreen = () => {
 
@@ -33,7 +34,7 @@ const GameScreen = () => {
     return (
         <BackgroundWrapper>
             <GameBack onPress={leaveGame}>
-                <Ionicons name='arrow-back' size={38} color={'#000'}/>
+                <BackImg source={back} style={{transform: [{rotate: '-180deg'}]}}/>
             </GameBack>
             <GameWrap>
                 <GameWrapper/>
@@ -54,4 +55,9 @@ const GameBack = styled.TouchableOpacity`
   left: -3px;
   z-index: 1;
 `
+const BackImg = styled.Image`
+  width: 40px;
+  height: 40px;
+`
+
 export default GameScreen

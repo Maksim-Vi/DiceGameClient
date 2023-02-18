@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/native'
 import React from 'react'
 import styled from 'styled-components';
-import {Ionicons} from '@expo/vector-icons'
+import back from '../../../../assets/common/btns/button_page_back.png'
 import {store} from "../../../redux/redux-store";
 import {setActiveTabApp} from "../../../redux/reducers/Websocket/WebsocketReducer";
 import Sounds, {soundsType} from "../../../utils/Sounds";
@@ -23,7 +23,7 @@ const ButtonBack = (props) => {
 
     return (
         <GameBack {...props} onPress={goBack}>
-            <Ionicons name='arrow-back' size={38} color={props.colorIcon ? props.colorIcon : '#000'} />
+            <BackImg source={back} style={{transform: [{rotate: '-180deg'}]}}/>
         </GameBack>   
     )
 }
@@ -33,6 +33,11 @@ const GameBack = styled.TouchableOpacity`
 	top: ${props=> props.top ? props.top : '20px'};
 	left: ${props=> props.left ? props.left : '10px'};
     z-index: 1;
+`
+
+const BackImg = styled.Image`
+  width: 40px;
+  height: 40px;
 `
 
 export default ButtonBack

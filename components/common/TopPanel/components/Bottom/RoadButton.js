@@ -31,7 +31,7 @@ const RoadBtn = styled.TouchableOpacity`
     height: 50px;
     border-radius: 10px;
     margin-right: 5px;
-    margin-top: 5px;
+    margin: 5px;
     background-color: rgb(1,1,70);
 `
 const RoadImg = styled.Image`

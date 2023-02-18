@@ -6,7 +6,7 @@ import CollectButton from "../common/CollectButton";
 import {Animated, Easing} from "react-native";
 import lock from "../../../../../assets/common/lock.png";
 import sale from "../../../../../assets/collections/sale.png";
-import TextWithoutShadow from "../../../../common/Text/TextWithoutShadow";
+import collBg from "../../../../../assets/common/glass_frame.png";
 
 const SquareItem = ({squareItem,isActive,isLocked,isSale, isCollected, setModalVisible}) => {
 
@@ -42,7 +42,6 @@ const SquareItem = ({squareItem,isActive,isLocked,isSale, isCollected, setModalV
 
     return (
         <SquareCard style={{
-            borderBottomWidth: 8,
             opacity: showPlace.current.interpolate({
                 inputRange: [0, 1],
                 outputRange: [0, 1],
@@ -56,32 +55,34 @@ const SquareItem = ({squareItem,isActive,isLocked,isSale, isCollected, setModalV
                 }
             ]
         }}>
-            {renderLockedBG()}
-            {renderSaleLabel()}
+            <CollectionCardBG source={collBg} resizeMode="contain">
+                {renderLockedBG()}
+                {renderSaleLabel()}
 
-            <SquareImage source={getCollectionSquareImg(squareItem,squareItem.sortIndex)}/>
-            <Text setShadow={true} numberOfLines={1} madium blod center>{squareItem.name}</Text>
-            <CollectButton item={squareItem}
-                           setModalVisible={setModalVisible}
-                           isActive={isActive}
-                           isLocked={isLocked}
-                           isSale={isSale}
-                           isCollected={isCollected}/>
+                <SquareImage source={getCollectionSquareImg(squareItem,squareItem.sortIndex)}/>
+                <Text setShadow={true} numberOfLines={1} madium blod center>{squareItem.name}</Text>
+                <CollectButton item={squareItem}
+                               setModalVisible={setModalVisible}
+                               isActive={isActive}
+                               isLocked={isLocked}
+                               isSale={isSale}
+                               isCollected={isCollected}/>
+            </CollectionCardBG>
         </SquareCard>
     );
 }
 
-const SquareCard = styled(Animated.View)`
+const SquareCard = styled(Animated.View)``
+
+const CollectionCardBG = styled.ImageBackground`
   position: relative;
   display: flex;
   align-items: center;
   justify-content: space-around;
-  width: 40%;
+  width: 180px;
   height: 180px;
-  border-radius: 20px;
   margin: 10px auto;
-  background-color: rgba(220, 220, 220, 0.73);
-  border: 2px solid rgba(229, 229, 229, 0.9);
+  padding: 10px 20px;
 `
 
 const LockedImg = styled.Image`
@@ -102,19 +103,10 @@ const SaleContainer = styled.View`
   right: -20px;
   z-index: 1;
 `
-
-const TextSale = styled(TextWithoutShadow)`
-  position: absolute;
-  top: 35px;
-  left: 22px;
-  z-index: 2;
-`
-
 const SaleImg = styled.Image`
   width: 100px;
   height: 100px;
 `
-
 const SquareImage = styled.Image`
   width: 70px;
   height: 70px;

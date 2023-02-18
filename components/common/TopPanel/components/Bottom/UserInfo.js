@@ -10,6 +10,7 @@ import {useNavigation} from "@react-navigation/native";
 import {store} from "../../../../redux/redux-store";
 import {setActiveTabApp} from "../../../../redux/reducers/Websocket/WebsocketReducer";
 import Sounds, {soundsType} from "../../../../utils/Sounds";
+import {Platform, View} from "react-native";
 
 const UserInfo = (props) => {
 
@@ -26,12 +27,11 @@ const UserInfo = (props) => {
         <SlideScreen left={true}>
             <UserInfoContainer>
                 <AvatarContainer>
-                    <Avatar width={50} height={50} avatarId={avatarId} hendelAvatar={hendelAvatar}/>
+                    <Avatar width={60} height={60} avatarFrame={true} avatarId={avatarId} hendelAvatar={hendelAvatar}/>
                 </AvatarContainer>
 
-
                 <AvatarIfoContainer>
-                    <UserName setShadow={true} numberOfLines={1} ellipsizeMode='middle' large heavy>{user ? user.username : ''}</UserName>
+                    {/*<UserName setShadow={true} numberOfLines={Platform.OS === 'android' ? 2 : 1} ellipsizeMode='middle' large heavy>{user ? user.username : ''}</UserName>*/}
                     <Experience experience={experience}/>
                 </AvatarIfoContainer>
             </UserInfoContainer>
@@ -42,12 +42,14 @@ const UserInfo = (props) => {
 
 const UserInfoContainer = styled.View`
   display: flex;
-  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
   padding: 5px;
-  margin-left: 5px;
   border-radius: 10px;
-  width: 130px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
   background-color: rgb(1,1,70);
 `
 const AvatarIfoContainer = styled.View`
@@ -55,10 +57,15 @@ const AvatarIfoContainer = styled.View`
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  width: 50%;
-  margin-left: 5px;
+  width: 55%;
+  margin-left: 20px;
 `
 const AvatarContainer = styled.View`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-top: 10px;
   width: 50px;
   height: 50px;
 `

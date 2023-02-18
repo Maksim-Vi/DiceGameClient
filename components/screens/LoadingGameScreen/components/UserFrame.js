@@ -39,7 +39,7 @@ const UserFrame = () => {
                 }
             ]
         }}>
-            <Avatar avatarId={user.avatar}/>
+            <Avatar avatarId={user.avatar} avatarFrame={true}/>
             <NameContainer>
                 <Text setShadow={true} large blod center>{user.username}</Text>
             </NameContainer>

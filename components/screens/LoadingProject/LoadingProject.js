@@ -13,6 +13,8 @@ import six from '../../../assets/collections/dices/d_4/dice_6.png'
 import starsAnim from "../../../assets/animation/lottieAnim/purpure-stars.json";
 import AnimatedLottieView from "lottie-react-native";
 import {setTimingAnimated} from "../../utils/Animation";
+import logo from "../../../assets/common/logo.png";
+import Logo from "../../common/Logo/Logo";
 
 const LoadingProject = () => {
 	const animFirstValue = React.useRef(new Animated.Value(0)).current;
@@ -80,7 +82,8 @@ const LoadingProject = () => {
 	return (
 		<BackgroundWrapper gackground={bag}>
 			<LoadingContainer>
-				<Text setShadow={true} title heavy color={'#fff'} center>Knocky Dice</Text>
+				<Logo />
+
 				<View style={styles.container}>
 					<AnimatedLottieView loop
 										autoPlay

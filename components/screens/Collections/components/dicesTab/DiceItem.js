@@ -6,9 +6,9 @@ import {getCollectionDiceImg} from "../../../../utils/utils";
 import CollectButton from "../common/CollectButton";
 import {Animated, Easing, useWindowDimensions} from 'react-native';
 import sale from "../../../../../assets/collections/sale.png";
-import TextWithoutShadow from "../../../../common/Text/TextWithoutShadow";
+import collBg from "../../../../../assets/common/glass_frame.png";
 
-const DiceItem = ({diceItem, isActive,isLocked,isSale, isCollected, setModalVisible}) => {
+const DiceItem = ({diceItem, isActive, isLocked, isSale, isCollected, setModalVisible}) => {
 
     const {width, height} = useWindowDimensions()
     const showPlace = React.useRef(new Animated.Value(0))
@@ -22,18 +22,18 @@ const DiceItem = ({diceItem, isActive,isLocked,isSale, isCollected, setModalVisi
         }).start();
     }
 
-    const renderLockedBG = () =>{
-        if(!isLocked) return null
+    const renderLockedBG = () => {
+        if (!isLocked) return null
 
         return <LockedImg source={lock} style={{transform: [{rotate: '10deg'}]}}/>
     }
 
-    const renderSaleLabel = () =>{
-        if(!isSale) return null
+    const renderSaleLabel = () => {
+        if (!isSale) return null
 
         return <SaleContainer>
             {/*<TextSale large blod center color={'#9a1515'} style={{transform: [{rotate: '-60deg'}]}}>sale</TextSale>*/}
-            <SaleImg source={sale} />
+            <SaleImg source={sale}/>
         </SaleContainer>
     }
 
@@ -41,9 +41,38 @@ const DiceItem = ({diceItem, isActive,isLocked,isSale, isCollected, setModalVisi
         showPlaceAnim()
     }, [])
 
+    /* return (
+         <DiceCard width={width} height={height} style={{
+             borderBottomWidth: 8,
+             opacity: showPlace.current.interpolate({
+                 inputRange: [0, 1],
+                 outputRange: [0, 1],
+             }),
+             transform: [
+                 {
+                     scale: showPlace.current.interpolate({
+                         inputRange: [0, 1],
+                         outputRange: [0, 1]
+                     })
+                 }
+             ],
+         }}>
+             {renderLockedBG()}
+             {renderSaleLabel()}
+
+             <DiceImage source={getCollectionDiceImg(diceItem, diceItem.sortIndex)}/>
+             <Text center>{diceItem.name}</Text>
+             <CollectButton item={diceItem}
+                            setModalVisible={setModalVisible}
+                            isActive={isActive}
+                            isSale={isSale}
+                            isLocked={isLocked}
+                            isCollected={isCollected}/>
+         </DiceCard>
+     );*/
+
     return (
-        <DiceCard width={width} height={height} style={{
-            borderBottomWidth: 8,
+        <DiceCard style={{
             opacity: showPlace.current.interpolate({
                 inputRange: [0, 1],
                 outputRange: [0, 1],
@@ -57,34 +86,34 @@ const DiceItem = ({diceItem, isActive,isLocked,isSale, isCollected, setModalVisi
                 }
             ],
         }}>
-            {renderLockedBG()}
-            {renderSaleLabel()}
+            <CollectionCardBG source={collBg} resizeMode="contain">
+                {renderLockedBG()}
+                {renderSaleLabel()}
 
-            <DiceImage source={getCollectionDiceImg(diceItem, diceItem.sortIndex)}/>
-            <Text center>{diceItem.name}</Text>
-            <CollectButton item={diceItem}
-                           setModalVisible={setModalVisible}
-                           isActive={isActive}
-                           isSale={isSale}
-                           isLocked={isLocked}
-                           isCollected={isCollected}/>
+                <DiceImage source={getCollectionDiceImg(diceItem, diceItem.sortIndex)}/>
+                <Text setShadow={true} numberOfLines={1} madium blod center>{diceItem.name}</Text>
+                <CollectButton item={diceItem}
+                               setModalVisible={setModalVisible}
+                               isActive={isActive}
+                               isSale={isSale}
+                               isLocked={isLocked}
+                               isCollected={isCollected}/>
+            </CollectionCardBG>
         </DiceCard>
-    );
+    )
 }
+const DiceCard = styled(Animated.View)``
 
-const DiceCard = styled(Animated.View)`
+const CollectionCardBG = styled.ImageBackground`
   position: relative;
   display: flex;
   align-items: center;
   justify-content: space-around;
-  width: 40%;
-  height: 200px;
-  border-radius: 20px;
+  width: 180px;
+  height: 180px;
   margin: 10px auto;
-  background-color: rgba(220, 220, 220, 0.73);
-  border: 2px solid rgba(229, 229, 229, 0.9);
+  padding: 10px 20px;
 `
-
 const LockedImg = styled.Image`
   position: absolute;
   right: 10px;
@@ -99,17 +128,9 @@ const SaleContainer = styled.View`
   text-align: center;
   position: absolute;
   top: -20px;
-  right: -20px;
+  right: -5px;
   z-index: 1;
 `
-
-const TextSale = styled(TextWithoutShadow)`
-  position: absolute;
-  top: 35px;
-  left: 22px;
-  z-index: 2;
-`
-
 const SaleImg = styled.Image`
   width: 100px;
   height: 100px;

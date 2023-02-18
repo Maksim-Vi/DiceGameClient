@@ -52,7 +52,7 @@ const Winner = ({winner, ...props}) => {
             <Container>
                 <PlaceContainer>
                     <Place source={place} resizeMode={ 'stretch'}/>
-                    <Avatar width={50} height={50} avatarId={winner.player.avatar}/>
+                    <Avatar width={50} height={50} avatarFrame={true} avatarId={winner.player.avatar}/>
                 </PlaceContainer>
 
                 <NameTextContainer>

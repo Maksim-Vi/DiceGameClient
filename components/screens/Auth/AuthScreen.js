@@ -9,10 +9,12 @@ import {Keyboard, Platform, TouchableWithoutFeedback} from 'react-native'
 import Divider from "../../common/Divider/Divider";
 import {useForm} from 'react-hook-form'
 import bag from '../../../assets/bg/main_bg.jpg'
+import logo from '../../../assets/common/logo.png'
 import GoogleAuth from "./Google/GoogleAuth";
 import {setInfoPopup} from "../../redux/reducers/popups/PopupsReducer";
 import {useDispatch} from "react-redux";
 import Sounds, {soundsType} from "../../utils/Sounds";
+import Logo from "../../common/Logo/Logo";
 
 const AuthScreen = () => {
 
@@ -53,7 +55,7 @@ const AuthScreen = () => {
         <BackgroundWrapper gackground={bag}>
             <TouchableWithoutFeedback style={{flex: 1}} onPress={Keyboard.dismiss} accessible={false}>
                 <AuthContainer>
-                    <Text setShadow={true} title heavy color={'#fff'} center>Knocky Dice</Text>
+                    <Logo />
 
                     <LoginScreen onChangeInputs={onChangeInputs}
                                  control={control}
@@ -79,6 +81,7 @@ const AuthContainer = styled.View`
   align-items: center;
   justify-content: center;
 `
+
 const ButtonContainer = styled.View`
   width: 100%;
   margin-top: 30px;
