@@ -31,6 +31,10 @@ const Text = styled.Text`
     }};
 
     ${({title,large,madium,small,fontSize})=>{
+      if (fontSize) {
+        return `font-size: ${fontSize}px`
+      }
+      
         if(title || large || madium || small){
           switch (true) {
             case title: return 'font-size: 32px'
@@ -39,8 +43,6 @@ const Text = styled.Text`
             case small: return 'font-size: 13px'
             default: return 'font-size: 14px'
           }  
-        } else if(fontSize){
-          return `font-size: ${fontSize}px`
         }
     }}
 

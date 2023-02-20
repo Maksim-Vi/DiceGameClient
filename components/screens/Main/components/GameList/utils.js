@@ -1,45 +1,46 @@
-import {Dimensions} from "react-native";
-import {
-    Extrapolate,
-    interpolate,
-} from 'react-native-reanimated';
+import gameIcon from "../../../../../assets/dice/bot2.png";
+import vs_person1 from "../../../../../assets/dice/vs_person1.png";
+import vs_time2 from "../../../../../assets/dice/vs_time2.png";
+import {selectTranslation} from "../../../../redux/reducers/language/LanguageReducer";
+import defaultTranslation from "../../../../redux/reducers/language/defaultTranslation";
+import {store} from "../../../../redux/redux-store";
+import GameWithOpponentByTime from "./GameWithOpponentByTime";
+import GameWithOpponent from "./GameWithOpponent";
+import GameWithBot from "./GameWithBot";
 
-const {width: SCREEN_WIDTH} = Dimensions.get('window');
-const ITEM_WIDTH = SCREEN_WIDTH / 5;
+export const gameListData = [
+    {
+        id: -1,
+        type: 'empty',
+    },
+    {
+        id: 0,
+        type: 'bot',
+        component: <GameWithBot />,
+    },
+    {
+        id: 1,
+        type: 'opponent',
+        component: <GameWithOpponent />,
+    },
+    {
+        id: 2,
+        type: 'opponentByTime',
+        component: <GameWithOpponentByTime />,
+    },
+    {
+        id: -2,
+        type: 'empty',
+    },
+]
 
 
-export const scaleAnimation = (udv, index) => {
-    'worklet';
-    return udv.value === null
-        ? 0
-        : interpolate(
-            udv.value,
-            [
-                (index - 2) * ITEM_WIDTH,
-                (index - 1) * ITEM_WIDTH,
-                index * ITEM_WIDTH,
-                (index + 1) * ITEM_WIDTH,
-                (index + 2) * ITEM_WIDTH,
-            ],
-            [0.5, 0.7, 1, 0.7, 0.5],
-            Extrapolate.CLAMP,
-        );
-};
+export const getMarginLeftGameItem = (index) =>{
+    if(index === 0){
+        return 100
+    }
 
-export const opacityAnimation = (udv, index) => {
-    'worklet';
-    return udv.value === null
-        ? 0
-        : interpolate(
-            udv.value,
-            [
-                (index - 2) * ITEM_WIDTH,
-                (index - 1) * ITEM_WIDTH,
-                index * ITEM_WIDTH,
-                (index + 1) * ITEM_WIDTH,
-                (index + 2) * ITEM_WIDTH,
-            ],
-            [0, 0.5, 0.8, 1, 0.8, 0.5, 0],
-            Extrapolate.CLAMP,
-        );
-};
+    if(index === gameListData.length - 1){
+        return -100
+    }
+}

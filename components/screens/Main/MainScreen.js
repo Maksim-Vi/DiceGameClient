@@ -12,7 +12,7 @@ import defaultParams from "../../redux/reducers/language/defaultParams";
 import {selectRestoreGame, setIsGameStarted} from "../../redux/reducers/game/GameReducer";
 import {store} from "../../redux/redux-store";
 import {selectMyUser} from "../../redux/reducers/players/PlayersReducer";
-import GameList from "./components/GameList/GameList";
+import GameList from "./components/GameList/List/GameList";
 
 const MainScreen = (props) => {
 

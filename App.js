@@ -18,10 +18,6 @@ export default function App() {
 
   const navigationRef = useNavigationContainerRef();
 
-  useEffect(()=>{
-    console.log('APP_TYPE', process.env.APP_TYPE)
-  },[])
-
   if (!fontsLoaded) return null;
   
   return  (
