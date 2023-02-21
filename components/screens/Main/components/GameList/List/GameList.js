@@ -75,7 +75,7 @@ const GameListContainer = styled.View`
   align-content: center;
   align-items: center;
   width: 100%;
-  height: 100%;
+  height: 55%;
 `
 
 const GameFlatList = styled(Animated.FlatList)`
