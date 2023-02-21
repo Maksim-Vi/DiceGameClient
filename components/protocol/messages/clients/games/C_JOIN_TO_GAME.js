@@ -3,6 +3,11 @@ import { selectClientIdWebsocket } from "../../../../redux/reducers/Websocket/We
 import { store } from "../../../../redux/redux-store"
 import { sendMessageWS } from "../../../websocet"
 import {isProduction} from "../../../../utils/utils";
+import {selectDifficultGame} from "../../../../redux/reducers/game/GameReducer";
+
+const difficultGameDeff = {
+    Easy: 'Easy', Medium: 'Medium', Hard: 'Hard'
+}
 
 export default class C_JOIN_TO_GAME {
     constructor(gameId){
@@ -10,9 +15,9 @@ export default class C_JOIN_TO_GAME {
         this.MESSAGE_NAME = 'C_JOIN_TO_GAME'
         this.clientIdWebsocket = null
         this.showLog = isProduction() ? false : true
-        this.difficultGame = {
-            Easy: 'Easy', Medium: 'Medium', Hard: 'Hard'
-        }
+
+
+        this.difficultGame = this.getDifficultGame()
         this.id = ''
         this.username = ''
         this.gameId = gameId
@@ -28,7 +33,14 @@ export default class C_JOIN_TO_GAME {
     }
 
     exec() {
-        sendMessageWS({ name: this.MESSAGE_NAME, clientIdWs: this.clientIdWebsocket, userId: this.id,  username: this.username, gameId: this.gameId, difficultGame: this.difficultGame.Medium })
+        sendMessageWS({
+            name: this.MESSAGE_NAME,
+            clientIdWs: this.clientIdWebsocket,
+            userId: this.id,
+            username: this.username,
+            gameId: this.gameId,
+            difficultGame: this.difficultGame.Medium
+        })
     }
 
     selectUserData = () =>{
@@ -36,6 +48,12 @@ export default class C_JOIN_TO_GAME {
 
         this.id = user.id
         this.username = user.username
+    }
+
+    getDifficultGame = () =>{
+        const DifficultGame = selectDifficultGame(store.getState())
+
+        return DifficultGame ? DifficultGame : difficultGameDeff.Medium
     }
 
     setClientId(){

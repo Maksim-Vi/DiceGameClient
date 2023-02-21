@@ -3,9 +3,15 @@ import {connect} from 'react-redux'
 import styled from 'styled-components'
 import {selectMyUser} from '../../redux/reducers/players/PlayersReducer'
 import {
-    selectAvatarPopup, selectCollectItemPopup, selectGoogleConfirmUsernamePopup, selectInfoPopup,
-    selectLevelUpPopup, selectLostConnOpponentPopup,
-    selectSettingsPopup, selectSevenDaysGiftPopup,
+    selectAvatarPopup,
+    selectBotGameTypesPopup,
+    selectCollectItemPopup,
+    selectGoogleConfirmUsernamePopup,
+    selectInfoPopup,
+    selectLevelUpPopup,
+    selectLostConnOpponentPopup,
+    selectSettingsPopup,
+    selectSevenDaysGiftPopup,
     selectTestBtnsPopup
 } from '../../redux/reducers/popups/PopupsReducer'
 import AvatarPopups from './popupsComponents/AvatarPopups'
@@ -19,6 +25,7 @@ import InfoPopups from "./popupsComponents/InfoPopups";
 import ChangeUserNameGoogle from "./popupsComponents/GooglePopups/ChangeUserNameGoogle";
 import LostConnectionOpponent from "./popupsComponents/Game/LostConnectionOpponent";
 import CollectItemPopup from "./popupsComponents/Collection/CollectItemPopup";
+import BotTypeGame from "./popupsComponents/Game/BotTypeGame";
 
 const PopupsManager = (props) => {
     return (
@@ -33,6 +40,7 @@ const PopupsManager = (props) => {
             {props.googleConfirmUsernamePopup.visible && <ChangeUserNameGoogle />}
             {props.lostConnOpponentPopup.visible && <LostConnectionOpponent />}
             {props.collectItemPopup.visible && <CollectItemPopup data={props.collectItemPopup.data}/>}
+            {props.botGameTypesPopup.visible && <BotTypeGame />}
 
 
             {props.testBtnsPopup.visible && <TestBtnsPopups />}
@@ -59,6 +67,7 @@ const mapStateToProps = (state) => ({
     googleConfirmUsernamePopup: selectGoogleConfirmUsernamePopup(state),
     lostConnOpponentPopup: selectLostConnOpponentPopup(state),
     collectItemPopup: selectCollectItemPopup(state),
+    botGameTypesPopup: selectBotGameTypesPopup(state),
 });
 
 export default connect(mapStateToProps)(PopupsManager);

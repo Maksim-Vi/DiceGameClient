@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 let initialState = {
   currentGameId: null,
+  difficultGame: 'Easy',
   game: null,
   restoreGame: false,
   gameSettings: null,
@@ -12,7 +13,7 @@ let initialState = {
   opponentThrowData: null,
   scores: {userId: null, username: null, userScores:null, opponentsScores:null},
   countScores: null,
-  result: null
+  result: null,
 }
 
 export const gameReducerSlice = createSlice({
@@ -21,6 +22,9 @@ export const gameReducerSlice = createSlice({
   reducers: {
     setCarrentGameId: (state, action) =>{
       state.currentGameId = action.payload
+    },
+    setDifficultGame: (state, action) =>{
+      state.difficultGame = action.payload
     },
     setGame: (state, action) =>{
       state.game = action.payload
@@ -62,12 +66,13 @@ export const gameReducerSlice = createSlice({
 });
 
 export const {
-  setCarrentGameId, setGame,setRestoreGame, setGameSettings,setIsGameStarted,
+  setCarrentGameId,setDifficultGame, setGame,setRestoreGame, setGameSettings,setIsGameStarted,
   setIsYouMove,setActiveThrowBtn, setThrowData, setOpponentThrowData,
   setScores,setCountScores, resetScores, setResultGame
 } = gameReducerSlice.actions;
 
 export const selectCurrentGameId = state => state.games.currentGameId;
+export const selectDifficultGame = state => state.games.difficultGame;
 export const selectGame = state => state.games.game;
 export const selectRestoreGame = state => state.games.restoreGame;
 export const selectGameSettings = state => state.games.gameSettings;

@@ -40,7 +40,7 @@ const BoardOpponentInfo = (props) => {
                   center>
                 {props.opponent.username || ''}
             </Name>
-            <Avatar width={50} height={50} avatarId={props.opponent.avatar} avatarFrame={true}/>
+            <Avatar width={width / 5} height={80} avatarId={props.opponent.avatar} avatarFrame={true}/>
 
             <CountContainer width={width}>
                 <Text large blod color={'#fff'}
@@ -52,10 +52,11 @@ const BoardOpponentInfo = (props) => {
 };
 
 const BoardAvatarContainer = styled(Animated.View)`
+  display: flex;
+  align-items: center;
   ${(props) => {
     if (props.width <= 400) {
       return `
-         
           width: 50px;
           height: 50px;
         `
@@ -82,7 +83,7 @@ const CountContainer = styled.View`
     if (props.width <= 400) {
       return `
           margin-top: 10px;
-          width: 50px;
+          width: 60px;
         `
     } else if (props.width > 400 && props.width <= 550) {
       return `

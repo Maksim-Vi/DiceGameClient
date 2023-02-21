@@ -8,7 +8,7 @@ import TextWithoutShadow from "../../../../common/Text/TextWithoutShadow";
 
 const BoardUserInfo = (props) => {
 
-    const {width} = useWindowDimensions()
+    const {width,height} = useWindowDimensions()
     const showAvatar = React.useRef(new Animated.Value(0)).current;
 
     const startAnimation = () =>{
@@ -39,7 +39,7 @@ const BoardUserInfo = (props) => {
                              color={'#fff'}>{props.countScores ? props.countScores.scoresUser : 0}</CountScores>
             </CountContainer>
 
-            <Avatar width={50} height={50} avatarId={props.user.avatar} avatarFrame={true}/>
+            <Avatar width={width / 5} height={80} avatarId={props.user.avatar} avatarFrame={true}/>
             <Name setShadow={true}
                   shadowRadius={1}
                   shadowOffset={{width: -1, height: 2}}
@@ -54,6 +54,8 @@ const BoardUserInfo = (props) => {
 };
 
 const BoardAvatarContainer = styled(Animated.View)`
+  display: flex;
+  align-items: center;
   ${(props) => {
     if (props.width <= 400) {
       return `
@@ -85,7 +87,7 @@ const CountContainer = styled.View`
     if (props.width <= 400) {
       return `
           margin-bottom: 10px;
-          width: 50px;
+          width: 60px;
         `
     } else if (props.width > 400 && props.width <= 550) {
       return `

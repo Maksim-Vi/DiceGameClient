@@ -30,8 +30,8 @@ const ButtonBack = (props) => {
 
 const GameBack = styled.TouchableOpacity`
 	position: absolute;
-	top: ${props=> props.top ? props.top : '20px'};
-	left: ${props=> props.left ? props.left : '10px'};
+	top: ${props=> props.top ? props.top : '30px'};
+	left: ${props=> props.left ? props.left : '20px'};
     z-index: 1;
 `
 

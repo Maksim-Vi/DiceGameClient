@@ -14,6 +14,8 @@ export default function App() {
   const [fontsLoaded] = useFonts({
     'Dilo-World': require('./assets/fonts/DiloWorld.ttf'),
     'Gogono-Cocoa': require('./assets/fonts/GogonoCocoa.otf'),
+    'Lobster': require('./assets/fonts/SeymourOne-Regular.ttf'),
+    'Russo-One': require('./assets/fonts/RussoOne-Regular.ttf'),
   });
 
   const navigationRef = useNavigationContainerRef();

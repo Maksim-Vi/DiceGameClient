@@ -51,8 +51,8 @@ const GameWrap = styled.View`
 const GameBack = styled.TouchableOpacity`
   position: absolute;
   padding: 20px;
-  top: -3px;
-  left: -3px;
+  top: 10px;
+  left: 0;
   z-index: 1;
 `
 const BackImg = styled.Image`

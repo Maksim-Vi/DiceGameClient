@@ -10,6 +10,7 @@ let initialState = {
    googleConfirmUsernamePopup: {visible: false, data: null},
    lostConnOpponentGame: {visible: false, data: null},
    collectItemPopup: {visible: false, data: null},
+   botGameTypesPopup: {visible: false, data: null},
 }
 
 export const popupsReducerSlice = createSlice({
@@ -43,11 +44,15 @@ export const popupsReducerSlice = createSlice({
     setCollectItemPopup: (state, action) =>{
       state.collectItemPopup = action.payload
     },
+    setBotGameTypesPopup: (state, action) =>{
+      state.botGameTypesPopup = action.payload
+    },
   },
 });
 
 export const {
     setTestBtnsPopup,
+    setBotGameTypesPopup,
     setLevelUpPopup,
     setAvatarPopup,
     setSettingsMenuPopup,
@@ -67,6 +72,7 @@ export const selectInfoPopup = state => state.popups.infoPopup;
 export const selectGoogleConfirmUsernamePopup = state => state.popups.googleConfirmUsernamePopup;
 export const selectLostConnOpponentPopup = state => state.popups.lostConnOpponentGame;
 export const selectCollectItemPopup = state => state.popups.collectItemPopup;
+export const selectBotGameTypesPopup = state => state.popups.botGameTypesPopup;
 
 export default popupsReducerSlice.reducer;
 

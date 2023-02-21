@@ -220,18 +220,23 @@ class GameContainer extends React.PureComponent {
                     </UsersInfoContainer>
                 </GameFrame>
                 {this.state.showThrowBtn &&
-                    <ButtonContainer onPress={this.hendlerThrowGame}
+                   /* <ButtonContainer onPress={this.hendlerThrowGame}
                                      activeOpacity={!this.state.isThrow ? 1 : 0.6}
                                      disabled={this.state.isThrow}>
                         <Text setShadow={true}
-                              shadowRadius={5}
-                              shadowOffset={{width: -1, height: 2}}
-                              shadowColor={!this.state.isThrow ? 'rgba(204,30,30)' : 'rgb(204,30,30,0)'}
                               large heavy
                               color={!this.state.isThrow ? '#168f45' : 'rgba(255,255,255,0.62)'}>
                             {this.props.throwText}
                         </Text>
-                    </ButtonContainer>
+                    </ButtonContainer>*/
+                    <ButnContainer>
+                        <ThrowButton onPress={this.hendlerThrowGame}
+                                     activeOpacity={!this.state.isThrow ? 1 : 0.6}
+                                     disabled={this.state.isThrow}>
+                            <Text setShadow={true} large heavy color={'#fff'}>{this.props.throwText}</Text>
+                        </ThrowButton>
+                    </ButnContainer>
+
                 }
 
                 {this.state.showStartGameText &&
@@ -303,7 +308,7 @@ const UsersInfoContainer = styled.View`
   align-items: center;
   justify-content: space-between;
   height: 55%;
-  margin-left: 20px;
+  margin-left: 25px;
 `
 
 const Opponent = styled.View`
@@ -355,6 +360,38 @@ const StartGameTextContainer = styled(Animated.View)`
   text-align: center;
   height: 100%;
   width: 100%;
+`
+const ButnContainer = styled.View`
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0.3;
+  width: 100%;
+  height: 12%;
+  margin-top: 10px;
+`
+
+const ThrowButton = styled.TouchableOpacity`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    border: 1px solid #000;
+    padding: 10px 50px;
+  
+    ${(props)=>{
+    if(props.disabled){
+        return `
+                background-color: gray;
+            `
+    } else {
+        return `
+                background-color: green;
+          `
+    }
+}}
 `
 
 const StartGameText = styled(Text)`
