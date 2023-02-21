@@ -3,6 +3,7 @@ import {
 } from "../../../../redux/reducers/collections/CollectionsReducer";
 import {store} from "../../../../redux/redux-store";
 import {isProduction} from "../../../../utils/utils";
+import {setCollectItemPopup} from "../../../../redux/reducers/popups/PopupsReducer";
 
 export default class S_BUY_GAME_ITEM {
     constructor(availableCollectionItems,collectionType,itemId){
@@ -25,6 +26,13 @@ export default class S_BUY_GAME_ITEM {
     exec() {
         if(this.availableCollectionItems){
             store.dispatch(addAvailableCollectionItems(this.availableCollectionItems))
+
+            setTimeout(()=>{
+                store.dispatch(setCollectItemPopup({visible: true, data: {
+                        type: this.collectionType,
+                        id: this.itemId
+                    }}))
+            },1000)
         }
     }
 

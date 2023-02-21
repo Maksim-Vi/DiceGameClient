@@ -7,6 +7,7 @@ import defaultTranslation from "../../../../redux/reducers/language/defaultTrans
 import {connect} from "react-redux";
 import Sounds, {soundsType} from "../../../../utils/Sounds";
 import C_QUICK_PLAY from "../../../../protocol/messages/clients/games/C_QUICK_PLAY";
+import bgGame from "../../../../../assets/bg/gameItems/gameItemBg.png";
 
 const GameWithOpponent = (props) => {
 
@@ -16,13 +17,26 @@ const GameWithOpponent = (props) => {
   }
 
   return (
-      <OpponentContainer onPress={handelClick} style={{ borderBottomWidth: 8 }}>
-        <TextCont numberOfLines={1} setShadow={true} madium heavy color={'#ff9d4d'} center>{props.tap_to_play}</TextCont>
-        <GameImage source={gameIcon} resizeMode={'contain'}/>
-        <TextCont numberOfLines={2} setShadow={true} fontSize={20} heavy color={'#ff9d4d'} center>{props.fightOpp}</TextCont>
-      </OpponentContainer>
+      <BG source={bgGame} resizeMode={'contain'} style={{transform: [{scale: 1.5}]}}>
+          <OpponentContainer onPress={handelClick}
+                             activeOpacity={0.9}
+                            //style={{ borderBottomWidth: 8 }}
+          >
+            <TextCont numberOfLines={1} setShadow={true} madium heavy color={'#ff9d4d'} center>{props.tap_to_play}</TextCont>
+            <GameImage source={gameIcon} resizeMode={'contain'}/>
+            <TextCont numberOfLines={2} setShadow={true} fontSize={12} heavy color={'#ff9d4d'} center>{props.fightOpp}</TextCont>
+          </OpponentContainer>
+      </BG>
   );
 };
+
+const BG = styled.ImageBackground`
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+  height: 100%;
+`
 
 const OpponentContainer = styled.TouchableOpacity`
   display: flex;
@@ -32,14 +46,17 @@ const OpponentContainer = styled.TouchableOpacity`
   height: 100%;
   border-radius: 20px;
   margin: 10px auto;
-  padding: 20px;
-  background-color: #ffefb1;
-  border: 2px solid #ed9f39;
+  padding: 40px;
+  /*background-color: #ffefb1;
+  border: 2px solid #ed9f39;*/
 `
 const GameImage = styled.Image`
-  width: 130px;
+ /* width: 130px;
   height: 130px;
-  margin: 10px auto;
+  margin: 10px auto;*/
+  width: 80px;
+  height: 80px;
+  /*margin: 5px auto;*/
 `
 const TextCont = styled(Text)`
 

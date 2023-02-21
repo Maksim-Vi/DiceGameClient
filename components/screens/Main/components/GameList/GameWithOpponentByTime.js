@@ -8,6 +8,7 @@ import {connect} from "react-redux";
 import {store} from "../../../../redux/redux-store";
 import {setInfoPopup} from "../../../../redux/reducers/popups/PopupsReducer";
 import Sounds, {soundsType} from "../../../../utils/Sounds";
+import bgGame from "../../../../../assets/bg/gameItems/gameItemBg.png";
 
 const GameWithOpponentByTime = (props) => {
 
@@ -18,13 +19,27 @@ const GameWithOpponentByTime = (props) => {
   }
 
   return (
-      <OpponentContainer onPress={handelClick} style={{ borderBottomWidth: 8 }}>
-        <TextCont numberOfLines={1} setShadow={true} madium heavy color={'#ff9d4d'} center>{props.tap_to_play}</TextCont>
-        <GameImage source={gameIcon} resizeMode={'contain'}/>
-        <TextCont numberOfLines={2} setShadow={true} title heavy color={'#ff9d4d'} center>{props.fightOppByTime}</TextCont>
-      </OpponentContainer>
+      <BG source={bgGame} resizeMode={'contain'} style={{transform: [{scale: 1.5}]}}>
+          <OpponentContainer onPress={handelClick}
+                             activeOpacity={0.9}
+                             //style={{ borderBottomWidth: 8 }}
+          >
+            <TextCont numberOfLines={1} setShadow={true} madium heavy color={'#ff9d4d'} center>{props.tap_to_play}</TextCont>
+            <GameImage source={gameIcon} resizeMode={'contain'}/>
+            <TextCont numberOfLines={2} setShadow={true} fontSize={12} heavy color={'#ff9d4d'} center>{props.fightOppByTime}</TextCont>
+          </OpponentContainer>
+      </BG>
   );
 };
+
+const BG = styled.ImageBackground`
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+  height: 100%;
+  opacity: 0.6;
+`
 
 const OpponentContainer = styled.TouchableOpacity`
   display: flex;
@@ -34,15 +49,18 @@ const OpponentContainer = styled.TouchableOpacity`
   height: 100%;
   border-radius: 20px;
   margin: 10px auto;
-  padding: 20px;
-  background-color: #ffefb1;
+  padding: 40px;
+  /*background-color: #ffefb1;
   border: 2px solid #ed9f39;
-  opacity: 0.6;
+  opacity: 0.6;*/
 `
 const GameImage = styled.Image`
-  width: 130px;
+  /*width: 130px;
   height: 130px;
-  margin: 10px auto;
+  margin: 10px auto;*/
+  width: 80px;
+  height: 80px;
+  /*margin: 5px auto;*/
 `
 const TextCont = styled(Text)`
   text-shadow: 1px 1px 1px #000;

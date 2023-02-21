@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import styled from 'styled-components'
 import {selectMyUser} from '../../redux/reducers/players/PlayersReducer'
 import {
-    selectAvatarPopup, selectGoogleConfirmUsernamePopup, selectInfoPopup,
+    selectAvatarPopup, selectCollectItemPopup, selectGoogleConfirmUsernamePopup, selectInfoPopup,
     selectLevelUpPopup, selectLostConnOpponentPopup,
     selectSettingsPopup, selectSevenDaysGiftPopup,
     selectTestBtnsPopup
@@ -18,6 +18,7 @@ import SevenDaysGift from "./popupsComponents/SevenDays/SevenDaysGift";
 import InfoPopups from "./popupsComponents/InfoPopups";
 import ChangeUserNameGoogle from "./popupsComponents/GooglePopups/ChangeUserNameGoogle";
 import LostConnectionOpponent from "./popupsComponents/Game/LostConnectionOpponent";
+import CollectItemPopup from "./popupsComponents/Collection/CollectItemPopup";
 
 const PopupsManager = (props) => {
     return (
@@ -31,9 +32,10 @@ const PopupsManager = (props) => {
             {props.infoPopup.visible && <InfoPopups />}
             {props.googleConfirmUsernamePopup.visible && <ChangeUserNameGoogle />}
             {props.lostConnOpponentPopup.visible && <LostConnectionOpponent />}
+            {props.collectItemPopup.visible && <CollectItemPopup data={props.collectItemPopup.data}/>}
 
 
-            {props.testBtnsPopup.visible && <TestBtnsPopups/>}
+            {props.testBtnsPopup.visible && <TestBtnsPopups />}
         </PopupConteiner>
     )
 }
@@ -56,6 +58,7 @@ const mapStateToProps = (state) => ({
     activeTabApp: selectActiveTabApp(state),
     googleConfirmUsernamePopup: selectGoogleConfirmUsernamePopup(state),
     lostConnOpponentPopup: selectLostConnOpponentPopup(state),
+    collectItemPopup: selectCollectItemPopup(state),
 });
 
 export default connect(mapStateToProps)(PopupsManager);

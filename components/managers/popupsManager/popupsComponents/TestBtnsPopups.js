@@ -5,11 +5,15 @@ import styled from 'styled-components'
 import ModalWrapper from '../../../common/ModalWindows/ModalWrapper'
 import Text from '../../../common/Text/Text'
 import { setGame, setGameSettings, setIsGameStarted, setResultGame } from '../../../redux/reducers/game/GameReducer'
-import {setLevelUpPopup, setSevenDaysGiftPopup, setTestBtnsPopup} from '../../../redux/reducers/popups/PopupsReducer'
+import {
+    setCollectItemPopup,
+    setLevelUpPopup,
+    setSevenDaysGiftPopup,
+    setTestBtnsPopup
+} from '../../../redux/reducers/popups/PopupsReducer'
 import {getResultScreenData, getStartGameData, transitionState} from '../../../utils/utils'
 import FireworkStandart from "../../../common/SpriteSheetViewer/components/FireworkStandart/FireworkStandert";
 import FireworkColor from "../../../common/SpriteSheetViewer/components/FireworkColor/FireworkColor";
-import {store} from "../../../redux/redux-store";
 
 const TestBtnsPopups = () =>{
 
@@ -69,6 +73,11 @@ const TestBtnsPopups = () =>{
         closeModal()
     }
 
+    const handelCollectClick = () =>{
+        dispatch(setCollectItemPopup({visible: true, data: {type: 'dices', id: 7}}))
+        closeModal()
+    }
+
     const handelAnim = (type) =>{
         setAnim({...anim, [type]: true})
 
@@ -85,14 +94,15 @@ const TestBtnsPopups = () =>{
             <Test onPress={handelLoadingGameClick} style={{ borderBottomWidth: 8 }}><Text color={'#000'}>Loading-Game</Text></Test>
             <Test onPress={handelLvlUpClick} style={{ borderBottomWidth: 8 }}><Text color={'#000'}>Lvl up</Text></Test>
             <Test onPress={handelSevenDaysGiftClick} style={{ borderBottomWidth: 8 }}><Text color={'#000'}>Seven Days Gift</Text></Test>
-            <AnimBtnContainer>
-                <TextAnim onPress={()=>handelAnim('showFirst')} style={{ borderBottomWidth: 8 }}>
-                    <Text center color={'#000'}>show 1 Anim</Text>
-                </TextAnim>
-                <TextAnim onPress={()=>handelAnim('showSecond')} style={{ borderBottomWidth: 8 }}>
-                    <Text center color={'#000'}>show 2 Anim</Text>
-                </TextAnim>
-            </AnimBtnContainer>
+            <Test onPress={handelCollectClick} style={{ borderBottomWidth: 8 }}><Text color={'#000'}>Collect Item</Text></Test>
+            {/*<AnimBtnContainer>*/}
+            {/*    <TextAnim onPress={()=>handelAnim('showFirst')} style={{ borderBottomWidth: 8 }}>*/}
+            {/*        <Text center color={'#000'}>show 1 Anim</Text>*/}
+            {/*    </TextAnim>*/}
+            {/*    <TextAnim onPress={()=>handelAnim('showSecond')} style={{ borderBottomWidth: 8 }}>*/}
+            {/*        <Text center color={'#000'}>show 2 Anim</Text>*/}
+            {/*    </TextAnim>*/}
+            {/*</AnimBtnContainer>*/}
         </Container>
     }
 

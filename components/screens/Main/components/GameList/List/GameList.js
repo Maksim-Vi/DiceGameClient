@@ -6,6 +6,7 @@ import {connect} from "react-redux";
 import {Animated, Dimensions, Platform, View} from "react-native";
 import {gameListData, getMarginLeftGameItem} from "../utils";
 import Text from "../../../../../common/Text/Text";
+import bgGame from "../../../../../../assets/bg/gameItems/gameItemBg.png";
 
 const {width} = Dimensions.get('window');
 const ITEM_SIZE_W = width ? (width / 2) - 10 : 150;
@@ -30,7 +31,7 @@ const GameList = props => {
 
         const scale = scrollX.interpolate({
             inputRange,
-            outputRange: [0.8, 1, 0.8],
+            outputRange: [0.6, 1.2, 0.6],
             extrapolate: 'clamp',
         });
 
@@ -74,6 +75,7 @@ const GameListContainer = styled.View`
   align-content: center;
   align-items: center;
   width: 100%;
+  height: 100%;
 `
 
 const GameFlatList = styled(Animated.FlatList)`
@@ -84,14 +86,6 @@ const Game = styled(Animated.View)`
   display: flex;
   align-items: center;
   justify-content: center;
-`
-const GameImage = styled.Image`
-  width: 130px;
-  height: 130px;
-  margin: 15px auto;
-`
-const TextCont = styled(Text)`
-  text-shadow: 1px 1px 1px #000;
 `
 
 const mapStateToProps = (state) => ({
