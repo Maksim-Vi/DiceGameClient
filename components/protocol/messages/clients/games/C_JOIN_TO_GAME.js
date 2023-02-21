@@ -39,7 +39,7 @@ export default class C_JOIN_TO_GAME {
             userId: this.id,
             username: this.username,
             gameId: this.gameId,
-            difficultGame: this.difficultGame.Medium
+            difficultGame: this.difficultGame
         })
     }
 
