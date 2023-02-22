@@ -6,6 +6,8 @@ import InfoButton from "../../../Info/InfoButton";
 import Text from "../../../Text/Text";
 import {useSelector} from "react-redux";
 import Sounds, {soundsType} from "../../../../utils/Sounds";
+import bg from "../../../../../assets/topPanel/btns/button.png";
+import BackgroundButtons from "../../../BackgroundWrapper/BackgroundButtons";
 
 const RoadButton = () =>{
 
@@ -18,21 +20,19 @@ const RoadButton = () =>{
     }
 
     return (
-        <RoadBtn onPress={OpenRoad}>
-            {availableToClaimMissionsRoad > 0 && <InfoButton count={availableToClaimMissionsRoad}/>}
-            <RoadImg source={roadImg} resizeMode='stretch'/>
-        </RoadBtn>
+        <BackgroundButtons marginBottom={5} bgButton={bg}>
+            <RoadBtn onPress={OpenRoad} activeOpacity={0.9}>
+                {availableToClaimMissionsRoad > 0 && <InfoButton count={availableToClaimMissionsRoad}/>}
+                <RoadImg source={roadImg} resizeMode='stretch'/>
+            </RoadBtn>
+        </BackgroundButtons>
     )
 }
 
 const RoadBtn = styled.TouchableOpacity`
     position: relative;
-    width: 50px;
-    height: 50px;
-    border-radius: 10px;
-    margin-right: 5px;
-    margin: 5px;
-    background-color: rgb(1,1,70);
+    width: 45px;
+    height: 45px;
 `
 const RoadImg = styled.Image`
     margin: auto;

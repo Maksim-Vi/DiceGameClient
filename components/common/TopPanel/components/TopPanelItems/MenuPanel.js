@@ -1,9 +1,11 @@
 import React from 'react';
 import settings from '../../../../../assets/topPanel/settings.png'
-import ButtonWithImage from "../../../Buttons/ButtonWithImage";
 import {useDispatch} from "react-redux";
 import {setSettingsMenuPopup} from "../../../../redux/reducers/popups/PopupsReducer";
 import Sounds, {soundsType} from "../../../../utils/Sounds";
+import BackgroundButtons from "../../../BackgroundWrapper/BackgroundButtons";
+import bg from "../../../../../assets/topPanel/btns/button.png";
+import styled from "styled-components";
 
 const MenuPanel = (props) => {
 
@@ -14,13 +16,22 @@ const MenuPanel = (props) => {
         dispatch(setSettingsMenuPopup({visible: true, data: null}))
     }
 
-    return <ButtonWithImage color={'rgb(1,1,70)'}
-                            width={45}
-                            height={45}
-                            borderColor={'#fff0'}
-                            padding={0}
-                            clickHandler={()=>{openSettingsPopup()}}
-                            image={settings}/>
+    return (
+        <BackgroundButtons bgButton={bg}>
+            <BtnContainer onPress={openSettingsPopup} activeOpacity={0.9}>
+                <PriceImage {...props} source={settings}/>
+            </BtnContainer>
+        </BackgroundButtons>
+    )
 }
+const BtnContainer = styled.TouchableOpacity`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
 
+const PriceImage = styled.Image`
+  width: 45px;
+  height: 45px;
+`
 export default MenuPanel;

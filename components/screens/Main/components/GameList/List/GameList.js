@@ -4,9 +4,7 @@ import {selectDefaultParams} from "../../../../../redux/reducers/language/Langua
 import defaultParams from "../../../../../redux/reducers/language/defaultParams";
 import {connect} from "react-redux";
 import {Animated, Dimensions, Platform, View} from "react-native";
-import {gameListData, getMarginLeftGameItem} from "../utils";
-import Text from "../../../../../common/Text/Text";
-import bgGame from "../../../../../../assets/bg/gameItems/gameItemBg.png";
+import {gameListData} from "../utils";
 
 const {width} = Dimensions.get('window');
 const ITEM_SIZE_W = width ? (width / 2) - 10 : 150;
@@ -31,7 +29,7 @@ const GameList = props => {
 
         const scale = scrollX.interpolate({
             inputRange,
-            outputRange: [0.6, 1.2, 0.6],
+            outputRange: [0.8, 1.3, 0.8],
             extrapolate: 'clamp',
         });
 

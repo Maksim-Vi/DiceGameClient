@@ -6,8 +6,7 @@ import {selectTranslation} from "../../../../redux/reducers/language/LanguageRed
 import {connect, useDispatch} from "react-redux";
 import defaultTranslation from "../../../../redux/reducers/language/defaultTranslation";
 import Sounds, {soundsType} from "../../../../utils/Sounds";
-import C_QUICK_PLAY from "../../../../protocol/messages/clients/games/C_QUICK_PLAY";
-import bgGame from "../../../../../assets/bg/gameItems/gameItemBg.png";
+import bgGame from "../../../../../assets/common/btns/GameBtnBlue.png";
 import {setBotGameTypesPopup} from "../../../../redux/reducers/popups/PopupsReducer";
 
 const GameWithBot = (props) => {
@@ -20,15 +19,13 @@ const GameWithBot = (props) => {
     }
 
     return (
-        <BG source={bgGame} resizeMode={'contain'} style={{transform: [{scale: 1.5}]}}>
+        <BG source={bgGame} resizeMode={'contain'}>
             <BotContainer onPress={handelClick}
-                          activeOpacity={0.9}
-                //style={{ borderBottomWidth: 8 }}
-            >
+                          activeOpacity={0.9}>
                 <TextCont numberOfLines={1} setShadow={true} madium heavy color={'#ff9d4d'}
                           center>{props.tap_to_play}</TextCont>
                 <GameImage source={gameIcon} resizeMode={'contain'}/>
-                <TextCont numberOfLines={1} setShadow={true} fontSize={14} heavy color={'#ff9d4d'}
+                <TextCont numberOfLines={1} setShadow={true} fontSize={18} heavy color={'#ff9d4d'}
                           center>{props.fightBot}</TextCont>
             </BotContainer>
         </BG>
@@ -38,7 +35,7 @@ const GameWithBot = (props) => {
 const BG = styled.ImageBackground`
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: center;
   width: 100%;
   height: 100%;
 `
@@ -46,23 +43,19 @@ const BG = styled.ImageBackground`
 const BotContainer = styled.TouchableOpacity`
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   width: 100%;
   height: 100%;
   border-radius: 20px;
-  padding: 40px;
-  /*background-color: #ffefb1;
-  border: 2px solid #ed9f39;*/
+  margin-top: 20px;
+  padding: 0 50px;
 `
 const GameImage = styled.Image`
-  /* width: 120px;
-   height: 120px;
-   margin: 15px auto;*/
-
-  width: 60px;
-  height: 60px;
-  margin: 10px auto;
+  width: 80px;
+  height: 80px;
+  margin: 30px auto;
 `
+
 const TextCont = styled(Text)`
   text-shadow: 1px 1px 1px #000;
 `

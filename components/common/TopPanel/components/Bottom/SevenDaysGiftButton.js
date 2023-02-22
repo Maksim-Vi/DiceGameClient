@@ -7,6 +7,8 @@ import {setSevenDaysGiftPopup} from "../../../../redux/reducers/popups/PopupsRed
 import {useDispatch, useSelector} from "react-redux";
 import {selectAvailableToClaim} from "../../../../redux/reducers/gifts/GiftsReducer";
 import Sounds, {soundsType} from "../../../../utils/Sounds";
+import bg from "../../../../../assets/topPanel/btns/button.png";
+import BackgroundButtons from "../../../BackgroundWrapper/BackgroundButtons";
 
 const SevenDaysGiftButton = () =>{
 
@@ -19,21 +21,19 @@ const SevenDaysGiftButton = () =>{
     }
 
     return (
-        <RoadBtn onPress={OpenSevenDays}>
-            {availableToClaim && +availableToClaim > 0 ? <InfoButton count={String(availableToClaim)}/> : null}
-            <RoadImg source={Img} resizeMode='stretch'/>
-        </RoadBtn>
+        <BackgroundButtons marginBottom={5} bgButton={bg}>
+            <RewardBtn onPress={OpenSevenDays}>
+                {availableToClaim && +availableToClaim > 0 ? <InfoButton count={String(availableToClaim)}/> : null}
+                <RoadImg source={Img} resizeMode='stretch'/>
+            </RewardBtn>
+        </BackgroundButtons>
     )
 }
 
-const RoadBtn = styled.TouchableOpacity`
+const RewardBtn = styled.TouchableOpacity`
     position: relative;
-    width: 50px;
-    height: 50px;
-    border-radius: 10px;
-    margin-right: 5px;
-    margin: 5px;
-    background-color: rgb(1,1,70);
+    width: 45px;
+    height: 45px;
 `
 const RoadImg = styled.Image`
     margin: auto;

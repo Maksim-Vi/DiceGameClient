@@ -5,17 +5,22 @@ import Flash from "../Top/Flash";
 import {NativeModules, Platform} from "react-native";
 import styled from 'styled-components'
 import {getIosModel} from "../../../../utils/utils";
+import bg from "../../../../../assets/topPanel/btns/TopPanel.png";
+import BackgroundButtons from "../../../BackgroundWrapper/BackgroundButtons";
 
 const PricesItemsPanel = ({userData}) => {
     return (
         <TopPanelContainer>
-            <TopPanelItemsContainer>
-                <ElementsContainer>
-                    <Coins coins={userData.coins}/>
-                    <Crystals crystals={userData.crystals}/>
-                    <Flash crystals={userData.flash}/>
-                </ElementsContainer>
-            </TopPanelItemsContainer>
+            <BackgroundButtons width={100} height={50} bgButton={bg}>
+                <TopPanelItemsContainer>
+                    <ElementsContainer>
+                        <Coins coins={userData.coins}/>
+                        <Crystals crystals={userData.crystals}/>
+                        <Flash crystals={userData.flash}/>
+                    </ElementsContainer>
+                </TopPanelItemsContainer>
+            </BackgroundButtons>
+
             <ProgressContainer>
                 <Progress progress={userData.experience ? userData.experience.progress : 0}/>
             </ProgressContainer>
@@ -35,9 +40,9 @@ const TopPanelItemsContainer = styled.View`
     align-items: center;
     justify-content: center;
     text-align: center;
-    background-color: rgb(1,1,70);
+    //background-color: rgb(1,1,70);
     width: 100%;
-    border-radius: 15px;
+    //border-radius: 15px;
 `
 const ElementsContainer = styled.View`
     display: flex;
@@ -56,7 +61,7 @@ const ProgressContainer = styled.View`
     const isIos = getIosModel()
     if(Platform.OS === 'ios' && isIos >= 10){
       return `
-         width: 90%;
+         width: 95%;
          border-radius: 5px;
       `
     } else {

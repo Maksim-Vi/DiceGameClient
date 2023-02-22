@@ -1,11 +1,11 @@
 import React from 'react';
-import ButtonWithImage from "../../../Buttons/ButtonWithImage";
-import settings from "../../../../../assets/topPanel/friends.png";
-import {useNavigation} from "@react-navigation/native";
-import {Alert} from "react-native";
+import friends from "../../../../../assets/topPanel/friends.png";
 import {setInfoPopup} from "../../../../redux/reducers/popups/PopupsReducer";
 import {useDispatch} from "react-redux";
 import Sounds, {soundsType} from "../../../../utils/Sounds";
+import styled from "styled-components";
+import bg from "../../../../../assets/topPanel/btns/button.png";
+import BackgroundButtons from "../../../BackgroundWrapper/BackgroundButtons";
 
 const FriendsPanel = (props) => {
 
@@ -13,17 +13,28 @@ const FriendsPanel = (props) => {
 
     const openFriendsPopup = () => {
         Sounds.loadAndPlayFile(soundsType.click2)
-        dispatch(setInfoPopup({visible: true, data: {text: 'Friends will be available after some time. Have a good game!'}}))
-        //navigaion.navigate('FriendsScreen')
+        dispatch(setInfoPopup({
+            visible: true,
+            data: {text: 'Friends will be available after some time. Have a good game!'}
+        }))
     }
 
-    return <ButtonWithImage color={'rgb(1,1,70)'}
-                            width={45}
-                            height={45}
-                            borderColor={'#fff0'}
-                            padding={0}
-                            clickHandler={() => openFriendsPopup()}
-                            image={settings}/>
+    return (
+        <BackgroundButtons bgButton={bg}>
+            <BtnContainer onPress={openFriendsPopup} activeOpacity={0.9}>
+                <PriceImage {...props} source={friends}/>
+            </BtnContainer>
+        </BackgroundButtons>
+    )
 }
+const BtnContainer = styled.TouchableOpacity`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
 
+const PriceImage = styled.Image`
+  width: 45px;
+  height: 45px;
+`
 export default FriendsPanel;

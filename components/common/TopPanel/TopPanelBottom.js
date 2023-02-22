@@ -31,7 +31,7 @@ const TopPanelBottom = (props) => {
             <SlideScreen left={false}>
                 <PanelEndContainer>
                     {myUser && (myUser.admin === 'true' || myUser.admin === true) &&
-                        <Test onPress={testBtnClick}>
+                        <Test onPress={testBtnClick} style={{ borderBottomWidth: 5 }}>
                             <Text color={'#000'}>Admin</Text>
                         </Test>
                     }
@@ -55,7 +55,7 @@ const PanelBottom = styled.View`
 const PanelEndContainer = styled.View`
   position: absolute;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: flex-start;
   align-content: flex-start;
   flex-direction: column;
