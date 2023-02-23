@@ -6,6 +6,7 @@ import {selectAvailableToClaim} from "../../../../redux/reducers/gifts/GiftsRedu
 import Sounds, {soundsType} from "../../../../utils/Sounds";
 import bg from "../../../../../assets/topPanel/btns/rewards.png";
 import Text from "../../../Text/Text";
+import {setRewardsPopup} from "../../../../redux/reducers/popups/PopupsReducer";
 
 const RewardsButton = () =>{
 
@@ -14,6 +15,7 @@ const RewardsButton = () =>{
 
     const OpenSevenDays = () => {
         Sounds.loadAndPlayFile(soundsType.click2)
+        dispatch(setRewardsPopup({visible: true, data: null}))
     }
 
     return (

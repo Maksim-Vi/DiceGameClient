@@ -88,6 +88,7 @@ const Test = styled.TouchableOpacity`
   margin: 5px;
   background-color: #ffefb1;
   border: 2px solid #ed9f39;
+  z-index: 1;
 `
 
 const mapStateToProps = (state) => ({

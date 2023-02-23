@@ -47,8 +47,8 @@ const RoadBtn = styled.TouchableOpacity`
     justify-content: center;
 `
 const RoadImg = styled.Image`
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
 `
 
 const RoadTextContainer = styled.View`

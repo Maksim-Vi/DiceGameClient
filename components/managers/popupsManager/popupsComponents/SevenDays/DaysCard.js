@@ -92,18 +92,10 @@ const DaysCardContainer = styled.TouchableOpacity`
   justify-content: center;
   width: 30%;
   height: 130px;
-  margin-bottom: 20px;
+  margin: 5px 5px 20px 5px;
   border-radius: 20px;
   background-color: #ffefb1;
   border: 2px solid #ed9f39;
-`
-
-const CalendarImage = styled(Animated.Image)`
-  position: absolute;
-  bottom: 7px;
-  right: 7px;
-  width: 30px;
-  height: 30px;
 `
 
 export default DaysCard;

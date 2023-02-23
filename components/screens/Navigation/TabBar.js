@@ -102,7 +102,7 @@ class TabBar extends React.PureComponent {
 
                     return (
                         <PlaceNavBackground source={isFocused ? bgActive : bg} resizeMode={'stretch'}>
-                            <TabIconContainer key={index} focused={isFocused} onPress={() => this.onPress(route, isFocused)}>
+                            <TabIconContainer key={index} focused={isFocused} activeOpacity={0.9} onPress={() => this.onPress(route, isFocused)}>
                                 <NavImage source={this.getIconName(route)} resizeMode={'contain'}/>
                                 <Text setShadow={true} heavy medium color={'#ff9d4d'}>{this.getText(route)}</Text>
                                 {route.name === 'ChatScreen' && !isFocused && this.state.unreadMessages > 0 &&
