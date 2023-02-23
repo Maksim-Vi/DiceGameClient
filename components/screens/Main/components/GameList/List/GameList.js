@@ -29,7 +29,7 @@ const GameList = props => {
 
         const scale = scrollX.interpolate({
             inputRange,
-            outputRange: [0.8, 1.3, 0.8],
+            outputRange: [0.8, 1.2, 0.8],
             extrapolate: 'clamp',
         });
 
@@ -73,7 +73,8 @@ const GameListContainer = styled.View`
   align-content: center;
   align-items: center;
   width: 100%;
-  height: 55%;
+  height: 50%;
+  margin-bottom: -50px;
 `
 
 const GameFlatList = styled(Animated.FlatList)`
@@ -95,14 +96,3 @@ const mapStateToProps = (state) => ({
 })
 
 export default connect(mapStateToProps)(GameList);
-
-
-/*
-  return (
-        <GameListContainer>
-            {props.params.ENABLE_GAME_BOT && <GameWithBot index={0} handlerPlayGame={handlerPlayGame}/>}
-            {props.params.ENABLE_GAME_OPPONENT && <GameWithOpponent index={1} handlerPlayGame={handlerPlayGame}/>}
-            {props.params.ENABLE_GAME_OPPONENT_BY_TIME && <GameWithOpponentByTime index={2} handlerPlayGame={handlerPlayGame}/>}
-        </GameListContainer>
-    );
-*/

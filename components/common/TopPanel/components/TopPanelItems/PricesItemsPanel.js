@@ -11,7 +11,7 @@ import BackgroundButtons from "../../../BackgroundWrapper/BackgroundButtons";
 const PricesItemsPanel = ({userData}) => {
     return (
         <TopPanelContainer>
-            <BackgroundButtons width={100} height={50} bgButton={bg}>
+            <BackgroundButtons width={100} height={55} bgButton={bg}>
                 <TopPanelItemsContainer>
                     <ElementsContainer>
                         <Coins coins={userData.coins}/>

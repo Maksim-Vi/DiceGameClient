@@ -20,24 +20,40 @@ const RoadButton = () =>{
     }
 
     return (
-        <BackgroundButtons marginBottom={5} bgButton={bg}>
+        <BtnBackground source={bg} resizeMode={'stretch'}>
             <RoadBtn onPress={OpenRoad} activeOpacity={0.9}>
                 {availableToClaimMissionsRoad > 0 && <InfoButton count={availableToClaimMissionsRoad}/>}
                 <RoadImg source={roadImg} resizeMode='stretch'/>
+                <RoadTextContainer>
+                    <Text setShadow={true} madium blod center>Road</Text>
+                </RoadTextContainer>
             </RoadBtn>
-        </BackgroundButtons>
+        </BtnBackground>
     )
 }
 
+const BtnBackground = styled.ImageBackground`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 70px;
+  height: 70px;
+`
+
 const RoadBtn = styled.TouchableOpacity`
     position: relative;
-    width: 45px;
-    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `
 const RoadImg = styled.Image`
-    margin: auto;
-    width: 75%;
-    height: 75%;
+    width: 60px;
+    height: 60px;
+`
+
+const RoadTextContainer = styled.View`
+  position: absolute;
+  bottom: -5px;
 `
 
 export default RoadButton

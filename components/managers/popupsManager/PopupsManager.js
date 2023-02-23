@@ -1,5 +1,5 @@
-import React from 'react'
-import {connect} from 'react-redux'
+import React, {useEffect, useRef} from 'react'
+import {connect, useSelector} from 'react-redux'
 import styled from 'styled-components'
 import {selectMyUser} from '../../redux/reducers/players/PlayersReducer'
 import {
@@ -26,16 +26,33 @@ import ChangeUserNameGoogle from "./popupsComponents/GooglePopups/ChangeUserName
 import LostConnectionOpponent from "./popupsComponents/Game/LostConnectionOpponent";
 import CollectItemPopup from "./popupsComponents/Collection/CollectItemPopup";
 import BotTypeGame from "./popupsComponents/Game/BotTypeGame";
+import {selectRestoreGame} from "../../redux/reducers/game/GameReducer";
 
 const PopupsManager = (props) => {
+
+    const isRestoreGame = useSelector(selectRestoreGame)
+
+    const renderSevenDays = () =>{
+        if( props.sevenDaysPopup.visible &&
+            (props.activeTabApp === 'App' || props.activeTabApp === 'MainScreen') &&
+            !isRestoreGame
+        ){
+            return <SevenDaysGift />
+        }
+    }
+
     return (
         <PopupConteiner>
             <StatusBar hidden={true} style="light"/>
 
             {props.avatarPopup.visible && <AvatarPopups user={props.user}/>}
             {props.settingsPopup.visible && <SettingsMenuPopups/>}
-            {props.lvlUpPopup.visible && (props.activeTabApp === 'App' || props.activeTabApp === 'MainScreen') && <LevelUpPopup/>}
-            {props.sevenDaysPopup.visible && <SevenDaysGift />}
+            {
+                props.lvlUpPopup.visible &&
+                (props.activeTabApp === 'App' || props.activeTabApp === 'MainScreen') &&
+                <LevelUpPopup/>
+            }
+            { renderSevenDays() }
             {props.infoPopup.visible && <InfoPopups />}
             {props.googleConfirmUsernamePopup.visible && <ChangeUserNameGoogle />}
             {props.lostConnOpponentPopup.visible && <LostConnectionOpponent />}

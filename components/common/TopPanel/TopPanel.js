@@ -100,7 +100,7 @@ const Panel = styled.View`
 
 const TopPanel = styled(Animated.View)`
   display: flex;
-  align-items: flex-end;
+  align-items: flex-start;
   justify-content: space-around;
   flex-direction: row;
   width: 98%;

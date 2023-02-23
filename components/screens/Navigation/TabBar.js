@@ -1,10 +1,9 @@
 import styled from "styled-components";
 import mainIcon from '../../../assets/nav/main.png'
-import shopIcon from '../../../assets/nav/shop.png'
 import collectionsIcon from '../../../assets/nav/collections.png'
 import chatIcon from '../../../assets/nav/chat.png'
 import Text from "../../common/Text/Text";
-import {NativeModules, Platform} from "react-native";
+import {Platform} from "react-native";
 import InfoButton from "../../common/Info/InfoButton";
 import React from "react";
 import EventDispatcher from "../../redux/EventDispatcher";
@@ -16,6 +15,8 @@ import {setActiveTabApp} from "../../redux/reducers/Websocket/WebsocketReducer";
 import {store} from "../../redux/redux-store";
 import {getIosModel} from "../../utils/utils";
 import Sounds, {soundsType} from "../../utils/Sounds";
+import bg from "../../../assets/nav/nav_bg.png";
+import bgActive from "../../../assets/nav/nav_bg_active.png";
 
 class TabBar extends React.PureComponent {
     constructor(props){
@@ -67,13 +68,13 @@ class TabBar extends React.PureComponent {
             case "MainScreen":
                 return mainIcon;
             case "ShopScreen":
-                return shopIcon;
+                return '';
             case "CollectionsScreen":
                 return collectionsIcon;
             case "ChatScreen":
                 return chatIcon;
             default:
-                return startGameIcon
+                return ''
         }
     };
 
@@ -100,16 +101,15 @@ class TabBar extends React.PureComponent {
                     const isFocused = this.props.state.index === index;
 
                     return (
-                        <TabIconContainer key={index} focused={isFocused} onPress={() => this.onPress(route, isFocused)}>
-                            <NavImage source={this.getIconName(route)} resizeMode={'contain'}/>
-                            <Text setShadow={true} heavy medium color={'#ff9d4d'}>{this.getText(route)}</Text>
-                            {isFocused &&
-                                <Active style={{borderTopWidth: 4, borderBottomWidth: 0}}/>
-                            }
-                            {route.name === 'ChatScreen' && !isFocused && this.state.unreadMessages > 0 &&
-                                <InfoButton count={this.state.unreadMessages}/>
-                            }
-                        </TabIconContainer>
+                        <PlaceNavBackground source={isFocused ? bgActive : bg} resizeMode={'stretch'}>
+                            <TabIconContainer key={index} focused={isFocused} onPress={() => this.onPress(route, isFocused)}>
+                                <NavImage source={this.getIconName(route)} resizeMode={'contain'}/>
+                                <Text setShadow={true} heavy medium color={'#ff9d4d'}>{this.getText(route)}</Text>
+                                {route.name === 'ChatScreen' && !isFocused && this.state.unreadMessages > 0 &&
+                                    <InfoButton count={this.state.unreadMessages}/>
+                                }
+                            </TabIconContainer>
+                        </PlaceNavBackground>
                     );
                 })}
             </TabsContainer>
@@ -117,13 +117,22 @@ class TabBar extends React.PureComponent {
     }
 };
 
+const PlaceNavBackground = styled.ImageBackground`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  margin-bottom: 25px;
+`
+
 const TabsContainer = styled.View`
   position: absolute;
   bottom: 0;
   display: flex;
   flex-direction: row;
   align-items: flex-end;
-  justify-content: space-around;
+  justify-content: space-evenly;
   width: 100%;
   ${() => {
     const isIos = getIosModel()
