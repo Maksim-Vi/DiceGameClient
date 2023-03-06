@@ -12,7 +12,7 @@ import TopPanelBottom from "./TopPanelBottom";
 import PricesItemsPanel from "./components/TopPanelItems/PricesItemsPanel";
 import MenuPanel from "./components/TopPanelItems/MenuPanel";
 import FriendsPanel from "./components/TopPanelItems/FriendsPanel";
-import {Animated, Easing, NativeModules, Platform} from "react-native";
+import {Animated, Easing} from "react-native";
 import {setTimingAnimated} from "../../utils/Animation";
 import {getIosModel} from "../../utils/utils";
 

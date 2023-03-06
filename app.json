@@ -3,7 +3,7 @@
     "name": "knocky dice",
     "slug": "dicegame",
     "owner": "kastom",
-    "version": "1.1.12",
+    "version": "1.2.1",
     "orientation": "portrait",
     "icon": "./assets/loadGame/icon-game.png",
     "userInterfaceStyle": "light",
@@ -12,6 +12,9 @@
       "resizeMode": "cover",
       "backgroundColor": "#ffffff",
       "fontSize": "18px"
+    },
+    "androidNavigationBar": {
+      "visible": "immersive"
     },
     "updates": {
       "fallbackToCacheTimeout": 0,

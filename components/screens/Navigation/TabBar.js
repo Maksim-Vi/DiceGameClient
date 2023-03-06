@@ -101,7 +101,7 @@ class TabBar extends React.PureComponent {
                     const isFocused = this.props.state.index === index;
 
                     return (
-                        <PlaceNavBackground source={isFocused ? bgActive : bg} resizeMode={'stretch'}>
+                        <PlaceNavBackground key={index} source={isFocused ? bgActive : bg} resizeMode={'stretch'}>
                             <TabIconContainer key={index} focused={isFocused} activeOpacity={0.9} onPress={() => this.onPress(route, isFocused)}>
                                 <NavImage source={this.getIconName(route)} resizeMode={'contain'}/>
                                 <Text setShadow={true} heavy medium color={'#ff9d4d'}>{this.getText(route)}</Text>

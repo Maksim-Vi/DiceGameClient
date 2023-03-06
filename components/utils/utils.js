@@ -6,9 +6,7 @@ import DeviceInfo from "react-native-device-info";
 import {Platform} from "react-native";
 
 export const isProduction = () =>{
-    //return process.env.APP_TYPE === 'production'
-
-    return false
+    return process.env.APP_TYPE === 'production'
 }
 
 export const transitionState = (tab) =>{

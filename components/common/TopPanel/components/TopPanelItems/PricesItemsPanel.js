@@ -32,7 +32,7 @@ const TopPanelContainer = styled.View`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 70%;
+  width: 65%;
 `
 const TopPanelItemsContainer = styled.View`
     height: 50px;

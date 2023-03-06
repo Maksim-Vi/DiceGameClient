@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Modal from "react-native-modal";
 import DefaultBG from './ModalBackgrounds/DefaultBG';
 import Close from '../Buttons/Close/Close';
-import { StatusBar } from 'react-native';
+import {Platform, StatusBar, useWindowDimensions} from 'react-native';
 
 const ModalWrapper = (props) => {
    
@@ -29,7 +29,9 @@ const ModalWrapper = (props) => {
                animationOut={'slideOutDown'}
                animationOutTiming={300}
                coverScreen={true}
-               statusBarTranslucent={true}
+               deviceWidth={Platform.OS === "ios" ? useWindowDimensions().width : useWindowDimensions().width + StatusBar.currentHeight * 2}
+               deviceHeight={Platform.OS === "ios" ? useWindowDimensions().height : useWindowDimensions().height + StatusBar.currentHeight * 2}
+               statusBarTranslucent
                onSwipeComplete={() => setModalVisible(false)}
                swipeDirection={swipe ? swipe : null}
                isVisible={modalVisible}>

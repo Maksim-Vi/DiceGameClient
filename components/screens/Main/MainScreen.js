@@ -40,7 +40,7 @@ const MainScreen = (props) => {
         }
     },[isRestoreGame])
 
-    useEffect(()=>{
+    useEffect( ()=>{
         if(!window.chatManager.chat.channels['general']){
             window.chatManager.connectionToChatRoom('general')
         }
@@ -50,7 +50,7 @@ const MainScreen = (props) => {
             <BackgroundWrapper>
                 <StatusBar hidden={true} style="light"/>
 
-                {/*myUser && (myUser.admin === 'true' || myUser.admin === true) */ true &&
+                {myUser && (myUser.admin === 'true' || myUser.admin === true)  &&
                     <Test onPress={testBtnClick} style={{ borderBottomWidth: 5 }}>
                         <Text color={'#000'}>Admin</Text>
                     </Test>
