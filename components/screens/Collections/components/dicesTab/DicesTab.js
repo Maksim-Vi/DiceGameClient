@@ -6,6 +6,7 @@ import ModalWrapper from "../../../../common/ModalWindows/ModalWrapper";
 import ModalChildrenBuy from "../../../../common/ModalWindows/ModalChildren/ModalChildrenBuy";
 import {useSelector} from "react-redux";
 import {selectMyUser} from "../../../../redux/reducers/players/PlayersReducer";
+import SquareItem from "../squaresTab/SquareItem";
 
 const DicesTab = (props) => {
 
@@ -43,20 +44,22 @@ const DicesTab = (props) => {
                         [...props.dices]
                             .filter(item => item.available !== 'false' || user.admin)
                             .sort((a,b)=> a.sortIndex > b.sortIndex ? 1 : -1)
-                            .map(diceItem=>{
+                            .reduce((acc, diceItem, index)=>{
                                 const isCollected = props.availableItems.dices.includes(+diceItem.id)
                                 const isActive = +props.activeItems.dice === +diceItem.id
                                 const isLocked = diceItem.lvlUnlock > user.experience.lvl
                                 const isSale = diceItem.isSale === 'true'
 
-                                return <DiceItem key={diceItem.id}
-                                                 isActive={isActive}
-                                                 isCollected={isCollected}
-                                                 isLocked={isLocked}
-                                                 isSale={isSale}
-                                                 diceItem={diceItem}
-                                                 setModalVisible={setModalVisible}/>
-                        })
+                                acc.push(<DiceItem key={diceItem.id}
+                                                   isActive={isActive}
+                                                   isCollected={isCollected}
+                                                   isLocked={isLocked}
+                                                   isSale={isSale}
+                                                   diceItem={diceItem}
+                                                   setModalVisible={setModalVisible}/>
+                                )
+                                return acc;
+                            },[])
                     }
                 </DiceScrollContainer>
                 <DiceCardLast />

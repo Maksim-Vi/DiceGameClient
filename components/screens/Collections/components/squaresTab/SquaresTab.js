@@ -40,22 +40,26 @@ const SquaresTab = (props) => {
             <SquaresScroll showsVerticalScrollIndicator={false} contentContainerStyle={styles.scroll}>
                 <SquaresScrollContainer>
                     {props.squares &&
-                         [...props.squares].sort((a,b)=> a.sortIndex > b.sortIndex ? 1 : -1).map(squareItem=>{
-                             if(squareItem.available || user.admin) {
+                        [...props.squares]
+                            .filter(item => item.available !== 'false' || user.admin)
+                            .sort((a,b)=> a.sortIndex > b.sortIndex ? 1 : -1)
+                            .reduce((acc, squareItem, index)=>{
+
                                 const isCollected = props.availableItems.squares.includes(+squareItem.id)
                                 const isActive = +props.activeItems.square === +squareItem.id
                                 const isLocked = squareItem.lvlUnlock > user.experience.lvl
-                                 const isSale = squareItem.isSale === 'true'
+                                const isSale = squareItem.isSale === 'true'
 
-                                return <SquareItem key={squareItem.id}
-                                                   isActive={isActive}
-                                                   isCollected={isCollected}
-                                                   isLocked={isLocked}
-                                                   isSale={isSale}
-                                                   squareItem={squareItem}
-                                                   setModalVisible={setModalVisible}/>
-                            }
-                        })
+                                acc.push(<SquareItem key={squareItem.id}
+                                                     isActive={isActive}
+                                                     isCollected={isCollected}
+                                                     isLocked={isLocked}
+                                                     isSale={isSale}
+                                                     squareItem={squareItem}
+                                                     setModalVisible={setModalVisible}/>
+                                )
+                                return acc;
+                            },[])
                     }
                 </SquaresScrollContainer>
                 <SquareCardLast />
