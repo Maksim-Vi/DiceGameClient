@@ -94,6 +94,19 @@ export const postRegisterApi = async (username, email, password) => {
     return await getFetchUrl('register','POST', data, refreshToken, callback)
 }
 
+export const deleteAccountApi = async (userId) => {
+
+    const refreshToken = (equest, type, bodyData) =>{
+
+    }
+
+    const callback = (json) =>{
+        console.log('ANSWER delete', json)
+    }
+
+    return await getFetchUrl(`users/${userId}`,'DELETE', {}, refreshToken, callback)
+}
+
 export const getCoinsBonus = async (username) =>{
    
     const refreshToken = (equest, type, bodyData) =>{

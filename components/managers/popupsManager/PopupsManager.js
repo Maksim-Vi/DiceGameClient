@@ -5,7 +5,7 @@ import {selectMyUser} from '../../redux/reducers/players/PlayersReducer'
 import {
     selectAvatarPopup,
     selectBotGameTypesPopup,
-    selectCollectItemPopup,
+    selectCollectItemPopup, selectDeleteAccountPopup,
     selectGoogleConfirmUsernamePopup,
     selectInfoPopup,
     selectLevelUpPopup,
@@ -28,6 +28,7 @@ import CollectItemPopup from "./popupsComponents/Collection/CollectItemPopup";
 import BotTypeGame from "./popupsComponents/Game/BotTypeGame";
 import {selectRestoreGame} from "../../redux/reducers/game/GameReducer";
 import RewardsPopup from "./popupsComponents/Rewards/RewardsPopup";
+import DeleteAccount from "./popupsComponents/DeleteAccount/DeleteAccount";
 
 const PopupsManager = (props) => {
 
@@ -60,6 +61,7 @@ const PopupsManager = (props) => {
             {props.collectItemPopup.visible && <CollectItemPopup data={props.collectItemPopup.data}/>}
             {props.botGameTypesPopup.visible && <BotTypeGame />}
             {props.rewardsPopup.visible && <RewardsPopup />}
+            {props.deleteAccountPopup.visible && <DeleteAccount />}
 
 
             {props.testBtnsPopup.visible && <TestBtnsPopups />}
@@ -88,6 +90,7 @@ const mapStateToProps = (state) => ({
     collectItemPopup: selectCollectItemPopup(state),
     botGameTypesPopup: selectBotGameTypesPopup(state),
     rewardsPopup: selectRewardsPopup(state),
+    deleteAccountPopup: selectDeleteAccountPopup(state),
 });
 
 export default connect(mapStateToProps)(PopupsManager);

@@ -32,7 +32,7 @@ const GameBack = styled.TouchableOpacity`
 	position: absolute;
 	top: ${props=> props.top ? props.top : '30px'};
 	left: ${props=> props.left ? props.left : '20px'};
-    z-index: 1;
+    z-index: 10;
 `
 
 const BackImg = styled.Image`

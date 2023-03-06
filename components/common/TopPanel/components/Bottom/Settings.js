@@ -5,14 +5,15 @@ import goBack from "../../../../../assets/topPanel/settingsPopup/back.png";
 import muteSounds from "../../../../../assets/topPanel/settingsPopup/silent.png";
 import unmuteSounds from "../../../../../assets/topPanel/settingsPopup/high-volume.png";
 import support from "../../../../../assets/topPanel/settingsPopup/support.png";
+import deleteAcc from "../../../../../assets/topPanel/settingsPopup/delete-acc.png";
 import lang from "../../../../../assets/topPanel/settingsPopup/language.png";
 import {UserContext} from "../../../../utils/UserProvider";
 import C_LEAVE_SOCKET from "../../../../protocol/messages/clients/C_LEAVE_SOCKET";
-import {setSettingsMenuPopup} from "../../../../redux/reducers/popups/PopupsReducer";
+import {setDeleteAccountPopup, setSettingsMenuPopup} from "../../../../redux/reducers/popups/PopupsReducer";
 import {connect, useDispatch} from "react-redux";
 import Text from "../../../Text/Text";
 import {getCurrentData} from "../../../../utils/utils";
-import {selectSoundsInfo, selectTranslation, setSoundInfo} from "../../../../redux/reducers/language/LanguageReducer";
+import {selectSoundsInfo, selectTranslation} from "../../../../redux/reducers/language/LanguageReducer";
 import defaultTranslation from "../../../../redux/reducers/language/defaultTranslation";
 import {selectMyUser} from "../../../../redux/reducers/players/PlayersReducer";
 import SelectDropdown from 'react-native-select-dropdown'
@@ -54,6 +55,12 @@ const Settings = (props) =>{
 
     const setSupport = () =>{
         Sounds.loadAndPlayFile(soundsType.click2)
+    }
+
+    const deleteAccount = () =>{
+        Sounds.loadAndPlayFile(soundsType.click2)
+        dispatch(setSettingsMenuPopup({visible: false, data: null}))
+        setTimeout(()=>{dispatch(setDeleteAccountPopup({visible: true, data: null}))}, 500)
     }
 
     useEffect(()=>{
@@ -107,6 +114,12 @@ const Settings = (props) =>{
                         <Img source={support} resizeMode='stretch'/>
                         <Text large blod center color={'#0c6fb6'}>{props.support}</Text>
                     </SupportContainer>
+                </Btn>
+                <Btn onPress={deleteAccount} activeOpacity={0.9}>
+                    <LeaveContainer style={{ borderBottomWidth: 3 }}>
+                        <Img source={deleteAcc} resizeMode='stretch'/>
+                        <Text large blod center color={'#0c6fb6'}>{props.deleteAccount}</Text>
+                    </LeaveContainer>
                 </Btn>
                 <Btn onPress={Logout} activeOpacity={0.9}>
                     <LeaveContainer style={{ borderBottomWidth: 3 }}>
@@ -207,6 +220,7 @@ const mapStateToProps = (state) => ({
     support: selectTranslation(state,defaultTranslation.TR_SUPPORT),
     muteUnmute: selectTranslation(state,defaultTranslation.TR_MUTE_UNMUTE),
     leaveGame: selectTranslation(state,defaultTranslation.TR_LEAVE_GAME),
+    deleteAccount: selectTranslation(state,defaultTranslation.TR_DELETE_ACCOUNT),
     sounds: selectSoundsInfo(state),
 })
 

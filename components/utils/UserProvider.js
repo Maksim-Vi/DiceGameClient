@@ -1,5 +1,4 @@
 import {createContext, useCallback, useEffect, useState} from "react";
-import C_LOGIN from "../protocol/messages/clients/C_LOGIN";
 import {postLoginApi} from "../protocol/API/API";
 import {setCurrentUser, updateCurrentUserSound} from "../redux/reducers/players/PlayersReducer";
 import {store} from "../redux/redux-store";

@@ -1,6 +1,6 @@
 import React from 'react';
 import ModalWrapper from "../../../common/ModalWindows/ModalWrapper";
-import {NativeModules, Platform, useWindowDimensions} from "react-native";
+import {Platform, useWindowDimensions} from "react-native";
 import {setSettingsMenuPopup} from "../../../redux/reducers/popups/PopupsReducer";
 import {useDispatch} from "react-redux";
 import Settings from "../../../common/TopPanel/components/Bottom/Settings";
