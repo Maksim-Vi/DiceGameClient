@@ -26,9 +26,9 @@ const SevenDaysGift = (props) => {
 
     return (
         <ModalWrapper modalBG={'bg_black'} modalVisible={true} >
+            <ButtonBack top={'0px'} left={'-2px'} leaveGame={leaveGift} colorIcon={'#fefefe'}/>
 
             <SevenDaysContainer>
-                <ButtonBack leaveGame={leaveGift} colorIcon={'#fefefe'}/>
                 <TitleContainer>
                     <SevenDaysTitle setShadow={true} title blod center>{props.dailyTitle}</SevenDaysTitle>
                 </TitleContainer>

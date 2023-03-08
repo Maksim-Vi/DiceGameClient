@@ -71,27 +71,6 @@ class GameContainer extends React.PureComponent {
         }
     }
 
-    // shouldComponentUpdate(prevProps, prevState) {
-    //     return this.props.gameSettings !== prevProps.gameSettings ||
-    //         this.props.currentGame !== prevProps.currentGame ||
-    //         this.props.currentGameId !== prevProps.currentGameId ||
-    //         this.props.user !== prevProps.user ||
-    //         this.props.throwData !== prevProps.throwData ||
-    //         this.props.opponentThrowData !== prevProps.opponentThrowData ||
-    //         this.props.scores !== prevProps.scores ||
-    //         this.props.countScores !== prevProps.countScores ||
-    //         this.props.isYouMove !== prevProps.isYouMove ||
-    //         this.props.activeThrowBtn !== prevProps.activeThrowBtn ||
-    //         this.state.boardData !== prevState.boardData ||
-    //         this.state.isThrow !== prevState.isThrow ||
-    //         this.state.boardData.userBoard !== prevState.boardData.userBoard ||
-    //         this.state.boardData.opponentBoard !== prevState.boardData.opponentBoard ||
-    //         this.state.boardData.winPointsData !== prevState.boardData.winPointsData ||
-    //         this.state.opponent !== prevState.opponent ||
-    //         this.state.showStartGameText !== prevState.showStartGameText ||
-    //         this.state.showThrowBtn !== prevState.showThrowBtn
-    // }
-
     componentDidUpdate(nextProps, nextState) {
         if (this.props.gameSettings !== nextProps.gameSettings) {
             this.gameModel.setData(this.props.currentGame, this.props.gameSettings)
@@ -192,6 +171,7 @@ class GameContainer extends React.PureComponent {
                                             countScores={this.props.countScores}
                                             isYouMove={this.props.isYouMove}
                                             activeItems={this.props.activeItems}
+                                            isTutorial={false}
                                             setThrowBtn={() => {
                                                 this.setState({showStartGameText: true})
                                                 this.animateStartGameText()
@@ -215,20 +195,10 @@ class GameContainer extends React.PureComponent {
                                            }}
                                            countScores={this.props.countScores}/>
                         </User>
-
-
                     </UsersInfoContainer>
+
                 </GameFrame>
                 {this.state.showThrowBtn &&
-                   /* <ButtonContainer onPress={this.hendlerThrowGame}
-                                     activeOpacity={!this.state.isThrow ? 1 : 0.6}
-                                     disabled={this.state.isThrow}>
-                        <Text setShadow={true}
-                              large heavy
-                              color={!this.state.isThrow ? '#168f45' : 'rgba(255,255,255,0.62)'}>
-                            {this.props.throwText}
-                        </Text>
-                    </ButtonContainer>*/
                     <ButnContainer>
                         <ThrowButton onPress={this.hendlerThrowGame}
                                      activeOpacity={!this.state.isThrow ? 1 : 0.6}

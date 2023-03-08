@@ -54,7 +54,7 @@ const RewardsPopup = props => {
 
     return (
         <ModalWrapper modalBG={'bg_black'} modalVisible={true} >
-            <ButtonBack leaveGame={leave} colorIcon={'#fefefe'}/>
+            <ButtonBack top={'-5px'} left={'-2px'} leaveGame={leave} colorIcon={'#fefefe'}/>
 
             <RewardsContainer>
                 <RewardTabs tab={tab} changeTab={changeTab}/>
@@ -73,7 +73,7 @@ const RewardsContainer = styled.View`
     display: flex;
   align-items: center;
   justify-content: flex-start;
-  margin-top: 50%;
+  margin-top: 30%;
   width: 100%;
   height: 100%;
 `
