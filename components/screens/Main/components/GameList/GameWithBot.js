@@ -51,7 +51,7 @@ const BotContainer = styled.TouchableOpacity`
   height: 90%;
   border-radius: 20px;
   margin-top: 10px;
-  padding: 0 20px;
+  padding: 0 30px;
 `
 const GameImage = styled.Image`
   width: 100px;
