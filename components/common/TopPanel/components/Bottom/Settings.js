@@ -167,7 +167,7 @@ const SupportContainer = styled(ReturnContainer)``
 const LanguageContainer = styled(ReturnContainer)``
 
 const Info = styled.View`
-  width: 50%;
+  width: 70%;
 `
 
 const Btn = styled.TouchableOpacity`
@@ -189,6 +189,7 @@ const ImgSelect = styled.Image`
 
 const styles = StyleSheet.create({
     dropdown1BtnStyle: {
+        height: 30,
         backgroundColor: 'rgba(255,255,255,0)',
     },
     dropdown1BtnTxtStyle: (props)=> {

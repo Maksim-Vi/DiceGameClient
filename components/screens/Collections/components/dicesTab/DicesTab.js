@@ -42,7 +42,6 @@ const DicesTab = (props) => {
                 <DiceScrollContainer>
                     {props.dices &&
                         [...props.dices]
-                            .filter(item => item.available !== 'false' || user.admin)
                             .sort((a,b)=> a.sortIndex > b.sortIndex ? 1 : -1)
                             .reduce((acc, diceItem, index)=>{
                                 const isCollected = props.availableItems.dices.includes(+diceItem.id)
@@ -50,14 +49,20 @@ const DicesTab = (props) => {
                                 const isLocked = diceItem.lvlUnlock > user.experience.lvl
                                 const isSale = diceItem.isSale === 'true'
 
-                                acc.push(<DiceItem key={diceItem.id}
-                                                   isActive={isActive}
-                                                   isCollected={isCollected}
-                                                   isLocked={isLocked}
-                                                   isSale={isSale}
-                                                   diceItem={diceItem}
-                                                   setModalVisible={setModalVisible}/>
-                                )
+                                if(
+                                    (diceItem.available && diceItem.available === 'true') ||
+                                    (diceItem.available && diceItem.available !== 'true' && user.admin === 'true')
+                                ){
+                                    acc.push(<DiceItem key={diceItem.id}
+                                                       isActive={isActive}
+                                                       isCollected={isCollected}
+                                                       isLocked={isLocked}
+                                                       isSale={isSale}
+                                                       diceItem={diceItem}
+                                                       setModalVisible={setModalVisible}/>
+                                    )
+                                }
+
                                 return acc;
                             },[])
                     }

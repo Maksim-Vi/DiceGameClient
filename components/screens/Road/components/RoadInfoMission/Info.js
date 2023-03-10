@@ -23,13 +23,14 @@ const Info = (props) => {
 
     return (
         <InfoContainer>
-            <Name small numberOfLines={2}>{translation}</Name>
+            <NameContainer>
+                <Text setShadow numberOfLines={3} blod small>{translation}</Text>
+            </NameContainer>
 
             <WonPriceContainer>
                 <PriceImg source={getImageByType()} resizeMode={'stretch'}/>
-                <WonPrice center blod large>{props.activeMission.rewardQuantity}</WonPrice>
+                <WonPrice setShadow center blod large>{props.activeMission.rewardQuantity}</WonPrice>
             </WonPriceContainer>
-
         </InfoContainer>
     );
 };
@@ -43,11 +44,10 @@ const InfoContainer = styled.View`
   height: 50%;
 `
 
-const Name = styled(TextWithoutShadow)`
+const NameContainer = styled.View`
   width: 50%;
-  height: 100%;
-  margin-top: 7px;
 `
+
 const WonPriceContainer = styled.View`
   display: flex;
   align-items: center;

@@ -7,23 +7,26 @@ import Settings from "../../../common/TopPanel/components/Bottom/Settings";
 import {getIosModel} from "../../../utils/utils";
 import Sounds, {soundsType} from "../../../utils/Sounds";
 
+const margin = 50
+const marginButtons = 30
+const countTabsHeight = (6 * (30 + marginButtons)) + margin
 const isIos = getIosModel()
 const isIphoneX = Platform.OS === 'ios' && isIos >= 10
 
 const SettingsMenuPopups = () => {
 
-    const { height, width } = useWindowDimensions();
+    const { width } = useWindowDimensions();
     const dispatch = useDispatch()
-    const heightPopup = Platform.OS === 'ios'
-        ? isIphoneX ? 2.2 : 1.5
-        : 2
+    // const heightPopup = Platform.OS === 'ios'
+    //     ? isIphoneX ? countTabsHeight : countTabsHeight
+    //     : countTabsHeight
 
     const closeModal = () =>{
         Sounds.loadAndPlayFile(soundsType.click2)
         dispatch(setSettingsMenuPopup({visible: false, data: null}))
     }
 
-    return <ModalWrapper modalBG={'default'} width={width - 20} height={height / heightPopup} modalVisible={true}>
+    return <ModalWrapper modalBG={'default'} width={width - 20} height={countTabsHeight} modalVisible={true}>
             <Settings closeModal={closeModal}/>
     </ModalWrapper>
 }

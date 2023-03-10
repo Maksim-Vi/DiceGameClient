@@ -41,7 +41,6 @@ const SquaresTab = (props) => {
                 <SquaresScrollContainer>
                     {props.squares &&
                         [...props.squares]
-                            .filter(item => item.available !== 'false' || user.admin)
                             .sort((a,b)=> a.sortIndex > b.sortIndex ? 1 : -1)
                             .reduce((acc, squareItem, index)=>{
 
@@ -49,15 +48,20 @@ const SquaresTab = (props) => {
                                 const isActive = +props.activeItems.square === +squareItem.id
                                 const isLocked = squareItem.lvlUnlock > user.experience.lvl
                                 const isSale = squareItem.isSale === 'true'
+                                if(
+                                    (squareItem.available && squareItem.available === 'true') ||
+                                    (squareItem.available && squareItem.available !== 'true' && user.admin === 'true')
+                                ){
+                                    acc.push(<SquareItem key={squareItem.id}
+                                                         isActive={isActive}
+                                                         isCollected={isCollected}
+                                                         isLocked={isLocked}
+                                                         isSale={isSale}
+                                                         squareItem={squareItem}
+                                                         setModalVisible={setModalVisible}/>
+                                    )
+                                }
 
-                                acc.push(<SquareItem key={squareItem.id}
-                                                     isActive={isActive}
-                                                     isCollected={isCollected}
-                                                     isLocked={isLocked}
-                                                     isSale={isSale}
-                                                     squareItem={squareItem}
-                                                     setModalVisible={setModalVisible}/>
-                                )
                                 return acc;
                             },[])
                     }

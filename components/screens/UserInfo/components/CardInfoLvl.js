@@ -5,7 +5,7 @@ import Text from "../../../common/Text/Text";
 const CardInfoLvl = (props) => {
     return (
         <CardContainer>
-            <Img source={props.icon} resizeMode={ 'stretch'} />
+            <Img source={props.icon} resizeMode={'contain'} />
             <Text setShadow={true} madium blod>lvl: {props.lvl}</Text>
             <Text setShadow={true} madium blod>{props.progress.toFixed(2)}%</Text>
         </CardContainer>

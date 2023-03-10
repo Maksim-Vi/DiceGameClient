@@ -14,6 +14,7 @@ import RewardTabs from "./components/Tabs/RewardTabs";
 import defaultParams from "../../../../redux/reducers/language/defaultParams";
 import Text from "../../../../common/Text/Text";
 import SlideScreen from "../../../../common/AnimationScreens/SlideScreen";
+import DailyRewards from "./DailyRewards/DailyRewards";
 
 const RewardsPopup = props => {
 
@@ -35,9 +36,7 @@ const RewardsPopup = props => {
     const getContentByType = () =>{
         switch (tab) {
             case 'sevenDays': return <RewardSevenDays />
-            case 'DailyRewards': return <SlideScreen left={true}>
-                <Text>Daily Rewards</Text>
-            </SlideScreen>
+            case 'DailyRewards': return <DailyRewards />
             default: return null
         }
     }

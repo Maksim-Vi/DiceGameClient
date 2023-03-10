@@ -13,7 +13,7 @@ import diamonds from '../../../assets/topPanel/diamond.png'
 import flash from '../../../assets/topPanel/flash.png'
 import lvl from '../../../assets/topPanel/star_lvl.png'
 import CardInfoLvl from "./components/CardInfoLvl";
-import {NativeModules, Platform} from "react-native";
+import {Platform} from "react-native";
 import {selectTranslation} from "../../redux/reducers/language/LanguageReducer";
 import defaultTranslation from "../../redux/reducers/language/defaultTranslation";
 import {getIosModel} from "../../utils/utils";

@@ -8,7 +8,7 @@ import defaultTranslation from "../../../../redux/reducers/language/defaultTrans
 import Sounds, {soundsType} from "../../../../utils/Sounds";
 import bgGame from "../../../../../assets/common/btns/GameBtnBlue.png";
 import {setBotGameTypesPopup} from "../../../../redux/reducers/popups/PopupsReducer";
-import {View} from "react-native";
+import {Platform, View} from "react-native";
 
 const GameWithBot = (props) => {
 
@@ -23,11 +23,11 @@ const GameWithBot = (props) => {
         <BG source={bgGame} resizeMode={'contain'}>
             <BotContainer onPress={handelClick}
                           activeOpacity={0.9}>
-                <Text setShadow numberOfLines={1} madium blod color={'#ff9d4d'} center>
+                <Text setShadow madium blod color={'#ff9d4d'} center>
                     {props.tap_to_play}
                 </Text>
                 <GameImage source={gameIcon} resizeMode={'contain'}/>
-                <Text setShadow numberOfLines={1} fontSize={18} blod color={'#ff9d4d'} center>
+                <Text setShadow fontSize={18} blod color={'#ff9d4d'} center>
                     {props.fightBot}
                 </Text>
             </BotContainer>
@@ -51,7 +51,7 @@ const BotContainer = styled.TouchableOpacity`
   height: 90%;
   border-radius: 20px;
   margin-top: 10px;
-  padding: 0 50px;
+  padding: 0 20px;
 `
 const GameImage = styled.Image`
   width: 100px;

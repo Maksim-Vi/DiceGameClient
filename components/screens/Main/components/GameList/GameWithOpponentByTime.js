@@ -24,9 +24,9 @@ const GameWithOpponentByTime = (props) => {
                              activeOpacity={0.9}
                              //style={{ borderBottomWidth: 8 }}
           >
-            <TextCont numberOfLines={1} setShadow={true} madium blod color={'#ff9d4d'} center>{props.tap_to_play}</TextCont>
+            <TextCont setShadow={true} madium blod color={'#ff9d4d'} center>{props.tap_to_play}</TextCont>
             <GameImage source={gameIcon} resizeMode={'contain'}/>
-            <TextCont numberOfLines={2} setShadow={true} large blod color={'#ff9d4d'} center>{props.fightOppByTime}</TextCont>
+            <TextCont numberOfLines={2} setShadow={true} fontSize={16} blod color={'#ff9d4d'} center>{props.fightOppByTime}</TextCont>
           </OpponentContainer>
       </BG>
   );
@@ -49,7 +49,7 @@ const OpponentContainer = styled.TouchableOpacity`
   height: 90%;
   border-radius: 20px;
   margin-top: 10px;
-  padding: 0 50px;
+  padding: 0 20px;
 `
 const GameImage = styled.Image`
   width: 130px;

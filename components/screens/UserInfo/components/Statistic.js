@@ -14,30 +14,30 @@ const Statistic = (props) => {
             <Text blod large>{props.botStatistic}:</Text>
             <BotTab>
                 <Block>
-                    <Text numberOfLines={1} blod madium color={'black'} center>{props.gamePlayed}: </Text>
+                    <Text numberOfLines={1} blod small color={'black'} center>{props.gamePlayed}: </Text>
                     <Text numberOfLines={1} blod large color={'black'}>{statistics.bot.games || 0}</Text>
                 </Block>
                 <Block>
-                    <Text numberOfLines={1} blod madium color={'black'} center>{props.gameWon}: </Text>
+                    <Text numberOfLines={1} blod small color={'black'} center>{props.gameWon}: </Text>
                     <Text numberOfLines={1} blod large color={'black'}>{statistics.bot.won || 0}</Text>
                 </Block>
                 <Block>
-                    <Text numberOfLines={1} blod madium color={'black'} center>{props.gameLose}: </Text>
+                    <Text numberOfLines={1} blod small color={'black'} center>{props.gameLose}: </Text>
                     <Text numberOfLines={1} blod large color={'black'}>{statistics.bot.lost || 0}</Text>
                 </Block>
             </BotTab>
             <Text blod large>{props.oppStatistic}:</Text>
             <UsersTab>
                 <Block>
-                    <Text numberOfLines={1} blod madium color={'black'} center>{props.gamePlayed}:</Text>
+                    <Text numberOfLines={1} blod small color={'black'} center>{props.gamePlayed}:</Text>
                     <Text numberOfLines={1} blod large color={'black'}>{statistics.opponent.games || 0}</Text>
                 </Block>
                 <Block>
-                    <Text numberOfLines={1} blod madium color={'black'} center>{props.gameWon}: </Text>
+                    <Text numberOfLines={1} blod small color={'black'} center>{props.gameWon}: </Text>
                     <Text numberOfLines={1} blod large color={'black'}>{statistics.opponent.won || 0}</Text>
                 </Block>
                 <Block>
-                    <Text numberOfLines={1} blod madium color={'black'} center>{props.gameLose}: </Text>
+                    <Text numberOfLines={1} blod small color={'black'} center>{props.gameLose}: </Text>
                     <Text numberOfLines={1} blod large color={'black'}>{statistics.opponent.lost || 0}</Text>
                 </Block>
             </UsersTab>
