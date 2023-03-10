@@ -36,7 +36,7 @@ const ResultScreen = (props) => {
 
     const hendlerCloseResult = () => {
         Sounds.loadAndPlayFile(soundsType.click2)
-        if (isLoaded && advertising.countShowless === advertising.numberCanMissGameAd) {
+        if (props.ENABLE_AD_AFTER_GAME && isLoaded && advertising.countShowless === advertising.numberCanMissGameAd) {
             show();
         } else {
             navigation.navigate('MainScreen')
@@ -180,6 +180,7 @@ const mapStateToProps = (state) => ({
     ENABLE_AD_PROD: selectDefaultParams(state, defaultParams.ENABLE_AD_PROD),
     ENABLE_AD_IOS_PROD: selectDefaultParams(state, defaultParams.ENABLE_AD_IOS_PROD),
     ENABLE_AD_ANDROID_PROD: selectDefaultParams(state, defaultParams.ENABLE_AD_ANDROID_PROD),
+    ENABLE_AD_AFTER_GAME: selectDefaultParams(state, defaultParams.ENABLE_AD_AFTER_GAME),
 });
 
 export default connect(mapStateToProps)(ResultScreen);
