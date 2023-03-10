@@ -51,7 +51,7 @@ const OpponentContainer = styled.TouchableOpacity`
 const GameImage = styled.Image`
   width: 130px;
   height: 130px;
-  margin: 20px;
+  margin: 10px 20px;
 `
 const TextCont = styled(Text)`
 

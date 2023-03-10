@@ -29,7 +29,7 @@ const UserInfoScreen = (props) => {
 
     return (
         <BackgroundWrapper>
-            <ButtonBack goMainPage={true} />
+            <ButtonBack top={'20px'} left={'10px'} goMainPage={true} />
 
             <UserInfoContainer>
                 <ProfileTitle>

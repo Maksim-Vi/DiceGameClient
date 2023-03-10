@@ -56,7 +56,7 @@ const BotContainer = styled.TouchableOpacity`
 const GameImage = styled.Image`
   width: 100px;
   height: 100px;
-  margin: 40px;
+  margin: 30px 20px;
 `
 
 const mapStateToProps = (state) => ({
