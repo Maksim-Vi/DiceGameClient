@@ -15,6 +15,7 @@ import {setInfoPopup} from "../../redux/reducers/popups/PopupsReducer";
 import {useDispatch} from "react-redux";
 import Sounds, {soundsType} from "../../utils/Sounds";
 import Logo from "../../common/Logo/Logo";
+import TextWithoutShadow from "../../common/Text/TextWithoutShadow";
 
 const AuthScreen = () => {
 
@@ -69,6 +70,9 @@ const AuthScreen = () => {
                                                                      center>Register</Text></RegisterBtn>
                         <GoogleAuth />
                     </ButtonContainer>
+                    {process.env.APP_TYPE === 'development' &&
+                        <TextPlatform blod small color={'#fff'}>{process.env.APP_TYPE}</TextPlatform>
+                    }
                 </AuthContainer>
             </TouchableWithoutFeedback>
         </BackgroundWrapper>
@@ -76,6 +80,7 @@ const AuthScreen = () => {
 }
 
 const AuthContainer = styled.View`
+  position: relative;
   flex: 1;
   display: flex;
   align-items: center;
@@ -113,6 +118,12 @@ const RegisterBtn = styled.TouchableOpacity`
   border: 1px solid #000;
   width: 80%;
   height: 40px;
+`
+
+const TextPlatform = styled(TextWithoutShadow)`
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
 `
 
 export default AuthScreen

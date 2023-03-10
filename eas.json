@@ -21,6 +21,9 @@
     "production": {
       "channel": "production",
       "autoIncrement": true,
+      "env": {
+        "APP_ENV": "production"
+      },
       "ios":{
         "resourceClass": "m1-medium"
       },
