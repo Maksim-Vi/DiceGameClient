@@ -14,6 +14,7 @@ export let websocket;
 
 let reconnectTimeout = null;
 let reconnecting = false;
+let leaveWebsocket = false;
 
 let reconnectFailedCount = 0;
 let reconnectFailed = false;
@@ -55,6 +56,7 @@ export const openServerConnection = () => {
 function openWSHandler() {
     console.log('open connection to server')
     store.dispatch(setLoaded(true))
+    leaveWebsocket = false
     reconnecting = false;
     reconnectFailed = false;
     reconnectFailedCount = 0
@@ -98,7 +100,7 @@ function reconnectWebsocket() {
     clearTimeout(reconnectTimeout);
 
     reconnectTimeout = setTimeout (() => {
-        if (reconnecting) {
+        if (websocket && reconnecting && !leaveWebsocket) {
             websocket = null;
             openServerConnection();
         }
@@ -107,12 +109,14 @@ function reconnectWebsocket() {
 
 export const closeWebsocletAfterLeaveGame = () =>{
     if (websocket) {
+        websocket.close();
+
+        leaveWebsocket = true
         reconnecting = true
         reconnectFailed = false
+        websocket = null;
         reconnectFailedCount = 0
         store.dispatch(setClientIdWebsocket(null))
-
-        websocket.close();
     }
 }
 
@@ -124,7 +128,7 @@ const sendErrorConnectionMessage = () =>{
         store.dispatch(setClientIdWebsocket(null))
         transitionState('AuthScreen')
         store.dispatch(setInfoPopup({visible: true, data: {text: 'Oops, Sorry! game is rebooted please try to connect later!'}}))
-    } else if(!selectBadConnection(store.getState())){
+    } else if(!selectBadConnection(store.getState()) && !leaveWebsocket){
         store.dispatch(setBadConnectionWS(true))
     }
 }

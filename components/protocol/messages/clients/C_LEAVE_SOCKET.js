@@ -31,11 +31,8 @@ export default class C_LEAVE_SOCKET {
             id: this.id,
             username: this.username
         })
-
-        window.chatManager.clearAllChanels()
-        store.dispatch(setClientIdWebsocket(null))
-
         closeWebsocletAfterLeaveGame()
+        window.chatManager.clearAllChanels()
     }
 
     getUserData = () => {
