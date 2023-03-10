@@ -15,7 +15,7 @@ const BGTabs = styled.ImageBackground`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 300px;
+  width: 320px;
   height: 60px;
 `
 

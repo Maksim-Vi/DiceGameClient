@@ -20,7 +20,7 @@ const ButtonWithText = (props) => {
                     disabled={props.disabled || false}
                     onPress={btnClickHendler}
                     activeOpacity={0.9}>
-            <Text setShadow={true} small heavy color='#fff' center>{props.text}</Text>
+            <Text setShadow={true} small blod color='#fff' center>{props.text}</Text>
         </CollectBtn>
     )
 }

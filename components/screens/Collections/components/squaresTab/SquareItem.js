@@ -100,7 +100,7 @@ const SaleContainer = styled.View`
   text-align: center;
   position: absolute;
   top: -20px;
-  right: -20px;
+  right: -5px;
   z-index: 1;
 `
 const SaleImg = styled.Image`

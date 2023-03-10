@@ -22,9 +22,9 @@ const GameWithOpponent = (props) => {
                              activeOpacity={0.9}
                             //style={{ borderBottomWidth: 8 }}
           >
-            <TextCont numberOfLines={1} setShadow={true} madium heavy color={'#ff9d4d'} center>{props.tap_to_play}</TextCont>
+            <TextCont numberOfLines={1} setShadow={true} madium blod color={'#ff9d4d'} center>{props.tap_to_play}</TextCont>
             <GameImage source={gameIcon} resizeMode={'contain'}/>
-            <TextCont numberOfLines={2} setShadow={true} fontSize={16} heavy color={'#ff9d4d'} center>{props.fightOpp}</TextCont>
+            <TextCont numberOfLines={2} setShadow={true} fontSize={16} blod color={'#ff9d4d'} center>{props.fightOpp}</TextCont>
           </OpponentContainer>
       </BG>
   );
@@ -33,7 +33,7 @@ const GameWithOpponent = (props) => {
 const BG = styled.ImageBackground`
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   width: 100%;
   height: 100%;
 `
@@ -43,15 +43,15 @@ const OpponentContainer = styled.TouchableOpacity`
   align-items: center;
   justify-content: flex-start;
   width: 100%;
-  height: 100%;
+  height: 90%;
   border-radius: 20px;
-  margin-top: 20px;
+  margin-top: 10px;
   padding: 0 50px;
 `
 const GameImage = styled.Image`
-  width: 100px;
-  height: 100px;
-  margin: 15px auto;
+  width: 130px;
+  height: 130px;
+  margin: 20px;
 `
 const TextCont = styled(Text)`
 

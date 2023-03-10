@@ -23,7 +23,7 @@ const RewardsPopup = props => {
     const getTitleByType = () =>{
         switch (tab) {
             case 'sevenDays': return <BackgroundTitle title={props.dailyTitle}/>
-            case 'def': return <BackgroundTitle title={'def'}/>
+            case 'DailyRewards': return <BackgroundTitle title={'Daily Rewards'}/>
             default: return null
         }
     }
@@ -35,7 +35,9 @@ const RewardsPopup = props => {
     const getContentByType = () =>{
         switch (tab) {
             case 'sevenDays': return <RewardSevenDays />
-            case 'def': return <SlideScreen left={true}><Text>def</Text></SlideScreen>
+            case 'DailyRewards': return <SlideScreen left={true}>
+                <Text>Daily Rewards</Text>
+            </SlideScreen>
             default: return null
         }
     }

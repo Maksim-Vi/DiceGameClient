@@ -11,13 +11,13 @@ const RewardTabs = (props) => {
             <Tab isActive={props.tab === 'sevenDays'}
                  nameTab={'sevenDays'}
                  image={sevenDaysImg}
-                 text={'Rewards'}
+                 text={'7 days Rewards'}
                  changeTab={props.changeTab}/>
 
-            <Tab isActive={props.tab === 'def'}
-                 nameTab={'def'}
+            <Tab isActive={props.tab === 'DailyRewards'}
+                 nameTab={'DailyRewards'}
                  image={defImage}
-                 text={'def'}
+                 text={'Daily Rewards'}
                  changeTab={props.changeTab}/>
 
         </RewardsTabsContainer>

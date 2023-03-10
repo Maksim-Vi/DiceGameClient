@@ -21,7 +21,7 @@ const ButtonImage = (props) => {
                 textShadowColor: 'rgba(0, 0, 0, 0.5)',
                 textShadowOffset: {width: -1, height: 1},
                 textShadowRadius: 1
-            }} small heavy color='#fff' center>{props.text}</TextBtn>}
+            }} small blod color='#fff' center>{props.text}</TextBtn>}
         </CollectBtn>
     )
 }

@@ -8,7 +8,7 @@ import {gameListData} from "../utils";
 
 const {width} = Dimensions.get('window');
 const ITEM_SIZE_W = width ? (width / 2) - 10 : 150;
-const ITEM_SIZE_H = 230;
+const ITEM_SIZE_H = 280;
 const EMPTY_ITEM_SIZE = (width - ITEM_SIZE_W) / 2;
 
 const GameList = props => {
@@ -29,7 +29,7 @@ const GameList = props => {
 
         const scale = scrollX.interpolate({
             inputRange,
-            outputRange: [0.8, 1.2, 0.8],
+            outputRange: [0.7, 1, 0.7],
             extrapolate: 'clamp',
         });
 
