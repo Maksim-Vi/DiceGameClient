@@ -4,6 +4,7 @@ import Modal from "react-native-modal";
 import DefaultBG from './ModalBackgrounds/DefaultBG';
 import Close from '../Buttons/Close/Close';
 import {Platform, StatusBar, useWindowDimensions} from 'react-native';
+import {PresentationStyle} from "react-native-modal/dist/types";
 
 const ModalWrapper = (props) => {
    
@@ -32,6 +33,8 @@ const ModalWrapper = (props) => {
                deviceWidth={Platform.OS === "ios" ? useWindowDimensions().width : useWindowDimensions().width + StatusBar.currentHeight * 2}
                deviceHeight={Platform.OS === "ios" ? useWindowDimensions().height : useWindowDimensions().height + StatusBar.currentHeight * 2}
                statusBarTranslucent
+               hardwareAccelerated={false}
+               PresentationStyle={'overFullScreen'}
                onSwipeComplete={() => setModalVisible(false)}
                swipeDirection={swipe ? swipe : null}
                isVisible={modalVisible}>

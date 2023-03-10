@@ -16,6 +16,9 @@
     "androidStatusBar": {
       "hidden": true
     },
+    "androidNavigationBar": {
+      "visible": "immersive"
+    },
     "updates": {
       "fallbackToCacheTimeout": 0,
       "url": "https://u.expo.dev/a5e5cb05-164b-405b-9ee0-6e83cf5f8084"

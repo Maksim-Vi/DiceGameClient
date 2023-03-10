@@ -7,11 +7,10 @@ import {connect, useDispatch} from "react-redux";
 import styled from "styled-components";
 import BackgroundTabs from "./components/Backgrounds/BackgroundTabs";
 import BackgroundTitle from "./components/Backgrounds/BackgroundTitle";
-import {selectIsFinishedSevenDays, selectSevenDaysGifts} from "../../../../redux/reducers/gifts/GiftsReducer";
+import {selectIsFinishedSevenDays} from "../../../../redux/reducers/gifts/GiftsReducer";
 import {selectDefaultParams, selectTranslation} from "../../../../redux/reducers/language/LanguageReducer";
 import RewardSevenDays from "./SevenDays/RewardSevenDays";
 import RewardTabs from "./components/Tabs/RewardTabs";
-import {store} from "../../../../redux/redux-store";
 import defaultParams from "../../../../redux/reducers/language/defaultParams";
 import Text from "../../../../common/Text/Text";
 import SlideScreen from "../../../../common/AnimationScreens/SlideScreen";
@@ -54,7 +53,7 @@ const RewardsPopup = props => {
 
     return (
         <ModalWrapper modalBG={'bg_black'} modalVisible={true} >
-            <ButtonBack top={'-5px'} left={'-2px'} leaveGame={leave} colorIcon={'#fefefe'}/>
+            <ButtonBack top={'0px'} left={'0px'} leaveGame={leave} colorIcon={'#fefefe'}/>
 
             <RewardsContainer>
                 <RewardTabs tab={tab} changeTab={changeTab}/>

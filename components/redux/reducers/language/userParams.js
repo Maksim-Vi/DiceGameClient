@@ -1,0 +1,3 @@
+export default {
+    USER_TUTORIAL_FINISH: 'USER_TUTORIAL_FINISH',
+}

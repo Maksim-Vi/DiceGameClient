@@ -1,10 +1,12 @@
 import {createSlice} from '@reduxjs/toolkit';
 import defaultTranslation from "./defaultTranslation";
 import defaultParams from "./defaultParams";
+import userParams from "./userParams";
 
 let initialState = {
     translations: defaultTranslation,
     params: defaultParams,
+    userParams: userParams,
     sound: true,
 }
 
@@ -36,13 +38,25 @@ export const languageReducerSlice = createSlice({
 
             state.params = paramObj
         },
+        setAllUserParams: (state,action) =>{
+            let paramObj = {}
+            Object.entries(state.userParams).forEach(([key, value])=>{
+                if(typeof action.payload[key] === 'boolean'){
+                    paramObj[key] = action.payload[key]
+                } else {
+                    paramObj[key] = value
+                }
+            })
+
+            state.userParams = paramObj
+        },
         setSoundInfo: (state,action) =>{
             state.sound = action.payload
         }
     },
 });
 
-export const {setAllTranslations,setAllDefaultParams, setSoundInfo} = languageReducerSlice.actions;
+export const {setAllTranslations,setAllDefaultParams,setAllUserParams, setSoundInfo} = languageReducerSlice.actions;
 
 export const selectTranslation = (state, param) => {
     const getTranslationByParam = () =>{
@@ -78,6 +92,24 @@ export const selectDefaultParams = (state, param) => {
     }
 
     return getDefaultParamsByParam()
+};
+
+export const selectUserParams = (state, param) => {
+    const getUserParamsByParam = () =>{
+        if(param && typeof state.language.userParams[param] === 'boolean'){
+            return state.language.userParams[param]
+        }
+        return getUserByParam()
+    }
+
+    const getUserByParam = () =>{
+        if(param && userParams[param]){
+            return userParams[param]
+        }
+        return typeof param === 'boolean' ? param : false
+    }
+
+    return getUserParamsByParam()
 };
 
 export const selectSoundsInfo = state => state.language.sound;

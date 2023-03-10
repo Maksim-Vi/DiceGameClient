@@ -12,7 +12,7 @@ import {
     selectLostConnOpponentPopup, selectRewardsPopup,
     selectSettingsPopup,
     selectSevenDaysGiftPopup,
-    selectTestBtnsPopup
+    selectTestBtnsPopup, selectTutorialPopup
 } from '../../redux/reducers/popups/PopupsReducer'
 import AvatarPopups from './popupsComponents/AvatarPopups'
 import {StatusBar} from "react-native";
@@ -29,6 +29,7 @@ import BotTypeGame from "./popupsComponents/Game/BotTypeGame";
 import {selectRestoreGame} from "../../redux/reducers/game/GameReducer";
 import RewardsPopup from "./popupsComponents/Rewards/RewardsPopup";
 import DeleteAccount from "./popupsComponents/DeleteAccount/DeleteAccount";
+import TutorialPopup from "./popupsComponents/Tutorial/TutorialPopup";
 
 const PopupsManager = (props) => {
 
@@ -37,7 +38,8 @@ const PopupsManager = (props) => {
     const renderSevenDays = () =>{
         if( props.sevenDaysPopup.visible &&
             (props.activeTabApp === 'App' || props.activeTabApp === 'MainScreen') &&
-            !isRestoreGame
+            !isRestoreGame &&
+            !props.tutorialPopup.visible
         ){
             return <SevenDaysGift />
         }
@@ -54,6 +56,7 @@ const PopupsManager = (props) => {
                 (props.activeTabApp === 'App' || props.activeTabApp === 'MainScreen') &&
                 <LevelUpPopup/>
             }
+            {props.tutorialPopup.visible && <TutorialPopup />}
             { renderSevenDays() }
             {props.infoPopup.visible && <InfoPopups />}
             {props.googleConfirmUsernamePopup.visible && <ChangeUserNameGoogle />}
@@ -91,6 +94,7 @@ const mapStateToProps = (state) => ({
     botGameTypesPopup: selectBotGameTypesPopup(state),
     rewardsPopup: selectRewardsPopup(state),
     deleteAccountPopup: selectDeleteAccountPopup(state),
+    tutorialPopup: selectTutorialPopup(state),
 });
 
 export default connect(mapStateToProps)(PopupsManager);

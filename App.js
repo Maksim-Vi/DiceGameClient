@@ -9,7 +9,7 @@ import {useFonts} from 'expo-font';
 import PopupsManager from './components/managers/popupsManager/PopupsManager';
 import NoConnection from "./components/common/NoConnection/NoConnection";
 import * as NavigationBar from 'expo-navigation-bar';
-import {StatusBar} from "react-native";
+import {Platform, StatusBar} from "react-native";
 
 export default function App() {
 
@@ -29,7 +29,9 @@ export default function App() {
     }
 
     useEffect(()=>{
-        AndroidSoftwareNavHidden()
+        if(Platform.OS === 'android'){
+            AndroidSoftwareNavHidden()
+        }
     },[])
 
     if (!fontsLoaded) return null;

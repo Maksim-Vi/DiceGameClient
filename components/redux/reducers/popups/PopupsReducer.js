@@ -7,6 +7,7 @@ let initialState = {
    lvlUpPopup: {visible: false, data: null},
    sevenDaysGift: {visible: false, data: null},
    infoPopup: {visible: false, data: null},
+   tutorialPopup: {visible: false, data: null},
    googleConfirmUsernamePopup: {visible: false, data: null},
    lostConnOpponentGame: {visible: false, data: null},
    collectItemPopup: {visible: false, data: null},
@@ -37,6 +38,9 @@ export const popupsReducerSlice = createSlice({
     setInfoPopup: (state, action) =>{
       state.infoPopup = action.payload
     },
+    setTutorialPopup: (state, action) =>{
+      state.tutorialPopup = action.payload
+    },
     setGoogleConfirmUsernamePopup: (state, action) =>{
       state.googleConfirmUsernamePopup = action.payload
     },
@@ -61,6 +65,7 @@ export const popupsReducerSlice = createSlice({
 export const {
     setTestBtnsPopup,
     setBotGameTypesPopup,
+    setTutorialPopup,
     setLevelUpPopup,
     setAvatarPopup,
     setSettingsMenuPopup,
@@ -79,6 +84,7 @@ export const selectSettingsPopup = state => state.popups.settingsPopup;
 export const selectTestBtnsPopup = state => state.popups.testBtnsPopup;
 export const selectSevenDaysGiftPopup = state => state.popups.sevenDaysGift;
 export const selectInfoPopup = state => state.popups.infoPopup;
+export const selectTutorialPopup = state => state.popups.tutorialPopup;
 export const selectGoogleConfirmUsernamePopup = state => state.popups.googleConfirmUsernamePopup;
 export const selectLostConnOpponentPopup = state => state.popups.lostConnOpponentGame;
 export const selectCollectItemPopup = state => state.popups.collectItemPopup;

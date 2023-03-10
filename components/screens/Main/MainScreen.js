@@ -7,14 +7,15 @@ import {connect, useDispatch, useSelector} from 'react-redux'
 import FreeGift from "./components/FreeGift";
 import OnlineUsers from "./components/OnlineUsers";
 import {transitionState} from "../../utils/utils";
-import {selectDefaultParams} from "../../redux/reducers/language/LanguageReducer";
+import {selectDefaultParams, selectUserParams} from "../../redux/reducers/language/LanguageReducer";
 import defaultParams from "../../redux/reducers/language/defaultParams";
 import {selectRestoreGame, setIsGameStarted} from "../../redux/reducers/game/GameReducer";
 import {store} from "../../redux/redux-store";
 import {selectMyUser} from "../../redux/reducers/players/PlayersReducer";
 import GameList from "./components/GameList/List/GameList";
 import Text from "../../common/Text/Text";
-import {setTestBtnsPopup} from "../../redux/reducers/popups/PopupsReducer";
+import {setTestBtnsPopup, setTutorialPopup} from "../../redux/reducers/popups/PopupsReducer";
+import userParams from "../../redux/reducers/language/userParams";
 
 const MainScreen = (props) => {
 
@@ -41,6 +42,9 @@ const MainScreen = (props) => {
     },[isRestoreGame])
 
     useEffect( ()=>{
+        if(props.params.ENABLE_TUTORIAL && !props.params.isShowTutorial){
+            dispatch(setTutorialPopup({visible: true, data: null}))
+        }
         if(!window.chatManager.chat.channels['general']){
             window.chatManager.connectionToChatRoom('general')
         }
@@ -94,6 +98,8 @@ const Test = styled.TouchableOpacity`
 const mapStateToProps = (state) => ({
     params:{
         ENABLE_AD_PLUGIN: selectDefaultParams(state, defaultParams.ENABLE_AD_PLUGIN),
+        ENABLE_TUTORIAL: selectDefaultParams(state, defaultParams.ENABLE_TUTORIAL),
+        isShowTutorial: selectUserParams(state, userParams.USER_TUTORIAL_FINISH),
     }
 })
 
