@@ -5,11 +5,11 @@ import Text from '../../common/Text/Text'
 import {useNavigation} from '@react-navigation/native'
 import LoginScreen from './Login/LoginScreen'
 import {postLoginApi} from '../../protocol/API/API'
-import {Keyboard, Platform, TouchableWithoutFeedback} from 'react-native'
+import {Keyboard, TouchableWithoutFeedback} from 'react-native'
 import Divider from "../../common/Divider/Divider";
 import {useForm} from 'react-hook-form'
 import bag from '../../../assets/bg/main_bg.jpg'
-import logo from '../../../assets/common/logo.png'
+import appJSON from '../../../app.json'
 import GoogleAuth from "./Google/GoogleAuth";
 import {setInfoPopup} from "../../redux/reducers/popups/PopupsReducer";
 import {useDispatch} from "react-redux";
@@ -47,6 +47,15 @@ const AuthScreen = () => {
         }
     }
 
+    const getDevType = () =>{
+       return process.env.APP_TYPE === 'development'
+           ? process.env.APP_TYPE + ':game version:'
+           : 'game version:'
+    }
+    const getVersion = () =>{
+        return appJSON.expo.version
+    }
+
     const handlerRegister = () => {
         Sounds.loadAndPlayFile(soundsType.click2)
         navigation.navigate('RegisterScreen')
@@ -70,9 +79,11 @@ const AuthScreen = () => {
                                                                      center>Register</Text></RegisterBtn>
                         <GoogleAuth />
                     </ButtonContainer>
-                    {process.env.APP_TYPE === 'development' &&
-                        <TextPlatform blod small color={'#fff'}>{process.env.APP_TYPE}</TextPlatform>
-                    }
+
+                        <TextPlatform blod small color={'#fff'}>
+                            {getDevType()}{getVersion()}
+                        </TextPlatform>
+
                 </AuthContainer>
             </TouchableWithoutFeedback>
         </BackgroundWrapper>
