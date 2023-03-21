@@ -26,7 +26,7 @@ const BotTypeGame = props => {
     }
 
     return (
-        <ModalWrapper modalBG={'default'} height={height / 3.5} modalVisible={true} setModalVisible={close}>
+        <ModalWrapper modalBG={'default'} height={height / 3} modalVisible={true} setModalVisible={close}>
             <Container>
                 <Text numberOfLines={1} setShadow={true} large heavy color={'#ffffff'} center>Select type game</Text>
                 <BotTypeGameContainer>
@@ -53,7 +53,7 @@ const Container = styled.View`
   margin: 10px;
   padding: 10px;
   width: 100%;
-  height: 100%;
+  height: 90%;
 `
 
 const BotTypeGameContainer = styled.View`
@@ -83,7 +83,7 @@ const MediumGame = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
   flex: 0 1 31%;
-  height: 60%;
+  height: 50%;
   border-radius: 20px;
   background-color: #ffefb1;
   border: 2px solid #ed9f39;
@@ -93,7 +93,7 @@ const HardGame = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
   flex: 0 1 31%;
-  height: 60%;
+  height: 50%;
   border-radius: 20px;
   background-color: #ffefb1;
   border: 2px solid #ed9f39;
