@@ -12,7 +12,7 @@ import defaultTranslation from "../../../redux/reducers/language/defaultTranslat
 
 const InfoPopups = () => {
 
-    const {height} = useWindowDimensions()
+    const {width, height} = useWindowDimensions()
     const dispatch = useDispatch()
     const info = useSelector(state=> selectInfoPopup(state))
     const close = useSelector(state=> selectTranslation(state, defaultTranslation.TR_CLOSE))
@@ -25,7 +25,7 @@ const InfoPopups = () => {
         <ModalWrapper modalBG={'default'} height={height / 3} modalVisible={true}>
             {info.data.title && <TextTitle title blod center color={'#fefefe'}>{info.data.title}</TextTitle>}
             <InfoContainer>
-                <TextContainer>
+                <TextContainer style={{borderBottomWidth: 3}}>
                     <Text setShadow={true} large blod center color={'#fefefe'}>{info.data.text || 'coming soon'}</Text>
                 </TextContainer>
                 <ButtonWithText  width={'80%'}
@@ -51,6 +51,7 @@ const TextContainer = styled.View`
   align-items: center;
   justify-content: center;
   text-align: center;
+  border: 1px solid rgba(101, 65, 56, 0.8);
   background-color: rgba(145, 93, 82, 0.8);
   border-radius: 20px;
   width: 100%;

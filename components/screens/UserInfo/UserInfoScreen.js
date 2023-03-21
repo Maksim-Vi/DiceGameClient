@@ -17,6 +17,7 @@ import {Platform} from "react-native";
 import {selectTranslation} from "../../redux/reducers/language/LanguageReducer";
 import defaultTranslation from "../../redux/reducers/language/defaultTranslation";
 import {getIosModel} from "../../utils/utils";
+import bgTitle from "../../../assets/bg/title_info_text_BG.png";
 
 const UserInfoScreen = (props) => {
 
@@ -33,7 +34,9 @@ const UserInfoScreen = (props) => {
 
             <UserInfoContainer>
                 <ProfileTitle>
-                    <Text setShadow={true} large blod center>{props.profile}</Text>
+                    <TitleBG source={bgTitle} resizeMode={'stretch'}>
+                        <Text setShadow={true} large blod center>{props.profile}</Text>
+                    </TitleBG>
                 </ProfileTitle>
 
                 <ProfileAvatarInfo>
@@ -82,12 +85,19 @@ const ProfileTitle = styled.View`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  width: 70%;
-  height: 40px;
-  background-color: #2281ce;
-  border-radius: 20px;
-  border: 3px solid #2b4b8d;
+  width: 80%;
+  height: 50px;
 `
+
+const TitleBG = styled.ImageBackground`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+`
+
 
 const ProfileAvatarInfo = styled.View`
   display: flex;

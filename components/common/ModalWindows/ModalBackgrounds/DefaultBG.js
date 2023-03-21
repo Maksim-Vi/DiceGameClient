@@ -1,20 +1,21 @@
 import React from 'react'
 import styled from 'styled-components'
+import bgTitle from "../../../../assets/modal/popup_bg.png";
 
 const DefaultBG = (props) =>{
-    return <Container {...props}>
-        {props.children}
-    </Container>
+    return (
+        <ContainerBG {...props} source={bgTitle} resizeMode={'stretch'}>
+            {props.children}
+        </ContainerBG>
+    )
 }
 
-const Container = styled.View`
+const ContainerBG = styled.ImageBackground`
   display: flex;
   align-items: center;
-  background-color: #f6dcb9;
-  border: 5px solid #b5491d;
-  border-radius: 20px;
   width: ${(props) =>  props.width ? `${Math.floor(props.width)}px`  : '100%'};
   height: ${(props) =>  props.height ? `${Math.floor(props.height)}px` : '50%'};
+
 `
 
 export default DefaultBG
