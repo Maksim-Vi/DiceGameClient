@@ -164,20 +164,21 @@ const ModalChildrenBuy = (props) => {
         if(props.openItem.isSale !== 'true') return null
 
         return <SaleContainer>
-            {/*<TextSale large blod center color={'#9a1515'} style={{transform: [{rotate: '-60deg'}]}}>sale</TextSale>*/}
             <SaleImg source={sale} />
         </SaleContainer>
     }
 
     const getItemImgByType = () =>{
-        if(props.type === 'dices'){
-            return getCollectionDiceImg(props.openItem, props.openItem.sortIndex)
-        }
+        if(props.openItem){
+            if(props.type === 'dices'){
+                return getCollectionDiceImg(props.openItem, props.openItem.sortIndex)
+            }
 
-        return getCollectionSquareImg(props.openItem, props.openItem.sortIndex)
+            return getCollectionSquareImg(props.openItem, props.openItem.sortIndex)
+        }
     }
 
-    if(!props.openItem) return null
+   // if(!props.openItem) return null
 
     return (
         <BuyContainer>

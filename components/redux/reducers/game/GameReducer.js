@@ -8,7 +8,6 @@ let initialState = {
   gameSettings: null,
   isStarted: false,
   youMove: false,
-  activeThrowBtn: false,
   throwData: null,
   opponentThrowData: null,
   scores: {userId: null, username: null, userScores:null, opponentsScores:null},
@@ -41,9 +40,6 @@ export const gameReducerSlice = createSlice({
     setIsYouMove: (state, action) =>{
       state.youMove = action.payload
     },
-    setActiveThrowBtn: (state, action) =>{
-      state.activeThrowBtn = action.payload
-    },
     setThrowData: (state, action) =>{
       state.throwData = action.payload
     },
@@ -67,7 +63,7 @@ export const gameReducerSlice = createSlice({
 
 export const {
   setCarrentGameId,setDifficultGame, setGame,setRestoreGame, setGameSettings,setIsGameStarted,
-  setIsYouMove,setActiveThrowBtn, setThrowData, setOpponentThrowData,
+  setIsYouMove, setThrowData, setOpponentThrowData,
   setScores,setCountScores, resetScores, setResultGame
 } = gameReducerSlice.actions;
 
@@ -76,7 +72,6 @@ export const selectDifficultGame = state => state.games.difficultGame;
 export const selectGame = state => state.games.game;
 export const selectRestoreGame = state => state.games.restoreGame;
 export const selectGameSettings = state => state.games.gameSettings;
-export const selectActiveThrowBtn = state => state.games.activeThrowBtn;
 export const selectIsYouMove = state => state.games.youMove;
 export const selectThrowData = state => state.games.throwData;
 export const selectOpponentThrowData = state => state.games.opponentThrowData;

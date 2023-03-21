@@ -86,7 +86,9 @@ const CollectButton = ({item,isActive,isSale,isLocked,isCollected,setModalVisibl
 
     const clickHandler = () =>{
         Sounds.loadAndPlayFile(soundsType.click2)
-        setModalVisible(true,item)
+        if(item){
+            setModalVisible(true,item)
+        }
     }
 
     return (

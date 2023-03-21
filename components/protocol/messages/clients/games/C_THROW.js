@@ -2,6 +2,7 @@ import { selectClientIdWebsocket } from "../../../../redux/reducers/Websocket/We
 import { store } from "../../../../redux/redux-store"
 import { sendMessageWS } from "../../../websocet"
 import {isProduction} from "../../../../utils/utils";
+import GameModel from "../../../../games/GameModel/GameModel";
 
 export default class C_THROW {
     constructor(userId, username, gameId){

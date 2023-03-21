@@ -1,6 +1,7 @@
 import { setGame, setGameSettings } from "../../../../redux/reducers/game/GameReducer"
 import { store } from "../../../../redux/redux-store"
 import {isProduction} from "../../../../utils/utils";
+import GameModel from "../../../../games/GameModel/GameModel";
 
 export default class S_GAME_SETTINGS {
     constructor(currentGame,gameSettings){
@@ -20,6 +21,7 @@ export default class S_GAME_SETTINGS {
     }
 
     exec() {
+        GameModel.setGameData(this.gameSettings,this.currentGame)
         store.dispatch(setGame(this.currentGame))
         store.dispatch(setGameSettings(this.gameSettings))
     }

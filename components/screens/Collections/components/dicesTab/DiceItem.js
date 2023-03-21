@@ -32,7 +32,6 @@ const DiceItem = ({diceItem, isActive, isLocked, isSale, isCollected, setModalVi
         if (!isSale) return null
 
         return <SaleContainer>
-            {/*<TextSale large blod center color={'#9a1515'} style={{transform: [{rotate: '-60deg'}]}}>sale</TextSale>*/}
             <SaleImg source={sale}/>
         </SaleContainer>
     }
@@ -40,36 +39,6 @@ const DiceItem = ({diceItem, isActive, isLocked, isSale, isCollected, setModalVi
     useEffect(() => {
         showPlaceAnim()
     }, [])
-
-    /* return (
-         <DiceCard width={width} height={height} style={{
-             borderBottomWidth: 8,
-             opacity: showPlace.current.interpolate({
-                 inputRange: [0, 1],
-                 outputRange: [0, 1],
-             }),
-             transform: [
-                 {
-                     scale: showPlace.current.interpolate({
-                         inputRange: [0, 1],
-                         outputRange: [0, 1]
-                     })
-                 }
-             ],
-         }}>
-             {renderLockedBG()}
-             {renderSaleLabel()}
-
-             <DiceImage source={getCollectionDiceImg(diceItem, diceItem.sortIndex)}/>
-             <Text center>{diceItem.name}</Text>
-             <CollectButton item={diceItem}
-                            setModalVisible={setModalVisible}
-                            isActive={isActive}
-                            isSale={isSale}
-                            isLocked={isLocked}
-                            isCollected={isCollected}/>
-         </DiceCard>
-     );*/
 
     return (
         <DiceCard style={{

@@ -4,6 +4,7 @@ import {store} from "../redux/redux-store";
 import {setActiveTabApp} from "../redux/reducers/Websocket/WebsocketReducer";
 import DeviceInfo from "react-native-device-info";
 import {Platform} from "react-native";
+import GameModel from "../games/GameModel/GameModel";
 
 export const isProduction = () =>{
     //return process.env.APP_TYPE === 'production'
@@ -88,8 +89,8 @@ export const getResultScreenData = () =>{
     return  {
         gameId: 13234241,
         players: [
-        {id: myUser.id, username: myUser.username, avatar: myUser.avatar, side: 0, activeItems: 0, inGame: true},
-        {id: 66, username: 'Tetris', avatar: 5, side: 1, activeItems: 0, inGame: true}
+        {id: myUser.id, username: myUser.username, avatar: myUser.avatar, side: 0, activeItems: {square: 1004, dice: 2}, inGame: true},
+        {id: 66, username: 'Tetris', avatar: 5, side: 1, activeItems: {square: 1008, dice: 5}, inGame: true}
         ],
         userResultItems:{
             scores: 80,
@@ -107,7 +108,8 @@ export const getResultScreenData = () =>{
 }
 
 export const getStartGameData = () =>{
-    return  {
+    const myUser = selectMyUser(store.getState())
+    const data = {
         isStarted:true,
         gameSettings:{
             gameId:"70aa11c2-1e15-4a0f-892e-c85585e6c47a",
@@ -118,20 +120,18 @@ export const getStartGameData = () =>{
             players:[
                 {
                     id:123456789,
-                    username:"Bot",
+                    username:"TEST user",
                     avatar:3,
+                    activeItems: {square: 1008, dice: 5},
                     inGame:true,
                     side:1
                 },
                 {
-                    id:6,
-                    username:"Max",
+                    id: myUser.id,
+                    username: myUser.username,
                     avatar: "3",
                     side:2,
-                    activeItems:{
-                        dice:2,
-                        square:11
-                    },
+                    activeItems: {square: 1012, dice: 7},
                     inGame:true
                 }
             ],
@@ -142,7 +142,12 @@ export const getStartGameData = () =>{
             player1:[0,0,0,0,0,0,0,0,0],
             player2:[0,0,0,0,0,0,0,0,0]
         }
-    } 
+    }
+
+    GameModel.setGameData(data.gameSettings,data)
+    GameModel.setGameStarted(true, true, 1000)
+
+    return data
 }
 
 export const getCurrentData = () =>{

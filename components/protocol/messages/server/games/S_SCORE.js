@@ -3,6 +3,7 @@ import {setOpponentThrowData, setScores, setThrowData} from "../../../../redux/r
 import { store } from "../../../../redux/redux-store"
 import {selectMyUser} from "../../../../redux/reducers/players/PlayersReducer";
 import {isProduction} from "../../../../utils/utils";
+import GameModel from "../../../../games/GameModel/GameModel";
 
 export default class S_SCORE {
     constructor(userId, username, userScores, opponentsScores){
@@ -32,6 +33,8 @@ export default class S_SCORE {
             store.dispatch(setThrowData(null))
         }
         store.dispatch(setScores({userId: this.userId, username: this.username, userScores: this.userScores, opponentsScores: this.opponentsScores}))
+
+        GameModel.setScores(this.userScores,this.opponentsScores)
     }
 
     selectUserData = () =>{

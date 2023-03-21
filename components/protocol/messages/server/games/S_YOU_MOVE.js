@@ -1,7 +1,8 @@
 
-import { setIsYouMove, setActiveThrowBtn } from "../../../../redux/reducers/game/GameReducer"
+import { setIsYouMove } from "../../../../redux/reducers/game/GameReducer"
 import { store } from "../../../../redux/redux-store"
 import {isProduction} from "../../../../utils/utils";
+import GameModel from "../../../../games/GameModel/GameModel";
 
 export default class S_YOU_MOVE {
     constructor(gameId){
@@ -21,7 +22,8 @@ export default class S_YOU_MOVE {
 
     exec() {
        store.dispatch(setIsYouMove(true))
-       store.dispatch(setActiveThrowBtn(true))
+
+       GameModel.setIsYouMove(true)
     }
 
 	getLogText() {

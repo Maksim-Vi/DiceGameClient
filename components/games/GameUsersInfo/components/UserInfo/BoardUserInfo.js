@@ -8,7 +8,7 @@ import TextWithoutShadow from "../../../../common/Text/TextWithoutShadow";
 
 const BoardUserInfo = (props) => {
 
-    const {width,height} = useWindowDimensions()
+    const {width} = useWindowDimensions()
     const showAvatar = React.useRef(new Animated.Value(0)).current;
 
     const startAnimation = () =>{
@@ -58,22 +58,22 @@ const BoardAvatarContainer = styled(Animated.View)`
   align-items: center;
   ${(props) => {
     if (props.width <= 400) {
-      return `
+        return `
           width: 50px;
           height: 50px;
         `
     } else if (props.width > 400 && props.width <= 550) {
-      return `
+        return `
           width: 70px;
           height: 70px;
         `
     } else if (props.width > 550) {
-      return `
+        return `
           width: 100px;
           height: 100px;
         `
     }
-  }}
+}}
 `
 
 const CountScores = styled(TextWithoutShadow)`
@@ -85,22 +85,22 @@ const CountContainer = styled.View`
   border: 2px solid #d6dbdd;
   ${(props) => {
     if (props.width <= 400) {
-      return `
+        return `
           margin-bottom: 10px;
           width: 60px;
         `
     } else if (props.width > 400 && props.width <= 550) {
-      return `
+        return `
           margin-bottom: 20px;
           width: 70px;
         `
     } else if (props.width > 550) {
-      return `
+        return `
           margin-bottom: 30px;
           width: 100px;
         `
     }
-  }}
+}}
 `
 const Name = styled(Text)`
 

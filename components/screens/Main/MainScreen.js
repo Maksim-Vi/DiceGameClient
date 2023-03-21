@@ -16,6 +16,7 @@ import GameList from "./components/GameList/List/GameList";
 import Text from "../../common/Text/Text";
 import {setTestBtnsPopup, setTutorialPopup} from "../../redux/reducers/popups/PopupsReducer";
 import userParams from "../../redux/reducers/language/userParams";
+import GameModel from "../../games/GameModel/GameModel";
 
 const MainScreen = (props) => {
 
@@ -25,10 +26,11 @@ const MainScreen = (props) => {
 
     const restoreGame = () =>{
         store.dispatch(setIsGameStarted(true))
+        GameModel.loadRestoreGameData()
 
         setTimeout(()=>{
             transitionState('GameScreen')
-        }, 500)
+        }, 1000)
     }
 
     const testBtnClick = () =>{

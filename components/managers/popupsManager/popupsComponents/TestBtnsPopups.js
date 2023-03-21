@@ -45,7 +45,7 @@ const TestBtnsPopups = () =>{
 
         dispatch(setIsGameStarted(true))
         //window.navigation.navigate('GameScreen')
-        transitionState('GameScreen')
+        //transitionState('GameScreen')
     }
 
     const handelLoadingProjectClick = () =>{

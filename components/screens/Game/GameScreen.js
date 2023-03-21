@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react'
 import BackgroundWrapper from '../../common/BackgroundWrapper/BackgroundWrapper'
 import styled from 'styled-components'
-import GameWrapper from '../../games/DiceGame/GameWrapper'
 import C_ABORDED_GAME from '../../protocol/messages/clients/games/C_ABORDED_GAME'
 import {store} from '../../redux/redux-store'
 import {selectCurrentGameId} from '../../redux/reducers/game/GameReducer'
-import {Ionicons} from '@expo/vector-icons'
 import back from "../../../assets/common/btns/button_page_back.png";
+import GameLoader from "../../games/GameLoader";
+import {transitionState} from "../../utils/utils";
 
 const GameScreen = () => {
 
@@ -16,6 +16,7 @@ const GameScreen = () => {
     const leaveGame = () => {
         if(isPress) return null
 
+      //transitionState('App')
         const leaveGameId = selectCurrentGameId(store.getState())
         if (leaveGameId) {
             new C_ABORDED_GAME(leaveGameId)
@@ -37,7 +38,7 @@ const GameScreen = () => {
                 <BackImg source={back} style={{transform: [{rotate: '-180deg'}]}}/>
             </GameBack>
             <GameWrap>
-                <GameWrapper/>
+                <GameLoader />
             </GameWrap>
         </BackgroundWrapper>
     )

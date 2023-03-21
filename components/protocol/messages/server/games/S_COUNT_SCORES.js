@@ -2,6 +2,7 @@
 import { setCountScores } from "../../../../redux/reducers/game/GameReducer"
 import { store } from "../../../../redux/redux-store"
 import {isProduction} from "../../../../utils/utils";
+import GameModel from "../../../../games/GameModel/GameModel";
 
 export default class S_COUNT_SCORES {
     constructor(scoresUser,scoresOpponent){
@@ -25,6 +26,8 @@ export default class S_COUNT_SCORES {
             scoresUser: this.scoresUser,
             scoresOpponent: this.scoresOpponent
         }))
+
+        GameModel.setUsersMaxScores(this.scoresUser,this.scoresOpponent)
     }
 
 	getLogText() {

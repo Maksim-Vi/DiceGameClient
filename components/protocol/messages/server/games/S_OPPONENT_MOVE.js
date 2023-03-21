@@ -2,6 +2,7 @@
 import { setIsYouMove } from "../../../../redux/reducers/game/GameReducer"
 import { store } from "../../../../redux/redux-store"
 import {isProduction} from "../../../../utils/utils";
+import GameModel from "../../../../games/GameModel/GameModel";
 
 export default class S_OPPONENT_MOVE {
     constructor(gameId){
@@ -21,6 +22,8 @@ export default class S_OPPONENT_MOVE {
 
     exec() {
         store.dispatch(setIsYouMove(false))
+
+        GameModel.setIsYouMove(false)
     }
 
 	getLogText() {

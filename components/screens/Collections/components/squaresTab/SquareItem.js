@@ -31,7 +31,6 @@ const SquareItem = ({squareItem,isActive,isLocked,isSale, isCollected, setModalV
         if(!isSale || isCollected) return null
 
         return <SaleContainer>
-            {/*<TextSale large blod center color={'#9a1515'} style={{transform: [{rotate: '-60deg'}]}}>sale</TextSale>*/}
             <SaleImg source={sale} />
         </SaleContainer>
     }

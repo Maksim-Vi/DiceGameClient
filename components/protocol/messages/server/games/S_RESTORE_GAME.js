@@ -1,5 +1,4 @@
 import {
-    setActiveThrowBtn,
     setCarrentGameId, setCountScores,
     setGame,
     setGameSettings, setIsYouMove, setOpponentThrowData,
@@ -37,10 +36,7 @@ export default class S_RESTORE_GAME {
         store.dispatch(setGameSettings(this.activeGame.gameSettings))
 
         if(this.username !== this.lastThrowUser){
-            store.dispatch(setActiveThrowBtn(true))
             store.dispatch(setIsYouMove(true))
-        } else {
-            store.dispatch(setActiveThrowBtn(false))
         }
 
         this.getScores()
@@ -79,8 +75,6 @@ export default class S_RESTORE_GAME {
 
     setThrowData = () =>{
         if(this.lastThrowData){
-            store.dispatch(setActiveThrowBtn(false))
-
             if(this.lastThrowData.username === this.username){
                 store.dispatch(setIsYouMove(true))
                 return store.dispatch(setThrowData({
