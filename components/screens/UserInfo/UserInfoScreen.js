@@ -13,7 +13,7 @@ import diamonds from '../../../assets/topPanel/diamond.png'
 import flash from '../../../assets/topPanel/flash.png'
 import lvl from '../../../assets/topPanel/star_lvl.png'
 import CardInfoLvl from "./components/CardInfoLvl";
-import {Platform} from "react-native";
+import {Platform, useWindowDimensions} from "react-native";
 import {selectTranslation} from "../../redux/reducers/language/LanguageReducer";
 import defaultTranslation from "../../redux/reducers/language/defaultTranslation";
 import {getIosModel} from "../../utils/utils";
@@ -21,6 +21,7 @@ import bgTitle from "../../../assets/bg/title_info_text_BG.png";
 
 const UserInfoScreen = (props) => {
 
+    const {width,height} = useWindowDimensions()
     const myUser = useSelector(state => state.players.myUser)
     const dispatch = useDispatch()
 
@@ -30,10 +31,10 @@ const UserInfoScreen = (props) => {
 
     return (
         <BackgroundWrapper>
-            <ButtonBack top={'20px'} left={'10px'} goMainPage={true} />
+            <ButtonBack top={'3%'} goMainPage={true} />
 
             <UserInfoContainer>
-                <ProfileTitle>
+                <ProfileTitle width={width}>
                     <TitleBG source={bgTitle} resizeMode={'stretch'}>
                         <Text setShadow={true} large blod center>{props.profile}</Text>
                     </TitleBG>
@@ -86,6 +87,7 @@ const ProfileTitle = styled.View`
   justify-content: center;
   flex-direction: column;
   width: 80%;
+  width:${(props)=> props.width < 400 ? `65%` : '80%'};
   height: 50px;
 `
 

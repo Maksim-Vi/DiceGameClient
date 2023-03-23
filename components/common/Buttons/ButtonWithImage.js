@@ -17,7 +17,7 @@ const ButtonWithImage = (props) => {
                     onPress={onClickBtn}
                     style={{ borderBottomWidth: 3 }}
                     activeOpacity={0.9}>
-            <PriceImage {...props} source={props.image}/>
+            <PriceImage {...props} source={props.image} resizeMode={'stretch'}/>
             {props.text && <Text setShadow={true} fontFamily={props.fontFamily} small blod color='#fff' center>{props.text}</Text>}
         </CollectBtn>
     )

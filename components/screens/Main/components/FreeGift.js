@@ -162,7 +162,7 @@ const FreeGift = (props) => {
 const FreeCoinsContainer = styled(Animated.View)`
   align-items: center;
   position: absolute;
-  bottom: 15%;
+  bottom: 20%;
   right: 5%;
 `
 

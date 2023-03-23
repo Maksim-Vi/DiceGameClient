@@ -12,13 +12,13 @@ import {selectDefaultParams, selectTranslation} from "../../../../redux/reducers
 import RewardSevenDays from "./SevenDays/RewardSevenDays";
 import RewardTabs from "./components/Tabs/RewardTabs";
 import defaultParams from "../../../../redux/reducers/language/defaultParams";
-import Text from "../../../../common/Text/Text";
-import SlideScreen from "../../../../common/AnimationScreens/SlideScreen";
 import DailyRewards from "./DailyRewards/DailyRewards";
+import {useWindowDimensions} from "react-native";
 
 const RewardsPopup = props => {
 
     const dispatch = useDispatch()
+    const {width,height} = useWindowDimensions()
     const [tab, setTab] = useState('')
 
     const getTitleByType = () =>{
@@ -56,7 +56,7 @@ const RewardsPopup = props => {
         <ModalWrapper modalBG={'bg_black'} modalVisible={true} >
             <ButtonBack top={'0px'} left={'0px'} leaveGame={leave} colorIcon={'#fefefe'}/>
 
-            <RewardsContainer>
+            <RewardsContainer height={height}>
                 <RewardTabs tab={tab} changeTab={changeTab}/>
                 <BackgroundTabs>
                     {getTitleByType()}
@@ -73,7 +73,7 @@ const RewardsContainer = styled.View`
     display: flex;
   align-items: center;
   justify-content: flex-start;
-  margin-top: 30%;
+  margin-top:${(props)=> props.height < 700 ? `0px` : '30%'};
   width: 100%;
   height: 100%;
 `

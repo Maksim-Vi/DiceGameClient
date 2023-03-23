@@ -45,7 +45,7 @@ const OpponentContainer = styled.TouchableOpacity`
   width: 100%;
   height: 90%;
   border-radius: 20px;
-  margin-top: 10px;
+  margin-top: 15px;
   padding: 0 30px;
 `
 const GameImage = styled.Image`

@@ -4,7 +4,12 @@ let initialState = {
   myUser: {},
   statistics: {},
   activeItems: {},
-  usersOnline: 0
+  usersOnline: 0,
+  friends:{
+    userFriends: [],
+    invitationsToFriends: [],
+    invitationsFromFriends: []
+  }
 }
 
 export const playersReducerSlice = createSlice({
@@ -53,6 +58,14 @@ export const playersReducerSlice = createSlice({
     setStatistics: (state, action) =>{
       state.statistics = action.payload
     },
+
+    setFriends: (state, action) =>{
+      state.friends = {
+        userFriends: action.payload.userFriends,
+        invitationsToFriends: action.payload.invitationsToFriends,
+        invitationsFromFriends: action.payload.invitationsFromFriends
+      }
+    },
   },
 });
 
@@ -66,7 +79,8 @@ export const {
   updateCurrentUserCoins,
   updateCurrentUserCrystals,
   setUsersOnline,
-  setStatistics
+  setStatistics,
+  setFriends
 } = playersReducerSlice.actions;
 
 export const selectMyUser = state => state.players.myUser;

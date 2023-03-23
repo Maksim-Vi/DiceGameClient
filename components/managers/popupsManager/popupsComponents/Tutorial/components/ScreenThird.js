@@ -4,14 +4,18 @@ import styled from "styled-components";
 import Text from "../../../../../common/Text/Text";
 import table from "../../../../../../assets/tutorial/collectTable.png";
 import {selectTranslation} from "../../../../../redux/reducers/language/LanguageReducer";
+import {useWindowDimensions} from "react-native";
 
 const ScreenThird = (props) => {
+
+    const {width,height} = useWindowDimensions()
+
     return <ScreenFirstContainer>
         <Container>
             <Text setShadow large blod center>{props.text5}</Text>
             <Text setShadow madium blod center>{props.text6}</Text>
             <Text setShadow madium blod center>{props.text7}</Text>
-            <Table source={table} resizeMode={'contain'}/>
+            <Table width={width} height={height} source={table} resizeMode={'contain'}/>
         </Container>
     </ScreenFirstContainer>
 }
@@ -52,7 +56,7 @@ const Dicy = styled.Image`
 
 const Table = styled.Image`
   width: 400px;
-  height: 400px;
+  height:${(props)=> props.height ? `${props.height / 2.2}px` : '400px'};
 `
 const mapStateToProps = (state) => ({
     text5: selectTranslation(state,'TR_TUTORIAL_TEXT_5'),

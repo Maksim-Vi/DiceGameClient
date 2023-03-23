@@ -1,22 +1,16 @@
 import React from 'react';
 import friends from "../../../../../assets/topPanel/friends.png";
-import {setInfoPopup} from "../../../../redux/reducers/popups/PopupsReducer";
-import {useDispatch} from "react-redux";
 import Sounds, {soundsType} from "../../../../utils/Sounds";
 import styled from "styled-components";
 import bg from "../../../../../assets/topPanel/btns/button.png";
 import BackgroundButtons from "../../../BackgroundWrapper/BackgroundButtons";
+import {transitionState} from "../../../../utils/utils";
 
 const FriendsPanel = (props) => {
 
-    const dispatch = useDispatch()
-
     const openFriendsPopup = () => {
         Sounds.loadAndPlayFile(soundsType.click2)
-        dispatch(setInfoPopup({
-            visible: true,
-            data: {text: 'Friends will be available after some time. Have a good game!'}
-        }))
+        transitionState('FriendsScreen')
     }
 
     return (

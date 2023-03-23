@@ -21,7 +21,7 @@ const ChangeUserNameGoogle = (props) => {
     const dispatch = useDispatch()
 
     const confirm = async () =>{
-        if(googleConfirmUsernamePopup.data.username){
+        if(googleConfirmUsernamePopup.data.username && !error){
             const googleUpdate = await postUpdateGoogleUsername(updateUsername, googleConfirmUsernamePopup.data.email)
 
             if(googleUpdate && googleUpdate.success){
@@ -37,9 +37,10 @@ const ChangeUserNameGoogle = (props) => {
     }
 
     const updateName = (val) =>{
-        if(error){
-            setError(null)
-        }
+        if(error) setError(null)
+        if(val === 'Bot') setError('this field can not be "Bot"')
+        if(val.length > 8) setError('this field should have only 8 characters')
+
         setUpdateUsername(val)
     }
 

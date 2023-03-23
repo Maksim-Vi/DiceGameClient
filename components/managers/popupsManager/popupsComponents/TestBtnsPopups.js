@@ -17,11 +17,6 @@ import FireworkColor from "../../../common/SpriteSheetViewer/components/Firework
 
 const TestBtnsPopups = () =>{
 
-    const [anim, setAnim] = React.useState({
-        showFirst: false,
-        showSecond: false,
-    })
-
     const { height, width } = useWindowDimensions();
     const dispatch = useDispatch()
 
@@ -78,14 +73,6 @@ const TestBtnsPopups = () =>{
         closeModal()
     }
 
-    const handelAnim = (type) =>{
-        setAnim({...anim, [type]: true})
-
-        setTimeout(()=>{
-            setAnim({...anim, [type]: false})
-        },3000)
-    }
-
     const renderPopup = () =>{
         return <Container>
             <Test onPress={handelStartGameClick} style={{ borderBottomWidth: 8 }}><Text color={'#000'}>StartGame</Text></Test>
@@ -95,14 +82,6 @@ const TestBtnsPopups = () =>{
             <Test onPress={handelLvlUpClick} style={{ borderBottomWidth: 8 }}><Text color={'#000'}>Lvl up</Text></Test>
             <Test onPress={handelSevenDaysGiftClick} style={{ borderBottomWidth: 8 }}><Text color={'#000'}>Seven Days Gift</Text></Test>
             <Test onPress={handelCollectClick} style={{ borderBottomWidth: 8 }}><Text color={'#000'}>Collect Item</Text></Test>
-            {/*<AnimBtnContainer>*/}
-            {/*    <TextAnim onPress={()=>handelAnim('showFirst')} style={{ borderBottomWidth: 8 }}>*/}
-            {/*        <Text center color={'#000'}>show 1 Anim</Text>*/}
-            {/*    </TextAnim>*/}
-            {/*    <TextAnim onPress={()=>handelAnim('showSecond')} style={{ borderBottomWidth: 8 }}>*/}
-            {/*        <Text center color={'#000'}>show 2 Anim</Text>*/}
-            {/*    </TextAnim>*/}
-            {/*</AnimBtnContainer>*/}
         </Container>
     }
 
@@ -128,13 +107,6 @@ const AnimContainer = styled.View`
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
-`
-const AnimBtnContainer = styled.View`
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    flex-direction: row;
     width: 100%;
 `
 

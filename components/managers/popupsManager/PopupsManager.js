@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react'
+import React from 'react'
 import {connect, useSelector} from 'react-redux'
 import styled from 'styled-components'
 import {selectMyUser} from '../../redux/reducers/players/PlayersReducer'

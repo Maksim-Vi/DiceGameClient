@@ -11,6 +11,8 @@ import ava9 from "../../../assets/avatars/9.png";
 import ava10 from "../../../assets/avatars/10.png";
 
 export const getAvatarById = (id) =>{
+    if(!id) return avatar
+
     switch (Number(id)){
         case 0:{return avatar}
         case 1:{return ava1}

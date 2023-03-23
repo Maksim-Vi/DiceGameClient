@@ -59,7 +59,7 @@ const AvatarPopups = (props) =>{
         </AvatarContainer>
     }
 
-    return <ModalWrapper modalBG={'default'} height={height / 1.8} modalVisible={true} setModalVisible={closeModal}>
+    return <ModalWrapper modalBG={'default'} height={height / 1.5} modalVisible={true} setModalVisible={closeModal}>
            {renderAvatarPopup()}
     </ModalWrapper>
 }

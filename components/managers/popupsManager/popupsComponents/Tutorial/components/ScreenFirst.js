@@ -28,7 +28,7 @@ const Container = styled.View`
   align-items: center;
   justify-content: space-around;
   width: 100%;
-  height: 50%;
+  height: 70%;
 `
 const Dicy = styled.Image`
   width: 250px;

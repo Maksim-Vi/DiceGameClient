@@ -73,7 +73,7 @@ const GameListContainer = styled.View`
   align-content: center;
   align-items: center;
   width: 100%;
-  height: 50%;
+  height: auto;
   margin-bottom: -50px;
 `
 

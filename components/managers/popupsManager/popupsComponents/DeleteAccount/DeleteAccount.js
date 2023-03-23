@@ -27,7 +27,6 @@ const DeleteAccount = () => {
     const deleteAcc = () =>{
         Sounds.loadAndPlayFile(soundsType.click2)
         deleteAccountApi(myUser.id).then((data)=>{
-            console.log('ANSWER', data)
             if(data.success){
                 logout()
             }

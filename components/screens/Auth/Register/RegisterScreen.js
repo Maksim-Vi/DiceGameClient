@@ -14,8 +14,8 @@ import bag from '../../../../assets/bg/main_bg.jpg'
 import {setInfoPopup} from "../../../redux/reducers/popups/PopupsReducer";
 import {useDispatch} from "react-redux";
 import Sounds, {soundsType} from "../../../utils/Sounds";
-import logo from "../../../../assets/common/logo.png";
 import Logo from "../../../common/Logo/Logo";
+import {getDeviceLocation} from "../../../utils/utils";
 
 const RegisterScreen = () => {
 
@@ -45,8 +45,8 @@ const RegisterScreen = () => {
     const hendlerRegister = async (dataForm) => {
         Sounds.loadAndPlayFile(soundsType.click2)
         setEnableBtn(true)
-        const data = await postRegisterApi(dataForm.username, dataForm.email, dataForm.password)
-        
+        const data = await postRegisterApi(dataForm.username, dataForm.email, dataForm.password, getDeviceLocation())
+
         if (data && data.success) {
             setEnableBtn(false)
             navigation.goBack()
@@ -54,6 +54,18 @@ const RegisterScreen = () => {
             setEnableBtn(false)
             dispatch(setInfoPopup({visible: true, data: {text: data.message}}))
         }
+    }
+
+    const getErrUsername = () => {
+        if (!errors.username) return
+
+        if(errors.username.type === 'validate'){
+            return <Text color={'red'}>this field can not be "Bot"</Text>
+        }
+
+        return errors.username.type === 'maxLength'
+            ? <Text color={'red'}>this field should have only 8 characters</Text>
+            : <Text color={'red'}>this field is required.</Text>
     }
 
     const getErrEmail = () => {
@@ -89,7 +101,7 @@ const RegisterScreen = () => {
                         <Logo />
 
                         <Controller control={control}
-                                    rules={{required: true}}
+                                    rules={{required: true, maxLength: 8, validate: (value) => value !== 'Bot'}}
                                     name="username"
                                     render={({field: {onChange, onBlur, value}}) => (
                                         <Name placeholder='Name'
@@ -101,7 +113,7 @@ const RegisterScreen = () => {
                                               onSubmitEditing={() => nextFieldFocus('Email')}/>
                                     )}
                         />
-                        {errors.username && <Text color={'red'}>this field is required.</Text>}
+                        {getErrUsername()}
 
                         <Controller control={control}
                                     rules={{required: true, pattern: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/}}

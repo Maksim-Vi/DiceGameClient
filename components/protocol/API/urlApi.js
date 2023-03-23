@@ -43,11 +43,11 @@ export const getFetchUrl = async (request, type, bodyData,refreshToken, callback
         .then((response) => {
             return response.json()
         })
-        .then((json) => { 
+        .then((json) => {
             if(json.success){
                 callback(json)
             }
-            
+
             return json
         })
         .catch((err) => { 
@@ -72,16 +72,17 @@ export const getFetchUrl = async (request, type, bodyData,refreshToken, callback
             if (response.status === 401) {
                 refreshToken(request, type, bodyData)
             }
+
             return response;
         })
         .then((response) => {
             return response.json()
         })
-        .then((json) => { 
+        .then((json) => {
             if(json.success){
                 callback(json)
             }
-        
+
             return json
         })
         .catch((err) => { 

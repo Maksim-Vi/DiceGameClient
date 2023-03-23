@@ -10,6 +10,7 @@ import PopupsManager from './components/managers/popupsManager/PopupsManager';
 import NoConnection from "./components/common/NoConnection/NoConnection";
 import * as NavigationBar from 'expo-navigation-bar';
 import {Platform, StatusBar} from "react-native";
+import {getDeviceLocation} from "./components/utils/utils";
 
 export default function App() {
 

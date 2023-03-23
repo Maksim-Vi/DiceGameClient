@@ -5,15 +5,19 @@ import Text from "../../../../../common/Text/Text";
 import dicy from "../../../../../../assets/tutorial/dicy_1.png";
 import table from "../../../../../../assets/tutorial/freeTable.png";
 import {selectTranslation} from "../../../../../redux/reducers/language/LanguageReducer";
+import {Dimensions, useWindowDimensions} from "react-native";
 
 const ScreenSecond = (props) => {
+
+    const {width,height} = useWindowDimensions()
+
     return <ScreenFirstContainer>
         <Container>
             <Text setShadow large blod center>{props.text3}</Text>
             <Text setShadow large blod center>{props.text4}</Text>
             <ImgContainer>
-                <Dicy source={dicy} resizeMode={'contain'}/>
-                <Table source={table} resizeMode={'contain'}/>
+                <Dicy width={width} height={height} source={dicy} resizeMode={'contain'}/>
+                <Table width={width} height={height} source={table} resizeMode={'contain'}/>
             </ImgContainer>
         </Container>
     </ScreenFirstContainer>
@@ -55,7 +59,7 @@ const Dicy = styled.Image`
 
 const Table = styled.Image`
   width: 450px;
-  height: 450px;
+  height:${(props)=> props.height ? `${props.height / 2}px` : '450px'};
 `
 const mapStateToProps = (state) => ({
     text3: selectTranslation(state,'TR_TUTORIAL_TEXT_3'),

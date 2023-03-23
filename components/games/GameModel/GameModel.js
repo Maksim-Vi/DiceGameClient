@@ -103,7 +103,6 @@ export default new class GameModel {
     }
 
     setGameRestore = () =>{
-        console.log('ANSWER', this.restoreGameData)
         this.isYouMove = this.restoreGameData.isYouMove
 
         this.setScores(this.restoreGameData.boardData.userScores,this.restoreGameData.boardData.opponentsScores)

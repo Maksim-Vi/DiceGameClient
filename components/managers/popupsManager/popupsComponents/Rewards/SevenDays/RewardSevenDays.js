@@ -9,14 +9,18 @@ import {selectSevenDaysGifts} from "../../../../../redux/reducers/gifts/GiftsRed
 import {connect} from "react-redux";
 import SlideScreen from "../../../../../common/AnimationScreens/SlideScreen";
 import NextRewardTimer from "../../SevenDays/NextRewardTimer";
+import {useWindowDimensions} from "react-native";
 
 const RewardSevenDays = props => {
+
+    const {width,height} = useWindowDimensions()
+
     return (
         <SlideScreen left={false}>
             <SevenDaysDesc setShadow={true} madium blod center>{props.dailyDesc}</SevenDaysDesc>
             <NextRewardTimer />
 
-            <CardsContainer>
+            <CardsContainer height={height}>
                 {
                     props.giftData.map((item,index) => {
                         const giftLocalData = sevenDaysInfo[index]
@@ -42,7 +46,7 @@ const CardsContainer = styled.View`
   flex-wrap: wrap;
   width: 100%;
   height: auto;
-  margin-top: 10%;
+  margin-top:${(props)=> props.height < 700 ? `0px` : '10%'};
 `
 
 const ImageGift = styled.Image`

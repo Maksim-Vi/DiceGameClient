@@ -3,7 +3,7 @@ import {selectMyUser} from "../redux/reducers/players/PlayersReducer";
 import {store} from "../redux/redux-store";
 import {setActiveTabApp} from "../redux/reducers/Websocket/WebsocketReducer";
 import DeviceInfo from "react-native-device-info";
-import {Platform} from "react-native";
+import {NativeModules, Platform} from "react-native";
 import GameModel from "../games/GameModel/GameModel";
 
 export const isProduction = () =>{
@@ -15,6 +15,25 @@ export const transitionState = (tab) =>{
     if(window.navigation){
         window.navigation.navigate(tab)
         store.dispatch(setActiveTabApp(tab))
+    }
+}
+
+export const getDeviceLocation = () =>{
+    const deviceLanguage =
+        Platform.OS === 'ios'
+            ? NativeModules.SettingsManager.settings.AppleLocale ||
+            NativeModules.SettingsManager.settings.AppleLanguages[0] //iOS 13
+            : NativeModules.I18nManager.localeIdentifier;
+
+    switch (deviceLanguage) {
+        case 'en-US': return console.log('EN')
+        case 'EN': return console.log('EN')
+        case 'en': return console.log('EN')
+        case 'uk-US': return console.log('UA')
+        case 'uk': return console.log('UA')
+        case 'UA': return console.log('UA')
+        case 'ua': return console.log('UA')
+        default: return console.log('EN')
     }
 }
 

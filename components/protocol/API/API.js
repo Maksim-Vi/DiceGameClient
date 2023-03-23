@@ -9,7 +9,7 @@ import {setGoogleConfirmUsernamePopup} from "../../redux/reducers/popups/PopupsR
 export const postLoginApi = async (username, password) => {
     let data = { username: username, password: password }
    
-    const refreshToken = (equest, type, bodyData) =>{
+    const refreshToken = (request, type, bodyData) =>{
       
     }
 
@@ -57,7 +57,7 @@ export const postGoogleLoginOrRegister = async (username, password, email, googl
 export const postUpdateGoogleUsername = async (username, email) => {
     let data = { username: username, email: email }
 
-    const refreshToken = (equest, type, bodyData) =>{
+    const refreshToken = (request, type, bodyData) =>{
         if(request && type){
             getRefreshToken()
             postUpdateGoogleUsername(bodyData.username,bodyData.email)
@@ -80,10 +80,10 @@ export const postUpdateGoogleUsername = async (username, email) => {
     return await getFetchUrl('googleConfirmOrChangeName', 'POST', data, refreshToken, callback)
 }
 
-export const postRegisterApi = async (username, email, password) => {
-    let data = { username: username, email: email.toLowerCase(), password: password }
+export const postRegisterApi = async (username, email, password, lang) => {
+    let data = { username: username, email: email.toLowerCase(), password: password, lang: lang }
    
-    const refreshToken = (equest, type, bodyData) =>{
+    const refreshToken = (request, type, bodyData) =>{
 
     }
 
@@ -96,20 +96,36 @@ export const postRegisterApi = async (username, email, password) => {
 
 export const deleteAccountApi = async (userId) => {
 
-    const refreshToken = (equest, type, bodyData) =>{
-
+    const refreshToken = (request, type, bodyData) =>{
+        if(request && type){
+            getRefreshToken()
+            postUpdateGoogleUsername(bodyData.username,bodyData.email)
+        }
     }
 
-    const callback = (json) =>{
-        console.log('ANSWER delete', json)
-    }
+    const callback = (json) =>{}
 
     return await getFetchUrl(`users/${userId}`,'DELETE', {}, refreshToken, callback)
 }
 
+export const searchFriendsApi = async (username) => {
+
+    const refreshToken = (request, type, bodyData) =>{
+        if(request && type){
+            getRefreshToken()
+            postUpdateGoogleUsername(bodyData.username,bodyData.email)
+        }
+    }
+
+    const callback = (json) =>{
+    }
+
+    return await getFetchUrl(`users/search?username=${username}`,'GET', {}, refreshToken, callback)
+}
+
 export const getCoinsBonus = async (username) =>{
    
-    const refreshToken = (equest, type, bodyData) =>{
+    const refreshToken = (request, type, bodyData) =>{
         if(request && type){
             getRefreshToken()
             getCoinsBonus()
@@ -127,7 +143,7 @@ export const getCoinsBonus = async (username) =>{
 
 export const getDiamondsBonus = async (username) =>{
     
-    const refreshToken = (equest, type, bodyData) =>{
+    const refreshToken = (request, type, bodyData) =>{
         if(request && type){
             getRefreshToken()
             getDiamondsBonus()
@@ -143,7 +159,7 @@ export const getDiamondsBonus = async (username) =>{
 
 export const getFlashBonus = async (username) =>{
     
-    const refreshToken = (equest, type, bodyData) =>{
+    const refreshToken = (request, type, bodyData) =>{
         if(request && type){
             getRefreshToken()
             getFlashBonus()
@@ -159,7 +175,7 @@ export const getFlashBonus = async (username) =>{
 
 export const setNewAvatar = async (username, avatarId) =>{
 
-    const refreshToken = async (request, type, bodyData) =>{
+    const refreshToken = (request, type, bodyData) =>{
         if(request && type){
             getRefreshToken()
             getText()
@@ -177,7 +193,7 @@ export const setNewAvatar = async (username, avatarId) =>{
 
 export const getText = async () =>{
 
-    const refreshToken = async (request, type, bodyData) =>{
+    const refreshToken = (request, type, bodyData) =>{
         if(request && type){
             getRefreshToken()
             getText()
