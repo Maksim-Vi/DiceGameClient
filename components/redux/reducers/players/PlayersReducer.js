@@ -8,7 +8,8 @@ let initialState = {
   friends:{
     userFriends: [],
     invitationsToFriends: [],
-    invitationsFromFriends: []
+    invitationsFromFriends: [],
+    invitedCount: 0
   }
 }
 
@@ -63,7 +64,8 @@ export const playersReducerSlice = createSlice({
       state.friends = {
         userFriends: action.payload.userFriends,
         invitationsToFriends: action.payload.invitationsToFriends,
-        invitationsFromFriends: action.payload.invitationsFromFriends
+        invitationsFromFriends: action.payload.invitationsFromFriends,
+        invitedCount: action.payload.invitedCount
       }
     },
   },

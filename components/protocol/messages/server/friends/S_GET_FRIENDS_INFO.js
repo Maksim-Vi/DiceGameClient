@@ -25,8 +25,10 @@ export default class S_GET_FRIENDS_INFO {
         store.dispatch(setFriends({
             userFriends: this.userFriends ,
             invitationsToFriends: this.invitationsToFriends,
-            invitationsFromFriends: this.invitationsFromFriends
+            invitationsFromFriends: this.invitationsFromFriends,
+            invitedCount: this.invitationsFromFriends.length
         }))
+
     }
 
     getLogText() {

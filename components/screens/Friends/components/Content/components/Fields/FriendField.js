@@ -6,11 +6,31 @@ import Avatar from "../../../../../../common/Avatars/Avatar";
 import TextWithoutShadow from "../../../../../../common/Text/TextWithoutShadow";
 import ButtonWithText from "../../../../../../common/Buttons/ButtonWithText";
 import {TouchableWithoutFeedback} from "react-native";
-import {transitionState} from "../../../../../../utils/utils";
+import {calcLastTimeOnline, transitionState} from "../../../../../../utils/utils";
 import {store} from "../../../../../../redux/redux-store";
 import {setInfoPopup} from "../../../../../../redux/reducers/popups/PopupsReducer";
 
 const FriendField = (props) => {
+
+    const isStatusFriend = () =>{
+
+        const lastOnlineTime = calcLastTimeOnline(props.item.lastTimeOnline)
+
+        console.log('ANSWER', lastOnlineTime)
+        return (
+            <StatusContainer>
+                <Text setShadow={true}
+                      small
+                      blod
+                      color={props.item.isOnline ? '#67DC54' : '#E78225'}>
+                    {props.item.isOnline ? 'online' : 'offline'}
+                </Text>
+                {!props.item.isOnline && lastOnlineTime && props.item.lastTimeOnline !== '' &&
+                    <Text setShadow={true} fontSize={'10'} blod color={'#E78225'}> :{lastOnlineTime}</Text>
+                }
+            </StatusContainer>
+        )
+    }
 
     const openFriendInfo = () =>{
         const formatItem = {
@@ -38,19 +58,15 @@ const FriendField = (props) => {
 
                             <TextContainer>
                                 <Text setShadow={true} large blod center>{props.item.username}</Text>
-                                <Text setShadow={true}
-                                      small
-                                      blod
-                                      center
-                                      color={props.item.isOnline ? '#67DC54' : '#E78225'}>
-                                     {props.item.isOnline ? 'online' : 'offline'}
-                                </Text>
+                                {isStatusFriend()}
                             </TextContainer>
 
                             <ButtonContainer>
-                                <ButtonWithText width={'100px'}
-                                                text={'challenge'}
-                                                clickHandler={challenge} />
+                                {props.item.isOnline &&
+                                    <ButtonWithText width={'100px'}
+                                                    text={'challenge'}
+                                                    clickHandler={challenge}/>
+                                }
                             </ButtonContainer>
 
                         </Content>
@@ -120,6 +136,14 @@ const AvatarContainer = styled.View`
   text-align: center;
   width: 60px;
   height: 60px;
+`
+
+const StatusContainer = styled.View`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex-direction: row;
 `
 
 export default FriendField;

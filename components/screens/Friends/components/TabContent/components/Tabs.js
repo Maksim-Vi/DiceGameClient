@@ -5,9 +5,13 @@ import friends from "../../../../../../assets/topPanel/friends.png";
 import add from "../../../../../../assets/friends/add.png";
 import search from "../../../../../../assets/friends/search.png";
 import {tabs} from "../../../FriendsScreen";
+import {useSelector} from "react-redux";
+import {selectInvitedCount} from "../../../../../redux/reducers/players/friendsSelectors";
+import InfoButton from "../../../../../common/Info/InfoButton";
 
 const Tabs = (props) => {
 
+    const invitedCount = useSelector(selectInvitedCount)
     const handlerTab = (newTab) =>{
          props.changeTab(newTab)
     }
@@ -22,14 +26,17 @@ const Tabs = (props) => {
                        color={props.active === tabs.added ? 'rgb(255, 157, 77)' : '#5eba7d;'}
                        borderColor={props.active  === tabs.added  ? 'rgb(37,37,37)' : 'rgb(255, 157, 77);'}
                        image={friends}/>
-            <ButtonTab width={50}
-                       height={50}
-                       btnWidth={20}
-                       btnHeight={20}
-                       clickHandler={()=> handlerTab(tabs.confirm)}
-                       color={props.active === tabs.confirm ? 'rgb(255, 157, 77)' : '#5eba7d;'}
-                       borderColor={props.active  === tabs.confirm  ? 'rgb(37,37,37)' : 'rgb(255, 157, 77);'}
-                       image={add}/>
+            <ConfirmBtnContainer>
+                {invitedCount > 0 && <InfoButton count={invitedCount}/>}
+                <ButtonTab width={50}
+                           height={50}
+                           btnWidth={20}
+                           btnHeight={20}
+                           clickHandler={()=> handlerTab(tabs.confirm)}
+                           color={props.active === tabs.confirm ? 'rgb(255, 157, 77)' : '#5eba7d;'}
+                           borderColor={props.active  === tabs.confirm  ? 'rgb(37,37,37)' : 'rgb(255, 157, 77);'}
+                           image={add}/>
+            </ConfirmBtnContainer>
             <ButtonTab width={50}
                        height={50}
                        btnWidth={20}
@@ -49,6 +56,10 @@ const TabsContainer = styled.View`
   flex-direction: row;
   width: 55%;
   height: 50px;
+`
+
+const ConfirmBtnContainer = styled.View`
+  position: relative;
 `
 
 

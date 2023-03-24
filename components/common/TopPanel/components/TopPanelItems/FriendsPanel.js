@@ -5,9 +5,13 @@ import styled from "styled-components";
 import bg from "../../../../../assets/topPanel/btns/button.png";
 import BackgroundButtons from "../../../BackgroundWrapper/BackgroundButtons";
 import {transitionState} from "../../../../utils/utils";
+import {useSelector} from "react-redux";
+import {selectInvitedCount} from "../../../../redux/reducers/players/friendsSelectors";
+import InfoButton from "../../../Info/InfoButton";
 
 const FriendsPanel = (props) => {
 
+    const invitedCount = useSelector(selectInvitedCount)
     const openFriendsPopup = () => {
         Sounds.loadAndPlayFile(soundsType.click2)
         transitionState('FriendsScreen')
@@ -15,6 +19,8 @@ const FriendsPanel = (props) => {
 
     return (
         <BackgroundButtons bgButton={bg}>
+            {invitedCount > 0 && <InfoButton count={invitedCount}/>}
+
             <BtnContainer onPress={openFriendsPopup} activeOpacity={0.9}>
                 <PriceImage {...props} source={friends}/>
             </BtnContainer>

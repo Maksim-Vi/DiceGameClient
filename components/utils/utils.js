@@ -5,10 +5,10 @@ import {setActiveTabApp} from "../redux/reducers/Websocket/WebsocketReducer";
 import DeviceInfo from "react-native-device-info";
 import {NativeModules, Platform} from "react-native";
 import GameModel from "../games/GameModel/GameModel";
+import moment from 'moment'
 
 export const isProduction = () =>{
-    //return process.env.APP_TYPE === 'production'
-    return false
+    return process.env.APP_TYPE === 'production'
 }
 
 export const transitionState = (tab, data = {}) =>{
@@ -176,6 +176,14 @@ export const getCurrentData = () =>{
     const yyyy = today.getFullYear();
 
     return dd + '.' + mm  + '.' + yyyy;
+}
+
+export const calcLastTimeOnline = (time) =>{
+    if (+time > 0 && moment.unix(+time / 1000).isValid()) {
+        return moment(moment.unix(+time / 1000)).fromNow()
+    }
+
+    return null
 }
 
 export const delay = ms => new Promise(
