@@ -26,14 +26,14 @@ export const getDeviceLocation = () =>{
             : NativeModules.I18nManager.localeIdentifier;
 
     switch (deviceLanguage) {
-        case 'en-US': return console.log('EN')
-        case 'EN': return console.log('EN')
-        case 'en': return console.log('EN')
-        case 'uk-US': return console.log('UA')
-        case 'uk': return console.log('UA')
-        case 'UA': return console.log('UA')
-        case 'ua': return console.log('UA')
-        default: return console.log('EN')
+        case 'EN':
+        case 'en':
+        case 'en-US': return 'EN'
+        case 'ua':
+        case 'UA':
+        case 'uk':
+        case 'uk-US': return 'UA'
+        default: return 'EN'
     }
 }
 

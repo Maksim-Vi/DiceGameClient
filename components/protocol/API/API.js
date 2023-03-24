@@ -5,6 +5,7 @@ import { getRefreshToken } from "../../utils/refreshTokenHook";
 import { getFetchUrl } from "./urlApi";
 import { setCurrentUser } from "../../redux/reducers/players/PlayersReducer";
 import {setGoogleConfirmUsernamePopup} from "../../redux/reducers/popups/PopupsReducer";
+import {getDeviceLocation} from "../../utils/utils";
 
 export const postLoginApi = async (username, password) => {
     let data = { username: username, password: password }
@@ -29,7 +30,7 @@ export const postLoginApi = async (username, password) => {
 }
 
 export const postGoogleLoginOrRegister = async (username, password, email, googleAvatar) => {
-    let data = { username: username, password: password, email: email, googleAvatar: googleAvatar }
+    let data = { username: username, password: password, email: email, googleAvatar: googleAvatar, lang: getDeviceLocation() || 'EN' }
 
     const refreshToken = (equest, type, bodyData) =>{
 
@@ -81,7 +82,7 @@ export const postUpdateGoogleUsername = async (username, email) => {
 }
 
 export const postRegisterApi = async (username, email, password, lang) => {
-    let data = { username: username, email: email.toLowerCase(), password: password, lang: lang }
+    let data = { username: username, email: email.toLowerCase(), password: password, lang: lang || 'EN' }
    
     const refreshToken = (request, type, bodyData) =>{
 
