@@ -60,7 +60,6 @@ const FriendsScreen = (props) => {
         if (searchText.length >= 1) {
             if(myUser && searchText !== myUser.username){
                 searchFriendsApi(searchText).then((res)=>{
-                    console.log('ANSWER', res)
                     setFriendsData({
                         ...friendsData,
                         searchData: res
