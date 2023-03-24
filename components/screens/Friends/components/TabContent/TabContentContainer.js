@@ -6,7 +6,10 @@ import Tabs from "./components/Tabs";
 const TabContentContainer = (props) => {
     return (
         <TabsContainer>
-            <Search searchHandler={props.searchHandler} handlerSearchBtn={props.handlerSearchBtn} searchText={props.searchText}/>
+            <Search disabledSearch={props.disabledSearch}
+                    searchHandler={props.searchHandler}
+                    handlerSearchBtn={props.handlerSearchBtn}
+                    searchText={props.searchText}/>
             <Tabs active={props.active} changeTab={props.changeTab}/>
         </TabsContainer>
     );

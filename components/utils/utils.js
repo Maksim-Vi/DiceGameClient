@@ -11,9 +11,9 @@ export const isProduction = () =>{
     return false
 }
 
-export const transitionState = (tab) =>{
+export const transitionState = (tab, data = {}) =>{
     if(window.navigation){
-        window.navigation.navigate(tab)
+        window.navigation.navigate(tab, data)
         store.dispatch(setActiveTabApp(tab))
     }
 }

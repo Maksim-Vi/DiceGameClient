@@ -5,9 +5,7 @@ import {useSelector} from "react-redux";
 
 const Statistic = (props) => {
 
-    const statistics = useSelector(state => state.players.statistics)
-
-    if (!statistics && statistics.bot !== null) return null
+    if (!props.statistics && props.statistics.bot !== null) return null
 
     return (
         <ProfileStatistic>
@@ -15,30 +13,30 @@ const Statistic = (props) => {
             <BotTab>
                 <Block>
                     <Text numberOfLines={1} blod small color={'black'} center>{props.gamePlayed}: </Text>
-                    <Text numberOfLines={1} blod large color={'black'}>{statistics.bot.games || 0}</Text>
+                    <Text numberOfLines={1} blod large color={'black'}>{props.statistics.bot.games || 0}</Text>
                 </Block>
                 <Block>
                     <Text numberOfLines={1} blod small color={'black'} center>{props.gameWon}: </Text>
-                    <Text numberOfLines={1} blod large color={'black'}>{statistics.bot.won || 0}</Text>
+                    <Text numberOfLines={1} blod large color={'black'}>{props.statistics.bot.won || 0}</Text>
                 </Block>
                 <Block>
                     <Text numberOfLines={1} blod small color={'black'} center>{props.gameLose}: </Text>
-                    <Text numberOfLines={1} blod large color={'black'}>{statistics.bot.lost || 0}</Text>
+                    <Text numberOfLines={1} blod large color={'black'}>{props.statistics.bot.lost || 0}</Text>
                 </Block>
             </BotTab>
             <Text blod large>{props.oppStatistic}:</Text>
             <UsersTab>
                 <Block>
                     <Text numberOfLines={1} blod small color={'black'} center>{props.gamePlayed}:</Text>
-                    <Text numberOfLines={1} blod large color={'black'}>{statistics.opponent.games || 0}</Text>
+                    <Text numberOfLines={1} blod large color={'black'}>{props.statistics.opponent.games || 0}</Text>
                 </Block>
                 <Block>
                     <Text numberOfLines={1} blod small color={'black'} center>{props.gameWon}: </Text>
-                    <Text numberOfLines={1} blod large color={'black'}>{statistics.opponent.won || 0}</Text>
+                    <Text numberOfLines={1} blod large color={'black'}>{props.statistics.opponent.won || 0}</Text>
                 </Block>
                 <Block>
                     <Text numberOfLines={1} blod small color={'black'} center>{props.gameLose}: </Text>
-                    <Text numberOfLines={1} blod large color={'black'}>{statistics.opponent.lost || 0}</Text>
+                    <Text numberOfLines={1} blod large color={'black'}>{props.statistics.opponent.lost || 0}</Text>
                 </Block>
             </UsersTab>
         </ProfileStatistic>

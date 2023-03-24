@@ -5,45 +5,59 @@ import Text from "../../../../../../common/Text/Text";
 import Avatar from "../../../../../../common/Avatars/Avatar";
 import TextWithoutShadow from "../../../../../../common/Text/TextWithoutShadow";
 import ButtonWithText from "../../../../../../common/Buttons/ButtonWithText";
+import {TouchableWithoutFeedback} from "react-native";
+import {transitionState} from "../../../../../../utils/utils";
+import {store} from "../../../../../../redux/redux-store";
+import {setInfoPopup} from "../../../../../../redux/reducers/popups/PopupsReducer";
 
 const FriendField = (props) => {
 
-    const challenge = () =>{
+    const openFriendInfo = () =>{
+        const formatItem = {
+            ...props.item,
+            experience: typeof props.item.experience === 'string' ? JSON.parse(props.item.experience) : props.item.experience,
+            statistics: typeof props.item.statistics === 'string' ? JSON.parse(props.item.statistics) : props.item.statistics
+        }
+        transitionState('FriendsInfoScreen', formatItem)
+    }
 
+    const challenge = () =>{
+        store.dispatch(setInfoPopup({visible: true, data: {text: 'Could be Soon! =)'}}))
     }
 
     return (
-        <FriendFieldContainer>
-            <ListItemBG source={friend_bg} resizeMode={'stretch'}>
-                <Index large blod center>{props.index + 1}</Index>
+        <TouchableWithoutFeedback style={{flex: 1}} onPress={openFriendInfo} accessible={false}>
+            <FriendFieldContainer>
+                    <ListItemBG source={friend_bg} resizeMode={'stretch'}>
+                        <Index large blod center>{props.index + 1}</Index>
 
-                <Content>
-                    <AvatarContainer>
-                        <Avatar width={70} height={70} avatarFrame={true} avatarId={props.item.avatar}/>
-                    </AvatarContainer>
+                        <Content>
+                            <AvatarContainer>
+                                <Avatar width={70} height={70} avatarFrame={true} avatarId={props.item.avatar}/>
+                            </AvatarContainer>
 
-                    <TextContainer>
-                        <Text setShadow={true} large blod center>{props.item.username}</Text>
-                        <Text setShadow={true}
-                              small
-                              blod
-                              center
-                              color={props.item.isOnline ? '#67DC54' : '#E78225'}>
-                             {props.item.isOnline ? 'online' : 'offline'}
-                        </Text>
-                    </TextContainer>
+                            <TextContainer>
+                                <Text setShadow={true} large blod center>{props.item.username}</Text>
+                                <Text setShadow={true}
+                                      small
+                                      blod
+                                      center
+                                      color={props.item.isOnline ? '#67DC54' : '#E78225'}>
+                                     {props.item.isOnline ? 'online' : 'offline'}
+                                </Text>
+                            </TextContainer>
 
-                    <ButtonContainer>
-                        <ButtonWithText width={'100px'}
-                                        text={'challenge'}
-                                        clickHandler={challenge} />
-                    </ButtonContainer>
+                            <ButtonContainer>
+                                <ButtonWithText width={'100px'}
+                                                text={'challenge'}
+                                                clickHandler={challenge} />
+                            </ButtonContainer>
 
-                </Content>
+                        </Content>
 
-
-            </ListItemBG>
-        </FriendFieldContainer>
+                    </ListItemBG>
+            </FriendFieldContainer>
+        </TouchableWithoutFeedback>
     );
 };
 

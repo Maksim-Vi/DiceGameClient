@@ -5,23 +5,30 @@ import search from '../../../../assets/friends/searchIc.png'
 const Search = (props) => {
 
     const setSearchPhrase = (value) =>{
+        if(props.disabledSearch) return
+
         props.searchHandler(value)
     }
 
     const handlerSearchBtn = (value) =>{
+        if(props.disabledSearch) return
+
         props.handlerSearchBtn(value)
     }
 
     return (
-        <SearchContainer>
+        <SearchContainer disabled={props.disabledSearch}>
             <SearchInput
                 placeholder="search..."
                 maxLength={8}
                 value={props.searchText}
+                editable={!props.disabledSearch}
+                selectTextOnFocus={!props.disabledSearch}
                 onChangeText={setSearchPhrase}
             />
 
             <SearchBtn onPress={handlerSearchBtn}
+                       disabled={props.disabledSearch}
                        activeOpacity={0.6}>
                 <SearchButton source={search} resizeMode={'contain'} />
             </SearchBtn>
@@ -35,6 +42,13 @@ const SearchContainer = styled.View`
   display: flex;
   align-items: center;
   width: 35%;
+  ${props=>{
+      if(props.disabled){
+        return `
+           opacity: 0.6;
+      `
+      }
+  }}
 `
 
 const SearchInput = styled.TextInput`

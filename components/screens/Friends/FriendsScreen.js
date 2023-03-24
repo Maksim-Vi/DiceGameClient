@@ -28,8 +28,6 @@ const titleTab = {
 
 const FriendsScreen = (props) => {
 
-    let interval = null
-    let searchCount = 0
     const myUser = useSelector(selectMyUser)
     const [friendsData, setFriendsData] = useState({
         title: titleTab.added,
@@ -39,10 +37,18 @@ const FriendsScreen = (props) => {
     })
 
     const changeTab = (newTab) =>{
-        setFriendsData({...friendsData, tabName: newTab, title: titleTab[newTab]})
+        setFriendsData({
+            ...friendsData,
+            tabName: newTab,
+            title: titleTab[newTab],
+            searchText: '',
+            searchData: null
+        })
     }
 
     const searchHandler = (search) =>{
+        if(friendsData.tabName !== tabs.search) return
+
         setFriendsData({
             ...friendsData,
             searchText: search,
@@ -86,6 +92,7 @@ const FriendsScreen = (props) => {
                     <Text setShadow={true} large blod center>{friendsData.title}</Text>
                     <TabContentContainer active={friendsData.tabName}
                                          changeTab={changeTab}
+                                         disabledSearch={friendsData.tabName !== tabs.search}
                                          searchText={friendsData.searchText}
                                          handlerSearchBtn={searchPlayers}
                                          searchHandler={searchHandler}/>

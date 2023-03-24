@@ -21,6 +21,7 @@ import {useSelector} from "react-redux";
 import {selectDefaultParams} from "../../redux/reducers/language/LanguageReducer";
 import defaultParams from "../../redux/reducers/language/defaultParams";
 import ShopScreen from "../Shop/ShopScreen";
+import FriendsInfoScreen from "../UserInfo/FriendsInfoScreen";
 
 const options = {
     headerStyleInterpolator: HeaderStyleInterpolators.forFade,
@@ -67,8 +68,8 @@ export default function Navigator() {
             <AppStack.Screen options={options} name="LoadingGameScreen" component={LoadingGameScreen}/>
             <AppStack.Screen options={options} name="RoadScreen" component={RoadScreen}/>
             <AppStack.Screen options={options} name="FriendsScreen" component={FriendsScreen}/>
-            <AppStack.Screen options={{presentation: 'transparentModal'}} name="UserInfoScreen"
-                             component={UserInfoScreen}/>
+            <AppStack.Screen options={{presentation: 'transparentModal'}} name="UserInfoScreen" component={UserInfoScreen}/>
+            <AppStack.Screen options={{presentation: 'transparentModal'}} name="FriendsInfoScreen" component={FriendsInfoScreen}/>
         </AppStack.Navigator>
     );
 }
