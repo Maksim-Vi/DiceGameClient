@@ -14,6 +14,10 @@ const FriendsContent = () => {
         return <FriendField index={data.index} item={data.item}/>
     }
 
+    const filterUsers = (list) =>{
+        return list.sort((a, b) => Number(b.isOnline) - Number(a.isOnline));
+    }
+
     if(!friendsList || friendsList.length === 0) {
         return (
             <Empty>

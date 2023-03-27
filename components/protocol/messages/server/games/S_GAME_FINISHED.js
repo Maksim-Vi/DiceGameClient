@@ -1,5 +1,7 @@
 
 import {isProduction} from "../../../../utils/utils";
+import {store} from "../../../../redux/redux-store";
+import {setInvitedOpponent} from "../../../../redux/reducers/players/PlayersReducer";
 
 export default class S_GAME_FINISHED {
     constructor(gameId){
@@ -18,7 +20,7 @@ export default class S_GAME_FINISHED {
     }
 
     exec() {
-
+        store.dispatch(setInvitedOpponent(null))
     }
 
 	getLogText() {

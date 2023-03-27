@@ -10,7 +10,8 @@ let initialState = {
     invitationsToFriends: [],
     invitationsFromFriends: [],
     invitedCount: 0
-  }
+  },
+  invitedOpponent: null
 }
 
 export const playersReducerSlice = createSlice({
@@ -68,6 +69,9 @@ export const playersReducerSlice = createSlice({
         invitedCount: action.payload.invitedCount
       }
     },
+    setInvitedOpponent: (state, action) =>{
+      state.invitedOpponent = action.payload
+    },
   },
 });
 
@@ -82,7 +86,8 @@ export const {
   updateCurrentUserCrystals,
   setUsersOnline,
   setStatistics,
-  setFriends
+  setFriends,
+  setInvitedOpponent
 } = playersReducerSlice.actions;
 
 export const selectMyUser = state => state.players.myUser;

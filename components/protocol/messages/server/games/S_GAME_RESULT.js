@@ -2,6 +2,7 @@
 import { store } from "../../../../redux/redux-store"
 import {setRestoreGame, setResultGame} from "../../../../redux/reducers/game/GameReducer";
 import {isProduction, transitionState} from "../../../../utils/utils";
+import {setInvitedOpponent} from "../../../../redux/reducers/players/PlayersReducer";
 
 export default class S_GAME_RESULT {
     constructor(resultData){
@@ -20,6 +21,7 @@ export default class S_GAME_RESULT {
     }
 
     exec() {
+        store.dispatch(setInvitedOpponent(null))
         store.dispatch(setRestoreGame(false))
         store.dispatch(setResultGame(this.resultData))
         setTimeout(()=>{

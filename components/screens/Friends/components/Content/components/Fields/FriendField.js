@@ -7,16 +7,18 @@ import TextWithoutShadow from "../../../../../../common/Text/TextWithoutShadow";
 import ButtonWithText from "../../../../../../common/Buttons/ButtonWithText";
 import {TouchableWithoutFeedback} from "react-native";
 import {calcLastTimeOnline, transitionState} from "../../../../../../utils/utils";
-import {store} from "../../../../../../redux/redux-store";
-import {setInfoPopup} from "../../../../../../redux/reducers/popups/PopupsReducer";
+import C_SEND_GAME_INVITATION_TO_FRIEND
+    from "../../../../../../protocol/messages/clients/friends/C_SEND_GAME_INVITATION_TO_FRIEND";
+import {useSelector} from "react-redux";
+import {selectMyUser} from "../../../../../../redux/reducers/players/PlayersReducer";
 
 const FriendField = (props) => {
+    const myUser = useSelector(selectMyUser)
 
     const isStatusFriend = () =>{
 
         const lastOnlineTime = calcLastTimeOnline(props.item.lastTimeOnline)
 
-        console.log('ANSWER', lastOnlineTime)
         return (
             <StatusContainer>
                 <Text setShadow={true}
@@ -42,7 +44,9 @@ const FriendField = (props) => {
     }
 
     const challenge = () =>{
-        store.dispatch(setInfoPopup({visible: true, data: {text: 'Could be Soon! =)'}}))
+        if(myUser.username && props.item.username){
+            new C_SEND_GAME_INVITATION_TO_FRIEND(myUser.username, props.item.username)
+        }
     }
 
     return (

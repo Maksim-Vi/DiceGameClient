@@ -1,6 +1,7 @@
 import {isProduction, transitionState} from "../../../../utils/utils";
 import {store} from "../../../../redux/redux-store";
 import {setRestoreGame} from "../../../../redux/reducers/game/GameReducer";
+import {setInvitedOpponent} from "../../../../redux/reducers/players/PlayersReducer";
 
 export default class S_GAME_BROKEN {
     constructor(gameId){
@@ -19,6 +20,7 @@ export default class S_GAME_BROKEN {
     }
 
     exec() {
+        store.dispatch(setInvitedOpponent(null))
         store.dispatch(setRestoreGame(false))
         transitionState('MainScreen')
     }

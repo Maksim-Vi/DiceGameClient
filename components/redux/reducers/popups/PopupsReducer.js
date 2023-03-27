@@ -14,6 +14,7 @@ let initialState = {
    botGameTypesPopup: {visible: false, data: null},
    rewardsPopup: {visible: false, data: null},
    deleteAccountPopup: {visible: false, data: null},
+   invitationPopup: {visible: false, data: null},
 }
 
 export const popupsReducerSlice = createSlice({
@@ -59,6 +60,9 @@ export const popupsReducerSlice = createSlice({
     setDeleteAccountPopup: (state, action) =>{
       state.deleteAccountPopup = action.payload
     },
+    setInvitationPopup: (state, action) =>{
+      state.invitationPopup = action.payload
+    },
   },
 });
 
@@ -75,7 +79,8 @@ export const {
     setLostConnOppPopup,
     setCollectItemPopup,
     setRewardsPopup,
-    setDeleteAccountPopup
+    setDeleteAccountPopup,
+    setInvitationPopup
 } = popupsReducerSlice.actions;
 
 export const selectAvatarPopup = state => state.popups.avatarPopup;
@@ -91,6 +96,7 @@ export const selectCollectItemPopup = state => state.popups.collectItemPopup;
 export const selectBotGameTypesPopup = state => state.popups.botGameTypesPopup;
 export const selectRewardsPopup = state => state.popups.rewardsPopup;
 export const selectDeleteAccountPopup = state => state.popups.deleteAccountPopup;
+export const selectInvitationPopup = state => state.popups.invitationPopup;
 
 export default popupsReducerSlice.reducer;
 

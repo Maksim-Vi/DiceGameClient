@@ -1,12 +1,13 @@
-import {isProduction, transitionState} from "../../../../utils/utils";
+import {isProduction} from "../../../../utils/utils";
 import {sendMessageWS} from "../../../websocet";
 
-export default class C_SEND_GAME_INVITATION_TO_FRIEND {
-    constructor(username, friendUsername){
+export default class C_DECLINE_GAME_BY_FRIEND_INVITATION {
+    constructor(gameId, username, friendUsername){
 
-        this.MESSAG_ENAME = 'C_SEND_GAME_INVITATION_TO_FRIEND'
+        this.MESSAG_ENAME = 'C_DECLINE_GAME_BY_FRIEND_INVITATION'
         this.showLog = isProduction() ? false : true
 
+        this.gameId = gameId
         this.username = username
         this.friendUsername = friendUsername
 
@@ -19,9 +20,9 @@ export default class C_SEND_GAME_INVITATION_TO_FRIEND {
     }
 
     exec() {
-        transitionState('LoadingInvitationGameScreen', {isOwner: true})
         sendMessageWS({
             name: this.MESSAG_ENAME,
+            gameId: this.gameId,
             username: this.username,
             friendUsername: this.friendUsername,
         })

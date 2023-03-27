@@ -1,8 +1,7 @@
 import { setIsGameStarted } from "../../../../redux/reducers/game/GameReducer"
 import { store } from "../../../../redux/redux-store"
-import {isProduction, transitionState} from "../../../../utils/utils";
+import {isProduction} from "../../../../utils/utils";
 import GameModel from "../../../../games/GameModel/GameModel";
-import Dispatcher from "../../../../games/Events/Dispatcher";
 
 export default class S_START_GAME {
     constructor(data){
@@ -23,6 +22,7 @@ export default class S_START_GAME {
     exec() {
         store.dispatch(setIsGameStarted(true))
         GameModel.setGameStarted(true, true, 2000)
+
     }
 
 	getLogText() {

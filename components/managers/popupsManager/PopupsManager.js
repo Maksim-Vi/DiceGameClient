@@ -2,18 +2,7 @@ import React from 'react'
 import {connect, useSelector} from 'react-redux'
 import styled from 'styled-components'
 import {selectMyUser} from '../../redux/reducers/players/PlayersReducer'
-import {
-    selectAvatarPopup,
-    selectBotGameTypesPopup,
-    selectCollectItemPopup, selectDeleteAccountPopup,
-    selectGoogleConfirmUsernamePopup,
-    selectInfoPopup,
-    selectLevelUpPopup,
-    selectLostConnOpponentPopup, selectRewardsPopup,
-    selectSettingsPopup,
-    selectSevenDaysGiftPopup,
-    selectTestBtnsPopup, selectTutorialPopup
-} from '../../redux/reducers/popups/PopupsReducer'
+import * as popups from '../../redux/reducers/popups/PopupsReducer'
 import AvatarPopups from './popupsComponents/AvatarPopups'
 import {StatusBar} from "react-native";
 import TestBtnsPopups from './popupsComponents/TestBtnsPopups'
@@ -30,6 +19,7 @@ import {selectRestoreGame} from "../../redux/reducers/game/GameReducer";
 import RewardsPopup from "./popupsComponents/Rewards/RewardsPopup";
 import DeleteAccount from "./popupsComponents/DeleteAccount/DeleteAccount";
 import TutorialPopup from "./popupsComponents/Tutorial/TutorialPopup";
+import InvitationPopup from "./popupsComponents/Invitation/InvitationPopup";
 
 const PopupsManager = (props) => {
 
@@ -49,8 +39,7 @@ const PopupsManager = (props) => {
         <PopupConteiner>
             <StatusBar hidden={true} style="light"/>
 
-            {props.avatarPopup.visible && <AvatarPopups user={props.user}/>}
-            {props.settingsPopup.visible && <SettingsMenuPopups/>}
+            {props.deleteAccountPopup.visible && <DeleteAccount />}
             {
                 props.lvlUpPopup.visible &&
                 (props.activeTabApp === 'App' || props.activeTabApp === 'MainScreen') &&
@@ -58,14 +47,15 @@ const PopupsManager = (props) => {
             }
             {props.tutorialPopup.visible && <TutorialPopup />}
             { renderSevenDays() }
+            {props.avatarPopup.visible && <AvatarPopups user={props.user}/>}
+            {props.settingsPopup.visible && <SettingsMenuPopups/>}
             {props.infoPopup.visible && <InfoPopups />}
             {props.googleConfirmUsernamePopup.visible && <ChangeUserNameGoogle />}
             {props.lostConnOpponentPopup.visible && <LostConnectionOpponent />}
             {props.collectItemPopup.visible && <CollectItemPopup data={props.collectItemPopup.data}/>}
             {props.botGameTypesPopup.visible && <BotTypeGame />}
             {props.rewardsPopup.visible && <RewardsPopup />}
-            {props.deleteAccountPopup.visible && <DeleteAccount />}
-
+            {props.invitationPopup.visible && <InvitationPopup />}
 
             {props.testBtnsPopup.visible && <TestBtnsPopups />}
         </PopupConteiner>
@@ -80,21 +70,22 @@ const PopupConteiner = styled.View`
 `
 
 const mapStateToProps = (state) => ({
-    avatarPopup: selectAvatarPopup(state),
-    settingsPopup: selectSettingsPopup(state),
-    lvlUpPopup: selectLevelUpPopup(state),
-    sevenDaysPopup: selectSevenDaysGiftPopup(state),
-    infoPopup: selectInfoPopup(state),
-    testBtnsPopup: selectTestBtnsPopup(state),
+    avatarPopup: popups.selectAvatarPopup(state),
+    settingsPopup: popups.selectSettingsPopup(state),
+    lvlUpPopup: popups.selectLevelUpPopup(state),
+    sevenDaysPopup: popups.selectSevenDaysGiftPopup(state),
+    infoPopup: popups.selectInfoPopup(state),
+    testBtnsPopup: popups.selectTestBtnsPopup(state),
     user: selectMyUser(state),
     activeTabApp: selectActiveTabApp(state),
-    googleConfirmUsernamePopup: selectGoogleConfirmUsernamePopup(state),
-    lostConnOpponentPopup: selectLostConnOpponentPopup(state),
-    collectItemPopup: selectCollectItemPopup(state),
-    botGameTypesPopup: selectBotGameTypesPopup(state),
-    rewardsPopup: selectRewardsPopup(state),
-    deleteAccountPopup: selectDeleteAccountPopup(state),
-    tutorialPopup: selectTutorialPopup(state),
+    googleConfirmUsernamePopup: popups.selectGoogleConfirmUsernamePopup(state),
+    lostConnOpponentPopup: popups.selectLostConnOpponentPopup(state),
+    collectItemPopup: popups.selectCollectItemPopup(state),
+    botGameTypesPopup: popups.selectBotGameTypesPopup(state),
+    rewardsPopup: popups.selectRewardsPopup(state),
+    deleteAccountPopup: popups.selectDeleteAccountPopup(state),
+    tutorialPopup: popups.selectTutorialPopup(state),
+    invitationPopup: popups.selectInvitationPopup(state),
 });
 
 export default connect(mapStateToProps)(PopupsManager);

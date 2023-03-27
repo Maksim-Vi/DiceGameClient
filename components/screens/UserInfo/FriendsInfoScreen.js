@@ -20,9 +20,8 @@ import bgTitle from "../../../assets/bg/title_info_text_BG.png";
 import ButtonWithText from "../../common/Buttons/ButtonWithText";
 import C_DELETE_FROM_FRIENDS from "../../protocol/messages/clients/friends/C_DELETE_FROM_FRIENDS";
 import {selectMyUser} from "../../redux/reducers/players/PlayersReducer";
-import {store} from "../../redux/redux-store";
-import {setInfoPopup} from "../../redux/reducers/popups/PopupsReducer";
 import {useNavigation} from "@react-navigation/native";
+import C_SEND_GAME_INVITATION_TO_FRIEND from "../../protocol/messages/clients/friends/C_SEND_GAME_INVITATION_TO_FRIEND";
 
 const FriendsInfoScreen = (props) => {
 
@@ -51,7 +50,9 @@ const FriendsInfoScreen = (props) => {
     }
 
     const challenge = () =>{
-        store.dispatch(setInfoPopup({visible: true, data: {text: 'Could be Soon! =)'}}))
+        if(myUser.username && props.route.params.username){
+            new C_SEND_GAME_INVITATION_TO_FRIEND(myUser.username, props.route.params.username)
+        }
     }
 
     const goBack = () =>{

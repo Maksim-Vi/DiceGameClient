@@ -5,7 +5,7 @@ import {
     setRestoreGame, setScores, setThrowData,
 } from "../../../../redux/reducers/game/GameReducer";
 import {store} from "../../../../redux/redux-store";
-import {selectMyUser} from "../../../../redux/reducers/players/PlayersReducer";
+import {selectMyUser, setInvitedOpponent} from "../../../../redux/reducers/players/PlayersReducer";
 import {isProduction} from "../../../../utils/utils";
 
 export default class S_RESTORE_GAME {
@@ -30,6 +30,7 @@ export default class S_RESTORE_GAME {
     }
 
     exec() {
+        store.dispatch(setInvitedOpponent(null))
         store.dispatch(setRestoreGame(true))
         store.dispatch(setCarrentGameId(this.activeGame.gameSettings.gameId))
         store.dispatch(setGame(this.activeGame))

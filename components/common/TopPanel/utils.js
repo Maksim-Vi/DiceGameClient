@@ -9,6 +9,7 @@ import ava7 from "../../../assets/avatars/7.png";
 import ava8 from "../../../assets/avatars/8.png";
 import ava9 from "../../../assets/avatars/9.png";
 import ava10 from "../../../assets/avatars/10.png";
+import question from "../../../assets/avatars/_.png";
 
 export const getAvatarById = (id) =>{
     if(!id) return avatar
@@ -25,6 +26,7 @@ export const getAvatarById = (id) =>{
         case 8:{return ava8}
         case 9:{return ava9}
         case 10:{return ava10}
+        case 1000: {return question}
         default: return avatar
     }
 }
