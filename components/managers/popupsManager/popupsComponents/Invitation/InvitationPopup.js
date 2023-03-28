@@ -6,17 +6,17 @@ import Sounds, {soundsType} from "../../../../utils/Sounds";
 import Text from "../../../../common/Text/Text";
 import styled from "styled-components";
 import ButtonWithText from "../../../../common/Buttons/ButtonWithText";
-import Avatar from "../../../../common/Avatars/Avatar";
 import {selectInvitationPopup, setInvitationPopup} from "../../../../redux/reducers/popups/PopupsReducer";
 import InvitationUserFrame from "../../../../screens/LoadingGameScreen/components/Invitation/InvitationUserFrame";
 import C_DECLINE_GAME_BY_FRIEND_INVITATION
     from "../../../../protocol/messages/clients/friends/C_DECLINE_GAME_BY_FRIEND_INVITATION";
 import {selectMyUser} from "../../../../redux/reducers/players/PlayersReducer";
-import C_JOIN_TO_GAME from "../../../../protocol/messages/clients/games/C_JOIN_TO_GAME";
 import C_ACCEPT_GAME_BY_FRIEND_INVITATION
     from "../../../../protocol/messages/clients/friends/C_ACCEPT_GAME_BY_FRIEND_INVITATION";
+import {selectTranslation} from "../../../../redux/reducers/language/LanguageReducer";
+import defaultTranslation from "../../../../redux/reducers/language/defaultTranslation";
 
-const InvitationPopup = () => {
+const InvitationPopup = (props) => {
 
     const dispatch = useDispatch()
     const invitation = useSelector(selectInvitationPopup)
@@ -38,13 +38,17 @@ const InvitationPopup = () => {
         dispatch(setInvitationPopup({visible: false, data: null}))
     }
 
+    const replaceText = () =>{
+        return props.text1.replace('_name_', invitation.data.username)
+    }
+
     return <ModalWrapper modalBG={'default'} width={width - 20} height={height / 2} modalVisible={true}>
         <Container>
             <DeleteContainer>
                 <InvitationUserFrame username={invitation.data.username || 'user'}
                                      avatar={invitation.data.avatarId}/>
-                <Text setShadow blod large center>Player name want to play together.</Text>
-                <Text setShadow blod medium center>Do you accept this invite?</Text>
+                <Text setShadow blod large center>{replaceText()}</Text>
+                <Text setShadow blod medium center>{props.text2}</Text>
             </DeleteContainer>
             <BtnsContainer>
                 <ButtonWithText width={'45%'}
@@ -91,6 +95,8 @@ const BtnsContainer = styled.View`
   height: 25%;
 `
 const mapStateToProps = (state) => ({
+    text1: selectTranslation(state,defaultTranslation.TR_INVITE_POPUP_TXT1),
+    text2: selectTranslation(state,defaultTranslation.TR_INVITE_POPUP_TXT2),
 });
 
 export default connect(mapStateToProps)(InvitationPopup);

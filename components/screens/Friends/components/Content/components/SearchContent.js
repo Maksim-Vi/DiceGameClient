@@ -3,6 +3,9 @@ import styled from "styled-components";
 import FriendSearchField from "./Fields/FriendSearchField";
 import {Animated} from "react-native";
 import Text from "../../../../../common/Text/Text";
+import {selectTranslation} from "../../../../../redux/reducers/language/LanguageReducer";
+import defaultTranslation from "../../../../../redux/reducers/language/defaultTranslation";
+import {connect} from "react-redux";
 
 const SearchContent = (props) => {
 
@@ -13,7 +16,7 @@ const SearchContent = (props) => {
     if(!props.searchData || props.searchData === null) {
         return (
             <Empty>
-                <Text>search users and have more fun!</Text>
+                <Text>{props.searchEmpty}</Text>
             </Empty>
         )
     }
@@ -54,5 +57,8 @@ const FriendFlatList = styled(Animated.FlatList)`
   width: 100%;
   height: 100%;
 `
+const mapStateToProps = (state) => ({
+    searchEmpty: selectTranslation(state,defaultTranslation.TR_SEARCH_EMPTY),
+})
 
-export default SearchContent;
+export default connect(mapStateToProps)(SearchContent);

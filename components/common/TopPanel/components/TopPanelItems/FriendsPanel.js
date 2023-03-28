@@ -8,13 +8,21 @@ import {transitionState} from "../../../../utils/utils";
 import {useSelector} from "react-redux";
 import {selectInvitedCount} from "../../../../redux/reducers/players/friendsSelectors";
 import InfoButton from "../../../Info/InfoButton";
+import {selectDefaultParams} from "../../../../redux/reducers/language/LanguageReducer";
+import defaultParams from "../../../../redux/reducers/language/defaultParams";
+import {store} from "../../../../redux/redux-store";
 
 const FriendsPanel = (props) => {
 
     const invitedCount = useSelector(selectInvitedCount)
+
     const openFriendsPopup = () => {
+        const isFriendEnabled = selectDefaultParams(store.getState(),defaultParams.ENABLE_FRIENDS)
+
+        if(isFriendEnabled){
+            transitionState('FriendsScreen')
+        }
         Sounds.loadAndPlayFile(soundsType.click2)
-        transitionState('FriendsScreen')
     }
 
     return (

@@ -6,10 +6,12 @@ import Avatar from "../../../../../../common/Avatars/Avatar";
 import TextWithoutShadow from "../../../../../../common/Text/TextWithoutShadow";
 import ButtonWithText from "../../../../../../common/Buttons/ButtonWithText";
 import C_SEND_FRIEND_INVITATION from "../../../../../../protocol/messages/clients/friends/C_SEND_FRIEND_INVITATION";
-import {useSelector} from "react-redux";
+import {connect, useSelector} from "react-redux";
 import {selectMyUser} from "../../../../../../redux/reducers/players/PlayersReducer";
 import {selectFriendsList, selectInvitationsToFriends} from "../../../../../../redux/reducers/players/friendsSelectors";
 import C_DELETE_FRIEND_INVITATION from "../../../../../../protocol/messages/clients/friends/C_DELETE_FRIEND_INVITATION";
+import {selectTranslation} from "../../../../../../redux/reducers/language/LanguageReducer";
+import defaultTranslation from "../../../../../../redux/reducers/language/defaultTranslation";
 
 const FriendSearchField = (props) => {
 
@@ -23,7 +25,7 @@ const FriendSearchField = (props) => {
 
         return {
             inviteData: isInvite,
-            btnText: isInvite && !isInvite.isAccepted ? 'invited' : 'invite',
+            btnText: isInvite && !isInvite.isAccepted ? props.invited : props.invite,
             isInvite: isInvite && !isInvite.isAccepted,
             isFriend: !!isFriend || props.item.username === myUser.username,
         }
@@ -56,7 +58,7 @@ const FriendSearchField = (props) => {
                               blod
                               center
                               color={props.item.isOnline ? '#67DC54' : '#E78225'}>
-                            {props.item.isOnline ? 'online' : 'offline'}
+                            {props.item.isOnline ? props.online : props.offline}
                         </Text>
                     </TextContainer>
 
@@ -139,4 +141,12 @@ const AvatarContainer = styled.View`
   height: 60px;
 `
 
-export default FriendSearchField;
+const mapStateToProps = (state) => ({
+    friendsEmpty: selectTranslation(state,defaultTranslation.TR_FRIENDS_EMPTY),
+    online: selectTranslation(state,defaultTranslation.TR_ONLINE),
+    offline: selectTranslation(state,defaultTranslation.TR_OFFLINE),
+    invite: selectTranslation(state,defaultTranslation.TR_INVITE_FRIEND),
+    invited: selectTranslation(state,defaultTranslation.TR_INVITED_FRIEND),
+})
+
+export default connect(mapStateToProps)(FriendSearchField);

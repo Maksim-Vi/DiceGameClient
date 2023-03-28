@@ -8,6 +8,9 @@ import ButtonWithText from "../../../../../../common/Buttons/ButtonWithText";
 import C_ACCEPT_FRIEND_INVITATION from "../../../../../../protocol/messages/clients/friends/C_ACCEPT_FRIEND_INVITATION";
 import C_DECLINE_FRIEND_INVITATION
     from "../../../../../../protocol/messages/clients/friends/C_DECLINE_FRIEND_INVITATION";
+import {selectTranslation} from "../../../../../../redux/reducers/language/LanguageReducer";
+import defaultTranslation from "../../../../../../redux/reducers/language/defaultTranslation";
+import {connect} from "react-redux";
 
 const FriendConfirmField = (props) => {
 
@@ -39,10 +42,10 @@ const FriendConfirmField = (props) => {
 
                     <ButtonContainer>
                         <ButtonWithText width={'100px'}
-                                        text={'confirm'}
+                                        text={props.confirmText}
                                         clickHandler={confirm} />
                         <ButtonWithText width={'100px'}
-                                        text={'decline'}
+                                        text={props.declineText}
                                         color={'#d34b2d'}
                                         clickHandler={decline} />
                     </ButtonContainer>
@@ -116,4 +119,9 @@ const AvatarContainer = styled.View`
   height: 60px;
 `
 
-export default FriendConfirmField;
+const mapStateToProps = (state) => ({
+    confirmText: selectTranslation(state,defaultTranslation.TR_CONFIRM_FRIEND),
+    declineText: selectTranslation(state,defaultTranslation.TR_DECLINE_FRIEND),
+})
+
+export default connect(mapStateToProps)(FriendConfirmField);

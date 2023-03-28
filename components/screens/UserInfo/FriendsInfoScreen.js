@@ -67,7 +67,7 @@ const FriendsInfoScreen = (props) => {
             <UserInfoContainer>
                 <ProfileTitle width={width}>
                     <TitleBG source={bgTitle} resizeMode={'stretch'}>
-                        <Text setShadow={true} large blod center>Friend</Text>
+                        <Text setShadow={true} large blod center>{props.friend}</Text>
                     </TitleBG>
                 </ProfileTitle>
 
@@ -87,12 +87,12 @@ const FriendsInfoScreen = (props) => {
                 <ButtonContainer>
                     <ButtonWithText width={'100px'}
                                     height={'50px'}
-                                    text={'delete'}
+                                    text={props.deleteFriend}
                                     color={'#e84d4d'}
                                     clickHandler={deleteFriend} />
                     <ButtonWithText width={'100px'}
                                     height={'50px'}
-                                    text={'challenge'}
+                                    text={props.challenge}
                                     clickHandler={challenge} />
                 </ButtonContainer>
 
@@ -177,11 +177,15 @@ const ButtonContainer = styled.View`
 
 
 const mapStateToProps = (state) => ({
+    friend: selectTranslation(state, defaultTranslation.TR_FRIEND),
     botStatistic: selectTranslation(state, defaultTranslation.TR_BOT_STATISTIC),
     oppStatistic: selectTranslation(state, defaultTranslation.TR_OPP_STATISTIC),
     gamePlayed: selectTranslation(state, defaultTranslation.TR_GAME_PLAYED),
     gameWon: selectTranslation(state, defaultTranslation.TR_GAME_WON),
     gameLose: selectTranslation(state, defaultTranslation.TR_GAME_LOSE),
+    challenge: selectTranslation(state, defaultTranslation.TR_CHALLENGE_FRIEND),
+    deleteFriend: selectTranslation(state, defaultTranslation.TR_DELETE_FRIEND),
+
 });
 
 export default connect(mapStateToProps)(FriendsInfoScreen);

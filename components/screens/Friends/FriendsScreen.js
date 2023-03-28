@@ -13,6 +13,9 @@ import ContentContainer from "./components/Content/ContentContainer";
 import {searchFriendsApi} from "../../protocol/API/API";
 import {useSelector} from "react-redux";
 import {selectMyUser} from "../../redux/reducers/players/PlayersReducer";
+import {selectTranslation} from "../../redux/reducers/language/LanguageReducer";
+import {store} from "../../redux/redux-store";
+import defaultTranslation from "../../redux/reducers/language/defaultTranslation";
 
 export const tabs = {
     added: 'added',
@@ -20,15 +23,14 @@ export const tabs = {
     search: 'search'
 }
 
-const titleTab = {
-    added: 'friends',
-    confirm: 'confirm friends',
-    search: 'search friends'
-}
-
 const FriendsScreen = (props) => {
 
     const myUser = useSelector(selectMyUser)
+    const titleTab = {
+        added: selectTranslation(store.getState(),defaultTranslation.TR_FRIENDS),
+        confirm: selectTranslation(store.getState(),defaultTranslation.TR_CONFIRM_FRIEND),
+        search: selectTranslation(store.getState(),defaultTranslation.TR_SEARCH_FRIENDS),
+    }
     const [friendsData, setFriendsData] = useState({
         title: titleTab.added,
         tabName: tabs.added,

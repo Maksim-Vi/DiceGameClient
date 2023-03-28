@@ -31,10 +31,10 @@ const ShareInfo = (props) => {
         <ShareContainer>
             <Dicy source={dicy} resizeMode={'contain'}/>
             <TextContainer>
-                <Text setShadow={true} large blod center>Invite friends</Text>
-                <Text setShadow={true} medium blod center>And play together</Text>
+                <Text setShadow={true} large blod center>{props.inviteText}</Text>
+                <Text setShadow={true} medium blod center>{props.inviteTextDesc}</Text>
             </TextContainer>
-            <ButtonWithText clickHandler={onShare} text={'invite friends'}/>
+            <ButtonWithText clickHandler={onShare} text={props.inviteText}/>
         </ShareContainer>
     );
 };
@@ -69,6 +69,8 @@ const Dicy = styled.Image`
 
 const mapStateToProps = (state) => ({
     shareURL: selectTranslation(state,'SHARE_GAME_URL'),
+    inviteText: selectTranslation(state,'TR_INVITE_FRIENDS'),
+    inviteTextDesc: selectTranslation(state,'TR_INVITE_FRIENDS_DESC'),
 })
 
 export default connect(mapStateToProps)(ShareInfo);

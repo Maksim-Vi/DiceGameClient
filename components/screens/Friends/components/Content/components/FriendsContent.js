@@ -1,12 +1,14 @@
 import React from 'react';
 import styled from "styled-components";
 import {Animated} from "react-native";
-import {useSelector} from "react-redux";
+import {connect, useSelector} from "react-redux";
 import {selectFriendsList} from "../../../../../redux/reducers/players/friendsSelectors";
 import Text from "../../../../../common/Text/Text";
 import FriendField from "./Fields/FriendField";
+import {selectTranslation} from "../../../../../redux/reducers/language/LanguageReducer";
+import defaultTranslation from "../../../../../redux/reducers/language/defaultTranslation";
 
-const FriendsContent = () => {
+const FriendsContent = (props) => {
 
     const friendsList = useSelector(selectFriendsList)
 
@@ -21,7 +23,7 @@ const FriendsContent = () => {
     if(!friendsList || friendsList.length === 0) {
         return (
             <Empty>
-                <Text>Find your friends!</Text>
+                <Text>{props.friendsEmpty}</Text>
             </Empty>
         )
     }
@@ -62,4 +64,9 @@ const FriendFlatList = styled(Animated.FlatList)`
   width: 100%;
   height: 100%;
 `
-export default FriendsContent;
+
+const mapStateToProps = (state) => ({
+    friendsEmpty: selectTranslation(state,defaultTranslation.TR_FRIENDS_EMPTY),
+})
+
+export default connect(mapStateToProps)(FriendsContent);

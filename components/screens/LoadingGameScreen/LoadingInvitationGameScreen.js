@@ -21,7 +21,9 @@ const LoadingInvitationGameScreen = ({route}) => {
 
     const leaveGame = () =>{
         transitionState('App')
-        new C_ABORDED_GAME(invitedOpponent.gameId)
+        if(invitedOpponent.gameId){
+            new C_ABORDED_GAME(invitedOpponent.gameId)
+        }
     }
 
     const startGame = () =>{

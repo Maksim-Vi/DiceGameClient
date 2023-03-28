@@ -9,8 +9,10 @@ import {TouchableWithoutFeedback} from "react-native";
 import {calcLastTimeOnline, transitionState} from "../../../../../../utils/utils";
 import C_SEND_GAME_INVITATION_TO_FRIEND
     from "../../../../../../protocol/messages/clients/friends/C_SEND_GAME_INVITATION_TO_FRIEND";
-import {useSelector} from "react-redux";
+import {connect, useSelector} from "react-redux";
 import {selectMyUser} from "../../../../../../redux/reducers/players/PlayersReducer";
+import {selectTranslation} from "../../../../../../redux/reducers/language/LanguageReducer";
+import defaultTranslation from "../../../../../../redux/reducers/language/defaultTranslation";
 
 const FriendField = (props) => {
     const myUser = useSelector(selectMyUser)
@@ -25,7 +27,7 @@ const FriendField = (props) => {
                       small
                       blod
                       color={props.item.isOnline ? '#67DC54' : '#E78225'}>
-                    {props.item.isOnline ? 'online' : 'offline'}
+                    {props.item.isOnline ? props.online : props.offline}
                 </Text>
                 {!props.item.isOnline && lastOnlineTime && props.item.lastTimeOnline !== '' &&
                     <Text setShadow={true} fontSize={'10'} blod color={'#E78225'}> :{lastOnlineTime}</Text>
@@ -68,7 +70,7 @@ const FriendField = (props) => {
                             <ButtonContainer>
                                 {props.item.isOnline &&
                                     <ButtonWithText width={'100px'}
-                                                    text={'challenge'}
+                                                    text={props.challenge}
                                                     clickHandler={challenge}/>
                                 }
                             </ButtonContainer>
@@ -149,5 +151,10 @@ const StatusContainer = styled.View`
   text-align: center;
   flex-direction: row;
 `
+const mapStateToProps = (state) => ({
+    challenge: selectTranslation(state,defaultTranslation.TR_CHALLENGE_FRIEND),
+    online: selectTranslation(state,defaultTranslation.TR_ONLINE),
+    offline: selectTranslation(state,defaultTranslation.TR_OFFLINE),
+})
 
-export default FriendField;
+export default connect(mapStateToProps)(FriendField);

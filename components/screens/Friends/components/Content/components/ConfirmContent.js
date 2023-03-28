@@ -2,11 +2,13 @@ import React from 'react';
 import styled from "styled-components";
 import {Animated} from "react-native";
 import Text from "../../../../../common/Text/Text";
-import {useSelector} from "react-redux";
+import {connect, useSelector} from "react-redux";
 import {selectInvitationsFromFriends} from "../../../../../redux/reducers/players/friendsSelectors";
 import FriendConfirmField from "./Fields/FriendConfirmField";
+import {selectTranslation} from "../../../../../redux/reducers/language/LanguageReducer";
+import defaultTranslation from "../../../../../redux/reducers/language/defaultTranslation";
 
-const ConfirmContent = () => {
+const ConfirmContent = (props) => {
 
     const inviteFriendsList = useSelector(selectInvitationsFromFriends)
 
@@ -17,7 +19,7 @@ const ConfirmContent = () => {
     if(!inviteFriendsList || inviteFriendsList.length === 0) {
         return (
             <Empty>
-                <Text>You dont have invites!</Text>
+                <Text>{props.confirmEmpty}</Text>
             </Empty>
         )
     }
@@ -59,5 +61,8 @@ const FriendFlatList = styled(Animated.FlatList)`
   width: 100%;
   height: 100%;
 `
+const mapStateToProps = (state) => ({
+    confirmEmpty: selectTranslation(state,defaultTranslation.TR_CONFIRM_EMPTY),
+})
 
-export default ConfirmContent;
+export default connect(mapStateToProps)(ConfirmContent);

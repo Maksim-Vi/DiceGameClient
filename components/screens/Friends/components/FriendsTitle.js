@@ -3,6 +3,8 @@ import bgTitle from "../../../../assets/bg/title_info_text_BG.png";
 import Text from "../../../common/Text/Text";
 import styled from "styled-components";
 import {useWindowDimensions} from "react-native";
+import {selectTranslation} from "../../../redux/reducers/language/LanguageReducer";
+import {connect} from "react-redux";
 
 const FriendsTitle = (props) => {
     const {width,height} = useWindowDimensions()
@@ -10,7 +12,7 @@ const FriendsTitle = (props) => {
     return (
         <Title width={width}>
             <TitleBG source={bgTitle} resizeMode={'stretch'}>
-                <Text setShadow={true} large blod center>Friends</Text>
+                <Text setShadow={true} large blod center>{props.friends}</Text>
             </TitleBG>
         </Title>
     )
@@ -33,4 +35,8 @@ const TitleBG = styled.ImageBackground`
   width: 100%;
   height: 100%;
 `
-export default FriendsTitle;
+const mapStateToProps = (state) => ({
+    friends: selectTranslation(state,'TR_FRIENDS'),
+})
+
+export default connect(mapStateToProps)(FriendsTitle);
