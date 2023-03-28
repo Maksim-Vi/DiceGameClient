@@ -2,9 +2,6 @@ import React from 'react';
 import styled from "styled-components";
 import Search from "../Search";
 import Tabs from "./components/Tabs";
-import {selectTranslation} from "../../../../redux/reducers/language/LanguageReducer";
-import {store} from "../../../../redux/redux-store";
-import defaultTranslation from "../../../../redux/reducers/language/defaultTranslation";
 
 const TabContentContainer = (props) => {
     return (
@@ -12,7 +9,7 @@ const TabContentContainer = (props) => {
             <Search disabledSearch={props.disabledSearch}
                     searchHandler={props.searchHandler}
                     handlerSearchBtn={props.handlerSearchBtn}
-                    searchText={selectTranslation(store.getState(),defaultTranslation.TR_SEARCH)}/>
+                    searchText={props.searchText}/>
             <Tabs active={props.active} changeTab={props.changeTab}/>
         </TabsContainer>
     );
