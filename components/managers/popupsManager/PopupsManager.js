@@ -20,6 +20,7 @@ import RewardsPopup from "./popupsComponents/Rewards/RewardsPopup";
 import DeleteAccount from "./popupsComponents/DeleteAccount/DeleteAccount";
 import TutorialPopup from "./popupsComponents/Tutorial/TutorialPopup";
 import InvitationPopup from "./popupsComponents/Invitation/InvitationPopup";
+import ADFlashPopup from "./popupsComponents/ADPopups/ADFlashPopup";
 
 const PopupsManager = (props) => {
 
@@ -56,6 +57,7 @@ const PopupsManager = (props) => {
             {props.botGameTypesPopup.visible && <BotTypeGame />}
             {props.rewardsPopup.visible && <RewardsPopup />}
             {props.invitationPopup.visible && <InvitationPopup />}
+            {props.adFlashPopup.visible && <ADFlashPopup />}
 
             {props.testBtnsPopup.visible && <TestBtnsPopups />}
         </PopupConteiner>
@@ -86,6 +88,7 @@ const mapStateToProps = (state) => ({
     deleteAccountPopup: popups.selectDeleteAccountPopup(state),
     tutorialPopup: popups.selectTutorialPopup(state),
     invitationPopup: popups.selectInvitationPopup(state),
+    adFlashPopup: popups.selectADFlashPopup(state),
 });
 
 export default connect(mapStateToProps)(PopupsManager);

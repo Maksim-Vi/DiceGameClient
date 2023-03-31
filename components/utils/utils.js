@@ -8,7 +8,8 @@ import GameModel from "../games/GameModel/GameModel";
 import moment from 'moment'
 
 export const isProduction = () =>{
-    return process.env.APP_TYPE === 'production'
+    //return process.env.APP_TYPE === 'production'
+    return true
 }
 
 export const transitionState = (tab, data = {}) =>{

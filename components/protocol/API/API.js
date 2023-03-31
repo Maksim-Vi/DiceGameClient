@@ -174,6 +174,42 @@ export const getFlashBonus = async (username) =>{
     return await getFetchUrl('addFlashToUserByUsername','POST', {username: username}, refreshToken, callback)
 }
 
+export const getADX2CoinsBonus = async (userId,coins) =>{
+
+    const body = {coinsQuantity: coins, multiplier: 2}
+
+    const refreshToken = (request, type, bodyData) =>{
+        if(request && type){
+            getRefreshToken()
+            getFlashBonus()
+        }
+    }
+
+    const callback = (json) =>{
+
+    }
+
+    return await getFetchUrl(`users/${userId}/multiple-coins`,'PATCH', body, refreshToken, callback)
+}
+
+export const getADFlashBonus = async (userId,flash) =>{
+
+    const body = {flashQuantity: flash, multiplier: 1}
+
+    const refreshToken = (request, type, bodyData) =>{
+        if(request && type){
+            getRefreshToken()
+            getFlashBonus()
+        }
+    }
+
+    const callback = (json) =>{
+
+    }
+
+    return await getFetchUrl(`users/${userId}/multiple-flash`,'PATCH', body, refreshToken, callback)
+}
+
 export const setNewAvatar = async (username, avatarId) =>{
 
     const refreshToken = (request, type, bodyData) =>{

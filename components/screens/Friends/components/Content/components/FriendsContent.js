@@ -17,7 +17,13 @@ const FriendsContent = (props) => {
     }
 
     const filterUsers = (list) =>{
-        return list.sort((a, b) => Number(b.isOnline) - Number(a.isOnline));
+        if(list && list.length > 0){
+            return [...list].sort((a,b) => {
+                return b.isOnline - a.isOnline || b.username.localeCompare(a.username)
+            });
+        }
+
+        return list
     }
 
     if(!friendsList || friendsList.length === 0) {
@@ -32,7 +38,8 @@ const FriendsContent = (props) => {
         <FriendsContainer>
             <FriendFlatList
                 contentContainerStyle = {{ alignItems: 'center'}}
-                data={friendsList}
+               // data={friendsList}
+                data={filterUsers(friendsList)}
                 renderItem={renderItem}
                 scrollEnabled
                 keyExtractor={item => item.id} />

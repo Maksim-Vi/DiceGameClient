@@ -137,4 +137,11 @@ export default {
 
     TR_INVITE_POPUP_TXT1: 'TR_INVITE_POPUP_TXT1', //Player name want to play together.
     TR_INVITE_POPUP_TXT2: 'TR_INVITE_POPUP_TXT2', //Do you accept this invite?
+
+    TR_WATCH_VIDEO: 'TR_WATCH_VIDEO',
+    TR_SKIP: 'TR_SKIP',
+    TR_WATCH_VIDEO_FLASH_TXT1: 'TR_WATCH_VIDEO_FLASH_TXT1', //If you wanna more flash watch video!
+    TR_WATCH_VIDEO_FLASH_TXT2: 'TR_WATCH_VIDEO_FLASH_TXT2', //and get free 3 flash
+
+    TR_SEVEN_DAYS_REWARD_CLAIM_DESC: 'TR_SEVEN_DAYS_REWARD_CLAIM_DESC', //and get free 3 flash
 }

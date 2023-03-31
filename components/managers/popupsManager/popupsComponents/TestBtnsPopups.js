@@ -1,11 +1,12 @@
 import React from 'react'
-import { useWindowDimensions } from 'react-native'
+import {StyleSheet, useWindowDimensions} from 'react-native'
 import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import ModalWrapper from '../../../common/ModalWindows/ModalWrapper'
 import Text from '../../../common/Text/Text'
 import { setGame, setGameSettings, setIsGameStarted, setResultGame } from '../../../redux/reducers/game/GameReducer'
 import {
+    setADFlashPopup, setADResultPopup,
     setCollectItemPopup,
     setLevelUpPopup,
     setSevenDaysGiftPopup,
@@ -17,6 +18,7 @@ import FireworkColor from "../../../common/SpriteSheetViewer/components/Firework
 
 const TestBtnsPopups = () =>{
 
+    let scrollView = React.useRef(null).current
     const { height, width } = useWindowDimensions();
     const dispatch = useDispatch()
 
@@ -27,7 +29,6 @@ const TestBtnsPopups = () =>{
     const handelResultClick = () =>{
         dispatch(setResultGame(getResultScreenData()))
         closeModal()
-        //navigation.navigate('ResultScreen')
         transitionState('ResultScreen')
     }
 
@@ -39,18 +40,14 @@ const TestBtnsPopups = () =>{
         closeModal()
 
         dispatch(setIsGameStarted(true))
-        //window.navigation.navigate('GameScreen')
-        //transitionState('GameScreen')
     }
 
     const handelLoadingProjectClick = () =>{
-        //window.navigation.navigate('LoadingGameScreen')
         transitionState('LoadingProject')
         closeModal()
     }
 
     const handelLoadingGameClick = () =>{
-        //window.navigation.navigate('LoadingGameScreen')
         transitionState('LoadingGameScreen')
         closeModal()
     }
@@ -73,40 +70,49 @@ const TestBtnsPopups = () =>{
         closeModal()
     }
 
+    const handelADResultClick = () =>{
+        dispatch(setADResultPopup({visible: true, data: {coins: 3}}))
+        closeModal()
+    }
+
+    const handelADFlashClick = () =>{
+        dispatch(setADFlashPopup({visible: true, data: {flash: 2}}))
+        closeModal()
+    }
+
     const renderPopup = () =>{
-        return <Container>
-            <Test onPress={handelStartGameClick} style={{ borderBottomWidth: 8 }}><Text color={'#000'}>StartGame</Text></Test>
-            <Test onPress={handelResultClick} style={{ borderBottomWidth: 8 }}><Text color={'#000'}>Result</Text></Test>
-            <Test onPress={handelLoadingProjectClick} style={{ borderBottomWidth: 8 }}><Text color={'#000'}>Loading-Project</Text></Test>
-            <Test onPress={handelLoadingGameClick} style={{ borderBottomWidth: 8 }}><Text color={'#000'}>Loading-Game</Text></Test>
-            <Test onPress={handelLvlUpClick} style={{ borderBottomWidth: 8 }}><Text color={'#000'}>Lvl up</Text></Test>
-            <Test onPress={handelSevenDaysGiftClick} style={{ borderBottomWidth: 8 }}><Text color={'#000'}>Seven Days Gift</Text></Test>
-            <Test onPress={handelCollectClick} style={{ borderBottomWidth: 8 }}><Text color={'#000'}>Collect Item</Text></Test>
-        </Container>
+        return <Scroll ref={ref => {scrollView = ref}}
+                       showsVerticalScrollIndicator={true}
+                       contentContainerStyle={styles.scroll}>
+            <Container>
+                <Test onPress={handelStartGameClick} style={{ borderBottomWidth: 8 }}><Text color={'#000'}>StartGame</Text></Test>
+                <Test onPress={handelResultClick} style={{ borderBottomWidth: 8 }}><Text color={'#000'}>Result</Text></Test>
+                <Test onPress={handelLoadingProjectClick} style={{ borderBottomWidth: 8 }}><Text color={'#000'}>Loading-Project</Text></Test>
+                <Test onPress={handelLoadingGameClick} style={{ borderBottomWidth: 8 }}><Text color={'#000'}>Loading-Game</Text></Test>
+                <Test onPress={handelLvlUpClick} style={{ borderBottomWidth: 8 }}><Text color={'#000'}>Lvl up</Text></Test>
+                <Test onPress={handelSevenDaysGiftClick} style={{ borderBottomWidth: 8 }}><Text color={'#000'}>Seven Days Gift</Text></Test>
+                <Test onPress={handelCollectClick} style={{ borderBottomWidth: 8 }}><Text color={'#000'}>Collect Item</Text></Test>
+                <Test onPress={handelADFlashClick} style={{ borderBottomWidth: 8 }}><Text color={'#000'}>ad flash</Text></Test>
+            </Container>
+        </Scroll>
     }
 
     return <ModalWrapper modalBG={'default'} width={width - 50} height={height - 200} modalVisible={true} setModalVisible={closeModal}>
            {renderPopup()}
-
-        <AnimContainer>
-            {anim.showFirst && <FireworkStandart />}
-            {anim.showSecond && <FireworkColor />}
-        </AnimContainer>
     </ModalWrapper>
 }
 
-const Container = styled.View`
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    flex-direction: column;
-    width: 100%;
+const Scroll = styled.ScrollView`
+      display: flex;
+      width: 100%;
+      height: 100%;
 `
 
-const AnimContainer = styled.View`
+const Container = styled.View`
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
     width: 100%;
 `
 
@@ -121,9 +127,12 @@ const Test = styled.TouchableOpacity`
   background-color: #ffefb1;
   border: 2px solid #ed9f39;
 `
-
-const TextAnim = styled(Test)`
-  width: 30%;
-`
+const styles = StyleSheet.create({
+    scroll:{
+        display: 'flex',
+        flexGrow: 1,
+        justifyContent: 'flex-start',
+    }
+})
 
 export default TestBtnsPopups

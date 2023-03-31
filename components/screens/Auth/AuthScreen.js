@@ -48,6 +48,7 @@ const AuthScreen = () => {
     }
 
     const getDevType = () =>{
+       console.log('ANSWER', process.env.APP_TYPE)
        return process.env.APP_TYPE === 'development'
            ? process.env.APP_TYPE + ':game version:'
            : 'game version:'

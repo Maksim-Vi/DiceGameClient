@@ -24,6 +24,11 @@ export default class S_INVITATION_FRIEND_TO_GAME_FALSE {
 
     exec() {
         store.dispatch(setInfoPopup({visible: true, data: {text: this.message}}))
+        if(window.navigation){
+            setTimeout(()=>{
+                window.navigation.goBack()
+            }, 1000)
+        }
     }
 
     getLogText() {

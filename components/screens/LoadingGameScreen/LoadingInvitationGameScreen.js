@@ -12,17 +12,21 @@ import C_ABORDED_GAME from "../../protocol/messages/clients/games/C_ABORDED_GAME
 import {selectInvitedOpponent} from "../../redux/reducers/players/friendsSelectors";
 import ButtonWithText from "../../common/Buttons/ButtonWithText";
 import C_START_GAME_WITH_FRIEND from "../../protocol/messages/clients/games/C_START_GAME_WITH_FRIEND";
+import {selectCurrentGameId} from "../../redux/reducers/game/GameReducer";
 
 const LoadingInvitationGameScreen = ({route}) => {
 
     const myUser = useSelector(selectMyUser)
+    const currentGameId = useSelector(selectCurrentGameId)
     const invitedOpponent = useSelector(selectInvitedOpponent)
     const [isPressed, setPressedBtn] = useState(false)
 
     const leaveGame = () =>{
         transitionState('App')
-        if(invitedOpponent.gameId){
-            new C_ABORDED_GAME(invitedOpponent.gameId)
+        if(invitedOpponent && invitedOpponent.gameId){
+            new C_ABORDED_GAME(invitedOpponent.gameId, invitedOpponent.opponent.username)
+        } else if(currentGameId){
+            new C_ABORDED_GAME(currentGameId)
         }
     }
 

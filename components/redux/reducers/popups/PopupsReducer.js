@@ -15,6 +15,7 @@ let initialState = {
    rewardsPopup: {visible: false, data: null},
    deleteAccountPopup: {visible: false, data: null},
    invitationPopup: {visible: false, data: null},
+   adFlashPopup: {visible: false, data: null},
 }
 
 export const popupsReducerSlice = createSlice({
@@ -63,6 +64,9 @@ export const popupsReducerSlice = createSlice({
     setInvitationPopup: (state, action) =>{
       state.invitationPopup = action.payload
     },
+    setADFlashPopup: (state, action) =>{
+      state.adFlashPopup = action.payload
+    },
   },
 });
 
@@ -80,7 +84,8 @@ export const {
     setCollectItemPopup,
     setRewardsPopup,
     setDeleteAccountPopup,
-    setInvitationPopup
+    setInvitationPopup,
+    setADFlashPopup
 } = popupsReducerSlice.actions;
 
 export const selectAvatarPopup = state => state.popups.avatarPopup;
@@ -97,6 +102,7 @@ export const selectBotGameTypesPopup = state => state.popups.botGameTypesPopup;
 export const selectRewardsPopup = state => state.popups.rewardsPopup;
 export const selectDeleteAccountPopup = state => state.popups.deleteAccountPopup;
 export const selectInvitationPopup = state => state.popups.invitationPopup;
+export const selectADFlashPopup = state => state.popups.adFlashPopup;
 
 export default popupsReducerSlice.reducer;
 

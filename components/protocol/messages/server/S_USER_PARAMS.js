@@ -1,11 +1,12 @@
 import {store} from "../../../redux/redux-store";
 import {setAllUserParams} from "../../../redux/reducers/language/LanguageReducer";
+import {isProduction} from "../../../utils/utils";
 
 export default class S_USER_PARAMS {
     constructor(userParams){
 
         this.MESSAG_ENAME = 'S_USER_PARAMS'
-        this.showLog = true
+        this.showLog = isProduction() ? false : true
 
         this.userParams = userParams && typeof userParams === "string"
             ? JSON.parse(userParams)

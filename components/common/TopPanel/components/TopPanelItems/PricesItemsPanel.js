@@ -16,7 +16,7 @@ const PricesItemsPanel = ({userData}) => {
                     <ElementsContainer>
                         <Coins coins={userData.coins}/>
                         <Crystals crystals={userData.crystals}/>
-                        <Flash crystals={userData.flash}/>
+                        <Flash flash={userData.flash}/>
                     </ElementsContainer>
                 </TopPanelItemsContainer>
             </BackgroundButtons>

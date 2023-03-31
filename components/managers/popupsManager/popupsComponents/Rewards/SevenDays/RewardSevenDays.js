@@ -10,10 +10,24 @@ import {connect} from "react-redux";
 import SlideScreen from "../../../../../common/AnimationScreens/SlideScreen";
 import NextRewardTimer from "../../SevenDays/NextRewardTimer";
 import {useWindowDimensions} from "react-native";
+import defaultTranslation from "../../../../../redux/reducers/language/defaultTranslation";
+import TextWithoutShadow from "../../../../../common/Text/TextWithoutShadow";
 
 const RewardSevenDays = props => {
 
     const {width,height} = useWindowDimensions()
+
+
+    if(props.isFinished){
+        return (
+            <SlideScreen left={false}>
+                <FinishOverlay>
+                    <Congrat setShadow title blod center>{props.congratulate}</Congrat>
+                    <Text setShadow large blod center>{props.claimDesc}</Text>
+                </FinishOverlay>
+            </SlideScreen>
+        )
+    }
 
     return (
         <SlideScreen left={false}>
@@ -49,6 +63,14 @@ const CardsContainer = styled.View`
   margin-top:${(props)=> props.height < 700 ? `0px` : '10%'};
 `
 
+const FinishOverlay = styled.View`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 60%;
+`
+
 const ImageGift = styled.Image`
   width: 40px;
   height: 40px;
@@ -57,9 +79,15 @@ const ImageGift = styled.Image`
 const SevenDaysDesc = styled(Text)`
 `
 
+const Congrat = styled(TextWithoutShadow)`
+    margin-bottom: 20px;
+`
+
 const mapStateToProps = (state) => ({
     giftData: selectSevenDaysGifts(state),
     dailyDesc: selectTranslation(state,'TR_DAILY_DESC'),
+    congratulate: selectTranslation(state,defaultTranslation.TR_CONGRATULATE),
+    claimDesc: selectTranslation(state,defaultTranslation.TR_SEVEN_DAYS_REWARD_CLAIM_DESC),
 });
 
 export default connect(mapStateToProps)(RewardSevenDays);

@@ -1,8 +1,13 @@
 import React from 'react';
 import styled from "styled-components";
-import search from '../../../../assets/friends/searchIc.png'
+import searchIc from '../../../../assets/friends/searchIc.png'
+import {useSelector} from "react-redux";
+import defaultTranslation from "../../../redux/reducers/language/defaultTranslation";
+import {selectTranslation} from "../../../redux/reducers/language/LanguageReducer";
 
 const Search = (props) => {
+
+    const search = useSelector(state=> selectTranslation(state,defaultTranslation.TR_SEARCH))
 
     const setSearchPhrase = (value) =>{
         if(props.disabledSearch) return
@@ -19,7 +24,7 @@ const Search = (props) => {
     return (
         <SearchContainer disabled={props.disabledSearch}>
             <SearchInput
-                placeholder="search..."
+                placeholder={search}
                 maxLength={8}
                 value={props.searchText}
                 editable={!props.disabledSearch}
@@ -30,7 +35,7 @@ const Search = (props) => {
             <SearchBtn onPress={handlerSearchBtn}
                        disabled={props.disabledSearch}
                        activeOpacity={0.6}>
-                <SearchButton source={search} resizeMode={'contain'} />
+                <SearchButton source={searchIc} resizeMode={'contain'} />
             </SearchBtn>
 
         </SearchContainer>
@@ -74,4 +79,5 @@ const SearchButton = styled.Image`
   width: 25px;
   height: 25px;
 `
+
 export default Search;
