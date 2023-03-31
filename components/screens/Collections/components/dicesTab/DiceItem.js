@@ -29,7 +29,7 @@ const DiceItem = ({diceItem, isActive, isLocked, isSale, isCollected, setModalVi
     }
 
     const renderSaleLabel = () => {
-        if (!isSale) return null
+        if (!isSale || isCollected) return null
 
         return <SaleContainer>
             <SaleImg source={sale}/>

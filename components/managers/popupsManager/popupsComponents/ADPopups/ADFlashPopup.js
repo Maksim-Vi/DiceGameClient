@@ -105,7 +105,7 @@ const TextContainer = styled.View`
   background-color: rgba(145, 93, 82, 0.8);
   border-radius: 20px;
   width: 100%;
-  height: 60%;
+  height: 70%;
   padding: 20px;
 `
 

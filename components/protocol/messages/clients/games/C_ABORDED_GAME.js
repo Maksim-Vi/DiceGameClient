@@ -5,7 +5,7 @@ import { sendMessageWS } from "../../../websocet"
 import {isProduction} from "../../../../utils/utils";
 
 export default class C_ABORDED_GAME {
-    constructor(gameId){
+    constructor(gameId, friendsUsername = null){
 
         this.MESSAG_ENAME = 'C_ABORDED_GAME'
         this.clientIdWebsocket = null
@@ -13,6 +13,7 @@ export default class C_ABORDED_GAME {
         this.id = ''
         this.username = ''
         this.gameId = gameId
+        this.friendsUsername = friendsUsername
 
         this.init()
     }
@@ -25,7 +26,7 @@ export default class C_ABORDED_GAME {
     }
 
     exec() {
-        sendMessageWS({ name: this.MESSAG_ENAME, clientIdWs: this.clientIdWebsocket, userId: this.id,  username: this.username, gameId: this.gameId })
+        sendMessageWS({ name: this.MESSAG_ENAME, clientIdWs: this.clientIdWebsocket, userId: this.id,  username: this.username, gameId: this.gameId, friendsUsername: this.friendsUsername })
     }
 
     selectUserData = () =>{

@@ -19,7 +19,7 @@ const RewardsPopup = props => {
 
     const dispatch = useDispatch()
     const {width,height} = useWindowDimensions()
-    const [tab, setTab] = useState('')
+    const [tab, setTab] = useState('sevenDays')
 
     const getTitleByType = () =>{
         switch (tab) {
@@ -35,7 +35,7 @@ const RewardsPopup = props => {
 
     const getContentByType = () =>{
         switch (tab) {
-            case 'sevenDays': return <RewardSevenDays />
+            case 'sevenDays': return <RewardSevenDays isFinished={props.isFinished}/>
             case 'DailyRewards': return <DailyRewards />
             default: return null
         }

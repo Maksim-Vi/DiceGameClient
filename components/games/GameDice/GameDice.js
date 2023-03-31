@@ -11,7 +11,8 @@ class GameDice extends PureComponent {
         super();
 
         this.state = {
-            throwData: 0
+            throwData: 0,
+            defaultItems: {square: 1000, dice: 1}
         }
 
     }
@@ -27,8 +28,6 @@ class GameDice extends PureComponent {
     }
 
     getActiveItemsByUser = () => {
-        if (GameModel.gameSettings.bot) return this.props.activeItems
-
         if (GameModel.isYouMove) {
             return this.props.activeItems
         }
@@ -37,7 +36,7 @@ class GameDice extends PureComponent {
     }
 
     getOpponentActiveItems = () => {
-        if (GameModel.gameSettings.bot) return this.props.activeItems
+        if (GameModel.gameSettings.bot) return this.state.defaultItems
 
         const {username} = GameModel.user
 
