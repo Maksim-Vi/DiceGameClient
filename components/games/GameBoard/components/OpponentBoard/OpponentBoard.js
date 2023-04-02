@@ -14,7 +14,8 @@ class OpponentBoard extends PureComponent {
         this.state = {
             board: [],
             winPoints: [],
-            activeItems: {square: 1000, dice: 1}
+            activeItems: {square: 1000, dice: 1},
+            defaultItems: {square: 1000, dice: 0}
         }
 
         this.width = Dimensions.get('window').width;
@@ -23,6 +24,9 @@ class OpponentBoard extends PureComponent {
     }
 
     componentDidMount() {
+        if(GameModel.gameSettings && GameModel.gameSettings.bot) {
+            return this.setState({activeItems: this.state.defaultItems})
+        }
         if(GameModel.opponent.activeItems){
             this.setState({activeItems: GameModel.opponent.activeItems})
         }

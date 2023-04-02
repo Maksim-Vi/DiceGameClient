@@ -5,6 +5,7 @@ import GameModel from "../GameModel/GameModel";
 import {selectActiveItems} from "../../redux/reducers/players/PlayersReducer";
 import {connect} from "react-redux";
 import Dispatcher from "../Events/Dispatcher";
+import StartGameAnim from "../StartGameAnim/StartGameAnim";
 
 class GameDice extends PureComponent {
     constructor() {
@@ -12,7 +13,7 @@ class GameDice extends PureComponent {
 
         this.state = {
             throwData: 0,
-            defaultItems: {square: 1000, dice: 1}
+            defaultItems: {square: 1000, dice: 0}
         }
 
     }
@@ -36,17 +37,20 @@ class GameDice extends PureComponent {
     }
 
     getOpponentActiveItems = () => {
-        if (GameModel.gameSettings.bot) return this.state.defaultItems
+        if(GameModel.gameSettings){
+            if (GameModel.gameSettings.bot) return this.state.defaultItems
 
-        const {username} = GameModel.user
+            const {username} = GameModel.user
 
-        const opponent = GameModel.gameSettings.players.find(opp => opp.username !== username)
+            const opponent = GameModel.gameSettings.players.find(opp => opp.username !== username)
 
-        if (opponent) {
-            return opponent.activeItems
-        } else {
-            return this.props.activeItems
+            if (opponent) {
+                return opponent.activeItems
+            } else {
+                return this.props.activeItems
+            }
         }
+        return this.props.activeItems
     }
 
     getThrowData()  {
@@ -57,6 +61,8 @@ class GameDice extends PureComponent {
         return (
             <SpaceThrow style={{borderBottomWidth: 3, borderTopWidth: 3}}>
                 <Dice activeItems={this.getActiveItemsByUser()} diceNumber={this.state.throwData}/>
+
+                <StartGameAnim />
             </SpaceThrow>
         );
     }

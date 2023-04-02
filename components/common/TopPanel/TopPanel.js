@@ -104,6 +104,7 @@ const TopPanel = styled(Animated.View)`
   justify-content: space-around;
   flex-direction: row;
   width: 98%;
+  z-index: 11;
 `
 
 const mapStateToProps = (state) => ({

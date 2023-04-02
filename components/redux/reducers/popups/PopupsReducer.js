@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import NotEnoughFlashPopup from "../../../managers/popupsManager/popupsComponents/NotEnoughFlashPopup";
 
 let initialState = {
    testBtnsPopup: {visible: false},
@@ -16,6 +17,7 @@ let initialState = {
    deleteAccountPopup: {visible: false, data: null},
    invitationPopup: {visible: false, data: null},
    adFlashPopup: {visible: false, data: null},
+   notEnoughFlashPopup: {visible: false, data: null},
 }
 
 export const popupsReducerSlice = createSlice({
@@ -67,6 +69,9 @@ export const popupsReducerSlice = createSlice({
     setADFlashPopup: (state, action) =>{
       state.adFlashPopup = action.payload
     },
+    setNotEnoughFlashPopup: (state, action) =>{
+      state.notEnoughFlashPopup = action.payload
+    },
   },
 });
 
@@ -85,7 +90,8 @@ export const {
     setRewardsPopup,
     setDeleteAccountPopup,
     setInvitationPopup,
-    setADFlashPopup
+    setADFlashPopup,
+    setNotEnoughFlashPopup
 } = popupsReducerSlice.actions;
 
 export const selectAvatarPopup = state => state.popups.avatarPopup;
@@ -103,6 +109,7 @@ export const selectRewardsPopup = state => state.popups.rewardsPopup;
 export const selectDeleteAccountPopup = state => state.popups.deleteAccountPopup;
 export const selectInvitationPopup = state => state.popups.invitationPopup;
 export const selectADFlashPopup = state => state.popups.adFlashPopup;
+export const selectNotEnoughFlashPopup = state => state.popups.notEnoughFlashPopup;
 
 export default popupsReducerSlice.reducer;
 

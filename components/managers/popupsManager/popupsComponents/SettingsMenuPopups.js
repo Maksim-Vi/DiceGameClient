@@ -6,6 +6,11 @@ import {useDispatch} from "react-redux";
 import Settings from "../../../common/TopPanel/components/Bottom/Settings";
 import {getIosModel} from "../../../utils/utils";
 import Sounds, {soundsType} from "../../../utils/Sounds";
+import ButtonBack from "../../../common/Buttons/Back/ButtonBack";
+import back from "../../../../assets/common/btns/button_page_back.png";
+import styled from "styled-components";
+import {store} from "../../../redux/redux-store";
+import {setActiveTabApp} from "../../../redux/reducers/Websocket/WebsocketReducer";
 
 const margin = 50
 const marginButtons = 30
@@ -17,18 +22,23 @@ const SettingsMenuPopups = () => {
 
     const { width } = useWindowDimensions();
     const dispatch = useDispatch()
-    // const heightPopup = Platform.OS === 'ios'
-    //     ? isIphoneX ? countTabsHeight : countTabsHeight
-    //     : countTabsHeight
 
     const closeModal = () =>{
         Sounds.loadAndPlayFile(soundsType.click2)
         dispatch(setSettingsMenuPopup({visible: false, data: null}))
     }
 
-    return <ModalWrapper modalBG={'default'} width={width - 20} height={countTabsHeight} modalVisible={true}>
+    const goBack = () =>{
+        Sounds.loadAndPlayFile(soundsType.click2)
+        dispatch(setSettingsMenuPopup({visible: false, data: null}))
+    }
+
+    return <>
+        <ModalWrapper modalBG={'default'} width={width - 35} height={countTabsHeight} modalVisible={true} setModalVisible={goBack}>
             <Settings closeModal={closeModal}/>
-    </ModalWrapper>
+        </ModalWrapper>
+    </>
+
 }
 
 export default SettingsMenuPopups;

@@ -1,4 +1,12 @@
 const imagesGameDices = {
+    0: {
+        1: require('./collections/dices/d_0/dice_1.png'),
+        2: require('./collections/dices/d_0/dice_2.png'),
+        3: require('./collections/dices/d_0/dice_3.png'),
+        4: require('./collections/dices/d_0/dice_4.png'),
+        5: require('./collections/dices/d_0/dice_5.png'),
+        6: require('./collections/dices/d_0/dice_6.png'),
+    },
     1: {
         1: require('./collections/dices/d_1/dice_1.png'),
         2: require('./collections/dices/d_1/dice_2.png'),

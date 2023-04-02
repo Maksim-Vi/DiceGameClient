@@ -7,15 +7,16 @@ import {
 } from "../../../../redux/reducers/game/GameReducer"
 import { store } from "../../../../redux/redux-store"
 import C_PAY_BY_GAME from "../../clients/games/C_PAY_BY_GAME";
-import {isProduction} from "../../../../utils/utils";
+import {isProduction, transitionState} from "../../../../utils/utils";
 
 export default class S_CREATED_GAME {
-    constructor(gameId){
+    constructor(gameId,gameType){
 
         this.MESSAG_ENAME = 'S_CREATED_GAME'
         this.showLog = isProduction() ? false : true
 
         this.gameId = gameId
+        this.gameType = gameType
 
         this.init()
     }
@@ -26,6 +27,11 @@ export default class S_CREATED_GAME {
     }
 
     exec() {
+
+        if(this.gameType === 'play_friend'){
+            transitionState('LoadingInvitationGameScreen', {isOwner: true})
+        }
+
         store.dispatch(setCarrentGameId(this.gameId))
         store.dispatch(setThrowData(null))
         store.dispatch(setOpponentThrowData(null))

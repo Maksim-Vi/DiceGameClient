@@ -148,6 +148,10 @@ export default new class GameModel {
         return this.boardCalculator.userPointsCalculate(board)
     }
 
+    destroyGame = () =>{
+        this._destroyData()
+    }
+
     _loadUsers() {
         if(!this.gameSettings.players || this.gameSettings.players.length === 0) return
 

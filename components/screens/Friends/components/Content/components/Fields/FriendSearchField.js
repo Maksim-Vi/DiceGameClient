@@ -48,7 +48,7 @@ const FriendSearchField = (props) => {
 
                 <Content>
                     <AvatarContainer>
-                        <Avatar width={70} height={70} avatarFrame={true} avatarId={props.item.avatar}/>
+                        <Avatar width={70} height={70} avatarFrame={true} avatarId={props.item && props.item.avatar}/>
                     </AvatarContainer>
 
                     <TextContainer>

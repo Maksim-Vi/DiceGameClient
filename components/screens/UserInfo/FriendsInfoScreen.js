@@ -19,14 +19,17 @@ import {getIosModel} from "../../utils/utils";
 import bgTitle from "../../../assets/bg/title_info_text_BG.png";
 import ButtonWithText from "../../common/Buttons/ButtonWithText";
 import C_DELETE_FROM_FRIENDS from "../../protocol/messages/clients/friends/C_DELETE_FROM_FRIENDS";
-import {selectMyUser} from "../../redux/reducers/players/PlayersReducer";
+import {selectMyUser, selectUserFlash} from "../../redux/reducers/players/PlayersReducer";
 import {useNavigation} from "@react-navigation/native";
 import C_SEND_GAME_INVITATION_TO_FRIEND from "../../protocol/messages/clients/friends/C_SEND_GAME_INVITATION_TO_FRIEND";
+import {store} from "../../redux/redux-store";
+import {setNotEnoughFlashPopup} from "../../redux/reducers/popups/PopupsReducer";
 
 const FriendsInfoScreen = (props) => {
 
     const {width} = useWindowDimensions()
     const myUser = useSelector(selectMyUser)
+    const userFlash = useSelector(selectUserFlash)
     const navigation = useNavigation()
 
     const getStatistic = () =>{
@@ -50,6 +53,9 @@ const FriendsInfoScreen = (props) => {
     }
 
     const challenge = () =>{
+        if(userFlash < 1){
+            return store.dispatch(setNotEnoughFlashPopup({visible: true}))
+        }
         if(myUser.username && props.route.params.username){
             new C_SEND_GAME_INVITATION_TO_FRIEND(myUser.username, props.route.params.username)
         }
@@ -90,10 +96,11 @@ const FriendsInfoScreen = (props) => {
                                     text={props.deleteFriend}
                                     color={'#e84d4d'}
                                     clickHandler={deleteFriend} />
-                    <ButtonWithText width={'100px'}
-                                    height={'50px'}
-                                    text={props.challenge}
-                                    clickHandler={challenge} />
+                    {props.route.params.isOnline && <ButtonWithText width={'100px'}
+                                                                    height={'50px'}
+                                                                    text={props.challenge}
+                                                                    clickHandler={challenge} />
+                    }
                 </ButtonContainer>
 
                 <Statistic botStatistic={props.botStatistic}

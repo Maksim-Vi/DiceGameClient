@@ -23,7 +23,6 @@ export default class C_SEND_GAME_INVITATION_TO_FRIEND {
     }
 
     exec() {
-        transitionState('LoadingInvitationGameScreen', {isOwner: true})
         sendMessageWS({
             name: this.MESSAG_ENAME,
             clientIdWs: this.clientIdWebsocket,

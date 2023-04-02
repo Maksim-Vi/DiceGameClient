@@ -32,12 +32,12 @@ export default new class Sounds {
     }
 
     init = () =>{
-        this.enableSounds = selectSoundsInfo(store.getState())
+        if(store) this.enableSounds = selectSoundsInfo(store.getState())
         Sound.setCategory('Playback');
     }
 
     loadAndPlayFile = (fileName) =>{
-        this.enableSounds = selectSoundsInfo(store.getState())
+        if(store) this.enableSounds = selectSoundsInfo(store.getState())
 
         if(!this.enableSounds) return
 

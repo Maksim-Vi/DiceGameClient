@@ -21,6 +21,7 @@ import {StyleSheet} from 'react-native';
 import C_CHANGE_LANGUAGE from "../../../../protocol/messages/clients/C_CHANGE_LANGUAGE";
 import Sounds, {soundsType} from "../../../../utils/Sounds";
 import C_CHANGE_SOUND from "../../../../protocol/messages/clients/C_CHANGE_SOUND";
+import {openComposer, openInbox} from "react-native-email-link";
 
 const selectedData = ['EN', 'UA']
 
@@ -53,8 +54,15 @@ const Settings = (props) =>{
         setMute(!mute)
     }
 
-    const setSupport = () =>{
+    const setSupport = async () =>{
         Sounds.loadAndPlayFile(soundsType.click2)
+        openComposer({
+            to: "maksdev01panel@gmail.com",
+            subject: "I have a question",
+            body: "Hi, can you help me with...",
+        }).catch((err)=>{
+            console.log('ANSWER err', err )
+        })
     }
 
     const deleteAccount = () =>{
@@ -116,10 +124,10 @@ const Settings = (props) =>{
                     </SupportContainer>
                 </Btn>
                 <Btn onPress={deleteAccount} activeOpacity={0.9}>
-                    <LeaveContainer style={{ borderBottomWidth: 3 }}>
+                    <DeleteAccContainer style={{ borderBottomWidth: 3 }}>
                         <Img source={deleteAcc} resizeMode='stretch'/>
                         <Text large blod center color={'#0c6fb6'}>{props.deleteAccount}</Text>
-                    </LeaveContainer>
+                    </DeleteAccContainer>
                 </Btn>
                 <Btn onPress={Logout} activeOpacity={0.9}>
                     <LeaveContainer style={{ borderBottomWidth: 3 }}>
@@ -150,7 +158,7 @@ const ContentContainer = styled.View`
   width: 100%;
 `
 
-const ReturnContainer = styled.View`
+const BtnContainer = styled.View`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -161,10 +169,21 @@ const ReturnContainer = styled.View`
   border-radius: 10px;
   padding: 5px 20px;
 `
-const SoundsContainer = styled(ReturnContainer)``
-const LeaveContainer = styled(ReturnContainer)``
-const SupportContainer = styled(ReturnContainer)``
-const LanguageContainer = styled(ReturnContainer)``
+
+const ReturnContainer = styled(BtnContainer)`
+  background-color: rgb(255, 157, 77);
+  border: 1px solid rgba(0, 0, 0, 0.59);
+`
+const SoundsContainer = styled(BtnContainer)``
+const LeaveContainer = styled(BtnContainer)`
+  border: 1px solid rgb(2, 2, 2);
+`
+const DeleteAccContainer = styled(BtnContainer)`
+  background-color: rgb(241, 92, 79);
+  border: 1px solid rgb(2, 2, 2);
+`
+const SupportContainer = styled(BtnContainer)``
+const LanguageContainer = styled(BtnContainer)``
 
 const Info = styled.View`
   width: 70%;
