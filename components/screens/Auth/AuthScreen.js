@@ -29,10 +29,6 @@ const AuthScreen = () => {
         }
     });
 
-    const onChangeInputs = (name, event) => {
-        setInputChange({...inputData, [name]: event})
-    }
-
     const handlerLogin = async (dataForm) => {
         Sounds.loadAndPlayFile(soundsType.click2)
         setDisableBtn(true)
@@ -68,9 +64,7 @@ const AuthScreen = () => {
                 <AuthContainer>
                     <Logo />
 
-                    <LoginScreen onChangeInputs={onChangeInputs}
-                                 control={control}
-                                 errors={errors}/>
+                    <LoginScreen control={control} errors={errors}/>
                     <ButtonContainer>
                         <LoginBtn disabled={disableBtn} onPress={handleSubmit(handlerLogin)}><Text setShadow={true} small heavy
                                                                                                    color='#fff'
