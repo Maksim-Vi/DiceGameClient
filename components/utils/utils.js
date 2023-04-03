@@ -10,7 +10,7 @@ import moment from 'moment'
 
 export const isProduction = () =>{
     //return process.env.APP_TYPE === 'production'
-    return true
+    return false
 }
 
 export const transitionState = (tab, data = {}) =>{

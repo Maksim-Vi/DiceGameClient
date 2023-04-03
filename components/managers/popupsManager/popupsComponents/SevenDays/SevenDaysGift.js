@@ -30,7 +30,7 @@ const SevenDaysGift = (props) => {
 
             <SevenDaysContainer>
                 <TitleContainer>
-                    <SevenDaysTitle setShadow={true} title blod center>{props.dailyTitle}</SevenDaysTitle>
+                    <SevenDaysTitle setShadow={true} fontSize={28} blod center>{props.dailyTitle}</SevenDaysTitle>
                 </TitleContainer>
 
                 <SevenDaysDesc setShadow={true} madium blod center>{props.dailyDesc}</SevenDaysDesc>
@@ -67,16 +67,17 @@ const SevenDaysContainer = styled.View`
 const CardsContainer = styled.View`
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-evenly;
   flex-direction: row;
   flex-wrap: wrap;
-  width: 90%;
+  width: 100%;
   height: auto;
   margin-top: 10%;
 `
 
 const TitleContainer = styled.View`
-  padding: 10px 20px;
+  width: 90%;
+  padding: 10px;
   border-radius: 15px;
   background-color: #e63349;
   border: 2px solid #a61429;

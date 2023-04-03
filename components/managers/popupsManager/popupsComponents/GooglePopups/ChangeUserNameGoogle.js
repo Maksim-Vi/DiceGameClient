@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import ModalWrapper from "../../../../common/ModalWindows/ModalWrapper";
 import {useWindowDimensions} from "react-native";
 import styled from "styled-components";
@@ -47,6 +47,12 @@ const ChangeUserNameGoogle = (props) => {
     const closeConfirmPopup = () =>{
         dispatch(setGoogleConfirmUsernamePopup({visible: false, data: null}))
     }
+
+    useEffect(()=>{
+        if(updateUsername && updateUsername.length > 8){
+            setError('this field should have only 8 characters')
+        }
+    }, [])
 
     return (
         <ModalWrapper modalBG={'default'} width={width - 100} height={height / 4} modalVisible={true}>
