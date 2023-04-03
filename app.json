@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "knocky dice",
+    "name": "Knocky Dice",
     "slug": "dicegame",
     "owner": "kastom",
     "version": "1.2.7",
@@ -29,7 +29,12 @@
     "ios": {
       "supportsTablet": false,
       "infoPlist": {
-        "LSApplicationQueriesSchemes": ["mailto", "message", "airmail", "googlegmail"],
+        "LSApplicationQueriesSchemes": [
+          "mailto",
+          "message",
+          "airmail",
+          "googlegmail"
+        ],
         "NSAppTransportSecurity": {
           "NSAllowsArbitraryLoads": true,
           "GADIsAdManagerApp": true
@@ -42,7 +47,7 @@
         "backgroundColor": "#FFFFFF"
       },
       "package": "com.anonymous.knockydice",
-      "versionCode": 8
+      "versionCode": 9
     },
     "extra": {
       "APP_TYPE": "production",

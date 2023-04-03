@@ -28,9 +28,7 @@ export default class S_UPDATE_USER_FLASH {
 
     exec() {
         if(this.status === status.success){
-            if(this.flash){
-                store.dispatch(updateCurrentUserFlash(this.flash))
-            }
+            store.dispatch(updateCurrentUserFlash(this.flash))
         } else if(this.status === status.dontHaveFlesh){
             store.dispatch(setInfoPopup({visible: true, data: {text: 'Ops, you dont have flesh'}}))
         } else if(this.status === status.cannotPay){

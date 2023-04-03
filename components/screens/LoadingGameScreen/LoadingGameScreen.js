@@ -10,16 +10,16 @@ import C_ABORDED_GAME from "../../protocol/messages/clients/games/C_ABORDED_GAME
 import Text from "../../common/Text/Text";
 import vs from '../../../assets/loadGame/97368-versus-download-hd.png'
 
-const LoadingGameScreen = () => {
+const LoadingGameScreen = ({route}) => {
 
 	const leaveGame = () =>{
 		const leaveGameId = selectCurrentGameId(store.getState())
 		new C_ABORDED_GAME(leaveGameId)
 	}
-
+	
 	return (
 		<BackgroundWrapper>
-			<ButtonBack leaveGame={leaveGame} goMainPage={true}/>
+			{route.params.gameType !== 1 && <ButtonBack leaveGame={leaveGame} goMainPage={true}/>}
 
 			<Container>
 				<TitleContainer>

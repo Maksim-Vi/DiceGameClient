@@ -42,7 +42,7 @@ export default class C_QUICK_PLAY {
 
     loadLoadingScreen = () =>{
         //window.navigation.navigate('LoadingGameScreen')
-        transitionState('LoadingGameScreen')
+        transitionState('LoadingGameScreen', {gameType: this.gameType})
     }
 
     setClientId(){
