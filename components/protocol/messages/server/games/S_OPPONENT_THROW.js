@@ -25,6 +25,7 @@ export default class S_OPPONENT_THROW {
         store.dispatch(setThrowData(null))
         store.dispatch(setOpponentThrowData({userId: this.userId, username: this.username, diceScore: this.diceScore}))
 
+        GameModel.isYouMove = false
         GameModel.setThrowData(this.diceScore)
     }
 

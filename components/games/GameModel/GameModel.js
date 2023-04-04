@@ -11,7 +11,7 @@ import {
     selectIsYouMove,
     selectOpponentThrowData,
     selectScores,
-    selectThrowData
+    selectThrowData, setIsYouMove, setRestoreGame
 } from "../../redux/reducers/game/GameReducer";
 
 export default new class GameModel {
@@ -78,7 +78,7 @@ export default new class GameModel {
     }
 
     loadRestoreGameData = () =>{
-        let gameId, currentGame, gameSettings, isYouMove, countScores, boardData, throwData
+        let gameId, currentGame, gameSettings, isYouMove, countScores, boardData,userThrowData,opponentThrowData, throwData
         this._destroyData()
 
         gameId = selectCurrentGameId(store.getState())
@@ -87,7 +87,13 @@ export default new class GameModel {
         isYouMove = selectIsYouMove(store.getState())
         countScores = selectCountScores(store.getState())
         boardData = selectScores(store.getState())
-        throwData = isYouMove ? selectThrowData(store.getState()) : selectOpponentThrowData(store.getState())
+
+        userThrowData = selectThrowData(store.getState())
+        opponentThrowData = selectOpponentThrowData(store.getState())
+
+        throwData = isYouMove
+            ? userThrowData
+            : opponentThrowData
 
         this.restoreGameData = {
             gameId: gameId,
@@ -96,23 +102,39 @@ export default new class GameModel {
             isYouMove: isYouMove,
             countScores: countScores,
             boardData: boardData,
-            throwData: throwData ? throwData.diceScore : null
+            throwData: throwData ? throwData.diceScore : null,
+            lastThrowData: throwData
         }
 
         this.setGameData(gameSettings, currentGame)
     }
 
-    setGameRestore = () =>{
-        this.isYouMove = this.restoreGameData.isYouMove
+    updateRestoreGameBot = (userScores, opponentScores,countScoresUser,countScoresOpponent) =>{
+        this.setIsYouMove(true)
+        this.setScores(userScores, opponentScores)
+        this.setUsersMaxScores(countScoresUser,countScoresOpponent)
+        this.loadRestoreGameData()
+    }
 
+    setGameRestore = () =>{
         this.setScores(this.restoreGameData.boardData.userScores,this.restoreGameData.boardData.opponentsScores)
         this.setUsersMaxScores(this.restoreGameData.countScores.scoresUser,this.restoreGameData.countScores.scoresOpponent)
+
+        if(
+            this.restoreGameData.lastThrowData &&
+            this.restoreGameData.lastThrowData.username.toLowerCase() === 'bot'
+        ){
+            this.setIsYouMove(true)
+            return 'throwState'
+        }
+
+        this.isYouMove = this.restoreGameData.isYouMove
 
         return this.restoreGameData.throwData ? 'throwResultState' : 'throwState'
     }
 
     setIsYouMove = (isMove) =>{
-        this.isYouMove = isMove
+        this._isYouMove = isMove
 
         if(isMove){
             Dispatcher.dispatch('model:startUserThrow', null)

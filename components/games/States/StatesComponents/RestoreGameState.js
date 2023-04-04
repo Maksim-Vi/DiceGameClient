@@ -4,7 +4,6 @@ import GameModel from "../../GameModel/GameModel";
 
 export default class RestoreGameState extends State {
     start() {
-        console.log('RESTORE LOAD STATE')
         super.start()
         const state = GameModel.setGameRestore()
 
