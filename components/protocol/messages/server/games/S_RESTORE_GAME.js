@@ -7,6 +7,7 @@ import {
 import {store} from "../../../../redux/redux-store";
 import {selectMyUser, setInvitedOpponent} from "../../../../redux/reducers/players/PlayersReducer";
 import {isProduction} from "../../../../utils/utils";
+import GameModel from "../../../../games/GameModel/GameModel";
 
 export default class S_RESTORE_GAME {
     constructor(username, activeGame, countScores,lastThrow,lastThrowData){
@@ -25,6 +26,8 @@ export default class S_RESTORE_GAME {
     }
 
     init() {
+        this.getUserData()
+        this.updateDataIfBot()
         this.getLogText()
         this.exec()
     }
@@ -54,7 +57,7 @@ export default class S_RESTORE_GAME {
         let mySide = null
         let oppSide = null
         this.activeGame.gameSettings.players.forEach(user=> {
-            if(user.username === this.username){
+            if(user.username.toLowerCase() === this.username.toLowerCase()){
                 mySide = user.side
             } else {
                 oppSide = user.side
@@ -72,6 +75,10 @@ export default class S_RESTORE_GAME {
                 opponentsScores: oppScores
             }))
         }
+
+        return {
+            myScores, oppScores
+        }
     }
 
     setThrowData = () =>{
@@ -81,7 +88,16 @@ export default class S_RESTORE_GAME {
                 return store.dispatch(setThrowData({
                     userId: this.lastThrowData.userId,
                     username: this.lastThrowData.username,
-                    diceScore: this.lastThrowData.diceScore
+                    diceScore: this.lastThrowData.diceScore,
+                }))
+            }
+
+            if(this.lastThrowData.username.toLowerCase() === 'bot'){
+                store.dispatch(setIsYouMove(true))
+                return store.dispatch(setThrowData({
+                    userId: this.id,
+                    username: this.username,
+                    diceScore: null,
                 }))
             }
 
@@ -89,7 +105,7 @@ export default class S_RESTORE_GAME {
             return store.dispatch(setOpponentThrowData({
                 userId: this.lastThrowData.userId,
                 username: this.lastThrowData.username,
-                diceScore: this.lastThrowData.diceScore
+                diceScore: this.lastThrowData.diceScore,
             }))
         }
 
@@ -99,6 +115,15 @@ export default class S_RESTORE_GAME {
         const myUser = selectMyUser(store.getState())
         if (myUser) {
             this.id = myUser.id
+        }
+    }
+
+    updateDataIfBot = () =>{
+        if(this.lastThrowUser.toLowerCase() === 'bot'){
+            const {myScores,oppScores} = this.getScores()
+            const countScoresUser = this.countScores.countScoresUser
+            const countScoresOpponent = this.countScores.countScoresOpponent
+            GameModel.updateRestoreGameBot(myScores, oppScores, countScoresUser,countScoresOpponent)
         }
     }
 

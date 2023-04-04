@@ -13,7 +13,7 @@ class GameDice extends PureComponent {
 
         this.state = {
             throwData: 0,
-            defaultItems: {square: 1000, dice: 0}
+            defaultItems: {square: 1000, dice: 0},
         }
 
     }
@@ -54,7 +54,10 @@ class GameDice extends PureComponent {
     }
 
     getThrowData()  {
-        this.setState({throwData: GameModel.throwData})
+        this.setState({
+            throwData: GameModel.throwData,
+            throwItems: this.getActiveItemsByUser(GameModel.isYouMove)
+        })
     }
 
     render() {

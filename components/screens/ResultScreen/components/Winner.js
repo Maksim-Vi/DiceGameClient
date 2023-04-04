@@ -108,14 +108,14 @@ const Place = styled.Image`
 const NameTextContainer = styled.View`
     display: flex;
     flex-direction: column;
-    width: 20%;
+    width: 25%;
 `
 const WinsContainer = styled.View`
     display: flex;
     flex-direction: column;
     justify-content: center;
     text-align: center;
-    margin-right: 20px;
+    margin-right: 5px;
 `
 const mapStateToProps = (state) => ({
     place: selectTranslation(state,defaultTranslation.TR_PLACE),

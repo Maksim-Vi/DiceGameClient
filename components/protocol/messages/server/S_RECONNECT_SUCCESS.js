@@ -1,4 +1,5 @@
 import {isProduction} from "../../../utils/utils";
+import GameModel from "../../../games/GameModel/GameModel";
 
 export default class S_RECONNECT_SUCCESS {
     constructor(error){
