@@ -2,7 +2,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import styled from "styled-components";
 import DaysCardTitle from "./DaysCardTitle";
 import BlackBgCard from "../../../../common/BackgroundWrapper/BlackBGCard";
-import {Animated, Easing} from "react-native";
+import {Animated, Easing, useWindowDimensions} from "react-native";
 import {setTimingAnimated} from "../../../../utils/Animation";
 import coinsAnim from '../../../../../assets/animation/lottieAnim/coins.json'
 import diamondsAnim from '../../../../../assets/animation/lottieAnim/diamond-evaporate.json'
@@ -11,8 +11,15 @@ import C_CLAIM_SEVEN_DAYS_GIFTS from "../../../../protocol/messages/clients/gift
 import AnimatedLottieView from "lottie-react-native";
 import Sounds, {soundsType} from "../../../../utils/Sounds";
 
+const CARD_PADDING_ROW = 10
+const CARD_PADDING_COLUMN = 20
+const COUNT_CARD_ROW = 3
+const COUNT_CARD_COLUMN = 3
+const COUNT_CARD = 7
+
 const DaysCard = (props) => {
 
+    const {height, width} = useWindowDimensions()
     const {giftItem: {isAvailableClaim, isClaimed, dayNumber}} = props
     let isDisabled = !isAvailableClaim && !isClaimed
 
@@ -65,6 +72,8 @@ const DaysCard = (props) => {
 
     return (
         <DaysCardContainer activeOpacity={isDisabled || isClaimed ? 1 : 0.9}
+                           width={width}
+                           height={height}
                            onPress={claimGift}
                            style={{borderBottomWidth: 5, transform: [{rotate: rotate}]}}>
             <DaysCardTitle title={props.title}/>
@@ -90,9 +99,9 @@ const DaysCardContainer = styled.TouchableOpacity`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 30%;
+  width: ${props=> props.width ? `${((props.width / 3) - (CARD_PADDING_ROW * COUNT_CARD_ROW))}px` : '30%'};
   height: 130px;
-  margin: 5px 5px 20px 5px;
+  margin: 5px;
   border-radius: 20px;
   background-color: #ffefb1;
   border: 2px solid #ed9f39;

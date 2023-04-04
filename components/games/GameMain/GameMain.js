@@ -8,7 +8,6 @@ import GameModel from "../GameModel/GameModel";
 import StatesManager from "../States/StatesManager";
 import {StatesConfig} from "../States/StatesConfig";
 import Dispatcher from "../Events/Dispatcher";
-import StartGameAnim from "../StartGameAnim/StartGameAnim";
 import {selectRestoreGame} from "../../redux/reducers/game/GameReducer";
 import {connect} from "react-redux";
 import {delay} from "../../utils/utils";
@@ -46,7 +45,6 @@ class GameMain extends Component {
                     <GameUsersInfo />
                 </GameFrame>
                 <GameButton />
-                <StartGameAnim />
             </Game>
         );
     }

@@ -40,7 +40,7 @@ const BoardOpponentInfo = (props) => {
                   center>
                 {props.opponent.username || ''}
             </Name>
-            <Avatar width={width / 5} height={80} avatarId={props.opponent.avatar} avatarFrame={true}/>
+            <Avatar width={width / 5} height={80} avatarId={props.opponent ? props.opponent.avatar : 0} avatarFrame={true}/>
 
             <CountContainer width={width}>
                 <Text large blod color={'#fff'}

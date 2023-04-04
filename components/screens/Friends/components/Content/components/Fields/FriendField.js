@@ -10,12 +10,16 @@ import {calcLastTimeOnline, transitionState} from "../../../../../../utils/utils
 import C_SEND_GAME_INVITATION_TO_FRIEND
     from "../../../../../../protocol/messages/clients/friends/C_SEND_GAME_INVITATION_TO_FRIEND";
 import {connect, useSelector} from "react-redux";
-import {selectMyUser} from "../../../../../../redux/reducers/players/PlayersReducer";
+import {selectMyUser, selectUserFlash} from "../../../../../../redux/reducers/players/PlayersReducer";
 import {selectTranslation} from "../../../../../../redux/reducers/language/LanguageReducer";
 import defaultTranslation from "../../../../../../redux/reducers/language/defaultTranslation";
+import {store} from "../../../../../../redux/redux-store";
+import {setNotEnoughFlashPopup} from "../../../../../../redux/reducers/popups/PopupsReducer";
 
 const FriendField = (props) => {
+
     const myUser = useSelector(selectMyUser)
+    const userFlash = useSelector(selectUserFlash)
 
     const isStatusFriend = () =>{
 
@@ -46,6 +50,9 @@ const FriendField = (props) => {
     }
 
     const challenge = () =>{
+        if(userFlash < 1){
+            return store.dispatch(setNotEnoughFlashPopup({visible: true}))
+        }
         if(myUser.username && props.item.username){
             new C_SEND_GAME_INVITATION_TO_FRIEND(myUser.username, props.item.username)
         }
@@ -59,7 +66,7 @@ const FriendField = (props) => {
 
                         <Content>
                             <AvatarContainer>
-                                <Avatar width={70} height={70} avatarFrame={true} avatarId={props.item.avatar}/>
+                                <Avatar width={70} height={70} avatarFrame={true} avatarId={props.item && props.item.avatar}/>
                             </AvatarContainer>
 
                             <TextContainer>

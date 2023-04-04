@@ -1,9 +1,9 @@
 {
   "expo": {
-    "name": "knocky dice",
+    "name": "Knocky Dice",
     "slug": "dicegame",
     "owner": "kastom",
-    "version": "1.2.3",
+    "version": "1.2.7",
     "orientation": "portrait",
     "icon": "./assets/loadGame/icon-game.png",
     "userInterfaceStyle": "light",
@@ -29,6 +29,12 @@
     "ios": {
       "supportsTablet": false,
       "infoPlist": {
+        "LSApplicationQueriesSchemes": [
+          "mailto",
+          "message",
+          "airmail",
+          "googlegmail"
+        ],
         "NSAppTransportSecurity": {
           "NSAllowsArbitraryLoads": true,
           "GADIsAdManagerApp": true
@@ -41,7 +47,7 @@
         "backgroundColor": "#FFFFFF"
       },
       "package": "com.anonymous.knockydice",
-      "versionCode": 2
+      "versionCode": 9
     },
     "extra": {
       "APP_TYPE": "production",
@@ -52,7 +58,11 @@
     },
     "runtimeVersion": {
       "policy": "appVersion"
-    }
+    },
+    "plugins": [
+      "expo-localization",
+      "react-native-email-link"
+    ]
   },
   "react-native-google-mobile-ads": {
     "android_app_id": "ca-app-pub-6421975370931679~3130555324",

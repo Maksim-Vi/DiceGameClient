@@ -34,7 +34,7 @@ const getWSUrl = () =>{
 
 export const openServerConnection = () => {
     if (websocket) {
-        websocket.close();
+        //websocket.close();
         websocket.onopen = null;
         websocket.onerror = null;
         websocket.onclose = null;

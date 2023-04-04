@@ -38,7 +38,7 @@ export default class StatesManager {
     onStateCallback(data) {
         switch (data.event) {
             case 'start':
-                //console.log('==> state start', data.name);
+                console.log('==> state start', data.name);
                 this._currentState = this._states[data.name];
                 Dispatcher.dispatch('stateManager:stateChanged', data.name);
                 Dispatcher.dispatch('stateStart:' + data.name, null);

@@ -3,19 +3,27 @@ import gameIcon from "../../../../../assets/dice/bot2.png";
 import styled from "styled-components";
 import Text from "../../../../common/Text/Text";
 import {selectTranslation} from "../../../../redux/reducers/language/LanguageReducer";
-import {connect, useDispatch} from "react-redux";
+import {connect, useDispatch, useSelector} from "react-redux";
 import defaultTranslation from "../../../../redux/reducers/language/defaultTranslation";
 import Sounds, {soundsType} from "../../../../utils/Sounds";
 import bgGame from "../../../../../assets/common/btns/GameBtnBlue.png";
-import {setBotGameTypesPopup} from "../../../../redux/reducers/popups/PopupsReducer";
-import {Platform, View} from "react-native";
+import {
+    setBotGameTypesPopup,
+    setNotEnoughFlashPopup
+} from "../../../../redux/reducers/popups/PopupsReducer";
+import {selectUserFlash} from "../../../../redux/reducers/players/PlayersReducer";
+import {store} from "../../../../redux/redux-store";
 
 const GameWithBot = (props) => {
 
     const dispatch = useDispatch()
+    const userFlash = useSelector(selectUserFlash)
 
     const handelClick = () => {
         Sounds.loadAndPlayFile(soundsType.click2)
+        if(userFlash < 1){
+            return store.dispatch(setNotEnoughFlashPopup({visible: true}))
+        }
         dispatch(setBotGameTypesPopup({visible: true, data: null}))
     }
 

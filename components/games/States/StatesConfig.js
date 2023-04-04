@@ -27,31 +27,47 @@ export const StatesConfig = [
         ]
     },
     { name: 'throwState', class: ThrowState, transitions: [
-            { to: 'throwResultState', condition: function () {
-                    return true;
+            { to: 'throwResultState', condition: function (data) {
+                    return data === 'throwResult';
                 }
-            }
+            },
+            { to: 'restoreGameState', condition: function (data) {
+                    return data === 'restoreGame';
+                }
+            },
         ]
     },
     { name: 'throwResultState', class: ThrowResultState, transitions: [
-            { to: 'boardResultState', condition: function () {
-                    return true;
+            { to: 'boardResultState', condition: function (data) {
+                    return data === 'boardResult';
                 }
-            }
+            },
+            { to: 'restoreGameState', condition: function (data) {
+                    return data === 'restoreGame';
+                }
+            },
         ]
     },
     { name: 'boardResultState', class: BoardResultState, transitions: [
-            { to: 'maxScoresUsersState', condition: function () {
-                    return true;
+            { to: 'maxScoresUsersState', condition: function (data) {
+                    return data === 'maxScoresUsers';
                 }
-            }
+            },
+            { to: 'restoreGameState', condition: function (data) {
+                    return data === 'restoreGame';
+                }
+            },
         ]
     },
     { name: 'maxScoresUsersState', class: MaxScoresUsersState, transitions: [
-            { to: 'idleState', condition: function () {
-                    return true;
+            { to: 'idleState', condition: function (data) {
+                    return data === 'idle';
                 }
-            }
+            },
+            { to: 'restoreGameState', condition: function (data) {
+                    return data === 'restoreGame';
+                }
+            },
         ]
     },
     { name: 'restoreGameState', class: RestoreGameState, transitions: [

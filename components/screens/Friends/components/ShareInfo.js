@@ -16,8 +16,7 @@ const ShareInfo = (props) => {
         try {
             await Share.share({
                 title: 'Knocky Dice',
-                //message: 'Try to play with me "Knocky Dice": awesome dice game',
-                url: props.shareURL
+                message: `Try to play with me "Knocky Dice": ${props.shareURL}`,
             });
         } catch (error) {
             dispatch(setInfoPopup({

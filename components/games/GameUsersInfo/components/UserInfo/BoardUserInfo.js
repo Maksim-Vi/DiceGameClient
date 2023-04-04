@@ -39,7 +39,7 @@ const BoardUserInfo = (props) => {
                              color={'#fff'}>{props.countScores ? props.countScores.scoresUser : 0}</CountScores>
             </CountContainer>
 
-            <Avatar width={width / 5} height={80} avatarId={props.user.avatar} avatarFrame={true}/>
+            <Avatar width={width / 5} height={80} avatarId={props.user ? props.user.avatar : 0} avatarFrame={true}/>
             <Name setShadow={true}
                   shadowRadius={1}
                   shadowOffset={{width: -1, height: 2}}

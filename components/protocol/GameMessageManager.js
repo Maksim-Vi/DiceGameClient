@@ -18,17 +18,21 @@ import S_GAME_BROKEN from "./messages/server/games/S_GAME_BROKEN";
 import S_CAN_JOIN_TO_GAME from "./messages/server/games/S_CAN_JOIN_TO_GAME";
 import S_USER_LOST_CONNECTION_IN_GAME from "./messages/server/games/S_USER_LOST_CONNECTION_IN_GAME";
 import S_RESTORE_GAME from "./messages/server/games/S_RESTORE_GAME";
+import S_JOIN_FAILED from "./messages/server/games/S_JOIN_FAILED";
 
 export const gameHandlerMessage = (data) =>{
     switch (data.name) {
         case 'S_CREATED_GAME':
-            new S_CREATED_GAME(data.gameId)
+            new S_CREATED_GAME(data.gameId, data.gameType)
             break;
         case 'S_CAN_JOIN_TO_GAME':
             new S_CAN_JOIN_TO_GAME(data.gameId)
             break;
         case 'S_JOIN_SUCCESS':
             new S_JOIN_SUCCESS(data)
+            break;
+        case 'S_JOIN_FAILED':
+            new S_JOIN_FAILED(data)
             break;
         case 'S_WAITING_OPPONENT':
             new S_WAITING_OPPONENT(data)

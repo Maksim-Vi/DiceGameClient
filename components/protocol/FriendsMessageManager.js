@@ -8,7 +8,7 @@ import S_FRIEND_ACCEPTED_INVITATION from "./messages/server/friends/S_FRIEND_ACC
 export const friendsHandlerMessage = (data) => {
     switch (data.name) {
         case 'S_FRIEND_INVITATION_TROUBLES':
-            new S_FRIEND_INVITATION_TROUBLES(data.username,data.friendUsername,data.message)
+            new S_FRIEND_INVITATION_TROUBLES(data.username,data.friendUsername, data.reason, data.message)
             break;
         case 'S_GET_DETAIL_FRIEND_INFO':
             new S_GET_DETAIL_FRIEND_INFO(data.username,data.userFriend)

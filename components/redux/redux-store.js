@@ -10,6 +10,7 @@ import RoadReducer from "./reducers/road/RoadReducer";
 import AdvertisingReducer from "./reducers/AD/AdvertisingReducer";
 import LanguageReducer from "./reducers/language/LanguageReducer";
 import GiftsReducer from "./reducers/gifts/GiftsReducer";
+import TopPanelReducer from "./reducers/topPanel/TopPanelReducer";
 
 export const store = configureStore({
   reducer: {
@@ -25,6 +26,7 @@ export const store = configureStore({
     chat: ChatReducer,
     road: RoadReducer,
     gifts: GiftsReducer,
+    topPanel: TopPanelReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
 });

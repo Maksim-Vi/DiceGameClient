@@ -40,13 +40,15 @@ class GameUsersInfo extends PureComponent {
         return (
             <UsersInfoContainer>
                 <Opponent>
-                    <BoardOpponentInfo opponent={GameModel.opponent}
-                                       countScores={this.state.countScores}/>
+                    {GameModel.opponent && <BoardOpponentInfo opponent={GameModel.opponent}
+                                                              countScores={this.state.countScores}/>
+                    }
                 </Opponent>
                 <User>
-                    <BoardUserInfo user={GameModel.user}
-                                   setThrowBtn={this.showStartGameAnim}
-                                   countScores={this.state.countScores}/>
+                    {GameModel.user && <BoardUserInfo user={GameModel.user}
+                                                      setThrowBtn={this.showStartGameAnim}
+                                                      countScores={this.state.countScores}/>
+                    }
                 </User>
             </UsersInfoContainer>
         );

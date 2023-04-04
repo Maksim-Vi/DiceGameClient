@@ -33,7 +33,7 @@ const FriendConfirmField = (props) => {
 
                 <Content>
                     <AvatarContainer>
-                        <Avatar width={70} height={70} avatarFrame={true} avatarId={props.item.avatarSender}/>
+                        <Avatar width={70} height={70} avatarFrame={true} avatarId={props.item && props.item.avatarSender}/>
                     </AvatarContainer>
 
                     <TextContainer>
