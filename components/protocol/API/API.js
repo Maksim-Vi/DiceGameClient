@@ -30,7 +30,7 @@ export const postLoginApi = async (username, password) => {
 }
 
 export const postGoogleLoginOrRegister = async (username, password, email, googleAvatar) => {
-    let data = { username: username, password: password, email: email, googleAvatar: googleAvatar, lang: getDeviceLocation() || 'EN' }
+    let data = { username: username, password: password, email: email, googleAvatar: googleAvatar, lang: 'EN' }
 
     const refreshToken = (equest, type, bodyData) =>{
 
@@ -55,8 +55,8 @@ export const postGoogleLoginOrRegister = async (username, password, email, googl
     return await getFetchUrl('googleLoginOrRegister', 'POST', data, refreshToken, callback)
 }
 
-export const postUpdateGoogleUsername = async (username, email) => {
-    let data = { username: username, email: email }
+export const postUpdateGoogleUsername = async (username, email, language) => {
+    let data = { username: username, email: email, lang: language}
 
     const refreshToken = (request, type, bodyData) =>{
         if(request && type){

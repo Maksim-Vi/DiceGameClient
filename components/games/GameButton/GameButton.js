@@ -36,10 +36,8 @@ class GameButton extends PureComponent {
     }
 
     handlerThrowGame = () =>{
-        const {id, username} = GameModel.user
-
-        if(GameModel.user && username && this.state.isYouMove){
-            new C_THROW(id, username, GameModel.gameId)
+        if(GameModel && GameModel.user && GameModel.user.username && this.state.isYouMove){
+            new C_THROW(GameModel.user.id, GameModel.user.username, GameModel.gameId)
             this.setState({isYouMove: false})
         }
     }

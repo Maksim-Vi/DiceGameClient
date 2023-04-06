@@ -6,11 +6,10 @@ import DeviceInfo from "react-native-device-info";
 import {NativeModules, Platform} from "react-native";
 import GameModel from "../games/GameModel/GameModel";
 import moment from 'moment'
-//import Localization from 'expo-localization';
 
 export const isProduction = () =>{
     //return process.env.APP_TYPE === 'production'
-    return false
+    return true
 }
 
 export const transitionState = (tab, data = {}) =>{
@@ -19,14 +18,6 @@ export const transitionState = (tab, data = {}) =>{
         store.dispatch(setActiveTabApp(tab))
     }
 }
-
-export const getLocal = () =>{
-    //const info = Localization.locale()
-
-    //console.log('ANSWER', info)
-}
-
-
 
 export const getDeviceLocation = () =>{
     const deviceLanguage =

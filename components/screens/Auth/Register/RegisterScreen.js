@@ -16,6 +16,8 @@ import {useDispatch} from "react-redux";
 import Sounds, {soundsType} from "../../../utils/Sounds";
 import Logo from "../../../common/Logo/Logo";
 import {getDeviceLocation} from "../../../utils/utils";
+import DropdownLanguage from "../DropDownLanguage/DropdownLanguage";
+import back from "../../../../assets/common/btns/button_page_back.png";
 
 const RegisterScreen = () => {
 
@@ -24,6 +26,7 @@ const RegisterScreen = () => {
 
     const dispatch = useDispatch()
     const navigation = useNavigation()
+    const [language, setLanguage] = useState('EN')
     const [showPassword, setShowPassword] = useState(true)
     const [disableBtn, setEnableBtn] = useState(false)
     const {register, control, handleSubmit, formState: {errors}} = useForm({
@@ -42,10 +45,10 @@ const RegisterScreen = () => {
         }
     }
 
-    const hendlerRegister = async (dataForm) => {
+    const handlerRegister = async (dataForm) => {
         Sounds.loadAndPlayFile(soundsType.click2)
         setEnableBtn(true)
-        const data = await postRegisterApi(dataForm.username, dataForm.email, dataForm.password, getDeviceLocation())
+        const data = await postRegisterApi(dataForm.username, dataForm.email, dataForm.password, language)
 
         if (data && data.success) {
             setEnableBtn(false)
@@ -95,7 +98,7 @@ const RegisterScreen = () => {
                     <GameBack onPress={() => {
                         navigation.goBack()
                     }}>
-                        <Ionicons name='arrow-back' size={38} color={'#000'}/>
+                        <BackImg source={back} style={{transform: [{rotate: '-180deg'}]}}/>
                     </GameBack>
                     <InputsContainer>
                         <Logo />
@@ -153,9 +156,12 @@ const RegisterScreen = () => {
                                     )}
                         />
                         {getErrPassword()}
+
+                        <DropdownLanguage language={language} setLanguage={setLanguage}/>
+
                     </InputsContainer>
                     <BtnContainer>
-                        <RegisterBtn disabled={disableBtn} onPress={handleSubmit(hendlerRegister)}>
+                        <RegisterBtn disabled={disableBtn} onPress={handleSubmit(handlerRegister)}>
                             <Text setShadow={true} small heavy color='#fff'>Register</Text>
                         </RegisterBtn>
                     </BtnContainer>
@@ -183,7 +189,7 @@ const InputsContainer = styled.View`
 `
 const BtnContainer = styled.View`
   width: ${Platform.OS === 'ios' ? '100%' : '80%'};
-  margin-top: 30px;
+  margin-top: 20px;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
@@ -246,4 +252,9 @@ const ViewPassword = styled.View`
   right: 50px;
   top: 17px;
 `
+const BackImg = styled.Image`
+  width: 40px;
+  height: 40px;
+`
+
 export default RegisterScreen

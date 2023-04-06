@@ -5,7 +5,7 @@ import Text from '../../common/Text/Text'
 import {useNavigation} from '@react-navigation/native'
 import LoginScreen from './Login/LoginScreen'
 import {postLoginApi} from '../../protocol/API/API'
-import {Keyboard, TouchableWithoutFeedback} from 'react-native'
+import {Keyboard, Platform, TouchableWithoutFeedback} from 'react-native'
 import Divider from "../../common/Divider/Divider";
 import {useForm} from 'react-hook-form'
 import bag from '../../../assets/bg/main_bg.jpg'
@@ -49,8 +49,17 @@ const AuthScreen = () => {
            ? process.env.APP_TYPE + ':game version:'
            : 'game version:'
     }
+
     const getVersion = () =>{
         return appJSON.expo.version
+    }
+
+    const getVersionIndex = () =>{
+        if(Platform.OS === 'android'){
+            return `:${appJSON.expo.android.versionCode}`
+        } else if(Platform.OS === 'ios'){
+            return `:0${1}`
+        }
     }
 
     const handlerRegister = () => {
@@ -63,20 +72,20 @@ const AuthScreen = () => {
             <TouchableWithoutFeedback style={{flex: 1}} onPress={Keyboard.dismiss} accessible={false}>
                 <AuthContainer>
                     <Logo />
-
                     <LoginScreen control={control} errors={errors}/>
                     <ButtonContainer>
-                        <LoginBtn disabled={disableBtn} onPress={handleSubmit(handlerLogin)}><Text setShadow={true} small heavy
-                                                                                                   color='#fff'
-                                                                                                   center>Login</Text></LoginBtn>
+                        <LoginBtn disabled={disableBtn} onPress={handleSubmit(handlerLogin)}>
+                            <Text setShadow={true} small heavy color='#fff' center>Login</Text>
+                        </LoginBtn>
                         <Divider text={'or'} padding={10} color={'black'}/>
-                        <RegisterBtn onPress={handlerRegister}><Text setShadow={true} small heavy color='#fff'
-                                                                     center>Register</Text></RegisterBtn>
+                        <RegisterBtn onPress={handlerRegister}>
+                            <Text setShadow={true} small heavy color='#fff' center>Register</Text>
+                        </RegisterBtn>
                         <GoogleAuth />
                     </ButtonContainer>
 
                         <TextPlatform blod small color={'#fff'}>
-                            {getDevType()}{getVersion()}
+                            {getDevType()}{getVersion()}{getVersionIndex()}
                         </TextPlatform>
 
                 </AuthContainer>

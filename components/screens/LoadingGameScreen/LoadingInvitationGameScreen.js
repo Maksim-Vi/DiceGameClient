@@ -6,15 +6,17 @@ import Text from "../../common/Text/Text";
 import vs from '../../../assets/friends/VS.png'
 import {transitionState} from "../../utils/utils";
 import InvitationUserFrame from "./components/Invitation/InvitationUserFrame";
-import {useSelector} from "react-redux";
+import {connect, useSelector} from "react-redux";
 import {selectMyUser} from "../../redux/reducers/players/PlayersReducer";
 import C_ABORDED_GAME from "../../protocol/messages/clients/games/C_ABORDED_GAME";
 import {selectInvitedOpponent} from "../../redux/reducers/players/friendsSelectors";
 import ButtonWithText from "../../common/Buttons/ButtonWithText";
 import C_START_GAME_WITH_FRIEND from "../../protocol/messages/clients/games/C_START_GAME_WITH_FRIEND";
 import {selectCurrentGameId} from "../../redux/reducers/game/GameReducer";
+import {selectTranslation} from "../../redux/reducers/language/LanguageReducer";
+import defaultTranslation from "../../redux/reducers/language/defaultTranslation";
 
-const LoadingInvitationGameScreen = ({route}) => {
+const LoadingInvitationGameScreen = ({route, ...props}) => {
 
     const myUser = useSelector(selectMyUser)
     const currentGameId = useSelector(selectCurrentGameId)
@@ -41,7 +43,7 @@ const LoadingInvitationGameScreen = ({route}) => {
 
             <Container>
                 <TitleContainer>
-                    <Text setShadow={true} large blod center>Searching opponent</Text>
+                    <Text setShadow={true} large blod center>{props.searching}</Text>
                 </TitleContainer>
 
                 <LoadingContainer>
@@ -58,10 +60,10 @@ const LoadingInvitationGameScreen = ({route}) => {
                                           color={'#5acb57'}
                                           text={'Start Game'}
                                           clickHandler={startGame}/>
-                        : <Text setShadow={true} small blod center>Waiting to play</Text>
+                        : <Text setShadow={true} small blod center>{props.waitingGame}</Text>
                     : invitedOpponent && route.params.isOwner
-                        ? <Text setShadow={true} small blod center>Waiting for player...</Text>
-                        : <Text setShadow={true} small blod center>Waiting to play</Text>
+                        ? <Text setShadow={true} small blod center>{props.waitingPlayer}</Text>
+                        : <Text setShadow={true} small blod center>{props.waitingGame}</Text>
                 }
 
             </Container>
@@ -101,4 +103,10 @@ const TitleContainer = styled.View`
 	border: 3px solid #2b4b8d;
 `
 
-export default LoadingInvitationGameScreen
+const mapStateToProps = (state) => ({
+    searching: selectTranslation(state, defaultTranslation.TR_SEARCHING_OPPONENT),
+    waitingPlayer: selectTranslation(state, defaultTranslation.TR_WAITING_TO_PLAY),
+    waitingGame: selectTranslation(state, defaultTranslation.TR_WAITING_TO_PLAY),
+})
+
+export default connect(mapStateToProps)(LoadingInvitationGameScreen);

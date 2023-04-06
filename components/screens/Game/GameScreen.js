@@ -6,29 +6,19 @@ import {store} from '../../redux/redux-store'
 import {selectCurrentGameId} from '../../redux/reducers/game/GameReducer'
 import back from "../../../assets/common/btns/button_page_back.png";
 import GameLoader from "../../games/GameLoader";
-import {transitionState} from "../../utils/utils";
-import {selectClientIdWebsocket} from "../../redux/reducers/Websocket/WebsocketReducer";
-import C_RECONNECT from "../../protocol/messages/clients/C_RECONNECT";
-import {sendMessageWSTEST, websocket} from "../../protocol/websocet";
 
 const GameScreen = () => {
-
 
     const [isPress, setPress] = useState(false)
 
     const leaveGame = () => {
         if(isPress) return null
 
-      //transitionState('App')
         const leaveGameId = selectCurrentGameId(store.getState())
         if (leaveGameId) {
             new C_ABORDED_GAME(leaveGameId)
             setPress(true)
         }
-    }
-
-    const  restore = () => {
-        websocket.close()
     }
 
     useEffect(()=>{
@@ -43,9 +33,6 @@ const GameScreen = () => {
         <BackgroundWrapper>
             <GameBack onPress={leaveGame}>
                 <BackImg source={back} style={{transform: [{rotate: '-180deg'}]}}/>
-            </GameBack>
-            <GameBack onPress={restore}>
-                <BackImg source={back} style={{position: 'absolute', left: 100}}/>
             </GameBack>
             <GameWrap>
                 <GameLoader />

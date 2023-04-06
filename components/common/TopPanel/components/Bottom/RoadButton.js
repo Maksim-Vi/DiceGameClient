@@ -8,12 +8,15 @@ import {useSelector} from "react-redux";
 import Sounds, {soundsType} from "../../../../utils/Sounds";
 import bg from "../../../../../assets/topPanel/btns/button.png";
 import BackgroundButtons from "../../../BackgroundWrapper/BackgroundButtons";
+import {selectTranslation} from "../../../../redux/reducers/language/LanguageReducer";
+import defaultTranslation from "../../../../redux/reducers/language/defaultTranslation";
 
 const RoadButton = () =>{
 
     const navigaion = useNavigation()
     const availableToClaimMissionsRoad = useSelector(state => state.road.availableToClaimMissionsRoad)
-    
+    const road = useSelector(state => selectTranslation(state, defaultTranslation.TR_ROAD))
+
     const OpenRoad = () => {
         Sounds.loadAndPlayFile(soundsType.click2)
         navigaion.navigate('RoadScreen')
@@ -25,7 +28,7 @@ const RoadButton = () =>{
                 {availableToClaimMissionsRoad > 0 && <InfoButton count={availableToClaimMissionsRoad}/>}
                 <RoadImg source={roadImg} resizeMode='stretch'/>
                 <RoadTextContainer>
-                    <Text setShadow={true} madium blod center>Road</Text>
+                    <Text setShadow={true} madium blod center>{road}</Text>
                 </RoadTextContainer>
             </RoadBtn>
         </BtnBackground>

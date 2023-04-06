@@ -83,11 +83,15 @@ const ResultScreen = (props) => {
 	}
 
     const getWinner = (winner) =>{
-        return <Winner winner={winner} userId={props.userId}/>
+        if(winner){
+            return <Winner winner={winner} userId={props.userId}/>
+        }
     }
 
     const getLoser = (loser) => {
-        return <Loser loser={loser} userId={props.userId}/>
+        if(loser){
+            return <Loser loser={loser} userId={props.userId}/>
+        }
     }
 
     const renderResult = () =>{
@@ -133,7 +137,6 @@ const ResultScreen = (props) => {
     const getADButton = () =>{
 
         const myUser = props.result.players.find(user => +user.id === +props.userId)
-        animateVideoBtn()
 
         if( props.ENABLE_AD_AFTER_GAME &&
             isLoaded &&
@@ -141,6 +144,7 @@ const ResultScreen = (props) => {
             myUser?.id === props.userId &&
             advertising.countShowless >= advertising.numberCanMissGameAd
         ){
+            animateVideoBtn()
             return  <PlayVideoButtonContainer style={{
                 transform: [
                     {

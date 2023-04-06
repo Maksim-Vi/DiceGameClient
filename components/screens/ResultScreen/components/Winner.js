@@ -23,7 +23,7 @@ const Winner = ({winner, ...props}) => {
 	}
    
     React.useEffect(()=>{
-        if(winner.player.id === props.userId){
+        if(winner && winner.player.id === props.userId){
             Sounds.loadAndPlayFile(soundsType.roundFinish)
         }
 
@@ -52,19 +52,19 @@ const Winner = ({winner, ...props}) => {
             <Container>
                 <PlaceContainer>
                     <Place source={place} resizeMode={ 'stretch'}/>
-                    <Avatar width={50} height={50} avatarFrame={true} avatarId={winner.player ? winner.player.avatar : 0}/>
+                    <Avatar width={50} height={50} avatarFrame={true} avatarId={winner && winner.player ? winner.player.avatar : 0}/>
                 </PlaceContainer>
 
                 <NameTextContainer>
-                    <Text numberOfLines={1} title heavy color={'#170231'}>{winner.player.username}</Text>
-                    <Text color={'#fff'}>{props.place} №1</Text>
+                    <Text numberOfLines={1} title heavy color={'#170231'}>{winner.player.username || ''}</Text>
+                    <Text color={'#fff'}>{props.place || 0} №1</Text>
                 </NameTextContainer>
 
                 <WinsContainer>
-                    <Text numberOfLines={1} medium heavy color={'#fff'}>{props.coins}: {winner.items.coins}</Text>
-                    <Text numberOfLines={1} medium heavy color={'#fff'}>{props.diamonds}: {winner.items.crystals}</Text>
+                    <Text numberOfLines={1} medium heavy color={'#fff'}>{props.coins}: {winner.items.coins || 0}</Text>
+                    <Text numberOfLines={1} medium heavy color={'#fff'}>{props.diamonds}: {winner.items.crystals || 0}</Text>
                     <Text numberOfLines={1} medium heavy color={'#000'}> {props.combinations}:
-                        <Text large heavy color={'#fff'}> {winner.items.scores}</Text>
+                        <Text large heavy color={'#fff'}> {winner.items.scores || 0}</Text>
                     </Text>
                 </WinsContainer>
 

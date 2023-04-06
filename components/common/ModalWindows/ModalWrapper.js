@@ -1,13 +1,12 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styled from "styled-components";
 import Modal from "react-native-modal";
 import DefaultBG from './ModalBackgrounds/DefaultBG';
 import Close from '../Buttons/Close/Close';
 import {Platform, StatusBar, useWindowDimensions} from 'react-native';
-import {PresentationStyle} from "react-native-modal/dist/types";
 
 const ModalWrapper = (props) => {
-   
+
     const {modalBG, swipe, modalVisible,setModalVisible,children} = props
 
     const renderModalBG = () =>{

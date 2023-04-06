@@ -11,18 +11,20 @@ import {
     setGoogleConfirmUsernamePopup,
     setInfoPopup
 } from "../../../../redux/reducers/popups/PopupsReducer";
+import DropdownLanguage from "../../../../screens/Auth/DropDownLanguage/DropdownLanguage";
 
 const ChangeUserNameGoogle = (props) => {
 
     const googleConfirmUsernamePopup = useSelector(state => selectGoogleConfirmUsernamePopup(state))
     const [updateUsername, setUpdateUsername] = useState(googleConfirmUsernamePopup.data.username)
+    const [language, setLanguage] = useState('EN')
     const [error, setError] = useState(null)
     const {height, width} = useWindowDimensions();
     const dispatch = useDispatch()
 
     const confirm = async () =>{
         if(googleConfirmUsernamePopup.data.username && !error){
-            const googleUpdate = await postUpdateGoogleUsername(updateUsername, googleConfirmUsernamePopup.data.email)
+            const googleUpdate = await postUpdateGoogleUsername(updateUsername, googleConfirmUsernamePopup.data.email,language)
 
             if(googleUpdate && googleUpdate.success){
                 closeConfirmPopup()
@@ -55,13 +57,15 @@ const ChangeUserNameGoogle = (props) => {
     }, [])
 
     return (
-        <ModalWrapper modalBG={'default'} width={width - 100} height={height / 4} modalVisible={true}>
+        <ModalWrapper modalBG={'default'} width={width - 100} height={height / 3} modalVisible={true}>
             <Container>
                 <ChangeNameContainer>
                     <TextTitle setShadow={true} large blod center color={'#ffffff'}>Change or confirm you username</TextTitle>
                     <Name onChangeText={updateName}
                           value={updateUsername}/>
                     {error && <Text small heavy color={'#d92f2f'} center>{error}</Text>}
+
+                    <DropdownLanguage language={language} setLanguage={setLanguage}/>
                 </ChangeNameContainer>
                 <ButtonContainer>
                     <ButtonWithText clickHandler={closeConfirmPopup} width={'45%'} text={'Leave Game'} color={'#ff6262'}/>

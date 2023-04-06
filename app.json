@@ -3,7 +3,7 @@
     "name": "Knocky Dice",
     "slug": "dicegame",
     "owner": "kastom",
-    "version": "1.2.8",
+    "version": "1.2.9",
     "orientation": "portrait",
     "icon": "./assets/loadGame/icon-game.png",
     "userInterfaceStyle": "light",
@@ -12,12 +12,6 @@
       "resizeMode": "cover",
       "backgroundColor": "#ffffff",
       "fontSize": "18px"
-    },
-    "androidStatusBar": {
-      "hidden": true
-    },
-    "androidNavigationBar": {
-      "visible": "immersive"
     },
     "updates": {
       "fallbackToCacheTimeout": 0,
@@ -47,7 +41,7 @@
         "backgroundColor": "#FFFFFF"
       },
       "package": "com.anonymous.knockydice",
-      "versionCode": 10
+      "versionCode": 11
     },
     "extra": {
       "APP_TYPE": "production",
@@ -58,6 +52,12 @@
     },
     "runtimeVersion": {
       "policy": "appVersion"
+    },
+    "androidStatusBar": {
+      "hidden": true
+    },
+    "androidNavigationBar": {
+      "visible": "immersive"
     },
     "plugins": [
       "expo-localization",

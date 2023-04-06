@@ -25,7 +25,7 @@ const Loser = ({loser, ...props}) => {
 	}
    
     React.useEffect(()=>{
-        if(loser.player.id === props.userId){
+        if(loser && loser.player.id === props.userId){
             Sounds.loadAndPlayFile(soundsType.roundFinishLose)
         }
         animateWinner()
@@ -52,20 +52,20 @@ const Loser = ({loser, ...props}) => {
         }}>
             <Container>
                 <PlaceContainer>
-                    <Place source={place} resizeMode={ 'stretch'}/>
-                    <Avatar width={50} height={50} avatarFrame={true} avatarId={loser.player && loser.player.avatar}/>
+                    <Place source={place} resizeMode={'stretch'}/>
+                    <Avatar width={50} height={50} avatarFrame={true} avatarId={loser && loser.player ? loser.player.avatar : 0}/>
                 </PlaceContainer>
 
                 <NameTextContainer>
-                    <Text numberOfLines={1} title heavy color={'#170231'}>{loser.player.username}</Text>
-                    <Text color={'#fff'}>{props.place} №2</Text>
+                    <Text numberOfLines={1} title heavy color={'#170231'}>{loser.player.username || ''}</Text>
+                    <Text color={'#fff'}>{props.place || 0} №2</Text>
                 </NameTextContainer>
 
                 <WinsContainer>
-                    <Text numberOfLines={1} medium heavy color={'#fff'}>{props.coins}: {loser.items.coins}</Text>
-                    <Text numberOfLines={1} medium heavy color={'#fff'}>{props.diamonds}: {loser.items.crystals}</Text>
+                    <Text numberOfLines={1} medium heavy color={'#fff'}>{props.coins}: {loser.items.coins || 0}</Text>
+                    <Text numberOfLines={1} medium heavy color={'#fff'}>{props.diamonds}: {loser.items.crystals || 0}</Text>
                     <Text numberOfLines={1} medium heavy color={'#000'}> {props.combinations}:
-                        <Text large heavy color={'#fff'}> {loser.items.scores}</Text>
+                        <Text large heavy color={'#fff'}> {loser.items.scores || 0}</Text>
                     </Text>
                 </WinsContainer>
             </Container>

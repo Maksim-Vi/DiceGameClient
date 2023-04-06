@@ -7,11 +7,14 @@ import Sounds, {soundsType} from "../../../../utils/Sounds";
 import bg from "../../../../../assets/topPanel/btns/rewards.png";
 import Text from "../../../Text/Text";
 import {setRewardsPopup} from "../../../../redux/reducers/popups/PopupsReducer";
+import {selectTranslation} from "../../../../redux/reducers/language/LanguageReducer";
+import defaultTranslation from "../../../../redux/reducers/language/defaultTranslation";
 
 const RewardsButton = () =>{
 
     const dispatch = useDispatch()
     const availableToClaim = useSelector(selectAvailableToClaim)
+    const rewards = useSelector(state => selectTranslation(state, defaultTranslation.TR_REWARDS))
 
     const OpenSevenDays = () => {
         Sounds.loadAndPlayFile(soundsType.click2)
@@ -22,7 +25,7 @@ const RewardsButton = () =>{
         <BtnBackground source={bg} resizeMode={'stretch'}>
             <RewardBtn onPress={OpenSevenDays} activeOpacity={0.9}>
                 {availableToClaim && +availableToClaim > 0 ? <InfoButton count={String(availableToClaim)}/> : null}
-                <Text setShadow={true} large blod center>Rewards</Text>
+                <Text setShadow={true} large blod center>{rewards}</Text>
             </RewardBtn>
         </BtnBackground>
     )

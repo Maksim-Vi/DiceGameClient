@@ -9,8 +9,11 @@ import {store} from "../../redux/redux-store";
 import C_ABORDED_GAME from "../../protocol/messages/clients/games/C_ABORDED_GAME";
 import Text from "../../common/Text/Text";
 import vs from '../../../assets/loadGame/97368-versus-download-hd.png'
+import {connect} from "react-redux";
+import {selectTranslation} from "../../redux/reducers/language/LanguageReducer";
+import defaultTranslation from "../../redux/reducers/language/defaultTranslation";
 
-const LoadingGameScreen = ({route}) => {
+const LoadingGameScreen = ({route, ...props}) => {
 
 	const leaveGame = () =>{
 		const leaveGameId = selectCurrentGameId(store.getState())
@@ -23,14 +26,14 @@ const LoadingGameScreen = ({route}) => {
 
 			<Container>
 				<TitleContainer>
-					<Text setShadow={true} large blod center>Searching Game</Text>
+					<Text setShadow={true} large blod center>{props.searching}</Text>
 				</TitleContainer>
 				<LoadingContainer>
 					<OpponentFrame />
 					<VSImage source={vs} resizeMode={ 'stretch'}/>
 					<UserFrame />
 				</LoadingContainer>
-				<Text setShadow={true} small blod center>play more and win many rewards</Text>
+				<Text setShadow={true} small blod center>{props.searchingDesc}</Text>
 			</Container>
 
 		</BackgroundWrapper>
@@ -67,5 +70,10 @@ const TitleContainer = styled.View`
 	border-radius: 20px;
 	border: 3px solid #2b4b8d;
 `
-    
-export default LoadingGameScreen
+
+const mapStateToProps = (state) => ({
+	searching: selectTranslation(state, defaultTranslation.TR_SEARCHING_GAME),
+	searchingDesc: selectTranslation(state, defaultTranslation.TR_SEARCHING_DESC)
+})
+
+export default connect(mapStateToProps)(LoadingGameScreen);
