@@ -1,23 +1,31 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import styled from "styled-components";
-import Modal from "react-native-modal";
+//import Modal from "react-native-modal";
 import DefaultBG from './ModalBackgrounds/DefaultBG';
 import Close from '../Buttons/Close/Close';
-import {Platform, StatusBar, useWindowDimensions} from 'react-native';
-import Text from "../Text/Text";
+import ButtonBack from "../Buttons/Back/ButtonBack";
+import {getIosModel} from "../../utils/utils";
 
 const ModalWrapper = (props) => {
 
-    const {modalBG, swipe, modalVisible,setModalVisible,children} = props
+    const {modalBG, swipe, modalVisible,lineArrow,setModalVisible,children} = props
 
     const renderModalBG = () =>{
         switch (modalBG) {
             case 'default': return <DefaultBG  margin={props.margin} width={props.width} height={props.height}>
-                    {setModalVisible && <Close close={setModalVisible}/>}
+                    {setModalVisible && !lineArrow && <Close close={setModalVisible}/>}
                     {children}
                 </DefaultBG>
             case 'bg_black': return <BlackBG>
-                    {setModalVisible && <Close close={setModalVisible}/>}
+                    {setModalVisible && !lineArrow && <Close close={setModalVisible}/>}
+                    {setModalVisible && lineArrow && <ButtonBack top={'5%'} leaveGame={setModalVisible}/>}
+                    {children}
+                </BlackBG>
+            case 'bg_black_rewards':
+                const iosModel = getIosModel()
+                const position = iosModel >= 10 || iosModel === 0 ? '7%' : '5%'
+                return <BlackBG>
+                    {setModalVisible && lineArrow && <ButtonBack top={position} leaveGame={setModalVisible}/>}
                     {children}
                 </BlackBG>
             default: return children

@@ -41,67 +41,43 @@ export default new class Sounds {
 
         if(!this.enableSounds) return
 
-        try {
-            this.stopFile()
-             this.loadSound = new Sound(fileName, (error) => {
-                if (error) return console.log('failed to load the sound');
+        this.stopFile()
+         this.loadSound = new Sound(fileName, (error) => {
+            if (error) return console.log('failed to load the sound');
 
-                 this.playFile()
-            });
-            this.loadSound.release();
-        } catch (e) {
-            console.log('cannot play the song file')
-        }
+             this.playFile()
+        });
+        this.loadSound.release();
     }
 
     playFile = () =>{
-        try {
-            this.setVolumeFile(1)
-            this.loadSound.play((success) => {
-                if (success) {
-                    this.stopFile()
-                }
-            });
-        } catch (e) {
-            console.log('cannot stop the song file')
-        }
+        this.setVolumeFile(1)
+        this.loadSound.play((success) => {
+            if (success) {
+                this.stopFile()
+            }
+        });
     }
 
     stopFile = () =>{
-        try {
-            if(this.loadSound.isPlaying()){
-                this.loadSound.stop();
-            }
-        } catch (e) {
-            console.log('cannot stop the song file')
+        if(this.loadSound && this.loadSound.isPlaying()){
+            this.loadSound.stop();
         }
     }
 
     pauseFile = () =>{
-        try {
-            if(this.loadSound.isPlaying()){
-                this.loadSound.pause();
-            }
-        } catch (e) {
-            console.log('cannot pause the song file')
+        if(this.loadSound.isPlaying()){
+            this.loadSound.pause();
         }
     }
 
 
     setVolumeFile = (volume) =>{
-        try {
-            this.loadSound.setVolume(volume || 1);
-        } catch (e) {
-            console.log('cannot setVolume the song file')
-        }
+        this.loadSound.setVolume(volume || 1);
     }
 
     setNumberOfLoopsFile = (numLoop) =>{
-        try {
-            this.loadSound.setNumberOfLoops(numLoop || -1);
-        } catch (e) {
-            console.log('cannot setVolume the song file')
-        }
+        this.loadSound.setNumberOfLoops(numLoop || -1);
     }
 
 }()

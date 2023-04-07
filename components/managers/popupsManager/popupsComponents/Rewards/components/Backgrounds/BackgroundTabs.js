@@ -15,8 +15,9 @@ const BGTabs = styled.ImageBackground`
   align-items: center;
   justify-content: center;
   align-content: center;
-  width: 100%;
+  width: 370px;
   height: 100px;
+  padding: 0 10px;
 `
 
 export default BackgroundTabs;

@@ -6,6 +6,7 @@ import ChatMessages from './ChatMessages';
 import ChatTabs from './ChatTabs';
 import EmojiSelector, { Categories } from "react-native-emoji-selector";
 import EmojisPanel from "./EmojisPanel/EmojisPanel";
+import {Keyboard} from "react-native";
 
 const ChatContainer = () => {
 
@@ -16,10 +17,25 @@ const ChatContainer = () => {
         message: ''
     })
 
+    const [keyboardStatus, setKeyboardStatus] = useState(false);
+
+    React.useEffect(() => {
+        const showSubscription = Keyboard.addListener('keyboardDidShow', () => {
+            setKeyboardStatus(true);
+        });
+        const hideSubscription = Keyboard.addListener('keyboardDidHide', () => {
+            setKeyboardStatus(false);
+        });
+
+        return () => {
+            showSubscription.remove();
+            hideSubscription.remove();
+        };
+    }, []);
 
 
     return (
-        <ChatWrapper>
+        <ChatWrapper keyboardStatus={keyboardStatus}>
             <Container openEmoji={messageData.openEmoji}>
                 <ChatTabs />
                 <ChatMessages openEmoji={messageData.openEmoji} chatChanel={'general'}/>
@@ -40,7 +56,8 @@ const ChatContainer = () => {
 }
 
 const ChatWrapper = styled.View`
-    flex: .9;
+    flex: ${(props) => props.keyboardStatus ? '.65' : '.9' };
+
     display: flex;
     align-items: center;
     justify-content: center;

@@ -31,6 +31,7 @@ const RewardsTabsContainer = styled.View`
   justify-content:${(props)=> props.heightData < 700 ? `center` : 'flex-start'};
   flex-direction: row;
   width: 100%;
+  margin-left: 20px;
 `
 
 export default RewardTabs;

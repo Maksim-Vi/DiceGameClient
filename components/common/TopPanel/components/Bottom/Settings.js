@@ -17,11 +17,10 @@ import {selectSoundsInfo, selectTranslation} from "../../../../redux/reducers/la
 import defaultTranslation from "../../../../redux/reducers/language/defaultTranslation";
 import {selectMyUser} from "../../../../redux/reducers/players/PlayersReducer";
 import SelectDropdown from 'react-native-select-dropdown'
-import {StyleSheet} from 'react-native';
+import {Linking, StyleSheet} from 'react-native';
 import C_CHANGE_LANGUAGE from "../../../../protocol/messages/clients/C_CHANGE_LANGUAGE";
 import Sounds, {soundsType} from "../../../../utils/Sounds";
 import C_CHANGE_SOUND from "../../../../protocol/messages/clients/C_CHANGE_SOUND";
-import {openComposer, openInbox} from "react-native-email-link";
 
 const selectedData = ['EN', 'UA']
 
@@ -56,12 +55,10 @@ const Settings = (props) =>{
 
     const setSupport = async () =>{
         Sounds.loadAndPlayFile(soundsType.click2)
-        openComposer({
-            to: "maksdev01panel@gmail.com",
-            subject: "I have a question",
-            body: "Hi, can you help me with...",
-        }).catch((err)=>{
-            console.log('ANSWER err', err )
+        Linking.openURL(
+            `mailto:maksdev01panel@gmail.com?subject=Knocky dice help request&body=I have a question, nick: ${props.user.username}`
+        ).catch(err=>{
+            console.log('link error', err)
         })
     }
 
@@ -103,6 +100,7 @@ const Settings = (props) =>{
                             rowTextForSelection={(item, index) => {
                                 return item
                             }}
+                            statusBarTranslucent={true}
                             buttonStyle={styles.dropdown1BtnStyle}
                             buttonTextStyle={styles.dropdown1BtnTxtStyle(props)}
                             dropdownStyle={styles.dropdown1DropdownStyle}

@@ -6,7 +6,7 @@ import Text from "../../../../../../common/Text/Text";
 const BackgroundTitle = props => {
     return (
         <BGTabs source={bg} resizeMode={'stretch'}>
-            <Text setShadow={true} title blod center>{props.title}</Text>
+            <Text setShadow={true} fontSize={26} blod center>{props.title}</Text>
         </BGTabs>
     );
 };
@@ -15,9 +15,8 @@ const BGTabs = styled.ImageBackground`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 320px;
+  width: 100%;
   height: 60px;
-  margin: 10px;
 `
 
 export default BackgroundTitle;

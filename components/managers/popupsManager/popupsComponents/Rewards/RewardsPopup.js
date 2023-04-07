@@ -14,6 +14,8 @@ import RewardTabs from "./components/Tabs/RewardTabs";
 import defaultParams from "../../../../redux/reducers/language/defaultParams";
 import DailyRewards from "./DailyRewards/DailyRewards";
 import {useWindowDimensions} from "react-native";
+import back from "../../../../../assets/common/btns/button_page_back.png";
+import Sounds, {soundsType} from "../../../../utils/Sounds";
 
 const RewardsPopup = props => {
 
@@ -53,10 +55,9 @@ const RewardsPopup = props => {
     },[])
 
     return (
-        <ModalWrapper modalBG={'bg_black'} width={width} height={height} modalVisible={true} >
-            <ButtonBack top={'0px'} left={'0px'} leaveGame={leave} colorIcon={'#fefefe'}/>
-
+        <ModalWrapper modalBG={'bg_black_rewards'} modalVisible={true} lineArrow setModalVisible={leave}>
             <RewardsContainer height={height}>
+
                 <RewardTabs tab={tab} changeTab={changeTab}/>
                 <BackgroundTabs>
                     {getTitleByType()}
@@ -72,10 +73,22 @@ const RewardsPopup = props => {
 const RewardsContainer = styled.View`
     display: flex;
   align-items: center;
-  justify-content: flex-start;
-  margin-top:${(props)=> props.height < 700 ? `0px` : '30%'};
+  justify-content: center;
+  margin-top:${(props)=> props.height < 700 ? `20px` : '30%'};
   height: ${(props)=> props.height ? `${props.height}px` : '100%'};
 `
+const GameBack = styled.TouchableOpacity`
+	position: absolute;
+	top: ${(props)=> props.height > 700 ? `65px` : '30px'};
+	left: ${(props)=> props.height > 700 ? `20px` : '10px'};
+    z-index: 10;
+`
+
+const BackImg = styled.Image`
+  width: 40px;
+  height: 40px;
+`
+
 const mapStateToProps = (state) => ({
     ENABLE_SEVEN_DAYS_GIFT: selectDefaultParams(state, defaultParams.ENABLE_SEVEN_DAYS_GIFT),
     isFinished: selectIsFinishedSevenDays(state),

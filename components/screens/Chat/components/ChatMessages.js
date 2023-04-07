@@ -3,7 +3,6 @@ import { StyleSheet } from 'react-native';
 import styled from 'styled-components';
 import EventDispatcher from '../../../redux/EventDispatcher';
 import eventsType from '../../../redux/eventsType';
-import Message from './Message/Message';
 import ChatMassagesController from "./Controllers/ChatMessagesController";
 
 class ChatMessages extends React.Component {
