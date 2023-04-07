@@ -63,8 +63,8 @@ const NotEnoughFlashPopup = (props) => {
     }
 
     return (
-        <ModalWrapper modalBG={'default'} height={height / 3} modalVisible={true}>
-            <TextTitle title blod center color={'#fefefe'}>Oops, not enough flash</TextTitle>
+        <ModalWrapper modalBG={'default'} width={width - 35} height={height / 3} modalVisible={true}>
+            <TextTitle fontSize={24} blod center color={'#fefefe'}>Oops, not enough flash</TextTitle>
             <InfoContainer>
                 <TextContainer style={{borderBottomWidth: 3}}>
                     <Text setShadow={true} large blod center color={'#fefefe'}>You use all your flash!</Text>
@@ -113,7 +113,7 @@ const TextContainer = styled.View`
 `
 const TextTitle = styled(TextWithoutShadow)`
   position: absolute;
-  top: -40px;
+  top: -30px;
   z-index: 1;
 `
 

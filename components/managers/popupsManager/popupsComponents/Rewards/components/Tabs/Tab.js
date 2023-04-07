@@ -34,7 +34,7 @@ const TabContainer = styled.ImageBackground`
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  width: ${props => props.isActive ? '120px' : '80px'};
+  width: ${props => props.isActive ? '110px' : '80px'};
   height: 60px;
   margin-left: 10px;
 `

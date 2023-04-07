@@ -17,6 +17,7 @@ const BGTabs = styled.ImageBackground`
   justify-content: center;
   width: 320px;
   height: 60px;
+  margin: 10px;
 `
 
 export default BackgroundTitle;

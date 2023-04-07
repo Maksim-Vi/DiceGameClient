@@ -16,7 +16,7 @@ import DropdownLanguage from "../../../../screens/Auth/DropDownLanguage/Dropdown
 const ChangeUserNameGoogle = (props) => {
 
     const googleConfirmUsernamePopup = useSelector(state => selectGoogleConfirmUsernamePopup(state))
-    const [updateUsername, setUpdateUsername] = useState(googleConfirmUsernamePopup.data.username)
+    const [updateUsername, setUpdateUsername] = useState(googleConfirmUsernamePopup.data ? googleConfirmUsernamePopup.data.username : 'test')
     const [language, setLanguage] = useState('EN')
     const [error, setError] = useState(null)
     const {height, width} = useWindowDimensions();
@@ -57,7 +57,7 @@ const ChangeUserNameGoogle = (props) => {
     }, [])
 
     return (
-        <ModalWrapper modalBG={'default'} width={width - 100} height={height / 3} modalVisible={true}>
+        <ModalWrapper modalBG={'default'} width={width - 35} height={height / 2.5} modalVisible={true}>
             <Container>
                 <ChangeNameContainer>
                     <TextTitle setShadow={true} large blod center color={'#ffffff'}>Change or confirm you username</TextTitle>

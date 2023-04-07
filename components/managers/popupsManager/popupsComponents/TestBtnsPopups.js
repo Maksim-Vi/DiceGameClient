@@ -97,7 +97,7 @@ const TestBtnsPopups = () =>{
         </Scroll>
     }
 
-    return <ModalWrapper modalBG={'default'} width={width - 50} height={height - 200} modalVisible={true} setModalVisible={closeModal}>
+    return <ModalWrapper modalBG={'default'} width={width - 35} height={height - 200} modalVisible={true} setModalVisible={closeModal}>
            {renderPopup()}
     </ModalWrapper>
 }

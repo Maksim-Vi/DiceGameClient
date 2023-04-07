@@ -11,7 +11,7 @@ import {setBotGameTypesPopup} from "../../../../redux/reducers/popups/PopupsRedu
 
 const BotTypeGame = props => {
 
-    const {height} = useWindowDimensions()
+    const {width, height} = useWindowDimensions()
     const dispatch = useDispatch()
 
     const handlerGame = (type) =>{
@@ -26,7 +26,7 @@ const BotTypeGame = props => {
     }
 
     return (
-        <ModalWrapper modalBG={'default'} height={height / 3} modalVisible={true} setModalVisible={close}>
+        <ModalWrapper modalBG={'default'} width={width - 35} height={height / 3} modalVisible={true} setModalVisible={close}>
             <Container>
                 <Text numberOfLines={1} setShadow={true} large heavy color={'#ffffff'} center>Select type game</Text>
                 <BotTypeGameContainer>

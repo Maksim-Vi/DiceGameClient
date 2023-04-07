@@ -59,7 +59,7 @@ const AvatarPopups = (props) =>{
         </AvatarContainer>
     }
 
-    return <ModalWrapper modalBG={'default'} height={height / 1.5} modalVisible={true} setModalVisible={closeModal}>
+    return <ModalWrapper modalBG={'default'} width={width - 35} height={height / 1.5} modalVisible={true} setModalVisible={closeModal}>
            {renderAvatarPopup()}
     </ModalWrapper>
 }
@@ -71,7 +71,7 @@ const AvatarContainer = styled.View`
 `
 const Scroll = styled.ScrollView`
   display: flex;
-  height: 90%;
+  height: 85%;
 `
 const AvatarsGrid = styled.View`
     display: flex;

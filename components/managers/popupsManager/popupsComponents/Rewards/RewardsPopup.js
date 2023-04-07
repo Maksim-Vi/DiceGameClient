@@ -53,7 +53,7 @@ const RewardsPopup = props => {
     },[])
 
     return (
-        <ModalWrapper modalBG={'bg_black'} modalVisible={true} >
+        <ModalWrapper modalBG={'bg_black'} width={width} height={height} modalVisible={true} >
             <ButtonBack top={'0px'} left={'0px'} leaveGame={leave} colorIcon={'#fefefe'}/>
 
             <RewardsContainer height={height}>
@@ -74,8 +74,7 @@ const RewardsContainer = styled.View`
   align-items: center;
   justify-content: flex-start;
   margin-top:${(props)=> props.height < 700 ? `0px` : '30%'};
-  width: 100%;
-  height: 100%;
+  height: ${(props)=> props.height ? `${props.height}px` : '100%'};
 `
 const mapStateToProps = (state) => ({
     ENABLE_SEVEN_DAYS_GIFT: selectDefaultParams(state, defaultParams.ENABLE_SEVEN_DAYS_GIFT),

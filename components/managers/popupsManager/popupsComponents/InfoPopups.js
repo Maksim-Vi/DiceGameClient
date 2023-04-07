@@ -22,7 +22,7 @@ const InfoPopups = () => {
     }
 
     return (
-        <ModalWrapper modalBG={'default'} height={height / 3} modalVisible={true}>
+        <ModalWrapper modalBG={'default'} width={width - 35} height={height / 3} modalVisible={true}>
             {info.data.title && <TextTitle title blod center color={'#fefefe'}>{info.data.title}</TextTitle>}
             <InfoContainer>
                 <TextContainer style={{borderBottomWidth: 3}}>

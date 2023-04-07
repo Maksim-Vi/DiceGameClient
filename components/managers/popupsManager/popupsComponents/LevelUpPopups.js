@@ -71,7 +71,9 @@ const LevelUpPopup = (props) => {
         <LvlContainer>
             {textTitleRender()}
             {starRender()}
-            <ButtonWithText text={props.continue} clickHandler={closeModal} width={'50%'} height={'40px'}/>
+            <ButtonContainer>
+                <ButtonWithText text={props.continue} clickHandler={closeModal} width={'180px'} height={'40px'}/>
+            </ButtonContainer>
         </LvlContainer>
     </ModalWrapper>
 }
@@ -80,8 +82,16 @@ const LvlContainer = styled.View`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  text-align: center;
   width: 100%;
   height: 60%;
+`
+
+const ButtonContainer = styled.View`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 `
 
 const StarContainer = styled(Animated.View)`

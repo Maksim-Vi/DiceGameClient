@@ -20,7 +20,7 @@ const ButtonWithText = (props) => {
                     disabled={props.disabled || false}
                     onPress={btnClickHendler}
                     activeOpacity={0.9}>
-            <Text setShadow={true} small blod color='#fff' center>{props.text}</Text>
+            <Text setShadow small blod color='#fff' center>{props.text}</Text>
         </CollectBtn>
     )
 }
@@ -30,6 +30,7 @@ const CollectBtn = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
   flex-direction: row;
+  text-align: center;
   margin: 5px;
   ${(props) => {
 

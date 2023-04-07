@@ -26,7 +26,7 @@ const SevenDaysGift = (props) => {
 
     return (
         <ModalWrapper modalBG={'bg_black'} modalVisible={true} >
-            <ButtonBack top={'0px'} left={'-2px'} leaveGame={leaveGift} colorIcon={'#fefefe'}/>
+            <ButtonBack top={'5px'} left={'5px'} leaveGame={leaveGift} colorIcon={'#fefefe'}/>
 
             <SevenDaysContainer>
                 <TitleContainer>
@@ -76,7 +76,7 @@ const CardsContainer = styled.View`
 `
 
 const TitleContainer = styled.View`
-  width: 90%;
+  width: 100%;
   padding: 10px;
   border-radius: 15px;
   background-color: #e63349;

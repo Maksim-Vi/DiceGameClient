@@ -162,7 +162,7 @@ const BtnContainer = styled.View`
   display: flex;
   flex-direction: row;
   align-items: center;
-  width: 80%;
+  width: 85%;
   background-color: rgba(17, 192, 113, 0.59);
   border: 1px solid rgb(255, 157, 77);
   margin: 5px;
@@ -198,7 +198,7 @@ const Btn = styled.TouchableOpacity`
 const Img = styled.Image`
     width: 30px;
     height: 30px;
-    margin-right: 20px;
+    margin-right: 10px;
 `
 
 const ImgSelect = styled.Image`

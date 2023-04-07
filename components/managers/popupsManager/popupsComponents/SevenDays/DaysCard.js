@@ -11,11 +11,7 @@ import C_CLAIM_SEVEN_DAYS_GIFTS from "../../../../protocol/messages/clients/gift
 import AnimatedLottieView from "lottie-react-native";
 import Sounds, {soundsType} from "../../../../utils/Sounds";
 
-const CARD_PADDING_ROW = 10
-const CARD_PADDING_COLUMN = 20
-const COUNT_CARD_ROW = 3
-const COUNT_CARD_COLUMN = 3
-const COUNT_CARD = 7
+const CARD_PADDING_ROW = 20
 
 const DaysCard = (props) => {
 
@@ -99,7 +95,7 @@ const DaysCardContainer = styled.TouchableOpacity`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: ${props=> props.width ? `${((props.width / 3) - (CARD_PADDING_ROW * COUNT_CARD_ROW))}px` : '30%'};
+  width: ${props=> props.width ? `${((props.width / 3) - (CARD_PADDING_ROW))}px` : '30%'};
   height: 130px;
   margin: 5px;
   border-radius: 20px;

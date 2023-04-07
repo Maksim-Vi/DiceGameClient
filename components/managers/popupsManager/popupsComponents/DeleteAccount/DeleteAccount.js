@@ -37,7 +37,7 @@ const DeleteAccount = () => {
         })
     }
 
-    return <ModalWrapper modalBG={'default'} width={width - 20} height={height / 3} modalVisible={true} setModalVisible={closeModal}>
+    return <ModalWrapper modalBG={'default'} width={width - 35} height={height / 2.5} modalVisible={true} setModalVisible={closeModal}>
         <Container>
             <DeleteContainer>
                 <Text setShadow blod large center>Are you sure that you wanna delete your account?</Text>
@@ -72,7 +72,7 @@ const DeleteContainer = styled.View`
   align-items: center;
   justify-content: center;
   text-align: center;
-  width: 80%;
+  width: 90%;
   margin-top: 20px;
   padding: 10px 30px;
   background-color: rgba(175, 82, 52, 0.64);
@@ -84,7 +84,7 @@ const BtnsContainer = styled.View`
   align-items: center;
   justify-content: space-between;
   flex-direction: row;
-  width: 80%;
+  width: 90%;
   height: 40%;
 `
 const mapStateToProps = (state) => ({

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import {connect, useSelector} from 'react-redux'
 import styled from 'styled-components'
 import {selectMyUser} from '../../redux/reducers/players/PlayersReducer'
@@ -22,8 +22,12 @@ import TutorialPopup from "./popupsComponents/Tutorial/TutorialPopup";
 import InvitationPopup from "./popupsComponents/Invitation/InvitationPopup";
 import ADFlashPopup from "./popupsComponents/ADPopups/ADFlashPopup";
 import NotEnoughFlashPopup from "./popupsComponents/NotEnoughFlashPopup";
+import ModalWrapper from "../../common/ModalWindows/ModalWrapper";
+import {updateManager} from "./utils";
 
 const PopupsManager = (props) => {
+
+    const [isActiveManager, setActiveManager] = useState(false)
 
     const isRestoreGame = useSelector(selectRestoreGame)
 
@@ -36,6 +40,35 @@ const PopupsManager = (props) => {
             return <SevenDaysGift />
         }
     }
+
+    const checkActiveManager = () =>{
+        return props.deleteAccountPopup.visible ||
+               props.lvlUpPopup.visible ||
+               props.tutorialPopup.visible ||
+               props.avatarPopup.visible ||
+               props.settingsPopup.visible ||
+               props.infoPopup.visible ||
+               props.googleConfirmUsernamePopup.visible ||
+               props.lostConnOpponentPopup.visible ||
+               props.collectItemPopup.visible ||
+               props.botGameTypesPopup.visible ||
+               props.rewardsPopup.visible ||
+               props.invitationPopup.visible ||
+               props.adFlashPopup.visible ||
+               props.notEnoughFlashPopup.visible ||
+               props.testBtnsPopup.visible ||
+               props.sevenDaysPopup.visible
+    }
+
+    useEffect(()=>{
+        if(checkActiveManager()){
+            setActiveManager(true)
+        } else {
+            setActiveManager(false)
+        }
+    }, updateManager(props))
+
+    if(!isActiveManager) return null
 
     return (
         <PopupConteiner>
@@ -60,17 +93,19 @@ const PopupsManager = (props) => {
             {props.invitationPopup.visible && <InvitationPopup />}
             {props.adFlashPopup.visible && <ADFlashPopup />}
             {props.notEnoughFlashPopup.visible && <NotEnoughFlashPopup />}
-
             {props.testBtnsPopup.visible && <TestBtnsPopups />}
         </PopupConteiner>
     )
 }
 
 const PopupConteiner = styled.View`
-  flex: 1;
   position: absolute;
-  top: 0;
-  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  height: 100%;
 `
 
 const mapStateToProps = (state) => ({

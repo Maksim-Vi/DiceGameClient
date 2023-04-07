@@ -7,7 +7,7 @@ import {connect, useDispatch} from "react-redux";
 import Text from "../../../../common/Text/Text";
 import speans from '../../../../../assets/animation/speans.png'
 import sunRaye from '../../../../../assets/animation/sun-rays2.png'
-import {Animated, Easing} from "react-native";
+import {Animated, Easing, useWindowDimensions} from "react-native";
 import {setTimingAnimated} from "../../../../utils/Animation";
 import {getCollectionDiceImg, getCollectionSquareImg} from "../../../../utils/utils";
 import AnimatedLottieView from "lottie-react-native";
@@ -20,6 +20,7 @@ import defaultTranslation from "../../../../redux/reducers/language/defaultTrans
 const CollectItemPopup = props => {
 
     const dispatch = useDispatch()
+    const {width, height} = useWindowDimensions()
     const showValue = React.useRef(new Animated.Value(0)).current;
     const spinValue = React.useRef(new Animated.Value(0)).current;
     const spinValue2 = React.useRef(new Animated.Value(0)).current;
@@ -93,7 +94,7 @@ const CollectItemPopup = props => {
     },[]);
 
     return (
-        <ModalWrapper modalBG={'bg_black'} modalVisible={true}>
+        <ModalWrapper modalBG={'bg_black'} width={width} height={height} modalVisible={true}>
             <Container>
                 <TopContent>
                     <Title title heavy center>{props.congratulateTag}!</Title>
@@ -129,23 +130,22 @@ const CollectItemPopup = props => {
 };
 
 const Container = styled.View`
-  position: relative;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-evenly;
+  width: 100%;
+  height: 100%;
 `
 
 const TopContent = styled.View`
   display: flex;
   align-items: center;
-  height: 25%;
 `
 
 const Content = styled.View`
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  height: 40%;
 `
 const ItemContainer = styled.View`
   position: absolute;
@@ -165,7 +165,6 @@ const Speans = styled(Animated.Image)`
 `
 
 const BottomText = styled.View`
-  
 `
 
 const Image = styled.Image`

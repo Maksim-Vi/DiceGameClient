@@ -39,14 +39,14 @@ const InvitationPopup = (props) => {
     }
 
     const replaceText = () =>{
-        return props.text1.replace('_name_', invitation.data.username)
+        return props.text1.replace('_name_', invitation.data?.username || 'user')
     }
 
-    return <ModalWrapper modalBG={'default'} width={width - 20} height={height / 2} modalVisible={true}>
+    return <ModalWrapper modalBG={'default'} width={width - 35} height={height / 2} modalVisible={true}>
         <Container>
             <DeleteContainer>
-                <InvitationUserFrame username={invitation.data.username || 'user'}
-                                     avatar={invitation.data.avatarId}/>
+                <InvitationUserFrame username={invitation.data ? invitation.data.username : 'user'}
+                                     avatar={invitation.data?.avatarId || 1000}/>
                 <Text setShadow blod large center>{replaceText()}</Text>
                 <Text setShadow blod medium center>{props.text2}</Text>
             </DeleteContainer>

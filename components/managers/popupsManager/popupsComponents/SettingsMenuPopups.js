@@ -31,7 +31,7 @@ const SettingsMenuPopups = () => {
     const AndroidSoftwareNavHidden = async () =>{
         await NavigationBar.setPositionAsync('absolute')
         await NavigationBar.setVisibilityAsync("hidden");
-        await NavigationBar.setBehaviorAsync('inset-swipe')
+        await NavigationBar.setBehaviorAsync('overlay-swipe')
     }
 
     useEffect(()=>{

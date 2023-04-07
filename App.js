@@ -25,7 +25,8 @@ export default function App() {
     const AndroidSoftwareNavHidden = async () =>{
         await NavigationBar.setPositionAsync('absolute')
         await NavigationBar.setVisibilityAsync("hidden");
-        await NavigationBar.setBehaviorAsync('inset-swipe')
+        await NavigationBar.setBehaviorAsync('overlay-swipe')
+        await NavigationBar.setBorderColorAsync("#00000020")
     }
 
     useEffect(()=>{
@@ -54,5 +55,7 @@ export default function App() {
 
 const AppContainer = styled.View`
   flex: 1;
+  width: 100%;
+  height: 100%;
   position: relative;
 `

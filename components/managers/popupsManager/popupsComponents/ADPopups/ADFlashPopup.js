@@ -59,7 +59,7 @@ const ADFlashPopup = (props) => {
     }, [isClosed, navigation]);
 
     return (
-        <ModalWrapper modalBG={'default'} height={height / 2.5} modalVisible={true}>
+        <ModalWrapper modalBG={'default'} width={width - 35} height={height / 2} modalVisible={true}>
             <Container>
                 <TextContainer style={{borderBottomWidth: 3}}>
                     <Text setShadow={true} blod large center>{props.text1}</Text>
