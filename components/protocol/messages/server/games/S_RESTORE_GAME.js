@@ -8,6 +8,7 @@ import {store} from "../../../../redux/redux-store";
 import {selectMyUser, setInvitedOpponent} from "../../../../redux/reducers/players/PlayersReducer";
 import {isProduction} from "../../../../utils/utils";
 import GameModel from "../../../../games/GameModel/GameModel";
+import {selectActiveTabApp} from "../../../../redux/reducers/Websocket/WebsocketReducer";
 
 export default class S_RESTORE_GAME {
     constructor(username, activeGame, countScores,lastThrow,lastThrowData){
@@ -33,9 +34,8 @@ export default class S_RESTORE_GAME {
     }
 
     exec() {
-        store.dispatch(setInvitedOpponent(null))
-        store.dispatch(setRestoreGame(true))
         store.dispatch(setCarrentGameId(this.activeGame.gameSettings.gameId))
+        store.dispatch(setInvitedOpponent(null))
         store.dispatch(setGame(this.activeGame))
         store.dispatch(setGameSettings(this.activeGame.gameSettings))
 
@@ -51,6 +51,8 @@ export default class S_RESTORE_GAME {
         }))
 
         this.setThrowData()
+
+        store.dispatch(setRestoreGame(true))
     }
 
     getScores = () =>{
@@ -108,7 +110,6 @@ export default class S_RESTORE_GAME {
                 diceScore: this.lastThrowData.diceScore,
             }))
         }
-
     }
 
     getUserData = () => {
@@ -119,7 +120,9 @@ export default class S_RESTORE_GAME {
     }
 
     updateDataIfBot = () =>{
-        if(this.lastThrowUser.toLowerCase() === 'bot'){
+        const activeTab = selectActiveTabApp(store.getState())
+
+        if(this.lastThrowUser.toLowerCase() === 'bot' && activeTab === 'GameScreen'){
             const {myScores,oppScores} = this.getScores()
             const countScoresUser = this.countScores.countScoresUser
             const countScoresOpponent = this.countScores.countScoresOpponent

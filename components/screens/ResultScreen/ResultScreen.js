@@ -58,7 +58,9 @@ const ResultScreen = (props) => {
 
     const getADBonus = async () =>{
         if(props.userId && props.result.userResultItems.coins){
-            await getADX2CoinsBonus(props.userId, props.result.userResultItems.coins)
+            if(props.testGetCoins){
+                await getADX2CoinsBonus(props.userId, props.result.userResultItems.coins)
+            }
         }
         transitionState('MainScreen')
         store.dispatch(setCountScores(null))
@@ -292,6 +294,7 @@ const mapStateToProps = (state) => ({
     ENABLE_AD_IOS_PROD: selectDefaultParams(state, defaultParams.ENABLE_AD_IOS_PROD),
     ENABLE_AD_ANDROID_PROD: selectDefaultParams(state, defaultParams.ENABLE_AD_ANDROID_PROD),
     ENABLE_AD_AFTER_GAME: selectDefaultParams(state, defaultParams.ENABLE_AD_AFTER_GAME),
+    testGetCoins: selectDefaultParams(state, defaultParams.TEST_GET_X2COINS_FUNCTION),
 });
 
 export default connect(mapStateToProps)(ResultScreen);

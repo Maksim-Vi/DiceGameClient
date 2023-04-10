@@ -6,6 +6,7 @@ import {store} from '../../redux/redux-store'
 import {selectCurrentGameId} from '../../redux/reducers/game/GameReducer'
 import back from "../../../assets/common/btns/button_page_back.png";
 import GameLoader from "../../games/GameLoader";
+import {websocket} from "../../protocol/websocet";
 
 const GameScreen = () => {
 

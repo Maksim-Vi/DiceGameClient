@@ -22,8 +22,8 @@ import TutorialPopup from "./popupsComponents/Tutorial/TutorialPopup";
 import InvitationPopup from "./popupsComponents/Invitation/InvitationPopup";
 import ADFlashPopup from "./popupsComponents/ADPopups/ADFlashPopup";
 import NotEnoughFlashPopup from "./popupsComponents/NotEnoughFlashPopup";
-import ModalWrapper from "../../common/ModalWindows/ModalWrapper";
 import {updateManager} from "./utils";
+import CollectionBuyItemPopup from "./popupsComponents/Collection/CollectionBuyItemPopup";
 
 const PopupsManager = (props) => {
 
@@ -51,6 +51,7 @@ const PopupsManager = (props) => {
                props.googleConfirmUsernamePopup.visible ||
                props.lostConnOpponentPopup.visible ||
                props.collectItemPopup.visible ||
+               props.collectBuyItemPopup.visible ||
                props.botGameTypesPopup.visible ||
                props.rewardsPopup.visible ||
                props.invitationPopup.visible ||
@@ -88,6 +89,7 @@ const PopupsManager = (props) => {
             {props.googleConfirmUsernamePopup.visible && <ChangeUserNameGoogle />}
             {props.lostConnOpponentPopup.visible && <LostConnectionOpponent />}
             {props.collectItemPopup.visible && <CollectItemPopup data={props.collectItemPopup.data}/>}
+            {props.collectBuyItemPopup.visible && <CollectionBuyItemPopup modal={props.collectBuyItemPopup.data}/>}
             {props.botGameTypesPopup.visible && <BotTypeGame />}
             {props.rewardsPopup.visible && <RewardsPopup />}
             {props.invitationPopup.visible && <InvitationPopup />}
@@ -120,6 +122,7 @@ const mapStateToProps = (state) => ({
     googleConfirmUsernamePopup: popups.selectGoogleConfirmUsernamePopup(state),
     lostConnOpponentPopup: popups.selectLostConnOpponentPopup(state),
     collectItemPopup: popups.selectCollectItemPopup(state),
+    collectBuyItemPopup: popups.selectCollectBuyItemPopup(state),
     botGameTypesPopup: popups.selectBotGameTypesPopup(state),
     rewardsPopup: popups.selectRewardsPopup(state),
     deleteAccountPopup: popups.selectDeleteAccountPopup(state),

@@ -31,13 +31,18 @@ const GameWithBot = (props) => {
         <BG source={bgGame} resizeMode={'contain'}>
             <BotContainer onPress={handelClick}
                           activeOpacity={0.9}>
-                <Text setShadow madium blod color={'#ff9d4d'} center>
-                    {props.tap_to_play}
-                </Text>
+                <TapTpPlayContainer>
+                    <Text setShadow madium blod color={'#ff9d4d'} center>
+                        {props.tap_to_play}
+                    </Text>
+                </TapTpPlayContainer>
+
                 <GameImage source={gameIcon} resizeMode={'contain'}/>
-                <Text setShadow fontSize={18} blod color={'#ff9d4d'} center>
-                    {props.fightBot}
-                </Text>
+                <DescContainer>
+                    <Text setShadow fontSize={18} blod color={'#ff9d4d'} center>
+                        {props.fightBot}
+                    </Text>
+                </DescContainer>
             </BotContainer>
         </BG>
     );
@@ -54,17 +59,31 @@ const BG = styled.ImageBackground`
 const BotContainer = styled.TouchableOpacity`
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-evenly;
   width: 100%;
-  height: 90%;
+  height: 85%;
   border-radius: 20px;
-  margin-top: 15px;
-  padding: 0 30px;
+  padding: 10px;
 `
+
+const TapTpPlayContainer = styled.View`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60%;
+`
+const DescContainer = styled.View`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 10%;
+`
+
 const GameImage = styled.Image`
   width: 100px;
   height: 100px;
-  margin: 30px 20px;
+  margin: 20px;
 `
 
 const mapStateToProps = (state) => ({

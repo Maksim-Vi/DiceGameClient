@@ -23,7 +23,12 @@ const ModalWrapper = (props) => {
                 </BlackBG>
             case 'bg_black_rewards':
                 const iosModel = getIosModel()
-                const position = iosModel >= 10 || iosModel === 0 ? '7%' : '5%'
+                let position = iosModel >= 10 ? '7%' : '5%'
+
+                if(iosModel === 0){
+                    position = '2%'
+                }
+
                 return <BlackBG>
                     {setModalVisible && lineArrow && <ButtonBack top={position} leaveGame={setModalVisible}/>}
                     {children}

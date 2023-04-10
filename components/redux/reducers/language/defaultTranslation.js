@@ -164,4 +164,8 @@ export default {
     TR_WAITING_TO_PLAY: 'TR_WAITING_TO_PLAY', //Waiting to play
     TR_WAITING_TO_PLAYER: 'TR_WAITING_TO_PLAYER', //Waiting for player...
     TR_ROAD: 'TR_ROAD',
+
+    TR_SELECT_GAME_TYPE: 'TR_SELECT_GAME_TYPE',
+    TR_MEDIUM: 'TR_MEDIUM',
+    TR_HARD: 'TR_HARD',
 }

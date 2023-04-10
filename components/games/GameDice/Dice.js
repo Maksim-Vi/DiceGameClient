@@ -16,7 +16,16 @@ const Dice = (props) => {
         let diceImg = ''
 
         if(props.diceNumber > 0) {
-            diceImg = imagesGameDices[props.activeItems ? props.activeItems.dice : 14][+props.diceNumber]
+            let diceUrl = ''
+            const activeDice = imagesGameDices[props.activeItems ? props.activeItems.dice : 1]
+
+            if(activeDice){
+                diceUrl = activeDice[+props.diceNumber]
+            } else {
+                diceUrl = imagesGameDices['default'][+props.diceNumber]
+            }
+
+            diceImg = diceUrl
         }
 
         return diceImg

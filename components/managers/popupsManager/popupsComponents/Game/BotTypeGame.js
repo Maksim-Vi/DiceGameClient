@@ -1,17 +1,22 @@
 import React from 'react';
 import ModalWrapper from "../../../../common/ModalWindows/ModalWrapper";
 import {useWindowDimensions} from "react-native";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import styled from "styled-components";
 import Text from "../../../../common/Text/Text";
 import Sounds, {soundsType} from "../../../../utils/Sounds";
 import C_QUICK_PLAY from "../../../../protocol/messages/clients/games/C_QUICK_PLAY";
 import {setDifficultGame} from "../../../../redux/reducers/game/GameReducer";
 import {setBotGameTypesPopup} from "../../../../redux/reducers/popups/PopupsReducer";
+import {selectTranslation} from "../../../../redux/reducers/language/LanguageReducer";
+import defaultTranslation from "../../../../redux/reducers/language/defaultTranslation";
 
 const BotTypeGame = props => {
 
     const {width, height} = useWindowDimensions()
+    const gameTypeText = useSelector(state => selectTranslation(state, defaultTranslation.TR_SELECT_GAME_TYPE))
+    const medium = useSelector(state => selectTranslation(state, defaultTranslation.TR_MEDIUM))
+    const hard = useSelector(state => selectTranslation(state, defaultTranslation.TR_HARD))
     const dispatch = useDispatch()
 
     const handlerGame = (type) =>{
@@ -28,16 +33,16 @@ const BotTypeGame = props => {
     return (
         <ModalWrapper modalBG={'default'} width={width - 35} height={height / 3} modalVisible={true} setModalVisible={close}>
             <Container>
-                <Text numberOfLines={1} setShadow={true} large heavy color={'#ffffff'} center>Select type game</Text>
+                <Text numberOfLines={1} setShadow={true} large heavy color={'#ffffff'} center>{gameTypeText}</Text>
                 <BotTypeGameContainer>
                     {/*<LowGame onPress={() => handlerGame('Easy')} activeOpacity={0.9} style={{ borderBottomWidth: 8 }}>*/}
                     {/*    <Text numberOfLines={0} setShadow={true} large heavy color={'#ffffff'} center>Low</Text>*/}
                     {/*</LowGame>*/}
                     <MediumGame onPress={() => handlerGame('Medium')} activeOpacity={0.9} style={{ borderBottomWidth: 8 }}>
-                        <Text numberOfLines={0} setShadow={true} large heavy color={'#ffffff'} center>Medium</Text>
+                        <Text numberOfLines={0} setShadow={true} large heavy color={'#ffffff'} center>{medium}</Text>
                     </MediumGame>
                     <HardGame onPress={() => handlerGame('Hard')} activeOpacity={0.9} style={{ borderBottomWidth: 8 }}>
-                        <Text numberOfLines={0} setShadow={true} large heavy color={'#ffffff'} center>Hard</Text>
+                        <Text numberOfLines={0} setShadow={true} large heavy color={'#ffffff'} center>{hard}</Text>
                     </HardGame>
                 </BotTypeGameContainer>
             </Container>

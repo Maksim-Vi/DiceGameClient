@@ -1,6 +1,6 @@
 import {store} from "../../../redux/redux-store";
-import {setInfoPopup} from "../../../redux/reducers/popups/PopupsReducer";
-import {isProduction} from "../../../utils/utils";
+import {closeAllPopupsPopup, setInfoPopup} from "../../../redux/reducers/popups/PopupsReducer";
+import {delay, isProduction} from "../../../utils/utils";
 
 export default class S_LOGIN_FAILED {
     constructor(data){
@@ -19,8 +19,11 @@ export default class S_LOGIN_FAILED {
     }
 
     exec() {
+        store.dispatch(closeAllPopupsPopup(false))
         store.logout()
-        store.dispatch(setInfoPopup({visible: true, data: {text: this.data.error}}))
+        delay(1000).then(()=>{
+            store.dispatch(setInfoPopup({visible: true, data: {text: this.data.error}}))
+        })
     }
 
 	getLogText() {

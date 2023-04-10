@@ -1,4 +1,5 @@
 const imagesGameSquares = {
+    'default': require('./collections/squares/1000.png'),
     1000: require('./collections/squares/1000.png'),
     1001: require('./collections/squares/1001.png'),
     1002: require('./collections/squares/1002.png'),

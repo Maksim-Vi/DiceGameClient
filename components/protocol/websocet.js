@@ -8,7 +8,7 @@ import {
 import { store } from "../redux/redux-store";
 import { hendleMessage } from "./MessageManager";
 import {transitionState} from "../utils/utils";
-import {selectInfoPopup, setInfoPopup} from "../redux/reducers/popups/PopupsReducer";
+import {closeAllPopupsPopup, selectInfoPopup, setInfoPopup} from "../redux/reducers/popups/PopupsReducer";
 
 export let websocket;
 
@@ -124,6 +124,7 @@ const sendErrorConnectionMessage = () =>{
     if(!reconnectFailed && reconnectFailedCount >= 10){
         reconnectFailed = true
 
+        store.dispatch(closeAllPopupsPopup(false))
         store.dispatch(setBadConnectionWS(false))
         store.dispatch(setClientIdWebsocket(null))
         transitionState('AuthScreen')

@@ -42,16 +42,33 @@ const BoardItem = (props) => {
     }
 
     const getSquare = () => {
-        const square = imagesGameSquares[props.activeItems ? props.activeItems.square : 1000]
+        let squareUrl = ''
+        const activeSquare= imagesGameSquares[props.activeItems ? props.activeItems.square : 1000]
 
-        return square ? square : ''
+        if(activeSquare){
+            squareUrl = activeSquare
+        } else {
+            squareUrl = imagesGameSquares['default']
+        }
+
+        return squareUrl ? squareUrl : ''
     }
 
     const getDiceNumber = () => {
         let diceImg = ''
 
-        if (props.item > 0) {
-            diceImg = imagesGameDices[props.activeItems ? props.activeItems.dice : 1][+props.item]
+
+        if(props.item > 0) {
+            let diceUrl = ''
+            const activeDice = imagesGameDices[props.activeItems ? props.activeItems.dice : 1]
+
+            if(activeDice){
+                diceUrl = activeDice[+props.item]
+            } else {
+                diceUrl = imagesGameDices['default'][+props.item]
+            }
+
+            diceImg = diceUrl
         }
 
         return diceImg ? diceImg : ''

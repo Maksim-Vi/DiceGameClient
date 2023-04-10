@@ -77,17 +77,6 @@ const RewardsContainer = styled.View`
   margin-top:${(props)=> props.height < 700 ? `20px` : '30%'};
   height: ${(props)=> props.height ? `${props.height}px` : '100%'};
 `
-const GameBack = styled.TouchableOpacity`
-	position: absolute;
-	top: ${(props)=> props.height > 700 ? `65px` : '30px'};
-	left: ${(props)=> props.height > 700 ? `20px` : '10px'};
-    z-index: 10;
-`
-
-const BackImg = styled.Image`
-  width: 40px;
-  height: 40px;
-`
 
 const mapStateToProps = (state) => ({
     ENABLE_SEVEN_DAYS_GIFT: selectDefaultParams(state, defaultParams.ENABLE_SEVEN_DAYS_GIFT),

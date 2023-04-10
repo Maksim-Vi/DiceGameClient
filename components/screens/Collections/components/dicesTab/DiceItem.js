@@ -7,6 +7,7 @@ import CollectButton from "../common/CollectButton";
 import {Animated, Easing, useWindowDimensions} from 'react-native';
 import sale from "../../../../../assets/collections/sale.png";
 import collBg from "../../../../../assets/common/glass_frame.png";
+import images from "../../../../../assets/dynamicLoadImage";
 
 const DiceItem = ({diceItem, isActive, isLocked, isSale, isCollected, setModalVisible}) => {
 
@@ -36,6 +37,14 @@ const DiceItem = ({diceItem, isActive, isLocked, isSale, isCollected, setModalVi
         </SaleContainer>
     }
 
+    const getImage = () =>{
+        const img = getCollectionDiceImg(diceItem, diceItem.sortIndex)
+
+        if(img) return  img
+
+        return images.dices['default']
+    }
+
     useEffect(() => {
         showPlaceAnim()
     }, [])
@@ -59,7 +68,7 @@ const DiceItem = ({diceItem, isActive, isLocked, isSale, isCollected, setModalVi
                 {renderLockedBG()}
                 {renderSaleLabel()}
 
-                <DiceImage source={getCollectionDiceImg(diceItem, diceItem.sortIndex)}/>
+                <DiceImage source={getImage()}/>
                 <Text setShadow={true} numberOfLines={1} madium blod center>{diceItem.name}</Text>
                 <CollectButton item={diceItem}
                                setModalVisible={setModalVisible}
@@ -86,9 +95,10 @@ const CollectionCardBG = styled.ImageBackground`
 const LockedImg = styled.Image`
   position: absolute;
   right: 10px;
-  bottom: 60px;
+  bottom: 75px;
   width: 35px;
   height: 35px;
+  z-index: 1;
 `
 const SaleContainer = styled.View`
   display: flex;

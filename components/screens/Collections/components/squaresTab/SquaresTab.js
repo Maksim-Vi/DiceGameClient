@@ -4,37 +4,20 @@ import {StyleSheet} from "react-native";
 import SquareItem from "./SquareItem";
 import ModalWrapper from "../../../../common/ModalWindows/ModalWrapper";
 import ModalChildrenBuy from "../../../../common/ModalWindows/ModalChildren/ModalChildrenBuy";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {selectMyUser} from "../../../../redux/reducers/players/PlayersReducer";
+import {setCollectBuyItemPopup} from "../../../../redux/reducers/popups/PopupsReducer";
 
 const SquaresTab = (props) => {
 
+    const dispatch = useDispatch()
     const user = useSelector(state=> selectMyUser(state))
-    const [modal, setModal] = React.useState({
-        visible: false,
-        modalName: 'Squares',
-        openItem: {}
-    });
 
     const setModalVisible = (isVisible, item) =>{
-        setModal({
-            ...modal,
-            visible: isVisible,
+        dispatch(setCollectBuyItemPopup({visible: true, data: {
+            modalName: 'Squares',
             openItem: item
-        })
-    }
-
-    const Model = () =>{
-        if(modal && modal.visible && modal.openItem){
-            return (
-                <ModalWrapper modalBG={'default'} height={400} modalVisible={modal.visible} setModalVisible={()=> setModalVisible(false)}>
-                    <ModalChildrenBuy titleItemName={modal.modalName}
-                                      openItem={modal.openItem}
-                                      type={'squares'}
-                                      setModalVisible={setModalVisible}/>
-                </ModalWrapper>
-            )
-        }
+        }}))
     }
 
     return (
@@ -70,12 +53,12 @@ const SquaresTab = (props) => {
                 </SquaresScrollContainer>
                 <SquareCardLast />
             </SquaresScroll>
-            {Model()}
         </Square>
     );
 }
 
 const Square = styled.View`
+  position: relative;
   flex: .83;
   display: flex;
   width: 100%;

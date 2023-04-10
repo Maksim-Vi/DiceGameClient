@@ -1,12 +1,13 @@
 import React, {useEffect} from 'react';
 import Text from "../../../../common/Text/Text";
 import styled from "styled-components";
-import { getCollectionSquareImg} from "../../../../utils/utils";
+import {getCollectionDiceImg, getCollectionSquareImg} from "../../../../utils/utils";
 import CollectButton from "../common/CollectButton";
 import {Animated, Easing} from "react-native";
 import lock from "../../../../../assets/common/lock.png";
 import sale from "../../../../../assets/collections/sale.png";
 import collBg from "../../../../../assets/common/glass_frame.png";
+import images from "../../../../../assets/dynamicLoadImage";
 
 const SquareItem = ({squareItem,isActive,isLocked,isSale, isCollected, setModalVisible}) => {
 
@@ -35,6 +36,14 @@ const SquareItem = ({squareItem,isActive,isLocked,isSale, isCollected, setModalV
         </SaleContainer>
     }
 
+    const getImage = () =>{
+        const img = getCollectionSquareImg(squareItem,squareItem.sortIndex)
+
+        if(img) return  img
+
+        return images.squares['default']
+    }
+
     useEffect(() => {
         showPlaceAnim()
     }, [])
@@ -58,7 +67,7 @@ const SquareItem = ({squareItem,isActive,isLocked,isSale, isCollected, setModalV
                 {renderLockedBG()}
                 {renderSaleLabel()}
 
-                <SquareImage source={getCollectionSquareImg(squareItem,squareItem.sortIndex)}/>
+                <SquareImage source={getImage()}/>
                 <Text setShadow={true} numberOfLines={1} madium blod center>{squareItem.name}</Text>
                 <CollectButton item={squareItem}
                                setModalVisible={setModalVisible}

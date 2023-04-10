@@ -30,10 +30,15 @@ const GameWithOpponent = (props) => {
                                activeOpacity={0.9}
                 //style={{ borderBottomWidth: 8 }}
             >
-                <TextCont setShadow={true} madium blod color={'#ff9d4d'} center>{props.tap_to_play}</TextCont>
+                <TapTpPlayContainer>
+                    <Text setShadow madium blod color={'#ff9d4d'} center>{props.tap_to_play}</Text>
+                </TapTpPlayContainer>
+
                 <GameImage source={gameIcon} resizeMode={'contain'}/>
-                <TextCont numberOfLines={2} setShadow={true} fontSize={18} blod color={'#ff9d4d'}
-                          center>{props.fightOpp}</TextCont>
+                <DescContainer>
+                    <Text numberOfLines={2} setShadow fontSize={17} blod color={'#ff9d4d'}
+                          center>{props.fightOpp}</Text>
+                </DescContainer>
             </OpponentContainer>
         </BG>
     );
@@ -50,20 +55,29 @@ const BG = styled.ImageBackground`
 const OpponentContainer = styled.TouchableOpacity`
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-evenly;
   width: 100%;
-  height: 90%;
+  height: 85%;
   border-radius: 20px;
-  margin-top: 15px;
-  padding: 0 30px;
+  padding: 10px;
+`
+
+const TapTpPlayContainer = styled.View`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60%;
+`
+const DescContainer = styled.View`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 `
 const GameImage = styled.Image`
   width: 130px;
   height: 130px;
-  margin: 10px 20px;
-`
-const TextCont = styled(Text)`
-
+  margin: 5px 0;
 `
 
 const mapStateToProps = (state) => ({

@@ -170,7 +170,7 @@ const ModalChildrenBuy = (props) => {
 
     const getItemImgByType = () =>{
         if(props.openItem){
-            if(props.type === 'dices'){
+            if(props.type === 'Dices'){
                 return getCollectionDiceImg(props.openItem, props.openItem.sortIndex)
             }
 

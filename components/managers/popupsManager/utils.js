@@ -11,6 +11,7 @@ export const updateManager = (props) =>{
         props.googleConfirmUsernamePopup.visible,
         props.lostConnOpponentPopup.visible,
         props.collectItemPopup.visible,
+        props.collectBuyItemPopup.visible,
         props.botGameTypesPopup.visible,
         props.rewardsPopup.visible,
         props.invitationPopup.visible,

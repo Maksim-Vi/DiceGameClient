@@ -4,38 +4,21 @@ import {StyleSheet} from "react-native";
 import DiceItem from "./DiceItem";
 import ModalWrapper from "../../../../common/ModalWindows/ModalWrapper";
 import ModalChildrenBuy from "../../../../common/ModalWindows/ModalChildren/ModalChildrenBuy";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {selectMyUser} from "../../../../redux/reducers/players/PlayersReducer";
 import SquareItem from "../squaresTab/SquareItem";
+import {setCollectBuyItemPopup} from "../../../../redux/reducers/popups/PopupsReducer";
 
 const DicesTab = (props) => {
 
+    const dispatch = useDispatch()
     const user = useSelector(state=> selectMyUser(state))
-    const [modal, setModal] = React.useState({
-        visible: false,
-        modalName: 'Dices',
-        openItem: {}
-    });
 
     const setModalVisible = (isVisible, item) =>{
-        setModal({
-            ...modal,
-            visible: isVisible,
-            openItem: item
-        })
-    }
-
-    const Model = () =>{
-        if(modal && modal.visible && modal.openItem){
-            return (
-                <ModalWrapper modalBG={'default'} height={400} modalVisible={modal.visible} setModalVisible={()=> setModalVisible(false)}>
-                    <ModalChildrenBuy titleItemName={modal.modalName}
-                                      openItem={modal.openItem}
-                                      type={'dices'}
-                                      setModalVisible={setModalVisible}/>
-                </ModalWrapper>
-            )
-        }
+        dispatch(setCollectBuyItemPopup({visible: true, data: {
+                modalName: 'Dices',
+                openItem: item
+            }}))
     }
 
     return (
@@ -71,7 +54,6 @@ const DicesTab = (props) => {
                 </DiceScrollContainer>
                 <DiceCardLast />
             </DicesScroll>
-            {Model()}
         </DicesContainer>
     );
 }

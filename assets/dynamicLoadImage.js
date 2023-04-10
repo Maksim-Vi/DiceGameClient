@@ -1,5 +1,6 @@
 const images = {
     dices: {
+        'default': require('./collections/dice_unknown.png'),
         1: require('./collections/dices/d_1/dice_1.png'),
         2: require('./collections/dices/d_2/dice_1.png'),
         3: require('./collections/dices/d_3/dice_1.png'),
@@ -14,6 +15,7 @@ const images = {
         12: require('./collections/dices/d_12/dice_1.png'),
     },
     squares: {
+        'default': require('./collections/dice_unknown.png'),
         1000: require('./collections/squares/1000.png'),
         1001: require('./collections/squares/1001.png'),
         1002: require('./collections/squares/1002.png'),

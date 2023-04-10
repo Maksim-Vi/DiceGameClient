@@ -11,8 +11,9 @@ import {TestIds, useInterstitialAd} from "react-native-google-mobile-ads";
 import Sounds, {soundsType} from "../../../../utils/Sounds";
 import {getADFlashBonus} from "../../../../protocol/API/API";
 import {selectMyUser} from "../../../../redux/reducers/players/PlayersReducer";
-import {selectTranslation} from "../../../../redux/reducers/language/LanguageReducer";
+import {selectDefaultParams, selectTranslation} from "../../../../redux/reducers/language/LanguageReducer";
 import defaultTranslation from "../../../../redux/reducers/language/defaultTranslation";
+import defaultParams from "../../../../redux/reducers/language/defaultParams";
 
 const ADFlashPopup = (props) => {
 
@@ -30,7 +31,9 @@ const ADFlashPopup = (props) => {
 
     const getADBonus = async () =>{
         if(myUser.id){
-            await getADFlashBonus(myUser.id, 3)
+            if(props.testGetFlash){
+                await getADFlashBonus(myUser.id, 3)
+            }
             closePopup()
         } else {
             closePopup()
@@ -125,6 +128,7 @@ const mapStateToProps = (state) => ({
     skip: selectTranslation(state, defaultTranslation.TR_SKIP),
     text1: selectTranslation(state, defaultTranslation.TR_WATCH_VIDEO_FLASH_TXT1),
     text2: selectTranslation(state, defaultTranslation.TR_WATCH_VIDEO_FLASH_TXT2),
+    testGetFlash: selectDefaultParams(state, defaultParams.TEST_GET_FLASH_FUNCTION),
 });
 
 export default connect(mapStateToProps)(ADFlashPopup);
