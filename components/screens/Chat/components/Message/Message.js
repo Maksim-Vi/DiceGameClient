@@ -16,7 +16,7 @@ const Message = ({mess}) => {
     return (
         <MessageContainer isMyMessage={isMyMessage()}>
             <NameText madium heavy color={'red'}>{mess.username}: </NameText>
-            <MessageText small light color={'black'}>{mess.chatMessage}</MessageText>
+            <MessageText small light color={'black'} fontFamily={'Gogono-Cocoa'}>{mess.chatMessage}</MessageText>
         </MessageContainer>
     )
 }

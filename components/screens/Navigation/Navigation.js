@@ -25,7 +25,7 @@ import FriendsInfoScreen from "../UserInfo/FriendsInfoScreen";
 import LoadingInvitationGameScreen from "../LoadingGameScreen/LoadingInvitationGameScreen";
 
 const options = {
-    headerStyleInterpolator: HeaderStyleInterpolators.forFade,
+    presentation: 'transparentModal'
 }
 
 const AppStack = createStackNavigator();
@@ -70,8 +70,8 @@ export default function Navigator() {
             <AppStack.Screen options={options} name="LoadingInvitationGameScreen" component={LoadingInvitationGameScreen}/>
             <AppStack.Screen options={options} name="RoadScreen" component={RoadScreen}/>
             <AppStack.Screen options={options} name="FriendsScreen" component={FriendsScreen}/>
-            <AppStack.Screen options={{presentation: 'transparentModal'}} name="UserInfoScreen" component={UserInfoScreen}/>
-            <AppStack.Screen options={{presentation: 'transparentModal'}} name="FriendsInfoScreen" component={FriendsInfoScreen}/>
+            <AppStack.Screen options={options} name="UserInfoScreen" component={UserInfoScreen}/>
+            <AppStack.Screen options={options} name="FriendsInfoScreen" component={FriendsInfoScreen}/>
         </AppStack.Navigator>
     );
 }

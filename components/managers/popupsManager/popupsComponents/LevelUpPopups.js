@@ -81,10 +81,10 @@ const LevelUpPopup = (props) => {
 const LvlContainer = styled.View`
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-evenly;
   text-align: center;
   width: 100%;
-  height: 60%;
+  height: 100%;
 `
 
 const ButtonContainer = styled.View`

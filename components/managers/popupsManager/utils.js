@@ -3,7 +3,10 @@ export const updateManager = (props) =>{
 
     return [
         props.deleteAccountPopup.visible,
-        props.lvlUpPopup.visible,
+        (
+            (props.activeTabApp === 'App' || props.activeTabApp === 'MainScreen') &&
+            props.lvlUpPopup.visible
+        ),
         props.tutorialPopup.visible,
         props.avatarPopup.visible,
         props.settingsPopup.visible,

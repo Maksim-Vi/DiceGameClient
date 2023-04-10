@@ -11,9 +11,11 @@ import ScreenThird from "./components/ScreenThird";
 import ScreenFour from "./components/ScreenFour";
 import ScreenFive from "./components/ScreenFive";
 import {selectTranslation} from "../../../../redux/reducers/language/LanguageReducer";
+import {useWindowDimensions} from "react-native";
 
 const TutorialPopup = (props) => {
 
+    const {width, height} = useWindowDimensions()
     const [currentScreen, setNextScreen] = useState(0)
 
     const getScreens = () =>{
@@ -33,31 +35,38 @@ const TutorialPopup = (props) => {
         }
     }
 
-    return <ModalWrapper modalBG={'bg_black'} modalVisible={true}>
+    return <ModalWrapper modalBG={'bg_black'} width={width} height={height} modalVisible={true}>
+        <TopBlock source={topImageBlock} resizeMode={'contain'}/>
         <TutorialContainer>
-            <TopBlock source={topImageBlock} resizeMode={'contain'}/>
             <TouchableWithoutFeedback onPress={continueScreen}>
-                <TutorialContainer>
+                <TutorialContentContainer>
                     <ContentContainer>
                         {getScreens()}
                     </ContentContainer>
                     {currentScreen < 4 && <ContinueText>{props.tapToContinue}</ContinueText>}
-                </TutorialContainer>
+                </TutorialContentContainer>
             </TouchableWithoutFeedback>
-            <BottomBlock source={bottomImageBlock} resizeMode={'contain'}/>
         </TutorialContainer>
+        <BottomBlock source={bottomImageBlock} resizeMode={'contain'}/>
     </ModalWrapper>
 }
 
 
 const TutorialContainer = styled.View`
-  position: relative;
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
   height: 100%;
+`
+
+const TutorialContentContainer = styled.View`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 95%;
 `
 
 const TouchableWithoutFeedback = styled.TouchableWithoutFeedback`
@@ -69,7 +78,7 @@ const ContentContainer = styled.View`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
+  width: 95%;
   height: 100%;
 `
 const ContinueText = styled(Text)`
@@ -81,15 +90,15 @@ const ContinueText = styled(Text)`
 
 const TopBlock = styled.Image`
   position: absolute;
-  top: -20px;
-  right: -40px;
+  top: 0;
+  right: -20px;
   width: 100px;
   height: 100px;
 `
 const BottomBlock = styled.Image`
   position: absolute;
-  bottom: -30px;
-  left: -20px;
+  bottom: -15px;
+  left: 0;
   width: 100px;
   height: 100px;
 `

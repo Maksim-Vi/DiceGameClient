@@ -74,7 +74,7 @@ const RewardsContainer = styled.View`
     display: flex;
   align-items: center;
   justify-content: center;
-  margin-top:${(props)=> props.height < 700 ? `20px` : '30%'};
+  margin-top:${(props)=> props.height < 700 ? `20px` : '15%'};
   height: ${(props)=> props.height ? `${props.height}px` : '100%'};
 `
 

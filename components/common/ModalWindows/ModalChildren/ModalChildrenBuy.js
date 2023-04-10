@@ -94,7 +94,7 @@ const ModalChildrenBuy = (props) => {
                                              clickHandler={()=>confirmModal('coins', props.openItem.price.coins, props.openItem.id)}/>}
                         {diamonds !== '' && props.openItem.isSale === 'true' && salePrice.coins !== props.openItem.price.diamonds
                             ? getSaleBtn('diamonds',props.openItem.price.diamonds, salePrice.diamonds, diamonds)
-                            : <ButtonWithImage text={diamonds}
+                            : <ButtonWithImage text={props.openItem.price.diamonds}
                                              image={diamonds}
                                              margin={2}
                                              btnWidth={45}

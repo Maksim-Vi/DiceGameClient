@@ -71,10 +71,10 @@ export const getIosModel = () => {
 export const getCollectionDiceImg = (item, id) => {
     try {
         if (+id) {
-            if (item.image && item.image !== '') {
-                return {uri: item.image}
-            } else if(images.dices[+id]){
+            if(images.dices[+id]){
                 return images.dices[+id]
+            } else if (item.image && item.image !== '') {
+                return {uri: item.image}
             }
 
             return images.dices['default']
@@ -88,10 +88,10 @@ export const getCollectionDiceImg = (item, id) => {
 export const getCollectionSquareImg = (item, id) => {
     try {
         if (+id) {
-            if (item.image && item.image !== '') {
-                return {uri: item.image}
-            } else if(images.squares[+id]){
+            if(images.squares[+id]){
                 return images.squares[+id]
+            } else if (item.image && item.image !== '') {
+                return {uri: item.image}
             }
 
             return images.squares['default']

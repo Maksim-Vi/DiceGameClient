@@ -42,7 +42,9 @@ const ResultScreen = (props) => {
         Sounds.loadAndPlayFile(soundsType.click2)
         transitionState('MainScreen')
         store.dispatch(setCountScores(null))
-        store.dispatch(setCountShowAd())
+        if(props.ENABLE_AD_AFTER_GAME){
+            store.dispatch(setCountShowAd())
+        }
     }
 
     const handlerWatch = () =>{
@@ -157,7 +159,7 @@ const ResultScreen = (props) => {
                     }
                 ]
             }}>
-                <PlayVideoButton onPress={handlerWatch} style={{borderBottomWidth: 5}}>
+                <PlayVideoButton onPress={handlerWatch} activeOpacity={0.9} style={{borderBottomWidth: 5}}>
                     <IconVideo source={film} style={{ transform: [{rotate: '-20deg'}]}} />
                     <Text large heavy color={'#000'}>{props.watchVideo}</Text>
                     <BtnCoins>
@@ -191,7 +193,7 @@ const ResultScreen = (props) => {
 
                 <ButtonContainer>
                     {getADButton()}
-                    <PlayButton onPress={handlerCloseResult} style={{ borderBottomWidth: 5 }}>
+                    <PlayButton onPress={handlerCloseResult} activeOpacity={0.9} style={{ borderBottomWidth: 5 }}>
                         <Text large heavy color={'#fff'}>{props.continue}</Text>
                     </PlayButton>
                 </ButtonContainer>

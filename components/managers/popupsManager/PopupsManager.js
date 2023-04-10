@@ -43,7 +43,10 @@ const PopupsManager = (props) => {
 
     const checkActiveManager = () =>{
         return props.deleteAccountPopup.visible ||
-               props.lvlUpPopup.visible ||
+               (
+                   (props.activeTabApp === 'App' || props.activeTabApp === 'MainScreen') &&
+                   props.lvlUpPopup.visible
+               ) ||
                props.tutorialPopup.visible ||
                props.avatarPopup.visible ||
                props.settingsPopup.visible ||
@@ -108,6 +111,7 @@ const PopupConteiner = styled.View`
   text-align: center;
   width: 100%;
   height: 100%;
+  background: rgba(0, 0, 0, 0.44);
 `
 
 const mapStateToProps = (state) => ({

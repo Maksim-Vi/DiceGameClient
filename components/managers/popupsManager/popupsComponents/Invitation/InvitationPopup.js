@@ -6,7 +6,11 @@ import Sounds, {soundsType} from "../../../../utils/Sounds";
 import Text from "../../../../common/Text/Text";
 import styled from "styled-components";
 import ButtonWithText from "../../../../common/Buttons/ButtonWithText";
-import {selectInvitationPopup, setInvitationPopup} from "../../../../redux/reducers/popups/PopupsReducer";
+import {
+    closeAllPopupsPopup,
+    selectInvitationPopup,
+    setInvitationPopup
+} from "../../../../redux/reducers/popups/PopupsReducer";
 import InvitationUserFrame from "../../../../screens/LoadingGameScreen/components/Invitation/InvitationUserFrame";
 import C_DECLINE_GAME_BY_FRIEND_INVITATION
     from "../../../../protocol/messages/clients/friends/C_DECLINE_GAME_BY_FRIEND_INVITATION";
@@ -33,6 +37,8 @@ const InvitationPopup = (props) => {
 
     const acceptInvite = () =>{
         const {gameId, username} = invitation.data
+
+        dispatch(closeAllPopupsPopup())
         Sounds.loadAndPlayFile(soundsType.click2)
         new C_ACCEPT_GAME_BY_FRIEND_INVITATION(gameId, myUser.username, username)
         dispatch(setInvitationPopup({visible: false, data: null}))
@@ -54,12 +60,12 @@ const InvitationPopup = (props) => {
                 <ButtonWithText width={'45%'}
                                 height={'40px'}
                                 color={'#ee5353'}
-                                text={'Decline'}
+                                text={props.decline}
                                 clickHandler={declineModal}/>
                 <ButtonWithText width={'45%'}
                                 height={'40px'}
                                 color={'#5acb57'}
-                                text={'Accept'}
+                                text={props.accept}
                                 clickHandler={acceptInvite}/>
             </BtnsContainer>
         </Container>
@@ -97,6 +103,8 @@ const BtnsContainer = styled.View`
 const mapStateToProps = (state) => ({
     text1: selectTranslation(state,defaultTranslation.TR_INVITE_POPUP_TXT1),
     text2: selectTranslation(state,defaultTranslation.TR_INVITE_POPUP_TXT2),
+    accept: selectTranslation(state,defaultTranslation.TR_ACCEPT_FRIEND),
+    decline: selectTranslation(state,defaultTranslation.TR_DECLINE_FRIEND),
 });
 
 export default connect(mapStateToProps)(InvitationPopup);

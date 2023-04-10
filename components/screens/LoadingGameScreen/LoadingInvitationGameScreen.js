@@ -48,7 +48,7 @@ const LoadingInvitationGameScreen = ({route, ...props}) => {
 
                 <LoadingContainer>
                     <InvitationUserFrame username={myUser.username || 'user'}
-                                         avatar={myUser.avatar || 1000}/>
+                                         avatar={myUser.avatar}/>
                     <VSImage source={vs} resizeMode={'stretch'}/>
                     <InvitationUserFrame username={invitedOpponent ? invitedOpponent.opponent.username : 'opponent'}
                                          avatar={invitedOpponent ? invitedOpponent.opponent.avatar : 1000}/>

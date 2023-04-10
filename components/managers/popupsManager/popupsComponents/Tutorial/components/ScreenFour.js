@@ -61,15 +61,15 @@ const Board1 = styled.Image`
   height: 200px;
 `
 const Board2 = styled.Image`
-  width: 200px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
 `
 
 const Dicy = styled.Image`
   position: absolute;
-  top: 20%;
-  width: 250px;
-  height: 250px;
+  top: 22%;
+  width: 220px;
+  height: 220px;
   margin-left: -50px;
 `
 const mapStateToProps = (state) => ({

@@ -16,13 +16,13 @@ const InfoContainer = styled.View`
     align-items: center;
     justify-content: center;
     top: -5px;
-    right: -5px;
+    right: -2px;
     border-radius: 100px;
     width: 20px;
     height: 20px;
     background: #CB3131;
     border: 2px solid white;
-  z-index: 1;
+    z-index: 1;
 `
 
 const TextCount = styled(TextWithoutShadowStyle)``
