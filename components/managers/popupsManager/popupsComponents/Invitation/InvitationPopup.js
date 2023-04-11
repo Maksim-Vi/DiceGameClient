@@ -52,7 +52,7 @@ const InvitationPopup = (props) => {
         <Container>
             <DeleteContainer>
                 <InvitationUserFrame username={invitation.data ? invitation.data.username : 'user'}
-                                     avatar={invitation.data?.avatarId || 1000}/>
+                                     avatar={invitation.data?.avatarId}/>
                 <Text setShadow blod large center>{replaceText()}</Text>
                 <Text setShadow blod medium center>{props.text2}</Text>
             </DeleteContainer>
