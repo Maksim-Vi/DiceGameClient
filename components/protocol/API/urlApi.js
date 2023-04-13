@@ -13,7 +13,7 @@ export const getUrl = () =>{
 
     const protocol = inProduction ? 'https' : 'http';
 
-    //console.log('ANSWER', apiDomain)
+    console.log('ANSWER', apiDomain)
 
     if(Platform.OS === 'android'){
         return inProduction ? `${protocol}://${apiDomain}/api` : `${protocol}://10.0.2.2:${port}/api`

@@ -3,16 +3,21 @@ import styled from "styled-components";
 import exit from "../../../../../assets/topPanel/settingsPopup/exit.png";
 import goBack from "../../../../../assets/topPanel/settingsPopup/back.png";
 import muteSounds from "../../../../../assets/topPanel/settingsPopup/silent.png";
+import tutorial from "../../../../../assets/tutorial/dicy.png";
 import unmuteSounds from "../../../../../assets/topPanel/settingsPopup/high-volume.png";
 import support from "../../../../../assets/topPanel/settingsPopup/support.png";
 import deleteAcc from "../../../../../assets/topPanel/settingsPopup/delete-acc.png";
 import lang from "../../../../../assets/topPanel/settingsPopup/language.png";
 import {UserContext} from "../../../../utils/UserProvider";
 import C_LEAVE_SOCKET from "../../../../protocol/messages/clients/C_LEAVE_SOCKET";
-import {setDeleteAccountPopup, setSettingsMenuPopup} from "../../../../redux/reducers/popups/PopupsReducer";
+import {
+    setDeleteAccountPopup,
+    setSettingsMenuPopup,
+    setTutorialPopup
+} from "../../../../redux/reducers/popups/PopupsReducer";
 import {connect, useDispatch} from "react-redux";
 import Text from "../../../Text/Text";
-import {getCurrentData} from "../../../../utils/utils";
+import {delay, getCurrentData} from "../../../../utils/utils";
 import {selectSoundsInfo, selectTranslation} from "../../../../redux/reducers/language/LanguageReducer";
 import defaultTranslation from "../../../../redux/reducers/language/defaultTranslation";
 import {selectMyUser} from "../../../../redux/reducers/players/PlayersReducer";
@@ -51,6 +56,14 @@ const Settings = (props) =>{
         Sounds.loadAndPlayFile(soundsType.click2)
         new C_CHANGE_SOUND(!mute)
         setMute(!mute)
+    }
+
+    const openTutorial = () =>{
+        Sounds.loadAndPlayFile(soundsType.click2)
+        dispatch(setSettingsMenuPopup({visible: false, data: null}))
+        delay(300).then(()=>{
+            dispatch(setTutorialPopup({visible: true, data: null}))
+        })
     }
 
     const setSupport = async () =>{
@@ -114,6 +127,12 @@ const Settings = (props) =>{
                         <Img source={mute ? unmuteSounds : muteSounds} resizeMode='stretch'/>
                         <Text large blod center color={'#0c6fb6'}>{props.muteUnmute}</Text>
                     </SoundsContainer>
+                </Btn>
+                <Btn onPress={openTutorial} activeOpacity={0.9}>
+                    <TutorialContainer  style={{ borderBottomWidth: 3 }}>
+                        <Img source={tutorial} resizeMode='contain'/>
+                        <Text large blod center color={'#0c6fb6'}>Tutorial</Text>
+                    </TutorialContainer>
                 </Btn>
                 <Btn onPress={setSupport} activeOpacity={0.9}>
                     <SupportContainer style={{ borderBottomWidth: 3 }}>
@@ -180,6 +199,7 @@ const DeleteAccContainer = styled(BtnContainer)`
   background-color: rgb(241, 92, 79);
   border: 1px solid rgb(2, 2, 2);
 `
+const TutorialContainer = styled(BtnContainer)``
 const SupportContainer = styled(BtnContainer)``
 const LanguageContainer = styled(BtnContainer)``
 

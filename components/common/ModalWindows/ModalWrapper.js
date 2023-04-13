@@ -15,7 +15,7 @@ const ModalWrapper = (props) => {
                     {setModalVisible && !lineArrow && <Close close={setModalVisible}/>}
                     {children}
                 </DefaultBG>
-            case 'bg_black': return <BlackBG>
+            case 'bg_black': return <BlackBG backgroundColor={props.backgroundColor}>
                     {setModalVisible && !lineArrow && <Close close={setModalVisible}/>}
                     {setModalVisible && lineArrow && <ButtonBack top={'5%'} leaveGame={setModalVisible}/>}
                     {children}
@@ -54,6 +54,8 @@ const BlackBG = styled.View`
   position: relative;
   width: 100%;
   height: 100%;
+  background: ${(props) =>  props.backgroundColor ? `${props.backgroundColor}`  : 'transparent'};
+
 `
 
 export default ModalWrapper;

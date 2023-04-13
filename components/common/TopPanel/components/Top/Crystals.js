@@ -14,7 +14,7 @@ const CrystalsContainer = styled.View`
   position: relative;
   border: 2px solid rgb(255,157,77);
   border-radius: 5px;
-  background-color: aqua;
+  background-color: #00eaff;
   padding: 2px 20px 2px 20px;
 
   ${(props)=>{

@@ -168,4 +168,6 @@ export default {
     TR_SELECT_GAME_TYPE: 'TR_SELECT_GAME_TYPE',
     TR_MEDIUM: 'TR_MEDIUM',
     TR_HARD: 'TR_HARD',
+
+    TR_NOT_ENOUGH_TO_BUY: 'TR_NOT_ENOUGH_TO_BUY', // `Sorry but you dont have ${type}! play more and then you could buy something`
 }

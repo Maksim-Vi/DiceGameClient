@@ -53,7 +53,8 @@ class OpponentBoard extends PureComponent {
     DrawBoard = () =>{
 
         const checkWinPiontsByColumn = (i) =>{
-            const columnIndex = [[0,3,6],[1,4,7],[2,5,8]]
+            //const columnIndex = [[0,3,6],[1,4,7],[2,5,8]]
+            const columnIndex = [[6,3,0],[7,4,1],[8,5,2]]
             let data = null
             columnIndex.flat().forEach(index=>{
                 if(index === i && (index === 0 || index === 3 || index ===6)){

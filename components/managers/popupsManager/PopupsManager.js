@@ -22,7 +22,7 @@ import TutorialPopup from "./popupsComponents/Tutorial/TutorialPopup";
 import InvitationPopup from "./popupsComponents/Invitation/InvitationPopup";
 import ADFlashPopup from "./popupsComponents/ADPopups/ADFlashPopup";
 import NotEnoughFlashPopup from "./popupsComponents/NotEnoughFlashPopup";
-import {updateManager} from "./utils";
+import {isAppScreen, updateManager} from "./utils";
 import CollectionBuyItemPopup from "./popupsComponents/Collection/CollectionBuyItemPopup";
 
 const PopupsManager = (props) => {
@@ -32,22 +32,16 @@ const PopupsManager = (props) => {
     const isRestoreGame = useSelector(selectRestoreGame)
 
     const renderSevenDays = () =>{
-        if( props.sevenDaysPopup.visible &&
-            (props.activeTabApp === 'App' || props.activeTabApp === 'MainScreen') &&
-            !isRestoreGame &&
-            !props.tutorialPopup.visible
-        ){
+        if(props.sevenDaysPopup.visible && isAppScreen(props) && !isRestoreGame && !props.tutorialPopup.visible){
             return <SevenDaysGift />
         }
     }
 
     const checkActiveManager = () =>{
         return props.deleteAccountPopup.visible ||
-               (
-                   (props.activeTabApp === 'App' || props.activeTabApp === 'MainScreen') &&
-                   props.lvlUpPopup.visible
-               ) ||
-               props.tutorialPopup.visible ||
+               (isAppScreen(props) && props.lvlUpPopup.visible) ||
+               (isAppScreen(props) && props.tutorialPopup.visible) ||
+               (isAppScreen(props) && props.sevenDaysPopup.visible) ||
                props.avatarPopup.visible ||
                props.settingsPopup.visible ||
                props.infoPopup.visible ||
@@ -60,8 +54,7 @@ const PopupsManager = (props) => {
                props.invitationPopup.visible ||
                props.adFlashPopup.visible ||
                props.notEnoughFlashPopup.visible ||
-               props.testBtnsPopup.visible ||
-               props.sevenDaysPopup.visible
+               props.testBtnsPopup.visible
     }
 
     useEffect(()=>{
@@ -78,15 +71,11 @@ const PopupsManager = (props) => {
         <PopupConteiner>
             <StatusBar hidden={true} style="light"/>
 
-            {props.deleteAccountPopup.visible && <DeleteAccount />}
-            {
-                props.lvlUpPopup.visible &&
-                (props.activeTabApp === 'App' || props.activeTabApp === 'MainScreen') &&
-                <LevelUpPopup/>
-            }
-            {props.tutorialPopup.visible && <TutorialPopup />}
+            {props.deleteAccountPopup.visible && <DeleteAccount /> }
+            {props.lvlUpPopup.visible && isAppScreen(props) && <LevelUpPopup/> }
+            {props.tutorialPopup.visible && isAppScreen(props) && <TutorialPopup /> }
             { renderSevenDays() }
-            {props.avatarPopup.visible && <AvatarPopups user={props.user}/>}
+            {props.avatarPopup.visible && <AvatarPopups user={props.user}/> }
             {props.settingsPopup.visible && <SettingsMenuPopups/>}
             {props.infoPopup.visible && <InfoPopups />}
             {props.googleConfirmUsernamePopup.visible && <ChangeUserNameGoogle />}
@@ -111,7 +100,7 @@ const PopupConteiner = styled.View`
   text-align: center;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.44);
+  background: rgba(0, 0, 0, 0.7);
 `
 
 const mapStateToProps = (state) => ({

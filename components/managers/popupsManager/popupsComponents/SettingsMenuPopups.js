@@ -4,13 +4,13 @@ import {Platform, useWindowDimensions} from "react-native";
 import {setSettingsMenuPopup} from "../../../redux/reducers/popups/PopupsReducer";
 import {useDispatch} from "react-redux";
 import Settings from "../../../common/TopPanel/components/Bottom/Settings";
-import {getIosModel} from "../../../utils/utils";
 import Sounds, {soundsType} from "../../../utils/Sounds";
 import * as NavigationBar from "expo-navigation-bar";
 
 const margin = 50
 const marginButtons = 30
-const countTabsHeight = (6 * (30 + marginButtons)) + margin
+const countBtns = 7
+const countTabsHeight = (countBtns * (30 + marginButtons)) + margin
 
 const SettingsMenuPopups = () => {
 

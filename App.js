@@ -10,6 +10,7 @@ import PopupsManager from './components/managers/popupsManager/PopupsManager';
 import NoConnection from "./components/common/NoConnection/NoConnection";
 import * as NavigationBar from 'expo-navigation-bar';
 import {Platform, StatusBar} from "react-native";
+import {useBackHandler} from "@react-native-community/hooks";
 
 export default function App() {
 
@@ -34,6 +35,13 @@ export default function App() {
             AndroidSoftwareNavHidden()
         }
     },[])
+
+    const backActionHandler = () => {
+        console.log('SKIP BACK HOME')
+        return true;
+    };
+
+    useBackHandler(backActionHandler)
 
     if (!fontsLoaded) return null;
 

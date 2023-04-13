@@ -3,7 +3,7 @@
     "name": "Knocky Dice",
     "slug": "dicegame",
     "owner": "kastom",
-    "version": "1.3.1",
+    "version": "1.3.3",
     "orientation": "portrait",
     "icon": "./assets/loadGame/icon-game.png",
     "splash": {
@@ -19,7 +19,7 @@
     "assetBundlePatterns": [
       "**/*"
     ],
-    "userInterfaceStyle": "automatic",
+    "userInterfaceStyle": "light",
     "ios": {
       "supportsTablet": false,
       "infoPlist": {
@@ -41,7 +41,7 @@
         "backgroundColor": "#FFFFFF"
       },
       "package": "com.anonymous.knockydice",
-      "versionCode": 16
+      "versionCode": 18
     },
     "extra": {
       "APP_TYPE": "production",

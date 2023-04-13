@@ -144,7 +144,7 @@ const LoadingProject = () => {
 										style={{position: 'absolute', bottom: -10, opacity: 0.8, width: 400, height: 400}} />
 
 				</View>
-				<Text setShadow={true} small color={'#fff'} center>welcome to the us! created by 2022</Text>
+				<Text setShadow small color={'#fff'} center>Welcome to us! created since 2022</Text>
 			</LoadingContainer>
 		</BackgroundWrapper>
 	)

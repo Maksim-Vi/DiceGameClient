@@ -10,15 +10,17 @@ import C_BUY_GAME_ITEM from "../../../protocol/messages/clients/collections/C_BU
 import {selectUserCoins, selectUserCrystals} from "../../../redux/reducers/players/PlayersReducer";
 import {store} from "../../../redux/redux-store";
 import {setPaymentBuyRealMoney} from "../../../utils/PaymentHelper";
-import { getCollectionDiceImg, getCollectionSquareImg} from "../../../utils/utils";
+import {delay, getCollectionDiceImg, getCollectionSquareImg} from "../../../utils/utils";
 import {selectTranslation} from "../../../redux/reducers/language/LanguageReducer";
 import defaultTranslation from "../../../redux/reducers/language/defaultTranslation";
-import {connect} from "react-redux";
+import {connect, useDispatch} from "react-redux";
 import TextWithoutShadow from "../../Text/TextWithoutShadow";
 import sale from "../../../../assets/collections/sale.png";
+import {setInfoPopup} from "../../../redux/reducers/popups/PopupsReducer";
 
 const ModalChildrenBuy = (props) => {
 
+    const dispatch = useDispatch()
     const getButtons = () =>{
         if(!props.openItem) return
 
@@ -130,7 +132,10 @@ const ModalChildrenBuy = (props) => {
             (type === 'coins' && userCoins < price) ||
             (type === 'diamonds' && userCrystals < price)
         ) {
-            alert(`Sorry but you dont have ${type}! play more and then you could buy something =)`)
+            const message = props.notEnoughToBy.replace('_type_', `${type}`)
+            delay(300).then(()=>{
+                dispatch(setInfoPopup({visible: true, data: {text: message}}))
+            })
             return props.setModalVisible(false)
         }
 
@@ -290,6 +295,7 @@ const Sale = styled(Text)`
 const mapStateToProps = (state) => ({
     confirmInfo: selectTranslation(state,defaultTranslation.TR_COLLECTIONS_CONFIRM_INFO),
     fightOpp: selectTranslation(state,defaultTranslation.TR_FIGHT_OPP),
+    notEnoughToBy: selectTranslation(state,defaultTranslation.TR_NOT_ENOUGH_TO_BUY),
 })
 
 export default connect(mapStateToProps)(ModalChildrenBuy);

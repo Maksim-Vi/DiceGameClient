@@ -35,7 +35,7 @@ const TutorialPopup = (props) => {
         }
     }
 
-    return <ModalWrapper modalBG={'bg_black'} width={width} height={height} modalVisible={true}>
+    return <ModalWrapper modalBG={'bg_black'} backgroundColor={'rgba(0,0,0,0.66)'} width={width} height={height} modalVisible={true}>
         <TopBlock source={topImageBlock} resizeMode={'contain'}/>
         <TutorialContainer>
             <TouchableWithoutFeedback onPress={continueScreen}>

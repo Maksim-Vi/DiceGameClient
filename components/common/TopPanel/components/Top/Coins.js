@@ -27,16 +27,16 @@ const CoinsContainer = styled.View`
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid rgb(255,157,77);
+  border: 2px solid rgb(255, 157, 77);
   border-radius: 5px;
-  background-color: aqua;
+  background-color: #00eaff;
   padding: 2px 20px 2px 20px;
-  
-  ${(props)=>{
-      if(props.width){
-          return `width: ${props.width}px;`
-      }
+
+  ${(props) => {
+    if (props.width) {
+      return `width: ${props.width}px;`
+    }
   }}
-  
+
 `
 export default Coins
