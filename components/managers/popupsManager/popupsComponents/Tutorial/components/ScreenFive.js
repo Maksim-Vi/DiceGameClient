@@ -5,7 +5,7 @@ import Text from "../../../../../common/Text/Text";
 import dicy from "../../../../../../assets/tutorial/dicy_3.png";
 import bg from "../../../../../../assets/topPanel/btns/rewards.png";
 import {setTutorialPopup} from "../../../../../redux/reducers/popups/PopupsReducer";
-import {selectTranslation} from "../../../../../redux/reducers/language/LanguageReducer";
+import {selectTranslation, selectUserParams} from "../../../../../redux/reducers/language/LanguageReducer";
 import C_CHANGE_USER_PARAM from "../../../../../protocol/messages/clients/C_CHANGE_USER_PARAM";
 import userParams from "../../../../../redux/reducers/language/userParams";
 
@@ -13,7 +13,9 @@ const ScreenFive = (props) => {
     const dispatch = useDispatch()
 
     const close = () =>{
-        new C_CHANGE_USER_PARAM(userParams.USER_TUTORIAL_FINISH)
+        if(!props.isTutorialShow){
+            new C_CHANGE_USER_PARAM(userParams.USER_TUTORIAL_FINISH)
+        }
         dispatch(setTutorialPopup({visible: false, data: null}))
     }
 
@@ -95,6 +97,7 @@ const Dicy = styled.Image`
 `
 
 const mapStateToProps = (state) => ({
+    isTutorialShow: selectUserParams(state,'USER_TUTORIAL_FINISH'),
     text12: selectTranslation(state,'TR_TUTORIAL_TEXT_12'),
     playWithBot: selectTranslation(state,'TR_TUTORIAL_PLAY_WITH_BOT'),
     finishTutorial: selectTranslation(state,'TR_TUTORIAL_FINISH'),
