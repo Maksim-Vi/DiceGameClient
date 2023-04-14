@@ -24,7 +24,8 @@ const Text = styled.Text`
     color: ${props => props.color ? props.color : '#fff'};
     font-family: ${props => {
         if(!props.fontFamily){
-            return props.user && props.user.language !== 'EN' ? 'Gogono-Cocoa' : 'Dilo-World'
+            //return props.user && props.user.language !== 'EN' ? 'Gogono-Cocoa' : 'Dilo-World'
+            return 'Gogono-Cocoa'
         } else {
             return props.fontFamily
         }

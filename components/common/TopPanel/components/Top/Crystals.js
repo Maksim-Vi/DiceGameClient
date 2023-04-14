@@ -2,23 +2,38 @@ import React from "react";
 import Text from "../../../Text/Text";
 import styled from "styled-components";
 import star from "../../../../../assets/topPanel/diamond.png";
+import {store} from "../../../../redux/redux-store";
+import {setInfoPopup} from "../../../../redux/reducers/popups/PopupsReducer";
 
-const Crystals = (props) =>{
-    return <CrystalsContainer {...props}>
-        <CrystalsImage source={star} resizeMode="cover"/>
-        <Text setShadow={true} blod medium center>{props.crystals}</Text>
-    </CrystalsContainer>
+const Crystals = (props) => {
+
+    const openInfoCrystals = () => {
+        store.dispatch(setInfoPopup({visible: true, data: {text: 'some info'}}))
+    }
+
+    return (
+        <ButtonClick onPress={openInfoCrystals} accessible={false}>
+            <CrystalsContainer {...props}>
+                <CrystalsImage source={star} resizeMode="cover"/>
+                <Text setShadow={true} blod medium center>{props.crystals}</Text>
+            </CrystalsContainer>
+        </ButtonClick>
+    )
 }
+
+const ButtonClick = styled.TouchableWithoutFeedback`
+
+`
 
 const CrystalsContainer = styled.View`
   position: relative;
-  border: 2px solid rgb(255,157,77);
+  border: 2px solid rgb(255, 157, 77);
   border-radius: 5px;
   background-color: #00eaff;
   padding: 2px 20px 2px 20px;
 
-  ${(props)=>{
-    if(props.width){
+  ${(props) => {
+    if (props.width) {
       return `
         width: ${props.width}px;
       `

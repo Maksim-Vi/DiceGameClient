@@ -37,7 +37,6 @@ export default function App() {
     },[])
 
     const backActionHandler = () => {
-        console.log('SKIP BACK HOME')
         return true;
     };
 

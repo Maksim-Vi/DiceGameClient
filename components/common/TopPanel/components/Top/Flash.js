@@ -6,7 +6,7 @@ import add from "../../../../../assets/topPanel/btns/add-green.png";
 import {Animated, Easing} from "react-native";
 import {setTimingAnimated} from "../../../../utils/Animation";
 import {store} from "../../../../redux/redux-store";
-import {setADFlashPopup} from "../../../../redux/reducers/popups/PopupsReducer";
+import {setADFlashPopup, setInfoPopup} from "../../../../redux/reducers/popups/PopupsReducer";
 import FlashInfo from "./FlashInfo";
 
 const Flash = (props) => {
@@ -26,6 +26,8 @@ const Flash = (props) => {
     const showADFlash = () =>{
         if(props.flash <= 10){
             store.dispatch(setADFlashPopup({visible: true, data: {flash: props.flash}}))
+        } else {
+            store.dispatch(setInfoPopup({visible: true, data: {text: 'some info'}}))
         }
     }
 

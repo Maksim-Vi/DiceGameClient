@@ -2,6 +2,7 @@ import React, {useEffect} from 'react'
 import GameMain from "./GameMain/GameMain";
 import * as NavigationBar from "expo-navigation-bar";
 import {Platform} from "react-native";
+import {useBackHandler} from "@react-native-community/hooks";
 
 const GameLoader = () => {
 
@@ -21,6 +22,12 @@ const GameLoader = () => {
             }
         }
     },[visibility])
+
+    const backActionHandler = () => {
+        return true;
+    };
+
+    useBackHandler(backActionHandler)
 
     return <GameMain />
 }
