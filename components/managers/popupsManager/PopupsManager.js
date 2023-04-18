@@ -24,6 +24,10 @@ import ADFlashPopup from "./popupsComponents/ADPopups/ADFlashPopup";
 import NotEnoughFlashPopup from "./popupsComponents/NotEnoughFlashPopup";
 import {isAppScreen, updateManager} from "./utils";
 import CollectionBuyItemPopup from "./popupsComponents/Collection/CollectionBuyItemPopup";
+import CoinsInfoPopups from "./popupsComponents/TopPanelInfo/CoinsInfoPopup";
+import DiamondInfoPopups from "./popupsComponents/TopPanelInfo/DiamondInfoPopup";
+import FlashInfoPopups from "./popupsComponents/TopPanelInfo/FlashInfoPopup";
+import {selectDiamondsInfoPopup} from "../../redux/reducers/popups/PopupsReducer";
 
 const PopupsManager = (props) => {
 
@@ -54,7 +58,10 @@ const PopupsManager = (props) => {
                props.invitationPopup.visible ||
                props.adFlashPopup.visible ||
                props.notEnoughFlashPopup.visible ||
-               props.testBtnsPopup.visible
+               props.testBtnsPopup.visible ||
+               props.coinsInfoPopup.visible ||
+               props.diamondsInfoPopup.visible ||
+               props.flashInfoPopup.visible
     }
 
     useEffect(()=>{
@@ -88,6 +95,10 @@ const PopupsManager = (props) => {
             {props.adFlashPopup.visible && <ADFlashPopup />}
             {props.notEnoughFlashPopup.visible && <NotEnoughFlashPopup />}
             {props.testBtnsPopup.visible && <TestBtnsPopups />}
+
+            {props.coinsInfoPopup.visible && <CoinsInfoPopups />}
+            {props.diamondsInfoPopup.visible && <DiamondInfoPopups />}
+            {props.flashInfoPopup.visible && <FlashInfoPopups />}
         </PopupConteiner>
     )
 }
@@ -123,6 +134,10 @@ const mapStateToProps = (state) => ({
     invitationPopup: popups.selectInvitationPopup(state),
     adFlashPopup: popups.selectADFlashPopup(state),
     notEnoughFlashPopup: popups.selectNotEnoughFlashPopup(state),
+
+    coinsInfoPopup: popups.selectCoinsInfoPopup(state),
+    diamondsInfoPopup: popups.selectDiamondsInfoPopup(state),
+    flashInfoPopup: popups.selectFlashInfoPopup(state),
 });
 
 export default connect(mapStateToProps)(PopupsManager);

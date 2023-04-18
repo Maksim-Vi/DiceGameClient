@@ -170,4 +170,11 @@ export default {
     TR_HARD: 'TR_HARD',
 
     TR_NOT_ENOUGH_TO_BUY: 'TR_NOT_ENOUGH_TO_BUY', // `Sorry but you dont have ${type}! play more and then you could buy something`
+
+    TR_COINS_INFO_TITLE: 'TR_COINS_INFO_TITLE',
+    TR_DIAMONDS_INFO_TITLE: 'TR_DIAMONDS_INFO_TITLE',
+    TR_FLASH_INFO_TITLE: 'TR_FLASH_INFO_TITLE',
+    TR_COINS_INFO: 'TR_COINS_INFO',
+    TR_DIAMONDS_INFO: 'TR_DIAMONDS_INFO',
+    TR_FLASH_INFO: 'TR_FLASH_INFO',
 }

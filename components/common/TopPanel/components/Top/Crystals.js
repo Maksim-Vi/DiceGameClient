@@ -3,12 +3,12 @@ import Text from "../../../Text/Text";
 import styled from "styled-components";
 import star from "../../../../../assets/topPanel/diamond.png";
 import {store} from "../../../../redux/redux-store";
-import {setInfoPopup} from "../../../../redux/reducers/popups/PopupsReducer";
+import {setDiamondsInfoPopup} from "../../../../redux/reducers/popups/PopupsReducer";
 
 const Crystals = (props) => {
 
     const openInfoCrystals = () => {
-        store.dispatch(setInfoPopup({visible: true, data: {text: 'some info'}}))
+        store.dispatch(setDiamondsInfoPopup({visible: true, data: null}))
     }
 
     return (

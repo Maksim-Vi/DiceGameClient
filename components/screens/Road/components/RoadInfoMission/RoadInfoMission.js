@@ -69,7 +69,7 @@ const RoadInfoContainer = styled(Animated.View)`
     const isIos = getIosModel()
     if (Platform.OS === 'ios' && isIos >= 10) {
       return `
-        width: 90%;
+        width: 70%;
         top: 6%;
       `
     } else {

@@ -5,14 +5,14 @@ import AnimatedLottieView from "lottie-react-native";
 import coinsAnim from "../../../../../assets/animation/lottieAnim/coin-topPanel.json";
 import {Platform} from "react-native";
 import {store} from "../../../../redux/redux-store";
-import {setADFlashPopup, setInfoPopup} from "../../../../redux/reducers/popups/PopupsReducer";
+import {setADFlashPopup, setCoinsInfoPopup, setInfoPopup} from "../../../../redux/reducers/popups/PopupsReducer";
 
 const Coins = (props) => {
 
     const lottieRef = useRef(null)
 
     const openInfoCoins = () => {
-        store.dispatch(setInfoPopup({visible: true, data: {text: 'some info'}}))
+        store.dispatch(setCoinsInfoPopup({visible: true, data: null}))
     }
 
     useEffect(() => {

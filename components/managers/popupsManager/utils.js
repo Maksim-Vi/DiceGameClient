@@ -23,6 +23,9 @@ export const updateManager = (props) =>{
         props.adFlashPopup.visible,
         props.notEnoughFlashPopup.visible,
         props.testBtnsPopup.visible,
+        props.coinsInfoPopup.visible,
+        props.diamondsInfoPopup.visible,
+        props.flashInfoPopup.visible,
         (isAppScreen(props) && props.sevenDaysPopup.visible)
     ]
 }
