@@ -27,8 +27,10 @@ import {getADX2CoinsBonus} from "../../protocol/API/API";
 const ResultScreen = (props) => {
 
     const AdUnitID = Platform.OS === 'ios'
-        ? process.env.APP_TYPE !== 'development' && props.ENABLE_AD_PROD && props.ENABLE_AD_IOS_PROD ? 'ca-app-pub-6421975370931679/1085368846' : TestIds.INTERSTITIAL
-        : process.env.APP_TYPE !== 'development' && props.ENABLE_AD_PROD && props.ENABLE_AD_ANDROID_PROD ? 'ca-app-pub-6421975370931679/4342087577' : TestIds.INTERSTITIAL
+        ? process.env.APP_TYPE !== 'development' && props.ENABLE_AD_PROD && props.ENABLE_AD_IOS_PROD
+            ? 'ca-app-pub-6421975370931679/1096306623' : TestIds.INTERSTITIAL
+        : process.env.APP_TYPE !== 'development' && props.ENABLE_AD_PROD && props.ENABLE_AD_ANDROID_PROD
+            ? 'ca-app-pub-6421975370931679/5227941568' : TestIds.INTERSTITIAL
 
     const { isLoaded, isClosed, load, show } = useInterstitialAd(AdUnitID, {
         requestNonPersonalizedAdsOnly: true,

@@ -18,8 +18,10 @@ import defaultParams from "../../../../redux/reducers/language/defaultParams";
 const ADFlashPopup = (props) => {
 
     const AdUnitID = Platform.OS === 'ios'
-        ? process.env.APP_TYPE !== 'development' && props.ENABLE_AD_PROD && props.ENABLE_AD_IOS_PROD ? 'ca-app-pub-6421975370931679/4544844469' : TestIds.INTERSTITIAL
-        : process.env.APP_TYPE !== 'development' && props.ENABLE_AD_PROD && props.ENABLE_AD_ANDROID_PROD ? 'ca-app-pub-6421975370931679/3383844027' : TestIds.INTERSTITIAL
+        ? process.env.APP_TYPE !== 'development' && props.ENABLE_AD_PROD && props.ENABLE_AD_IOS_PROD
+            ? 'ca-app-pub-6421975370931679/4644916812' : TestIds.INTERSTITIAL
+        : process.env.APP_TYPE !== 'development' && props.ENABLE_AD_PROD && props.ENABLE_AD_ANDROID_PROD
+            ? 'ca-app-pub-6421975370931679/1480569564' : TestIds.INTERSTITIAL
 
     const { isLoaded, isClosed, load, show } = useInterstitialAd(AdUnitID, {
         requestNonPersonalizedAdsOnly: true,
