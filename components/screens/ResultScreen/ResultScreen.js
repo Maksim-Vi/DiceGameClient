@@ -4,7 +4,7 @@ import {connect, useSelector} from "react-redux";
 import {selectResultGame, setCountScores} from "../../redux/reducers/game/GameReducer";
 import React from "react";
 import {useNavigation} from "@react-navigation/native";
-import {selectCurrentUserId} from "../../redux/reducers/players/PlayersReducer";
+import {selectCurrentUserId, selectMyUser} from "../../redux/reducers/players/PlayersReducer";
 import BackgroundWrapper from "../../common/BackgroundWrapper/BackgroundWrapper";
 import {store} from "../../redux/redux-store";
 import Winner from "./components/Winner";
@@ -26,6 +26,7 @@ import {getADX2CoinsBonus} from "../../protocol/API/API";
 
 const ResultScreen = (props) => {
 
+    const user = useSelector(selectMyUser)
     const AdUnitID = Platform.OS === 'ios'
         ? process.env.APP_TYPE !== 'development' && props.ENABLE_AD_PROD && props.ENABLE_AD_IOS_PROD
             ? 'ca-app-pub-6421975370931679/1096306623' : TestIds.INTERSTITIAL

@@ -17,6 +17,7 @@ import defaultParams from "../../../../redux/reducers/language/defaultParams";
 
 const ADFlashPopup = (props) => {
 
+    const user = useSelector(selectMyUser)
     const AdUnitID = Platform.OS === 'ios'
         ? process.env.APP_TYPE !== 'development' && props.ENABLE_AD_PROD && props.ENABLE_AD_IOS_PROD
             ? 'ca-app-pub-6421975370931679/4644916812' : TestIds.INTERSTITIAL
