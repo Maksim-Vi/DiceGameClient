@@ -4,7 +4,7 @@ import ModalWrapper from "../../../../common/ModalWindows/ModalWrapper";
 import {connect, useDispatch, useSelector} from "react-redux";
 import ButtonWithText from "../../../../common/Buttons/ButtonWithText";
 import {Platform, useWindowDimensions} from "react-native";
-import {selectADFlashPopup, setADFlashPopup} from "../../../../redux/reducers/popups/PopupsReducer";
+import {setADFlashPopup} from "../../../../redux/reducers/popups/PopupsReducer";
 import Text from "../../../../common/Text/Text";
 import video from "../../../../../assets/result/film-slate.png";
 import {TestIds, useInterstitialAd} from "react-native-google-mobile-ads";
@@ -18,11 +18,15 @@ import defaultParams from "../../../../redux/reducers/language/defaultParams";
 const ADFlashPopup = (props) => {
 
     const AdUnitID = Platform.OS === 'ios'
-        ? process.env.APP_TYPE !== 'development' && props.ENABLE_AD_PROD && props.ENABLE_AD_IOS_PROD ? 'ca-app-pub-6421975370931679~2323680627' : TestIds.INTERSTITIAL
-        : process.env.APP_TYPE !== 'development' && props.ENABLE_AD_PROD && props.ENABLE_AD_ANDROID_PROD ? 'ca-app-pub-6421975370931679/4342087577' : TestIds.INTERSTITIAL
+        ? process.env.APP_TYPE !== 'development' && props.ENABLE_AD_PROD && props.ENABLE_AD_IOS_PROD ? 'ca-app-pub-6421975370931679/4544844469' : TestIds.INTERSTITIAL
+        : process.env.APP_TYPE !== 'development' && props.ENABLE_AD_PROD && props.ENABLE_AD_ANDROID_PROD ? 'ca-app-pub-6421975370931679/3383844027' : TestIds.INTERSTITIAL
 
     const { isLoaded, isClosed, load, show } = useInterstitialAd(AdUnitID, {
         requestNonPersonalizedAdsOnly: true,
+        serverSideVerificationOptions:{
+            userId: String(user.id),
+            customData: JSON.stringify({username: user.username, reward: 2, type: 'flashX2'})
+        }
     });
 
     const {width, height} = useWindowDimensions()

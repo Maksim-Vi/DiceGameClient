@@ -8,10 +8,14 @@ import {setTimingAnimated} from "../../../../utils/Animation";
 import {store} from "../../../../redux/redux-store";
 import {setADFlashPopup, setFlashInfoPopup} from "../../../../redux/reducers/popups/PopupsReducer";
 import FlashInfo from "./FlashInfo";
+import {useSelector} from "react-redux";
+import {selectDefaultParams} from "../../../../redux/reducers/language/LanguageReducer";
+import defaultParams from "../../../../redux/reducers/language/defaultParams";
 
 const Flash = (props) => {
 
     const animatedVideoBtnValue = React.useRef(new Animated.Value(0)).current;
+    const isEnabledADFlash = useSelector(state => selectDefaultParams(state, defaultParams.ENABLE_AD_FLASH))
 
     const animateVideoBtn = () => {
         Animated.loop(
@@ -24,7 +28,7 @@ const Flash = (props) => {
     }
 
     const showADFlash = () =>{
-        if(props.flash <= 10){
+        if(props.flash <= 10 && isEnabledADFlash === true){
             store.dispatch(setADFlashPopup({visible: true, data: {flash: props.flash}}))
         } else {
             store.dispatch(setFlashInfoPopup({visible: true, data: null}))
@@ -43,7 +47,7 @@ const Flash = (props) => {
                    <FlashImage source={flash} resizeMode="cover"/>
                    <Text setShadow blod medium>{props.flash || 0}</Text>
 
-                   {props.flash <= 10 &&
+                   {props.flash <= 10 && isEnabledADFlash === true &&
                        <AddContainer style={{
                            transform: [
                                {
