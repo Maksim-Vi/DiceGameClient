@@ -7,6 +7,7 @@ import styled from 'styled-components'
 import {getIosModel} from "../../../../utils/utils";
 import bg from "../../../../../assets/topPanel/btns/TopPanel.png";
 import BackgroundButtons from "../../../BackgroundWrapper/BackgroundButtons";
+import FlashInfo from "../Top/FlashInfo";
 
 const PricesItemsPanel = ({userData}) => {
     return (
@@ -24,11 +25,13 @@ const PricesItemsPanel = ({userData}) => {
             <ProgressContainer>
                 <Progress progress={userData.experience ? userData.experience.progress : 0}/>
             </ProgressContainer>
+            {userData.flash < 25 && <FlashInfo />}
         </TopPanelContainer>
     )
 }
 
 const TopPanelContainer = styled.View`
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;

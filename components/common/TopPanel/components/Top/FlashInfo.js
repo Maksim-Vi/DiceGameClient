@@ -100,7 +100,7 @@ const FlashInfo = (props) => {
                     <FlashImageInfo source={flash} resizeMode="cover"/>
                 </ContainerText>
 
-                <Text setShadow blod small center>{props.everyText} <Text setShadow blod small center color={'#e1a317'}>15m</Text></Text>
+                <Text setShadow blod small center>{props.everyText} <Text setShadow blod small center color={'#e1a317'}>15min</Text></Text>
             </InfoContainer>
         </Container>
 
@@ -109,8 +109,8 @@ const FlashInfo = (props) => {
 
 const Container = styled(Animated.View)`
   position: absolute;
-  left: -25px;
-  top: 25px;
+  right: -10px;
+  bottom: -40px;
   display: flex;
   align-items: center;
   justify-content: center;

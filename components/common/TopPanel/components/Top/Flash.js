@@ -61,7 +61,6 @@ const Flash = (props) => {
                            <AddImage source={add} resizeMode="cover"/>
                        </AddContainer>
                    }
-                   {props.flash < 25 && <FlashInfo />}
                </CrystalsContainer>
         </ButtonClick>
     )
@@ -77,7 +76,7 @@ const CrystalsContainer = styled.View`
 `
 
 const ButtonClick = styled.TouchableWithoutFeedback`
-
+  z-index: 11;
 `
 
 const FlashImage = styled.Image`

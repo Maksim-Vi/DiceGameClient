@@ -7,7 +7,7 @@ import {Platform, useWindowDimensions} from "react-native";
 import {setADFlashPopup, setInfoPopup} from "../../../../redux/reducers/popups/PopupsReducer";
 import Text from "../../../../common/Text/Text";
 import video from "../../../../../assets/result/film-slate.png";
-import {TestIds, useInterstitialAd, useRewardedInterstitialAd} from "react-native-google-mobile-ads";
+import {TestIds, useRewardedInterstitialAd} from "react-native-google-mobile-ads";
 import Sounds, {soundsType} from "../../../../utils/Sounds";
 import {getADFlashBonus} from "../../../../protocol/API/API";
 import {selectMyUser} from "../../../../redux/reducers/players/PlayersReducer";
@@ -145,6 +145,7 @@ const mapStateToProps = (state) => ({
     testGetFlash: selectDefaultParams(state, defaultParams.TEST_GET_FLASH_FUNCTION),
     ENABLE_AD_PROD: selectDefaultParams(state, defaultParams.ENABLE_AD_PROD),
     ENABLE_AD_ANDROID_PROD: selectDefaultParams(state, defaultParams.ENABLE_AD_ANDROID_PROD),
+    ENABLE_AD_IOS_PROD: selectDefaultParams(state, defaultParams.ENABLE_AD_IOS_PROD),
 });
 
 export default connect(mapStateToProps)(ADFlashPopup);
