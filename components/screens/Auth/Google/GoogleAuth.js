@@ -70,6 +70,7 @@ const GoogleBtn = styled.TouchableOpacity`
   width: 80%;
   height: 40px;
   margin-top: 10px;
+  margin-bottom: 10px;
   ${props=>{
     if(props.disabled){
         return `

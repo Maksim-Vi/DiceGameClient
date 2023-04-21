@@ -20,6 +20,7 @@ import coins from '../../../../assets/animation/lottieAnim/coins-drop.json'
 import Sounds, {soundsType} from "../../../utils/Sounds";
 import {selectDefaultParams} from "../../../redux/reducers/language/LanguageReducer";
 import defaultParams from "../../../redux/reducers/language/defaultParams";
+import {setInfoPopup} from "../../../redux/reducers/popups/PopupsReducer";
 
 const FreeGift = (props) => {
 
@@ -35,7 +36,7 @@ const FreeGift = (props) => {
     const dispatch = useDispatch()
     const leftTimeShowGiftAd = selectLeftTimeShowGiftAd(store.getState())
     const animatedValue = React.useRef(new Animated.Value(1)).current;
-    const { isLoaded, isClosed, load, show, isEarnedReward } =  useRewardedInterstitialAd(AdUnitID, {
+    const { isLoaded, isClosed, load, show, isEarnedReward, error } = useRewardedInterstitialAd(AdUnitID, {
         requestNonPersonalizedAdsOnly: true,
         serverSideVerificationOptions:{
             userId: String(user.id),
@@ -75,6 +76,11 @@ const FreeGift = (props) => {
     }
 
     const admodHendler = () =>{
+        if(!isLoaded){
+            load()
+            return dispatch(setInfoPopup({visible: true, data: {text: 'Sorry, but free coins are not working right now! come later'}}))
+        }
+
         if(isLoaded && leftTimeShowGiftAd && leftTimeShowGiftAd <= 0){
             Sounds.loadAndPlayFile(soundsType.click)
             show()

@@ -4,16 +4,17 @@ import ModalWrapper from "../../../../common/ModalWindows/ModalWrapper";
 import {connect, useDispatch, useSelector} from "react-redux";
 import ButtonWithText from "../../../../common/Buttons/ButtonWithText";
 import {Platform, useWindowDimensions} from "react-native";
-import {setADFlashPopup} from "../../../../redux/reducers/popups/PopupsReducer";
+import {setADFlashPopup, setInfoPopup} from "../../../../redux/reducers/popups/PopupsReducer";
 import Text from "../../../../common/Text/Text";
 import video from "../../../../../assets/result/film-slate.png";
-import {TestIds, useInterstitialAd} from "react-native-google-mobile-ads";
+import {TestIds, useInterstitialAd, useRewardedInterstitialAd} from "react-native-google-mobile-ads";
 import Sounds, {soundsType} from "../../../../utils/Sounds";
 import {getADFlashBonus} from "../../../../protocol/API/API";
 import {selectMyUser} from "../../../../redux/reducers/players/PlayersReducer";
 import {selectDefaultParams, selectTranslation} from "../../../../redux/reducers/language/LanguageReducer";
 import defaultTranslation from "../../../../redux/reducers/language/defaultTranslation";
 import defaultParams from "../../../../redux/reducers/language/defaultParams";
+import {delay} from "../../../../utils/utils";
 
 const ADFlashPopup = (props) => {
 
@@ -24,7 +25,7 @@ const ADFlashPopup = (props) => {
         : process.env.APP_TYPE !== 'development' && props.ENABLE_AD_PROD && props.ENABLE_AD_ANDROID_PROD
             ? 'ca-app-pub-6421975370931679/1480569564' : TestIds.INTERSTITIAL
 
-    const { isLoaded, isClosed, load, show } = useInterstitialAd(AdUnitID, {
+    const { isLoaded, isClosed, load, show } = useRewardedInterstitialAd(AdUnitID, {
         requestNonPersonalizedAdsOnly: true,
         serverSideVerificationOptions:{
             userId: String(user.id),
@@ -51,6 +52,14 @@ const ADFlashPopup = (props) => {
         Sounds.loadAndPlayFile(soundsType.click2)
         if (isLoaded) {
             show();
+        } else {
+            closePopup()
+            delay(200).then(()=>{
+                dispatch(setInfoPopup({
+                    visible: true,
+                    data: {text: 'Sorry, but free coins are not working right now! come later'}
+                }))
+            })
         }
     }
 

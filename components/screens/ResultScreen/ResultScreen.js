@@ -11,7 +11,7 @@ import Winner from "./components/Winner";
 import Loser from "./components/Loser";
 import {Animated, Easing, Platform} from "react-native";
 import { setTimingAnimated } from "../../utils/Animation";
-import { useInterstitialAd, TestIds } from 'react-native-google-mobile-ads';
+import {useInterstitialAd, TestIds, useRewardedInterstitialAd} from 'react-native-google-mobile-ads';
 import {resetCountShowAd, setCountShowAd} from "../../redux/reducers/AD/AdvertisingReducer";
 import {selectDefaultParams, selectTranslation} from "../../redux/reducers/language/LanguageReducer";
 import defaultTranslation from "../../redux/reducers/language/defaultTranslation";
@@ -33,7 +33,7 @@ const ResultScreen = (props) => {
         : process.env.APP_TYPE !== 'development' && props.ENABLE_AD_PROD && props.ENABLE_AD_ANDROID_PROD
             ? 'ca-app-pub-6421975370931679/5227941568' : TestIds.INTERSTITIAL
 
-    const { isLoaded, isClosed, load, show } = useInterstitialAd(AdUnitID, {
+    const { isLoaded, isClosed, load, show } = useRewardedInterstitialAd(AdUnitID, {
         requestNonPersonalizedAdsOnly: true,
         serverSideVerificationOptions:{
             userId: String(user.id),

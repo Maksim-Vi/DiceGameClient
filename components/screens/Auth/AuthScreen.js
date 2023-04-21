@@ -5,7 +5,7 @@ import Text from '../../common/Text/Text'
 import {useNavigation} from '@react-navigation/native'
 import LoginScreen from './Login/LoginScreen'
 import {postLoginApi} from '../../protocol/API/API'
-import {Keyboard, Platform, TouchableWithoutFeedback} from 'react-native'
+import {Keyboard, Linking, Platform, TouchableWithoutFeedback} from 'react-native'
 import Divider from "../../common/Divider/Divider";
 import {useForm} from 'react-hook-form'
 import bag from '../../../assets/bg/main_bg.jpg'
@@ -62,6 +62,13 @@ const AuthScreen = () => {
         }
     }
 
+    const openPolicy = async () =>{
+        Sounds.loadAndPlayFile(soundsType.click2)
+        Linking.openURL('https://knockydice-server.onrender.com/private-policy').catch(err=>{
+            console.log('policy error')
+        })
+    }
+
     const handlerRegister = () => {
         Sounds.loadAndPlayFile(soundsType.click2)
         navigation.navigate('RegisterScreen')
@@ -82,6 +89,9 @@ const AuthScreen = () => {
                             <Text setShadow={true} small heavy color='#fff' center>Register</Text>
                         </RegisterBtn>
                         <GoogleAuth />
+                        <TouchableWithoutFeedback onPress={openPolicy} accessible={false}>
+                            <Text setShadow small blod>Privacy Policy</Text>
+                        </TouchableWithoutFeedback>
                     </ButtonContainer>
 
                         <TextPlatform blod small color={'#fff'}>
