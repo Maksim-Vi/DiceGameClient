@@ -48,7 +48,7 @@ const ADFlashPopup = (props) => {
         }
     }
 
-    const watchVideo = () =>{
+    const onWatchVideo = () =>{
         Sounds.loadAndPlayFile(soundsType.click2)
         if (isLoaded) {
             show();
@@ -57,7 +57,7 @@ const ADFlashPopup = (props) => {
             delay(200).then(()=>{
                 dispatch(setInfoPopup({
                     visible: true,
-                    data: {text: 'Sorry, but free coins are not working right now! come later'}
+                    data: {text: 'Sorry, but free flash are not working right now! come later'}
                 }))
             })
         }
@@ -88,9 +88,9 @@ const ADFlashPopup = (props) => {
                 <ButtonContainer>
                     <ButtonWithText  width={'45%'}
                                      height={'40px'}
-                                     disabled={isLoaded}
+                                     disabled={!isLoaded}
                                      text={props.watchVideo}
-                                     clickHandler={watchVideo}/>
+                                     clickHandler={onWatchVideo}/>
                     <ButtonWithText  width={'45%'}
                                      height={'40px'}
                                      color={'#e75959'}
