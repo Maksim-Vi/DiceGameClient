@@ -21,11 +21,11 @@ const ADFlashPopup = (props) => {
     const user = useSelector(selectMyUser)
     const AdUnitID = Platform.OS === 'ios'
         ? process.env.APP_TYPE !== 'development' && props.ENABLE_AD_PROD && props.ENABLE_AD_IOS_PROD
-            ? 'ca-app-pub-6421975370931679/4644916812' : TestIds.INTERSTITIAL
+            ? 'ca-app-pub-6421975370931679/4644916812' : TestIds.REWARDED_INTERSTITIAL
         : process.env.APP_TYPE !== 'development' && props.ENABLE_AD_PROD && props.ENABLE_AD_ANDROID_PROD
-            ? 'ca-app-pub-6421975370931679/1480569564' : TestIds.INTERSTITIAL
+            ? 'ca-app-pub-6421975370931679/1480569564' : TestIds.REWARDED_INTERSTITIAL
 
-    const { isLoaded, isClosed, load, show } = useRewardedInterstitialAd(AdUnitID, {
+    const { isLoaded, isClosed, load, show, error } = useRewardedInterstitialAd(AdUnitID, {
         requestNonPersonalizedAdsOnly: true,
         serverSideVerificationOptions:{
             userId: String(user.id),
@@ -86,13 +86,11 @@ const ADFlashPopup = (props) => {
                     <Text setShadow={true} blod large center>{props.text2}</Text>
                 </TextContainer>
                 <ButtonContainer>
-                    {isLoaded &&
-                        <ButtonWithText  width={'45%'}
-                                         height={'40px'}
-                                         text={props.watchVideo}
-                                         clickHandler={watchVideo}/>
-                    }
-
+                    <ButtonWithText  width={'45%'}
+                                     height={'40px'}
+                                     disabled={isLoaded}
+                                     text={props.watchVideo}
+                                     clickHandler={watchVideo}/>
                     <ButtonWithText  width={'45%'}
                                      height={'40px'}
                                      color={'#e75959'}
@@ -145,6 +143,8 @@ const mapStateToProps = (state) => ({
     text1: selectTranslation(state, defaultTranslation.TR_WATCH_VIDEO_FLASH_TXT1),
     text2: selectTranslation(state, defaultTranslation.TR_WATCH_VIDEO_FLASH_TXT2),
     testGetFlash: selectDefaultParams(state, defaultParams.TEST_GET_FLASH_FUNCTION),
+    ENABLE_AD_PROD: selectDefaultParams(state, defaultParams.ENABLE_AD_PROD),
+    ENABLE_AD_ANDROID_PROD: selectDefaultParams(state, defaultParams.ENABLE_AD_ANDROID_PROD),
 });
 
 export default connect(mapStateToProps)(ADFlashPopup);
