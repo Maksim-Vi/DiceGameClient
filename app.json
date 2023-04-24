@@ -41,7 +41,7 @@
         "backgroundColor": "#FFFFFF"
       },
       "package": "com.anonymous.knockydice",
-      "versionCode": 23
+      "versionCode": 24
     },
     "extra": {
       "APP_TYPE": "production",

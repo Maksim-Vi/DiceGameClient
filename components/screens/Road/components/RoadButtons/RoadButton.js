@@ -7,6 +7,9 @@ import C_CLAIM_MISSION from "../../../../protocol/messages/clients/road/C_CLAIM_
 import AnimatedLottieView from "lottie-react-native";
 import coinsAnim from "../../../../../assets/animation/lottieAnim/stars-fly.json";
 import Sounds, {soundsType} from "../../../../utils/Sounds";
+import FlyingAwayAnim from "../../../../common/AnimationScreens/FlyingAwayAnim";
+import star from '../../../../../assets/common/star.png'
+import {delay} from "../../../../utils/utils";
 
 const RoadButton = (props) => {
 
@@ -29,17 +32,26 @@ const RoadButton = (props) => {
       Sounds.loadAndPlayFile(soundsType.stars)
       new C_CLAIM_MISSION(props.mission.missionNumber)
       setLottie(true)
-      setTimeout(()=>{
-        setLottie(false)
-      },3000)
+      onFinishAnim()
     }
   }
 
+  const onFinishAnim = () =>{
+    delay(1500).then(()=>{
+      setLottie(false)
+    })
+  }
+
   return (
-      <RoadButtonContainer onPress={clickHandler}
-                           activeOpacity={0.9}>
+      <RoadButtonContainer onPress={clickHandler} activeOpacity={0.9}>
           {getButtonByType()}
-        {isAnim && <AnimatedLottieView loop={false} autoPlay source={coinsAnim} style={{position: 'absolute', top: -13, width: 150, height: 150}}/>}
+          {/*{isAnim && <AnimatedLottieView loop={false} autoPlay source={coinsAnim} style={{position: 'absolute', top: -13, width: 150, height: 150}}/>}*/}
+          {isAnim &&
+              <FlyingAwayAnim countFlyItems={7}
+                              minRadius={10}
+                              maxRadius={40}
+                              icon={star} />
+          }
       </RoadButtonContainer>
   )
 };

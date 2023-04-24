@@ -25,7 +25,7 @@ const ADFlashPopup = (props) => {
         : process.env.APP_TYPE !== 'development' && props.ENABLE_AD_PROD && props.ENABLE_AD_ANDROID_PROD
             ? 'ca-app-pub-6421975370931679/1480569564' : TestIds.REWARDED_INTERSTITIAL
 
-    const { isLoaded, isClosed, load, show, error } = useRewardedInterstitialAd(AdUnitID, {
+    const { isLoaded, isClosed, load, show, isEarnedReward, error } = useRewardedInterstitialAd(AdUnitID, {
         requestNonPersonalizedAdsOnly: true,
         serverSideVerificationOptions:{
             userId: String(user.id),
@@ -49,17 +49,22 @@ const ADFlashPopup = (props) => {
     }
 
     const onWatchVideo = () =>{
-        Sounds.loadAndPlayFile(soundsType.click2)
-        if (isLoaded) {
-            show();
-        } else {
+        if(!isLoaded){
+            load()
             closePopup()
-            delay(200).then(()=>{
+            return delay(200).then(()=>{
                 dispatch(setInfoPopup({
                     visible: true,
                     data: {text: 'Sorry, but free flash are not working right now! come later'}
                 }))
             })
+        }
+
+        Sounds.loadAndPlayFile(soundsType.click2)
+        if (isLoaded) {
+            show();
+        } else {
+            load()
         }
     }
 

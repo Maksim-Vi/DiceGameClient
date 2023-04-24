@@ -197,3 +197,13 @@ export const delay = ms => new Promise(
     resolve => setTimeout(resolve, ms)
 );
 
+export const getRandomNumber = (min, max, negative = false) =>{
+    const number = Math.random() * (max - min) + max
+    if(!negative){
+        return number
+    }
+
+    const plusOrMinus = Math.random() < 0.5 ? -1 : 1;
+
+    return plusOrMinus === 1 ? number : -number
+}

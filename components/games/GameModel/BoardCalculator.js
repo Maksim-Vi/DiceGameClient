@@ -1,20 +1,27 @@
 export default class BoardCalculator {
     constructor() {
         this.columnIndex = [[0,3,6],[1,4,7],[2,5,8]]
+        this.columnOppIndex = [6,7,8,3,4,5,0,1,2]
     }
 
     userBoardCalculate(data){
         if(!data || data.length === 0) return []
 
-        //return data.flat()
         return data
     }
 
     opponentBoardCalculate(data){
         if(!data || data.length === 0) return []
 
-        //return data.flat()
-        return data
+        let formattedData = []
+
+        this.columnOppIndex.forEach(index=>{
+            if(data[index] || data[index] === 0){
+                formattedData.push(data[index])
+            }
+        })
+
+        return formattedData
     }
 
     scoresToSame = (index,scores) =>{
