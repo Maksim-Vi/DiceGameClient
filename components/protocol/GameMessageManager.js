@@ -19,6 +19,8 @@ import S_CAN_JOIN_TO_GAME from "./messages/server/games/S_CAN_JOIN_TO_GAME";
 import S_USER_LOST_CONNECTION_IN_GAME from "./messages/server/games/S_USER_LOST_CONNECTION_IN_GAME";
 import S_RESTORE_GAME from "./messages/server/games/S_RESTORE_GAME";
 import S_JOIN_FAILED from "./messages/server/games/S_JOIN_FAILED";
+import S_KICKED_DICES from "./messages/server/games/S_KICKED_DICES";
+import S_UNITE_DICES from "./messages/server/games/S_UNITE_DICES";
 
 export const gameHandlerMessage = (data) =>{
     switch (data.name) {
@@ -73,6 +75,13 @@ export const gameHandlerMessage = (data) =>{
             break;
         case 'S_RESTORE_GAME':
             new S_RESTORE_GAME(data.username, data.activeGame, data.countScores, data.lastThrow, data.lastThrowData)
+            break;
+
+        case 'S_KICKED_DICES':
+            new S_KICKED_DICES(data.username, data.kickFrom, data.kickTo, data.countKickDice, data.indexList)
+            break;
+        case 'S_UNITE_DICES':
+            new S_UNITE_DICES(data.username, data.countUniteDice, data.indexUniteList)
             break;
 
         case 'S_LEAVE_GAME':

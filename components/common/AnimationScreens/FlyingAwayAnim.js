@@ -9,7 +9,18 @@ import Animated, {
 } from "react-native-reanimated";
 import {getRandomNumber} from "../../utils/utils";
 
-const FlyingAwayAnim = ({countFlyItems = 7, icon, minRadius = 10, maxRadius = 10}) => {
+const FlyingAwayAnim = (props) => {
+
+    const {
+        countFlyItems = 7,
+        icon,
+        minRadius = 10,
+        maxRadius = 10,
+        iconSize = {
+            width: 25,
+            height: 25
+        }
+    } = props
 
     let countItemsInArr = countFlyItems || 7
     const [flyData, setFlyData] = useState({
@@ -20,7 +31,8 @@ const FlyingAwayAnim = ({countFlyItems = 7, icon, minRadius = 10, maxRadius = 10
         let data = []
         for (let i = 0; i < countItemsInArr; i++){
             data.push({
-                id: i
+                id: i,
+                rotate: `${Math.floor(Math.random() * 180)}deg`
             })
         }
 
@@ -53,8 +65,10 @@ const FlyingAwayAnim = ({countFlyItems = 7, icon, minRadius = 10, maxRadius = 10
             {
                 flyData.flyItems.map(item=>{
                     return <FlyItemContainer key={item.id}
+                                             item={item}
                                              minRadius={minRadius}
                                              maxRadius={maxRadius}
+                                             iconSize={iconSize}
                                              icon={icon} />
                 })
             }
@@ -78,6 +92,9 @@ const FlyItemContainer = (props) =>{
                 {
                     translateY: withSpring(offsetY.value)
                 },
+                {
+                    rotate: props.item.rotate
+                }
             ],
         };
     },[]);
@@ -90,7 +107,7 @@ const FlyItemContainer = (props) =>{
 
     return (
         <ItemsContainer {...props} style={animatedStyles}>
-            <FlyItem icon={props.icon}/>
+            <FlyItem icon={props.icon} iconSize={props.iconSize}/>
         </ItemsContainer>
     );
 }
@@ -116,8 +133,8 @@ const ItemsContainer = styled(Animated.View)`
   
 `
 const Item = styled.Image`
-  width: 35px;
-  height: 35px;
+  width: ${props => props.iconSize ? `${props.iconSize.width}px` : '35px'};
+  height: ${props => props.iconSize ?`${props.iconSize.height}px` : '35px'};
   
 `
 export default FlyingAwayAnim;

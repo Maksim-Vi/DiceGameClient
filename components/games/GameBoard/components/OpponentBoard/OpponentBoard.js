@@ -6,11 +6,13 @@ import BoardItem from "../BoardItem/BoardItem";
 import Dispatcher from "../../../Events/Dispatcher";
 import styled from 'styled-components'
 import GameModel from "../../../GameModel/GameModel";
+import KickTextAnimation from "../../../Animation/KickTextAnimation";
 
 class OpponentBoard extends PureComponent {
     constructor() {
         super();
 
+        this.columnOppIndex = [6,7,8,3,4,5,0,1,2]
         this.state = {
             board: [],
             winPoints: [],
@@ -77,9 +79,10 @@ class OpponentBoard extends PureComponent {
             const winPoints = checkWinPiontsByColumn(i)
             BoardsItem.push(<BoardItem key={i}
                                        item={item}
+                                       isUserBoard={false}
                                        winPoints={winPoints}
                                        activeItems={this.state.activeItems}
-                                       index={i}
+                                       index={this.columnOppIndex[i]}
                                        delay={i * 100}
                                        selectBoardItem={this.selectBoardItem}/>)
         })

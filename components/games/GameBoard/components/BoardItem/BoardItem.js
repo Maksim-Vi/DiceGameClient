@@ -3,11 +3,12 @@ import styled from 'styled-components'
 import {Animated, Dimensions, Easing} from "react-native";
 import imagesGameSquares from "../../../../../assets/dynamicLoadGameSquares";
 import imagesGameDices from "../../../../../assets/dynamicLoadGameDices";
-// import animOne from "../../../../../assets/animation/anim-light-one.png";
 import animOne from "../../../../../assets/animation/test-1.png";
 import animTwo from "../../../../../assets/animation/anim-purpure-two.png";
 import {setTimingAnimated} from '../../../../utils/Animation';
 import Sounds, {soundsType} from "../../../../utils/Sounds";
+import KickAnimation from "../../../Animation/KickAnimation";
+import CollectAnimation from "../../../Animation/CollectAnimation";
 
 const BoardItem = (props) => {
 
@@ -181,6 +182,8 @@ const BoardItem = (props) => {
                               width={width} source={squaresSource}
                               resizeMode={'stretch'}/>
                 }
+                {!props.isUserBoard && <KickAnimation index={props.index} isUserBoard={false}/>}
+                {props.isUserBoard && <CollectAnimation index={props.index} isUserBoard={true}/>}
             </ItemContainer>
         </AnimConatiner>
 

@@ -17,7 +17,6 @@ import Text from "../../common/Text/Text";
 import {setTestBtnsPopup, setTutorialPopup} from "../../redux/reducers/popups/PopupsReducer";
 import userParams from "../../redux/reducers/language/userParams";
 import GameModel from "../../games/GameModel/GameModel";
-import FlyingAwayAnim from "../../common/AnimationScreens/FlyingAwayAnim";
 
 const MainScreen = (props) => {
 

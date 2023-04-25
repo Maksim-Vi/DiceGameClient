@@ -15,8 +15,8 @@ const InfoContainer = styled.View`
     display: flex;
     align-items: center;
     justify-content: center;
-    top: -5px;
-    right: -2px;
+    top: -8px;
+    right: -8px;
     border-radius: 100px;
     width: 20px;
     height: 20px;

@@ -6,6 +6,8 @@ import {selectActiveItems} from "../../redux/reducers/players/PlayersReducer";
 import {connect} from "react-redux";
 import Dispatcher from "../Events/Dispatcher";
 import StartGameAnim from "../StartGameAnim/StartGameAnim";
+import CollectTextAnimation from "../Animation/CollectTextAnimation";
+import KickTextAnimation from "../Animation/KickTextAnimation";
 
 class GameDice extends PureComponent {
     constructor() {
@@ -66,6 +68,9 @@ class GameDice extends PureComponent {
                 <Dice activeItems={this.getActiveItemsByUser()} diceNumber={this.state.throwData}/>
 
                 <StartGameAnim />
+
+                <KickTextAnimation isUserBoard={false}/>
+                <CollectTextAnimation isUserBoard={true}/>
             </SpaceThrow>
         );
     }

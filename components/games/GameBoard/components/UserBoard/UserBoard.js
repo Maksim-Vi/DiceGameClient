@@ -8,6 +8,7 @@ import styled from 'styled-components'
 import GameModel from "../../../GameModel/GameModel";
 import {connect} from "react-redux";
 import {selectActiveItems} from "../../../../redux/reducers/players/PlayersReducer";
+import CollectTextAnimation from "../../../Animation/CollectTextAnimation";
 
 class UserBoard extends PureComponent {
     constructor() {
@@ -81,6 +82,7 @@ class UserBoard extends PureComponent {
              BoardsItem.push(<BoardItem key={i}
                                         item={item}
                                         winPoints={winPoints}
+                                        isUserBoard={true}
                                         activeItems={this.state.activeItems}
                                         index={i}
                                         delay={i * 100}
