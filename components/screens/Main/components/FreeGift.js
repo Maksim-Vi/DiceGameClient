@@ -18,9 +18,12 @@ import SlideScreen from "../../../common/AnimationScreens/SlideScreen";
 import AnimatedLottieView from "lottie-react-native";
 import coins from '../../../../assets/animation/lottieAnim/coins-drop.json'
 import Sounds, {soundsType} from "../../../utils/Sounds";
-import {selectDefaultParams} from "../../../redux/reducers/language/LanguageReducer";
+import {selectDefaultParams, selectTranslation} from "../../../redux/reducers/language/LanguageReducer";
 import defaultParams from "../../../redux/reducers/language/defaultParams";
 import {setInfoPopup} from "../../../redux/reducers/popups/PopupsReducer";
+import btmBG from '../../../../assets/common/btns/circleBtn.png'
+import Text from "../../../common/Text/Text";
+import defaultTranslation from "../../../redux/reducers/language/defaultTranslation";
 
 const FreeGift = (props) => {
 
@@ -28,7 +31,8 @@ const FreeGift = (props) => {
     const ENABLE_AD_PROD = useSelector(state=> selectDefaultParams(state, defaultParams.ENABLE_AD_PROD))
     const ENABLE_AD_IOS_PROD = useSelector(state=> selectDefaultParams(state, defaultParams.ENABLE_AD_IOS_PROD))
     const ENABLE_AD_ANDROID_PROD = useSelector(state=> selectDefaultParams(state, defaultParams.ENABLE_AD_ANDROID_PROD))
-    
+    const freeCoinsText = useSelector(state=> selectTranslation(state, defaultTranslation.TR_FREE_COINS))
+
     const AdUnitID = Platform.OS === 'ios'
         ? process.env.APP_TYPE !== 'development' && ENABLE_AD_PROD && ENABLE_AD_IOS_PROD ? 'ca-app-pub-6421975370931679/8219230470' : TestIds.REWARDED_INTERSTITIAL
         : process.env.APP_TYPE !== 'development' && ENABLE_AD_PROD && ENABLE_AD_ANDROID_PROD ? 'ca-app-pub-6421975370931679/7194208820' : TestIds.REWARDED_INTERSTITIAL
@@ -150,10 +154,20 @@ const FreeGift = (props) => {
             ]
         }}>
             <SlideScreen left={false}>
-                <ButtonImage width={50} height={50} image={freeCoins} clickHandler={()=> admodHendler()}/>
-                {timeData && (timeData.hours > 0 || timeData.minutes > 0 || timeData.seconds > 0) &&
-                    <GiftTimer timeData={timeData}/>
-                }
+                <Container>
+                    <Icon source={btmBG}/>
+                    <ButtonImage width={50} height={50} image={freeCoins} clickHandler={()=> admodHendler()}/>
+                    <TextContainer>
+                        <Text setShadow numberOfLines={1} small center>{freeCoinsText}</Text>
+                    </TextContainer>
+
+                </Container>
+                <GiftTimerContainer>
+                    {timeData && (timeData.hours > 0 || timeData.minutes > 0 || timeData.seconds > 0) &&
+                        <GiftTimer timeData={timeData}/>
+                    }
+                </GiftTimerContainer>
+
                 {lottieAnim &&
                     <AnimatedLottieView source={coins} loop={false} autoPlay
                                         onAnimationFinish={()=>{setLottieAnim(false)}}
@@ -170,6 +184,32 @@ const FreeCoinsContainer = styled(Animated.View)`
   position: absolute;
   bottom: 20%;
   right: 5%;
+  z-index: 1;
+`
+
+const Container = styled.View`
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+const TextContainer = styled.View`
+  position: absolute;
+  bottom: -5%;
+`
+
+const GiftTimerContainer = styled.View`
+  position: absolute;
+  bottom: -30%;
+  left: 20%;
+`
+
+const Icon = styled.Image`
+  position: absolute;
+  top: 10px;
+  z-index: -1;
+  width: 55px;
+  height: 55px;
 `
 
 export default FreeGift;
