@@ -4,6 +4,8 @@ import { store } from "../../../../redux/redux-store"
 import {selectMyUser} from "../../../../redux/reducers/players/PlayersReducer";
 import {isProduction} from "../../../../utils/utils";
 import GameModel from "../../../../games/GameModel/GameModel";
+import Sounds, {soundsType} from "../../../../utils/Sounds";
+
 
 export default class S_SCORE {
     constructor(userId, username, userScores, opponentsScores){
@@ -27,6 +29,7 @@ export default class S_SCORE {
     }
 
     exec() {
+        Sounds.loadAndPlayFile(soundsType.drop)
         if(this.currentUsername !== this.username){
             store.dispatch(setOpponentThrowData(null))
         } else {
@@ -35,6 +38,7 @@ export default class S_SCORE {
         store.dispatch(setScores({userId: this.userId, username: this.username, userScores: this.userScores, opponentsScores: this.opponentsScores}))
 
         GameModel.setScores(this.userScores,this.opponentsScores)
+
     }
 
     selectUserData = () =>{

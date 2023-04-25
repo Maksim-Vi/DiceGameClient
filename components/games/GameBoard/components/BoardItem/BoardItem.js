@@ -115,7 +115,7 @@ const BoardItem = (props) => {
     }
 
     const setDiceInPlaceAnim = () => {
-        Sounds.loadAndPlayFile(soundsType.drop)
+        // Sounds.loadAndPlayFile(soundsType.drop)
         Animated.sequence([
             setTimingAnimated(animatedValue.current, 1.2, 150, Easing.ease),
             setTimingAnimated(animatedValue.current, 1, 50, Easing.ease),
