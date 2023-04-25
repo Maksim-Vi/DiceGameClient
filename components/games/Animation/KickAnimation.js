@@ -47,7 +47,7 @@ class KickAnimation extends PureComponent {
                 <AnimatedLottieView autoPlay
                                     loop={false}
                                     source={starsAnim}
-                                    style={{position: 'absolute', zIndex: 1, top: -1, bottom: 0, width: 70, height: 70}} />
+                                    style={{position: 'absolute', zIndex: 1, top: -5, bottom: 0, width: 70, height: 70}} />
             }
         </>
     }
