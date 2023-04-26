@@ -8,6 +8,7 @@ import {selectTranslation} from "../../redux/reducers/language/LanguageReducer";
 import {selectRestoreGame} from "../../redux/reducers/game/GameReducer";
 import {setTimingAnimated} from "../../utils/Animation";
 import Dispatcher from "../Events/Dispatcher";
+import Sounds, {soundsType} from "../../utils/Sounds";
 
 class StartGameAnim extends Component {
     constructor() {
@@ -31,6 +32,8 @@ class StartGameAnim extends Component {
 
     animateStartGameText = () =>{
         if(this.props.isRestore) return this.setState({showStartGameText: false})
+
+        Sounds.loadAndPlayFile(soundsType.gameStart)
 
         Animated.sequence([
             setTimingAnimated(this.StartGameAnimatedValue, 1.2, 500, Easing.ease),

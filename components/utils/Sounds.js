@@ -20,6 +20,8 @@ export const soundsType = {
     startLoad: require('./sounds/start-load.mp3') ,
     startLoad2: require('./sounds/start-load2.mp3') ,
     salut: require('./sounds/zvuk-saljuta.mp3') ,
+    gameStart: require('./sounds/game-start.mp3'),
+    success: require('./sounds/success.mp3'),
 }
 
 const soundsArray = [
@@ -39,7 +41,9 @@ const soundsArray = [
   {type: soundsType.stars, url: require('./sounds/stars2.mp3')},
   {type: soundsType.startLoad, url: require('./sounds/start-load.mp3')},
   {type: soundsType.startLoad2, url: require('./sounds/start-load2.mp3')},
-  {type: soundsType.salut, url: require('./sounds/zvuk-saljuta.mp3')}
+  {type: soundsType.salut, url: require('./sounds/zvuk-saljuta.mp3')},
+  {type: soundsType.gameStart, url: require('./sounds/game-start.mp3')},
+  {type: soundsType.success, url: require('./sounds/success.mp3')}
 ]
 
 export default new class Sounds {

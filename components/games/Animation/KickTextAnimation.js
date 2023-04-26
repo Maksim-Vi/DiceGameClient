@@ -8,6 +8,7 @@ import styled from "styled-components";
 import {setTimingAnimated} from "../../utils/Animation";
 import FlyingAwayAnim from "../../common/AnimationScreens/FlyingAwayAnim";
 import star from "../../../assets/common/star.png";
+import Sounds, {soundsType} from "../../utils/Sounds";
 
 const {width,height} = Dimensions.get('window')
 
@@ -66,6 +67,7 @@ class KickTextAnimation extends PureComponent {
             img = kick2
         }
 
+        Sounds.loadAndPlayFile(soundsType.success)
         this.animateStart()
 
         const size = this.opacity.interpolate({
