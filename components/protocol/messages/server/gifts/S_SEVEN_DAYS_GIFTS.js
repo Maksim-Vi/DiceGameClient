@@ -16,7 +16,7 @@ export default class S_SEVEN_DAYS_GIFTS {
         this.MESSAG_ENAME = 'S_SEVEN_DAYS_GIFTS'
         this.showLog = isProduction() ? false : true
 
-        this.sevenDaysGifts = JSON.parse(sevenDaysGifts)
+        this.sevenDaysGifts =  typeof sevenDaysGifts === 'string' ? JSON.parse(sevenDaysGifts) : sevenDaysGifts
 
         this.init()
     }
