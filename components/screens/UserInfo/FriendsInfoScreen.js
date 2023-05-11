@@ -68,7 +68,7 @@ const FriendsInfoScreen = (props) => {
 
     return (
         <BackgroundWrapper>
-            <ButtonBack top={'3%'} leaveGame={goBack} />
+            <ButtonBack left={'1%'} top={'3%'} leaveGame={goBack} />
 
             <UserInfoContainer>
                 <ProfileTitle width={width}>

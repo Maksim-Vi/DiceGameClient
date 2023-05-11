@@ -84,7 +84,7 @@ const FriendsScreen = (props) => {
 
     return (
         <BackgroundWrapper>
-            <ButtonBack top={'3%'} goMainPage={true}/>
+            <ButtonBack left={'1%'} top={'3%'} goMainPage={true}/>
             <FriendsContainer>
                 <FriendsTitle />
                 <ShareInfo />

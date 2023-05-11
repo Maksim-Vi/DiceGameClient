@@ -20,7 +20,7 @@ const GiftTimer = (props) => {
     }
 
     if(timeData.hours <= 0 && timeData.minutes <= 0 && timeData.seconds > 0){
-        const seconds = timeData.seconds < 10 ? '0' + timeData.seconds : timeData.seconds
+        const seconds = timeData.seconds < 10 ? '00:0' + timeData.seconds : "00:" + timeData.seconds
         time = seconds
     }
 

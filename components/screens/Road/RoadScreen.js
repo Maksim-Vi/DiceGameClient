@@ -12,8 +12,8 @@ const RoadScreen = (props) => {
 
     return (
         <BackgroundWrapper gackground={mainBg}>
-            <ButtonBack top={Platform.OS === 'ios' && isIos >= 10 ? '7%' : '1%'}
-                        left={'10px'}
+            <ButtonBack top={Platform.OS === 'ios' && isIos >= 10 ? '7%' : '3%'}
+                        left={'1%'}
                         goMainPage={true}/>
             <RoadContainer />
         </BackgroundWrapper>

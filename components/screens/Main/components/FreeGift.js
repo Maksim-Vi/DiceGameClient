@@ -58,8 +58,9 @@ const FreeGift = (props) => {
 
     const updateTimeData = (data) =>{
         if(data.hours === 0 && data.minutes === 0 && data.seconds === 0){
+            if(!isLoaded) load()
+
             timer.stop()
-            load()
             animate()
             setLottieAnim(false)
             dispatch(setLeftTimeShowAd(-1))
@@ -80,16 +81,15 @@ const FreeGift = (props) => {
     }
 
     const admodHendler = () =>{
-        if(!isLoaded){
-            load()
-            return dispatch(setInfoPopup({visible: true, data: {text: 'Sorry, but free coins are not working right now! come later'}}))
-        }
-
         if(isLoaded && leftTimeShowGiftAd && leftTimeShowGiftAd <= 0){
             Sounds.loadAndPlayFile(soundsType.click)
             show()
         } else {
-            load()
+            if(!isLoaded) load()
+
+            if(!isLoaded && timeData <= 0 && leftTimeShowGiftAd && leftTimeShowGiftAd <= 0){
+                dispatch(setInfoPopup({visible: true, data: {text: 'Sorry, but free coins are not working right now! come later'}}))
+            }
         }
     }
 
@@ -102,7 +102,7 @@ const FreeGift = (props) => {
             animatedValue.stopAnimation()
 
         } else if(isClosed && !isEarnedReward){
-            load()
+            if(!isLoaded) load()
         }
     }
 
@@ -122,17 +122,18 @@ const FreeGift = (props) => {
     },[])
 
     useEffect(()=>{
-        if(leftTimeShowGiftAd && leftTimeShowGiftAd <= 0){
-            load()
-        } else if(leftTimeShowGiftAd && leftTimeShowGiftAd > 0){
+        if(!isLoaded) load()
+
+        if(leftTimeShowGiftAd && leftTimeShowGiftAd > 0){
             timer.start(leftTimeShowGiftAd)
         }
-    },[load, leftTimeShowGiftAd])
+
+    },[load, isLoaded, leftTimeShowGiftAd])
+
 
     useEffect(() => {
         getBonusByView()
     }, [isClosed]);
-
 
     useEffect(()=>{
         animate()

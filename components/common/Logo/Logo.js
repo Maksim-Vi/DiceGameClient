@@ -7,7 +7,7 @@ const Logo = (props) => {
 }
 
 const LogoImg = styled.Image`
-  width: 200px;
-  height: 50px;
+  width: 270px;
+  height: 70px;
 `
 export default Logo;

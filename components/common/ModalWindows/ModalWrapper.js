@@ -24,10 +24,10 @@ const ModalWrapper = (props) => {
                 const iosModel = getIosModel()
                 let position = iosModel >= 10
                     ? '1.5%'
-                    : iosModel < 10 && iosModel !== 0 ? '4.5%' : '1.5%'
+                    : iosModel < 10 && iosModel !== 0 ? '4.5%' : '3%'
 
                 return <BlackBG>
-                    {setModalVisible && lineArrow && <ButtonBack top={position} leaveGame={setModalVisible}/>}
+                    {setModalVisible && lineArrow && <ButtonBack left={'2%'} top={position} leaveGame={setModalVisible}/>}
                     {children}
                 </BlackBG>
             default: return children
