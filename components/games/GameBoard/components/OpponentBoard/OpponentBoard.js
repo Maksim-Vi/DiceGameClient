@@ -17,7 +17,7 @@ class OpponentBoard extends PureComponent {
             board: [],
             winPoints: [],
             activeItems: {square: 1000, dice: 1},
-            defaultItems: {square: 1026, dice: 0}
+            defaultItems: {square: 1029, dice: 0}
         }
 
         this.width = Dimensions.get('window').width;

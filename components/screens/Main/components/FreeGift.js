@@ -24,11 +24,15 @@ import {setInfoPopup} from "../../../redux/reducers/popups/PopupsReducer";
 import btmBG from '../../../../assets/common/btns/circleBtn.png'
 import Text from "../../../common/Text/Text";
 import defaultTranslation from "../../../redux/reducers/language/defaultTranslation";
+import {selectActiveTabApp} from "../../../redux/reducers/Websocket/WebsocketReducer";
 
 const FreeGift = (props) => {
 
     const user = useSelector(selectMyUser)
+    const changeTabs = useSelector(selectActiveTabApp)
     const ENABLE_AD_PROD = useSelector(state=> selectDefaultParams(state, defaultParams.ENABLE_AD_PROD))
+    const TR_FREE_COINS_TIMER_INFO = useSelector(state=> selectTranslation(state, defaultTranslation.TR_FREE_COINS_TIMER_INFO))
+    const TR_FREE_COINS_EMPTY_LOAD_INFO = useSelector(state=> selectTranslation(state, defaultTranslation.TR_FREE_COINS_EMPTY_LOAD_INFO))
     const ENABLE_AD_IOS_PROD = useSelector(state=> selectDefaultParams(state, defaultParams.ENABLE_AD_IOS_PROD))
     const ENABLE_AD_ANDROID_PROD = useSelector(state=> selectDefaultParams(state, defaultParams.ENABLE_AD_ANDROID_PROD))
     const freeCoinsText = useSelector(state=> selectTranslation(state, defaultTranslation.TR_FREE_COINS))
@@ -40,7 +44,7 @@ const FreeGift = (props) => {
     const dispatch = useDispatch()
     const leftTimeShowGiftAd = selectLeftTimeShowGiftAd(store.getState())
     const animatedValue = React.useRef(new Animated.Value(1)).current;
-    const { isLoaded, isClosed, load, show, isEarnedReward, error } = useRewardedInterstitialAd(AdUnitID, {
+    const { isLoaded, isClosed, load, show, isEarnedReward, error, isShowing, isClicked, isOpened } = useRewardedInterstitialAd(AdUnitID, {
         requestNonPersonalizedAdsOnly: true,
         serverSideVerificationOptions:{
             userId: String(user.id),
@@ -58,12 +62,13 @@ const FreeGift = (props) => {
 
     const updateTimeData = (data) =>{
         if(data.hours === 0 && data.minutes === 0 && data.seconds === 0){
-            if(!isLoaded) load()
+            if(timer && timer !== null) timer.stop()
 
-            timer.stop()
             animate()
             setLottieAnim(false)
             dispatch(setLeftTimeShowAd(-1))
+
+            if(!isLoaded) load()
         }
 
         setTimeData(data)
@@ -81,14 +86,17 @@ const FreeGift = (props) => {
     }
 
     const admodHendler = () =>{
-        if(isLoaded && leftTimeShowGiftAd && leftTimeShowGiftAd <= 0){
+        console.log('ANSWER', isLoaded)
+        if(isLoaded && leftTimeShowGiftAd <= 0){
             Sounds.loadAndPlayFile(soundsType.click)
             show()
         } else {
             if(!isLoaded) load()
 
-            if(!isLoaded && timeData <= 0 && leftTimeShowGiftAd && leftTimeShowGiftAd <= 0){
-                dispatch(setInfoPopup({visible: true, data: {text: 'Sorry, but free coins are not working right now! come later'}}))
+            if(!isLoaded && timeData.totalTime <= 0){
+                dispatch(setInfoPopup({visible: true, data: {text: TR_FREE_COINS_EMPTY_LOAD_INFO}}))
+            } else if(timeData.totalTime > 0){
+                dispatch(setInfoPopup({visible: true, data: {text: TR_FREE_COINS_TIMER_INFO}}))
             }
         }
     }
@@ -107,9 +115,15 @@ const FreeGift = (props) => {
     }
 
     useEffect(()=>{
+        if(!isLoaded) {
+            load()
+        }
+    },[load, isLoaded, changeTabs])
+
+    useEffect(()=>{
         timer.stop()
 
-        if(leftTimeShowGiftAd && leftTimeShowGiftAd > 0){
+        if(leftTimeShowGiftAd > 0){
             timer.start(leftTimeShowGiftAd)
         }
 
@@ -122,9 +136,9 @@ const FreeGift = (props) => {
     },[])
 
     useEffect(()=>{
-        if(!isLoaded) load()
+        //if(!isLoaded) load()
 
-        if(leftTimeShowGiftAd && leftTimeShowGiftAd > 0){
+        if(leftTimeShowGiftAd > 0){
             timer.start(leftTimeShowGiftAd)
         }
 

@@ -17,6 +17,17 @@ const BoardOpponentInfo = (props) => {
         ]).start();
     }
 
+    const getColorScoresByCount = () =>{
+
+        if(props.countScores.scoresUser < props.countScores.scoresOpponent){
+            return '#60b457'
+        } else if(props.countScores.scoresUser === props.countScores.scoresOpponent){
+            return '#354d57'
+        }
+
+        return '#c95050'
+    }
+
     useEffect(() => {
         startAnimation()
     }, [])
@@ -42,9 +53,8 @@ const BoardOpponentInfo = (props) => {
             </Name>
             <Avatar width={width / 5} height={80} avatarId={props.opponent ? props.opponent.avatar : 0} avatarFrame={true}/>
 
-            <CountContainer width={width}>
-                <Text large blod color={'#fff'}
-                      center>{props.countScores ? props.countScores.scoresOpponent : 0}</Text>
+            <CountContainer width={width} color={getColorScoresByCount()}>
+                <Text large blod color={'#fff'} center>{props.countScores ? props.countScores.scoresOpponent : 0}</Text>
             </CountContainer>
 
         </BoardAvatarContainer>
@@ -76,7 +86,7 @@ const BoardAvatarContainer = styled(Animated.View)`
 `
 
 const CountContainer = styled.View`
-  background-color: #354d57;
+  background-color: ${props => props.color ? props.color : '#354d57'};
   border-radius: 5px;
   border: 2px solid #d6dbdd;
   ${(props) => {
