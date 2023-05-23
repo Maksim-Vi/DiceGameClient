@@ -72,8 +72,8 @@ const ChangeUserNameGoogle = (props) => {
                     <DropdownLanguage language={language} setLanguage={setLanguage}/>
                 </ChangeNameContainer>
                 <ButtonContainer>
-                    <ButtonWithText clickHandler={closeConfirmPopup} width={'45%'} text={'Leave Game'} color={'#ff6262'}/>
-                    <ButtonWithText clickHandler={confirm} width={'45%'} text={'Create'} color={'#74ce30'}/>
+                    {/* <ButtonWithText clickHandler={closeConfirmPopup} width={'45%'} text={'Leave Game'} color={'#ff6262'}/> */}
+                    <ButtonWithText clickHandler={confirm} width={'60%'} height={'40px'} text={'Create'} color={'#74ce30'}/>
                 </ButtonContainer>
             </Container>
         </ModalWrapper>
@@ -108,6 +108,7 @@ const ButtonContainer = styled.View`
   justify-content: center;
   flex-direction: row;
   width: 100%;
+  margin-top: 10px;
 `
 
 const Name = styled.TextInput`
