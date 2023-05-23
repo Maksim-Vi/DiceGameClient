@@ -3,7 +3,6 @@ import C_SEND_MESSAGE from "../../protocol/messages/clients/chat/C_SEND_MESSAGE"
 import EventDispatcher from "../../redux/EventDispatcher"
 import eventsType from "../../redux/eventsType"
 import image from '../../../assets/chat/tabs/group.png'
-import clan from '../../../assets/chat/tabs/clan.png'
 import { store } from "../../redux/redux-store"
 import { addChatTab, cleanChatTabs } from "../../redux/reducers/chat/ChatReducer"
 import {selectTranslation} from "../../redux/reducers/language/LanguageReducer";
@@ -141,7 +140,7 @@ class ChatManager {
             case 'clan':
                 chatTabs = {
                     chanelName: roomChanel, 
-                    image: clan,
+                    image: '',
                     sortIndex: 1,
                 }
                 break;

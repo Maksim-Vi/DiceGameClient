@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import ModalWrapper from "../../../../common/ModalWindows/ModalWrapper";
 import {useWindowDimensions} from "react-native";
 import styled from "styled-components";
@@ -16,14 +16,14 @@ import DropdownLanguage from "../../../../screens/Auth/DropDownLanguage/Dropdown
 const ChangeUserNameGoogle = (props) => {
 
     const googleConfirmUsernamePopup = useSelector(state => selectGoogleConfirmUsernamePopup(state))
-    const [updateUsername, setUpdateUsername] = useState(googleConfirmUsernamePopup.data ? googleConfirmUsernamePopup.data.username : 'test')
+    const [updateUsername, setUpdateUsername] = useState('')
     const [language, setLanguage] = useState('EN')
     const [error, setError] = useState(null)
     const {height, width} = useWindowDimensions();
     const dispatch = useDispatch()
 
     const confirm = async () =>{
-        if(googleConfirmUsernamePopup.data.username && !error){
+        if(updateUsername && updateUsername !== '' && !error){
             const googleUpdate = await postUpdateGoogleUsername(updateUsername, googleConfirmUsernamePopup.data.email,language)
 
             if(googleUpdate && googleUpdate.success){
@@ -40,6 +40,7 @@ const ChangeUserNameGoogle = (props) => {
 
     const updateName = (val) =>{
         if(error) setError(null)
+        if(val === '') setError('create your unsername!')
         if(val === 'Bot') setError('this field can not be "Bot"')
         if(val.length > 8) setError('this field should have only 8 characters')
 
@@ -53,6 +54,8 @@ const ChangeUserNameGoogle = (props) => {
     useEffect(()=>{
         if(updateUsername && updateUsername.length > 8){
             setError('this field should have only 8 characters')
+        } else if(updateUsername === ''){
+            setError('create your unsername!')
         }
     }, [])
 
@@ -60,8 +63,9 @@ const ChangeUserNameGoogle = (props) => {
         <ModalWrapper modalBG={'default'} width={width - 35} height={height / 2.5} modalVisible={true}>
             <Container>
                 <ChangeNameContainer>
-                    <TextTitle setShadow={true} large blod center color={'#ffffff'}>Change or confirm you username</TextTitle>
+                    <TextTitle setShadow={true} large blod center color={'#ffffff'}>Create your Username!</TextTitle>
                     <Name onChangeText={updateName}
+                          autoFocus={true}
                           value={updateUsername}/>
                     {error && <Text small heavy color={'#d92f2f'} center>{error}</Text>}
 
@@ -69,7 +73,7 @@ const ChangeUserNameGoogle = (props) => {
                 </ChangeNameContainer>
                 <ButtonContainer>
                     <ButtonWithText clickHandler={closeConfirmPopup} width={'45%'} text={'Leave Game'} color={'#ff6262'}/>
-                    <ButtonWithText clickHandler={confirm} width={'45%'} text={'Confirm'} color={'#74ce30'}/>
+                    <ButtonWithText clickHandler={confirm} width={'45%'} text={'Create'} color={'#74ce30'}/>
                 </ButtonContainer>
             </Container>
         </ModalWrapper>

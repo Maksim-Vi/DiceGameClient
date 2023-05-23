@@ -132,7 +132,13 @@ export default class S_RESTORE_GAME {
 
     getLogText() {
         if(this.showLog){
-            console.log(`${this.MESSAG_ENAME} activeGame: ${JSON.stringify(this.activeGame)}`);
+            console.log(`${this.MESSAG_ENAME} 
+            username = ${JSON.stringify(this.username)}
+            activeGame = ${JSON.stringify(this.activeGame)}
+            countScores = ${JSON.stringify(this.countScores)}
+            lastThrowUser = ${JSON.stringify(this.lastThrowUser)}
+            lastThrowData = ${JSON.stringify(this.lastThrowData)}
+            `);
         }
     }
 
