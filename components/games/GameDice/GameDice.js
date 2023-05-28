@@ -40,7 +40,13 @@ class GameDice extends PureComponent {
 
     getOpponentActiveItems = () => {
         if(GameModel.gameSettings){
-            if (GameModel.gameSettings.bot) return this.state.defaultItems
+            if (GameModel.gameSettings.bot) {
+                if(GameModel.opponent && GameModel.opponent.activeItems){
+                    return GameModel.opponent.activeItems
+                }
+
+                return this.state.defaultItems
+            }
 
             const {username} = GameModel.user
 

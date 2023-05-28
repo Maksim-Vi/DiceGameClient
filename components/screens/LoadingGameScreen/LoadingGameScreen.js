@@ -12,17 +12,24 @@ import vs from '../../../assets/loadGame/97368-versus-download-hd.png'
 import {connect} from "react-redux";
 import {selectTranslation} from "../../redux/reducers/language/LanguageReducer";
 import defaultTranslation from "../../redux/reducers/language/defaultTranslation";
+import GameModel from '../../games/GameModel/GameModel';
+import { setActiveTabApp } from '../../redux/reducers/Websocket/WebsocketReducer';
 
 const LoadingGameScreen = ({route, ...props}) => {
 
 	const leaveGame = () =>{
-		const leaveGameId = selectCurrentGameId(store.getState())
-		new C_ABORDED_GAME(leaveGameId)
+		if(!GameModel._isGameJoined){
+			const leaveGameId = selectCurrentGameId(store.getState())
+			new C_ABORDED_GAME(leaveGameId)
+
+			navigation.navigate('MainScreen')
+            store.dispatch(setActiveTabApp('MainScreen'))
+		}
 	}
 	
 	return (
 		<BackgroundWrapper>
-			{route.params.gameType !== 1 && <ButtonBack leaveGame={leaveGame} goMainPage={true}/>}
+			{route.params.gameType !== 1 && <ButtonBack leaveGame={leaveGame} />}
 
 			<Container>
 				<TitleContainer>

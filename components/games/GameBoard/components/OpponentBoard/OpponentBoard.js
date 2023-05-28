@@ -6,7 +6,6 @@ import BoardItem from "../BoardItem/BoardItem";
 import Dispatcher from "../../../Events/Dispatcher";
 import styled from 'styled-components'
 import GameModel from "../../../GameModel/GameModel";
-import KickTextAnimation from "../../../Animation/KickTextAnimation";
 
 class OpponentBoard extends PureComponent {
     constructor() {
@@ -27,9 +26,13 @@ class OpponentBoard extends PureComponent {
 
     componentDidMount() {
         if(GameModel.gameSettings && GameModel.gameSettings.bot) {
+            if(GameModel.opponent && GameModel.opponent.activeItems){
+                return this.setState({activeItems: GameModel.opponent.activeItems})
+            }
+
             return this.setState({activeItems: this.state.defaultItems})
         }
-        if(GameModel.opponent.activeItems){
+        if(GameModel.opponent && GameModel.opponent.activeItems){
             this.setState({activeItems: GameModel.opponent.activeItems})
         }
     }
