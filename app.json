@@ -3,7 +3,7 @@
     "name": "Knocky Dice",
     "slug": "dicegame",
     "owner": "kastom",
-    "version": "1.3.8",
+    "version": "1.3.9",
     "orientation": "portrait",
     "icon": "./assets/loadGame/icon-game.png",
     "splash": {
@@ -41,10 +41,9 @@
         "backgroundColor": "#FFFFFF"
       },
       "package": "com.anonymous.knockydice",
-      "versionCode": 28
+      "versionCode": 29
     },
     "extra": {
-      "APP_TYPE": "production",
       "APP_PROD_URL": "knockydice-server.onrender.com",
       "eas": {
         "projectId": "a5e5cb05-164b-405b-9ee0-6e83cf5f8084"

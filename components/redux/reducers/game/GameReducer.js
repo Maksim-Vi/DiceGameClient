@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 let initialState = {
+  isGameJoined: false,
   currentGameId: null,
   difficultGame: 'Easy',
   game: null,
@@ -19,6 +20,9 @@ export const gameReducerSlice = createSlice({
   name: 'game',
   initialState,
   reducers: {
+    setGameJoined: (state, action) =>{
+      state.isGameJoined = action.payload
+    },
     setCarrentGameId: (state, action) =>{
       state.currentGameId = action.payload
     },
@@ -62,11 +66,13 @@ export const gameReducerSlice = createSlice({
 });
 
 export const {
+  setGameJoined,
   setCarrentGameId,setDifficultGame, setGame,setRestoreGame, setGameSettings,setIsGameStarted,
   setIsYouMove, setThrowData, setOpponentThrowData,
   setScores,setCountScores, resetScores, setResultGame
 } = gameReducerSlice.actions;
 
+export const selectGameJoined = state => state.games.isGameJoined;
 export const selectCurrentGameId = state => state.games.currentGameId;
 export const selectDifficultGame = state => state.games.difficultGame;
 export const selectGame = state => state.games.game;

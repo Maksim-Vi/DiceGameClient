@@ -11,13 +11,12 @@ import {
     selectIsYouMove,
     selectOpponentThrowData,
     selectScores,
-    selectThrowData, setIsYouMove, setRestoreGame
+    selectThrowData, setGameJoined, setGameStarted,
 } from "../../redux/reducers/game/GameReducer";
 
 export default new class GameModel {
     constructor() {
 
-        this._isGameJoined = false
         this._isGameStarted = null
 
         this._gameId = null
@@ -60,7 +59,7 @@ export default new class GameModel {
     setGameData = (gameSettings, currentGame) =>{
         this._destroyData()
 
-        this._isGameJoined = true
+        store.dispatch(setGameJoined(true))
 
         this.gameId = gameSettings.gameId
 
@@ -208,7 +207,7 @@ export default new class GameModel {
     }
 
     _destroyData = () =>{
-        this._isGameJoined = false
+        store.dispatch(setGameJoined(false))
         this.isGameStarted = null
 
         this.gameId = null
@@ -232,14 +231,6 @@ export default new class GameModel {
 
     get isGameStarted() {
         return this._isGameStarted;
-    }
-
-    set isGameJoined(value) {
-        this._isGameJoined = value;
-    }
-
-    get isGameJoined() {
-        return this._isGameJoined;
     }
 
     set isGameStarted(value) {

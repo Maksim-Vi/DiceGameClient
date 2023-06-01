@@ -1,24 +1,25 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import BackgroundWrapper from '../../common/BackgroundWrapper/BackgroundWrapper'
 import styled from 'styled-components';
 import ButtonBack from '../../common/Buttons/Back/ButtonBack';
 import UserFrame from "./components/UserFrame";
 import OpponentFrame from "./components/OpponentFrame";
-import {selectCurrentGameId} from "../../redux/reducers/game/GameReducer";
+import {selectCurrentGameId, selectGameJoined} from "../../redux/reducers/game/GameReducer";
 import {store} from "../../redux/redux-store";
 import C_ABORDED_GAME from "../../protocol/messages/clients/games/C_ABORDED_GAME";
 import Text from "../../common/Text/Text";
 import vs from '../../../assets/loadGame/97368-versus-download-hd.png'
-import {connect} from "react-redux";
+import {connect, useSelector} from "react-redux";
 import {selectTranslation} from "../../redux/reducers/language/LanguageReducer";
 import defaultTranslation from "../../redux/reducers/language/defaultTranslation";
-import GameModel from '../../games/GameModel/GameModel';
 import { setActiveTabApp } from '../../redux/reducers/Websocket/WebsocketReducer';
 
 const LoadingGameScreen = ({route, ...props}) => {
 
+	const isGameJoined = useSelector(selectGameJoined)
+
 	const leaveGame = () =>{
-		if(!GameModel._isGameJoined){
+		if(!isGameJoined){
 			const leaveGameId = selectCurrentGameId(store.getState())
 			new C_ABORDED_GAME(leaveGameId)
 
@@ -26,10 +27,10 @@ const LoadingGameScreen = ({route, ...props}) => {
             store.dispatch(setActiveTabApp('MainScreen'))
 		}
 	}
-	
+
 	return (
 		<BackgroundWrapper>
-			{route.params.gameType !== 1 && <ButtonBack leaveGame={leaveGame} />}
+			{route.params.gameType !== 1 && !isGameJoined && <ButtonBack leaveGame={leaveGame} />}
 
 			<Container>
 				<TitleContainer>
