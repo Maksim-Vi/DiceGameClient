@@ -19,6 +19,10 @@ export default class S_USERS_ONLINE {
 
     exec() {
         store.dispatch(setUsersOnline(this.usersOnline))
+
+        setTimeout(()=>{
+            store.setAuth()
+        },2000)
     }
 
     getLogText() {

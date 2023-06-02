@@ -17,6 +17,7 @@ import S_SOUND_INFO from "./messages/server/S_SOUND_INFO";
 import S_DEFAULT_PARAMS from "./messages/server/S_DEFAULT_PARAMS";
 import S_USER_PARAMS from "./messages/server/S_USER_PARAMS";
 import {friendsHandlerMessage} from "./FriendsMessageManager";
+import S_SERVER_WORKS_START_TIME from "./messages/server/S_SERVER_WORKS_START_TIME";
 
 export const hendleMessage = (data) =>{
     switch (data.name) {
@@ -58,7 +59,7 @@ export const hendleMessage = (data) =>{
             break;
         }
         case 'S_DEFAULT_PARAMS':{
-            new S_DEFAULT_PARAMS(data.defaultParams)
+            new S_DEFAULT_PARAMS(data.defaultParams, data.serverParams)
             break;
         }
         case 'S_USER_PARAMS':{
@@ -71,6 +72,10 @@ export const hendleMessage = (data) =>{
         }
         case 'S_SOUND_INFO':{
             new S_SOUND_INFO(data.username, data.sound)
+            break;
+        }
+        case 'S_SERVER_WORKS_START_TIME':{
+            new S_SERVER_WORKS_START_TIME(data.username, data.message, data.timeToStop, data.language)
             break;
         }
 

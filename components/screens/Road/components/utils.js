@@ -11,17 +11,17 @@ export const rewardType = {
 export const roadMap = [
     {
         id: 0,
-        pos:{top: height / 1.22, left: width / 4},
+        pos:{top: height / 1.22, left: width / 4.8},
         //pos:{top: height - 110, left: width / 4},
     },
     {
         id: 1,
-        pos:{top: height / 1.2, left: width / 2},
+        pos:{top: height / 1.2, left: width / 2.2},
         //pos:{top: height - 90, left: width / 2},
     },
     {
         id: 2,
-        pos:{top: height / 1.3, left: width / 1.3},
+        pos:{top: height / 1.33, left: width / 1.25},
         //pos:{top: height - 130, left: width / 1.3},
     },
     {

@@ -1,19 +1,23 @@
 import {
     calcAvailableToClaimMissionsRoad,
     setCurrentActiveMission,
-    setRoadMissions
+    setRoadMissions,
+    setStartTimeRoad,
+    setEndTimeRoad
 } from "../../../../redux/reducers/road/RoadReducer";
 import {store} from "../../../../redux/redux-store";
 import {isProduction} from "../../../../utils/utils";
 
 export default class S_ROAD_INFO_MAP {
-    constructor(username,missions){
+    constructor(username,missions, startTime, endTime){
 
         this.MESSAG_ENAME = 'S_ROAD_INFO_MAP'
         this.showLog = isProduction() ? false : true
 
         this.username = username
         this.missions =  typeof missions === 'string' ? JSON.parse(missions) : missions
+        this.startTime = startTime
+        this.endTime = endTime
 
         this.init()
     }
@@ -26,12 +30,12 @@ export default class S_ROAD_INFO_MAP {
     exec() {
         if(this.missions && this.missions.length > 0){
             store.dispatch(setRoadMissions(this.missions))
+
+            store.dispatch(setStartTimeRoad(this.startTime))
+            store.dispatch(setEndTimeRoad(this.endTime))
+
             this.checkMissions(this.missions)
         }
-
-        setTimeout(()=>{
-            store.setAuth()
-        },2000)
     }
 
     checkMissions = (missions) =>{

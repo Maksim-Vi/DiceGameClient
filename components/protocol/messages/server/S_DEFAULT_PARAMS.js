@@ -3,13 +3,15 @@ import {setAllDefaultParams} from "../../../redux/reducers/language/LanguageRedu
 import {isProduction} from "../../../utils/utils";
 
 export default class S_DEFAULT_PARAMS {
-    constructor(defaultParams){
+    constructor(defaultParams, serverParams){
 
         this.MESSAG_ENAME = 'S_DEFAULT_PARAMS'
         this.showLog = isProduction() ? false : true
 
         this.defaultParams = typeof defaultParams === "string" ? JSON.parse(defaultParams) : defaultParams
+        this.serverParams = typeof serverParams === "string" ? JSON.parse(serverParams) : serverParams
 
+        this.updatedParams = Object.assign({}, this.defaultParams, this.serverParams);
         this.init()
     }
 
@@ -19,12 +21,13 @@ export default class S_DEFAULT_PARAMS {
     }
 
     exec() {
-        store.dispatch(setAllDefaultParams(this.defaultParams))
+        console.log(this.updatedParams)
+        store.dispatch(setAllDefaultParams(this.updatedParams))
     }
 
     getLogText() {
         if(this.showLog){
-            console.log(`${this.MESSAG_ENAME} data:`, this.defaultParams);
+            console.log(`${this.MESSAG_ENAME} defaultParams: ${JSON.stringify(this.defaultParams)} serverParams: ${JSON.stringify(this.serverParams)}`);
         }
     }
 

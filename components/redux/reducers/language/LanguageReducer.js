@@ -31,6 +31,8 @@ export const languageReducerSlice = createSlice({
             Object.entries(state.params).forEach(([key, value])=>{
                 if(typeof action.payload[key] === 'boolean'){
                     paramObj[key] = action.payload[key]
+                } else if(!!action.payload[key]){
+                    paramObj[key] = action.payload[key]
                 } else {
                     paramObj[key] = value
                 }
@@ -80,6 +82,8 @@ export const selectDefaultParams = (state, param) => {
     const getDefaultParamsByParam = () =>{
         if(param && typeof state.language.params[param] === 'boolean'){
             return state.language.params[param]
+        } else if(param && !!state.language.params[param]){
+            return state.language.params[param]
         }
         return getDefaultByParam()
     }
@@ -88,7 +92,8 @@ export const selectDefaultParams = (state, param) => {
         if(param && defaultParams[param]){
             return defaultParams[param]
         }
-        return typeof param === 'boolean' ? param : false
+        //return typeof param === 'boolean' ? param : false
+        return param
     }
 
     return getDefaultParamsByParam()
