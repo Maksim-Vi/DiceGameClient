@@ -18,6 +18,7 @@ import S_DEFAULT_PARAMS from "./messages/server/S_DEFAULT_PARAMS";
 import S_USER_PARAMS from "./messages/server/S_USER_PARAMS";
 import {friendsHandlerMessage} from "./FriendsMessageManager";
 import S_SERVER_WORKS_START_TIME from "./messages/server/S_SERVER_WORKS_START_TIME";
+import S_GAME_END_LOADED from "./messages/server/S_GAME_END_LOADED";
 
 export const hendleMessage = (data) =>{
     switch (data.name) {
@@ -30,6 +31,10 @@ export const hendleMessage = (data) =>{
             break;
 
 
+        case 'S_GAME_END_LOADED':{
+            new S_GAME_END_LOADED()
+            break;
+        }
         case 'S_LOGIN_SUCCESS':{
             new S_LOGIN_SUCCESS(data.message)
             break;

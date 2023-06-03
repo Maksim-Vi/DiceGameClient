@@ -5,6 +5,7 @@ import back from '../../../../assets/common/btns/button_page_back.png'
 import {store} from "../../../redux/redux-store";
 import {setActiveTabApp} from "../../../redux/reducers/Websocket/WebsocketReducer";
 import Sounds, {soundsType} from "../../../utils/Sounds";
+import {transitionState} from "../../../utils/utils";
 
 const ButtonBack = (props) => {
 
@@ -16,8 +17,7 @@ const ButtonBack = (props) => {
             props.leaveGame()
         }
         if(props.goMainPage){
-            navigation.navigate('MainScreen')
-            store.dispatch(setActiveTabApp('MainScreen'))
+            transitionState('MainScreen')
         }
     }
 

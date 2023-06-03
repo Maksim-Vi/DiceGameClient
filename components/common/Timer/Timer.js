@@ -1,7 +1,10 @@
+import moment from "moment/moment";
+
 export default class Timer {
-    constructor(callback) {
+    constructor(callback, useTimezone = false) {
         this._callback = callback;
         this._time = 0;
+        this._useTimezone = useTimezone;
         this.interval = null;
     }
 
@@ -26,7 +29,13 @@ export default class Timer {
             totalTime: 0
         };
 
-        let now = new Date() / 1000;
+        let currentTime =  new Date();
+        if(this._useTimezone){
+            let thisMoment = moment().utcOffset('+0300').format('YYYY-MM-DD HH:mm:ss')
+            currentTime = Date.parse(thisMoment)
+        }
+
+        let now = +currentTime / 1000;
         let diff = Math.floor(this._time - now);
 
         result.totalTime = diff;

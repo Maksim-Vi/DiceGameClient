@@ -18,6 +18,11 @@ const RoadEndTimeContainer = (props) => {
         totalTime: 0
     })
 
+    const style = {
+        opacity: show.current.interpolate({ inputRange: [0, 1], outputRange: [0, 1] }),
+        transform: [{ scale: show.current.interpolate({ inputRange: [0, 1], outputRange: [0, 1] }) } ]
+    }
+
     const updateTimeData = (data) =>{
         if(data.hours === 0 && data.minutes === 0 && data.seconds === 0){
             timer.stop()
@@ -29,7 +34,7 @@ const RoadEndTimeContainer = (props) => {
         setTimeData(data)
     }
 
-    let timer = new Timer(updateTimeData)
+    let timer = new Timer(updateTimeData, true)
 
     const getTimeFormatter = () =>{
         let time = '00:00'
@@ -79,27 +84,49 @@ const RoadEndTimeContainer = (props) => {
         }
     },[])
 
-    return <TimeContainer  style={{
-        opacity: show.current.interpolate({
-            inputRange: [0, 1],
-            outputRange: [0, 1],
-        }),
-        transform: [
-            {
-                scale: show.current.interpolate({
-                    inputRange: [0, 1],
-                    outputRange: [0, 1]
-                })
-            }
-        ]
-    }}>
-            <ClockImg source={clock} style={{ transform: [{rotate: '-20deg'}]}} resizeMode={'stretch'} />
-            <Text setShadow blod madium>{props.textInfo}</Text>
-            <Text setShadow madium>{getTimeFormatter()}</Text>
-    </TimeContainer>
+    const renderLeft = () =>{
+        return (
+            <TimeContainerLeft style={style}>
+                <ClockImg source={clock} style={{ transform: [{rotate: '-20deg'}]}} resizeMode={'stretch'} />
+                <Text setShadow blod madium center>{props.textInfo}</Text>
+                <Text setShadow madium>{getTimeFormatter()}</Text>
+            </TimeContainerLeft>
+        )
+    }
+
+    const renderRight = () =>{
+        return (
+            <TimeContainerRight style={style}>
+                <ClockImg source={clock} style={{ transform: [{rotate: '-20deg'}]}} resizeMode={'stretch'} />
+                <Text setShadow blod madium center>{props.textInfo}</Text>
+                <Text setShadow madium>{getTimeFormatter()}</Text>
+            </TimeContainerRight>
+        )
+    }
+
+    const renderCenter = () =>{
+        return (
+            <TimeContainerCenter style={style}>
+                <ClockImg source={clock} style={{ transform: [{rotate: '-20deg'}]}} resizeMode={'stretch'} />
+                <Text setShadow blod madium center>{props.textInfo}</Text>
+                <Text setShadow madium>{getTimeFormatter()}</Text>
+            </TimeContainerCenter>
+        )
+    }
+
+    const getRenderByType = () =>{
+        switch (props.renderType){
+            case 'renderLeft': return renderLeft()
+            case 'renderRight': return renderRight()
+            case 'renderCenter': return renderCenter()
+            default: return renderLeft()
+        }
+    }
+
+    return getRenderByType()
 }
 
-const TimeContainer = styled(Animated.View)`
+const TimeContainerLeft = styled(Animated.View)`
   position: relative;
   display: flex;
   align-items: center;
@@ -130,12 +157,71 @@ const TimeContainer = styled(Animated.View)`
   }}
 `
 
+const TimeContainerRight = styled(Animated.View)`
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+  margin-right: auto;
+  width: 30%;
+  height: 55px;
+  background-color: rgba(0, 0, 0, 0.64);
+  border-radius: 10px;
+  border: 3px solid rgba(0, 0, 0, 0.49);
+  
+  ${()=>{
+    const isIos = getIosModel()
+    if (Platform.OS === 'ios' && isIos >= 10) {
+      return `
+        margin-bottom: 40px;
+      `
+    } else if(Platform.OS === 'ios' && isIos < 10){
+      return `
+        margin-bottom: 10px;
+      `
+    } else {
+      return `
+        margin-bottom: 30px;
+      `
+    }
+  }}
+`
+
+const TimeContainerCenter = styled(Animated.View)`
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60%;
+  height: 55px;
+  background-color: rgba(0, 0, 0, 0.64);
+  border-radius: 10px;
+  border: 3px solid rgba(0, 0, 0, 0.49);
+  ${()=>{
+    const isIos = getIosModel()
+    if (Platform.OS === 'ios' && isIos >= 10) {
+      return `
+        margin-bottom: 40px;
+      `
+    } else if(Platform.OS === 'ios' && isIos < 10){
+      return `
+        margin-bottom: 10px;
+      `
+    } else {
+      return `
+        margin-bottom: 30px;
+      `
+    }
+  }}
+`
+
 const ClockImg = styled.Image`
   position: absolute;
   display: flex;
-  left: -25px;
-  width: 45px;
-  height: 45px;
+  left: -30px;
+  width: 40px;
+  height: 40px;
 `
 
 export default RoadEndTimeContainer;

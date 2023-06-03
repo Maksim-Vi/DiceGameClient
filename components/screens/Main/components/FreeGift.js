@@ -86,12 +86,14 @@ const FreeGift = (props) => {
     }
 
     const admodHendler = () =>{
-        console.log('ANSWER', isLoaded)
         if(isLoaded && leftTimeShowGiftAd <= 0){
             Sounds.loadAndPlayFile(soundsType.click)
             show()
         } else {
-            if(!isLoaded) load()
+            if(!isLoaded && timeData.totalTime <= 0) {
+                load()
+                if(isLoaded) return show()
+            }
 
             if(!isLoaded && timeData.totalTime <= 0){
                 dispatch(setInfoPopup({visible: true, data: {text: TR_FREE_COINS_EMPTY_LOAD_INFO}}))
@@ -136,8 +138,6 @@ const FreeGift = (props) => {
     },[])
 
     useEffect(()=>{
-        //if(!isLoaded) load()
-
         if(leftTimeShowGiftAd > 0){
             timer.start(leftTimeShowGiftAd)
         }

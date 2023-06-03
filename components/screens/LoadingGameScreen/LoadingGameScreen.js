@@ -13,6 +13,7 @@ import {connect, useSelector} from "react-redux";
 import {selectTranslation} from "../../redux/reducers/language/LanguageReducer";
 import defaultTranslation from "../../redux/reducers/language/defaultTranslation";
 import { setActiveTabApp } from '../../redux/reducers/Websocket/WebsocketReducer';
+import {transitionState} from "../../utils/utils";
 
 const LoadingGameScreen = ({route, ...props}) => {
 
@@ -22,9 +23,7 @@ const LoadingGameScreen = ({route, ...props}) => {
 		if(!isGameJoined){
 			const leaveGameId = selectCurrentGameId(store.getState())
 			new C_ABORDED_GAME(leaveGameId)
-
-			navigation.navigate('MainScreen')
-            store.dispatch(setActiveTabApp('MainScreen'))
+			transitionState('MainScreen')
 		}
 	}
 

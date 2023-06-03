@@ -16,6 +16,7 @@ import {useDispatch} from "react-redux";
 import Sounds, {soundsType} from "../../utils/Sounds";
 import Logo from "../../common/Logo/Logo";
 import TextWithoutShadow from "../../common/Text/TextWithoutShadow";
+import { AdsConsent, AdsConsentDebugGeography, AdsConsentStatus } from 'react-native-google-mobile-ads';
 
 const AuthScreen = () => {
 
@@ -28,6 +29,19 @@ const AuthScreen = () => {
             password: ''
         }
     });
+
+    // const getReqToAd = async () =>{
+    //     const consentInfo = await AdsConsent.requestInfoUpdate({
+    //         debugGeography: AdsConsentDebugGeography.EEA,
+    //         testDeviceIdentifiers: ['TEST-DEVICE-HASHED-ID'],
+    //     });
+    //
+    //     if(consentInfo.isConsentFormAvailable && consentInfo.status === AdsConsentStatus.REQUIRED){
+    //         const { status } = await AdsConsent.showForm();
+    //         console.log('ANSWER status', status)
+    //
+    //     }
+    // }
 
     const handlerLogin = async (dataForm) => {
         Sounds.loadAndPlayFile(soundsType.click2)
@@ -73,6 +87,10 @@ const AuthScreen = () => {
         Sounds.loadAndPlayFile(soundsType.click2)
         navigation.navigate('RegisterScreen')
     }
+
+    // useEffect(()=>{
+    //     getReqToAd();
+    // },[])
 
     return (
         <BackgroundWrapper gackground={bag}>

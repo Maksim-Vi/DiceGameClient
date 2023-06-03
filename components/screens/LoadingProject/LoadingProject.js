@@ -3,7 +3,7 @@ import BackgroundWrapper from '../../common/BackgroundWrapper/BackgroundWrapper'
 import {
 	StyleSheet,
 	View,
-	Animated, Easing,
+	Animated, Easing, Platform,
 } from 'react-native';
 import styled from 'styled-components';
 import Text from "../../common/Text/Text";
@@ -13,10 +13,17 @@ import six from '../../../assets/collections/dices/d_4/dice_6.png'
 import starsAnim from "../../../assets/animation/lottieAnim/purpure-stars.json";
 import AnimatedLottieView from "lottie-react-native";
 import {setTimingAnimated} from "../../utils/Animation";
-import logo from "../../../assets/common/logo.png";
 import Logo from "../../common/Logo/Logo";
+import ButtonBack from "../../common/Buttons/Back/ButtonBack";
+import {getIosModel, transitionState} from "../../utils/utils";
+import {store} from "../../redux/redux-store";
+import {websocket} from "../../protocol/websocet";
+import C_LEAVE_SOCKET from "../../protocol/messages/clients/C_LEAVE_SOCKET";
 
 const LoadingProject = () => {
+
+	const isIos = getIosModel()
+
 	const animFirstValue = React.useRef(new Animated.Value(0)).current;
 	const animFirstRotValue = React.useRef(new Animated.Value(0)).current;
 
@@ -62,6 +69,11 @@ const LoadingProject = () => {
 		).start();
 	}
 
+	const goBack = () =>{
+		new C_LEAVE_SOCKET()
+		store.logout()
+	}
+
 	useEffect(()=>{
 		animFirstDice()
 		animSecondDice()
@@ -81,6 +93,10 @@ const LoadingProject = () => {
 
 	return (
 		<BackgroundWrapper gackground={bag}>
+			<ButtonBack top={Platform.OS === 'ios' && isIos >= 10 ? '7%' : '3%'}
+						left={'1%'}
+						leaveGame={goBack}/>
+
 			<LoadingContainer>
 				<Logo />
 

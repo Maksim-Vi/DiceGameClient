@@ -43,7 +43,7 @@ export const openServerConnection = () => {
 
     const url = getWSUrl()
 
-    console.log('ANSWER', url)
+    //console.log('ANSWER', url)
 
     websocket = new WebSocket(url);
 

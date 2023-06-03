@@ -21,7 +21,6 @@ export default class S_DEFAULT_PARAMS {
     }
 
     exec() {
-        console.log(this.updatedParams)
         store.dispatch(setAllDefaultParams(this.updatedParams))
     }
 
