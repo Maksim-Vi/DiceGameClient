@@ -27,7 +27,7 @@ const MessageContainer = styled.View`
     align-items: center;
     width: 70%;
     height: auto;
-    padding: 10px;
+    padding: 10px 45px 10px 10px;
     border-radius: 10px;
     margin: 5px;
     white-space: pre-wrap;
