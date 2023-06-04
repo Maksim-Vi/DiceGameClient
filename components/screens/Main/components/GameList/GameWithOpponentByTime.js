@@ -13,9 +13,16 @@ import bgGame from "../../../../../assets/common/btns/GameBtnBlue.png";
 const GameWithOpponentByTime = (props) => {
 
   const handelClick = () =>{
-      Sounds.loadAndPlayFile(soundsType.click2)
-      store.dispatch(setInfoPopup({visible: true, data: {text: 'Coming Soon =)'}}))
-      //new C_QUICK_PLAY(3)
+      if(props.currentIndexList !== props.indexComponent &&  props.flatlistRef){
+          props.updateCurrentIndex(props.indexComponent);
+          return props.flatlistRef.scrollToIndex({ animated: true, index: props.indexComponent + 0.4, });
+      }
+      if(props.currentIndexList === props.activeIndex){
+          Sounds.loadAndPlayFile(soundsType.click2)
+          store.dispatch(setInfoPopup({visible: true, data: {text: 'Coming Soon =)'}}))
+          //new C_QUICK_PLAY(3)
+      }
+
   }
 
   return (

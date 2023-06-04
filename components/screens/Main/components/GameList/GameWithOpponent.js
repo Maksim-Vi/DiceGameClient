@@ -17,11 +17,22 @@ const GameWithOpponent = (props) => {
     const userFlash = useSelector(selectUserFlash)
 
     const handelClick = () => {
-        Sounds.loadAndPlayFile(soundsType.click2)
-        if (userFlash < 1) {
-            return store.dispatch(setNotEnoughFlashPopup({visible: true}))
+        if(props.currentIndexList !== props.indexComponent &&  props.flatlistRef){
+            props.updateCurrentIndex(props.indexComponent);
+            return props.flatlistRef.scrollToIndex({
+                animated: true,
+                index: props.indexComponent + 0.4,
+            });
         }
-        new C_QUICK_PLAY(2)
+
+        if(props.currentIndexList === props.activeIndex){
+            Sounds.loadAndPlayFile(soundsType.click2)
+            if (userFlash < 1) {
+                return store.dispatch(setNotEnoughFlashPopup({visible: true}))
+            }
+            new C_QUICK_PLAY(2)
+        }
+
     }
 
     return (

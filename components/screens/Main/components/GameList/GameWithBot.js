@@ -20,11 +20,19 @@ const GameWithBot = (props) => {
     const userFlash = useSelector(selectUserFlash)
 
     const handelClick = () => {
-        Sounds.loadAndPlayFile(soundsType.click2)
-        if(userFlash < 1){
-            return store.dispatch(setNotEnoughFlashPopup({visible: true}))
+        if(props.currentIndexList !== props.indexComponent &&  props.flatlistRef){
+            props.updateCurrentIndex(props.indexComponent);
+            return props.flatlistRef.scrollToIndex({ animated: true, index: props.indexComponent, });
         }
-        dispatch(setBotGameTypesPopup({visible: true, data: null}))
+
+        if(props.currentIndexList === props.activeIndex){
+            Sounds.loadAndPlayFile(soundsType.click2)
+            if(userFlash < 1){
+                return store.dispatch(setNotEnoughFlashPopup({visible: true}))
+            }
+            dispatch(setBotGameTypesPopup({visible: true, data: null}))
+        }
+
     }
 
     return (

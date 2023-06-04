@@ -41,7 +41,7 @@
         "backgroundColor": "#FFFFFF"
       },
       "package": "com.anonymous.knockydice",
-      "versionCode": 29
+      "versionCode": 30
     },
     "extra": {
       "APP_PROD_URL": "knockydice-server.onrender.com",
