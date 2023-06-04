@@ -16,10 +16,12 @@ const EMPTY_ITEM_SIZE = (width - ITEM_SIZE_W) / 2;
 
 const GameList = props => {
 
+    let interval = useRef().current
     const flatlistRef = useRef()
+    const scrollX = React.useRef(new Animated.Value(0)).current;
+
     const [currentIndex, setCurrentIndex] = useState(0)
 
-    const scrollX = React.useRef(new Animated.Value(0)).current;
 
     const updateCurrentIndex = (index) =>{
         setCurrentIndex(index);
@@ -30,7 +32,12 @@ const GameList = props => {
         const index = event.nativeEvent.contentOffset.x / slideSize;
         const roundIndex = Math.round(index === -0 ? index : index + 1);
 
-        setCurrentIndex(roundIndex);
+        clearInterval(interval);
+        interval = setInterval(() => {
+            clearInterval(interval);
+            return  setCurrentIndex(roundIndex);
+        }, 500);
+
     }
 
     const getComponentByIndex = (currentIndexList, itemId) =>{
