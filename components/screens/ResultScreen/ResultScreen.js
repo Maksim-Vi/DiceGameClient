@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Text from "../../common/Text/Text";
 import {connect, useSelector} from "react-redux";
 import {selectResultGame, setCountScores} from "../../redux/reducers/game/GameReducer";
-import React from "react";
+import React, {useEffect} from "react";
 import {useNavigation} from "@react-navigation/native";
 import {selectCurrentUserId, selectMyUser} from "../../redux/reducers/players/PlayersReducer";
 import BackgroundWrapper from "../../common/BackgroundWrapper/BackgroundWrapper";
@@ -49,9 +49,9 @@ const ResultScreen = (props) => {
         Sounds.loadAndPlayFile(soundsType.click2)
         transitionState('MainScreen')
         store.dispatch(setCountScores(null))
-        if(props.ENABLE_AD_AFTER_GAME){
-            store.dispatch(setCountShowAd())
-        }
+        // if(props.ENABLE_AD_AFTER_GAME){
+        //     store.dispatch(setCountShowAd())
+        // }
     }
 
     const handlerWatch = () =>{
@@ -61,7 +61,7 @@ const ResultScreen = (props) => {
         } else {
             transitionState('MainScreen')
             store.dispatch(setCountScores(null))
-            store.dispatch(setCountShowAd())
+            //store.dispatch(setCountShowAd())
         }
     }
 
@@ -152,8 +152,9 @@ const ResultScreen = (props) => {
         if( props.ENABLE_AD_AFTER_GAME &&
             isLoaded &&
             props.result.userWin &&
-            myUser?.id === props.userId &&
-            advertising.countShowless >= advertising.numberCanMissGameAd
+            myUser?.id === props.userId
+            //&&
+            //advertising.countShowless >= advertising.numberCanMissGameAd
         ){
             animateVideoBtn()
             return  <PlayVideoButtonContainer style={{
@@ -183,9 +184,11 @@ const ResultScreen = (props) => {
 	  return () => {}
 	}, [])
 
-    React.useEffect(() => {
-        load();
-    }, [load]);
+    React.useEffect(()=>{
+        if(!isLoaded) {
+            load()
+        }
+    },[load, isLoaded])
 
     React.useEffect(() => {
         if (isClosed) {

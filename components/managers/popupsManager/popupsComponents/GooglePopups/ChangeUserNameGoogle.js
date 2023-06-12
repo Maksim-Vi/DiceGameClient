@@ -16,11 +16,25 @@ import DropdownLanguage from "../../../../screens/Auth/DropDownLanguage/Dropdown
 const ChangeUserNameGoogle = (props) => {
 
     const googleConfirmUsernamePopup = useSelector(state => selectGoogleConfirmUsernamePopup(state))
-    const [updateUsername, setUpdateUsername] = useState('')
     const [language, setLanguage] = useState('EN')
     const [error, setError] = useState(null)
     const {height, width} = useWindowDimensions();
     const dispatch = useDispatch()
+    const [updateUsername, setUpdateUsername] = useState('')
+
+    const replaceUsername = (username) =>{
+        if(username !== '' && username.length > 0){
+            const splitUsername = username.split(' ')
+
+            if(splitUsername[0].length > 8){
+                return splitUsername.substr(0, 8)
+            }
+
+            return splitUsername[0]
+        }
+
+        return ""
+    }
 
     const confirm = async () =>{
         if(updateUsername && updateUsername !== '' && !error){
@@ -39,12 +53,16 @@ const ChangeUserNameGoogle = (props) => {
     }
 
     const updateName = (val) =>{
-        if(error) setError(null)
-        if(val === '') setError('create your unsername!')
-        if(val === 'Bot') setError('this field can not be "Bot"')
-        if(val.length > 8) setError('this field should have only 8 characters')
-
         setUpdateUsername(val)
+    }
+
+    const checkUsernameByError = (val) =>{
+        if(val === '') return setError('create your unsername!')
+        if(val.length < 3) return setError('this field should have more 2 characters')
+        if(val === 'Bot') return setError('this field can not be "Bot"')
+        if(val.length > 8) return setError('this field should have only 8 characters')
+
+        setError(null)
     }
 
     const closeConfirmPopup = () =>{
@@ -52,18 +70,18 @@ const ChangeUserNameGoogle = (props) => {
     }
 
     useEffect(()=>{
-        if(updateUsername && updateUsername.length > 8){
-            setError('this field should have only 8 characters')
-        } else if(updateUsername === ''){
-            setError('create your unsername!')
-        }
+        setUpdateUsername(replaceUsername(googleConfirmUsernamePopup.data.username));
     }, [])
+
+    useEffect(()=>{
+        checkUsernameByError(updateUsername);
+    }, [updateUsername])
 
     return (
         <ModalWrapper modalBG={'default'} width={width - 35} height={height / 2.5} modalVisible={true}>
             <Container>
                 <ChangeNameContainer>
-                    <TextTitle setShadow={true} large blod center color={'#ffffff'}>Create your Username!</TextTitle>
+                    <TextTitle setShadow={true} large blod center color={'#ffffff'}>Change or submit your game nickname!</TextTitle>
                     <Name onChangeText={updateName}
                           autoFocus={true}
                           value={updateUsername}/>
@@ -73,7 +91,7 @@ const ChangeUserNameGoogle = (props) => {
                 </ChangeNameContainer>
                 <ButtonContainer>
                     {/* <ButtonWithText clickHandler={closeConfirmPopup} width={'45%'} text={'Leave Game'} color={'#ff6262'}/> */}
-                    <ButtonWithText clickHandler={confirm} width={'60%'} height={'40px'} text={'Create'} color={'#74ce30'}/>
+                    <ButtonWithText clickHandler={confirm} width={'60%'} height={'40px'} text={'Submit'} color={'#74ce30'}/>
                 </ButtonContainer>
             </Container>
         </ModalWrapper>
