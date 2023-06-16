@@ -30,6 +30,17 @@
       },
       "android":{
       }
+    },
+    "productionAPK": {
+      "channel": "production",
+      "autoIncrement": true,
+      "env": {
+        "APP_ENV": "production",
+        "APP_TYPE": "production"
+      },
+      "android":{
+        "buildType": "apk"
+      }
     }
   }
 }

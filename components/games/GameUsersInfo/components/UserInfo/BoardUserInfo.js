@@ -54,7 +54,7 @@ const BoardUserInfo = (props) => {
                   shadowOffset={{width: -1, height: 2}}
                   shadowColor={'rgb(204,30,30)'}
                   numberOfLines={3}
-                  madium blod color={'#fff'}
+                  blod color={'#fff'}
                   center>
                 {props.user.username || ''}
             </Name>

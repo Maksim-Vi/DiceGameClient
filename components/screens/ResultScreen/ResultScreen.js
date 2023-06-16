@@ -188,7 +188,7 @@ const ResultScreen = (props) => {
         if(!isLoaded) {
             load()
         }
-    },[load, isLoaded])
+    },[load])
 
     React.useEffect(() => {
         if (isClosed) {

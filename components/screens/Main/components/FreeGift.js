@@ -120,7 +120,7 @@ const FreeGift = (props) => {
         if(!isLoaded) {
             load()
         }
-    },[load, isLoaded, changeTabs])
+    },[load, changeTabs])
 
     useEffect(()=>{
         timer.stop()
