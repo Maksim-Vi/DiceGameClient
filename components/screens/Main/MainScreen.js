@@ -17,12 +17,23 @@ import Text from "../../common/Text/Text";
 import {setTestBtnsPopup, setTutorialPopup} from "../../redux/reducers/popups/PopupsReducer";
 import userParams from "../../redux/reducers/language/userParams";
 import GameModel from "../../games/GameModel/GameModel";
+import {AdsConsent, AdsConsentStatus} from 'react-native-google-mobile-ads';
 
 const MainScreen = (props) => {
 
     const myUser = useSelector(selectMyUser)
     const isRestoreGame = useSelector(selectRestoreGame)
+    const EC_ACCEPT_PRIVACY = useSelector(state => selectDefaultParams(state, defaultParams.EC_ACCEPT_PRIVACY))
     const dispatch = useDispatch()
+
+    const getADUserECInfo  = async () =>{
+        if(!EC_ACCEPT_PRIVACY) return
+
+        const consentInfo = await AdsConsent.requestInfoUpdate();
+        if(consentInfo.status === AdsConsentStatus.REQUIRED && consentInfo.isConsentFormAvailable){
+            const { status } = await AdsConsent.showForm();
+        }
+    }
 
     const restoreGame = () =>{
         store.dispatch(setIsGameStarted(true))
@@ -44,6 +55,8 @@ const MainScreen = (props) => {
     },[isRestoreGame])
 
     useEffect( ()=>{
+        getADUserECInfo()
+
         if(props.params.ENABLE_TUTORIAL && !props.params.isShowTutorial){
             dispatch(setTutorialPopup({visible: true, data: null}))
         }

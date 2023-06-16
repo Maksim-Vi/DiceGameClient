@@ -157,40 +157,52 @@ const FreeGift = (props) => {
         }
     },[])
 
-    return (
-        <FreeCoinsContainer style={{
-            transform: [
-                {
-                    scale: animatedValue.interpolate({
-                        inputRange: [0, 1],
-                        outputRange: [0, 1]
-                    })
-                }
-            ]
-        }}>
-            <SlideScreen left={false}>
-                <Container>
-                    <Icon source={btmBG}/>
-                    <ButtonImage width={50} height={50} image={freeCoins} clickHandler={()=> admodHendler()}/>
-                    <TextContainer>
-                        <Text setShadow numberOfLines={1} small center>{freeCoinsText}</Text>
-                    </TextContainer>
-
-                </Container>
-                <GiftTimerContainer>
-                    {timeData && (timeData.hours > 0 || timeData.minutes > 0 || timeData.seconds > 0) &&
-                        <GiftTimer timeData={timeData}/>
+    const renderComponent = () =>{
+        return (
+            <FreeCoinsContainer style={{
+                transform: [
+                    {
+                        scale: animatedValue.interpolate({
+                            inputRange: [0, 1],
+                            outputRange: [0, 1]
+                        })
                     }
-                </GiftTimerContainer>
+                ]
+            }}>
+                <SlideScreen left={false}>
+                    <Container>
+                        <Icon source={btmBG}/>
+                        <ButtonImage width={50} height={50} image={freeCoins} clickHandler={()=> admodHendler()}/>
+                        <TextContainer>
+                            <Text setShadow numberOfLines={1} small center>{freeCoinsText}</Text>
+                        </TextContainer>
 
-                {lottieAnim &&
-                    <AnimatedLottieView source={coins} loop={false} autoPlay
-                                        onAnimationFinish={()=>{setLottieAnim(false)}}
-                                        style={{position: 'absolute', bottom: 0, right: 0,width: 100, height: 250}} />
-                }
-            </SlideScreen>
-        </FreeCoinsContainer>
-    )
+                    </Container>
+                    <GiftTimerContainer>
+                        {timeData && (timeData.hours > 0 || timeData.minutes > 0 || timeData.seconds > 0) &&
+                            <GiftTimer timeData={timeData}/>
+                        }
+                    </GiftTimerContainer>
+
+                    {lottieAnim &&
+                        <AnimatedLottieView source={coins} loop={false} autoPlay
+                                            onAnimationFinish={()=>{setLottieAnim(false)}}
+                                            style={{position: 'absolute', bottom: 0, right: 0,width: 100, height: 250}} />
+                    }
+                </SlideScreen>
+            </FreeCoinsContainer>
+        )
+    }
+
+    if(!isLoaded){
+        if(leftTimeShowGiftAd > 0){
+            return renderComponent()
+        }
+
+        return null
+    }
+
+    return renderComponent()
 }
 
 
