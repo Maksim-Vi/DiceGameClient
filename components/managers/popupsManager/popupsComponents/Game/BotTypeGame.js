@@ -10,6 +10,7 @@ import {setDifficultGame} from "../../../../redux/reducers/game/GameReducer";
 import {setBotGameTypesPopup} from "../../../../redux/reducers/popups/PopupsReducer";
 import {selectTranslation} from "../../../../redux/reducers/language/LanguageReducer";
 import defaultTranslation from "../../../../redux/reducers/language/defaultTranslation";
+import {transitionState} from "../../../../utils/utils";
 
 const BotTypeGame = props => {
 
@@ -22,7 +23,8 @@ const BotTypeGame = props => {
     const handlerGame = (type) =>{
         Sounds.loadAndPlayFile(soundsType.click2)
         dispatch(setDifficultGame(type))
-        new C_QUICK_PLAY(1)
+        //new C_QUICK_PLAY(1)
+        transitionState('LoadingGameScreen', {gameType: 1})
         close()
     }
 

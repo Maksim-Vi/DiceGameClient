@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import gameIcon from "../../../../../assets/dice/vs_person1.png";
 import styled from "styled-components";
 import Text from "../../../../common/Text/Text";
@@ -11,6 +11,8 @@ import bgGame from "../../../../../assets/common/btns/GameBtnBlue.png";
 import {store} from "../../../../redux/redux-store";
 import {setNotEnoughFlashPopup} from "../../../../redux/reducers/popups/PopupsReducer";
 import {selectUserFlash} from "../../../../redux/reducers/players/PlayersReducer";
+import {selectActiveTabApp} from "../../../../redux/reducers/Websocket/WebsocketReducer";
+import {transitionState} from "../../../../utils/utils";
 
 const GameWithOpponent = (props) => {
 
@@ -30,9 +32,9 @@ const GameWithOpponent = (props) => {
             if (userFlash < 1) {
                 return store.dispatch(setNotEnoughFlashPopup({visible: true}))
             }
-            new C_QUICK_PLAY(2)
-        }
 
+            transitionState('LoadingGameScreen', {gameType: 2})
+        }
     }
 
     return (

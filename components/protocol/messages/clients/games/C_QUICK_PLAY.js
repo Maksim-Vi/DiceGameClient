@@ -29,8 +29,8 @@ export default class C_QUICK_PLAY {
     }
 
     exec() {
+        //this.loadLoadingScreen()
         sendMessageWS({ name: this.MESSAG_ENAME, clientIdWs: this.clientIdWebsocket, userId: this.id,  username: this.username, gameType: this.gameType})
-        this.loadLoadingScreen()
     }
 
     selectUserData = () =>{

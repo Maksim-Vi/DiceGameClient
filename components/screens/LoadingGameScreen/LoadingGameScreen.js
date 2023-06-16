@@ -14,6 +14,7 @@ import {selectTranslation} from "../../redux/reducers/language/LanguageReducer";
 import defaultTranslation from "../../redux/reducers/language/defaultTranslation";
 import { setActiveTabApp } from '../../redux/reducers/Websocket/WebsocketReducer';
 import {transitionState} from "../../utils/utils";
+import C_QUICK_PLAY from "../../protocol/messages/clients/games/C_QUICK_PLAY";
 
 const LoadingGameScreen = ({route, ...props}) => {
 
@@ -26,6 +27,12 @@ const LoadingGameScreen = ({route, ...props}) => {
 			transitionState('MainScreen')
 		}
 	}
+
+	useEffect(()=>{
+		if(route.params.gameType){
+			new C_QUICK_PLAY(route.params.gameType)
+		}
+	},[])
 
 	return (
 		<BackgroundWrapper>
