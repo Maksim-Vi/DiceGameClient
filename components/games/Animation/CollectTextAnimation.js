@@ -5,9 +5,9 @@ import collect3 from "../../../assets/animation/animKick/Collect3.png";
 import collect2 from "../../../assets/animation/animKick/Collect2.png";
 import styled from "styled-components";
 import {setTimingAnimated} from "../../utils/Animation";
-import FlyingAwayAnim from "../../common/AnimationScreens/FlyingAwayAnim";
-import star from "../../../assets/common/star.png";
 import Sounds, {soundsType} from "../../utils/Sounds";
+import AnimatedLottieView from "lottie-react-native";
+import fireworkEffect from "../../../assets/animation/lottieAnim/firework-effect.json";
 
 const {width,height} = Dimensions.get('window')
 
@@ -92,15 +92,10 @@ class CollectTextAnimation extends PureComponent {
                 this.renderCollectTextAnim()
             }
             {this.state.showCollectAnim &&
-                <FlyingAwayAnim countFlyItems={15}
-                                minRadius={2}
-                                maxRadius={50}
-                                icon={star}
-                                iconSize={{
-                                    width: 15,
-                                    height: 15
-                                }}
-                />
+                <AnimatedLottieView autoPlay
+                                    loop={false}
+                                    source={fireworkEffect}
+                                    style={{position: 'absolute', zIndex: 1, top: -35, bottom: 0, width: 520, height: 300}} />
             }
         </>
     }

@@ -2,7 +2,7 @@ import React, {useEffect} from 'react'
 import BackgroundWrapper from '../../common/BackgroundWrapper/BackgroundWrapper'
 import styled from 'styled-components'
 import TopMain from '../../common/TopPanel/TopPanel'
-import {StatusBar} from "react-native";
+import {Platform, StatusBar} from "react-native";
 import {connect, useDispatch, useSelector} from 'react-redux'
 import FreeGift from "./components/FreeGift";
 import OnlineUsers from "./components/OnlineUsers";
@@ -27,7 +27,7 @@ const MainScreen = (props) => {
     const dispatch = useDispatch()
 
     const getADUserECInfo  = async () =>{
-        if(!EC_ACCEPT_PRIVACY) return
+        if(!EC_ACCEPT_PRIVACY || Platform.OS === 'ios') return
 
         const consentInfo = await AdsConsent.requestInfoUpdate();
         if(consentInfo.status === AdsConsentStatus.REQUIRED && consentInfo.isConsentFormAvailable){

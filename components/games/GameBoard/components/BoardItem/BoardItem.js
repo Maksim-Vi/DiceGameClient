@@ -1,25 +1,23 @@
 import React, {memo, useEffect} from 'react'
 import styled from 'styled-components'
 import {Animated, Dimensions, Easing} from "react-native";
-import imagesGameSquares from "../../../../../assets/dynamicLoadGameSquares";
-import imagesGameDices from "../../../../../assets/dynamicLoadGameDices";
 import animOne from "../../../../../assets/animation/test-1.png";
 import animTwo from "../../../../../assets/animation/anim-purpure-two.png";
-import {setTimingAnimated} from '../../../../utils/Animation';
-import Sounds, {soundsType} from "../../../../utils/Sounds";
 import KickAnimation from "../../../Animation/KickAnimation";
 import CollectAnimation from "../../../Animation/CollectAnimation";
+import Dice from "./Dice";
+import Square from "./Square";
 
-const BoardItem = (props) => {
+const BoardItem = memo(function BoardItem( props) {
 
     const {width} = Dimensions.get('window');
 
     const showPlace = React.useRef(new Animated.Value(0))
     const spinValue = React.useRef(new Animated.Value(0))
-    const animatedValue = React.useRef(new Animated.Value(1))
     const opacityValue = React.useRef(new Animated.Value(0))
 
     const [squaresSource, setAnimSquaresSource] = React.useState(animOne)
+    const [prevWiningNumber, setPrevWiningsNumber] = React.useState(null)
 
     const rotateData = spinValue.current.interpolate({
         inputRange: [0, 1],
@@ -31,49 +29,10 @@ const BoardItem = (props) => {
         outputRange: [0, 1],
     })
 
-    const scaleData = animatedValue.current.interpolate({
-        inputRange: [0, 1],
-        outputRange: [0, 1]
-    })
-
-    const hendlerClick = () => {
+    const handlerClick = () => {
         if (props.selectBoardItem && props.item === 0) {
-            setDiceInPlaceAnim()
             props.selectBoardItem(props.index)
         }
-    }
-
-    const getSquare = () => {
-        let squareUrl = ''
-        const activeSquare= imagesGameSquares[props.activeItems ? props.activeItems.square : 1000]
-
-        if(activeSquare){
-            squareUrl = activeSquare
-        } else {
-            squareUrl = imagesGameSquares['default']
-        }
-
-        return squareUrl ? squareUrl : ''
-    }
-
-    const getDiceNumber = () => {
-        let diceImg = ''
-
-
-        if(props.item > 0) {
-            let diceUrl = ''
-            const activeDice = imagesGameDices[props.activeItems ? props.activeItems.dice : 1]
-
-            if(activeDice){
-                diceUrl = activeDice[+props.item]
-            } else {
-                diceUrl = imagesGameDices['default'][+props.item]
-            }
-
-            diceImg = diceUrl
-        }
-
-        return diceImg ? diceImg : ''
     }
 
     const getSelectedSquares = () => {
@@ -112,14 +71,6 @@ const BoardItem = (props) => {
                 useNativeDriver: true,
             })
         ).start()
-    }
-
-    const setDiceInPlaceAnim = () => {
-        // Sounds.loadAndPlayFile(soundsType.drop)
-        Animated.sequence([
-            setTimingAnimated(animatedValue.current, 1.2, 150, Easing.ease),
-            setTimingAnimated(animatedValue.current, 1, 50, Easing.ease),
-        ]).start();
     }
 
     const stopAnimation = () => {
@@ -163,20 +114,13 @@ const BoardItem = (props) => {
             ]
         }}>
             <ItemContainer {...props}
-                           onPress={hendlerClick}
+                           onPress={handlerClick}
                            enabled={true}
                            activeOpacity={.8}>
-                {getSquare() !== '' &&
-                    <SquaresImage width={width}
-                               source={getSquare()}
-                               resizeMode={'stretch'}/>
-                }
-                {getDiceNumber() !== "" &&
-                    <DiceImage width={width}
-                               style={{transform: [{scale: scaleData}]}}
-                               source={getDiceNumber()}
-                               resizeMode={'stretch'}/>
-                }
+
+                <Square activeItems={props.activeItems}/>
+                <Dice activeItems={props.activeItems} item={props.item}/>
+
                 {squaresSource &&
                     <SquaresAnim style={{opacity: opacityData, transform: [{rotate: rotateData}]}}
                               width={width} source={squaresSource}
@@ -188,7 +132,7 @@ const BoardItem = (props) => {
         </AnimConatiner>
 
     )
-}
+})
 
 const AnimConatiner = styled(Animated.View)`
   position: relative;

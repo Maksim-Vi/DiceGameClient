@@ -1,8 +1,8 @@
 import React, {PureComponent} from 'react';
 import Dispatcher from "../Events/Dispatcher";
 import {delay} from "../../utils/utils";
-import FlyingAwayAnim from "../../common/AnimationScreens/FlyingAwayAnim";
-import star from "../../../assets/common/star.png";
+import AnimatedLottieView from "lottie-react-native";
+import fireworkEffect from "../../../assets/animation/lottieAnim/tap-burst.json";
 
 class CollectAnimation extends PureComponent {
     constructor() {
@@ -47,15 +47,10 @@ class CollectAnimation extends PureComponent {
     render() {
         return <>
             {this.state.showCollectAnim &&
-                <FlyingAwayAnim countFlyItems={6}
-                                minRadius={2}
-                                maxRadius={13}
-                                icon={star}
-                                iconSize={{
-                                    width: 20,
-                                    height: 20
-                                }}
-                />
+                <AnimatedLottieView autoPlay
+                                    loop={false}
+                                    source={fireworkEffect}
+                                    style={{position: 'absolute', zIndex: 1, top: -8, bottom: 0, width: 120, height: 100}} />
             }
         </>
     }
