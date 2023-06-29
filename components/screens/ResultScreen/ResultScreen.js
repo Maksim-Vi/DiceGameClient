@@ -185,9 +185,7 @@ const ResultScreen = (props) => {
 	}, [])
 
     React.useEffect(()=>{
-        if(!isLoaded) {
-            load()
-        }
+        load()
     },[load])
 
     React.useEffect(() => {

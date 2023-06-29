@@ -30,7 +30,7 @@ const Dice = memo(function Dice(props) {
             diceImg = diceUrl
         }
 
-        return diceImg ? diceImg : ''
+        return typeof diceImg === "number" ? diceImg : ''
     }
 
     const setDiceInPlaceAnim = () => {
@@ -59,7 +59,7 @@ const Dice = memo(function Dice(props) {
 
     return (
         <React.Fragment>
-            {dicePrevNumber > 0 &&
+            {dicePrevNumber > 0 && getDiceNumber() > 0 &&
                 <DiceImage width={width}
                            style={{transform: [{scale: scaleData}]}}
                            source={getDiceNumber()}

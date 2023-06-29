@@ -82,7 +82,7 @@ const ThrowButton = styled.TouchableOpacity`
             `
     } else {
         return `
-                background-color: green;
+                background-color: #ff9d4d;
           `
     }
 }}

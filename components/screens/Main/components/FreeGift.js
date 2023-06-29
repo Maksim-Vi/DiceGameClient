@@ -16,7 +16,7 @@ import Timer from "../../../common/Timer/Timer";
 import GiftTimer from "./Gift/GiftTimer";
 import SlideScreen from "../../../common/AnimationScreens/SlideScreen";
 import AnimatedLottieView from "lottie-react-native";
-import coins from '../../../../assets/animation/lottieAnim/coins-drop.json'
+import coins from '../../../../assets/animation/lottieAnim/coin-bust.json'
 import Sounds, {soundsType} from "../../../utils/Sounds";
 import {selectDefaultParams, selectTranslation} from "../../../redux/reducers/language/LanguageReducer";
 import defaultParams from "../../../redux/reducers/language/defaultParams";
@@ -24,12 +24,10 @@ import {setInfoPopup} from "../../../redux/reducers/popups/PopupsReducer";
 import btmBG from '../../../../assets/common/btns/circleBtn.png'
 import Text from "../../../common/Text/Text";
 import defaultTranslation from "../../../redux/reducers/language/defaultTranslation";
-import {selectActiveTabApp} from "../../../redux/reducers/Websocket/WebsocketReducer";
 
 const FreeGift = (props) => {
 
     const user = useSelector(selectMyUser)
-    const changeTabs = useSelector(selectActiveTabApp)
     const ENABLE_AD_PROD = useSelector(state=> selectDefaultParams(state, defaultParams.ENABLE_AD_PROD))
     const TR_FREE_COINS_TIMER_INFO = useSelector(state=> selectTranslation(state, defaultTranslation.TR_FREE_COINS_TIMER_INFO))
     const TR_FREE_COINS_EMPTY_LOAD_INFO = useSelector(state=> selectTranslation(state, defaultTranslation.TR_FREE_COINS_EMPTY_LOAD_INFO))
@@ -68,7 +66,7 @@ const FreeGift = (props) => {
             setLottieAnim(false)
             dispatch(setLeftTimeShowAd(-1))
 
-            if(!isLoaded) load()
+            //if(!isLoaded) load()
         }
 
         setTimeData(data)
@@ -90,11 +88,6 @@ const FreeGift = (props) => {
             Sounds.loadAndPlayFile(soundsType.click)
             show()
         } else {
-            if(!isLoaded && timeData.totalTime <= 0) {
-                load()
-                if(isLoaded) return show()
-            }
-
             if(!isLoaded && timeData.totalTime <= 0){
                 dispatch(setInfoPopup({visible: true, data: {text: TR_FREE_COINS_EMPTY_LOAD_INFO}}))
             } else if(timeData.totalTime > 0){
@@ -105,22 +98,20 @@ const FreeGift = (props) => {
 
     const getBonusByView = async () =>{
         if (isClosed && isEarnedReward) {
-            setTimeout(()=>{
-                Sounds.loadAndPlayFile(soundsType.moneyDrop)
-                setLottieAnim(true)
-            },500)
+        
+            Sounds.loadAndPlayFile(soundsType.moneyDrop)
+            setLottieAnim(true)
             animatedValue.stopAnimation()
-
-        } else if(isClosed && !isEarnedReward){
-            if(!isLoaded) load()
         }
+
+        if(!isLoaded) load()
     }
 
     useEffect(()=>{
-        if(!isLoaded) {
+        if(!isLoaded){
             load()
         }
-    },[load, changeTabs])
+    }, [load])
 
     useEffect(()=>{
         timer.stop()
@@ -142,7 +133,7 @@ const FreeGift = (props) => {
             timer.start(leftTimeShowGiftAd)
         }
 
-    },[load, isLoaded, leftTimeShowGiftAd])
+    },[isLoaded, leftTimeShowGiftAd])
 
 
     useEffect(() => {
@@ -183,26 +174,21 @@ const FreeGift = (props) => {
                             <GiftTimer timeData={timeData}/>
                         }
                     </GiftTimerContainer>
-
-                    {lottieAnim &&
-                        <AnimatedLottieView source={coins} loop={false} autoPlay
-                                            onAnimationFinish={()=>{setLottieAnim(false)}}
-                                            style={{position: 'absolute', bottom: 0, right: 0,width: 100, height: 250}} />
-                    }
                 </SlideScreen>
             </FreeCoinsContainer>
         )
     }
 
-    if(!isLoaded){
-        if(leftTimeShowGiftAd > 0){
-            return renderComponent()
+    return <React.Fragment>
+        {((!isLoaded && leftTimeShowGiftAd > 0) || isLoaded) && 
+            renderComponent()
         }
-
-        return null
-    }
-
-    return renderComponent()
+        {lottieAnim &&
+            <AnimatedLottieView source={coins} loop={false} autoPlay
+                                onAnimationFinish={()=>{setLottieAnim(false)}}
+                                style={{position: 'absolute', top: 100, bottom: 0, right: 0, width: 300, height: 300}} />
+        }
+    </React.Fragment>
 }
 
 

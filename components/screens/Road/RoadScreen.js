@@ -29,14 +29,14 @@ const RoadScreen = (props) => {
         const currentTime = Date.parse(thisMoment)
         const roadTimeParam = Date.parse(startRoadTimeParam)
 
-        if(+startRoadTime > 0){
-            if((+startRoadTime - +currentTime) > 0){
+        if(typeof +roadTimeParam === 'number' && +roadTimeParam > 0){
+            if((+roadTimeParam - +currentTime) > 0){
                 return false
             }
         }
 
-        if(typeof +roadTimeParam === 'number' && +roadTimeParam > 0){
-            if((+roadTimeParam - +currentTime) > 0){
+        if(+startRoadTime > 0){
+            if((+startRoadTime - +currentTime) > 0){
                 return false
             }
         }
