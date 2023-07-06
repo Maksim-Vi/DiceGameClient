@@ -11,7 +11,11 @@ const SlideScreen = (props) => {
             toValue: 1,
             duration: 400,
             useNativeDriver: true,
-        }).start();
+        }).start(({finished})=>{
+            if(finished && props.animationComplete){
+                props.animationComplete()
+            }
+        });
         return () => {
             Animated.timing(slideAnim, {
                 toValue: 0,

@@ -6,6 +6,7 @@ let initialState = {
     settingsPopup: {visible: false, data: null},
     lvlUpPopup: {visible: false, data: null},
     sevenDaysGift: {visible: false, data: null},
+    everyDaysGift: {visible: false, data: null},
     infoPopup: {visible: false, data: null},
     tutorialPopup: {visible: false, data: null},
     googleConfirmUsernamePopup: {visible: false, data: null},
@@ -42,6 +43,9 @@ export const popupsReducerSlice = createSlice({
     },
     setSevenDaysGiftPopup: (state, action) =>{
       state.sevenDaysGift = action.payload
+    },
+    setEveryDaysGiftPopup: (state, action) =>{
+      state.everyDaysGift = action.payload
     },
     setInfoPopup: (state, action) =>{
       state.infoPopup = action.payload
@@ -102,6 +106,7 @@ export const {
     setAvatarPopup,
     setSettingsMenuPopup,
     setSevenDaysGiftPopup,
+    setEveryDaysGiftPopup,
     setInfoPopup,
     setGoogleConfirmUsernamePopup,
     setLostConnOppPopup,
@@ -123,6 +128,7 @@ export const selectLevelUpPopup = state => state.popups.lvlUpPopup;
 export const selectSettingsPopup = state => state.popups.settingsPopup;
 export const selectTestBtnsPopup = state => state.popups.testBtnsPopup;
 export const selectSevenDaysGiftPopup = state => state.popups.sevenDaysGift;
+export const selectEveryDaysGiftPopup = state => state.popups.everyDaysGift;
 export const selectInfoPopup = state => state.popups.infoPopup;
 export const selectTutorialPopup = state => state.popups.tutorialPopup;
 export const selectGoogleConfirmUsernamePopup = state => state.popups.googleConfirmUsernamePopup;

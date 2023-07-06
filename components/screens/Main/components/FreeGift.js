@@ -2,8 +2,7 @@ import React, {useEffect, useState} from 'react';
 import ButtonImage from "../../../common/Buttons/ButtonImage";
 import freeCoins from "../../../../assets/shop/profits.png";
 import styled from "styled-components";
-import {Animated, Easing, Platform} from "react-native";
-import {setTimingAnimated} from "../../../utils/Animation";
+import {Platform} from "react-native";
 import {
     TestIds,
     useRewardedInterstitialAd,
@@ -41,7 +40,6 @@ const FreeGift = (props) => {
 
     const dispatch = useDispatch()
     const leftTimeShowGiftAd = selectLeftTimeShowGiftAd(store.getState())
-    const animatedValue = React.useRef(new Animated.Value(1)).current;
     const { isLoaded, isClosed, load, show, isEarnedReward, error, isShowing, isClicked, isOpened } = useRewardedInterstitialAd(AdUnitID, {
         requestNonPersonalizedAdsOnly: true,
         serverSideVerificationOptions:{
@@ -62,11 +60,8 @@ const FreeGift = (props) => {
         if(data.hours === 0 && data.minutes === 0 && data.seconds === 0){
             if(timer && timer !== null) timer.stop()
 
-            animate()
             setLottieAnim(false)
             dispatch(setLeftTimeShowAd(-1))
-
-            //if(!isLoaded) load()
         }
 
         setTimeData(data)
@@ -74,25 +69,17 @@ const FreeGift = (props) => {
 
     let timer = new Timer(updateTimeData)
 
-    const animate = () => {
-        Animated.loop(
-            Animated.sequence([
-                setTimingAnimated(animatedValue, 1.1, 1500, Easing.ease, true),
-                setTimingAnimated(animatedValue, 1, 1500, Easing.ease, true),
-            ]),
-        ).start()
-    }
-
     const admodHendler = () =>{
+
+        if(!isLoaded && timeData.totalTime <= 0){
+            return dispatch(setInfoPopup({visible: true, data: {text: TR_FREE_COINS_EMPTY_LOAD_INFO}}))
+        } else if(timeData.totalTime > 0){
+            return dispatch(setInfoPopup({visible: true, data: {text: TR_FREE_COINS_TIMER_INFO}}))
+        }
+
         if(isLoaded && leftTimeShowGiftAd <= 0){
             Sounds.loadAndPlayFile(soundsType.click)
             show()
-        } else {
-            if(!isLoaded && timeData.totalTime <= 0){
-                dispatch(setInfoPopup({visible: true, data: {text: TR_FREE_COINS_EMPTY_LOAD_INFO}}))
-            } else if(timeData.totalTime > 0){
-                dispatch(setInfoPopup({visible: true, data: {text: TR_FREE_COINS_TIMER_INFO}}))
-            }
         }
     }
 
@@ -101,7 +88,7 @@ const FreeGift = (props) => {
         
             Sounds.loadAndPlayFile(soundsType.moneyDrop)
             setLottieAnim(true)
-            animatedValue.stopAnimation()
+            store.dispatch(setLeftTimeShowAd(Date.now() + 30))
         }
 
         if(!isLoaded) load()
@@ -114,9 +101,8 @@ const FreeGift = (props) => {
     }, [load])
 
     useEffect(()=>{
-        timer.stop()
-
         if(leftTimeShowGiftAd > 0){
+            timer.stop()
             timer.start(leftTimeShowGiftAd)
         }
 
@@ -130,6 +116,7 @@ const FreeGift = (props) => {
 
     useEffect(()=>{
         if(leftTimeShowGiftAd > 0){
+            timer.stop()
             timer.start(leftTimeShowGiftAd)
         }
 
@@ -140,26 +127,9 @@ const FreeGift = (props) => {
         getBonusByView()
     }, [isClosed]);
 
-    useEffect(()=>{
-        animate()
-
-        return ()=>{
-            animatedValue.stopAnimation()
-        }
-    },[])
-
     const renderComponent = () =>{
         return (
-            <FreeCoinsContainer style={{
-                transform: [
-                    {
-                        scale: animatedValue.interpolate({
-                            inputRange: [0, 1],
-                            outputRange: [0, 1]
-                        })
-                    }
-                ]
-            }}>
+            <FreeCoinsContainer >
                 <SlideScreen left={false}>
                     <Container>
                         <Icon source={btmBG}/>
@@ -192,7 +162,7 @@ const FreeGift = (props) => {
 }
 
 
-const FreeCoinsContainer = styled(Animated.View)`
+const FreeCoinsContainer = styled.View`
   align-items: center;
   position: absolute;
   bottom: 20%;

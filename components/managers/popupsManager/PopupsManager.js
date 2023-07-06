@@ -28,6 +28,7 @@ import CoinsInfoPopups from "./popupsComponents/TopPanelInfo/CoinsInfoPopup";
 import DiamondInfoPopups from "./popupsComponents/TopPanelInfo/DiamondInfoPopup";
 import FlashInfoPopups from "./popupsComponents/TopPanelInfo/FlashInfoPopup";
 import {selectDiamondsInfoPopup} from "../../redux/reducers/popups/PopupsReducer";
+import EveryDaysGift from './popupsComponents/EveryDays/EveryDaysGift'
 
 const PopupsManager = (props) => {
 
@@ -36,7 +37,7 @@ const PopupsManager = (props) => {
     const isRestoreGame = useSelector(selectRestoreGame)
 
     const renderSevenDays = () =>{
-        if(props.sevenDaysPopup.visible && isAppScreen(props) && !isRestoreGame && !props.tutorialPopup.visible){
+        if(props.sevenDaysPopup.visible && isAppScreen(props) && !props.everyDaysPopup.visible && !isRestoreGame && !props.tutorialPopup.visible){
             return <SevenDaysGift />
         }
     }
@@ -46,6 +47,7 @@ const PopupsManager = (props) => {
                (isAppScreen(props) && props.lvlUpPopup.visible) ||
                (isAppScreen(props) && props.tutorialPopup.visible) ||
                (isAppScreen(props) && props.sevenDaysPopup.visible) ||
+               (isAppScreen(props) && props.everyDaysPopup.visible) ||
                props.avatarPopup.visible ||
                props.settingsPopup.visible ||
                props.infoPopup.visible ||
@@ -82,6 +84,7 @@ const PopupsManager = (props) => {
             {props.lvlUpPopup.visible && isAppScreen(props) && <LevelUpPopup/> }
             {props.tutorialPopup.visible && isAppScreen(props) && <TutorialPopup /> }
             { renderSevenDays() }
+            {props.everyDaysPopup.visible && <EveryDaysGift /> }
             {props.avatarPopup.visible && <AvatarPopups user={props.user}/> }
             {props.settingsPopup.visible && <SettingsMenuPopups/>}
             {props.infoPopup.visible && <InfoPopups />}
@@ -119,6 +122,7 @@ const mapStateToProps = (state) => ({
     settingsPopup: popups.selectSettingsPopup(state),
     lvlUpPopup: popups.selectLevelUpPopup(state),
     sevenDaysPopup: popups.selectSevenDaysGiftPopup(state),
+    everyDaysPopup: popups.selectEveryDaysGiftPopup(state),
     infoPopup: popups.selectInfoPopup(state),
     testBtnsPopup: popups.selectTestBtnsPopup(state),
     user: selectMyUser(state),

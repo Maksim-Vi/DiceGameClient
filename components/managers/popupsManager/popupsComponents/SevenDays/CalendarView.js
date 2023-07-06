@@ -31,8 +31,8 @@ const CalendarView = (props) => {
                     })}
             ]
         }}>
-            <CalendarImage source={calendar}/>
-            <CheckMarkImage source={mark}/>
+            <CalendarImage source={calendar}  resizeMode={"contain"}/>
+            <CheckMarkImage source={mark}  resizeMode={"contain"}/>
         </CalenderContainer>
     )
 }

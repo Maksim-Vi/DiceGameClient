@@ -41,7 +41,7 @@ const RewardSevenDays = props => {
                         const getTitle = selectTranslation(store.getState(), giftLocalData.title)
                         return (
                             <DaysCard key={item.id} title={getTitle} giftItem={item} typeReward={giftLocalData.typeReward}>
-                                <ImageGift source={giftLocalData.icon}/>
+                                <ImageGift source={giftLocalData.icon} typeReward={giftLocalData.typeReward} resizeMode={"contain"}/>
                                 <Text setShadow={true} large blod center>{item.rewardQuantity}</Text>
                             </DaysCard>
                         )
@@ -60,7 +60,7 @@ const CardsContainer = styled.View`
   flex-wrap: wrap;
   width: 100%;
   height: auto;
-  margin-top:${(props)=> props.height < 700 ? `0px` : '10%'};
+  margin-top: ${(props)=> props.height < 700 ? `0px` : '10%'};
 `
 
 const FinishOverlay = styled.View`
@@ -72,8 +72,8 @@ const FinishOverlay = styled.View`
 `
 
 const ImageGift = styled.Image`
-  width: 40px;
-  height: 40px;
+  width: ${(props)=> props.typeReward === 'coins' ? `55px` : '40px'};
+  height: ${(props)=> props.typeReward === 'coins' ? `55px` : '40px'};
   margin-bottom: 10px;
 `
 const SevenDaysDesc = styled(Text)`
