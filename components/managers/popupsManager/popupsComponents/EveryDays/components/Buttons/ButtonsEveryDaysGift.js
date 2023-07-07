@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { memo, useEffect, useState } from "react";
 import styled from "styled-components";
 import coins from "../../../../../../../assets/topPanel/coins.png";
 import diamonds from "../../../../../../../assets/topPanel/diamond.png";
@@ -20,11 +20,17 @@ import {
   useRewardedInterstitialAd,
 } from "react-native-google-mobile-ads";
 import { selectMyUser } from "../../../../../../redux/reducers/players/PlayersReducer";
+import Sounds, { soundsType } from "../../../../../../utils/Sounds";
+import { delay } from "../../../../../../utils/utils";
+import AnimatedLottieView from "lottie-react-native";
+import coinsAnim from '../../../../../../../assets/animation/lottieAnim/coin-bust.json'
 
-const ButtonsEveryDaysGift = (props) => {
+const ButtonsEveryDaysGift = memo((props) => {
   
   const user = useSelector(selectMyUser)
   const dispatch = useDispatch();
+
+  const [isAnimFinished, setIsAnimFinished] = useState(false)
 
   const AdUnitID =
     Platform.OS === "ios"
@@ -40,7 +46,7 @@ const ButtonsEveryDaysGift = (props) => {
       requestNonPersonalizedAdsOnly: true,
       serverSideVerificationOptions: {
         userId: String(user.id),
-        customData: JSON.stringify({username: user.username,reward: 2,rewardType:  props.everyDaysGiftsResult.rewardType, rewardQuantity:  props.everyDaysGiftsResult.rewardQuantity}),
+        custom_data: JSON.stringify({username: user.username, rewardType: props.everyDaysGiftsResult.rewardType, rewardQuantity: props.everyDaysGiftsResult.rewardQuantity}),
       },
     });
 
@@ -66,12 +72,7 @@ const ButtonsEveryDaysGift = (props) => {
     Sounds.loadAndPlayFile(soundsType.click2);
     if (isLoaded) {
       show();
-    } else {
-      load();
     }
-
-    dispatch(setEveryDayGiftResult(null));
-    dispatch(setEveryDaysGiftPopup({ visible: false, data: null }));
   };
 
   const onContinue = () => {
@@ -82,8 +83,12 @@ const ButtonsEveryDaysGift = (props) => {
   };
 
   const getADBonus = () => {
-    dispatch(setEveryDayGiftResult(null));
-    dispatch(setEveryDaysGiftPopup({ visible: false, data: null }));
+    setIsAnimFinished(true)
+
+    delay(3000).then(()=>{
+      dispatch(setEveryDayGiftResult(null));
+      dispatch(setEveryDaysGiftPopup({ visible: false, data: null }));
+    })
   };
 
   useEffect(() => {
@@ -146,11 +151,23 @@ const ButtonsEveryDaysGift = (props) => {
           {props.continue}
         </Text>
       </PlayButton>
+
+      {isAnimFinished && 
+          <AnimationContainer>
+            <AnimatedLottieView source={coinsAnim} loop={false} autoPlay
+                                  style={{position: 'absolute', top: 0, bottom: 0, right: -70, width: 300, height: 300}} />
+              <AnimatedLottieView source={coinsAnim} loop={false} autoPlay
+                                  style={{position: 'absolute', top: 0, bottom: 0, right: 0, width: 350, height: 350}} />
+              <AnimatedLottieView source={coinsAnim} loop={false} autoPlay
+                                  style={{position: 'absolute', top: 0, bottom: 0, right: 20, width: 250, height: 150}} />
+          </AnimationContainer>
+        }
     </ButtonContainer>
   );
-};
+})
 
 const ButtonContainer = styled(Animated.View)`
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -159,6 +176,13 @@ const ButtonContainer = styled(Animated.View)`
 `;
 
 const PlayVideoButtonContainer = styled.View``;
+
+const AnimationContainer = styled.View`
+  position: absolute;
+  width: 100%;
+  height: 500px;
+  bottom: 150px;
+`;
 
 const PlayButton = styled.TouchableOpacity`
   background-color: #ff9d4d;

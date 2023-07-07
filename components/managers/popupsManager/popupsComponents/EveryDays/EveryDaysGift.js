@@ -4,7 +4,6 @@ import Text from "../../../../common/Text/Text";
 import { setEveryDaysGiftPopup } from "../../../../redux/reducers/popups/PopupsReducer";
 import { useDispatch, useSelector } from "react-redux";
 import ModalWrapper from "../../../../common/ModalWindows/ModalWrapper";
-import ButtonBack from "../../../../common/Buttons/Back/ButtonBack";
 import { transitionState } from "../../../../utils/utils";
 import EveryDayCard from "./components/Card/EveryDayCard";
 import { selectEveryDaysGifts, selectSevenDaysGiftsResult } from "../../../../redux/reducers/gifts/GiftsReducer";
@@ -35,13 +34,6 @@ const EveryDaysGift = () => {
 
   return (
     <ModalWrapper modalBG={"bg_black"} modalVisible={true}>
-      <ButtonBack
-        top={"20px"}
-        left={"15px"}
-        leaveGame={leaveGift}
-        colorIcon={"#fefefe"}
-      />
-
       <EveryDaysContainer>
         {!selectedCard && (
           <TitleContainer>

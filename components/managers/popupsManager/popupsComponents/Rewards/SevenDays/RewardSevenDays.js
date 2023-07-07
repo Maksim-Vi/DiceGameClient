@@ -72,8 +72,8 @@ const FinishOverlay = styled.View`
 `
 
 const ImageGift = styled.Image`
-  width: ${(props)=> props.typeReward === 'coins' ? `55px` : '40px'};
-  height: ${(props)=> props.typeReward === 'coins' ? `55px` : '40px'};
+  width: ${(props)=> props.typeReward === 'coins' ? `55px` : '55px'};
+  height: ${(props)=> props.typeReward === 'coins' ? `55px` : '55px'};
   margin-bottom: 10px;
 `
 const SevenDaysDesc = styled(Text)`

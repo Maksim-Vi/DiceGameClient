@@ -90,8 +90,8 @@ const SevenDaysDesc = styled(Text)`
 `
 
 const ImageGift = styled.Image`
-  width: ${(props)=> props.typeReward === 'coins' ? `55px` : '40px'};
-  height: ${(props)=> props.typeReward === 'coins' ? `55px` : '40px'};
+  width: ${(props)=> props.typeReward === 'coins' ? `55px` : '55px'};
+  height: ${(props)=> props.typeReward === 'coins' ? `55px` : '55px'};
   margin-bottom: 10px;
 `
 
