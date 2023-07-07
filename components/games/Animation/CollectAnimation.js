@@ -50,7 +50,7 @@ class CollectAnimation extends PureComponent {
                 <AnimatedLottieView autoPlay
                                     loop={false}
                                     source={fireworkEffect}
-                                    style={{position: 'absolute', zIndex: 1, top: -8, bottom: 0, width: 120, height: 100}} />
+                                    style={{position: 'absolute', zIndex: 1, top: -10, bottom: 0, width: 120, height: 100}} />
             }
         </>
     }

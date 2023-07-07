@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {memo, useState} from 'react'
 import BackgroundWrapper from '../../common/BackgroundWrapper/BackgroundWrapper'
 import styled from 'styled-components';
 import ButtonBack from '../../common/Buttons/Back/ButtonBack';
@@ -16,7 +16,7 @@ import {selectCurrentGameId} from "../../redux/reducers/game/GameReducer";
 import {selectTranslation} from "../../redux/reducers/language/LanguageReducer";
 import defaultTranslation from "../../redux/reducers/language/defaultTranslation";
 
-const LoadingInvitationGameScreen = ({route, ...props}) => {
+const LoadingInvitationGameScreen = memo(({route, ...props}) => {
 
     const myUser = useSelector(selectMyUser)
     const currentGameId = useSelector(selectCurrentGameId)
@@ -48,30 +48,33 @@ const LoadingInvitationGameScreen = ({route, ...props}) => {
 
                 <LoadingContainer>
                     <InvitationUserFrame username={myUser.username || 'user'}
+                                         user={myUser}
                                          avatar={myUser.avatar}/>
                     <VSImage source={vs} resizeMode={'stretch'}/>
                     <InvitationUserFrame username={invitedOpponent ? invitedOpponent.opponent.username : 'opponent'}
+                                         user={invitedOpponent ? invitedOpponent.opponent : null}
                                          avatar={invitedOpponent ? invitedOpponent.opponent.avatar : 1000}/>
                 </LoadingContainer>
-                {invitedOpponent && route.params.isOwner
-                    ? !isPressed
-                        ? <ButtonWithText width={'45%'}
-                                          height={'40px'}
-                                          color={'#5acb57'}
-                                          text={'Start Game'}
-                                          clickHandler={startGame}/>
-                        : <Text setShadow={true} small blod center>{props.waitingGame}</Text>
-                    : invitedOpponent && route.params.isOwner
-                        ? <Text setShadow={true} small blod center>{props.waitingPlayer}</Text>
-                        : <Text setShadow={true} small blod center>{props.waitingGame}</Text>
-                }
 
+                <ButtonCOntainer>
+                    {invitedOpponent && route.params.isOwner
+                        ? !isPressed
+                            ? <ButtonWithText width={'45%'}
+                                            height={'40px'}
+                                            color={'#5acb57'}
+                                            text={'Start Game'}
+                                            clickHandler={startGame}/>
+                            : <Text setShadow={true} small blod center>{props.waitingGame}</Text>
+                        : invitedOpponent && route.params.isOwner
+                            ? <Text setShadow={true} small blod center>{props.waitingPlayer}</Text>
+                            : <Text setShadow={true} small blod center>{props.waitingGame}</Text>
+                    }
+                </ButtonCOntainer>
             </Container>
 
         </BackgroundWrapper>
     )
-
-}
+})
 
 const Container = styled.View`
     flex: 1;
@@ -101,6 +104,13 @@ const TitleContainer = styled.View`
 	background-color: #2281ce;
 	border-radius: 20px;
 	border: 3px solid #2b4b8d;
+`
+const ButtonCOntainer = styled.View`
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 70%;
+	height: 60px;
 `
 
 const mapStateToProps = (state) => ({

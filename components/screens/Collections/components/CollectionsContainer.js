@@ -12,6 +12,7 @@ import SquaresTab from "./squaresTab/SquaresTab";
 import {selectAvailableCollectionItems, selectGameItems} from "../../../redux/reducers/collections/CollectionsReducer";
 import TopPanelStores from "../../../common/TopPanelStores/TopPanelStores";
 import Sounds, {soundsType} from "../../../utils/Sounds";
+import FramesTab from './framesTab/FramesTab';
 
 const CollectionsContainer = (props) => {
 
@@ -25,12 +26,17 @@ const CollectionsContainer = (props) => {
     const getTabContext = (tab) =>{
         switch (tab) {
             case 'dices': {
-                return <DicesTab dices={props.gameItems.Dices}
+                return <DicesTab dices={props.gameItems.Dices || []}
                                  activeItems={props.activeItems}
                                  availableItems={props.availableItems}/>
             }
             case 'squares': {
-                return <SquaresTab squares={props.gameItems.SquaresGame}
+                return <SquaresTab squares={props.gameItems.SquaresGame || []}
+                                   activeItems={props.activeItems}
+                                   availableItems={props.availableItems}/>
+            }
+            case 'frames': {
+                return <FramesTab  frames={props.gameItems.Frames || []}
                                    activeItems={props.activeItems}
                                    availableItems={props.availableItems}/>
             }

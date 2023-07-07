@@ -5,6 +5,7 @@ import {setLeftTimeShowAd} from "../../../redux/reducers/AD/AdvertisingReducer";
 import {setIsFinishedGift} from "../../../redux/reducers/gifts/GiftsReducer";
 import {setSoundInfo} from "../../../redux/reducers/language/LanguageReducer";
 import {isProduction} from "../../../utils/utils";
+import constants from "../../../constants/constants";
 
 export default class S_LOGIN_SUCCESS {
     constructor(data){
@@ -27,8 +28,8 @@ export default class S_LOGIN_SUCCESS {
         store.dispatch(setSoundInfo(this.data.user.isSoundOn))
         store.dispatch(setIsFinishedGift({isFinishGiftType: 'isFinishedSevenDayGifts', finishData: this.data.user.isSevenDaysGiftsFinished}))
         store.dispatch(setLeftTimeShowAd(this.data.user.giftWatchedTime))
-        store.dispatch(setActiveItems(this.data.user.activeItems || {dice: 1, square: 1000}))
-        store.dispatch(addAvailableCollectionItems(this.data.user.availableCollectionItems || {dice: [13], square: [14],gameBackgrounds:[1]}))
+        store.dispatch(setActiveItems(this.data.user.activeItems || constants.defaultActiveItems))
+        store.dispatch(addAvailableCollectionItems(this.data.user.availableCollectionItems ||  constants.defaultAvailableCollectionItems))
     }
 
 	getLogText() {

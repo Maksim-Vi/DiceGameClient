@@ -18,6 +18,11 @@ const TabsCollection = (props) => {
                        onPress={() => props.handelActiveTab('squares')}>
                 <Text setShadow={true}>{props.squares}</Text>
             </TabButton>
+            <TabButton tabName={'frames'}
+                       activeTab={props.activeTab}
+                       onPress={() => props.handelActiveTab('frames')}>
+                <Text setShadow={true}>frames</Text>
+            </TabButton>
         </Tabs>
     );
 }
@@ -34,7 +39,7 @@ const Tabs = styled.View`
 const TabButton = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
-  width: 45%;
+  width: 30%;
   height: 80%;
   border-radius: 10px;
   ${(props)=>{

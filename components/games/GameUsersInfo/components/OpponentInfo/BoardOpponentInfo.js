@@ -51,7 +51,7 @@ const BoardOpponentInfo = (props) => {
                   center>
                 {props.opponent.username || ''}
             </Name>
-            <Avatar width={width / 5} height={80} avatarId={props.opponent ? props.opponent.avatar : 0} avatarFrame={true}/>
+            <Avatar width={width / 5} height={80} user={props.opponent} avatarId={props.opponent ? props.opponent.avatar : 0} avatarFrame={true}/>
 
             <CountContainer width={width} color={getColorScoresByCount()}>
                 <Text large blod color={'#fff'} center>{props.countScores ? props.countScores.scoresOpponent : 0}</Text>

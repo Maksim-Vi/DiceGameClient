@@ -71,11 +71,11 @@ export const getIosModel = () => {
 export const getCollectionDiceImg = (item, id) => {
     try {
         if (+id) {
-            if(images.dices[+id]){
-                return images.dices[+id]
-            } else if (item.image && item.image !== '') {
+            if (item.image && item.image !== '') {
                 return {uri: item.image}
-            }
+            } else if(images.dices[+id]){
+                return images.dices[+id]
+            } 
 
             return images.dices['default']
         }
@@ -88,11 +88,11 @@ export const getCollectionDiceImg = (item, id) => {
 export const getCollectionSquareImg = (item, id) => {
     try {
         if (+id) {
-            if(images.squares[+id]){
-                return images.squares[+id]
-            } else if (item.image && item.image !== '') {
+            if (item.image && item.image !== '') {
                 return {uri: item.image}
-            }
+            } else if(images.squares[+id]){
+                return images.squares[+id]
+            } 
 
             return images.squares['default']
         }
@@ -100,6 +100,23 @@ export const getCollectionSquareImg = (item, id) => {
     } catch (e) {
         console.error('cannot loaded dice by name, set default')
         return images.squares['default']
+    }
+}
+
+export const getFrameImg = (item, id) => {
+    try {
+        if (+id) {
+            if (item.image && item.image !== '') {
+                return {uri: item.image}
+            } else if(images.frames[+id]){
+                return images.frames[+id]
+            }
+
+            return images.frames[10000]
+        }
+    } catch (e) {
+        console.error('cannot loaded frame by name, set default')
+        return images.frames[10000]
     }
 }
 

@@ -29,7 +29,7 @@ const UserInfo = (props) => {
             <BtnBackground source={bg} resizeMode={'stretch'}>
                 <UserInfoContainer>
                     <AvatarContainer>
-                        <Avatar width={60} height={60} avatarFrame={true} avatarId={avatarId} hendelAvatar={hendelAvatar}/>
+                        <Avatar width={70} height={70} avatarFrame={true} user={user} avatarId={avatarId} hendelAvatar={hendelAvatar}/>
                     </AvatarContainer>
 
                     <AvatarIfoContainer>
@@ -65,13 +65,14 @@ const AvatarIfoContainer = styled.View`
   justify-content: center;
   width: 55%;
   margin-left: 5px;
+  margin-top: 5px;
 `
 const AvatarContainer = styled.View`
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  margin-top: 10px;
+  margin-top: 5px;
   width: 50px;
   height: 50px;
 `

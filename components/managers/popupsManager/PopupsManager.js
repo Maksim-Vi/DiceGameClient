@@ -42,6 +42,12 @@ const PopupsManager = (props) => {
         }
     }
 
+    const renderEveryDaysGift = () =>{
+        if(props.everyDaysPopup.visible && isAppScreen(props) && !isRestoreGame && !props.tutorialPopup.visible){
+            return <EveryDaysGift />
+        }
+    }
+
     const checkActiveManager = () =>{
         return props.deleteAccountPopup.visible ||
                (isAppScreen(props) && props.lvlUpPopup.visible) ||
@@ -84,7 +90,7 @@ const PopupsManager = (props) => {
             {props.lvlUpPopup.visible && isAppScreen(props) && <LevelUpPopup/> }
             {props.tutorialPopup.visible && isAppScreen(props) && <TutorialPopup /> }
             { renderSevenDays() }
-            {props.everyDaysPopup.visible && <EveryDaysGift /> }
+            { renderEveryDaysGift() }
             {props.avatarPopup.visible && <AvatarPopups user={props.user}/> }
             {props.settingsPopup.visible && <SettingsMenuPopups/>}
             {props.infoPopup.visible && <InfoPopups />}

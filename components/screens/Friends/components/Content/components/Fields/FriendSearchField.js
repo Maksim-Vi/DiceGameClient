@@ -12,6 +12,7 @@ import {selectFriendsList, selectInvitationsToFriends} from "../../../../../../r
 import C_DELETE_FRIEND_INVITATION from "../../../../../../protocol/messages/clients/friends/C_DELETE_FRIEND_INVITATION";
 import {selectTranslation} from "../../../../../../redux/reducers/language/LanguageReducer";
 import defaultTranslation from "../../../../../../redux/reducers/language/defaultTranslation";
+import constants from '../../../../../../constants/constants';
 
 const FriendSearchField = (props) => {
 
@@ -41,6 +42,18 @@ const FriendSearchField = (props) => {
         }
     }
 
+    const getUser = () =>{
+     
+      const activeItems = typeof props.item.activeItems === 'string' 
+        ? JSON.parse(props.item.activeItems) 
+        : props.item.activeItems
+
+      return {
+        username: props.item.username || "",
+        activeItems: activeItems || constants.defaultActiveItems
+      }
+    }
+
     return (
         <FriendFieldContainer>
             <ListItemBG source={friend_bg} resizeMode={'stretch'}>
@@ -48,7 +61,7 @@ const FriendSearchField = (props) => {
 
                 <Content>
                     <AvatarContainer>
-                        <Avatar width={70} height={70} avatarFrame={true} avatarId={props.item && props.item.avatar}/>
+                        <Avatar width={70} height={70} avatarFrame={true} user={getUser()} avatarId={props.item && props.item.avatar}/>
                     </AvatarContainer>
 
                     <TextContainer>

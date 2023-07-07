@@ -78,7 +78,7 @@ const FriendsInfoScreen = (props) => {
                 </ProfileTitle>
 
                 <ProfileAvatarInfo>
-                    <Avatar width={100} height={100} avatarFrame={true} avatarId={props.route.params.avatar} />
+                    <Avatar width={100} height={100} user={props.route.params} avatarFrame={true} avatarId={props.route.params.avatar} />
                     <UserName setShadow={true} large blod center>{props.route.params.username}</UserName>
                 </ProfileAvatarInfo>
 

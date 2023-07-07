@@ -11,6 +11,7 @@ import C_DECLINE_FRIEND_INVITATION
 import {selectTranslation} from "../../../../../../redux/reducers/language/LanguageReducer";
 import defaultTranslation from "../../../../../../redux/reducers/language/defaultTranslation";
 import {connect} from "react-redux";
+import constants from '../../../../../../constants/constants';
 
 const FriendConfirmField = (props) => {
 
@@ -26,6 +27,18 @@ const FriendConfirmField = (props) => {
         }
     }
 
+    const getUser = () =>{
+    
+      const activeItems = typeof props.item.activeItemsSender === 'string' 
+        ? JSON.parse(props.item.activeItemsSender) 
+        : props.item.activeItemsSender
+
+      return {
+        username: props.item.senderUsername || "",
+        activeItems: activeItems || constants.defaultActiveItems
+      }
+    }
+
     return (
         <FriendFieldContainer>
             <ListItemBG source={friend_bg} resizeMode={'stretch'}>
@@ -33,7 +46,7 @@ const FriendConfirmField = (props) => {
 
                 <Content>
                     <AvatarContainer>
-                        <Avatar width={70} height={70} avatarFrame={true} avatarId={props.item && props.item.avatarSender}/>
+                        <Avatar width={70} height={70} avatarFrame={true} user={getUser()} avatarId={props.item && props.item.avatarSender}/>
                     </AvatarContainer>
 
                     <TextContainer>

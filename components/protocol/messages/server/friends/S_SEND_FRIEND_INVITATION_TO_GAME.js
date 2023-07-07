@@ -28,7 +28,8 @@ export default class S_SEND_FRIEND_INVITATION_TO_GAME {
         store.dispatch(setInvitationPopup({visible: true, data: {
                 gameId: this.gameId,
                 username: this.friendUsername,
-                avatarId: InvitedFriend.avatar || 0
+                avatarId: InvitedFriend.avatar || 0,
+                user: InvitedFriend
         }}))
     }
 

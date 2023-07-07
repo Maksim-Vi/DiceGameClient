@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styled from "styled-components";
 import {Animated, Easing} from "react-native";
 import Avatar from "../../../../common/Avatars/Avatar";
 import {setTimingAnimated} from "../../../../utils/Animation";
 import Text from "../../../../common/Text/Text";
+import constants from '../../../../constants/constants';
 
-const InvitationUserFrame = (props) => {
+const InvitationUserFrame = memo((props) => {
 
     const animatedValue = React.useRef(new Animated.Value(0)).current;
 
@@ -20,6 +21,19 @@ const InvitationUserFrame = (props) => {
     React.useEffect(() => {
         animateStart()
     }, [])
+
+    const getUser = () =>{
+        if(props.user){
+            const activeItems = typeof props.user.activeItems === 'string' 
+            ? JSON.parse(props.user.activeItems) 
+            : props.user.activeItems
+    
+          return {
+            username: props.user.username || "",
+            activeItems: activeItems || constants.defaultActiveItems
+          }
+        }
+    }
 
     return (
         <UserContainer style={{
@@ -36,13 +50,13 @@ const InvitationUserFrame = (props) => {
                 }
             ]
         }}>
-            <Avatar width={80} height={80} avatarId={props.avatar} avatarFrame={true}/>
+            <Avatar width={80} height={80} user={getUser()} avatarId={props.avatar} avatarFrame={true}/>
             <NameContainer>
                 <Text setShadow={true} large blod center>{props.username}</Text>
             </NameContainer>
         </UserContainer>
     );
-};
+})
 
 const UserContainer = styled(Animated.View)`
   display: flex;

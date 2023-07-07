@@ -15,6 +15,7 @@ import {selectTranslation} from "../../../../../../redux/reducers/language/Langu
 import defaultTranslation from "../../../../../../redux/reducers/language/defaultTranslation";
 import {store} from "../../../../../../redux/redux-store";
 import {setNotEnoughFlashPopup} from "../../../../../../redux/reducers/popups/PopupsReducer";
+import constants from '../../../../../../constants/constants';
 
 const FriendField = (props) => {
 
@@ -44,7 +45,8 @@ const FriendField = (props) => {
         const formatItem = {
             ...props.item,
             experience: typeof props.item.experience === 'string' ? JSON.parse(props.item.experience) : props.item.experience,
-            statistics: typeof props.item.statistics === 'string' ? JSON.parse(props.item.statistics) : props.item.statistics
+            statistics: typeof props.item.statistics === 'string' ? JSON.parse(props.item.statistics) : props.item.statistics,
+            activeItems: typeof props.item.activeItems === 'string' ? JSON.parse(props.item.activeItems) : props.item.activeItems,
         }
         transitionState('FriendsInfoScreen', formatItem)
     }
@@ -58,6 +60,17 @@ const FriendField = (props) => {
         }
     }
 
+    const getUser = () =>{
+        const activeItems = typeof props.item.activeItems === 'string' 
+        ? JSON.parse(props.item.activeItems) 
+        : props.item.activeItems
+
+        return {
+          username: props.item.username || "",
+          activeItems: activeItems || constants.defaultActiveItems
+        }
+      }
+
     return (
         <TouchableWithoutFeedback style={{flex: 1}} onPress={openFriendInfo} accessible={false}>
             <FriendFieldContainer>
@@ -66,7 +79,7 @@ const FriendField = (props) => {
 
                         <Content>
                             <AvatarContainer>
-                                <Avatar width={70} height={70} avatarFrame={true} avatarId={props.item && props.item.avatar}/>
+                                <Avatar width={70} height={70} avatarFrame={true} user={getUser()} avatarId={props.item && props.item.avatar}/>
                             </AvatarContainer>
 
                             <TextContainer>

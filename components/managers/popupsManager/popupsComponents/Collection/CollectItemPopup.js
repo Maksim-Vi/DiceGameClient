@@ -9,7 +9,7 @@ import speans from '../../../../../assets/animation/speans.png'
 import sunRaye from '../../../../../assets/animation/sun-rays2.png'
 import {Animated, Easing, useWindowDimensions} from "react-native";
 import {setTimingAnimated} from "../../../../utils/Animation";
-import {getCollectionDiceImg, getCollectionSquareImg} from "../../../../utils/utils";
+import {getCollectionDiceImg, getCollectionSquareImg, getFrameImg} from "../../../../utils/utils";
 import AnimatedLottieView from "lottie-react-native";
 import Anim from "../../../../../assets/animation/lottieAnim/gold-stars-v2.json";
 import Sounds, {soundsType} from "../../../../utils/Sounds";
@@ -66,6 +66,8 @@ const CollectItemPopup = props => {
         let imgItem = null
         if(props.data.type === 'dices'){
             imgItem = getCollectionDiceImg(props.data, props.data.id)
+        } else if(props.data.type === 'frames'){
+            imgItem = getFrameImg(props.data, props.data.id)
         } else {
             imgItem = getCollectionSquareImg(props.data, props.data.id)
         }

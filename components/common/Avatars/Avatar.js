@@ -3,8 +3,14 @@ import {getAvatarById} from "../TopPanel/utils";
 import styled from "styled-components";
 import Sounds, {soundsType} from "../../utils/Sounds";
 import frame from "../../../assets/avatars/normal.png";
+import { useSelector } from 'react-redux';
+import { selectActiveItems, selectMyUser } from '../../redux/reducers/players/PlayersReducer';
+import images from '../../../assets/dynamicLoadImage';
 
 const Avatar = (props) => {
+
+  const myUser = useSelector(selectMyUser)
+  const activeItems = useSelector(selectActiveItems)
 
   const onHandlerAvatar = () =>{
     if(props.hendelAvatar){
@@ -13,9 +19,25 @@ const Avatar = (props) => {
     }
   }
 
+  const getAvatarFrame = () =>{
+    if(myUser && props.user && myUser.username === props.user.username){
+      const img =  images.frames[+activeItems.frame]
+
+      if(img) return img
+    } else if(myUser && props.user && myUser.username !== props.user.username){
+      if(props.user.activeItems){
+        const img =  images.frames[+props.user.activeItems.frame]
+
+        if(img) return img
+      }
+    }
+
+    return frame
+  }
+
   const AvatarFrame = () =>{
       return <Frame>
-          <AvatarFrameContainer source={frame} resizeMode="contain"></AvatarFrameContainer>
+          <AvatarFrameContainer source={getAvatarFrame()} resizeMode="contain"></AvatarFrameContainer>
           <AvatarFrameImg avatarId={+props.avatarId} source={getAvatarById(+props.avatarId)} resizeMode={'contain'} />
       </Frame>
   }
@@ -35,7 +57,6 @@ const Avatar = (props) => {
 
 const AvatarContainer = styled.View`
   position: relative;
-  //border: 2px solid rgba(255, 255, 255, 0.7);
   border-radius: 10px;
   ${props => props.width ? `${props.width}px` : '50px'};
   ${props => props.height ? `${props.height}px` : '50px'};

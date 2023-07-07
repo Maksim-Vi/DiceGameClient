@@ -10,7 +10,7 @@ import C_BUY_GAME_ITEM from "../../../protocol/messages/clients/collections/C_BU
 import {selectUserCoins, selectUserCrystals} from "../../../redux/reducers/players/PlayersReducer";
 import {store} from "../../../redux/redux-store";
 import {setPaymentBuyRealMoney} from "../../../utils/PaymentHelper";
-import {delay, getCollectionDiceImg, getCollectionSquareImg} from "../../../utils/utils";
+import {delay, getCollectionDiceImg, getCollectionSquareImg, getFrameImg} from "../../../utils/utils";
 import {selectTranslation} from "../../../redux/reducers/language/LanguageReducer";
 import defaultTranslation from "../../../redux/reducers/language/defaultTranslation";
 import {connect, useDispatch} from "react-redux";
@@ -177,6 +177,8 @@ const ModalChildrenBuy = (props) => {
         if(props.openItem){
             if(props.type === 'Dices'){
                 return getCollectionDiceImg(props.openItem, props.openItem.sortIndex)
+            } else if(props.type === 'Frames'){
+                return getFrameImg(props.openItem, props.openItem.id)
             }
 
             return getCollectionSquareImg(props.openItem, props.openItem.sortIndex)
