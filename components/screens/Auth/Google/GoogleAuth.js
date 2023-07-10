@@ -58,7 +58,7 @@ const GoogleAuth = (props) => {
     }, [response]);
 
 
-    return <GoogleBtn disabled={!request || disableBtn} onPress={handlerGoogle}><Text small heavy color='#000' center>Google login</Text></GoogleBtn>
+    return <GoogleBtn style={{borderBottomWidth: 3}} disabled={!request || disableBtn} onPress={handlerGoogle}><Text small heavy color='#000' center>Google login</Text></GoogleBtn>
 }
 
 const GoogleBtn = styled.TouchableOpacity`
@@ -68,7 +68,7 @@ const GoogleBtn = styled.TouchableOpacity`
   border-radius: 10px;
   border: 1px solid #000;
   width: 80%;
-  height: 40px;
+  height: 50px;
   margin-top: 10px;
   margin-bottom: 10px;
   ${props=>{

@@ -12,7 +12,7 @@ import { selectTranslation } from "../../../../../../redux/reducers/language/Lan
 import defaultTranslation from "../../../../../../redux/reducers/language/defaultTranslation";
 import { useSelector } from "react-redux";
 
-const WinRewardItem = ({everyDaysGiftsResult}) => {
+const WinRewardItem = ({everyDaysGiftsResult, isLoaded, isClosed, show}) => {
  
   const congratulate = useSelector(state => selectTranslation(state, defaultTranslation.TR_CONGRATULATE));
 
@@ -93,7 +93,7 @@ const WinRewardItem = ({everyDaysGiftsResult}) => {
         </CoinsContainer>
        
         <ButtonContainer>
-          {isAnimFinished && <ButtonsEveryDaysGift everyDaysGiftsResult={everyDaysGiftsResult}/>}
+          {isAnimFinished && <ButtonsEveryDaysGift everyDaysGiftsResult={everyDaysGiftsResult} isLoaded={isLoaded} isClosed={isClosed} show={show}/>}
         </ButtonContainer>
 
         {isAnimFinished && 

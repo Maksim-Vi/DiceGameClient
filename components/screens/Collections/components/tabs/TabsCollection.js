@@ -11,17 +11,17 @@ const TabsCollection = (props) => {
             <TabButton tabName={'dices'}
                        activeTab={props.activeTab}
                        onPress={() => props.handelActiveTab('dices')}>
-                <Text setShadow={true}>{props.dices}</Text>
+                <Text setShadow={true} center>{props.dices}</Text>
             </TabButton>
             <TabButton tabName={'squares'}
                        activeTab={props.activeTab}
                        onPress={() => props.handelActiveTab('squares')}>
-                <Text setShadow={true}>{props.squares}</Text>
+                <Text setShadow={true} center>{props.squares}</Text>
             </TabButton>
             <TabButton tabName={'frames'}
                        activeTab={props.activeTab}
                        onPress={() => props.handelActiveTab('frames')}>
-                <Text setShadow={true}>frames</Text>
+                <Text setShadow={true} numberOfLines={1} center>{props.frames}</Text>
             </TabButton>
         </Tabs>
     );
@@ -39,7 +39,7 @@ const Tabs = styled.View`
 const TabButton = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
-  width: 30%;
+  width: 33%;
   height: 80%;
   border-radius: 10px;
   ${(props)=>{
@@ -54,6 +54,7 @@ const TabButton = styled.TouchableOpacity`
 const mapStateToProps = (state) => ({
     dices: selectTranslation(state,defaultTranslation.TR_DICES),
     squares: selectTranslation(state,defaultTranslation.TR_SQUARES),
+    frames: selectTranslation(state,defaultTranslation.TR_FRAMES),
 })
 
 export default connect(mapStateToProps)(TabsCollection);

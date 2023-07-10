@@ -99,11 +99,11 @@ const AuthScreen = () => {
                     <Logo />
                     <LoginScreen control={control} errors={errors}/>
                     <ButtonContainer>
-                        <LoginBtn disabled={disableBtn} onPress={handleSubmit(handlerLogin)}>
+                        <LoginBtn disabled={disableBtn} style={{borderBottomWidth: 3}} onPress={handleSubmit(handlerLogin)}>
                             <Text setShadow={true} small heavy color='#fff' center>Login</Text>
                         </LoginBtn>
                         <Divider text={'or'} padding={10} color={'black'}/>
-                        <RegisterBtn onPress={handlerRegister}>
+                        <RegisterBtn style={{borderBottomWidth: 3}} onPress={handlerRegister}>
                             <Text setShadow={true} small heavy color='#fff' center>Register</Text>
                         </RegisterBtn>
                         <GoogleAuth />
@@ -144,7 +144,7 @@ const LoginBtn = styled.TouchableOpacity`
   border-radius: 10px;
   border: 1px solid #000;
   width: 80%;
-  height: 40px;
+  height: 50px;
   ${props => {
     if (props.disabled) {
       return `
@@ -160,7 +160,7 @@ const RegisterBtn = styled.TouchableOpacity`
   border-radius: 10px;
   border: 1px solid #000;
   width: 80%;
-  height: 40px;
+  height: 50px;
 `
 
 const TextPlatform = styled(TextWithoutShadow)`

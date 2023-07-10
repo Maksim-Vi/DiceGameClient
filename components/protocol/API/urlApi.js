@@ -3,8 +3,8 @@ import { selectToken } from "../../redux/reducers/login/LoginReducer";
 import { store } from "../../redux/redux-store";
 
 export const getUrl = () =>{
-    //const inProduction = process.env.APP_TYPE !== 'development' ? true : false;
-    const inProduction = false;
+    const inProduction = process.env.APP_TYPE !== 'development' ? true : false;
+    //const inProduction = false;
 
     const port = 3000
 

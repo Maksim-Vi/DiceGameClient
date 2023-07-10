@@ -7,6 +7,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {transitionState} from "./utils";
 import {setClientIdWebsocket} from "../redux/reducers/Websocket/WebsocketReducer";
 import {setSoundInfo} from "../redux/reducers/language/LanguageReducer";
+import NetInfo from '@react-native-community/netinfo';
+import { log } from "react-native-reanimated";
+import { setInfoPopup } from "../redux/reducers/popups/PopupsReducer";
 
 export const UserContext = createContext({token: '', id: '', username: '', password: '', sound: true, data: null, auth: false});
 const storageName = 'UserData'
@@ -56,16 +59,33 @@ const UserProvider = ({children}) => {
         transitionState('App')
     }, [])
 
-    const logout = useCallback(async () => {
-        setUser({token: '', id: '', username: '', password: '', sound: user.sound, data: null, auth: false});
-        await AsyncStorage.setItem(storageName, '')
-        store.dispatch(setLogout())
-        store.dispatch(setClientIdWebsocket(null))
-        transitionState('AuthScreen')
+    const getInternetConnection = async () => {
+        let isConnected = false;
+
+        isConnected = await NetInfo.fetch().then(state => {
+            return state.isConnected
+        });
+
+        return isConnected
+    }
+
+    const logout = useCallback(async (isSerwerWorker = false) => {
+        if(!isSerwerWorker){
+            setUser({token: '', id: '', username: '', password: '', sound: user.sound, data: null, auth: false});
+            await AsyncStorage.setItem(storageName, '')
+            store.dispatch(setLogout())
+            store.dispatch(setClientIdWebsocket(null))
+            transitionState('AuthScreen')
+        } else {
+            store.dispatch(setClientIdWebsocket(null))
+            transitionState('AuthScreen')
+        }
     })
 
     const getDataFromStorage = async () => {
         const sound = await AsyncStorage.getItem(storageName)
+        const isInternetConnection = await getInternetConnection()
+
         if(sound){
             const soundParse = JSON.parse(sound)
             if(soundParse){
@@ -75,6 +95,14 @@ const UserProvider = ({children}) => {
         }
 
         const value = await AsyncStorage.getItem(storageName)
+
+        if(value && !isInternetConnection) {
+            store.dispatch(setClientIdWebsocket(null))
+            transitionState('AuthScreen')
+
+            return store.dispatch(setInfoPopup({visible: true, data: {text: 'Oops, Sorry, your internet connection is unstable! Please check your internet and try load the game again. We will wait for you!'}}))
+        }
+            
         if(value){
             const data = JSON.parse(value)
 

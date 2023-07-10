@@ -88,7 +88,6 @@ const FreeGift = (props) => {
         
             Sounds.loadAndPlayFile(soundsType.moneyDrop)
             setLottieAnim(true)
-            store.dispatch(setLeftTimeShowAd(Date.now() + 30))
         }
 
         if(!isLoaded) load()

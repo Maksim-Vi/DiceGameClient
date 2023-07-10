@@ -20,8 +20,9 @@ let reconnectFailedCount = 0;
 let reconnectFailed = false;
 
 const getWSUrl = () =>{
-    //const inProduction = process.env.APP_TYPE !== 'development' ? true : false;
-    const inProduction = false;
+    const inProduction = process.env.APP_TYPE !== 'development' ? true : false;
+    //const inProduction = false;
+   
     const port = 3000
 
     const protocol = inProduction ? 'wss' : 'ws';

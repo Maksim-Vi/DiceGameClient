@@ -20,7 +20,9 @@ export default class S_LOGIN_FAILED {
 
     exec() {
         store.dispatch(closeAllPopupsPopup(false))
-        store.logout()
+        
+        store.logout(this.data.message && this.data.message.isServerWorks ? this.data.message.isServerWorks : false)
+
         delay(1000).then(()=>{
             store.dispatch(setInfoPopup({visible: true, data: {text: this.data.error}}))
         })

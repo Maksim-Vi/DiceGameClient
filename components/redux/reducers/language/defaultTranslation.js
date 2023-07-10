@@ -188,6 +188,7 @@ export default {
     TR_ROAD_WILL_START_TITLE: "TR_ROAD_WILL_START_TITLE", // Road will start soon!
     TR_ROAD_WILL_START_TEXT:"TR_ROAD_WILL_START_TEXT", // play, get missions and collect your rewards!
 
-    TR_TITLE_EVERY_DAY_GIFT: "TR_TITLE_EVERY_DAY_GIFT"
+    TR_TITLE_EVERY_DAY_GIFT: "TR_TITLE_EVERY_DAY_GIFT",
+    TR_FRAMES: "TR_FRAMES"
 
 }

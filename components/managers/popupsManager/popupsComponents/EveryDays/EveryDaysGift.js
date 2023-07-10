@@ -1,35 +1,30 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useState } from "react";
 import styled from "styled-components";
 import Text from "../../../../common/Text/Text";
-import { setEveryDaysGiftPopup } from "../../../../redux/reducers/popups/PopupsReducer";
-import { useDispatch, useSelector } from "react-redux";
+import { connect } from "react-redux";
 import ModalWrapper from "../../../../common/ModalWindows/ModalWrapper";
-import { transitionState } from "../../../../utils/utils";
 import EveryDayCard from "./components/Card/EveryDayCard";
-import { selectEveryDaysGifts, selectSevenDaysGiftsResult } from "../../../../redux/reducers/gifts/GiftsReducer";
+import {
+  selectEveryDaysGifts,
+  selectSevenDaysGiftsResult,
+} from "../../../../redux/reducers/gifts/GiftsReducer";
 import C_CLAIM_EVERY_DAY_GIFT from "../../../../protocol/messages/clients/gifts/C_CLAIM_EVERY_DAY_GIFT";
 import WinReward from "./components/WinReward/WinReward";
-import { selectTranslation } from "../../../../redux/reducers/language/LanguageReducer";
+import {
+  selectDefaultParams,
+  selectTranslation,
+} from "../../../../redux/reducers/language/LanguageReducer";
 import defaultTranslation from "../../../../redux/reducers/language/defaultTranslation";
+import defaultParams from "../../../../redux/reducers/language/defaultParams";
+import { selectMyUser } from "../../../../redux/reducers/players/PlayersReducer";
 
-const EveryDaysGift = () => {
-
-
-  const dispatch = useDispatch();
-  const evertDaysGift = useSelector(selectEveryDaysGifts);
-  const everyDaysGiftsResult = useSelector(selectSevenDaysGiftsResult);
-  const everyDayTitle = useSelector(state => selectTranslation(state, defaultTranslation.TR_TITLE_EVERY_DAY_GIFT));
+const EveryDaysGift = memo((props) => {
 
   const [selectedCard, setSelectedCard] = useState(null);
 
-  const leaveGift = () => {
-    transitionState("MainScreen");
-    dispatch(setEveryDaysGiftPopup({ visible: false, data: null }));
-  };
-
   const onClickCard = (index) => {
     setSelectedCard(index);
-    new C_CLAIM_EVERY_DAY_GIFT()
+    new C_CLAIM_EVERY_DAY_GIFT();
   };
 
   return (
@@ -38,15 +33,15 @@ const EveryDaysGift = () => {
         {!selectedCard && (
           <TitleContainer>
             <EveryDaysTitle setShadow={true} fontSize={28} blod center>
-               {everyDayTitle}
+              {props.everyDayTitle}
             </EveryDaysTitle>
           </TitleContainer>
         )}
 
         {!selectedCard && (
           <CardsContainer selectedCard={selectedCard}>
-            {evertDaysGift.length > 0 &&
-              evertDaysGift.map((item, index) => {
+            {props.evertDaysGift.length > 0 &&
+              props.evertDaysGift.map((item, index) => {
                 if (item) {
                   return (
                     <EveryDayCard
@@ -61,11 +56,19 @@ const EveryDaysGift = () => {
           </CardsContainer>
         )}
 
-        {selectedCard && everyDaysGiftsResult && <WinReward everyDaysGiftsResult={everyDaysGiftsResult}/>}
+        {selectedCard && props.everyDaysGiftsResult && (
+          <WinReward
+            everyDaysGiftsResult={props.everyDaysGiftsResult}
+            ENABLE_AD_PROD={props.ENABLE_AD_PROD}
+            ENABLE_AD_IOS_PROD={props.ENABLE_AD_IOS_PROD}
+            ENABLE_AD_ANDROID_PROD={props.ENABLE_AD_ANDROID_PROD}
+            user={props.user}
+          />
+        )}
       </EveryDaysContainer>
     </ModalWrapper>
   );
-};
+})
 
 const EveryDaysContainer = styled.View`
   display: flex;
@@ -90,4 +93,14 @@ const TitleContainer = styled.View`
 `;
 const EveryDaysTitle = styled(Text)``;
 
-export default EveryDaysGift;
+const mapStateToProps = (state) => ({
+  user: selectMyUser(state),
+  evertDaysGift: selectEveryDaysGifts(state),
+  everyDaysGiftsResult: selectSevenDaysGiftsResult(state),
+  everyDayTitle: selectTranslation(state, defaultTranslation.TR_TITLE_EVERY_DAY_GIFT),
+  ENABLE_AD_PROD: selectDefaultParams(state, defaultParams.ENABLE_AD_PROD),
+  ENABLE_AD_ANDROID_PROD: selectDefaultParams(state, defaultParams.ENABLE_AD_ANDROID_PROD),
+  ENABLE_AD_IOS_PROD: selectDefaultParams( state, defaultParams.ENABLE_AD_IOS_PROD),
+});
+
+export default connect(mapStateToProps)(EveryDaysGift);
