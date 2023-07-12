@@ -17,6 +17,7 @@ import Sounds, {soundsType} from "../../utils/Sounds";
 import Logo from "../../common/Logo/Logo";
 import TextWithoutShadow from "../../common/Text/TextWithoutShadow";
 import { AdsConsent, AdsConsentDebugGeography, AdsConsentStatus } from 'react-native-google-mobile-ads';
+import { isProduction } from '../../utils/utils'
 
 const AuthScreen = () => {
 
@@ -25,8 +26,8 @@ const AuthScreen = () => {
     const [disableBtn, setDisableBtn] = useState(false)
     const {control, handleSubmit, formState: {errors}} = useForm({
         defaultValues: {
-            name: '',
-            password: ''
+            name: 'Max',
+            password: 'qwerty'
         }
     });
 
@@ -58,10 +59,7 @@ const AuthScreen = () => {
     }
 
     const getDevType = () =>{
-       //console.log('ANSWER', process.env.APP_TYPE)
-       return process.env.APP_TYPE === 'development'
-           ? process.env.APP_TYPE + ':game version:'
-           : 'game version:'
+       return isProduction() ? 'game version:' : 'development game version:'
     }
 
     const getVersion = () =>{

@@ -19,7 +19,7 @@ const MenuPanel = (props) => {
     return (
         <BackgroundButtons bgButton={bg}>
             <BtnContainer onPress={openSettingsPopup} activeOpacity={0.9}>
-                <PriceImage {...props} source={settings}/>
+                <PriceImage {...props} source={settings} resizeMode='contain'/>
             </BtnContainer>
         </BackgroundButtons>
     )
@@ -31,7 +31,7 @@ const BtnContainer = styled.TouchableOpacity`
 `
 
 const PriceImage = styled.Image`
-  width: 45px;
-  height: 45px;
+  width: 35px;
+  height: 35px;
 `
 export default MenuPanel;

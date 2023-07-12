@@ -228,6 +228,58 @@ export const setNewAvatar = async (username, avatarId) =>{
     return await getFetchUrl('setNewAvatar','POST', {username: username, avatarId: avatarId}, refreshToken, callback)
 }
 
+export const getNews = async (userId) =>{
+
+    const refreshToken = (request, type, bodyData) =>{
+        if(request && type){
+            getRefreshToken()
+            getText()
+        }   
+    }
+
+    const callback = (json) =>{
+    }
+
+    return await getFetchUrl(`news/get-for-user/${userId}`,'GET', null, refreshToken, callback)
+}
+
+export const openItemNews = async (idNews, userId) =>{
+
+    const refreshToken = (request, type, bodyData) =>{
+        if(request && type){
+            getRefreshToken()
+            getText()
+        }
+    }
+
+    const callback = (json) =>{
+    }
+
+    return await getFetchUrl(`news/${idNews}/user/${userId}`,'GET', null, refreshToken, callback)
+}
+
+export const claimNewsGift = async (idNews, userId, giftType, reward) =>{
+
+    const data = {
+        newsId: idNews,
+        userId : userId,
+        giftType: giftType,
+        reward: reward
+    }
+    const refreshToken = (request, type, bodyData) =>{
+        if(request && type){
+            getRefreshToken()
+            getText()
+        }
+    }
+
+    const callback = (json) =>{
+    }
+
+    return await getFetchUrl(`news/get-news-gift`,'POST', data, refreshToken, callback)
+}
+
+
 export const getText = async () =>{
 
     const refreshToken = (request, type, bodyData) =>{

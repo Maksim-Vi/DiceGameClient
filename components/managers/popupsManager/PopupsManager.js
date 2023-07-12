@@ -22,13 +22,13 @@ import TutorialPopup from "./popupsComponents/Tutorial/TutorialPopup";
 import InvitationPopup from "./popupsComponents/Invitation/InvitationPopup";
 import ADFlashPopup from "./popupsComponents/ADPopups/ADFlashPopup";
 import NotEnoughFlashPopup from "./popupsComponents/NotEnoughFlashPopup";
-import {isAppScreen, updateManager} from "./utils";
+import {checkActiveManager, isAppScreen, updateManager} from "./utils";
 import CollectionBuyItemPopup from "./popupsComponents/Collection/CollectionBuyItemPopup";
 import CoinsInfoPopups from "./popupsComponents/TopPanelInfo/CoinsInfoPopup";
 import DiamondInfoPopups from "./popupsComponents/TopPanelInfo/DiamondInfoPopup";
 import FlashInfoPopups from "./popupsComponents/TopPanelInfo/FlashInfoPopup";
-import {selectDiamondsInfoPopup} from "../../redux/reducers/popups/PopupsReducer";
 import EveryDaysGift from './popupsComponents/EveryDays/EveryDaysGift'
+import FreeGifts from "./popupsComponents/FreeGifts/FreeGifts";
 
 const PopupsManager = (props) => {
 
@@ -48,32 +48,8 @@ const PopupsManager = (props) => {
         }
     }
 
-    const checkActiveManager = () =>{
-        return props.deleteAccountPopup.visible ||
-               (isAppScreen(props) && props.lvlUpPopup.visible) ||
-               (isAppScreen(props) && props.tutorialPopup.visible) ||
-               (isAppScreen(props) && props.sevenDaysPopup.visible) ||
-               (isAppScreen(props) && props.everyDaysPopup.visible) ||
-               props.avatarPopup.visible ||
-               props.settingsPopup.visible ||
-               props.infoPopup.visible ||
-               props.googleConfirmUsernamePopup.visible ||
-               props.lostConnOpponentPopup.visible ||
-               props.collectItemPopup.visible ||
-               props.collectBuyItemPopup.visible ||
-               props.botGameTypesPopup.visible ||
-               props.rewardsPopup.visible ||
-               props.invitationPopup.visible ||
-               props.adFlashPopup.visible ||
-               props.notEnoughFlashPopup.visible ||
-               props.testBtnsPopup.visible ||
-               props.coinsInfoPopup.visible ||
-               props.diamondsInfoPopup.visible ||
-               props.flashInfoPopup.visible
-    }
-
     useEffect(()=>{
-        if(checkActiveManager()){
+        if(checkActiveManager(props)){
             setActiveManager(true)
         } else {
             setActiveManager(false)
@@ -104,10 +80,12 @@ const PopupsManager = (props) => {
             {props.adFlashPopup.visible && <ADFlashPopup />}
             {props.notEnoughFlashPopup.visible && <NotEnoughFlashPopup />}
             {props.testBtnsPopup.visible && <TestBtnsPopups />}
+            {props.freeGiftsPopup.visible && <FreeGifts />}
 
             {props.coinsInfoPopup.visible && <CoinsInfoPopups />}
             {props.diamondsInfoPopup.visible && <DiamondInfoPopups />}
             {props.flashInfoPopup.visible && <FlashInfoPopups />}
+
         </PopupConteiner>
     )
 }
@@ -144,6 +122,7 @@ const mapStateToProps = (state) => ({
     invitationPopup: popups.selectInvitationPopup(state),
     adFlashPopup: popups.selectADFlashPopup(state),
     notEnoughFlashPopup: popups.selectNotEnoughFlashPopup(state),
+    freeGiftsPopup: popups.selectFreeGiftsPopup(state),
 
     coinsInfoPopup: popups.selectCoinsInfoPopup(state),
     diamondsInfoPopup: popups.selectDiamondsInfoPopup(state),

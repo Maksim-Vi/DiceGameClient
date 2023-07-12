@@ -9,7 +9,22 @@ import moment from 'moment'
 
 export const isProduction = () => {
     //return process.env.APP_TYPE === 'production'
-    return true
+    return false
+}
+
+export const getUrlRequest = () =>{
+
+    const apiDomain = isProduction() ? process.env.APP_PROD_URL : 'localhost'
+
+    const port = 3000
+
+    const protocol = isProduction() ? 'https' : 'http';
+
+    if(Platform.OS === 'android'){
+        return isProduction() ? `${protocol}://${apiDomain}/` : `${protocol}://10.0.2.2:${port}/`
+    } else {
+        return isProduction() ? `${protocol}://${apiDomain}/` : `${protocol}://localhost:${port}/`
+    }
 }
 
 export const transitionState = (tab, data = {}) => {
@@ -251,4 +266,11 @@ export const getRadiusPosition = (count, r, cx, cy) =>{
         }
     }
     return sectors;
+}
+
+export const uuidv4 = () => {
+    return 'xxx-4xxx'.replace(/[xy]/g, function(c) {
+        var r = Math.random()*8|0, v = c == 'x' ? r : (r&0x3|0x8);
+        return v.toString(8);
+    });
 }

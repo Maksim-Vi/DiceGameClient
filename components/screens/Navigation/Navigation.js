@@ -1,5 +1,5 @@
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
-import {createStackNavigator, HeaderStyleInterpolators} from "@react-navigation/stack";
+import {createStackNavigator} from "@react-navigation/stack";
 import {screenOptions, tabsScreenOptions} from "../../constants/options";
 import CollectionsScreen from "../Collections/CollectionsScreen";
 import GameScreen from "../Game/GameScreen";
@@ -23,6 +23,8 @@ import defaultParams from "../../redux/reducers/language/defaultParams";
 import ShopScreen from "../Shop/ShopScreen";
 import FriendsInfoScreen from "../UserInfo/FriendsInfoScreen";
 import LoadingInvitationGameScreen from "../LoadingGameScreen/LoadingInvitationGameScreen";
+import NewsScreen from "../News/NewsScreen";
+import NewsItemScreen from "../News/NewsItemScreen";
 
 const options = {
     presentation: 'transparentModal'
@@ -72,6 +74,8 @@ export default function Navigator() {
             <AppStack.Screen options={options} name="FriendsScreen" component={FriendsScreen}/>
             <AppStack.Screen options={options} name="UserInfoScreen" component={UserInfoScreen}/>
             <AppStack.Screen options={options} name="FriendsInfoScreen" component={FriendsInfoScreen}/>
+            <AppStack.Screen options={options} name="NewsScreen" component={NewsScreen}/>
+            <AppStack.Screen options={options} name="NewsItemScreen" component={NewsItemScreen}/>
         </AppStack.Navigator>
     );
 }

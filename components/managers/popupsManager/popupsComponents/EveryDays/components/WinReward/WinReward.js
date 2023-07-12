@@ -4,7 +4,7 @@ import card from "../../../../../../../assets/Gifts/EveryDatsGiftCard.png";
 import { setTimingAnimated } from "../../../../../../utils/Animation";
 import { Animated, Easing, Platform } from "react-native";
 import WinRewardItem from "./WinRewardItem";
-import { useRewardedInterstitialAd } from "react-native-google-mobile-ads";
+import { TestIds, useRewardedInterstitialAd } from "react-native-google-mobile-ads";
 
 const WinReward = memo(function ({
   everyDaysGiftsResult,

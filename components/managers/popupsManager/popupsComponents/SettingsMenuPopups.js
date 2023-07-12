@@ -9,7 +9,7 @@ import * as NavigationBar from "expo-navigation-bar";
 
 const margin = 50
 const marginButtons = 30
-const countBtns = 7
+const countBtns = 8
 const countTabsHeight = (countBtns * (30 + marginButtons)) + margin
 
 const SettingsMenuPopups = () => {
@@ -42,7 +42,7 @@ const SettingsMenuPopups = () => {
         }
     },[visibility])
 
-    return <ModalWrapper modalBG={'default'} width={width - 35} height={countTabsHeight} modalVisible={true} setModalVisible={goBack}>
+    return <ModalWrapper modalBG={'default'} width={width - 35} height={countTabsHeight} modalVisible={true}>
         <Settings closeModal={closeModal}/>
     </ModalWrapper>
 }

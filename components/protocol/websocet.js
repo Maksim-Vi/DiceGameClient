@@ -7,7 +7,7 @@ import {
 } from "../redux/reducers/Websocket/WebsocketReducer";
 import { store } from "../redux/redux-store";
 import { hendleMessage } from "./MessageManager";
-import {transitionState} from "../utils/utils";
+import {isProduction, transitionState} from "../utils/utils";
 import {closeAllPopupsPopup, selectInfoPopup, setInfoPopup} from "../redux/reducers/popups/PopupsReducer";
 
 export let websocket;
@@ -20,8 +20,7 @@ let reconnectFailedCount = 0;
 let reconnectFailed = false;
 
 const getWSUrl = () =>{
-    const inProduction = process.env.APP_TYPE !== 'development' ? true : false;
-    //const inProduction = false;
+    const inProduction = isProduction() ? true : false;
    
     const port = 3000
 

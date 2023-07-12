@@ -9,6 +9,7 @@ import Text from "../../../Text/Text";
 import {setRewardsPopup} from "../../../../redux/reducers/popups/PopupsReducer";
 import {selectTranslation} from "../../../../redux/reducers/language/LanguageReducer";
 import defaultTranslation from "../../../../redux/reducers/language/defaultTranslation";
+import InfoWithoutNumberButton from "../../../Info/InfoWithoutNumberButton";
 
 const RewardsButton = () =>{
 
@@ -24,7 +25,7 @@ const RewardsButton = () =>{
     return (
         <BtnBackground source={bg} resizeMode={'stretch'}>
             <RewardBtn onPress={OpenSevenDays} activeOpacity={0.9}>
-                {availableToClaim && +availableToClaim > 0 ? <InfoButton count={String(availableToClaim)}/> : null}
+                {availableToClaim && +availableToClaim > 0 ? <InfoWithoutNumberButton /> : null}
                 <Text setShadow={true} large blod center>{rewards}</Text>
             </RewardBtn>
         </BtnBackground>

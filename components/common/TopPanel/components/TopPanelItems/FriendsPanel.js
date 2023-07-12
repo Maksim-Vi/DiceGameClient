@@ -7,10 +7,10 @@ import BackgroundButtons from "../../../BackgroundWrapper/BackgroundButtons";
 import {transitionState} from "../../../../utils/utils";
 import {useSelector} from "react-redux";
 import {selectInvitedCount} from "../../../../redux/reducers/players/friendsSelectors";
-import InfoButton from "../../../Info/InfoButton";
 import {selectDefaultParams} from "../../../../redux/reducers/language/LanguageReducer";
 import defaultParams from "../../../../redux/reducers/language/defaultParams";
 import {store} from "../../../../redux/redux-store";
+import InfoWithoutNumberButton from "../../../Info/InfoWithoutNumberButton";
 
 const FriendsPanel = (props) => {
 
@@ -27,7 +27,7 @@ const FriendsPanel = (props) => {
 
     return (
         <BackgroundButtons bgButton={bg}>
-            {invitedCount > 0 && <InfoButton count={invitedCount}/>}
+            {invitedCount > 0 && <InfoWithoutNumberButton />}
 
             <BtnContainer onPress={openFriendsPopup} activeOpacity={0.9}>
                 <PriceImage {...props} source={friends}/>

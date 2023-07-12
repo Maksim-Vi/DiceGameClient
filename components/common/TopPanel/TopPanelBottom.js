@@ -7,10 +7,12 @@ import {useSelector} from "react-redux";
 import {selectDefaultParams} from "../../redux/reducers/language/LanguageReducer";
 import defaultParams from "../../redux/reducers/language/defaultParams";
 import RewardsButton from "./components/Bottom/RewardsButton";
+import NewsButton from './components/Bottom/NewsButton';
 
 const TopPanelBottom = (props) => {
 
     const ENABLE_ROAD = useSelector(state => selectDefaultParams(state, defaultParams.ENABLE_ROAD))
+    const ENABLE_NEWS = useSelector(state => selectDefaultParams(state, defaultParams.ENABLE_NEWS))
 
     return (
         <PanelBottom>
@@ -18,6 +20,7 @@ const TopPanelBottom = (props) => {
 
             <SlideScreen left={false}>
                 <PanelEndContainer>
+                    {ENABLE_NEWS && <NewsButton />}
                     <RewardsButton />
                     {ENABLE_ROAD && <RoadButton />}
                 </PanelEndContainer>

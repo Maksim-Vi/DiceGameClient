@@ -1,10 +1,10 @@
 import { Platform } from "react-native"
 import { selectToken } from "../../redux/reducers/login/LoginReducer";
 import { store } from "../../redux/redux-store";
+import { isProduction } from "../../utils/utils";
 
 export const getUrl = () =>{
-    const inProduction = process.env.APP_TYPE !== 'development' ? true : false;
-    //const inProduction = false;
+    const inProduction = isProduction() ? true : false;
 
     const port = 3000
 

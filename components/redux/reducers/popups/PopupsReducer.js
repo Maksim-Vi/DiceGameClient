@@ -19,6 +19,7 @@ let initialState = {
     invitationPopup: {visible: false, data: null},
     adFlashPopup: {visible: false, data: null},
     notEnoughFlashPopup: {visible: false, data: null},
+    freeGiftsPopup: {visible: false, data: null},
 
     coinsInfoPopup: {visible: false, data: null},
     diamondsInfoPopup: {visible: false, data: null},
@@ -83,6 +84,9 @@ export const popupsReducerSlice = createSlice({
     setNotEnoughFlashPopup: (state, action) =>{
       state.notEnoughFlashPopup = action.payload
     },
+    setFreeGiftsPopup: (state, action) =>{
+      state.freeGiftsPopup = action.payload
+    },
 
     setCoinsInfoPopup: (state, action) =>{
       state.coinsInfoPopup = action.payload
@@ -121,6 +125,7 @@ export const {
     setCoinsInfoPopup,
     setDiamondsInfoPopup,
     setFlashInfoPopup,
+    setFreeGiftsPopup
 } = popupsReducerSlice.actions;
 
 export const selectAvatarPopup = state => state.popups.avatarPopup;
@@ -141,6 +146,8 @@ export const selectDeleteAccountPopup = state => state.popups.deleteAccountPopup
 export const selectInvitationPopup = state => state.popups.invitationPopup;
 export const selectADFlashPopup = state => state.popups.adFlashPopup;
 export const selectNotEnoughFlashPopup = state => state.popups.notEnoughFlashPopup;
+export const selectFreeGiftsPopup = state => state.popups.freeGiftsPopup;
+
 
 export const selectCoinsInfoPopup = state => state.popups.coinsInfoPopup;
 export const selectDiamondsInfoPopup = state => state.popups.diamondsInfoPopup;

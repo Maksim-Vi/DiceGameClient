@@ -1,6 +1,7 @@
 import React, {useContext, useEffect, useState} from "react";
 import styled from "styled-components";
 import exit from "../../../../../assets/topPanel/settingsPopup/exit.png";
+import news from "../../../../../assets/news/news-icon.png"
 import goBack from "../../../../../assets/topPanel/settingsPopup/back.png";
 import muteSounds from "../../../../../assets/topPanel/settingsPopup/silent.png";
 import tutorial from "../../../../../assets/tutorial/dicy.png";
@@ -17,7 +18,7 @@ import {
 } from "../../../../redux/reducers/popups/PopupsReducer";
 import {connect, useDispatch} from "react-redux";
 import Text from "../../../Text/Text";
-import {delay, getCurrentData} from "../../../../utils/utils";
+import {delay, getCurrentData, transitionState} from "../../../../utils/utils";
 import {selectSoundsInfo, selectTranslation} from "../../../../redux/reducers/language/LanguageReducer";
 import defaultTranslation from "../../../../redux/reducers/language/defaultTranslation";
 import {selectMyUser} from "../../../../redux/reducers/players/PlayersReducer";
@@ -66,6 +67,14 @@ const Settings = (props) =>{
         })
     }
 
+    const openNews = () =>{
+        Sounds.loadAndPlayFile(soundsType.click2)
+        dispatch(setSettingsMenuPopup({visible: false, data: null}))
+        delay(300).then(()=>{
+            transitionState('NewsScreen')
+        })
+    }
+
     const setSupport = async () =>{
         Sounds.loadAndPlayFile(soundsType.click2)
         Linking.openURL(
@@ -97,8 +106,20 @@ const Settings = (props) =>{
                 <Btn onPress={props.closeModal} activeOpacity={0.9}>
                     <ReturnContainer  style={{ borderBottomWidth: 3 }}>
                         <Img source={goBack} resizeMode='stretch'/>
-                        <Text  large blod center color={'#0c6fb6'}>{props.back}</Text>
+                        <Text  large blod center numberOfLines={1} color={'#0c6fb6'}>{props.back}</Text>
                     </ReturnContainer>
+                </Btn>
+                <Btn onPress={openNews} activeOpacity={0.9}>
+                    <TutorialContainer  style={{ borderBottomWidth: 3 }}>
+                        <Img source={news} resizeMode='contain'/>
+                        <Text large blod center numberOfLines={1} color={'#0c6fb6'}>News</Text>
+                    </TutorialContainer>
+                </Btn>
+                <Btn onPress={openTutorial} activeOpacity={0.9}>
+                    <TutorialContainer  style={{ borderBottomWidth: 3 }}>
+                        <Img source={tutorial} resizeMode='contain'/>
+                        <Text large blod center numberOfLines={1} color={'#0c6fb6'}>Tutorial</Text>
+                    </TutorialContainer>
                 </Btn>
                 <Btn onPress={()=>{}} activeOpacity={1}>
                     <LanguageContainer  style={{ borderBottomWidth: 3 }}>
@@ -125,31 +146,25 @@ const Settings = (props) =>{
                 <Btn onPress={setMuteUnmute} activeOpacity={0.9}>
                     <SoundsContainer  style={{ borderBottomWidth: 3 }}>
                         <Img source={mute ? unmuteSounds : muteSounds} resizeMode='stretch'/>
-                        <Text large blod center color={'#0c6fb6'}>{props.muteUnmute}</Text>
+                        <Text large blod center numberOfLines={1} color={'#0c6fb6'}>{props.muteUnmute}</Text>
                     </SoundsContainer>
-                </Btn>
-                <Btn onPress={openTutorial} activeOpacity={0.9}>
-                    <TutorialContainer  style={{ borderBottomWidth: 3 }}>
-                        <Img source={tutorial} resizeMode='contain'/>
-                        <Text large blod center color={'#0c6fb6'}>Tutorial</Text>
-                    </TutorialContainer>
                 </Btn>
                 <Btn onPress={setSupport} activeOpacity={0.9}>
                     <SupportContainer style={{ borderBottomWidth: 3 }}>
                         <Img source={support} resizeMode='stretch'/>
-                        <Text large blod center color={'#0c6fb6'}>{props.support}</Text>
+                        <Text large blod center numberOfLines={1} color={'#0c6fb6'}>{props.support}</Text>
                     </SupportContainer>
                 </Btn>
                 <Btn onPress={deleteAccount} activeOpacity={0.9}>
                     <DeleteAccContainer style={{ borderBottomWidth: 3 }}>
                         <Img source={deleteAcc} resizeMode='stretch'/>
-                        <Text large blod center color={'#0c6fb6'}>{props.deleteAccount}</Text>
+                        <Text large blod center numberOfLines={1} color={'#0c6fb6'}>{props.deleteAccount}</Text>
                     </DeleteAccContainer>
                 </Btn>
                 <Btn onPress={Logout} activeOpacity={0.9}>
                     <LeaveContainer style={{ borderBottomWidth: 3 }}>
                         <Img source={exit} resizeMode='stretch'/>
-                        <Text large blod center color={'#0c6fb6'}>{props.leaveGame}</Text>
+                        <Text large blod center numberOfLines={1} color={'#0c6fb6'}>{props.leaveGame}</Text>
                     </LeaveContainer>
                 </Btn>
             </ContentContainer>
