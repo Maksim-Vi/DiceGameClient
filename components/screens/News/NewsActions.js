@@ -1,5 +1,7 @@
-import {setFreeGiftsPopup} from "../../redux/reducers/popups/PopupsReducer";
+import {setFreeGiftsPopup, setInfoPopup} from "../../redux/reducers/popups/PopupsReducer";
 import {store} from "../../redux/redux-store";
+import {Linking} from "react-native";
+import {transitionState} from "../../utils/utils";
 
 export const newsActionsTypes = {
     Link: 'link',
@@ -8,16 +10,42 @@ export const newsActionsTypes = {
     Diamonds: 'crystals',
     CoinsDiamonds: 'coins-crystals',
     ItemsCoins: 'combi',
+    Gift: "gift"
+}
+
+export const newsActionsRedirectTypes = {
+    "collections": "CollectionsScreen",
+
+    "collectionDices": "",
+    "collectionFields": "",
+    "collectionFrames": "",
+
+    "road": "RoadScreen",
+    "friends": "FriendsScreen",
+    "userInfo": "UserInfoScreen",
+    "shop": "ShopScreen",
+
 }
 
 export const CallToActions = (actions = null) => {
-
     if(actions){
         switch (actions.type){
             case newsActionsTypes.Link: {
+                Linking.canOpenURL(actions.url).then(supported => {
+                    if (supported) {
+                        Linking.openURL(actions.url);
+                    } else {
+                        store.dispatch(setInfoPopup({visible: true, data: {text: 'Can not open the link! \n\n Thanks for understand, Knocky Dice team!'}}))
+                    }
+                });
                 break
             }
             case newsActionsTypes.Redirect: {
+                const redirectLink = newsActionsRedirectTypes[actions.path]
+
+                if(redirectLink){
+                    transitionState(redirectLink)
+                }
                 break
             }
             case "gift": {

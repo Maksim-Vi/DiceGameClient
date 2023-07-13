@@ -12,11 +12,11 @@ const ButtonWithText = (props) => {
         props.clickHandler()
     }
 
+    const styleBtn = {...{borderBottomWidth: 3}, ...props.style}
+
     return (
         <CollectBtn {...props}
-                    style={{
-                        borderBottomWidth: 3,
-                    }}
+                    style={styleBtn}
                     disabled={props.disabled || false}
                     onPress={btnClickHendler}
                     activeOpacity={0.9}>

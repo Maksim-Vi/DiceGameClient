@@ -2,10 +2,10 @@ import React, {useEffect, useState} from 'react'
 import styled from 'styled-components'
 import BackgroundWrapper from '../../common/BackgroundWrapper/BackgroundWrapper'
 import ButtonBack from '../../common/Buttons/Back/ButtonBack'
-import {Animated, Linking, SafeAreaView} from 'react-native'
+import {Animated, Linking, SafeAreaView, useWindowDimensions} from 'react-native'
 import Text from '../../common/Text/Text'
 import {getUrlRequest, transitionState} from '../../utils/utils'
-import {CallToActions, newsActionsTypes} from "./NewsActions";
+import {CallToActions, newsActionsRedirectTypes, newsActionsTypes} from "./NewsActions";
 import ButtonWithText from "../../common/Buttons/ButtonWithText";
 import {claimNewsGift} from "../../protocol/API/API";
 import {useSelector} from "react-redux";
@@ -16,11 +16,14 @@ import defaultParams from "../../redux/reducers/language/defaultParams";
 import app from '../../../app.json'
 import Sounds, {soundsType} from "../../utils/Sounds";
 import defaultTranslation from "../../redux/reducers/language/defaultTranslation";
+import {store} from "../../redux/redux-store";
+import {setInfoPopup} from "../../redux/reducers/popups/PopupsReducer";
 
 const NewsItemScreen = ({route}) => {
 
   const [newsItem, setNewsItem] = useState(route.params)
 
+  const {width} = useWindowDimensions()
   const buttonName = useSelector(state => selectTranslation(state, newsItem.actions.buttonName))
   const updateButtonName = useSelector(state => selectTranslation(state, defaultTranslation.TR_UPDATE))
   const url = useSelector(state => selectTranslation(state, defaultTranslation.SHARE_GAME_URL))
@@ -41,16 +44,29 @@ const NewsItemScreen = ({route}) => {
 
   const clickButtonGift = async () =>{
       Sounds.loadAndPlayFile(soundsType.click2)
-      if(newsItem && newsItem.actions && !newsItem.isReceivedGifts){
-          const claimRes = await claimNewsGift(newsItem.id, user.id, newsItem.actions.giftType, newsItem.actions.reward);
+      switch (newsItem.actions.type) {
+          case newsActionsTypes.Link: {
+              CallToActions(newsItem.actions);
+              break
+          }
+          case newsActionsTypes.Redirect: {
+              CallToActions(newsItem.actions);
+              break
+          }
+          case newsActionsTypes.Gift: {
+              if(newsItem && newsItem.actions && !newsItem.isReceivedGifts){
+                  const claimRes = await claimNewsGift(newsItem.id, user.id, newsItem.actions.giftType, newsItem.actions.reward);
 
-          if(claimRes && claimRes.success){
-              setNewsItem(claimRes.news);
-              NewsManager.updateNews(claimRes.news);
+                  if(claimRes && claimRes.success){
+                      setNewsItem(claimRes.news);
+                      NewsManager.updateNews(claimRes.news);
 
-              if(claimRes.news && claimRes.news.actions){
-                CallToActions({type: claimRes.news.actions.type, giftType: claimRes.news.actions.giftType, reward: claimRes.news.actions.reward});
+                      if(claimRes.news && claimRes.news.actions){
+                          CallToActions({type: claimRes.news.actions.type, giftType: claimRes.news.actions.giftType, reward: claimRes.news.actions.reward});
+                      }
+                  }
               }
+              break
           }
       }
   }
@@ -61,7 +77,7 @@ const NewsItemScreen = ({route}) => {
           if (supported) {
               Linking.openURL(url);
           } else {
-              alert('Can not open link, please, update game from play')
+              store.dispatch(setInfoPopup({visible: true, data: {text: 'Can not open the link, please, update the game from the store.\n\n Thanks for understand Knocky Dice team!'}}))
           }
       });
   }
@@ -70,14 +86,14 @@ const NewsItemScreen = ({route}) => {
 
       if(newsItem && newsItem.isNeedUpdate){
         if(currentClientVersion !== app.expo.version){
-            return  <ButtonWithText width={'50%'}
+            return <ButtonWithText width={'70%'}
                                     height={'50px'}
                                     text={updateButtonName}
                                     clickHandler={updateGame}/>
         }
       }
 
-      return <ButtonWithText width={'50%'}
+      return <ButtonWithText width={'70%'}
                              height={'50px'}
                              disabled={newsItem.isReceivedGifts}
                              text={buttonName}
@@ -101,7 +117,7 @@ const NewsItemScreen = ({route}) => {
                   <Text setShadow blod large center>{user.language === "EN" ? newsItem.text.EN : newsItem.text.UA}</Text>
 
                   {newsItem.actions && newsItem.actions.buttonName &&
-                      <ButtonContainer>
+                      <ButtonContainer width={width}>
                           {getButton()}
                       </ButtonContainer>
 
@@ -137,7 +153,7 @@ const ButtonContainer = styled.View`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  width: ${props => props.width ? `${props.width - 50}px` : "100%"};
   margin-top: 30px;
   margin-bottom: 10px;
 `
