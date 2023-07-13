@@ -18,7 +18,7 @@ const SquareItem = ({squareItem,isActive,isLocked,isSale, isCollected, setModalV
             toValue: 1,
             duration: 200,
             easing: Easing.linear,
-            useNativeDriver: true,
+            useNativeDriver: false,
         }).start();
     }
 

@@ -46,9 +46,9 @@ class KickTextAnimation extends PureComponent {
     animateStart = () => {
         this.opacity.setValue(0);
         Animated.sequence([
-            setTimingAnimated(this.opacity, 1, 400, Easing.in(Easing.bounce), true),
+            setTimingAnimated(this.opacity, 1, 400, Easing.in(Easing.bounce), false),
             Animated.delay(500),
-            setTimingAnimated(this.opacity, 0, 200, Easing.ease, true),
+            setTimingAnimated(this.opacity, 0, 200, Easing.ease, false),
         ]).start((result)=>{
             if(result){
                 this.setState({

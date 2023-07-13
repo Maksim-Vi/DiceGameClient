@@ -21,8 +21,8 @@ const WinRewardItem = ({everyDaysGiftsResult, isLoaded, isClosed, show}) => {
   const winShowValue = React.useRef(new Animated.Value(0)).current;
   const winAnimShow = React.useRef(
     Animated.sequence([
-      setTimingAnimated(winShowValue, 0, 100, Easing.ease, true),
-      setTimingAnimated(winShowValue, 1, 200, Easing.ease, true),
+      setTimingAnimated(winShowValue, 0, 100, Easing.ease, false),
+      setTimingAnimated(winShowValue, 1, 200, Easing.ease, false),
     ])
   );
 
@@ -30,8 +30,8 @@ const WinRewardItem = ({everyDaysGiftsResult, isLoaded, isClosed, show}) => {
   const titleAnimShow = React.useRef(
     Animated.sequence([
       Animated.delay(100),
-      setTimingAnimated(showTitle, 0, 300, Easing.ease, true),
-      setTimingAnimated(showTitle, 1, 300, Easing.ease, true),
+      setTimingAnimated(showTitle, 0, 300, Easing.ease, false),
+      setTimingAnimated(showTitle, 1, 300, Easing.ease, false),
     ])
   );
 
@@ -39,8 +39,8 @@ const WinRewardItem = ({everyDaysGiftsResult, isLoaded, isClosed, show}) => {
   const priceAnimShow = React.useRef(
     Animated.sequence([
       Animated.delay(100),
-      setTimingAnimated(showPrice, 0, 300, Easing.ease, true),
-      setTimingAnimated(showPrice, 1, 300, Easing.ease, true),
+      setTimingAnimated(showPrice, 0, 300, Easing.ease, false),
+      setTimingAnimated(showPrice, 1, 300, Easing.ease, false),
     ])
   );
 

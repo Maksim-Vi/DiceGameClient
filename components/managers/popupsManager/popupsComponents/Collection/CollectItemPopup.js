@@ -39,7 +39,7 @@ const CollectItemPopup = props => {
 
     const startShow = () =>{
         Animated.sequence([
-            setTimingAnimated(showValue, 1, 1000, Easing.linear, true),
+            setTimingAnimated(showValue, 1, 1000, Easing.linear, false),
         ]).start(()=>{
             startSpin1()
             startSpin2()

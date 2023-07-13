@@ -12,8 +12,8 @@ const EveryDayCard = (props) => {
   const animShow = React.useRef(
     Animated.sequence([
       Animated.delay(props.delay),
-      setTimingAnimated(showValue, 0, 300, Easing.ease, true),
-      setTimingAnimated(showValue, 1, 300, Easing.ease, true),
+      setTimingAnimated(showValue, 0, 300, Easing.ease, false),
+      setTimingAnimated(showValue, 1, 300, Easing.ease, false),
     ])
   );
   const scaleY = showValue.interpolate({

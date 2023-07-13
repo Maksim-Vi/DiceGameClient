@@ -19,8 +19,8 @@ const RoadInfoMission = (props) => {
     const showPlaceAnim = () => {
         Animated.sequence([
             Animated.delay(500),
-            setTimingAnimated(show.current, 1.05, 800, Easing.cubic,true),
-            setTimingAnimated(show.current, 1, 600, Easing.cubic,true),
+            setTimingAnimated(show.current, 1.05, 800, Easing.cubic,false),
+            setTimingAnimated(show.current, 1, 600, Easing.cubic,false),
         ]).start();
 
     }

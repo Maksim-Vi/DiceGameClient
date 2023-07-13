@@ -14,7 +14,7 @@ const DefaultBG = (props) =>{
             Animated.timing(slideAnim, {
                 toValue: 1,
                 duration: 400,
-                useNativeDriver: true,
+                useNativeDriver: false,
             }).start();
         })
     });

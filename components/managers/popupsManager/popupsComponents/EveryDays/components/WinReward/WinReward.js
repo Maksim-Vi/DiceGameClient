@@ -46,12 +46,12 @@ const WinReward = memo(function ({
   const showValue = React.useRef(new Animated.Value(0)).current;
   const animShow = React.useRef(
     Animated.sequence([
-      setTimingAnimated(showValue, 0, 300, Easing.ease, true),
-      setTimingAnimated(showValue, 1, 300, Easing.ease, true),
-      setTimingAnimated(showValue, 2, 250, Easing.ease, true),
-      setTimingAnimated(showValue, 3, 200, Easing.ease, true),
-      setTimingAnimated(showValue, 4, 200, Easing.ease, true),
-      setTimingAnimated(showValue, 5, 300, Easing.ease, true),
+      setTimingAnimated(showValue, 0, 300, Easing.ease, false),
+      setTimingAnimated(showValue, 1, 300, Easing.ease, false),
+      setTimingAnimated(showValue, 2, 250, Easing.ease, false),
+      setTimingAnimated(showValue, 3, 200, Easing.ease, false),
+      setTimingAnimated(showValue, 4, 200, Easing.ease, false),
+      setTimingAnimated(showValue, 5, 300, Easing.ease, false),
     ])
   );
 

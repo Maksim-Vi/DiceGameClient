@@ -13,7 +13,7 @@ const CircleAroundAnim = (props) => {
     const startAnim = () =>{
         Animated.loop(
             Animated.sequence([
-                setTimingAnimated(spinValue, 1, 15000, Easing.linear, true),
+                setTimingAnimated(spinValue, 1, 15000, Easing.linear, false),
             ])
         ).start();
     }

@@ -1,14 +1,15 @@
-import React from 'react'
+import React, {memo} from 'react'
 import styled from 'styled-components'
 import news_item_bg from '../../../../../assets/news/new.png'
 import reared_item_bg from '../../../../../assets/news/reared.png'
 import Text from '../../../../common/Text/Text'
 import { getUrlRequest, transitionState } from '../../../../utils/utils'
 import InfoWithoutNumberButton from "../../../../common/Info/InfoWithoutNumberButton";
+import {TouchableWithoutFeedback} from "react-native";
 
-const NewsItem = (props) => {
+const NewsItem = memo((props) => {
 
-  const getImaage = () =>{
+  const getImage = () =>{
     const url = getUrlRequest()
 
     if(props.newsItem.image && url){
@@ -21,71 +22,63 @@ const NewsItem = (props) => {
     transitionState("NewsItemScreen", props.newsItem)
   }
 
-  const getTextInfoRender = () =>{
+  const getTextInfoRender = () => {
     return (
         <NewsInfoContainer>
 
           <TitleContainer>
-            <Text setShadow blod madium >{props.user.language === "EN" ? props.newsItem.title.EN :  props.newsItem.title.UA}</Text>
+            <Text setShadow blod madium>{props.user && props.user.language === "EN" ? props.newsItem.title.EN :  props.newsItem.title.UA}</Text>
           </TitleContainer>
 
-
           <DescContainer>
-            <Text setShadow blod fontSize={10} numberOfLines={3} ellipsizeMode='middle'>{props.user.language === "EN" ? props.newsItem.text.EN :  props.newsItem.text.UA}</Text>
-            <DataText setShadow small right>{props.newsItem.createdAt}</DataText>
+              <Text setShadow blod fontSize={10}>
+                  {props.user && props.user.language === "EN"
+                      ? props.newsItem.text.EN.substring(0,50) + "..."
+                      : props.newsItem.text.UA.substring(0,50) + "..." }
+              </Text>
+
+              <DataText>
+                  <Text setShadow small>{props.newsItem && props.newsItem.createdAt}</Text>
+              </DataText>
           </DescContainer>
 
         </NewsInfoContainer>
     )
   }
 
-  const getImageNewsRender = () =>{
+  const getImageNewsRender = () => {
     return (
         <NewsImageContainer>
-          <NewsImg source={{uri: getImaage()}} style={{borderTopRightRadius: 15, borderTopLeftRadius: 15}} resizeMode='cover'/>
+          <NewsImg source={{uri: getImage()}} style={{borderTopRightRadius: 15, borderTopLeftRadius: 15}} resizeMode='cover'/>
         </NewsImageContainer>
     )
   }
 
   return (
-    <ItemTouch onPress={openNews}>
-      <Item>
-        <ListItemBG source={!props.newsItem.isWatched ?  news_item_bg : reared_item_bg} resizeMode={'stretch'}>
-          {!props.newsItem.isWatched &&
-              <InfoWithoutNumberButton top={0} right={15}/>
-          }
-          {props.newsItem.isWatched && props.newsItem.actions && !props.newsItem.isReceivedGifts &&
-              <InfoWithoutNumberButton top={0} right={15}/>
-          }
+      <TouchableWithoutFeedback onPress={openNews} accessible={false}>
+        <Item>
+            <ListItemBG source={!props.newsItem.isWatched ?  news_item_bg : reared_item_bg} resizeMode={'stretch'}>
+              {!props.newsItem.isWatched &&
+                  <InfoWithoutNumberButton top={0} right={15}/>
+              }
+              {props.newsItem.isWatched && props.newsItem.actions && !props.newsItem.isReceivedGifts &&
+                  <InfoWithoutNumberButton top={0} right={15}/>
+              }
+              <News>
+                 <NewsTopContainer>
+                   {getTextInfoRender()}
+                   {getImageNewsRender()}
+                 </NewsTopContainer>
 
-          <News>
-             <NewsTopContainer>
-               {getTextInfoRender()}
-               {getImageNewsRender()}
-             </NewsTopContainer>
-
-             <BottomContainer>
-               <Text setShadow center>watch more...</Text>
-             </BottomContainer>
-           </News>
-
-
-
-        </ListItemBG>
-      </Item>
-    </ItemTouch>
+                 <BottomContainer>
+                   <Text setShadow center>watch more...</Text>
+                 </BottomContainer>
+               </News>
+            </ListItemBG>
+        </Item>
+      </TouchableWithoutFeedback>
   )
-}
-
-const ItemTouch = styled.TouchableWithoutFeedback`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  height: 130px;
-  margin-bottom: 10px;
-  padding: 0 15px;
-`
+})
 
 const Item = styled.View`
   display: flex;
@@ -96,6 +89,7 @@ const Item = styled.View`
   margin-bottom: 10px;
   padding: 0 15px;
 `
+
 const ListItemBG = styled.ImageBackground`
   display: flex;
   align-items: center;
@@ -164,8 +158,11 @@ const NewsImg = styled.Image`
     width: 100%;
     height: 100%;
 `
-const DataText = styled(Text)`
-  margin-top: 10px;
+
+const DataText = styled.View`
+  display: flex;
+  margin-top: 5px;
   padding-top: 10px;
+  align-items: flex-end;
 `
 export default NewsItem

@@ -25,7 +25,7 @@ const Title = styled.View`
   justify-content: center;
   width: 70%;
   height: 50px;
-  margin-top: 20%;
+  margin-top: 16%;
 `
 
 const TitleBG = styled.ImageBackground`

@@ -19,7 +19,7 @@ const DiceItem = ({diceItem, isActive, isLocked, isSale, isCollected, setModalVi
             toValue: 1,
             duration: 200,
             easing: Easing.linear,
-            useNativeDriver: true,
+            useNativeDriver: false,
         }).start();
     }
 

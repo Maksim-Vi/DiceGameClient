@@ -65,15 +65,16 @@ const RoadEndTimeContainer = (props) => {
     const showPlaceAnim = () => {
         Animated.sequence([
             Animated.delay(props.animDelay || 700),
-            setTimingAnimated(show.current, 1.05, 800, Easing.cubic,true),
-            setTimingAnimated(show.current, 1, 600, Easing.cubic,true),
+            setTimingAnimated(show.current, 1.05, 800, Easing.cubic,false),
+            setTimingAnimated(show.current, 1, 600, Easing.cubic,false),
         ]).start();
 
     }
 
     useEffect(()=>{
+        timer.stop()
+
         if(props.time > 0){
-            timer.stop()
             timer.start(Math.floor(props.time / 1000))
             showPlaceAnim()
         }

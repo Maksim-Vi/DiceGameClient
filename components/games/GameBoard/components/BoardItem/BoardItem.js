@@ -21,7 +21,7 @@ const BoardItem = memo(function BoardItem( props) {
             toValue: 1,
             duration: props.delay + 100,
             easing: Easing.linear,
-            useNativeDriver: true,
+            useNativeDriver: false,
         }).start();
     }
 
