@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import styled from 'styled-components'
 import BackgroundWrapper from '../../common/BackgroundWrapper/BackgroundWrapper'
 import ButtonBack from '../../common/Buttons/Back/ButtonBack'
-import {Animated, SafeAreaView} from 'react-native'
+import {Animated, Linking, SafeAreaView} from 'react-native'
 import Text from '../../common/Text/Text'
 import {getUrlRequest, transitionState} from '../../utils/utils'
 import {CallToActions, newsActionsTypes} from "./NewsActions";
@@ -10,14 +10,22 @@ import ButtonWithText from "../../common/Buttons/ButtonWithText";
 import {claimNewsGift} from "../../protocol/API/API";
 import {useSelector} from "react-redux";
 import {selectMyUser} from "../../redux/reducers/players/PlayersReducer";
-import {selectTranslation} from "../../redux/reducers/language/LanguageReducer";
+import {selectDefaultParams, selectTranslation} from "../../redux/reducers/language/LanguageReducer";
 import NewsManager from "../../managers/News/NewsManager";
+import defaultParams from "../../redux/reducers/language/defaultParams";
+import app from '../../../app.json'
+import Sounds, {soundsType} from "../../utils/Sounds";
+import defaultTranslation from "../../redux/reducers/language/defaultTranslation";
 
-const NewsItemScreen = ({route, ...props}) => {
+const NewsItemScreen = ({route}) => {
 
   const [newsItem, setNewsItem] = useState(route.params)
 
   const buttonName = useSelector(state => selectTranslation(state, newsItem.actions.buttonName))
+  const updateButtonName = useSelector(state => selectTranslation(state, defaultTranslation.TR_UPDATE))
+  const url = useSelector(state => selectTranslation(state, defaultTranslation.SHARE_GAME_URL))
+  const currentClientVersion = useSelector(state => selectDefaultParams(state, defaultParams.CURRENT_CLIENT_VERSION))
+
   const user = useSelector(selectMyUser)
 
   const goBack = () =>{
@@ -32,7 +40,8 @@ const NewsItemScreen = ({route, ...props}) => {
   }
 
   const clickButtonGift = async () =>{
-      if(newsItem.actions && !newsItem.isReceivedGifts){
+      Sounds.loadAndPlayFile(soundsType.click2)
+      if(newsItem && newsItem.actions && !newsItem.isReceivedGifts){
           const claimRes = await claimNewsGift(newsItem.id, user.id, newsItem.actions.giftType, newsItem.actions.reward);
 
           if(claimRes && claimRes.success){
@@ -44,6 +53,36 @@ const NewsItemScreen = ({route, ...props}) => {
               }
           }
       }
+  }
+
+  const updateGame = async () =>{
+      Sounds.loadAndPlayFile(soundsType.click2)
+      Linking.canOpenURL(url).then(supported => {
+          if (supported) {
+              Linking.openURL(url);
+          } else {
+              alert('Can not open link, please, update game from play')
+          }
+      });
+  }
+
+  const getButton = () =>{
+
+      if(newsItem && newsItem.isNeedUpdate){
+        if(currentClientVersion !== app.expo.version){
+            return  <ButtonWithText width={'50%'}
+                                    height={'50px'}
+                                    text={updateButtonName}
+                                    clickHandler={updateGame}/>
+        }
+      }
+
+      return <ButtonWithText width={'50%'}
+                             height={'50px'}
+                             disabled={newsItem.isReceivedGifts}
+                             text={buttonName}
+                             clickHandler={clickButtonGift}/>
+
   }
 
   return (
@@ -63,11 +102,7 @@ const NewsItemScreen = ({route, ...props}) => {
 
                   {newsItem.actions && newsItem.actions.buttonName &&
                       <ButtonContainer>
-                          <ButtonWithText width={'50%'}
-                                          height={'50px'}
-                                          disabled={newsItem.isReceivedGifts}
-                                          text={buttonName}
-                                          clickHandler={clickButtonGift}/>
+                          {getButton()}
                       </ButtonContainer>
 
                   }

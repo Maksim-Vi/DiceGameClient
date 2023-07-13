@@ -1,25 +1,29 @@
-import React, {memo} from 'react'
+import React from 'react'
 import styled from 'styled-components'
+import giftAnim from '../../../../../assets/animation/lottieAnim/gift.json'
 import news_item_bg from '../../../../../assets/news/new.png'
 import reared_item_bg from '../../../../../assets/news/reared.png'
 import Text from '../../../../common/Text/Text'
 import { getUrlRequest, transitionState } from '../../../../utils/utils'
 import InfoWithoutNumberButton from "../../../../common/Info/InfoWithoutNumberButton";
 import {TouchableWithoutFeedback} from "react-native";
+import AnimatedLottieView from "lottie-react-native";
 
-const NewsItem = memo((props) => {
+const NewsItem = (props) => {
 
   const getImage = () =>{
     const url = getUrlRequest()
 
-    if(props.newsItem.image && url){
+    if(props.newsItem && props.newsItem.image && url){
       return url + props.newsItem.image
     }
   }
 
   const openNews = () =>{
-    props.openNewsData(props.index, props.newsItem.id, props.user.id);
-    transitionState("NewsItemScreen", props.newsItem)
+      if(props.newsItem && props.user){
+          props.openNewsData(props.index, props.newsItem.id, props.user.id);
+          transitionState("NewsItemScreen", props.newsItem)
+      }
   }
 
   const getTextInfoRender = () => {
@@ -57,13 +61,24 @@ const NewsItem = memo((props) => {
   return (
       <TouchableWithoutFeedback onPress={openNews} accessible={false}>
         <Item>
-            <ListItemBG source={!props.newsItem.isWatched ?  news_item_bg : reared_item_bg} resizeMode={'stretch'}>
-              {!props.newsItem.isWatched &&
+            <ListItemBG source={props.newsItem && !props.newsItem.isWatched ?  news_item_bg : reared_item_bg} resizeMode={'stretch'}>
+              {props.newsItem && !props.newsItem.isWatched &&
                   <InfoWithoutNumberButton top={0} right={15}/>
               }
-              {props.newsItem.isWatched && props.newsItem.actions && !props.newsItem.isReceivedGifts &&
-                  <InfoWithoutNumberButton top={0} right={15}/>
-              }
+
+                {props.newsItem && props.newsItem.actions && props.newsItem.actions.type === "gift" && !props.newsItem.isReceivedGifts &&
+                    <AnimatedLottieView source={giftAnim}
+                                        loop
+                                        autoPlay
+                                        style={{
+                                            position: 'absolute',
+                                            zIndex: 1,
+                                            right: 10, bottom: 5,
+                                            width: 50,
+                                            height: 50
+                                        }}/>
+                }
+
               <News>
                  <NewsTopContainer>
                    {getTextInfoRender()}
@@ -76,11 +91,13 @@ const NewsItem = memo((props) => {
                </News>
             </ListItemBG>
         </Item>
+
       </TouchableWithoutFeedback>
   )
-})
+}
 
 const Item = styled.View`
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;

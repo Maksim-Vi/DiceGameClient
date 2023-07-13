@@ -27,7 +27,7 @@ export default class S_GAME_END_LOADED {
         },2000)
     }
 
-    async loadNews() {
+     loadNews() {
         NewsManager.getNews();
     }
 

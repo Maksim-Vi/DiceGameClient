@@ -27,11 +27,12 @@ const NewsScreen = () => {
   }
 
   const openNewsData = async (index, newsId, userId) =>{
+
     const updatedNews = await NewsManager.openNews(index, newsId, userId)
 
-    if(updatedNews){
-      setNewsData(updatedNews)
-    }
+    // if(updatedNews){
+    //   setNewsData(updatedNews)
+    // }
   }
 
   const renderItem = (data) =>{

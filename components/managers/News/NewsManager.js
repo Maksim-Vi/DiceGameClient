@@ -11,24 +11,31 @@ export default new class NewsManager {
 
     async getNews(){
         const user = selectMyUser(store.getState())
-        const news = await getNews(user.id);
 
-        if(news){
-            this.news = news
+        if(user){
+            const news = await getNews(user.id);
 
-            store.dispatch(setNews(news));
-            this.getUnreadedNews();
+            if(news){
+                this.news = news
+
+                store.dispatch(setNews(news));
+                this.getUnreadedNews();
+            }
         }
     }
 
     async openNews(index, newsId, userId){
         const newsReqData = await openItemNews(newsId, userId)
+
         if(newsReqData){
-            const updated = this.news.map(item=>{
-                if(item.id === newsReqData.id){
-                    return newsReqData;
+            let updated = []
+            for (let i = 0; i < this.news.length; i++){
+                if(this.news[i].id === newsReqData.id){
+                    updated.push(newsReqData);
+                } else {
+                    updated.push(this.news[i]);
                 }
-            })
+            }
 
             this.news = updated
 
@@ -41,11 +48,14 @@ export default new class NewsManager {
 
     updateNews(news){
         if(news){
-            const updated = this.news.map(item=>{
-                if(item.id === news.id){
-                    return news;
+            let updated = []
+            for (let i = 0; i < this.news.length; i++){
+                if(this.news[i].id === news.id){
+                    updated.push(news);
+                } else {
+                    updated.push(this.news[i]);
                 }
-            })
+            }
 
             this.news = updated
 
