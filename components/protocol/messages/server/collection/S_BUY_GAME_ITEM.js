@@ -32,7 +32,7 @@ export default class S_BUY_GAME_ITEM {
                         type: this.collectionType,
                         id: this.itemId
                     }}))
-            },1000)
+            },100)
         }
     }
 

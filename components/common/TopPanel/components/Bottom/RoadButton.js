@@ -36,11 +36,13 @@ const RoadButton = () =>{
 }
 
 const BtnBackground = styled.ImageBackground`
+  flex: 0.40;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 70px;
+  //width: 70px;
   height: 70px;
+  margin-right: 5px;
 `
 
 const RoadBtn = styled.TouchableOpacity`

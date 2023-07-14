@@ -31,14 +31,14 @@ const NewsItem = (props) => {
         <NewsInfoContainer>
 
           <TitleContainer>
-            <Text setShadow blod madium>{props.user && props.user.language === "EN" ? props.newsItem.title.EN :  props.newsItem.title.UA}</Text>
+            <Text setShadow blod small>{props.user && props.user.language === "EN" ? props.newsItem.title.EN :  props.newsItem.title.UA}</Text>
           </TitleContainer>
 
           <DescContainer>
               <Text setShadow blod fontSize={10}>
                   {props.user && props.user.language === "EN"
-                      ? props.newsItem.text.EN.substring(0,50) + "..."
-                      : props.newsItem.text.UA.substring(0,50) + "..." }
+                      ? props.newsItem.text.EN.substring(0,40) + "..."
+                      : props.newsItem.text.UA.substring(0,40) + "..." }
               </Text>
 
               <DataText>
@@ -53,7 +53,7 @@ const NewsItem = (props) => {
   const getImageNewsRender = () => {
     return (
         <NewsImageContainer>
-          <NewsImg source={{uri: getImage()}} style={{borderTopRightRadius: 15, borderTopLeftRadius: 15}} resizeMode='cover'/>
+          <NewsImg source={{uri: getImage()}} style={{borderTopRightRadius: 15, borderTopLeftRadius: 15}} resizeMode='stretch'/>
         </NewsImageContainer>
     )
   }
@@ -144,6 +144,7 @@ const NewsInfoContainer = styled.View`
 `
 const TitleContainer = styled.View`
   width: 100%;
+  height: 35%;
   margin-top: 5px;
   padding: 5px;
   background-color: rgba(0, 0, 0, 0.2);
@@ -153,7 +154,7 @@ const DescContainer = styled.View`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  height: 60px;
+  height: 55%;
   padding: 5px;
   background-color: rgba(0, 0, 0, 0.2);
   border-radius: 5px;

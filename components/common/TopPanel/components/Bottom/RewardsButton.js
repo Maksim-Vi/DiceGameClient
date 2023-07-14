@@ -33,12 +33,13 @@ const RewardsButton = () =>{
 }
 
 const BtnBackground = styled.ImageBackground`
+  flex: 0.70;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 130px;
+  //width: 130px;
   height: 70px;
-  margin-right: 5px;
+  margin-right: 2px;
 `
 
 const RewardBtn = styled.TouchableOpacity`

@@ -34,12 +34,12 @@ const NewsButton = () =>{
 }
 
 const BtnBackground = styled.ImageBackground`
+  flex: 0.40;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 70px;
   height: 70px;
-  margin-right: 5px;
+  margin-right: 2px;
 `
 
 const Btn = styled.TouchableOpacity`

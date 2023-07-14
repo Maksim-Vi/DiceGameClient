@@ -106,15 +106,15 @@ const NewsItemScreen = ({route}) => {
       <ButtonBack left={'3%'} top={'5%'} leaveGame={goBack}/>
       <NewsContainer>
           <NewsImageContainer>
-              <NewsImg source={{uri: getImaage()}} style={{borderTopRightRadius: 15, borderTopLeftRadius: 15}} resizeMode='cover'/>
+              <NewsImg source={{uri: getImaage()}} style={{borderTopRightRadius: 15, borderTopLeftRadius: 15}} resizeMode='stretch'/>
           </NewsImageContainer>
 
           <TitleContainer>
-              <Text setShadow blod title center>{user.language === "EN" ? newsItem.title.EN :  newsItem.title.UA}</Text>
+              <Text color={'#eca451'} setShadow blod title numberOfLines={1} center>{user.language === "EN" ? newsItem.title.EN :  newsItem.title.UA}</Text>
           </TitleContainer>
-          <SafeAreaView style={{flex: 0.75}}>
+          <SafeAreaView style={{flex: 0.80}}>
               <ScrollText>
-                  <Text setShadow blod large center>{user.language === "EN" ? newsItem.text.EN : newsItem.text.UA}</Text>
+                  <Text setShadow blod large>{user.language === "EN" ? newsItem.text.EN : newsItem.text.UA}</Text>
 
                   {newsItem.actions && newsItem.actions.buttonName &&
                       <ButtonContainer width={width}>
@@ -138,14 +138,14 @@ const NewsContainer = styled.View`
   justify-content: flex-start;
   width: 100%;
   height: 100%;
-  margin-top: 30%;
+  margin-top: 20%;
 `
 const NewsImageContainer = styled.View`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 90%;
-  height: 150px;
+  width: 85%;
+  height: 200px;
   margin-bottom: 10px;
 `
 
@@ -170,8 +170,10 @@ const TitleContainer = styled.View`
 `
 
 const ScrollText = styled.ScrollView`
+  margin-top: 5px;
   width: 100%;
-  padding: 10px;
+  padding: 15px;
+  background-color: rgba(0, 0, 0, 0.2);
 `
 
 const Empty = styled.View`

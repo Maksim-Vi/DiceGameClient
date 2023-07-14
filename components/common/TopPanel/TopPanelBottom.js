@@ -16,36 +16,45 @@ const TopPanelBottom = (props) => {
 
     return (
         <PanelBottom>
-            <UserInfo userData={props.userData}/>
+            <AvatarContainer>
+                <UserInfo userData={props.userData}/>
+            </AvatarContainer>
 
-            <SlideScreen left={false}>
-                <PanelEndContainer>
-                    {ENABLE_NEWS && <NewsButton />}
-                    <RewardsButton />
-                    {ENABLE_ROAD && <RoadButton />}
-                </PanelEndContainer>
-            </SlideScreen>
+
+            <PanelEndContainer>
+                {ENABLE_NEWS && <NewsButton />}
+                <RewardsButton />
+                {ENABLE_ROAD && <RoadButton />}
+            </PanelEndContainer>
         </PanelBottom>
     );
 };
 
 const PanelBottom = styled.View`
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: space-between;
-    width: 98%;
-    margin-top: 10px;
-    z-index: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: auto;
+  margin-top: 10px;
+  z-index: 1;
 `
+
+const AvatarContainer = styled.View`
+  display: flex;
+  align-items: flex-start;
+  width: 25%;
+  height: 100px;
+`
+
 const PanelEndContainer = styled.View`
-  position: absolute;
   display: flex;
   align-items: center;
   justify-content: flex-end;
   flex-direction: row;
-  margin: 15px 0;
-  width: 100%;
+  width: 70%;
+  height: 100px;
 `
 
 export default TopPanelBottom;
