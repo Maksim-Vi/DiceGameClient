@@ -16,8 +16,6 @@ const NewsScreen = () => {
   const user = useSelector(selectMyUser)
   const news = useSelector(selectNews)
 
-  console.log(news)
-
   const [newsData, setNewsData] = useState(news)
 
   const loadNewsData = async () => {
