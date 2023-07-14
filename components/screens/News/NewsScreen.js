@@ -16,6 +16,8 @@ const NewsScreen = () => {
   const user = useSelector(selectMyUser)
   const news = useSelector(selectNews)
 
+  console.log(news)
+
   const [newsData, setNewsData] = useState(news)
 
   const loadNewsData = async () => {
@@ -27,12 +29,11 @@ const NewsScreen = () => {
   }
 
   const openNewsData = async (index, newsId, userId) =>{
-
     const updatedNews = await NewsManager.openNews(index, newsId, userId)
 
-    // if(updatedNews){
-    //   setNewsData(updatedNews)
-    // }
+    if(updatedNews){
+      setNewsData(updatedNews)
+    }
   }
 
   const renderItem = (data) =>{
@@ -53,12 +54,11 @@ const NewsScreen = () => {
 
   return (
     <BackgroundWrapper>
-      <ButtonBack left={'3%'} top={'9.5%'} goMainPage={true}/>
-     
+      <ButtonBack left={'3%'} top={'8%'}  goMainPage={true}/>
+
       <TitleContainer>
         <NewsTitle />
       </TitleContainer>
-    
       
       <NewsContainer>
           <NewsFlatList
@@ -80,6 +80,7 @@ const NewsContainer = styled.View`
 `
 
 const TitleContainer = styled.View`
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;

@@ -19,7 +19,11 @@ import {
 import {connect, useDispatch} from "react-redux";
 import Text from "../../../Text/Text";
 import {delay, getCurrentData, transitionState} from "../../../../utils/utils";
-import {selectSoundsInfo, selectTranslation} from "../../../../redux/reducers/language/LanguageReducer";
+import {
+    selectDefaultParams,
+    selectSoundsInfo,
+    selectTranslation
+} from "../../../../redux/reducers/language/LanguageReducer";
 import defaultTranslation from "../../../../redux/reducers/language/defaultTranslation";
 import {selectMyUser} from "../../../../redux/reducers/players/PlayersReducer";
 import SelectDropdown from 'react-native-select-dropdown'
@@ -27,6 +31,8 @@ import {Linking, StyleSheet} from 'react-native';
 import C_CHANGE_LANGUAGE from "../../../../protocol/messages/clients/C_CHANGE_LANGUAGE";
 import Sounds, {soundsType} from "../../../../utils/Sounds";
 import C_CHANGE_SOUND from "../../../../protocol/messages/clients/C_CHANGE_SOUND";
+import {store} from "../../../../redux/redux-store";
+import defaultParams from "../../../../redux/reducers/language/defaultParams";
 
 const selectedData = ['EN', 'UA']
 
@@ -37,6 +43,7 @@ const Settings = (props) =>{
     const [mute, setMute] = useState(false)
     const dispatch = useDispatch()
     const { logout } = useContext(UserContext);
+    const ENABLE_NEWS = selectDefaultParams(store.getState(), defaultParams.ENABLE_NEWS)
 
     const Logout = () =>{
         Sounds.loadAndPlayFile(soundsType.click2)
@@ -109,12 +116,14 @@ const Settings = (props) =>{
                         <Text  large blod center numberOfLines={1} color={'#0c6fb6'}>{props.back}</Text>
                     </ReturnContainer>
                 </Btn>
-                <Btn onPress={openNews} activeOpacity={0.9}>
-                    <TutorialContainer  style={{ borderBottomWidth: 3 }}>
-                        <Img source={news} resizeMode='contain'/>
-                        <Text large blod center numberOfLines={1} color={'#0c6fb6'}>News</Text>
-                    </TutorialContainer>
-                </Btn>
+                {ENABLE_NEWS &&
+                    <Btn onPress={openNews} activeOpacity={0.9}>
+                        <TutorialContainer  style={{ borderBottomWidth: 3 }}>
+                            <Img source={news} resizeMode='contain'/>
+                            <Text large blod center numberOfLines={1} color={'#0c6fb6'}>News</Text>
+                        </TutorialContainer>
+                    </Btn>
+                }
                 <Btn onPress={openTutorial} activeOpacity={0.9}>
                     <TutorialContainer  style={{ borderBottomWidth: 3 }}>
                         <Img source={tutorial} resizeMode='contain'/>

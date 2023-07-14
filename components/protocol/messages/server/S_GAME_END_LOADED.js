@@ -1,9 +1,8 @@
 import NewsManager from "../../../managers/News/NewsManager";
-import { setNews, setUnreadedNews } from "../../../redux/reducers/News/NewsReducer";
-import { selectMyUser } from "../../../redux/reducers/players/PlayersReducer";
 import {store} from "../../../redux/redux-store";
 import {isProduction} from "../../../utils/utils";
-import { getNews } from '../../API/API';
+import {selectDefaultParams} from "../../../redux/reducers/language/LanguageReducer";
+import defaultParams from "../../../redux/reducers/language/defaultParams";
 
 export default class S_GAME_END_LOADED {
     constructor(){
@@ -28,7 +27,11 @@ export default class S_GAME_END_LOADED {
     }
 
      loadNews() {
-        NewsManager.getNews();
+         const ENABLE_NEWS = selectDefaultParams(store.getState(), defaultParams.ENABLE_NEWS)
+
+         if(ENABLE_NEWS){
+             NewsManager.getNews();
+         }
     }
 
     getLogText() {
