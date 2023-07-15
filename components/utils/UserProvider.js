@@ -10,6 +10,7 @@ import {setSoundInfo} from "../redux/reducers/language/LanguageReducer";
 import NetInfo from '@react-native-community/netinfo';
 import { log } from "react-native-reanimated";
 import { setInfoPopup } from "../redux/reducers/popups/PopupsReducer";
+import {closeWebsocletAfterLeaveGame} from "../protocol/websocet";
 
 export const UserContext = createContext({token: '', id: '', username: '', password: '', sound: true, data: null, auth: false});
 const storageName = 'UserData'
@@ -76,6 +77,7 @@ const UserProvider = ({children}) => {
             store.dispatch(setLogout())
             store.dispatch(setClientIdWebsocket(null))
             transitionState('AuthScreen')
+            closeWebsocletAfterLeaveGame()
         } else {
             store.dispatch(setClientIdWebsocket(null))
             transitionState('AuthScreen')
