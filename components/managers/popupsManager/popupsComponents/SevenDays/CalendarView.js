@@ -11,9 +11,9 @@ const CalendarView = (props) => {
 
     const setCalendarStartAnim = () =>{
         Animated.sequence([
-            setTimingAnimated(calendarValue, 0, 300, Easing.ease, false),
-            setTimingAnimated(calendarValue, 1, 300, Easing.ease, false),
-            setTimingAnimated(calendarValue, 0.9, 300, Easing.ease, false),
+            setTimingAnimated(calendarValue, 0, 300, Easing.ease, true),
+            setTimingAnimated(calendarValue, 1, 300, Easing.ease, true),
+            setTimingAnimated(calendarValue, 0.9, 300, Easing.ease, true),
         ]).start();
     }
 

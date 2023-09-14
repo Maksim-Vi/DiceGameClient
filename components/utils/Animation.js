@@ -1,6 +1,6 @@
 import { Animated, Easing } from "react-native";
 
-export const setTimingAnimated = (originalValue, newValue, duration, easing = Easing.linear, useNativeDriver = false) => {
+export const setTimingAnimated = (originalValue, newValue, duration, easing = Easing.linear, useNativeDriver = true) => {
     return Animated.timing(originalValue, {
         toValue: newValue,
         duration,
