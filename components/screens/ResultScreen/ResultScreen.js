@@ -19,7 +19,7 @@ import coinsAnim from "../../../assets/animation/lottieAnim/confetti2.json";
 import AnimatedLottieView from "lottie-react-native";
 import Sounds, {soundsType} from "../../utils/Sounds";
 import defaultParams from "../../redux/reducers/language/defaultParams";
-import {transitionState} from "../../utils/utils";
+import {isProduction, transitionState} from "../../utils/utils";
 import coins from '../../../assets/topPanel/coins.png'
 import film from '../../../assets/result/film-slate.png'
 import {getADX2CoinsBonus} from "../../protocol/API/API";
@@ -28,9 +28,9 @@ const ResultScreen = (props) => {
 
     const user = useSelector(selectMyUser)
     const AdUnitID = Platform.OS === 'ios'
-        ? process.env.APP_TYPE !== 'development' && props.ENABLE_AD_PROD && props.ENABLE_AD_IOS_PROD
+        ? isProduction() && props.ENABLE_AD_PROD && props.ENABLE_AD_IOS_PROD
             ? 'ca-app-pub-6421975370931679/1096306623' : TestIds.REWARDED_INTERSTITIAL
-        : process.env.APP_TYPE !== 'development' && props.ENABLE_AD_PROD && props.ENABLE_AD_ANDROID_PROD
+        : isProduction() && props.ENABLE_AD_PROD && props.ENABLE_AD_ANDROID_PROD
             ? 'ca-app-pub-6421975370931679/5227941568' : TestIds.REWARDED_INTERSTITIAL
 
     const { isLoaded, isClosed, load, show } = useRewardedInterstitialAd(AdUnitID, {

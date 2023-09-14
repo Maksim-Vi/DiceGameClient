@@ -26,8 +26,8 @@ const AuthScreen = () => {
     const [disableBtn, setDisableBtn] = useState(false)
     const {control, handleSubmit, formState: {errors}} = useForm({
         defaultValues: {
-            name: '',
-            password: ''
+            name: 'max',
+            password: 'qwerty'
         }
     });
 

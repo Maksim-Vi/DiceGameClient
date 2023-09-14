@@ -23,6 +23,7 @@ import {setInfoPopup} from "../../../redux/reducers/popups/PopupsReducer";
 import btmBG from '../../../../assets/common/btns/circleBtn.png'
 import Text from "../../../common/Text/Text";
 import defaultTranslation from "../../../redux/reducers/language/defaultTranslation";
+import {isProduction} from "../../../utils/utils";
 
 const FreeGift = (props) => {
 
@@ -35,8 +36,8 @@ const FreeGift = (props) => {
     const freeCoinsText = useSelector(state=> selectTranslation(state, defaultTranslation.TR_FREE_COINS))
 
     const AdUnitID = Platform.OS === 'ios'
-        ? process.env.APP_TYPE !== 'development' && ENABLE_AD_PROD && ENABLE_AD_IOS_PROD ? 'ca-app-pub-6421975370931679/8219230470' : TestIds.REWARDED_INTERSTITIAL
-        : process.env.APP_TYPE !== 'development' && ENABLE_AD_PROD && ENABLE_AD_ANDROID_PROD ? 'ca-app-pub-6421975370931679/7194208820' : TestIds.REWARDED_INTERSTITIAL
+        ? isProduction() && ENABLE_AD_PROD && ENABLE_AD_IOS_PROD ? 'ca-app-pub-6421975370931679/8219230470' : TestIds.REWARDED_INTERSTITIAL
+        : isProduction() && ENABLE_AD_PROD && ENABLE_AD_ANDROID_PROD ? 'ca-app-pub-6421975370931679/7194208820' : TestIds.REWARDED_INTERSTITIAL
 
     const dispatch = useDispatch()
     const leftTimeShowGiftAd = selectLeftTimeShowGiftAd(store.getState())
@@ -95,6 +96,9 @@ const FreeGift = (props) => {
 
     useEffect(()=>{
         if(!isLoaded){
+
+            console.log(isLoaded)
+
             load()
         }
     }, [load])
@@ -125,6 +129,7 @@ const FreeGift = (props) => {
     useEffect(() => {
         getBonusByView()
     }, [isClosed]);
+
 
     const renderComponent = () =>{
         return (

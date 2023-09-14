@@ -17,6 +17,7 @@ import {TestIds, useInterstitialAd} from "react-native-google-mobile-ads";
 import {selectMyUser} from "../../../redux/reducers/players/PlayersReducer";
 import {getADFlashBonus} from "../../../protocol/API/API";
 import Sounds, {soundsType} from "../../../utils/Sounds";
+import {isProduction} from "../../../utils/utils";
 
 const NotEnoughFlashPopup = (props) => {
 
@@ -25,8 +26,8 @@ const NotEnoughFlashPopup = (props) => {
     const close = useSelector(state=> selectTranslation(state, defaultTranslation.TR_CLOSE))
 
     const AdUnitID = Platform.OS === 'ios'
-        ? process.env.APP_TYPE !== 'development' && props.ENABLE_AD_PROD && props.ENABLE_AD_IOS_PROD ? 'ca-app-pub-6421975370931679~2323680627' : TestIds.INTERSTITIAL
-        : process.env.APP_TYPE !== 'development' && props.ENABLE_AD_PROD && props.ENABLE_AD_ANDROID_PROD ? 'ca-app-pub-6421975370931679/4342087577' : TestIds.INTERSTITIAL
+        ? isProduction() && props.ENABLE_AD_PROD && props.ENABLE_AD_IOS_PROD ? 'ca-app-pub-6421975370931679~2323680627' : TestIds.INTERSTITIAL
+        : isProduction() && props.ENABLE_AD_PROD && props.ENABLE_AD_ANDROID_PROD ? 'ca-app-pub-6421975370931679/4342087577' : TestIds.INTERSTITIAL
 
     const { isLoaded, isClosed, load, show } = useInterstitialAd(AdUnitID, {
         requestNonPersonalizedAdsOnly: true,

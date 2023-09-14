@@ -5,6 +5,7 @@ import { setTimingAnimated } from "../../../../../../utils/Animation";
 import { Animated, Easing, Platform } from "react-native";
 import WinRewardItem from "./WinRewardItem";
 import { TestIds, useRewardedInterstitialAd } from "react-native-google-mobile-ads";
+import {isProduction} from "../../../../../../utils/utils";
 
 const WinReward = memo(function ({
   everyDaysGiftsResult,
@@ -15,12 +16,12 @@ const WinReward = memo(function ({
 }) {
   const AdUnitID =
     Platform.OS === "ios"
-      ? process.env.APP_TYPE !== "development" &&
+      ? isProduction() &&
         ENABLE_AD_PROD &&
         ENABLE_AD_IOS_PROD
         ? "ca-app-pub-6421975370931679/5405188852"
         : TestIds.REWARDED_INTERSTITIAL
-      : process.env.APP_TYPE !== "development" &&
+      : isProduction() &&
         ENABLE_AD_PROD &&
         ENABLE_AD_ANDROID_PROD
       ? "ca-app-pub-6421975370931679/9955905438"

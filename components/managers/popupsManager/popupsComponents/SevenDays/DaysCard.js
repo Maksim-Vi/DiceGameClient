@@ -25,12 +25,12 @@ const DaysCard = (props) => {
     const anim = React.useRef(
         Animated.loop(
             Animated.sequence([
-                setTimingAnimated(rotValue, 1, 300, Easing.ease, false),
-                setTimingAnimated(rotValue, 2, 300, Easing.ease, false),
-                setTimingAnimated(rotValue, 0, 300, Easing.ease, false),
-                setTimingAnimated(rotValue, 1, 300, Easing.ease, false),
-                setTimingAnimated(rotValue, 2, 300, Easing.ease, false),
-                setTimingAnimated(rotValue, 0, 300, Easing.ease, false),
+                setTimingAnimated(rotValue, 1, 300, Easing.ease, true),
+                setTimingAnimated(rotValue, 2, 300, Easing.ease, true),
+                setTimingAnimated(rotValue, 0, 300, Easing.ease, true),
+                setTimingAnimated(rotValue, 1, 300, Easing.ease, true),
+                setTimingAnimated(rotValue, 2, 300, Easing.ease, true),
+                setTimingAnimated(rotValue, 0, 300, Easing.ease, true),
                 Animated.delay(2000),
             ])
         )

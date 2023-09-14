@@ -14,15 +14,15 @@ import {selectMyUser} from "../../../../redux/reducers/players/PlayersReducer";
 import {selectDefaultParams, selectTranslation} from "../../../../redux/reducers/language/LanguageReducer";
 import defaultTranslation from "../../../../redux/reducers/language/defaultTranslation";
 import defaultParams from "../../../../redux/reducers/language/defaultParams";
-import {delay} from "../../../../utils/utils";
+import {delay, isProduction} from "../../../../utils/utils";
 
 const ADFlashPopup = (props) => {
 
     const user = useSelector(selectMyUser)
     const AdUnitID = Platform.OS === 'ios'
-        ? process.env.APP_TYPE !== 'development' && props.ENABLE_AD_PROD && props.ENABLE_AD_IOS_PROD
+        ? isProduction() && props.ENABLE_AD_PROD && props.ENABLE_AD_IOS_PROD
             ? 'ca-app-pub-6421975370931679/4644916812' : TestIds.REWARDED_INTERSTITIAL
-        : process.env.APP_TYPE !== 'development' && props.ENABLE_AD_PROD && props.ENABLE_AD_ANDROID_PROD
+        : isProduction() && props.ENABLE_AD_PROD && props.ENABLE_AD_ANDROID_PROD
             ? 'ca-app-pub-6421975370931679/1480569564' : TestIds.REWARDED_INTERSTITIAL
 
     const { isLoaded, isClosed, load, show, isEarnedReward, error } = useRewardedInterstitialAd(AdUnitID, {
