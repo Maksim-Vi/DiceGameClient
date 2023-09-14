@@ -35,10 +35,8 @@ const NewsItemScreen = ({route}) => {
     transitionState('NewsScreen')
   }
   const getImaage = () =>{
-    const url = getUrlRequest()
-
-    if(newsItem.image && url){
-        return url + newsItem.image
+    if(newsItem.image){
+        return newsItem.image
     }
   }
 

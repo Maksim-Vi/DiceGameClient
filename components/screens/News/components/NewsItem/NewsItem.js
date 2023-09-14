@@ -4,7 +4,7 @@ import giftAnim from '../../../../../assets/animation/lottieAnim/gift.json'
 import news_item_bg from '../../../../../assets/news/new.png'
 import reared_item_bg from '../../../../../assets/news/reared.png'
 import Text from '../../../../common/Text/Text'
-import { getUrlRequest, transitionState } from '../../../../utils/utils'
+import { transitionState } from '../../../../utils/utils'
 import InfoWithoutNumberButton from "../../../../common/Info/InfoWithoutNumberButton";
 import {TouchableWithoutFeedback} from "react-native";
 import AnimatedLottieView from "lottie-react-native";
@@ -12,10 +12,8 @@ import AnimatedLottieView from "lottie-react-native";
 const NewsItem = (props) => {
 
   const getImage = () =>{
-    const url = getUrlRequest()
-
-    if(props.newsItem && props.newsItem.image && url){
-      return url + props.newsItem.image
+    if(props.newsItem && props.newsItem.image){
+      return props.newsItem.image
     }
   }
 

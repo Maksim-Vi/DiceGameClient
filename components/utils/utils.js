@@ -9,7 +9,7 @@ import moment from 'moment'
 
 export const isProduction = () => {
     //return process.env.APP_TYPE === 'production'
-    return false
+    return true
 }
 
 export const getUrlRequest = () =>{
